@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": {
+    "diffPath": "C:/Users/jeung/keyboard-recommender/backend/data/swagkey_inventory/seed_inventory_diff.json",
+    "inventoryPath": "C:/Users/jeung/keyboard-recommender/backend/data/swagkey_inventory/swagkey_inventory.v2.json",
+    "generatedAt": "2026-07-06T06:07:04.451009+00:00"
+  },
+  "stats": {
+    "totalNewInCrawl": 0,
+    "withUrl": 0,
+    "missingUrl": 0,
+    "switchTargets": 0,
+    "plateTargets": 0,
+    "foamTargets": 0,
+    "layoutTargets": 0,
+    "missingUrlRows": 0
+  },
+  "switchTargets": {
+    "switches": []
+  },
+  "compatTargets": {
+    "plates": [],
+    "foams": []
+  },
+  "layoutTargets": {
+    "layouts": []
+  },
+  "missingUrlRows": []
+}

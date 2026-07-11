@@ -1,0 +1,8 @@
+Swagkey new_in_crawl → seed merge report
+generated: 2026-07-06T06:07:12.360133+00:00
+
+counts (before → after):
+  plate: 14 → 14 (+0)
+  foam: 9 → 9 (+0)
+  layout: 22 → 22 (+0)
+  switch: 72 → 72 (+0)

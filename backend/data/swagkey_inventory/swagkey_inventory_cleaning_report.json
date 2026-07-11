@@ -1,0 +1,271 @@
+{
+  "schema_version": "1.0.0",
+  "source_csv": "C:/Users/jeung/keyboard-recommender/backend/data/swagkey_inventory/swagkey_products.csv",
+  "generated_at": "2026-07-11T15:41:55.458328+00:00",
+  "input_row_count": 322,
+  "kept_count": 293,
+  "removed_count": 29,
+  "brand_corrections": 47,
+  "removed": [
+    {
+      "reason": "discount_only_product_name",
+      "category": "Keyboards",
+      "brand": "AM ATM98 커스텀 기계식 완제품 키보드",
+      "product_name": "10%",
+      "source_line": 50,
+      "detail": ""
+    },
+    {
+      "reason": "discount_only_product_name",
+      "category": "Keyboards",
+      "brand": "MatrixLab One Thing 커스텀 기계식 키보드",
+      "product_name": "30%",
+      "source_line": 63,
+      "detail": ""
+    },
+    {
+      "reason": "discount_only_product_name",
+      "category": "Switches",
+      "brand": "Haimu 스노우 저소음 자석축 키보드 스위치",
+      "product_name": "50%",
+      "source_line": 103,
+      "detail": ""
+    },
+    {
+      "reason": "discount_only_product_name",
+      "category": "Switches",
+      "brand": "SW x SWK 피오니 HE 마그네틱 스위치",
+      "product_name": "50%",
+      "source_line": 105,
+      "detail": ""
+    },
+    {
+      "reason": "discount_only_product_name",
+      "category": "Switches",
+      "brand": "NEO 라벤더 HE 마그네틱 스위치",
+      "product_name": "60%",
+      "source_line": 125,
+      "detail": ""
+    },
+    {
+      "reason": "discount_only_product_name",
+      "category": "Keycaps",
+      "brand": "스웨그키 MOA 키보드 키캡",
+      "product_name": "50%",
+      "source_line": 159,
+      "detail": ""
+    },
+    {
+      "reason": "discount_only_product_name",
+      "category": "Keycaps",
+      "brand": "Keyboard Science Heyball 키캡",
+      "product_name": "20%",
+      "source_line": 164,
+      "detail": ""
+    },
+    {
+      "reason": "discount_only_product_name",
+      "category": "Keycaps",
+      "brand": "스웨그키 SW Antarctic 이중사출 키캡 세트",
+      "product_name": "50%",
+      "source_line": 167,
+      "detail": ""
+    },
+    {
+      "reason": "discount_only_product_name",
+      "category": "Keycaps",
+      "brand": "스웨그키 DMK Silent Plateau 키보드 키캡 Add-on",
+      "product_name": "50%",
+      "source_line": 186,
+      "detail": ""
+    },
+    {
+      "reason": "discount_only_product_name",
+      "category": "Keycaps",
+      "brand": "스웨그키 KBM Love Detective 키보드 키캡 Add-on",
+      "product_name": "50%",
+      "source_line": 188,
+      "detail": ""
+    },
+    {
+      "reason": "discount_only_product_name",
+      "category": "Keycaps",
+      "brand": "스웨그키 Hammerworks CRP RGBY 키보드 키캡",
+      "product_name": "50%",
+      "source_line": 190,
+      "detail": ""
+    },
+    {
+      "reason": "discount_only_product_name",
+      "category": "Keycaps",
+      "brand": "KAT WoB Candy 키캡 Accent kit",
+      "product_name": "30%",
+      "source_line": 201,
+      "detail": ""
+    },
+    {
+      "reason": "discount_only_product_name",
+      "category": "Keycaps",
+      "brand": "Keykobo Outer bounds",
+      "product_name": "50%",
+      "source_line": 209,
+      "detail": ""
+    },
+    {
+      "reason": "discount_only_product_name",
+      "category": "Accessories",
+      "brand": "스웨그키 Long 스위치 스프링 (20mm)",
+      "product_name": "30%",
+      "source_line": 243,
+      "detail": ""
+    },
+    {
+      "reason": "discount_only_product_name",
+      "category": "Accessories",
+      "brand": "HIBI Single Unit 키보드 스탠드.",
+      "product_name": "20%",
+      "source_line": 272,
+      "detail": ""
+    },
+    {
+      "reason": "discount_only_product_name",
+      "category": "Deskpads",
+      "brand": "스웨그키 x Kyodiy 6XV Corsa 장패드.",
+      "product_name": "70%",
+      "source_line": 280,
+      "detail": ""
+    },
+    {
+      "reason": "discount_only_product_name",
+      "category": "Deskpads",
+      "brand": "스웨그키 SW x Kyodiy 코코심플 키보드 매트 60/65% 80%",
+      "product_name": "10%",
+      "source_line": 290,
+      "detail": ""
+    },
+    {
+      "reason": "discount_only_product_name",
+      "category": "Deskpads",
+      "brand": "스웨그키 SW x Kyodiy 체크 키보드 매트 60/65% 80%",
+      "product_name": "10%",
+      "source_line": 303,
+      "detail": ""
+    },
+    {
+      "reason": "discount_only_product_name",
+      "category": "Deskpads",
+      "brand": "SW x Kyodiy NEO ERGO 전용 데스크매트",
+      "product_name": "10%",
+      "source_line": 305,
+      "detail": ""
+    },
+    {
+      "reason": "discount_only_product_name",
+      "category": "Deskpads",
+      "brand": "스웨그키 SW x Kyodiy 스프레이 키보드 매트 60/65% 80%",
+      "product_name": "10%",
+      "source_line": 307,
+      "detail": ""
+    },
+    {
+      "reason": "discount_only_product_name",
+      "category": "Gaming",
+      "brand": "스웨그키 NEON 게이밍 포론 마우스패드",
+      "product_name": "23%",
+      "source_line": 315,
+      "detail": ""
+    },
+    {
+      "reason": "duplicate_cross_category",
+      "category": "Main",
+      "brand": "스웨그키",
+      "product_name": "Keygeek 오트 리니어 스위치",
+      "source_line": 2,
+      "detail": "replaced_by_line=91; kept_category=Switches"
+    },
+    {
+      "reason": "duplicate_cross_category",
+      "category": "Main",
+      "brand": "HMX",
+      "product_name": "스웨그키 HMX Peach 피치 반저소음 리니어 키보드 스위치",
+      "source_line": 3,
+      "detail": "replaced_by_line=92; kept_category=Switches"
+    },
+    {
+      "reason": "duplicate_cross_category",
+      "category": "Main",
+      "brand": "TTC",
+      "product_name": "TTC 아이스 프로즌 저소음 V2 커스텀 기계식 키보드 스위치 공장윤활 사무용",
+      "source_line": 4,
+      "detail": "replaced_by_line=93; kept_category=Switches"
+    },
+    {
+      "reason": "duplicate_cross_category",
+      "category": "Main",
+      "brand": "Swagkeys",
+      "product_name": "스웨그키 Ion 이온 리니어 로우피치 키보드 스위치",
+      "source_line": 5,
+      "detail": "replaced_by_line=94; kept_category=Switches"
+    },
+    {
+      "reason": "duplicate_cross_category",
+      "category": "Gaming",
+      "brand": "스웨그키",
+      "product_name": "트랜지션 라이트 전용 MX 8K 게이밍 기판",
+      "source_line": 311,
+      "detail": "kept_category=Keyboards; kept_line=58"
+    },
+    {
+      "reason": "duplicate_cross_category",
+      "category": "Gaming",
+      "brand": "스웨그키",
+      "product_name": "스웨그키 SW A87 레이아웃 8K 게이밍 기판",
+      "source_line": 321,
+      "detail": "kept_category=Keyboards; kept_line=83"
+    },
+    {
+      "reason": "duplicate_cross_category",
+      "category": "Gaming",
+      "brand": "MatrixLab",
+      "product_name": "[GB] MatrixLab MP-01 강화유리 마우스패드",
+      "source_line": 322,
+      "detail": "kept_category=Deskpads; kept_line=310"
+    },
+    {
+      "reason": "duplicate_cross_category",
+      "category": "Gaming",
+      "brand": "NEON",
+      "product_name": "NEON Transition LITE HE Kit",
+      "source_line": 323,
+      "detail": "kept_category=Keyboards; kept_line=89"
+    }
+  ],
+  "removals_by_reason": {
+    "discount_only_product_name": 21,
+    "duplicate_cross_category": 8
+  },
+  "kept_by_category": {
+    "Keyboards": 82,
+    "Switches": 54,
+    "Keycaps": 65,
+    "Accessories": 57,
+    "Deskpads": 27,
+    "Gaming": 8
+  },
+  "summary_lines": [
+    "input rows: 322",
+    "kept: 293",
+    "removed: 29",
+    "brand corrections: 47",
+    "removals by reason:",
+    "  - discount_only_product_name: 21",
+    "  - duplicate_cross_category: 8",
+    "kept by category:",
+    "  - Switches: 54",
+    "  - Keyboards: 82",
+    "  - Keycaps: 65",
+    "  - Accessories: 57",
+    "  - Deskpads: 27",
+    "  - Gaming: 8"
+  ]
+}

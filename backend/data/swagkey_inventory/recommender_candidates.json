@@ -1,0 +1,4535 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": {
+    "inventoryJson": "swagkey_inventory.v4.json",
+    "inventoryPath": "C:/Users/jeung/keyboard-recommender/backend/data/swagkey_inventory/swagkey_inventory.v4.json",
+    "generatedAt": "2026-07-11T16:23:54.742169+00:00"
+  },
+  "stats": {
+    "totalItems": 400,
+    "byFamily": {
+      "layout": 23,
+      "case_kit": 126,
+      "plate": 20,
+      "out_of_scope": 100,
+      "foam": 9,
+      "switch": 55,
+      "keycap": 67
+    },
+    "byRule": {
+      "keyword:layout": 23,
+      "keyword:case_kit": 87,
+      "keyword:plate": 20,
+      "keyword:accessory_or_merch": 72,
+      "category:keyboards_fallback": 39,
+      "keyword:foam": 9,
+      "category:switches": 54,
+      "category:keycaps": 67,
+      "category:accessories_fallback": 1,
+      "category:deskpads": 27,
+      "keyword:switch": 1
+    },
+    "recommenderCandidateCount": 300
+  },
+  "candidates": {
+    "switch": [
+      {
+        "id": "inv-0083",
+        "category": "Switches",
+        "brand": "Keygeek",
+        "productName": "Neo Rye 라이 리니어 스위치",
+        "normalizedName": "Neo Rye 라이 리니어 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0084",
+        "category": "Switches",
+        "brand": "스웨그키",
+        "productName": "Keygeek 오트 리니어 스위치",
+        "normalizedName": "Keygeek 오트 리니어 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0085",
+        "category": "Switches",
+        "brand": "HMX",
+        "productName": "스웨그키 HMX Peach 피치 반저소음 리니어 키보드 스위치",
+        "normalizedName": "스웨그키 HMX Peach 피치 반저소음 리니어 키보드 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0086",
+        "category": "Switches",
+        "brand": "TTC",
+        "productName": "TTC 아이스 프로즌 저소음 V2 커스텀 기계식 키보드 스위치 공장윤활 사무용",
+        "normalizedName": "TTC 아이스 프로즌 저소음 V2 커스텀 기계식 키보드 스위치 공장윤활 사무용",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0087",
+        "category": "Switches",
+        "brand": "Swagkeys",
+        "productName": "스웨그키 Ion 이온 리니어 로우피치 키보드 스위치",
+        "normalizedName": "스웨그키 Ion 이온 리니어 로우피치 키보드 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0088",
+        "category": "Switches",
+        "brand": "Cherry",
+        "productName": "Cherry MX2A 흑축 비윤활 스위치",
+        "normalizedName": "Cherry MX2A 흑축 비윤활 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0089",
+        "category": "Switches",
+        "brand": "Owlab",
+        "productName": "Owlab Ti HE 마그네틱 스위치",
+        "normalizedName": "Owlab Ti HE 마그네틱 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0090",
+        "category": "Switches",
+        "brand": "HMX",
+        "productName": "HMX 신하이 리니어 스위치",
+        "normalizedName": "HMX 신하이 리니어 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0091",
+        "category": "Switches",
+        "brand": "Wingtree",
+        "productName": "스웨그키 Wingtree Golden Apple 키보드 스위치",
+        "normalizedName": "스웨그키 Wingtree Golden Apple 키보드 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0092",
+        "category": "Switches",
+        "brand": "Wingtree",
+        "productName": "스웨그키 Keygeek B1 리니어 키보드 스위치",
+        "normalizedName": "스웨그키 Keygeek B1 리니어 키보드 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0093",
+        "category": "Switches",
+        "brand": "SWK",
+        "productName": "SWK 네온 리니어 스위치",
+        "normalizedName": "SWK 네온 리니어 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0094",
+        "category": "Switches",
+        "brand": "HMX",
+        "productName": "HMX Duckduck V2 덕덕 키보드 스위치",
+        "normalizedName": "HMX Duckduck V2 덕덕 키보드 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0095",
+        "category": "Switches",
+        "brand": "Haimu",
+        "productName": "Haimu 스노우 저소음 자석축 키보드 스위치",
+        "normalizedName": "Haimu 스노우 저소음 자석축 키보드 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0096",
+        "category": "Switches",
+        "brand": "스웨그키",
+        "productName": "SW x SWK 피오니 HE 마그네틱 스위치",
+        "normalizedName": "SW x SWK 피오니 HE 마그네틱 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0097",
+        "category": "Switches",
+        "brand": "HMX",
+        "productName": "HMX Toast 키보드 스위치",
+        "normalizedName": "HMX Toast 키보드 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0098",
+        "category": "Switches",
+        "brand": "Swagkeys x TTC",
+        "productName": "TTC 피넛 라떼 저소음 택타일 스위치",
+        "normalizedName": "TTC 피넛 라떼 저소음 택타일 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0099",
+        "category": "Switches",
+        "brand": "스웨그키",
+        "productName": "SW x Haimu MP 택타일 스위치",
+        "normalizedName": "SW x Haimu MP 택타일 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0100",
+        "category": "Switches",
+        "brand": "CHERRY",
+        "productName": "Cherry MX2A Honey 택타일 스위치",
+        "normalizedName": "Cherry MX2A Honey 택타일 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0101",
+        "category": "Switches",
+        "brand": "Cherry",
+        "productName": "체리 MX2A 클래식 히로세 키보드 스위치",
+        "normalizedName": "체리 MX2A 클래식 히로세 키보드 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0102",
+        "category": "Switches",
+        "brand": "Wingtree",
+        "productName": "스웨그키 Wingtree ANON 리니어 키보드 스위치",
+        "normalizedName": "스웨그키 Wingtree ANON 리니어 키보드 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0103",
+        "category": "Switches",
+        "brand": "HMX",
+        "productName": "Neo Amber 앰버 리니어 스위치",
+        "normalizedName": "Neo Amber 앰버 리니어 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0104",
+        "category": "Switches",
+        "brand": "Wuque",
+        "productName": "Wuque BigLucky 빅럭키 클릭 스위치 Cliky",
+        "normalizedName": "Wuque BigLucky 빅럭키 클릭 스위치 Cliky",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0105",
+        "category": "Switches",
+        "brand": "WEKT",
+        "productName": "WEKT Kunzite 쿤자이트 저소음 리니어 스위치",
+        "normalizedName": "WEKT Kunzite 쿤자이트 저소음 리니어 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0106",
+        "category": "Switches",
+        "brand": "Cherry",
+        "productName": "체리 MX2A RGB Silver 은축 리니어 기계식 키보드 스위치",
+        "normalizedName": "체리 MX2A RGB Silver 은축 리니어 기계식 키보드 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0107",
+        "category": "Switches",
+        "brand": "CHERRY",
+        "productName": "Cherry MX2A Northern Light 리니어 스위치",
+        "normalizedName": "Cherry MX2A Northern Light 리니어 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0108",
+        "category": "Switches",
+        "brand": "OWLAB",
+        "productName": "Owlab London Fog V2 런던포그 키보드 스위치",
+        "normalizedName": "Owlab London Fog V2 런던포그 키보드 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0109",
+        "category": "Switches",
+        "brand": "CHERRY",
+        "productName": "Cherry MX2A 비윤활 갈축 키보드 스위치",
+        "normalizedName": "Cherry MX2A 비윤활 갈축 키보드 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0110",
+        "category": "Switches",
+        "brand": "CHERRY",
+        "productName": "Cherry MX2A Blossom 리니어 스위치",
+        "normalizedName": "Cherry MX2A Blossom 리니어 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0111",
+        "category": "Switches",
+        "brand": "체리",
+        "productName": "Cherry MX2A 스위치",
+        "normalizedName": "Cherry MX2A 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0112",
+        "category": "Switches",
+        "brand": "Owlab",
+        "productName": "스웨그키 Owlab Nova N극 HE 키보드 스위치",
+        "normalizedName": "스웨그키 Owlab Nova N극 HE 키보드 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0113",
+        "category": "Switches",
+        "brand": "CHERRY",
+        "productName": "Cherry MX2A RGB Silver 리니어 스위치",
+        "normalizedName": "Cherry MX2A RGB Silver 리니어 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0114",
+        "category": "Switches",
+        "brand": "HMX",
+        "productName": "HMX T-Rex 키보드 스위치",
+        "normalizedName": "HMX T-Rex 키보드 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0115",
+        "category": "Switches",
+        "brand": "SWK",
+        "productName": "NEO 라벤더 HE 마그네틱 스위치",
+        "normalizedName": "NEO 라벤더 HE 마그네틱 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0116",
+        "category": "Switches",
+        "brand": "Evoworks",
+        "productName": "HMX 아주르 리니어 스위치",
+        "normalizedName": "HMX 아주르 리니어 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0117",
+        "category": "Switches",
+        "brand": "Keygeek",
+        "productName": "스웨그키 Keygeek Cera X 리니어 키보드 스위치",
+        "normalizedName": "스웨그키 Keygeek Cera X 리니어 키보드 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0118",
+        "category": "Switches",
+        "brand": "HMX",
+        "productName": "스웨그키 HMX Taro 타로 스위치 리니어",
+        "normalizedName": "스웨그키 HMX Taro 타로 스위치 리니어",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0119",
+        "category": "Switches",
+        "brand": "HMX",
+        "productName": "스웨그키 HMX Custard 커스터드 스위치 리니어",
+        "normalizedName": "스웨그키 HMX Custard 커스터드 스위치 리니어",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0120",
+        "category": "Switches",
+        "brand": "스웨그키",
+        "productName": "SWK 지음 v2 리니어 스위치",
+        "normalizedName": "SWK 지음 v2 리니어 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0121",
+        "category": "Switches",
+        "brand": "CHERRY",
+        "productName": "체리 MX2A Petal 키보드 스위치",
+        "normalizedName": "체리 MX2A Petal 키보드 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0122",
+        "category": "Switches",
+        "brand": "CHERRY",
+        "productName": "Cherry MX Falcon 택타일 스위치",
+        "normalizedName": "Cherry MX Falcon 택타일 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0123",
+        "category": "Switches",
+        "brand": "게이트론",
+        "productName": "게이트론 Melodic 기계식 키보드 스위치",
+        "normalizedName": "게이트론 Melodic 기계식 키보드 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0124",
+        "category": "Switches",
+        "brand": "Keygeek",
+        "productName": "스웨그키 Keygeek 쉐이크 Shake 리니어 키보드 스위치",
+        "normalizedName": "스웨그키 Keygeek 쉐이크 Shake 리니어 키보드 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0125",
+        "category": "Switches",
+        "brand": "Bustdown",
+        "productName": "스웨그키 BDG Optical White 리니어 키보드 스위치",
+        "normalizedName": "스웨그키 BDG Optical White 리니어 키보드 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0126",
+        "category": "Switches",
+        "brand": "bsun",
+        "productName": "QK01 키보드 스위치",
+        "normalizedName": "QK01 키보드 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0127",
+        "category": "Switches",
+        "brand": "Keygeek",
+        "productName": "Keygeek Muse 리니어 스위치",
+        "normalizedName": "Keygeek Muse 리니어 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0128",
+        "category": "Switches",
+        "brand": "CHERRY",
+        "productName": "Cherry MX2A 비윤활 갈축 키보드 스위치 - 450개 벌크",
+        "normalizedName": "Cherry MX2A 비윤활 갈축 키보드 스위치 - 450개 벌크",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0129",
+        "category": "Switches",
+        "brand": "bsun",
+        "productName": "Peach Mellow 키보드 스위치",
+        "normalizedName": "Peach Mellow 키보드 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0130",
+        "category": "Switches",
+        "brand": "Outemu",
+        "productName": "Outemu Cream Pink 크림핑크 리니어축 키보드 스위치",
+        "normalizedName": "Outemu Cream Pink 크림핑크 리니어축 키보드 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0131",
+        "category": "Switches",
+        "brand": "CHERRY",
+        "productName": "Cherry MX2A 비윤활 흑축 키보드 스위치 - 450개 벌크",
+        "normalizedName": "Cherry MX2A 비윤활 흑축 키보드 스위치 - 450개 벌크",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0132",
+        "category": "Switches",
+        "brand": "Wuque",
+        "productName": "Wuque Flux HE 자석축 키보드 스위치 (N극)",
+        "normalizedName": "Wuque Flux HE 자석축 키보드 스위치 (N극)",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0133",
+        "category": "Switches",
+        "brand": "SW",
+        "productName": "SW x Gateron 디핑 리니어 스위치",
+        "normalizedName": "SW x Gateron 디핑 리니어 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0134",
+        "category": "Switches",
+        "brand": "MZ Studio",
+        "productName": "스웨그키 MZ Studio T2 리니어 키보드 스위치",
+        "normalizedName": "스웨그키 MZ Studio T2 리니어 키보드 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0135",
+        "category": "Switches",
+        "brand": "CHERRY",
+        "productName": "체리 MX 흑축 삼신흑 키보드 스위치",
+        "normalizedName": "체리 MX 흑축 삼신흑 키보드 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0136",
+        "category": "Switches",
+        "brand": "Keygeek",
+        "productName": "스웨그키 Keygeek peach cheesecake 리니어 키보드 스위치",
+        "normalizedName": "스웨그키 Keygeek peach cheesecake 리니어 키보드 스위치",
+        "family": "switch",
+        "ruleId": "category:switches",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0340",
+        "category": "Keyboards",
+        "brand": "Mode",
+        "productName": "[GB] Mode Themes Switches",
+        "normalizedName": "[GB] Mode Themes Switches",
+        "family": "switch",
+        "ruleId": "keyword:switch",
+        "matchedKeywords": [
+          "switch"
+        ]
+      }
+    ],
+    "plate": [
+      {
+        "id": "inv-0003",
+        "category": "Keyboards",
+        "brand": "NEO STUDIO",
+        "productName": "NEO65 Core Plus 보강판",
+        "normalizedName": "NEO65 Core Plus 보강판",
+        "family": "plate",
+        "ruleId": "keyword:plate",
+        "matchedKeywords": [
+          "보강판"
+        ]
+      },
+      {
+        "id": "inv-0006",
+        "category": "Keyboards",
+        "brand": "QwertyKey",
+        "productName": "Qwertykeys NEO80 CU 보강판",
+        "normalizedName": "Qwertykeys NEO80 CU 보강판",
+        "family": "plate",
+        "ruleId": "keyword:plate",
+        "matchedKeywords": [
+          "보강판"
+        ]
+      },
+      {
+        "id": "inv-0011",
+        "category": "Keyboards",
+        "brand": "QwertyKey",
+        "productName": "Qwertykeys NEO65 CU 보강판",
+        "normalizedName": "Qwertykeys NEO65 CU 보강판",
+        "family": "plate",
+        "ruleId": "keyword:plate",
+        "matchedKeywords": [
+          "보강판"
+        ]
+      },
+      {
+        "id": "inv-0016",
+        "category": "Keyboards",
+        "brand": "MM Studio",
+        "productName": "MM Studio - Class 100 전용 보강판",
+        "normalizedName": "MM Studio - Class 100 전용 보강판",
+        "family": "plate",
+        "ruleId": "keyword:plate",
+        "matchedKeywords": [
+          "보강판"
+        ]
+      },
+      {
+        "id": "inv-0025",
+        "category": "Keyboards",
+        "brand": "GDK Lab",
+        "productName": "GDK Lab - DK1 TKL 보강판",
+        "normalizedName": "GDK Lab - DK1 TKL 보강판",
+        "family": "plate",
+        "ruleId": "keyword:plate",
+        "matchedKeywords": [
+          "보강판"
+        ]
+      },
+      {
+        "id": "inv-0028",
+        "category": "Keyboards",
+        "brand": "NEO STUDIO",
+        "productName": "Qwertykeys NEO75 보강판",
+        "normalizedName": "Qwertykeys NEO75 보강판",
+        "family": "plate",
+        "ruleId": "keyword:plate",
+        "matchedKeywords": [
+          "보강판"
+        ]
+      },
+      {
+        "id": "inv-0040",
+        "category": "Keyboards",
+        "brand": "Bowl Keyboard",
+        "productName": "Bowl Oblique 기판 및 보강판",
+        "normalizedName": "Bowl Oblique 기판 및 보강판",
+        "family": "plate",
+        "ruleId": "keyword:plate",
+        "matchedKeywords": [
+          "보강판"
+        ]
+      },
+      {
+        "id": "inv-0045",
+        "category": "Keyboards",
+        "brand": "NEO STUDIO",
+        "productName": "Qwertykeys NEO98 보강판",
+        "normalizedName": "Qwertykeys NEO98 보강판",
+        "family": "plate",
+        "ruleId": "keyword:plate",
+        "matchedKeywords": [
+          "보강판"
+        ]
+      },
+      {
+        "id": "inv-0050",
+        "category": "Keyboards",
+        "brand": "Owlab",
+        "productName": "Owlab Hellcat Mech-01 기판&보강판",
+        "normalizedName": "Owlab Hellcat Mech-01 기판&보강판",
+        "family": "plate",
+        "ruleId": "keyword:plate",
+        "matchedKeywords": [
+          "보강판"
+        ]
+      },
+      {
+        "id": "inv-0053",
+        "category": "Keyboards",
+        "brand": "스웨그키",
+        "productName": "스웨그키 트랜지션 라이트 보강판",
+        "normalizedName": "스웨그키 트랜지션 라이트 보강판",
+        "family": "plate",
+        "ruleId": "keyword:plate",
+        "matchedKeywords": [
+          "보강판"
+        ]
+      },
+      {
+        "id": "inv-0055",
+        "category": "Keyboards",
+        "brand": "QwertyKey",
+        "productName": "Qwertykeys NEO60 Core 보강판",
+        "normalizedName": "Qwertykeys NEO60 Core 보강판",
+        "family": "plate",
+        "ruleId": "keyword:plate",
+        "matchedKeywords": [
+          "보강판"
+        ]
+      },
+      {
+        "id": "inv-0062",
+        "category": "Keyboards",
+        "brand": "스웨그키",
+        "productName": "Shelby65 보강판",
+        "normalizedName": "Shelby65 보강판",
+        "family": "plate",
+        "ruleId": "keyword:plate",
+        "matchedKeywords": [
+          "보강판"
+        ]
+      },
+      {
+        "id": "inv-0064",
+        "category": "Keyboards",
+        "brand": "QwertyKey",
+        "productName": "Qwertykeys QK65 MK3 보강판",
+        "normalizedName": "Qwertykeys QK65 MK3 보강판",
+        "family": "plate",
+        "ruleId": "keyword:plate",
+        "matchedKeywords": [
+          "보강판"
+        ]
+      },
+      {
+        "id": "inv-0072",
+        "category": "Keyboards",
+        "brand": "스웨그키",
+        "productName": "SW Eave65 보강판",
+        "normalizedName": "SW Eave65 보강판",
+        "family": "plate",
+        "ruleId": "keyword:plate",
+        "matchedKeywords": [
+          "보강판"
+        ]
+      },
+      {
+        "id": "inv-0299",
+        "category": "Keyboards",
+        "brand": "QWERTYKEYS",
+        "productName": "QK Alice Duo 보강판",
+        "normalizedName": "QK Alice Duo 보강판",
+        "family": "plate",
+        "ruleId": "keyword:plate",
+        "matchedKeywords": [
+          "보강판"
+        ]
+      },
+      {
+        "id": "inv-0314",
+        "category": "Keyboards",
+        "brand": "Anorexus",
+        "productName": "[GB] Anorexus Void65 PCB / Plate",
+        "normalizedName": "[GB] Anorexus Void65 PCB / Plate",
+        "family": "plate",
+        "ruleId": "keyword:plate",
+        "matchedKeywords": [
+          " plate"
+        ]
+      },
+      {
+        "id": "inv-0329",
+        "category": "Keyboards",
+        "brand": "Anorexus",
+        "productName": "[GB] DMK Silent Plateau",
+        "normalizedName": "[GB] DMK Silent Plateau",
+        "family": "plate",
+        "ruleId": "keyword:plate",
+        "matchedKeywords": [
+          " plate"
+        ]
+      },
+      {
+        "id": "inv-0335",
+        "category": "Keyboards",
+        "brand": "Mode",
+        "productName": "[GB] Mode Envoy 65% 추가 보강판",
+        "normalizedName": "[GB] Mode Envoy 65% 추가 보강판",
+        "family": "plate",
+        "ruleId": "keyword:plate",
+        "matchedKeywords": [
+          "보강판"
+        ]
+      },
+      {
+        "id": "inv-0351",
+        "category": "Keyboards",
+        "brand": "Anorexus",
+        "productName": "[GB] Pangea Fullsize 추가 보강판",
+        "normalizedName": "[GB] Pangea Fullsize 추가 보강판",
+        "family": "plate",
+        "ruleId": "keyword:plate",
+        "matchedKeywords": [
+          "보강판"
+        ]
+      },
+      {
+        "id": "inv-0396",
+        "category": "Keyboards",
+        "brand": "Owlab",
+        "productName": "[In-Stock] Owlab Link65 Plate",
+        "normalizedName": "[In-Stock] Owlab Link65 Plate",
+        "family": "plate",
+        "ruleId": "keyword:plate",
+        "matchedKeywords": [
+          " plate"
+        ]
+      }
+    ],
+    "foam": [
+      {
+        "id": "inv-0034",
+        "category": "Keyboards",
+        "brand": "GDK Lab",
+        "productName": "GDK Lab - DK1 TKL 여분 폼킷",
+        "normalizedName": "GDK Lab - DK1 TKL 여분 폼킷",
+        "family": "foam",
+        "ruleId": "keyword:foam",
+        "matchedKeywords": [
+          "폼킷"
+        ]
+      },
+      {
+        "id": "inv-0208",
+        "category": "Accessories",
+        "brand": "스웨그키",
+        "productName": "스웨그키 스페이스바 흡음재",
+        "normalizedName": "스웨그키 스페이스바 흡음재",
+        "family": "foam",
+        "ruleId": "keyword:foam",
+        "matchedKeywords": [
+          "흡음재"
+        ]
+      },
+      {
+        "id": "inv-0221",
+        "category": "Accessories",
+        "brand": "EPDM",
+        "productName": "EPDM 흡음재",
+        "normalizedName": "EPDM 흡음재",
+        "family": "foam",
+        "ruleId": "keyword:foam",
+        "matchedKeywords": [
+          "흡음재"
+        ]
+      },
+      {
+        "id": "inv-0227",
+        "category": "Accessories",
+        "brand": "포론",
+        "productName": "포론 하부 흡음재",
+        "normalizedName": "포론 하부 흡음재",
+        "family": "foam",
+        "ruleId": "keyword:foam",
+        "matchedKeywords": [
+          "포론",
+          "흡음재"
+        ]
+      },
+      {
+        "id": "inv-0235",
+        "category": "Accessories",
+        "brand": "키보드용",
+        "productName": "키보드용 신슐레이터 흡음재",
+        "normalizedName": "키보드용 신슐레이터 흡음재",
+        "family": "foam",
+        "ruleId": "keyword:foam",
+        "matchedKeywords": [
+          "흡음재",
+          "신슐레이터"
+        ]
+      },
+      {
+        "id": "inv-0237",
+        "category": "Accessories",
+        "brand": "스웨그키",
+        "productName": "스웨그키 스위치 폼 필름 v2",
+        "normalizedName": "스웨그키 스위치 폼 필름 v2",
+        "family": "foam",
+        "ruleId": "keyword:foam",
+        "matchedKeywords": [
+          "폼 필름"
+        ]
+      },
+      {
+        "id": "inv-0250",
+        "category": "Accessories",
+        "brand": "스웨그키",
+        "productName": "스웨그키 포론 기보강 흡음재 - 60배열용",
+        "normalizedName": "스웨그키 포론 기보강 흡음재 - 60배열용",
+        "family": "foam",
+        "ruleId": "keyword:foam",
+        "matchedKeywords": [
+          "포론",
+          "흡음재"
+        ]
+      },
+      {
+        "id": "inv-0253",
+        "category": "Accessories",
+        "brand": "스위치",
+        "productName": "스위치 하부 PE 폼",
+        "normalizedName": "스위치 하부 PE 폼",
+        "family": "foam",
+        "ruleId": "keyword:foam",
+        "matchedKeywords": [
+          "pe 폼"
+        ]
+      },
+      {
+        "id": "inv-0362",
+        "category": "Keyboards",
+        "brand": "Cannonkeys",
+        "productName": "[GB] Cannonkeys VIDA 폼킷 & 여분 가스켓",
+        "normalizedName": "[GB] Cannonkeys VIDA 폼킷 & 여분 가스켓",
+        "family": "foam",
+        "ruleId": "keyword:foam",
+        "matchedKeywords": [
+          "폼킷"
+        ]
+      }
+    ],
+    "layout": [
+      {
+        "id": "inv-0001",
+        "category": "Keyboards",
+        "brand": "NEO STUDIO",
+        "productName": "NEO65 Core Plus 기판",
+        "normalizedName": "NEO65 Core Plus 기판",
+        "family": "layout",
+        "ruleId": "keyword:layout",
+        "matchedKeywords": [
+          "기판"
+        ]
+      },
+      {
+        "id": "inv-0004",
+        "category": "Keyboards",
+        "brand": "QwertyKey",
+        "productName": "NEO80 CU 기판",
+        "normalizedName": "NEO80 CU 기판",
+        "family": "layout",
+        "ruleId": "keyword:layout",
+        "matchedKeywords": [
+          "기판"
+        ]
+      },
+      {
+        "id": "inv-0013",
+        "category": "Keyboards",
+        "brand": "QwertyKey",
+        "productName": "NEO65 CU 기판",
+        "normalizedName": "NEO65 CU 기판",
+        "family": "layout",
+        "ruleId": "keyword:layout",
+        "matchedKeywords": [
+          "기판"
+        ]
+      },
+      {
+        "id": "inv-0020",
+        "category": "Keyboards",
+        "brand": "MM Studio",
+        "productName": "MM Studio - Class 100 전용 기판",
+        "normalizedName": "MM Studio - Class 100 전용 기판",
+        "family": "layout",
+        "ruleId": "keyword:layout",
+        "matchedKeywords": [
+          "기판"
+        ]
+      },
+      {
+        "id": "inv-0033",
+        "category": "Keyboards",
+        "brand": "Swagkeys",
+        "productName": "스웨그키 Eave65 전용 기판",
+        "normalizedName": "스웨그키 Eave65 전용 기판",
+        "family": "layout",
+        "ruleId": "keyword:layout",
+        "matchedKeywords": [
+          "기판"
+        ]
+      },
+      {
+        "id": "inv-0035",
+        "category": "Keyboards",
+        "brand": "GDK Lab",
+        "productName": "GDK Lab - DK1 TKL 기판",
+        "normalizedName": "GDK Lab - DK1 TKL 기판",
+        "family": "layout",
+        "ruleId": "keyword:layout",
+        "matchedKeywords": [
+          "기판"
+        ]
+      },
+      {
+        "id": "inv-0046",
+        "category": "Keyboards",
+        "brand": "NEO STUDIO",
+        "productName": "NEO98 기판",
+        "normalizedName": "NEO98 기판",
+        "family": "layout",
+        "ruleId": "keyword:layout",
+        "matchedKeywords": [
+          "기판"
+        ]
+      },
+      {
+        "id": "inv-0048",
+        "category": "Keyboards",
+        "brand": "QwertyKey",
+        "productName": "QK65 MK3 기판",
+        "normalizedName": "QK65 MK3 기판",
+        "family": "layout",
+        "ruleId": "keyword:layout",
+        "matchedKeywords": [
+          "기판"
+        ]
+      },
+      {
+        "id": "inv-0051",
+        "category": "Keyboards",
+        "brand": "스웨그키",
+        "productName": "스웨그키 트랜지션 라이트 기판",
+        "normalizedName": "스웨그키 트랜지션 라이트 기판",
+        "family": "layout",
+        "ruleId": "keyword:layout",
+        "matchedKeywords": [
+          "기판"
+        ]
+      },
+      {
+        "id": "inv-0052",
+        "category": "Keyboards",
+        "brand": "스웨그키",
+        "productName": "트랜지션 라이트 전용 MX 8K 게이밍 기판",
+        "normalizedName": "트랜지션 라이트 전용 MX 8K 게이밍 기판",
+        "family": "layout",
+        "ruleId": "keyword:layout",
+        "matchedKeywords": [
+          "기판"
+        ]
+      },
+      {
+        "id": "inv-0054",
+        "category": "Keyboards",
+        "brand": "QwertyKey",
+        "productName": "NEO60 Core 기판",
+        "normalizedName": "NEO60 Core 기판",
+        "family": "layout",
+        "ruleId": "keyword:layout",
+        "matchedKeywords": [
+          "기판"
+        ]
+      },
+      {
+        "id": "inv-0063",
+        "category": "Keyboards",
+        "brand": "스웨그키",
+        "productName": "Shelby65 기판",
+        "normalizedName": "Shelby65 기판",
+        "family": "layout",
+        "ruleId": "keyword:layout",
+        "matchedKeywords": [
+          "기판"
+        ]
+      },
+      {
+        "id": "inv-0069",
+        "category": "Keyboards",
+        "brand": "NONO Studio",
+        "productName": "NONO Studio N65 기판",
+        "normalizedName": "NONO Studio N65 기판",
+        "family": "layout",
+        "ruleId": "keyword:layout",
+        "matchedKeywords": [
+          "기판"
+        ]
+      },
+      {
+        "id": "inv-0076",
+        "category": "Keyboards",
+        "brand": "스웨그키",
+        "productName": "스웨그키 SW A87 레이아웃 8K 게이밍 기판",
+        "normalizedName": "스웨그키 SW A87 레이아웃 8K 게이밍 기판",
+        "family": "layout",
+        "ruleId": "keyword:layout",
+        "matchedKeywords": [
+          "기판",
+          "레이아웃"
+        ]
+      },
+      {
+        "id": "inv-0080",
+        "category": "Keyboards",
+        "brand": "NEO STUDIO",
+        "productName": "NEO75 기판",
+        "normalizedName": "NEO75 기판",
+        "family": "layout",
+        "ruleId": "keyword:layout",
+        "matchedKeywords": [
+          "기판"
+        ]
+      },
+      {
+        "id": "inv-0301",
+        "category": "Keyboards",
+        "brand": "QWERTYKEYS",
+        "productName": "QK Alice Duo 기판",
+        "normalizedName": "QK Alice Duo 기판",
+        "family": "layout",
+        "ruleId": "keyword:layout",
+        "matchedKeywords": [
+          "기판"
+        ]
+      },
+      {
+        "id": "inv-0318",
+        "category": "Keyboards",
+        "brand": "FAUKWAA",
+        "productName": "[GB] FAUKWAA - [MY-2K] 100NG Edition - 기판",
+        "normalizedName": "[GB] FAUKWAA - [MY-2K] 100NG Edition - 기판",
+        "family": "layout",
+        "ruleId": "keyword:layout",
+        "matchedKeywords": [
+          "기판"
+        ]
+      },
+      {
+        "id": "inv-0327",
+        "category": "Keyboards",
+        "brand": "MM Studio",
+        "productName": "[GB] Mode Envoy 65% PCB",
+        "normalizedName": "[GB] Mode Envoy 65% PCB",
+        "family": "layout",
+        "ruleId": "keyword:layout",
+        "matchedKeywords": [
+          "pcb"
+        ]
+      },
+      {
+        "id": "inv-0345",
+        "category": "Keyboards",
+        "brand": "Anorexus",
+        "productName": "[GB] Pangea Fullsize PCB",
+        "normalizedName": "[GB] Pangea Fullsize PCB",
+        "family": "layout",
+        "ruleId": "keyword:layout",
+        "matchedKeywords": [
+          "pcb"
+        ]
+      },
+      {
+        "id": "inv-0370",
+        "category": "Keyboards",
+        "brand": "MatrixLab",
+        "productName": "[GB] MatrixLab CP.8XV 3 ⅓ Pad 전용 기판",
+        "normalizedName": "[GB] MatrixLab CP.8XV 3 ⅓ Pad 전용 기판",
+        "family": "layout",
+        "ruleId": "keyword:layout",
+        "matchedKeywords": [
+          "기판"
+        ]
+      },
+      {
+        "id": "inv-0391",
+        "category": "Keyboards",
+        "brand": "NEO",
+        "productName": "[Group Buy] Pixelspace Shadow80 PCB % Extra Parts",
+        "normalizedName": "[Group Buy] Pixelspace Shadow80 PCB % Extra Parts",
+        "family": "layout",
+        "ruleId": "keyword:layout",
+        "matchedKeywords": [
+          "pcb"
+        ]
+      },
+      {
+        "id": "inv-0393",
+        "category": "Keyboards",
+        "brand": "스웨그키",
+        "productName": "스웨그키 Neon 기판 성능 측정기",
+        "normalizedName": "스웨그키 Neon 기판 성능 측정기",
+        "family": "layout",
+        "ruleId": "keyword:layout",
+        "matchedKeywords": [
+          "기판"
+        ]
+      },
+      {
+        "id": "inv-0395",
+        "category": "Keyboards",
+        "brand": "Owlab",
+        "productName": "[In-Stock] Owlab Link65 PCB",
+        "normalizedName": "[In-Stock] Owlab Link65 PCB",
+        "family": "layout",
+        "ruleId": "keyword:layout",
+        "matchedKeywords": [
+          "pcb"
+        ]
+      }
+    ],
+    "case_kit": [
+      {
+        "id": "inv-0002",
+        "category": "Keyboards",
+        "brand": "NEO STUDIO",
+        "productName": "NEO65 Core Plus 커스텀 기계식 키보드",
+        "normalizedName": "NEO65 Core Plus 커스텀 기계식 키보드",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "기계식 키보드"
+        ]
+      },
+      {
+        "id": "inv-0005",
+        "category": "Keyboards",
+        "brand": "NEO Studio",
+        "productName": "NEO80 CU 커스텀 기계식 키보드",
+        "normalizedName": "NEO80 CU 커스텀 기계식 키보드",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "기계식 키보드"
+        ]
+      },
+      {
+        "id": "inv-0007",
+        "category": "Keyboards",
+        "brand": "KBDFANS",
+        "productName": "[GB] Agar Micro 파츠",
+        "normalizedName": "[GB] Agar Micro 파츠",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "파츠"
+        ]
+      },
+      {
+        "id": "inv-0008",
+        "category": "Keyboards",
+        "brand": "EVOWORKS",
+        "productName": "EVO80 에보80 알루미늄 커스텀 기계식 키보드",
+        "normalizedName": "EVO80 에보80 알루미늄 커스텀 기계식 키보드",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "기계식 키보드"
+        ]
+      },
+      {
+        "id": "inv-0009",
+        "category": "Keyboards",
+        "brand": "Ticktype",
+        "productName": "DP104 알루미늄 커스텀 기계식 키보드",
+        "normalizedName": "DP104 알루미늄 커스텀 기계식 키보드",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "기계식 키보드"
+        ]
+      },
+      {
+        "id": "inv-0010",
+        "category": "Keyboards",
+        "brand": "KBDFANS",
+        "productName": "[GB] Agar Micro 커스텀 기계식 키보드",
+        "normalizedName": "[GB] Agar Micro 커스텀 기계식 키보드",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "기계식 키보드"
+        ]
+      },
+      {
+        "id": "inv-0012",
+        "category": "Keyboards",
+        "brand": "스웨그키",
+        "productName": "스웨그키 Eave65 커스텀 기계식 키보드",
+        "normalizedName": "스웨그키 Eave65 커스텀 기계식 키보드",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "기계식 키보드"
+        ]
+      },
+      {
+        "id": "inv-0014",
+        "category": "Keyboards",
+        "brand": "Baionlenja",
+        "productName": "Baionlenja Ophanim 파츠",
+        "normalizedName": "Baionlenja Ophanim 파츠",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "파츠"
+        ]
+      },
+      {
+        "id": "inv-0015",
+        "category": "Keyboards",
+        "brand": "NEO",
+        "productName": "NEO65 Cu 커스텀 기계식 키보드",
+        "normalizedName": "NEO65 Cu 커스텀 기계식 키보드",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "기계식 키보드"
+        ]
+      },
+      {
+        "id": "inv-0017",
+        "category": "Keyboards",
+        "brand": "Evoworks",
+        "productName": "EVO75 에보75 알루미늄 커스텀 기계식 키보드",
+        "normalizedName": "EVO75 에보75 알루미늄 커스텀 기계식 키보드",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "기계식 키보드"
+        ]
+      },
+      {
+        "id": "inv-0018",
+        "category": "Keyboards",
+        "brand": "스웨그키",
+        "productName": "스웨그키 트랜지션 라이트 커스텀 기계식 키보드",
+        "normalizedName": "스웨그키 트랜지션 라이트 커스텀 기계식 키보드",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "기계식 키보드"
+        ]
+      },
+      {
+        "id": "inv-0019",
+        "category": "Keyboards",
+        "brand": "AM",
+        "productName": "AM Relic80 커스텀 기계식 완제품 키보드 R1.5",
+        "normalizedName": "AM Relic80 커스텀 기계식 완제품 키보드 R1.5",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "완제품"
+        ]
+      },
+      {
+        "id": "inv-0021",
+        "category": "Keyboards",
+        "brand": "Baionlenja",
+        "productName": "Baionlenja Ophanim 베어본 킷",
+        "normalizedName": "Baionlenja Ophanim 베어본 킷",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "베어본"
+        ]
+      },
+      {
+        "id": "inv-0022",
+        "category": "Keyboards",
+        "brand": "Swagkeys, Play Keyboard",
+        "productName": "스웨그키 Smurve80 커스텀 기계식 완제품 키보드",
+        "normalizedName": "스웨그키 Smurve80 커스텀 기계식 완제품 키보드",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "완제품"
+        ]
+      },
+      {
+        "id": "inv-0024",
+        "category": "Keyboards",
+        "brand": "MM Studio",
+        "productName": "MM Studio - Class 100",
+        "normalizedName": "MM Studio - Class 100",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0026",
+        "category": "Keyboards",
+        "brand": "Bowl Keyboard",
+        "productName": "[GB]Bowl x Alexotos - Schema 파츠",
+        "normalizedName": "[GB]Bowl x Alexotos - Schema 파츠",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "파츠"
+        ]
+      },
+      {
+        "id": "inv-0027",
+        "category": "Keyboards",
+        "brand": "Qwertykeys",
+        "productName": "QK80MK2 커스텀 기계식 키보드",
+        "normalizedName": "QK80MK2 커스텀 기계식 키보드",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "기계식 키보드"
+        ]
+      },
+      {
+        "id": "inv-0029",
+        "category": "Keyboards",
+        "brand": "NEO STUDIO",
+        "productName": "NEO98 커스텀 기계식 키보드",
+        "normalizedName": "NEO98 커스텀 기계식 키보드",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "기계식 키보드"
+        ]
+      },
+      {
+        "id": "inv-0030",
+        "category": "Keyboards",
+        "brand": "스웨그키",
+        "productName": "트랜지션 라이트 Alu 상부 하우징 상판",
+        "normalizedName": "트랜지션 라이트 Alu 상부 하우징 상판",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "하우징",
+          "상판"
+        ]
+      },
+      {
+        "id": "inv-0031",
+        "category": "Keyboards",
+        "brand": "스웨그키",
+        "productName": "스웨그키 트랜지션 87 라이트 게이밍 8K 커스텀 기계식 완제품 키보드",
+        "normalizedName": "스웨그키 트랜지션 87 라이트 게이밍 8K 커스텀 기계식 완제품 키보드",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "완제품"
+        ]
+      },
+      {
+        "id": "inv-0032",
+        "category": "Keyboards",
+        "brand": "Cerakey",
+        "productName": "세라키 Zen75 기계식 완제품 키보드",
+        "normalizedName": "세라키 Zen75 기계식 완제품 키보드",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "완제품"
+        ]
+      },
+      {
+        "id": "inv-0036",
+        "category": "Keyboards",
+        "brand": "GDK Lab",
+        "productName": "GDK Lab - DK1 TKL Barebone Kit",
+        "normalizedName": "GDK Lab - DK1 TKL Barebone Kit",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "barebone",
+          "kit"
+        ]
+      },
+      {
+        "id": "inv-0037",
+        "category": "Keyboards",
+        "brand": "Bowl Keyboard",
+        "productName": "[GB]Bowl x Alexotos - Schema 상판",
+        "normalizedName": "[GB]Bowl x Alexotos - Schema 상판",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "상판"
+        ]
+      },
+      {
+        "id": "inv-0038",
+        "category": "Keyboards",
+        "brand": "Bowl Keyboard",
+        "productName": "[GB]Bowl x Alexotos - Schema Barebone Kit",
+        "normalizedName": "[GB]Bowl x Alexotos - Schema Barebone Kit",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "barebone",
+          "kit"
+        ]
+      },
+      {
+        "id": "inv-0039",
+        "category": "Keyboards",
+        "brand": "NEO STUDIO",
+        "productName": "NEO75 & NEO98 커스텀 기계식 완제품 키보드",
+        "normalizedName": "NEO75 & NEO98 커스텀 기계식 완제품 키보드",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "완제품"
+        ]
+      },
+      {
+        "id": "inv-0041",
+        "category": "Keyboards",
+        "brand": "Bowl Keyboard",
+        "productName": "Bowl Keyboard Oblique 커스텀 기계식 키보드 R2",
+        "normalizedName": "Bowl Keyboard Oblique 커스텀 기계식 키보드 R2",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "기계식 키보드"
+        ]
+      },
+      {
+        "id": "inv-0042",
+        "category": "Keyboards",
+        "brand": "Wuque Studio",
+        "productName": "Meletrix Zoom64 MX버전 커스텀 기계식 키보드",
+        "normalizedName": "Meletrix Zoom64 MX버전 커스텀 기계식 키보드",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "기계식 키보드"
+        ]
+      },
+      {
+        "id": "inv-0043",
+        "category": "Keyboards",
+        "brand": "Qwertykeys",
+        "productName": "QK65 MK3 커스텀 기계식 완제품 키보드",
+        "normalizedName": "QK65 MK3 커스텀 기계식 완제품 키보드",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "완제품"
+        ]
+      },
+      {
+        "id": "inv-0044",
+        "category": "Keyboards",
+        "brand": "AngryMiao",
+        "productName": "AM ATM98 커스텀 기계식 완제품 키보드",
+        "normalizedName": "AM ATM98 커스텀 기계식 완제품 키보드",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "완제품"
+        ]
+      },
+      {
+        "id": "inv-0047",
+        "category": "Keyboards",
+        "brand": "NEO STUDIO",
+        "productName": "NEO75 커스텀 기계식 키보드",
+        "normalizedName": "NEO75 커스텀 기계식 키보드",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "기계식 키보드"
+        ]
+      },
+      {
+        "id": "inv-0049",
+        "category": "Keyboards",
+        "brand": "MatrixLab",
+        "productName": "MatrixLab NOOS Wing 커스텀 기계식 키보드",
+        "normalizedName": "MatrixLab NOOS Wing 커스텀 기계식 키보드",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "기계식 키보드"
+        ]
+      },
+      {
+        "id": "inv-0056",
+        "category": "Keyboards",
+        "brand": "TOLNTOY",
+        "productName": "MatrixLab One Thing 커스텀 기계식 키보드",
+        "normalizedName": "MatrixLab One Thing 커스텀 기계식 키보드",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "기계식 키보드"
+        ]
+      },
+      {
+        "id": "inv-0057",
+        "category": "Keyboards",
+        "brand": "QWERTYKEYS",
+        "productName": "[GB] QK Alice Duo Barebone Kit [Batch 5]",
+        "normalizedName": "[GB] QK Alice Duo Barebone Kit [Batch 5]",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "barebone",
+          "kit"
+        ]
+      },
+      {
+        "id": "inv-0059",
+        "category": "Keyboards",
+        "brand": "MatrixLab",
+        "productName": "MatrixLab NoStation",
+        "normalizedName": "MatrixLab NoStation",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0060",
+        "category": "Keyboards",
+        "brand": "Wuque Studio",
+        "productName": "Meletrix Zoom64 HE버전 커스텀 기계식 키보드",
+        "normalizedName": "Meletrix Zoom64 HE버전 커스텀 기계식 키보드",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "기계식 키보드"
+        ]
+      },
+      {
+        "id": "inv-0061",
+        "category": "Keyboards",
+        "brand": "Bagri x Flatbrains",
+        "productName": "NP-R Numpad",
+        "normalizedName": "NP-R Numpad",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0065",
+        "category": "Keyboards",
+        "brand": "MatrixLab",
+        "productName": "[GB] MatrixLab Carnival [TKL] - Barebone Kit",
+        "normalizedName": "[GB] MatrixLab Carnival [TKL] - Barebone Kit",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "barebone",
+          "kit"
+        ]
+      },
+      {
+        "id": "inv-0066",
+        "category": "Keyboards",
+        "brand": "NBH",
+        "productName": "[GB] Neighbourhood Shy60 Barebone Kit",
+        "normalizedName": "[GB] Neighbourhood Shy60 Barebone Kit",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "barebone",
+          "kit"
+        ]
+      },
+      {
+        "id": "inv-0067",
+        "category": "Keyboards",
+        "brand": "Baionlenja",
+        "productName": "[GB] Baionlenja Synovia Parts",
+        "normalizedName": "[GB] Baionlenja Synovia Parts",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "parts"
+        ]
+      },
+      {
+        "id": "inv-0068",
+        "category": "Keyboards",
+        "brand": "Baionlenja",
+        "productName": "[GB] Baionlenja Synovia Barebone Kit",
+        "normalizedName": "[GB] Baionlenja Synovia Barebone Kit",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "barebone",
+          "kit"
+        ]
+      },
+      {
+        "id": "inv-0070",
+        "category": "Keyboards",
+        "brand": "ai03",
+        "productName": "[GB] ai03 Altair and Altair-X Barebone Kit R2",
+        "normalizedName": "[GB] ai03 Altair and Altair-X Barebone Kit R2",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "barebone",
+          "kit"
+        ]
+      },
+      {
+        "id": "inv-0071",
+        "category": "Keyboards",
+        "brand": "스웨그키",
+        "productName": "Swagkeys x JJW Integral 커스텀 기계식 키보드",
+        "normalizedName": "Swagkeys x JJW Integral 커스텀 기계식 키보드",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "기계식 키보드"
+        ]
+      },
+      {
+        "id": "inv-0073",
+        "category": "Keyboards",
+        "brand": "TOLNTOY",
+        "productName": "MatrixLab Prologue & Chapter One 커스텀 기계식 키보드",
+        "normalizedName": "MatrixLab Prologue & Chapter One 커스텀 기계식 키보드",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "기계식 키보드"
+        ]
+      },
+      {
+        "id": "inv-0074",
+        "category": "Keyboards",
+        "brand": "NEO",
+        "productName": "NEO60 Core 커스텀 기계식 키보드",
+        "normalizedName": "NEO60 Core 커스텀 기계식 키보드",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "기계식 키보드"
+        ]
+      },
+      {
+        "id": "inv-0075",
+        "category": "Keyboards",
+        "brand": "Cannonkeys",
+        "productName": "[GB] Cannonkeys VIDA",
+        "normalizedName": "[GB] Cannonkeys VIDA",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0077",
+        "category": "Keyboards",
+        "brand": "Cannonkeys",
+        "productName": "[GB] Cannonkeys Cerberus Barebone Kit",
+        "normalizedName": "[GB] Cannonkeys Cerberus Barebone Kit",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "barebone",
+          "kit"
+        ]
+      },
+      {
+        "id": "inv-0081",
+        "category": "Keyboards",
+        "brand": "Owlab",
+        "productName": "Owlab Hellcat Mech-01 커스텀 기계식 키보드",
+        "normalizedName": "Owlab Hellcat Mech-01 커스텀 기계식 키보드",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "기계식 키보드"
+        ]
+      },
+      {
+        "id": "inv-0082",
+        "category": "Keyboards",
+        "brand": "NEON",
+        "productName": "NEON Transition LITE HE Kit",
+        "normalizedName": "NEON Transition LITE HE Kit",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "kit",
+          "he kit"
+        ]
+      },
+      {
+        "id": "inv-0291",
+        "category": "Gaming",
+        "brand": "NEO STUDIO",
+        "productName": "NEO65 Sonic He+",
+        "normalizedName": "NEO65 Sonic He+",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "sonic he",
+          "he+"
+        ]
+      },
+      {
+        "id": "inv-0298",
+        "category": "Keyboards",
+        "brand": "NEW",
+        "productName": "Meletrix - ZOOM TKL Dyna",
+        "normalizedName": "Meletrix - ZOOM TKL Dyna",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0300",
+        "category": "Keyboards",
+        "brand": "MW",
+        "productName": "MW Mass80 커스텀 키보드 베어본 킷",
+        "normalizedName": "MW Mass80 커스텀 키보드 베어본 킷",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "베어본",
+          "커스텀 키보드"
+        ]
+      },
+      {
+        "id": "inv-0303",
+        "category": "Keyboards",
+        "brand": "Outva",
+        "productName": "[GB] Outva Solid Alex Alice",
+        "normalizedName": "[GB] Outva Solid Alex Alice",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0304",
+        "category": "Keyboards",
+        "brand": "Whatever Studio",
+        "productName": "Whatever Studio - Vany Alice",
+        "normalizedName": "Whatever Studio - Vany Alice",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0305",
+        "category": "Keyboards",
+        "brand": "FAUKWAA",
+        "productName": "[Raffle] FAUKWAA – [Carnival] Alice 결제용",
+        "normalizedName": "[Raffle] FAUKWAA – [Carnival] Alice 결제용",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0306",
+        "category": "Keyboards",
+        "brand": "Whatever Studio",
+        "productName": "Whatever Studio - Vany Alice Parts",
+        "normalizedName": "Whatever Studio - Vany Alice Parts",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "parts"
+        ]
+      },
+      {
+        "id": "inv-0308",
+        "category": "Keyboards",
+        "brand": "Owlab",
+        "productName": "Owlab Hellcat Mech-01 파츠",
+        "normalizedName": "Owlab Hellcat Mech-01 파츠",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "파츠"
+        ]
+      },
+      {
+        "id": "inv-0309",
+        "category": "Keyboards",
+        "brand": "FAUKWAA",
+        "productName": "[Raffle]FAUKWAA Carnival",
+        "normalizedName": "[Raffle]FAUKWAA Carnival",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0310",
+        "category": "Keyboards",
+        "brand": "Owlab",
+        "productName": "Owlab Hellcat Mech-01 Barebone Kit",
+        "normalizedName": "Owlab Hellcat Mech-01 Barebone Kit",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "barebone",
+          "kit"
+        ]
+      },
+      {
+        "id": "inv-0311",
+        "category": "Keyboards",
+        "brand": "Owlab",
+        "productName": "[Raffle] Owlab Hellcat Mech-01 Barebone Kit Babypink",
+        "normalizedName": "[Raffle] Owlab Hellcat Mech-01 Barebone Kit Babypink",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "barebone",
+          "kit"
+        ]
+      },
+      {
+        "id": "inv-0312",
+        "category": "Keyboards",
+        "brand": "Owlab",
+        "productName": "[Raffle] Owlab Hellcat Mech-01 Barebone Kit Dark Grey",
+        "normalizedName": "[Raffle] Owlab Hellcat Mech-01 Barebone Kit Dark Grey",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "barebone",
+          "kit"
+        ]
+      },
+      {
+        "id": "inv-0313",
+        "category": "Keyboards",
+        "brand": "Owlab",
+        "productName": "[Raffle] Owlab Hellcat Mech-01 Barebone Kit Grey",
+        "normalizedName": "[Raffle] Owlab Hellcat Mech-01 Barebone Kit Grey",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "barebone",
+          "kit"
+        ]
+      },
+      {
+        "id": "inv-0315",
+        "category": "Keyboards",
+        "brand": "NEO",
+        "productName": "[Pre-order] AM Compact Touch R2",
+        "normalizedName": "[Pre-order] AM Compact Touch R2",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0316",
+        "category": "Keyboards",
+        "brand": "NEO",
+        "productName": "[예약판매] Qwertykeys NEO Ergo Barebone Kit",
+        "normalizedName": "[예약판매] Qwertykeys NEO Ergo Barebone Kit",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "barebone",
+          "kit"
+        ]
+      },
+      {
+        "id": "inv-0317",
+        "category": "Keyboards",
+        "brand": "Anorexus",
+        "productName": "[GB] Anorexus Void65",
+        "normalizedName": "[GB] Anorexus Void65",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0319",
+        "category": "Keyboards",
+        "brand": "NEO",
+        "productName": "[예약판매] Qwertykeys NEO Ergo Parts",
+        "normalizedName": "[예약판매] Qwertykeys NEO Ergo Parts",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "parts"
+        ]
+      },
+      {
+        "id": "inv-0320",
+        "category": "Keyboards",
+        "brand": "MatrixLab",
+        "productName": "MatrixLab FAUKWAA - [MY-2K] 1999 베어본",
+        "normalizedName": "MatrixLab FAUKWAA - [MY-2K] 1999 베어본",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "베어본"
+        ]
+      },
+      {
+        "id": "inv-0321",
+        "category": "Keyboards",
+        "brand": "MatrixLab",
+        "productName": "[당첨자결제용] MatrixLab FAUKWAA - [MY-2K] 1999 베어본",
+        "normalizedName": "[당첨자결제용] MatrixLab FAUKWAA - [MY-2K] 1999 베어본",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "베어본"
+        ]
+      },
+      {
+        "id": "inv-0322",
+        "category": "Keyboards",
+        "brand": "FAUKWAA",
+        "productName": "[GB] FAUKWAA - [MY-2K] 100NG Edition",
+        "normalizedName": "[GB] FAUKWAA - [MY-2K] 100NG Edition",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0323",
+        "category": "Keyboards",
+        "brand": "GMK",
+        "productName": "[GB] PBS Granite",
+        "normalizedName": "[GB] PBS Granite",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0325",
+        "category": "Keyboards",
+        "brand": "Artkey",
+        "productName": "[GB] Artkey - AK75",
+        "normalizedName": "[GB] Artkey - AK75",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0326",
+        "category": "Keyboards",
+        "brand": "TKD",
+        "productName": "[GB] TKD Cycle 7 Parts",
+        "normalizedName": "[GB] TKD Cycle 7 Parts",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "parts"
+        ]
+      },
+      {
+        "id": "inv-0328",
+        "category": "Keyboards",
+        "brand": "MM Studio",
+        "productName": "[GB] MW - Reel to Reel",
+        "normalizedName": "[GB] MW - Reel to Reel",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0330",
+        "category": "Keyboards",
+        "brand": "Anorexus",
+        "productName": "[GB] Mode Envoy 65% 추가 파츠",
+        "normalizedName": "[GB] Mode Envoy 65% 추가 파츠",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "파츠"
+        ]
+      },
+      {
+        "id": "inv-0331",
+        "category": "Keyboards",
+        "brand": "Anorexus",
+        "productName": "[GB] Pangea Fullsize",
+        "normalizedName": "[GB] Pangea Fullsize",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0332",
+        "category": "Keyboards",
+        "brand": "MatrixLab",
+        "productName": "[GB] MatrixLab Gator",
+        "normalizedName": "[GB] MatrixLab Gator",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0333",
+        "category": "Keyboards",
+        "brand": "\bNeson Design",
+        "productName": "[GB] TKD Cycle 7 Keyboard",
+        "normalizedName": "[GB] TKD Cycle 7 Keyboard",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0334",
+        "category": "Keyboards",
+        "brand": "\bNeson Design",
+        "productName": "[GB] Neson Design 810E v3",
+        "normalizedName": "[GB] Neson Design 810E v3",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0336",
+        "category": "Keyboards",
+        "brand": "Mode",
+        "productName": "[GB] Mode Envoy 65% 추가 케이스",
+        "normalizedName": "[GB] Mode Envoy 65% 추가 케이스",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0338",
+        "category": "Keyboards",
+        "brand": "Mode",
+        "productName": "[GB] Mode Envoy 65% 추가 악센트",
+        "normalizedName": "[GB] Mode Envoy 65% 추가 악센트",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0339",
+        "category": "Keyboards",
+        "brand": "TKD",
+        "productName": "[GB] TKD Cycle 8 Add-on",
+        "normalizedName": "[GB] TKD Cycle 8 Add-on",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0341",
+        "category": "Keyboards",
+        "brand": "Artkey",
+        "productName": "[GB] Mode Envoy 65% Diy Kit",
+        "normalizedName": "[GB] Mode Envoy 65% Diy Kit",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "kit"
+        ]
+      },
+      {
+        "id": "inv-0342",
+        "category": "Keyboards",
+        "brand": "Artkey",
+        "productName": "[GB] Mode Themes Desk Mats",
+        "normalizedName": "[GB] Mode Themes Desk Mats",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0343",
+        "category": "Keyboards",
+        "brand": "Artkey",
+        "productName": "[GB] Artkey - AK75 Parts",
+        "normalizedName": "[GB] Artkey - AK75 Parts",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "parts"
+        ]
+      },
+      {
+        "id": "inv-0344",
+        "category": "Keyboards",
+        "brand": "Plywrks",
+        "productName": "[GB] Plywrks Spyder TKL",
+        "normalizedName": "[GB] Plywrks Spyder TKL",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0347",
+        "category": "Keyboards",
+        "brand": "FoxLab",
+        "productName": "[GB] FoxLab Time65 Parts",
+        "normalizedName": "[GB] FoxLab Time65 Parts",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "parts"
+        ]
+      },
+      {
+        "id": "inv-0348",
+        "category": "Keyboards",
+        "brand": "Cannonkeys",
+        "productName": "[GB] Cannonkeys VIDA 여분 상판",
+        "normalizedName": "[GB] Cannonkeys VIDA 여분 상판",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "상판"
+        ]
+      },
+      {
+        "id": "inv-0349",
+        "category": "Keyboards",
+        "brand": "Wuque",
+        "productName": "[GB]Meletrix Zoom64 - HE 버전",
+        "normalizedName": "[GB]Meletrix Zoom64 - HE 버전",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0352",
+        "category": "Keyboards",
+        "brand": "MM Studio",
+        "productName": "[GB] MM Studio Class 0413 상판",
+        "normalizedName": "[GB] MM Studio Class 0413 상판",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "상판"
+        ]
+      },
+      {
+        "id": "inv-0354",
+        "category": "Keyboards",
+        "brand": "MatrixLab",
+        "productName": "[GB] MatrixLab CP.8XV 3 ⅓ Pad",
+        "normalizedName": "[GB] MatrixLab CP.8XV 3 ⅓ Pad",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0355",
+        "category": "Keyboards",
+        "brand": "Neson Design",
+        "productName": "[GB] \bNeson Design 810E v3 Parts",
+        "normalizedName": "[GB] \bNeson Design 810E v3 Parts",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "parts"
+        ]
+      },
+      {
+        "id": "inv-0356",
+        "category": "Keyboards",
+        "brand": "TKD",
+        "productName": "[GB] XINGZHI x QIN 篆Seal Parts",
+        "normalizedName": "[GB] XINGZHI x QIN 篆Seal Parts",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "parts"
+        ]
+      },
+      {
+        "id": "inv-0359",
+        "category": "Keyboards",
+        "brand": "Wuque",
+        "productName": "[GB]ZOOM64 Mechanical Kit 추가 파츠",
+        "normalizedName": "[GB]ZOOM64 Mechanical Kit 추가 파츠",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "kit",
+          "파츠"
+        ]
+      },
+      {
+        "id": "inv-0360",
+        "category": "Keyboards",
+        "brand": "Plywrks",
+        "productName": "[GB] Plywrks Spyder TKL Add-on",
+        "normalizedName": "[GB] Plywrks Spyder TKL Add-on",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0361",
+        "category": "Keyboards",
+        "brand": "MM Studio",
+        "productName": "[GB] MM Studio Class 1800 Parts",
+        "normalizedName": "[GB] MM Studio Class 1800 Parts",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "parts"
+        ]
+      },
+      {
+        "id": "inv-0363",
+        "category": "Keyboards",
+        "brand": "Cannonkeys",
+        "productName": "[GB] Cannonkeys VIDA Blackout",
+        "normalizedName": "[GB] Cannonkeys VIDA Blackout",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0364",
+        "category": "Keyboards",
+        "brand": "MM Studio",
+        "productName": "[GB] MM Studio Class 0413 Parts",
+        "normalizedName": "[GB] MM Studio Class 0413 Parts",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "parts"
+        ]
+      },
+      {
+        "id": "inv-0365",
+        "category": "Keyboards",
+        "brand": "NBH",
+        "productName": "[GB] Neighbourhood Shy60 Parts",
+        "normalizedName": "[GB] Neighbourhood Shy60 Parts",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "parts"
+        ]
+      },
+      {
+        "id": "inv-0366",
+        "category": "Keyboards",
+        "brand": "TKD",
+        "productName": "[GB] TKD Cycle 7 Keyboard Barebones",
+        "normalizedName": "[GB] TKD Cycle 7 Keyboard Barebones",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "barebone"
+        ]
+      },
+      {
+        "id": "inv-0367",
+        "category": "Keyboards",
+        "brand": "TKD",
+        "productName": "[GB] 篆Seal x Cosmos Barebone Kit",
+        "normalizedName": "[GB] 篆Seal x Cosmos Barebone Kit",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "barebone",
+          "kit"
+        ]
+      },
+      {
+        "id": "inv-0368",
+        "category": "Keyboards",
+        "brand": "FoxLab",
+        "productName": "[GB] FoxLab Time65 Barebone Kit",
+        "normalizedName": "[GB] FoxLab Time65 Barebone Kit",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "barebone",
+          "kit"
+        ]
+      },
+      {
+        "id": "inv-0369",
+        "category": "Keyboards",
+        "brand": "Bowl Keyboard",
+        "productName": "[GB] Bowl x Alexotos Manta Add-on",
+        "normalizedName": "[GB] Bowl x Alexotos Manta Add-on",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0371",
+        "category": "Keyboards",
+        "brand": "Anorexus",
+        "productName": "[GB] Pangea Fullsize 추가 TKL Frames",
+        "normalizedName": "[GB] Pangea Fullsize 추가 TKL Frames",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0372",
+        "category": "Keyboards",
+        "brand": "Anorexus",
+        "productName": "[GB] Pangea Fullsize 추가 TOP Frames",
+        "normalizedName": "[GB] Pangea Fullsize 추가 TOP Frames",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0373",
+        "category": "Keyboards",
+        "brand": "Wuque",
+        "productName": "[GB]Meletrix Zoom64 - Mechanical 버전",
+        "normalizedName": "[GB]Meletrix Zoom64 - Mechanical 버전",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0374",
+        "category": "Keyboards",
+        "brand": "MatrixLab",
+        "productName": "[GB] MatrixLab Carnival [TKL] - Parts",
+        "normalizedName": "[GB] MatrixLab Carnival [TKL] - Parts",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "parts"
+        ]
+      },
+      {
+        "id": "inv-0375",
+        "category": "Keyboards",
+        "brand": "Baionlenja",
+        "productName": "[GB] Deadline studio X Hammer works - HMC",
+        "normalizedName": "[GB] Deadline studio X Hammer works - HMC",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0376",
+        "category": "Keyboards",
+        "brand": "Baionlenja",
+        "productName": "[GB] ai03 Altair and Altair-X R2 Parts",
+        "normalizedName": "[GB] ai03 Altair and Altair-X R2 Parts",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "parts"
+        ]
+      },
+      {
+        "id": "inv-0377",
+        "category": "Keyboards",
+        "brand": "NBH",
+        "productName": "[GB] XINGZHI x QIN 篆Seal Barebone Kit",
+        "normalizedName": "[GB] XINGZHI x QIN 篆Seal Barebone Kit",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "barebone",
+          "kit"
+        ]
+      },
+      {
+        "id": "inv-0378",
+        "category": "Keyboards",
+        "brand": "NBH",
+        "productName": "[GB] Hammer x BUGER CRP-X Parallel Worlds",
+        "normalizedName": "[GB] Hammer x BUGER CRP-X Parallel Worlds",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0379",
+        "category": "Keyboards",
+        "brand": "MM Studio",
+        "productName": "[GB] MM Studio Class 1800 Barebone Kit",
+        "normalizedName": "[GB] MM Studio Class 1800 Barebone Kit",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "barebone",
+          "kit"
+        ]
+      },
+      {
+        "id": "inv-0380",
+        "category": "Keyboards",
+        "brand": "MM Studio",
+        "productName": "[GB] 인스탁 구매자용 Matrix Navi & Corsa HE Kit",
+        "normalizedName": "[GB] 인스탁 구매자용 Matrix Navi & Corsa HE Kit",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "kit",
+          "he kit"
+        ]
+      },
+      {
+        "id": "inv-0381",
+        "category": "Keyboards",
+        "brand": "MM Studio",
+        "productName": "[GB] MM Studio Class 0413 Barebone Kit",
+        "normalizedName": "[GB] MM Studio Class 0413 Barebone Kit",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "barebone",
+          "kit"
+        ]
+      },
+      {
+        "id": "inv-0382",
+        "category": "Keyboards",
+        "brand": "MatrixLab",
+        "productName": "[GB] FAUKWAA [MY-2K] 100NG Edition - Parts",
+        "normalizedName": "[GB] FAUKWAA [MY-2K] 100NG Edition - Parts",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "parts"
+        ]
+      },
+      {
+        "id": "inv-0383",
+        "category": "Keyboards",
+        "brand": "NEO",
+        "productName": "Qwertykeys NEO65 Parts",
+        "normalizedName": "Qwertykeys NEO65 Parts",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "parts"
+        ]
+      },
+      {
+        "id": "inv-0384",
+        "category": "Keyboards",
+        "brand": "NEO",
+        "productName": "Qwertykeys NEO Ergo 파츠 & 팜레스트",
+        "normalizedName": "Qwertykeys NEO Ergo 파츠 & 팜레스트",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "파츠"
+        ]
+      },
+      {
+        "id": "inv-0385",
+        "category": "Keyboards",
+        "brand": "NEO",
+        "productName": "[Pre-order] Qwertykeys QK60 R2",
+        "normalizedName": "[Pre-order] Qwertykeys QK60 R2",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0386",
+        "category": "Keyboards",
+        "brand": "NEO",
+        "productName": "[In-stock] Qwertykeys QK80 Parts",
+        "normalizedName": "[In-stock] Qwertykeys QK80 Parts",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "parts"
+        ]
+      },
+      {
+        "id": "inv-0387",
+        "category": "Keyboards",
+        "brand": "NEO",
+        "productName": "[Pre-order] Qwertykeys - NEO60 Cu",
+        "normalizedName": "[Pre-order] Qwertykeys - NEO60 Cu",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0388",
+        "category": "Keyboards",
+        "brand": "NEO",
+        "productName": "[Pre-order] Qwertykeys - NEO 65&amp;60 Parts",
+        "normalizedName": "[Pre-order] Qwertykeys - NEO 65&amp;60 Parts",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "parts"
+        ]
+      },
+      {
+        "id": "inv-0389",
+        "category": "Keyboards",
+        "brand": "NEO",
+        "productName": "[Group Buy] Pixelspace Shadow80 Barebone Kit",
+        "normalizedName": "[Group Buy] Pixelspace Shadow80 Barebone Kit",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "barebone",
+          "kit"
+        ]
+      },
+      {
+        "id": "inv-0390",
+        "category": "Keyboards",
+        "brand": "Percent Studio",
+        "productName": "Volt Plus+",
+        "normalizedName": "Volt Plus+",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0392",
+        "category": "Keyboards",
+        "brand": "NEO",
+        "productName": "[Group Buy] Shadow80 Limited Edition 당첨자용",
+        "normalizedName": "[Group Buy] Shadow80 Limited Edition 당첨자용",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0394",
+        "category": "Keyboards",
+        "brand": "Percent Studio",
+        "productName": "[예약판매]Percent Studio - Platinum PT750",
+        "normalizedName": "[예약판매]Percent Studio - Platinum PT750",
+        "family": "case_kit",
+        "ruleId": "category:keyboards_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0397",
+        "category": "Keyboards",
+        "brand": "Owlab",
+        "productName": "Owlab Jelly Evolv Barebones Kit",
+        "normalizedName": "Owlab Jelly Evolv Barebones Kit",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "barebone",
+          "kit"
+        ]
+      },
+      {
+        "id": "inv-0398",
+        "category": "Keyboards",
+        "brand": "Owlab",
+        "productName": "[In-Stock] Owlab Link65 DIY Kit",
+        "normalizedName": "[In-Stock] Owlab Link65 DIY Kit",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "kit"
+        ]
+      },
+      {
+        "id": "inv-0399",
+        "category": "Keyboards",
+        "brand": "Owlab",
+        "productName": "[Raffle] Owlab Vento 80 Barebone Kit Light Wisteria WK",
+        "normalizedName": "[Raffle] Owlab Vento 80 Barebone Kit Light Wisteria WK",
+        "family": "case_kit",
+        "ruleId": "keyword:case_kit",
+        "matchedKeywords": [
+          "barebone",
+          "kit"
+        ]
+      }
+    ],
+    "keycap": [
+      {
+        "id": "inv-0137",
+        "category": "Keycaps",
+        "brand": "SWG",
+        "productName": "[GB]SWG Midnight Rainbow ABS 이중사출 키캡",
+        "normalizedName": "[GB]SWG Midnight Rainbow ABS 이중사출 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0138",
+        "category": "Keycaps",
+        "brand": "GMK",
+        "productName": "[GB]GMK CYL Pandemonium 키캡",
+        "normalizedName": "[GB]GMK CYL Pandemonium 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0139",
+        "category": "Keycaps",
+        "brand": "hammerworks",
+        "productName": "Hammerworks CRP R7 키캡",
+        "normalizedName": "Hammerworks CRP R7 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0140",
+        "category": "Keycaps",
+        "brand": "SWG",
+        "productName": "SWG Яubber ABS 이중사출 키캡",
+        "normalizedName": "SWG Яubber ABS 이중사출 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0141",
+        "category": "Keycaps",
+        "brand": "Swagkeys",
+        "productName": "스웨그키 Calm Beige PBT 염료승화 키캡",
+        "normalizedName": "스웨그키 Calm Beige PBT 염료승화 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0142",
+        "category": "Keycaps",
+        "brand": "스웨그키",
+        "productName": "스웨그키 포인트 키캡",
+        "normalizedName": "스웨그키 포인트 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0143",
+        "category": "Keycaps",
+        "brand": "스웨그키",
+        "productName": "스웨그키 투명 키보드 키캡",
+        "normalizedName": "스웨그키 투명 키보드 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0144",
+        "category": "Keycaps",
+        "brand": "SWG",
+        "productName": "SWG Euler ABS 이중사출 키캡",
+        "normalizedName": "SWG Euler ABS 이중사출 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0145",
+        "category": "Keycaps",
+        "brand": "Swagkeys",
+        "productName": "스웨그키 Calm Beige 스탠다드 버전 PBT 염료승화 키캡",
+        "normalizedName": "스웨그키 Calm Beige 스탠다드 버전 PBT 염료승화 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0146",
+        "category": "Keycaps",
+        "brand": "DoodleCaps",
+        "productName": "DoodleCaps 낙서 블랙 PBT 염료승화 키캡",
+        "normalizedName": "DoodleCaps 낙서 블랙 PBT 염료승화 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0147",
+        "category": "Keycaps",
+        "brand": "MilkyWay",
+        "productName": "[GB]MW Philosopher's Stone 키캡",
+        "normalizedName": "[GB]MW Philosopher's Stone 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0148",
+        "category": "Keycaps",
+        "brand": "OSHID",
+        "productName": "스웨그키 MOA 키보드 키캡",
+        "normalizedName": "스웨그키 MOA 키보드 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0149",
+        "category": "Keycaps",
+        "brand": "Swagkeys",
+        "productName": "스웨그키 Black on Black BoB 키캡 - 65%",
+        "normalizedName": "스웨그키 Black on Black BoB 키캡 - 65%",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0150",
+        "category": "Keycaps",
+        "brand": "DoodleCaps",
+        "productName": "DoodleCaps 낙서 PBT 염료승화 키캡",
+        "normalizedName": "DoodleCaps 낙서 PBT 염료승화 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0151",
+        "category": "Keycaps",
+        "brand": "Qwertykeys",
+        "productName": "스웨그키 Qwertykeys Bubble Tea Marshmallow 키보드 키캡",
+        "normalizedName": "스웨그키 Qwertykeys Bubble Tea Marshmallow 키보드 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0152",
+        "category": "Keycaps",
+        "brand": "Keyboard Science",
+        "productName": "Keyboard Science Heyball 키캡",
+        "normalizedName": "Keyboard Science Heyball 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0153",
+        "category": "Keycaps",
+        "brand": "Qwertykeys",
+        "productName": "스웨그키 Qwertykeys Milk Tea 키캡",
+        "normalizedName": "스웨그키 Qwertykeys Milk Tea 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0154",
+        "category": "Keycaps",
+        "brand": "스웨그키",
+        "productName": "스웨그키 SW Antarctic 이중사출 키캡 세트",
+        "normalizedName": "스웨그키 SW Antarctic 이중사출 키캡 세트",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0155",
+        "category": "Keycaps",
+        "brand": "SWG",
+        "productName": "[GB]SWG Classic Red ABS 이중사출 키캡",
+        "normalizedName": "[GB]SWG Classic Red ABS 이중사출 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0156",
+        "category": "Keycaps",
+        "brand": "Geistmaschine",
+        "productName": "Geistmaschine - TP-1 키캡",
+        "normalizedName": "Geistmaschine - TP-1 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0157",
+        "category": "Keycaps",
+        "brand": "RAMA Works",
+        "productName": "RAMA CAPS 키캡",
+        "normalizedName": "RAMA CAPS 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0158",
+        "category": "Keycaps",
+        "brand": "SWG",
+        "productName": "[GB]SWG Rainbow Alert ABS 이중사출 키캡",
+        "normalizedName": "[GB]SWG Rainbow Alert ABS 이중사출 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0159",
+        "category": "Keycaps",
+        "brand": "GMK",
+        "productName": "[GB]GMK CYL Thunder God 키캡",
+        "normalizedName": "[GB]GMK CYL Thunder God 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0160",
+        "category": "Keycaps",
+        "brand": "SWG",
+        "productName": "[GB]SWG Skeletoon ABS 이중사출 키캡",
+        "normalizedName": "[GB]SWG Skeletoon ABS 이중사출 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0161",
+        "category": "Keycaps",
+        "brand": "Lelelab",
+        "productName": "LeleLab LowSup-Ocean Blue 키보드 키캡 로우프로파일",
+        "normalizedName": "LeleLab LowSup-Ocean Blue 키보드 키캡 로우프로파일",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0162",
+        "category": "Keycaps",
+        "brand": "SWG",
+        "productName": "[GB]SWG Classic Blue ABS 이중사출 키캡",
+        "normalizedName": "[GB]SWG Classic Blue ABS 이중사출 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0163",
+        "category": "Keycaps",
+        "brand": "GMK",
+        "productName": "GMK Cherry Love 키캡 Add-on",
+        "normalizedName": "GMK Cherry Love 키캡 Add-on",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0164",
+        "category": "Keycaps",
+        "brand": "SWG",
+        "productName": "[GB]SWG Ferrofluid ABS 이중사출 키캡",
+        "normalizedName": "[GB]SWG Ferrofluid ABS 이중사출 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0165",
+        "category": "Keycaps",
+        "brand": "KnockKnockStudio&Fannie",
+        "productName": "스웨그키 DMK Red Bean 키캡 Add-on",
+        "normalizedName": "스웨그키 DMK Red Bean 키캡 Add-on",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0166",
+        "category": "Keycaps",
+        "brand": "SWG",
+        "productName": "[GB]SWG Prepress ABS 이중사출 키캡",
+        "normalizedName": "[GB]SWG Prepress ABS 이중사출 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0167",
+        "category": "Keycaps",
+        "brand": "Lelelab",
+        "productName": "LeleLab Good Night Cocoa 키보드 키캡",
+        "normalizedName": "LeleLab Good Night Cocoa 키보드 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0168",
+        "category": "Keycaps",
+        "brand": "Keyreative",
+        "productName": "스웨그키 KAP MV Classic 키캡",
+        "normalizedName": "스웨그키 KAP MV Classic 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0169",
+        "category": "Keycaps",
+        "brand": "SWG",
+        "productName": "[GB]SWG Euler ABS 이중사출 키캡",
+        "normalizedName": "[GB]SWG Euler ABS 이중사출 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0170",
+        "category": "Keycaps",
+        "brand": "HAMMER",
+        "productName": "스웨그키 Hammer Mirror Image 키보드 키캡 80s All-in",
+        "normalizedName": "스웨그키 Hammer Mirror Image 키보드 키캡 80s All-in",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0171",
+        "category": "Keycaps",
+        "brand": "HAMMER",
+        "productName": "Hammerworks CRP R6 Add-on kit",
+        "normalizedName": "Hammerworks CRP R6 Add-on kit",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0172",
+        "category": "Keycaps",
+        "brand": "DMK",
+        "productName": "스웨그키 DMK Silent Plateau 키보드 키캡 Add-on",
+        "normalizedName": "스웨그키 DMK Silent Plateau 키보드 키캡 Add-on",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0173",
+        "category": "Keycaps",
+        "brand": "KBM",
+        "productName": "스웨그키 KBM Love Detective 키보드 키캡 Add-on",
+        "normalizedName": "스웨그키 KBM Love Detective 키보드 키캡 Add-on",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0174",
+        "category": "Keycaps",
+        "brand": "HAMMER",
+        "productName": "스웨그키 Hammerworks CRP RGBY 키보드 키캡",
+        "normalizedName": "스웨그키 Hammerworks CRP RGBY 키보드 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0175",
+        "category": "Keycaps",
+        "brand": "Lelelab",
+        "productName": "스웨그키 Lelelab Gems 키보드 키캡",
+        "normalizedName": "스웨그키 Lelelab Gems 키보드 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0176",
+        "category": "Keycaps",
+        "brand": "Hammerworks",
+        "productName": "[GB]Hammerworks CRP R7 - Add on",
+        "normalizedName": "[GB]Hammerworks CRP R7 - Add on",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0177",
+        "category": "Keycaps",
+        "brand": "Hammerworks",
+        "productName": "[GB]Hammerworks CRP R7 - Mod",
+        "normalizedName": "[GB]Hammerworks CRP R7 - Mod",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0178",
+        "category": "Keycaps",
+        "brand": "Hammerworks",
+        "productName": "[GB]Hammerworks CRP R7 - Base",
+        "normalizedName": "[GB]Hammerworks CRP R7 - Base",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0179",
+        "category": "Keycaps",
+        "brand": "Hammerworks",
+        "productName": "[GB]Hammerworks CRP R7 - Alpha",
+        "normalizedName": "[GB]Hammerworks CRP R7 - Alpha",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0180",
+        "category": "Keycaps",
+        "brand": "SWG",
+        "productName": "[GB]SWG Яubber ABS 이중사출 키캡",
+        "normalizedName": "[GB]SWG Яubber ABS 이중사출 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0181",
+        "category": "Keycaps",
+        "brand": "SWG",
+        "productName": "SWG Beige ABS 이중사출 키캡 - Add on",
+        "normalizedName": "SWG Beige ABS 이중사출 키캡 - Add on",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0182",
+        "category": "Keycaps",
+        "brand": "GMK",
+        "productName": "[GB]GMK MTNU Foundation R2",
+        "normalizedName": "[GB]GMK MTNU Foundation R2",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0183",
+        "category": "Keycaps",
+        "brand": "GMK",
+        "productName": "[GB]GMK CYL Foundation R2",
+        "normalizedName": "[GB]GMK CYL Foundation R2",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0184",
+        "category": "Keycaps",
+        "brand": "Keyreative",
+        "productName": "KAT WoB Candy 키캡 Accent kit",
+        "normalizedName": "KAT WoB Candy 키캡 Accent kit",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0185",
+        "category": "Keycaps",
+        "brand": "Swagkey",
+        "productName": "스웨그키 SW Maestro 키캡",
+        "normalizedName": "스웨그키 SW Maestro 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0186",
+        "category": "Keycaps",
+        "brand": "ZOMOPLUS",
+        "productName": "스웨그키 ZOMO X B.Duck 3D 아티산 포인트 키캡",
+        "normalizedName": "스웨그키 ZOMO X B.Duck 3D 아티산 포인트 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0187",
+        "category": "Keycaps",
+        "brand": "ZOMOPLUS",
+        "productName": "스웨그키 ZOMO 크리스마스 굴뚝 테마 포인트 키캡",
+        "normalizedName": "스웨그키 ZOMO 크리스마스 굴뚝 테마 포인트 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0188",
+        "category": "Keycaps",
+        "brand": "KAP",
+        "productName": "[GB] KAP Santa LLum",
+        "normalizedName": "[GB] KAP Santa LLum",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0189",
+        "category": "Keycaps",
+        "brand": "Keykobo",
+        "productName": "스웨그키 KKB Instant 키보드 키캡 Novelties / Extension",
+        "normalizedName": "스웨그키 KKB Instant 키보드 키캡 Novelties / Extension",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0190",
+        "category": "Keycaps",
+        "brand": "Keyreative",
+        "productName": "KAP White on Black 기계식 키보드 키캡",
+        "normalizedName": "KAP White on Black 기계식 키보드 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0191",
+        "category": "Keycaps",
+        "brand": "Keykobo",
+        "productName": "Keykobo Outer bounds",
+        "normalizedName": "Keykobo Outer bounds",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0192",
+        "category": "Keycaps",
+        "brand": "Lelelab",
+        "productName": "LeleLab Snowspire Lake 키보드 키캡",
+        "normalizedName": "LeleLab Snowspire Lake 키보드 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0193",
+        "category": "Keycaps",
+        "brand": "Cerakey",
+        "productName": "스웨그키 세라키 세라믹 V2 키캡 Blue Crazed",
+        "normalizedName": "스웨그키 세라키 세라믹 V2 키캡 Blue Crazed",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0194",
+        "category": "Keycaps",
+        "brand": "SWG",
+        "productName": "SWG Nimbus ABS 이중사출 키캡",
+        "normalizedName": "SWG Nimbus ABS 이중사출 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0195",
+        "category": "Keycaps",
+        "brand": "Cerakey",
+        "productName": "스웨그키 세라키 세라믹 V2 키캡 Pink",
+        "normalizedName": "스웨그키 세라키 세라믹 V2 키캡 Pink",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0196",
+        "category": "Keycaps",
+        "brand": "SWG",
+        "productName": "[GB]SWG Tars ABS 이중사출 키캡",
+        "normalizedName": "[GB]SWG Tars ABS 이중사출 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0197",
+        "category": "Keycaps",
+        "brand": "GMK",
+        "productName": "[GB]GMK CYL Gonzales 키캡",
+        "normalizedName": "[GB]GMK CYL Gonzales 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0198",
+        "category": "Keycaps",
+        "brand": "SWG",
+        "productName": "SWG Beige ABS 이중사출 키캡 - Base",
+        "normalizedName": "SWG Beige ABS 이중사출 키캡 - Base",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0199",
+        "category": "Keycaps",
+        "brand": "GMK",
+        "productName": "[GB] GMK Cherry Love 키캡",
+        "normalizedName": "[GB] GMK Cherry Love 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0200",
+        "category": "Keycaps",
+        "brand": "KAP",
+        "productName": "[GB] KAP - Y",
+        "normalizedName": "[GB] KAP - Y",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0201",
+        "category": "Keycaps",
+        "brand": "Keyreative",
+        "productName": "[GB] KAP MV Classic",
+        "normalizedName": "[GB] KAP MV Classic",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0295",
+        "category": "Keycaps",
+        "brand": "NEW",
+        "productName": "SWG Euler ABS 이중사출 키캡",
+        "normalizedName": "SWG Euler ABS 이중사출 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0296",
+        "category": "Keycaps",
+        "brand": "NEW",
+        "productName": "SWG Яubber ABS 이중사출 키캡",
+        "normalizedName": "SWG Яubber ABS 이중사출 키캡",
+        "family": "keycap",
+        "ruleId": "category:keycaps",
+        "matchedKeywords": []
+      }
+    ],
+    "out_of_scope": [
+      {
+        "id": "inv-0023",
+        "category": "Keyboards",
+        "brand": "스웨그키",
+        "productName": "스웨그키 키보드 빌드 서비스(나이트 스테빌라이저 포함)",
+        "normalizedName": "스웨그키 키보드 빌드 서비스(나이트 스테빌라이저 포함)",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "스테빌",
+          "빌드 서비스",
+          "라이저"
+        ]
+      },
+      {
+        "id": "inv-0058",
+        "category": "Keyboards",
+        "brand": "Swgakeys",
+        "productName": "Swagkeys x StelLive 하나코 나나 콜라보 굿즈",
+        "normalizedName": "Swagkeys x StelLive 하나코 나나 콜라보 굿즈",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "굿즈"
+        ]
+      },
+      {
+        "id": "inv-0078",
+        "category": "Keyboards",
+        "brand": "Qwertykeys",
+        "productName": "Qwertykeys NEO SS 내부 무게추",
+        "normalizedName": "Qwertykeys NEO SS 내부 무게추",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "무게추"
+        ]
+      },
+      {
+        "id": "inv-0079",
+        "category": "Keyboards",
+        "brand": "스웨그키",
+        "productName": "Owlab Hellcat Mech-01 가방",
+        "normalizedName": "Owlab Hellcat Mech-01 가방",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "가방"
+        ]
+      },
+      {
+        "id": "inv-0202",
+        "category": "Accessories",
+        "brand": "스웨그키",
+        "productName": "스웨그키 나이트 무보강용 스테빌라이저",
+        "normalizedName": "스웨그키 나이트 무보강용 스테빌라이저",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "스테빌",
+          "라이저"
+        ]
+      },
+      {
+        "id": "inv-0203",
+        "category": "Accessories",
+        "brand": "스웨그키",
+        "productName": "스웨그키 윤활붓",
+        "normalizedName": "스웨그키 윤활붓",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "윤활",
+          "붓"
+        ]
+      },
+      {
+        "id": "inv-0204",
+        "category": "Accessories",
+        "brand": "크라이톡스",
+        "productName": "크라이톡스 Krytox 205g0 5g",
+        "normalizedName": "크라이톡스 Krytox 205g0 5g",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "krytox"
+        ]
+      },
+      {
+        "id": "inv-0205",
+        "category": "Accessories",
+        "brand": "Swagkey",
+        "productName": "스웨그키 투명 커스텀 키링",
+        "normalizedName": "스웨그키 투명 커스텀 키링",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "키링"
+        ]
+      },
+      {
+        "id": "inv-0206",
+        "category": "Accessories",
+        "brand": "스웨그키",
+        "productName": "스웨그키 SW 신형 기보강 포크 노폼 빌드용 툴",
+        "normalizedName": "스웨그키 SW 신형 기보강 포크 노폼 빌드용 툴",
+        "family": "out_of_scope",
+        "ruleId": "category:accessories_fallback",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0207",
+        "category": "Accessories",
+        "brand": "스웨그키",
+        "productName": "스웨그키 SW 츄이 커스텀 케이블 AtoC / CtoC 18W 100W",
+        "normalizedName": "스웨그키 SW 츄이 커스텀 케이블 AtoC / CtoC 18W 100W",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "케이블"
+        ]
+      },
+      {
+        "id": "inv-0209",
+        "category": "Accessories",
+        "brand": "체리",
+        "productName": "체리 스크류인 Screw-in 무보강 스테빌 라이저",
+        "normalizedName": "체리 스크류인 Screw-in 무보강 스테빌 라이저",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "스테빌",
+          "라이저"
+        ]
+      },
+      {
+        "id": "inv-0210",
+        "category": "Accessories",
+        "brand": "VETUS",
+        "productName": "VETUS 윤활용 정밀 핀셋",
+        "normalizedName": "VETUS 윤활용 정밀 핀셋",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "윤활",
+          "핀셋"
+        ]
+      },
+      {
+        "id": "inv-0211",
+        "category": "Accessories",
+        "brand": "스웨그키",
+        "productName": "스웨그키 스위치 풀러",
+        "normalizedName": "스웨그키 스위치 풀러",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "풀러"
+        ]
+      },
+      {
+        "id": "inv-0212",
+        "category": "Accessories",
+        "brand": "Wuque StudioFBB",
+        "productName": "워큐 키캡 풀러 Wuque Studio WS",
+        "normalizedName": "워큐 키캡 풀러 Wuque Studio WS",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "키캡",
+          "풀러"
+        ]
+      },
+      {
+        "id": "inv-0213",
+        "category": "Accessories",
+        "brand": "스웨그키",
+        "productName": "스웨그키 신형 스위치 슬라이더 픽커",
+        "normalizedName": "스웨그키 신형 스위치 슬라이더 픽커",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "슬라이더",
+          "픽커"
+        ]
+      },
+      {
+        "id": "inv-0214",
+        "category": "Accessories",
+        "brand": "윤활제",
+        "productName": "윤활제 주입기",
+        "normalizedName": "윤활제 주입기",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "윤활",
+          "주입기"
+        ]
+      },
+      {
+        "id": "inv-0215",
+        "category": "Accessories",
+        "brand": "kelowna",
+        "productName": "kelowna 스테빌 라이저 교정기",
+        "normalizedName": "kelowna 스테빌 라이저 교정기",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "스테빌",
+          "라이저",
+          "교정기"
+        ]
+      },
+      {
+        "id": "inv-0216",
+        "category": "Accessories",
+        "brand": "Superlube",
+        "productName": "Superlube 슈퍼루브 12g",
+        "normalizedName": "Superlube 슈퍼루브 12g",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "superlube"
+        ]
+      },
+      {
+        "id": "inv-0217",
+        "category": "Accessories",
+        "brand": "NANCH",
+        "productName": "NANCH 난치 정밀 드라이버",
+        "normalizedName": "NANCH 난치 정밀 드라이버",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "드라이버"
+        ]
+      },
+      {
+        "id": "inv-0218",
+        "category": "Accessories",
+        "brand": "에버글라이드",
+        "productName": "에버글라이드 키캡 풀러",
+        "normalizedName": "에버글라이드 키캡 풀러",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "키캡",
+          "풀러"
+        ]
+      },
+      {
+        "id": "inv-0219",
+        "category": "Accessories",
+        "brand": "스테빌",
+        "productName": "스테빌 라이저 포론 철심 패드",
+        "normalizedName": "스테빌 라이저 포론 철심 패드",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "스테빌",
+          "라이저"
+        ]
+      },
+      {
+        "id": "inv-0220",
+        "category": "Accessories",
+        "brand": "크라이톡스",
+        "productName": "크라이톡스 Krytox GPL105 10g",
+        "normalizedName": "크라이톡스 Krytox GPL105 10g",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "krytox"
+        ]
+      },
+      {
+        "id": "inv-0222",
+        "category": "Accessories",
+        "brand": "스웨그키",
+        "productName": "스웨그키 키보드 가방 60% 65% 80% TKL 보호 케이스",
+        "normalizedName": "스웨그키 키보드 가방 60% 65% 80% TKL 보호 케이스",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "가방"
+        ]
+      },
+      {
+        "id": "inv-0223",
+        "category": "Accessories",
+        "brand": "게이트론",
+        "productName": "게이트론 키캡 & 스위치 풀러 & 오프너 3 in 1",
+        "normalizedName": "게이트론 키캡 & 스위치 풀러 & 오프너 3 in 1",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "키캡",
+          "풀러",
+          "오프너"
+        ]
+      },
+      {
+        "id": "inv-0224",
+        "category": "Accessories",
+        "brand": "swagkeys",
+        "productName": "스웨그키 Long 스위치 스프링 (20mm)",
+        "normalizedName": "스웨그키 Long 스위치 스프링 (20mm)",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "스프링"
+        ]
+      },
+      {
+        "id": "inv-0225",
+        "category": "Accessories",
+        "brand": "kelowna",
+        "productName": "kelowna All in one 윤활 스테이션",
+        "normalizedName": "kelowna All in one 윤활 스테이션",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "윤활"
+        ]
+      },
+      {
+        "id": "inv-0226",
+        "category": "Accessories",
+        "brand": "게이트론",
+        "productName": "게이트론 아크릴 테스터 (20구)",
+        "normalizedName": "게이트론 아크릴 테스터 (20구)",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "테스터"
+        ]
+      },
+      {
+        "id": "inv-0228",
+        "category": "Accessories",
+        "brand": "Kelowna",
+        "productName": "Kelowna 2in1 스위치 오프너",
+        "normalizedName": "Kelowna 2in1 스위치 오프너",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "오프너"
+        ]
+      },
+      {
+        "id": "inv-0229",
+        "category": "Accessories",
+        "brand": "SPRiT",
+        "productName": "SPRiT Designs Slow Extreme 스프릿 스위치 스프링",
+        "normalizedName": "SPRiT Designs Slow Extreme 스프릿 스위치 스프링",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "스프링"
+        ]
+      },
+      {
+        "id": "inv-0230",
+        "category": "Accessories",
+        "brand": "스웨그키 x 쿄다이",
+        "productName": "스웨그키 스위치 스펙 스티커 (화이트 소형)",
+        "normalizedName": "스웨그키 스위치 스펙 스티커 (화이트 소형)",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "스티커"
+        ]
+      },
+      {
+        "id": "inv-0231",
+        "category": "Accessories",
+        "brand": "swagkeys",
+        "productName": "스웨그키 나이트 스테빌라이저 전용 철심",
+        "normalizedName": "스웨그키 나이트 스테빌라이저 전용 철심",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "스테빌",
+          "라이저"
+        ]
+      },
+      {
+        "id": "inv-0232",
+        "category": "Accessories",
+        "brand": "이름역순",
+        "productName": "SW 접착식 스테빌 스페이서",
+        "normalizedName": "SW 접착식 스테빌 스페이서",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "스테빌",
+          "접착식",
+          "스페이서"
+        ]
+      },
+      {
+        "id": "inv-0233",
+        "category": "Accessories",
+        "brand": "Bowl",
+        "productName": "Bowl Bowl - Alu 나사트레이",
+        "normalizedName": "Bowl Bowl - Alu 나사트레이",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "트레이"
+        ]
+      },
+      {
+        "id": "inv-0234",
+        "category": "Accessories",
+        "brand": "스웨그키",
+        "productName": "스웨그키 더스트커버 체크베이지 키보드덮개",
+        "normalizedName": "스웨그키 더스트커버 체크베이지 키보드덮개",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "덮개",
+          "체크베이지"
+        ]
+      },
+      {
+        "id": "inv-0236",
+        "category": "Accessories",
+        "brand": "스테빌",
+        "productName": "스테빌 라이저 철심(이바리 제거)",
+        "normalizedName": "스테빌 라이저 철심(이바리 제거)",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "스테빌",
+          "라이저"
+        ]
+      },
+      {
+        "id": "inv-0238",
+        "category": "Accessories",
+        "brand": "스웨그키",
+        "productName": "스웨그키 x 화홍 납작붓",
+        "normalizedName": "스웨그키 x 화홍 납작붓",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "붓"
+        ]
+      },
+      {
+        "id": "inv-0239",
+        "category": "Accessories",
+        "brand": "스웨그키",
+        "productName": "스웨그키 Chewy 스위치 스프링(17.5mm)",
+        "normalizedName": "스웨그키 Chewy 스위치 스프링(17.5mm)",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "스프링"
+        ]
+      },
+      {
+        "id": "inv-0240",
+        "category": "Accessories",
+        "brand": "C³",
+        "productName": "C³ EQUALZ 스테빌라이저 소울메이트",
+        "normalizedName": "C³ EQUALZ 스테빌라이저 소울메이트",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "스테빌",
+          "라이저"
+        ]
+      },
+      {
+        "id": "inv-0241",
+        "category": "Accessories",
+        "brand": "크라이톡스",
+        "productName": "크라이톡스 Krytox 103 10g",
+        "normalizedName": "크라이톡스 Krytox 103 10g",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "krytox"
+        ]
+      },
+      {
+        "id": "inv-0242",
+        "category": "Accessories",
+        "brand": "SPRiT",
+        "productName": "SPRiT Designs Slow Extreme SE Edition 스프릿 스위치 스프링",
+        "normalizedName": "SPRiT Designs Slow Extreme SE Edition 스프릿 스위치 스프링",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "스프링"
+        ]
+      },
+      {
+        "id": "inv-0243",
+        "category": "Accessories",
+        "brand": "SPRiT",
+        "productName": "SPRiT Designs Slow Extreme 3 Ultra 스프릿 스위치 스프링",
+        "normalizedName": "SPRiT Designs Slow Extreme 3 Ultra 스프릿 스위치 스프링",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "스프링"
+        ]
+      },
+      {
+        "id": "inv-0244",
+        "category": "Accessories",
+        "brand": "SPRiT",
+        "productName": "SPRiT Designs MX Supreme 스프릿 스위치 스프링",
+        "normalizedName": "SPRiT Designs MX Supreme 스프릿 스위치 스프링",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "스프링"
+        ]
+      },
+      {
+        "id": "inv-0245",
+        "category": "Accessories",
+        "brand": "AngryMiao",
+        "productName": "AM Slant Magnetic 케이블 C to C",
+        "normalizedName": "AM Slant Magnetic 케이블 C to C",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "케이블"
+        ]
+      },
+      {
+        "id": "inv-0246",
+        "category": "Accessories",
+        "brand": "스웨그키",
+        "productName": "SW 키보드 아크릴 네임택 V2 가방이름표",
+        "normalizedName": "SW 키보드 아크릴 네임택 V2 가방이름표",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "가방",
+          "네임택"
+        ]
+      },
+      {
+        "id": "inv-0247",
+        "category": "Accessories",
+        "brand": "tegic",
+        "productName": "TEGIC X SW 크리스탈 어댑터 40",
+        "normalizedName": "TEGIC X SW 크리스탈 어댑터 40",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "어댑터"
+        ]
+      },
+      {
+        "id": "inv-0248",
+        "category": "Accessories",
+        "brand": "JJW",
+        "productName": "JJW Play Tray V2",
+        "normalizedName": "JJW Play Tray V2",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "tray"
+        ]
+      },
+      {
+        "id": "inv-0249",
+        "category": "Accessories",
+        "brand": "tegic",
+        "productName": "스웨그키 Tegic LED 마그네틱 C to C 케이블 240W",
+        "normalizedName": "스웨그키 Tegic LED 마그네틱 C to C 케이블 240W",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "케이블"
+        ]
+      },
+      {
+        "id": "inv-0251",
+        "category": "Accessories",
+        "brand": "AM",
+        "productName": "[NEW] AM Emptiness phone case for iphone 17 air",
+        "normalizedName": "[NEW] AM Emptiness phone case for iphone 17 air",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "phone case",
+          "iphone"
+        ]
+      },
+      {
+        "id": "inv-0252",
+        "category": "Accessories",
+        "brand": "HIBI",
+        "productName": "HIBI Single Unit 키보드 스탠드",
+        "normalizedName": "HIBI Single Unit 키보드 스탠드",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "스탠드"
+        ]
+      },
+      {
+        "id": "inv-0254",
+        "category": "Accessories",
+        "brand": "스웨그키",
+        "productName": "스웨그키 스위치 프로그레시브 스프링 (16.5mm)",
+        "normalizedName": "스웨그키 스위치 프로그레시브 스프링 (16.5mm)",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "스프링"
+        ]
+      },
+      {
+        "id": "inv-0255",
+        "category": "Accessories",
+        "brand": "이퀄즈",
+        "productName": "이퀄즈 스테빌 라이저 철심",
+        "normalizedName": "이퀄즈 스테빌 라이저 철심",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "스테빌",
+          "라이저"
+        ]
+      },
+      {
+        "id": "inv-0256",
+        "category": "Accessories",
+        "brand": "스웨그키",
+        "productName": "스웨그키 Classic 스위치 스프링 (14.5mm)",
+        "normalizedName": "스웨그키 Classic 스위치 스프링 (14.5mm)",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "스프링"
+        ]
+      },
+      {
+        "id": "inv-0257",
+        "category": "Accessories",
+        "brand": "체리",
+        "productName": "체리 보강용 스테빌 라이저",
+        "normalizedName": "체리 보강용 스테빌 라이저",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "스테빌",
+          "라이저"
+        ]
+      },
+      {
+        "id": "inv-0258",
+        "category": "Accessories",
+        "brand": "체리",
+        "productName": "체리 스냅인 Snap-in 무보강 스테빌 라이저",
+        "normalizedName": "체리 스냅인 Snap-in 무보강 스테빌 라이저",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "스테빌",
+          "라이저"
+        ]
+      },
+      {
+        "id": "inv-0259",
+        "category": "Deskpads",
+        "brand": "이름역순",
+        "productName": "스웨그키 x Kyodiy 6XV Corsa 장패드",
+        "normalizedName": "스웨그키 x Kyodiy 6XV Corsa 장패드",
+        "family": "out_of_scope",
+        "ruleId": "category:deskpads",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0260",
+        "category": "Deskpads",
+        "brand": "스웨그키",
+        "productName": "스웨그키 Euler 오일러 장패드 데스크매트",
+        "normalizedName": "스웨그키 Euler 오일러 장패드 데스크매트",
+        "family": "out_of_scope",
+        "ruleId": "category:deskpads",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0261",
+        "category": "Deskpads",
+        "brand": "스웨그키",
+        "productName": "스웨그키 x Kyodiy 체크 장패드 데스크매트",
+        "normalizedName": "스웨그키 x Kyodiy 체크 장패드 데스크매트",
+        "family": "out_of_scope",
+        "ruleId": "category:deskpads",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0262",
+        "category": "Deskpads",
+        "brand": "Swagkey",
+        "productName": "스웨그키 SW x Kyodiy 흰냥 키보드 매트 80% 100%",
+        "normalizedName": "스웨그키 SW x Kyodiy 흰냥 키보드 매트 80% 100%",
+        "family": "out_of_scope",
+        "ruleId": "category:deskpads",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0263",
+        "category": "Deskpads",
+        "brand": "Swagkeys",
+        "productName": "스웨그키 x Kyodiy 스케이트보드 장패드 데스크매트",
+        "normalizedName": "스웨그키 x Kyodiy 스케이트보드 장패드 데스크매트",
+        "family": "out_of_scope",
+        "ruleId": "category:deskpads",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0264",
+        "category": "Deskpads",
+        "brand": "Swagkeys",
+        "productName": "스웨그키 x Kyodiy NFC 장패드 데스크매트",
+        "normalizedName": "스웨그키 x Kyodiy NFC 장패드 데스크매트",
+        "family": "out_of_scope",
+        "ruleId": "category:deskpads",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0265",
+        "category": "Deskpads",
+        "brand": "Swagkey",
+        "productName": "스웨그키 x Kyodiy 포켓볼 마우스패드",
+        "normalizedName": "스웨그키 x Kyodiy 포켓볼 마우스패드",
+        "family": "out_of_scope",
+        "ruleId": "category:deskpads",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0266",
+        "category": "Deskpads",
+        "brand": "Swagkey",
+        "productName": "스웨그키 x Kyodiy 스트라이프 마우스패드",
+        "normalizedName": "스웨그키 x Kyodiy 스트라이프 마우스패드",
+        "family": "out_of_scope",
+        "ruleId": "category:deskpads",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0267",
+        "category": "Deskpads",
+        "brand": "Swagkey",
+        "productName": "스웨그키 SW x Kyodiy 얼룩냥 키보드 매트 80% 100%",
+        "normalizedName": "스웨그키 SW x Kyodiy 얼룩냥 키보드 매트 80% 100%",
+        "family": "out_of_scope",
+        "ruleId": "category:deskpads",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0268",
+        "category": "Deskpads",
+        "brand": "스웨그키",
+        "productName": "스웨그키 SW x Kyodiy 코코심플 키보드 매트 60/65% 80%",
+        "normalizedName": "스웨그키 SW x Kyodiy 코코심플 키보드 매트 60/65% 80%",
+        "family": "out_of_scope",
+        "ruleId": "category:deskpads",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0269",
+        "category": "Deskpads",
+        "brand": "스웨그키",
+        "productName": "스웨그키 SW x Kyodiy 코코낙서 키보드 매트 60/65% 80%",
+        "normalizedName": "스웨그키 SW x Kyodiy 코코낙서 키보드 매트 60/65% 80%",
+        "family": "out_of_scope",
+        "ruleId": "category:deskpads",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0270",
+        "category": "Deskpads",
+        "brand": "Swagkeys",
+        "productName": "스웨그키 x Kyodiy 밀크 마우스패드",
+        "normalizedName": "스웨그키 x Kyodiy 밀크 마우스패드",
+        "family": "out_of_scope",
+        "ruleId": "category:deskpads",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0271",
+        "category": "Deskpads",
+        "brand": "Swagkeys",
+        "productName": "스웨그키 x Kyodiy LP 장패드 데스크매트",
+        "normalizedName": "스웨그키 x Kyodiy LP 장패드 데스크매트",
+        "family": "out_of_scope",
+        "ruleId": "category:deskpads",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0272",
+        "category": "Deskpads",
+        "brand": "Krakenkap",
+        "productName": "Child's Play 장패드 데스크매트",
+        "normalizedName": "Child's Play 장패드 데스크매트",
+        "family": "out_of_scope",
+        "ruleId": "category:deskpads",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0273",
+        "category": "Deskpads",
+        "brand": "Swagkey",
+        "productName": "스웨그키 x Kyodiy 러브 마우스패드",
+        "normalizedName": "스웨그키 x Kyodiy 러브 마우스패드",
+        "family": "out_of_scope",
+        "ruleId": "category:deskpads",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0274",
+        "category": "Deskpads",
+        "brand": "Swagkey",
+        "productName": "스웨그키 x Kyodiy STOP 마우스패드",
+        "normalizedName": "스웨그키 x Kyodiy STOP 마우스패드",
+        "family": "out_of_scope",
+        "ruleId": "category:deskpads",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0275",
+        "category": "Deskpads",
+        "brand": "Swagkey",
+        "productName": "스웨그키 SW x Kyodiy 만세멍 키보드 매트 80% 100%",
+        "normalizedName": "스웨그키 SW x Kyodiy 만세멍 키보드 매트 80% 100%",
+        "family": "out_of_scope",
+        "ruleId": "category:deskpads",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0276",
+        "category": "Deskpads",
+        "brand": "Swagkey",
+        "productName": "스웨그키 SW x Kyodiy 찡긋멍 키보드 매트 80% 100%",
+        "normalizedName": "스웨그키 SW x Kyodiy 찡긋멍 키보드 매트 80% 100%",
+        "family": "out_of_scope",
+        "ruleId": "category:deskpads",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0277",
+        "category": "Deskpads",
+        "brand": "스웨그키",
+        "productName": "스웨그키 x Kyodiy [NEW] 장패드 데스크매트",
+        "normalizedName": "스웨그키 x Kyodiy [NEW] 장패드 데스크매트",
+        "family": "out_of_scope",
+        "ruleId": "category:deskpads",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0278",
+        "category": "Deskpads",
+        "brand": "스웨그키",
+        "productName": "SW x Kyodiy 아이러브 SW 마우스패드",
+        "normalizedName": "SW x Kyodiy 아이러브 SW 마우스패드",
+        "family": "out_of_scope",
+        "ruleId": "category:deskpads",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0279",
+        "category": "Deskpads",
+        "brand": "스웨그키",
+        "productName": "SW x Kyodiy 스위치 사냥 마우스패드",
+        "normalizedName": "SW x Kyodiy 스위치 사냥 마우스패드",
+        "family": "out_of_scope",
+        "ruleId": "category:deskpads",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0280",
+        "category": "Deskpads",
+        "brand": "스웨그키",
+        "productName": "스웨그키 SW x Kyodiy 체크 키보드 매트 60/65% 80%",
+        "normalizedName": "스웨그키 SW x Kyodiy 체크 키보드 매트 60/65% 80%",
+        "family": "out_of_scope",
+        "ruleId": "category:deskpads",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0281",
+        "category": "Deskpads",
+        "brand": "스웨그키",
+        "productName": "SW x Kyodiy NEO ERGO 전용 데스크매트",
+        "normalizedName": "SW x Kyodiy NEO ERGO 전용 데스크매트",
+        "family": "out_of_scope",
+        "ruleId": "category:deskpads",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0282",
+        "category": "Deskpads",
+        "brand": "스웨그키",
+        "productName": "스웨그키 SW x Kyodiy 스프레이 키보드 매트 60/65% 80%",
+        "normalizedName": "스웨그키 SW x Kyodiy 스프레이 키보드 매트 60/65% 80%",
+        "family": "out_of_scope",
+        "ruleId": "category:deskpads",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0283",
+        "category": "Deskpads",
+        "brand": "스웨그키",
+        "productName": "스웨그키 SW x Kyodiy 방수 마우스패드",
+        "normalizedName": "스웨그키 SW x Kyodiy 방수 마우스패드",
+        "family": "out_of_scope",
+        "ruleId": "category:deskpads",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0284",
+        "category": "Deskpads",
+        "brand": "스웨그키",
+        "productName": "스웨그키 x Kyodiy Owlab 장패드",
+        "normalizedName": "스웨그키 x Kyodiy Owlab 장패드",
+        "family": "out_of_scope",
+        "ruleId": "category:deskpads",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0285",
+        "category": "Deskpads",
+        "brand": "MatrixLab",
+        "productName": "[GB] MatrixLab MP-01 강화유리 마우스패드",
+        "normalizedName": "[GB] MatrixLab MP-01 강화유리 마우스패드",
+        "family": "out_of_scope",
+        "ruleId": "category:deskpads",
+        "matchedKeywords": []
+      },
+      {
+        "id": "inv-0286",
+        "category": "Gaming",
+        "brand": "AngryMiao",
+        "productName": "AM Infinity .97 경량 무선 8K 게이밍 마우스",
+        "normalizedName": "AM Infinity .97 경량 무선 8K 게이밍 마우스",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "마우스"
+        ]
+      },
+      {
+        "id": "inv-0287",
+        "category": "Gaming",
+        "brand": "AngryMiao",
+        "productName": "AM Infinity Mouse 인피니티 마우스 전용 그립테이프&피트 세트",
+        "normalizedName": "AM Infinity Mouse 인피니티 마우스 전용 그립테이프&피트 세트",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "마우스",
+          "mouse",
+          "그립테이프"
+        ]
+      },
+      {
+        "id": "inv-0288",
+        "category": "Gaming",
+        "brand": "Swagkey",
+        "productName": "스웨그키 NEON 게이밍 포론 마우스패드",
+        "normalizedName": "스웨그키 NEON 게이밍 포론 마우스패드",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "마우스패드",
+          "마우스"
+        ]
+      },
+      {
+        "id": "inv-0289",
+        "category": "Gaming",
+        "brand": "AngryMiao",
+        "productName": "스웨그키 AM Silkglass 강화유리 마우스패드",
+        "normalizedName": "스웨그키 AM Silkglass 강화유리 마우스패드",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "마우스패드",
+          "마우스"
+        ]
+      },
+      {
+        "id": "inv-0290",
+        "category": "Gaming",
+        "brand": "AngryMiao",
+        "productName": "AM Infinity 무선 8K 게이밍 마우스 Basalt Black",
+        "normalizedName": "AM Infinity 무선 8K 게이밍 마우스 Basalt Black",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "마우스"
+        ]
+      },
+      {
+        "id": "inv-0292",
+        "category": "Gaming",
+        "brand": "AngryMiao",
+        "productName": "AM Infinity 무선 8K 게이밍 마우스 Blazed Orange",
+        "normalizedName": "AM Infinity 무선 8K 게이밍 마우스 Blazed Orange",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "마우스"
+        ]
+      },
+      {
+        "id": "inv-0293",
+        "category": "Gaming",
+        "brand": "AngryMiao",
+        "productName": "AM Infinity 무선 8K 게이밍 마우스 Cloud White",
+        "normalizedName": "AM Infinity 무선 8K 게이밍 마우스 Cloud White",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "마우스"
+        ]
+      },
+      {
+        "id": "inv-0294",
+        "category": "Keyboards",
+        "brand": "SWG",
+        "productName": "[GB]SWG Neowell ABS 이중사출 키캡",
+        "normalizedName": "[GB]SWG Neowell ABS 이중사출 키캡",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "키캡"
+        ]
+      },
+      {
+        "id": "inv-0297",
+        "category": "Keyboards",
+        "brand": "Geistmaschine",
+        "productName": "Geistmaschine - TP-1 키캡",
+        "normalizedName": "Geistmaschine - TP-1 키캡",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "키캡"
+        ]
+      },
+      {
+        "id": "inv-0302",
+        "category": "Accessories",
+        "brand": "NEW",
+        "productName": "JJW Play Tray V2",
+        "normalizedName": "JJW Play Tray V2",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "tray"
+        ]
+      },
+      {
+        "id": "inv-0307",
+        "category": "Keyboards",
+        "brand": "\bNeson Design",
+        "productName": "[GB] Mode Themes Keycaps",
+        "normalizedName": "[GB] Mode Themes Keycaps",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "keycap"
+        ]
+      },
+      {
+        "id": "inv-0324",
+        "category": "Keyboards",
+        "brand": "GMK",
+        "productName": "[GB] GMK Cosmos 키캡",
+        "normalizedName": "[GB] GMK Cosmos 키캡",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "키캡"
+        ]
+      },
+      {
+        "id": "inv-0337",
+        "category": "Keyboards",
+        "brand": "Mode",
+        "productName": "[GB] Mode Envoy 65% 추가 무게추",
+        "normalizedName": "[GB] Mode Envoy 65% 추가 무게추",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "무게추"
+        ]
+      },
+      {
+        "id": "inv-0346",
+        "category": "Keyboards",
+        "brand": "MilkyWay",
+        "productName": "[GB] MW Asuka R2 기계식 키보드 키캡",
+        "normalizedName": "[GB] MW Asuka R2 기계식 키보드 키캡",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "키캡"
+        ]
+      },
+      {
+        "id": "inv-0350",
+        "category": "Keyboards",
+        "brand": "GMK",
+        "productName": "[GB] PBS Strawberry Milk 키캡",
+        "normalizedName": "[GB] PBS Strawberry Milk 키캡",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "키캡"
+        ]
+      },
+      {
+        "id": "inv-0353",
+        "category": "Keyboards",
+        "brand": "MilkyWay",
+        "productName": "[GB] MW - Reel to Reel Deskmat",
+        "normalizedName": "[GB] MW - Reel to Reel Deskmat",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "deskmat"
+        ]
+      },
+      {
+        "id": "inv-0357",
+        "category": "Keyboards",
+        "brand": "Cannonkeys",
+        "productName": "[GB] Cannonkeys VIDA 여분 외부 무게추",
+        "normalizedName": "[GB] Cannonkeys VIDA 여분 외부 무게추",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "무게추"
+        ]
+      },
+      {
+        "id": "inv-0358",
+        "category": "Keyboards",
+        "brand": "Cannonkeys",
+        "productName": "[GB] Cannonkeys VIDA 여분 내부 무게추",
+        "normalizedName": "[GB] Cannonkeys VIDA 여분 내부 무게추",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "무게추"
+        ]
+      },
+      {
+        "id": "inv-0400",
+        "category": "Keyboards",
+        "brand": "Keykobo",
+        "productName": "[GB] Keykobo Cheese &amp; Vento 키캡",
+        "normalizedName": "[GB] Keykobo Cheese &amp; Vento 키캡",
+        "family": "out_of_scope",
+        "ruleId": "keyword:accessory_or_merch",
+        "matchedKeywords": [
+          "키캡"
+        ]
+      }
+    ]
+  }
+}

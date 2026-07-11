@@ -1,0 +1,109 @@
+# Live inventory pipeline (HTTP URL crawl + clean/classify from CSV + alert).
+# Product-name CSV may be the committed artifact unless an operator refreshes it.
+# Webhook URL must come from GitHub Actions secrets — never commit it.
+name: Swagkey inventory recheck (live)
+
+on:
+  schedule:
+    # 1st of each month 10:00 UTC (after weekly fixture Monday job)
+    - cron: "0 10 1 * *"
+  workflow_dispatch:
+    inputs:
+      skip_crawl_urls:
+        description: "Skip HTTP product-URL crawl"
+        required: false
+        default: false
+        type: boolean
+      skip_clean_classify:
+        description: "Skip clean+classify (use committed candidates only)"
+        required: false
+        default: false
+        type: boolean
+      fail_on_alert:
+        description: "Fail the job when alertTotal > 0"
+        required: false
+        default: false
+        type: boolean
+      notify_webhook:
+        description: "POST alerts/failures when CATALOG_CHANGE_ALERT_WEBHOOK_URL secret is set"
+        required: false
+        default: true
+        type: boolean
+      check_image_urls:
+        description: "Compare seed imageUrl to live og:image (Phase 8)"
+        required: false
+        default: true
+        type: boolean
+
+jobs:
+  live-recheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: backend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+          cache-dependency-path: backend/pyproject.toml
+
+      - name: Install package (editable)
+        run: |
+          python -m pip install -U pip
+          pip install -e ".[dev]"
+
+      - name: Run live inventory pipeline
+        id: pipeline
+        env:
+          CATALOG_CHANGE_ALERT_WEBHOOK_URL: ${{ secrets.CATALOG_CHANGE_ALERT_WEBHOOK_URL }}
+        run: |
+          EXTRA=""
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            if [ "${{ inputs.skip_crawl_urls }}" = "true" ]; then
+              EXTRA="$EXTRA --skip-crawl-urls"
+            fi
+            if [ "${{ inputs.skip_clean_classify }}" = "true" ]; then
+              EXTRA="$EXTRA --skip-clean-classify"
+            fi
+            if [ "${{ inputs.fail_on_alert }}" = "true" ]; then
+              EXTRA="$EXTRA --fail-on-alert"
+            fi
+            if [ "${{ inputs.notify_webhook }}" = "true" ]; then
+              EXTRA="$EXTRA --notify-webhook"
+            fi
+            if [ "${{ inputs.check_image_urls }}" = "true" ]; then
+              EXTRA="$EXTRA --check-image-urls --image-check-mode live"
+            fi
+          else
+            # schedule: crawl + clean/classify + notify when secret present
+            EXTRA="--notify-webhook --check-image-urls --image-check-mode live"
+          fi
+          set +e
+          python scripts/run_swagkey_live_inventory_pipeline.py $EXTRA
+          code=$?
+          set -e
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
+            echo "::error::Live inventory pipeline failed (exit $code)"
+            exit "$code"
+          fi
+          if [ "$code" -eq 2 ]; then
+            echo "::warning::Catalog change alerts present (alertTotal > 0). Review artifact."
+          fi
+
+      - name: Upload alert artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: catalog-change-alert-live
+          path: |
+            backend/data/swagkey_inventory/catalog_change_alert.json
+            backend/data/swagkey_inventory/catalog_change_alert.txt
+            backend/data/swagkey_inventory/seed_inventory_diff.json
+            backend/data/swagkey_inventory/image_url_recheck_report.json
+          if-no-files-found: warn

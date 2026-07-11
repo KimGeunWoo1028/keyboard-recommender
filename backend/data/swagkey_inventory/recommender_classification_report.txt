@@ -1,0 +1,43 @@
+Swagkey inventory classification report
+========================================
+
+total items: 400
+by family:
+  - switch: 55
+  - plate: 20
+  - foam: 9
+  - layout: 23
+  - case_kit: 126
+  - keycap: 67
+  - out_of_scope: 100
+recommender candidates (excl. out_of_scope): 300
+
+by rule:
+  - category:accessories_fallback: 1
+  - category:deskpads: 27
+  - category:keyboards_fallback: 39
+  - category:keycaps: 67
+  - category:switches: 54
+  - keyword:accessory_or_merch: 72
+  - keyword:case_kit: 87
+  - keyword:foam: 9
+  - keyword:layout: 23
+  - keyword:plate: 20
+  - keyword:switch: 1
+
+recommender sample (first 15):
+  [layout] NEO65 Core Plus 기판 (keyword:layout; 기판)
+  [case_kit] NEO65 Core Plus 커스텀 기계식 키보드 (keyword:case_kit; 기계식 키보드)
+  [plate] NEO65 Core Plus 보강판 (keyword:plate; 보강판)
+  [layout] NEO80 CU 기판 (keyword:layout; 기판)
+  [case_kit] NEO80 CU 커스텀 기계식 키보드 (keyword:case_kit; 기계식 키보드)
+  [plate] Qwertykeys NEO80 CU 보강판 (keyword:plate; 보강판)
+  [case_kit] [GB] Agar Micro 파츠 (keyword:case_kit; 파츠)
+  [case_kit] EVO80 에보80 알루미늄 커스텀 기계식 키보드 (keyword:case_kit; 기계식 키보드)
+  [case_kit] DP104 알루미늄 커스텀 기계식 키보드 (keyword:case_kit; 기계식 키보드)
+  [case_kit] [GB] Agar Micro 커스텀 기계식 키보드 (keyword:case_kit; 기계식 키보드)
+  [plate] Qwertykeys NEO65 CU 보강판 (keyword:plate; 보강판)
+  [case_kit] 스웨그키 Eave65 커스텀 기계식 키보드 (keyword:case_kit; 기계식 키보드)
+  [layout] NEO65 CU 기판 (keyword:layout; 기판)
+  [case_kit] Baionlenja Ophanim 파츠 (keyword:case_kit; 파츠)
+  [case_kit] NEO65 Cu 커스텀 기계식 키보드 (keyword:case_kit; 기계식 키보드)

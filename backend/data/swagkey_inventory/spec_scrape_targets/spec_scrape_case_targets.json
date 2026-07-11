@@ -1,0 +1,466 @@
+{
+  "cases": [
+    {
+      "id": "case-051",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1603",
+      "name": "Meletrix - ZOOM TKL Dyna",
+      "inventoryId": "inv-0298"
+    },
+    {
+      "id": "case-053",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1831",
+      "name": "MW Mass80 커스텀 키보드 베어본 킷",
+      "inventoryId": "inv-0300"
+    },
+    {
+      "id": "case-055",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1004",
+      "name": "[GB] Outva Solid Alex Alice",
+      "inventoryId": "inv-0303"
+    },
+    {
+      "id": "case-057",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1099",
+      "name": "Whatever Studio - Vany Alice",
+      "inventoryId": "inv-0304"
+    },
+    {
+      "id": "case-059",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1594",
+      "name": "[Raffle] FAUKWAA – [Carnival] Alice 결제용",
+      "inventoryId": "inv-0305"
+    },
+    {
+      "id": "case-061",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1101",
+      "name": "Whatever Studio - Vany Alice Parts",
+      "inventoryId": "inv-0306"
+    },
+    {
+      "id": "case-063",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1313",
+      "name": "Owlab Hellcat Mech-01 파츠",
+      "inventoryId": "inv-0308"
+    },
+    {
+      "id": "case-065",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1585",
+      "name": "[Raffle]FAUKWAA Carnival",
+      "inventoryId": "inv-0309"
+    },
+    {
+      "id": "case-067",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1314",
+      "name": "Owlab Hellcat Mech-01 Barebone Kit",
+      "inventoryId": "inv-0310"
+    },
+    {
+      "id": "case-069",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1315",
+      "name": "[Raffle] Owlab Hellcat Mech-01 Barebone Kit Babypink",
+      "inventoryId": "inv-0311"
+    },
+    {
+      "id": "case-071",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1316",
+      "name": "[Raffle] Owlab Hellcat Mech-01 Barebone Kit Dark Grey",
+      "inventoryId": "inv-0312"
+    },
+    {
+      "id": "case-073",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1317",
+      "name": "[Raffle] Owlab Hellcat Mech-01 Barebone Kit Grey",
+      "inventoryId": "inv-0313"
+    },
+    {
+      "id": "case-075",
+      "url": "https://www.swagkey.kr/shop_view/?idx=754",
+      "name": "[Pre-order] AM Compact Touch R2",
+      "inventoryId": "inv-0315"
+    },
+    {
+      "id": "case-077",
+      "url": "https://www.swagkey.kr/shop_view/?idx=857",
+      "name": "[예약판매] Qwertykeys NEO Ergo Barebone Kit",
+      "inventoryId": "inv-0316"
+    },
+    {
+      "id": "case-079",
+      "url": "https://www.swagkey.kr/shop_view/?idx=934",
+      "name": "[GB] Anorexus Void65",
+      "inventoryId": "inv-0317"
+    },
+    {
+      "id": "case-081",
+      "url": "https://www.swagkey.kr/shop_view/?idx=858",
+      "name": "[예약판매] Qwertykeys NEO Ergo Parts",
+      "inventoryId": "inv-0319"
+    },
+    {
+      "id": "case-083",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1810",
+      "name": "MatrixLab FAUKWAA - [MY-2K] 1999 베어본",
+      "inventoryId": "inv-0320"
+    },
+    {
+      "id": "case-085",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1815",
+      "name": "[당첨자결제용] MatrixLab FAUKWAA - [MY-2K] 1999 베어본",
+      "inventoryId": "inv-0321"
+    },
+    {
+      "id": "case-087",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1050",
+      "name": "[GB] FAUKWAA - [MY-2K] 100NG Edition",
+      "inventoryId": "inv-0322"
+    },
+    {
+      "id": "case-089",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1389",
+      "name": "[GB] PBS Granite",
+      "inventoryId": "inv-0323"
+    },
+    {
+      "id": "case-091",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1065",
+      "name": "[GB] Artkey - AK75",
+      "inventoryId": "inv-0325"
+    },
+    {
+      "id": "case-093",
+      "url": "https://www.swagkey.kr/shop_view/?idx=607",
+      "name": "[GB] TKD Cycle 7 Parts",
+      "inventoryId": "inv-0326"
+    },
+    {
+      "id": "case-095",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1177",
+      "name": "[GB] MW - Reel to Reel",
+      "inventoryId": "inv-0328"
+    },
+    {
+      "id": "case-097",
+      "url": "https://www.swagkey.kr/shop_view/?idx=531",
+      "name": "[GB] Mode Envoy 65% 추가 파츠",
+      "inventoryId": "inv-0330"
+    },
+    {
+      "id": "case-099",
+      "url": "https://www.swagkey.kr/shop_view/?idx=948",
+      "name": "[GB] Pangea Fullsize",
+      "inventoryId": "inv-0331"
+    },
+    {
+      "id": "case-101",
+      "url": "https://www.swagkey.kr/shop_view/?idx=917",
+      "name": "[GB] MatrixLab Gator",
+      "inventoryId": "inv-0332"
+    },
+    {
+      "id": "case-103",
+      "url": "https://www.swagkey.kr/shop_view/?idx=603",
+      "name": "[GB] TKD Cycle 7 Keyboard",
+      "inventoryId": "inv-0333"
+    },
+    {
+      "id": "case-105",
+      "url": "https://www.swagkey.kr/shop_view/?idx=676",
+      "name": "[GB] Neson Design 810E v3",
+      "inventoryId": "inv-0334"
+    },
+    {
+      "id": "case-107",
+      "url": "https://www.swagkey.kr/shop_view/?idx=528",
+      "name": "[GB] Mode Envoy 65% 추가 케이스",
+      "inventoryId": "inv-0336"
+    },
+    {
+      "id": "case-109",
+      "url": "https://www.swagkey.kr/shop_view/?idx=530",
+      "name": "[GB] Mode Envoy 65% 추가 악센트",
+      "inventoryId": "inv-0338"
+    },
+    {
+      "id": "case-111",
+      "url": "https://www.swagkey.kr/shop_view/?idx=907",
+      "name": "[GB] TKD Cycle 8 Add-on",
+      "inventoryId": "inv-0339"
+    },
+    {
+      "id": "case-113",
+      "url": "https://www.swagkey.kr/shop_view/?idx=521",
+      "name": "[GB] Mode Envoy 65% Diy Kit",
+      "inventoryId": "inv-0341"
+    },
+    {
+      "id": "case-115",
+      "url": "https://www.swagkey.kr/shop_view/?idx=542",
+      "name": "[GB] Mode Themes Desk Mats",
+      "inventoryId": "inv-0342"
+    },
+    {
+      "id": "case-117",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1067",
+      "name": "[GB] Artkey - AK75 Parts",
+      "inventoryId": "inv-0343"
+    },
+    {
+      "id": "case-119",
+      "url": "https://www.swagkey.kr/shop_view/?idx=913",
+      "name": "[GB] Plywrks Spyder TKL",
+      "inventoryId": "inv-0344"
+    },
+    {
+      "id": "case-121",
+      "url": "https://www.swagkey.kr/shop_view/?idx=854",
+      "name": "[GB] FoxLab Time65 Parts",
+      "inventoryId": "inv-0347"
+    },
+    {
+      "id": "case-123",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1027",
+      "name": "[GB] Cannonkeys VIDA 여분 상판",
+      "inventoryId": "inv-0348"
+    },
+    {
+      "id": "case-125",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1624",
+      "name": "[GB]Meletrix Zoom64 - HE 버전",
+      "inventoryId": "inv-0349"
+    },
+    {
+      "id": "case-127",
+      "url": "https://www.swagkey.kr/shop_view/?idx=849",
+      "name": "[GB] MM Studio Class 0413 상판",
+      "inventoryId": "inv-0352"
+    },
+    {
+      "id": "case-129",
+      "url": "https://www.swagkey.kr/shop_view/?idx=956",
+      "name": "[GB] MatrixLab CP.8XV 3 ⅓ Pad",
+      "inventoryId": "inv-0354"
+    },
+    {
+      "id": "case-131",
+      "url": "https://www.swagkey.kr/shop_view/?idx=677",
+      "name": "[GB] \bNeson Design 810E v3 Parts",
+      "inventoryId": "inv-0355"
+    },
+    {
+      "id": "case-133",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1009",
+      "name": "[GB] XINGZHI x QIN 篆Seal Parts",
+      "inventoryId": "inv-0356"
+    },
+    {
+      "id": "case-135",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1652",
+      "name": "[GB]ZOOM64 Mechanical Kit 추가 파츠",
+      "inventoryId": "inv-0359"
+    },
+    {
+      "id": "case-137",
+      "url": "https://www.swagkey.kr/shop_view/?idx=914",
+      "name": "[GB] Plywrks Spyder TKL Add-on",
+      "inventoryId": "inv-0360"
+    },
+    {
+      "id": "case-139",
+      "url": "https://www.swagkey.kr/shop_view/?idx=962",
+      "name": "[GB] MM Studio Class 1800 Parts",
+      "inventoryId": "inv-0361"
+    },
+    {
+      "id": "case-141",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1031",
+      "name": "[GB] Cannonkeys VIDA Blackout",
+      "inventoryId": "inv-0363"
+    },
+    {
+      "id": "case-143",
+      "url": "https://www.swagkey.kr/shop_view/?idx=848",
+      "name": "[GB] MM Studio Class 0413 Parts",
+      "inventoryId": "inv-0364"
+    },
+    {
+      "id": "case-145",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1505",
+      "name": "[GB] Neighbourhood Shy60 Parts",
+      "inventoryId": "inv-0365"
+    },
+    {
+      "id": "case-147",
+      "url": "https://www.swagkey.kr/shop_view/?idx=606",
+      "name": "[GB] TKD Cycle 7 Keyboard Barebones",
+      "inventoryId": "inv-0366"
+    },
+    {
+      "id": "case-149",
+      "url": "https://www.swagkey.kr/shop_view/?idx=964",
+      "name": "[GB] 篆Seal x Cosmos Barebone Kit",
+      "inventoryId": "inv-0367"
+    },
+    {
+      "id": "case-151",
+      "url": "https://www.swagkey.kr/shop_view/?idx=853",
+      "name": "[GB] FoxLab Time65 Barebone Kit",
+      "inventoryId": "inv-0368"
+    },
+    {
+      "id": "case-153",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1238",
+      "name": "[GB] Bowl x Alexotos Manta Add-on",
+      "inventoryId": "inv-0369"
+    },
+    {
+      "id": "case-155",
+      "url": "https://www.swagkey.kr/shop_view/?idx=951",
+      "name": "[GB] Pangea Fullsize 추가 TKL Frames",
+      "inventoryId": "inv-0371"
+    },
+    {
+      "id": "case-157",
+      "url": "https://www.swagkey.kr/shop_view/?idx=952",
+      "name": "[GB] Pangea Fullsize 추가 TOP Frames",
+      "inventoryId": "inv-0372"
+    },
+    {
+      "id": "case-159",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1646",
+      "name": "[GB]Meletrix Zoom64 - Mechanical 버전",
+      "inventoryId": "inv-0373"
+    },
+    {
+      "id": "case-161",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1626",
+      "name": "[GB] MatrixLab Carnival [TKL] - Parts",
+      "inventoryId": "inv-0374"
+    },
+    {
+      "id": "case-163",
+      "url": "https://www.swagkey.kr/shop_view/?idx=584",
+      "name": "[GB] Deadline studio X Hammer works - HMC",
+      "inventoryId": "inv-0375"
+    },
+    {
+      "id": "case-165",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1296",
+      "name": "[GB] ai03 Altair and Altair-X R2 Parts",
+      "inventoryId": "inv-0376"
+    },
+    {
+      "id": "case-167",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1006",
+      "name": "[GB] XINGZHI x QIN 篆Seal Barebone Kit",
+      "inventoryId": "inv-0377"
+    },
+    {
+      "id": "case-169",
+      "url": "https://www.swagkey.kr/shop_view/?idx=583",
+      "name": "[GB] Hammer x BUGER CRP-X Parallel Worlds",
+      "inventoryId": "inv-0378"
+    },
+    {
+      "id": "case-171",
+      "url": "https://www.swagkey.kr/shop_view/?idx=961",
+      "name": "[GB] MM Studio Class 1800 Barebone Kit",
+      "inventoryId": "inv-0379"
+    },
+    {
+      "id": "case-173",
+      "url": "https://www.swagkey.kr/shop_view/?idx=743",
+      "name": "[GB] 인스탁 구매자용 Matrix Navi & Corsa HE Kit",
+      "inventoryId": "inv-0380"
+    },
+    {
+      "id": "case-175",
+      "url": "https://www.swagkey.kr/shop_view/?idx=847",
+      "name": "[GB] MM Studio Class 0413 Barebone Kit",
+      "inventoryId": "inv-0381"
+    },
+    {
+      "id": "case-177",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1164",
+      "name": "[GB] FAUKWAA [MY-2K] 100NG Edition - Parts",
+      "inventoryId": "inv-0382"
+    },
+    {
+      "id": "case-179",
+      "url": "https://www.swagkey.kr/shop_view/?idx=885",
+      "name": "Qwertykeys NEO65 Parts",
+      "inventoryId": "inv-0383"
+    },
+    {
+      "id": "case-181",
+      "url": "https://www.swagkey.kr/shop_view/?idx=959",
+      "name": "Qwertykeys NEO Ergo 파츠 & 팜레스트",
+      "inventoryId": "inv-0384"
+    },
+    {
+      "id": "case-183",
+      "url": "https://www.swagkey.kr/shop_view/?idx=389",
+      "name": "[Pre-order] Qwertykeys QK60 R2",
+      "inventoryId": "inv-0385"
+    },
+    {
+      "id": "case-185",
+      "url": "https://www.swagkey.kr/shop_view/?idx=465",
+      "name": "[In-stock] Qwertykeys QK80 Parts",
+      "inventoryId": "inv-0386"
+    },
+    {
+      "id": "case-187",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1082",
+      "name": "[Pre-order] Qwertykeys - NEO60 Cu",
+      "inventoryId": "inv-0387"
+    },
+    {
+      "id": "case-189",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1083",
+      "name": "[Pre-order] Qwertykeys - NEO 65&amp;60 Parts",
+      "inventoryId": "inv-0388"
+    },
+    {
+      "id": "case-191",
+      "url": "https://www.swagkey.kr/shop_view/?idx=685",
+      "name": "[Group Buy] Pixelspace Shadow80 Barebone Kit",
+      "inventoryId": "inv-0389"
+    },
+    {
+      "id": "case-193",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1056",
+      "name": "Volt Plus+",
+      "inventoryId": "inv-0390"
+    },
+    {
+      "id": "case-195",
+      "url": "https://www.swagkey.kr/shop_view/?idx=714",
+      "name": "[Group Buy] Shadow80 Limited Edition 당첨자용",
+      "inventoryId": "inv-0392"
+    },
+    {
+      "id": "case-197",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1096",
+      "name": "[예약판매]Percent Studio - Platinum PT750",
+      "inventoryId": "inv-0394"
+    },
+    {
+      "id": "case-199",
+      "url": "https://www.swagkey.kr/shop_view/?idx=611",
+      "name": "Owlab Jelly Evolv Barebones Kit",
+      "inventoryId": "inv-0397"
+    },
+    {
+      "id": "case-201",
+      "url": "https://www.swagkey.kr/shop_view/?idx=532",
+      "name": "[In-Stock] Owlab Link65 DIY Kit",
+      "inventoryId": "inv-0398"
+    },
+    {
+      "id": "case-203",
+      "url": "https://www.swagkey.kr/shop_view/?idx=807",
+      "name": "[Raffle] Owlab Vento 80 Barebone Kit Light Wisteria WK",
+      "inventoryId": "inv-0399"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "_template_note": "Copy to catalog_ingestion_manifest.json next to this file. List JSON sources under the three keys below. Each value is either a path string or an object {\"path\": \"...\"}. Paths are relative to the manifest file unless you pass --base-dir to scripts/run_catalog_ingestion.py. Source files must follow the seed layout: \"switches\" is an object mapping subtype (e.g. linear, tactile) to an array of items; \"plates\", \"foams\", and \"layouts\" are arrays. Items use id, name, optional subtype, sourceUrl, metadata, tags, aliases. You may delete this _template_note key after copying.",
+  "vendor_pages": [],
+  "structured_feeds": [],
+  "manual_overrides": []
+}

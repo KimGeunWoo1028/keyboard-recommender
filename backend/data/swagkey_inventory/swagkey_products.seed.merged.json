@@ -1,0 +1,4147 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": {
+    "vendor": "Swagkey",
+    "baseUrl": "https://www.swagkey.kr",
+    "collectedFrom": [
+      "https://www.swagkey.kr/21",
+      "https://www.swagkey.kr/39",
+      "https://www.swagkey.kr/40",
+      "https://www.swagkey.kr/99",
+      "https://www.swagkey.kr/41",
+      "https://www.swagkey.kr/31",
+      "https://www.swagkey.kr/88",
+      "https://www.swagkey.kr/132"
+    ],
+    "note": "상품명은 원문 유지, 설명/trait은 후속 매핑 단계에서 보강."
+  },
+  "switches": {
+    "linear": [
+      {
+        "id": "sw-linear-001",
+        "name": "스웨그키 HMX Taro 타로 스위치 리니어",
+        "category": "switch",
+        "subtype": "linear",
+        "sourceUrl": "https://www.swagkey.kr/39",
+        "metadata": {
+          "spring_weight_g": 48,
+          "bottom_out_force_g": 55,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "POM",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-linear-002",
+        "name": "스웨그키 HMX Custard 커스터드 스위치 리니어",
+        "category": "switch",
+        "subtype": "linear",
+        "sourceUrl": "https://www.swagkey.kr/39",
+        "metadata": {
+          "spring_weight_g": 48,
+          "bottom_out_force_g": 55,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "POM",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-linear-003",
+        "name": "스웨그키 HMX Peach 반저소음 리니어 키보드 스위치",
+        "category": "switch",
+        "subtype": "linear",
+        "sourceUrl": "https://www.swagkey.kr/39",
+        "metadata": {
+          "spring_weight_g": 46,
+          "bottom_out_force_g": 53,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "POM",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-linear-004",
+        "name": "스웨그키 Keygeek DingDing 키보드 스위치 리니어",
+        "category": "switch",
+        "subtype": "linear",
+        "sourceUrl": "https://www.swagkey.kr/39",
+        "metadata": {
+          "spring_weight_g": 48,
+          "bottom_out_force_g": 55,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-linear-005",
+        "name": "Keygeek Muse 리니어 스위치",
+        "category": "switch",
+        "subtype": "linear",
+        "sourceUrl": "https://www.swagkey.kr/39",
+        "metadata": {
+          "spring_weight_g": 48,
+          "bottom_out_force_g": 55,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-linear-006",
+        "name": "Gateron X 리니어 스위치",
+        "category": "switch",
+        "subtype": "linear",
+        "sourceUrl": "https://www.swagkey.kr/39",
+        "metadata": {
+          "spring_weight_g": 48,
+          "bottom_out_force_g": 55,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "dual_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-linear-007",
+        "name": "SWK 지음 v2 리니어 스위치",
+        "category": "switch",
+        "subtype": "linear",
+        "sourceUrl": "https://www.swagkey.kr/39",
+        "metadata": {
+          "spring_weight_g": 48,
+          "bottom_out_force_g": 55,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-linear-008",
+        "name": "WEKT Kunzite 쿤자이트 저소음 리니어 스위치",
+        "category": "switch",
+        "subtype": "linear",
+        "sourceUrl": "https://www.swagkey.kr/39",
+        "metadata": {
+          "spring_weight_g": 46,
+          "bottom_out_force_g": 53,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-linear-009",
+        "name": "Outemu Cream Pink 크림핑크 리니어축 키보드 스위치",
+        "category": "switch",
+        "subtype": "linear",
+        "sourceUrl": "https://www.swagkey.kr/39",
+        "metadata": {
+          "spring_weight_g": 48,
+          "bottom_out_force_g": 55,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "creamy",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-linear-010",
+        "name": "Cherry MX2A RGB Silver 리니어 스위치",
+        "category": "switch",
+        "subtype": "linear",
+        "sourceUrl": "https://www.swagkey.kr/39",
+        "metadata": {
+          "spring_weight_g": 48,
+          "bottom_out_force_g": 60,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-linear-011",
+        "name": "Keygeek 오트 리니어 스위치",
+        "category": "switch",
+        "subtype": "linear",
+        "sourceUrl": "https://www.swagkey.kr/39",
+        "metadata": {
+          "spring_weight_g": 48,
+          "bottom_out_force_g": 55,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-linear-012",
+        "name": "HMX 신하이 리니어 스위치",
+        "category": "switch",
+        "subtype": "linear",
+        "sourceUrl": "https://www.swagkey.kr/39",
+        "metadata": {
+          "spring_weight_g": 48,
+          "bottom_out_force_g": 55,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "POM",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-linear-013",
+        "name": "Neo Rye 라이 리니어 스위치",
+        "category": "switch",
+        "subtype": "linear",
+        "sourceUrl": "https://www.swagkey.kr/39",
+        "metadata": {
+          "spring_weight_g": 48,
+          "bottom_out_force_g": 55,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-linear-014",
+        "name": "Keygeek Ash 리니어 스위치",
+        "category": "switch",
+        "subtype": "linear",
+        "sourceUrl": "https://www.swagkey.kr/39",
+        "metadata": {
+          "spring_weight_g": 48,
+          "bottom_out_force_g": 55,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-linear-015",
+        "name": "Neo Amber 앰버 리니어 스위치",
+        "category": "switch",
+        "subtype": "linear",
+        "sourceUrl": "https://www.swagkey.kr/39",
+        "metadata": {
+          "spring_weight_g": 48,
+          "bottom_out_force_g": 55,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-linear-016",
+        "name": "HMX 아주르 리니어 스위치",
+        "category": "switch",
+        "subtype": "linear",
+        "sourceUrl": "https://www.swagkey.kr/39",
+        "metadata": {
+          "spring_weight_g": 48,
+          "bottom_out_force_g": 55,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "POM",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-linear-017",
+        "name": "SWK 네온 리니어 스위치",
+        "category": "switch",
+        "subtype": "linear",
+        "sourceUrl": "https://www.swagkey.kr/39",
+        "metadata": {
+          "spring_weight_g": 48,
+          "bottom_out_force_g": 55,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-linear-018",
+        "name": "SW x Gateron 디핑 리니어 스위치",
+        "category": "switch",
+        "subtype": "linear",
+        "sourceUrl": "https://www.swagkey.kr/39",
+        "metadata": {
+          "spring_weight_g": 48,
+          "bottom_out_force_g": 55,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "dual_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      }
+    ],
+    "tactile": [
+      {
+        "id": "sw-tactile-001",
+        "name": "Cherry MX2A 비윤활 갈축 키보드 스위치",
+        "category": "switch",
+        "subtype": "tactile",
+        "sourceUrl": "https://www.swagkey.kr/40",
+        "metadata": {
+          "spring_weight_g": 53,
+          "bottom_out_force_g": 62,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-tactile-002",
+        "name": "텍스트 Cherry MX2A 비윤활 갈축 키보드 스위치 - 450개 벌크",
+        "category": "switch",
+        "subtype": "tactile",
+        "sourceUrl": "https://www.swagkey.kr/40",
+        "metadata": {
+          "spring_weight_g": 53,
+          "bottom_out_force_g": 62,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-tactile-003",
+        "name": "Cherry MX2A 비윤활 갈축 키보드 스위치 - 450개 벌크",
+        "category": "switch",
+        "subtype": "tactile",
+        "sourceUrl": "https://www.swagkey.kr/40",
+        "metadata": {
+          "spring_weight_g": 53,
+          "bottom_out_force_g": 62,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-tactile-004",
+        "name": "Cherry MX Falcon 택타일 스위치",
+        "category": "switch",
+        "subtype": "tactile",
+        "sourceUrl": "https://www.swagkey.kr/40",
+        "metadata": {
+          "spring_weight_g": 53,
+          "bottom_out_force_g": 62,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-tactile-005",
+        "name": "Cherry MX2A Honey 택타일 스위치",
+        "category": "switch",
+        "subtype": "tactile",
+        "sourceUrl": "https://www.swagkey.kr/40",
+        "metadata": {
+          "spring_weight_g": 53,
+          "bottom_out_force_g": 62,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-tactile-006",
+        "name": "SW x Haimu MP 택타일 스위치",
+        "category": "switch",
+        "subtype": "tactile",
+        "sourceUrl": "https://www.swagkey.kr/40",
+        "metadata": {
+          "spring_weight_g": 53,
+          "bottom_out_force_g": 62,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": true,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-tactile-007",
+        "name": "TTC 피넛 라떼 저소음 택타일 스위치",
+        "category": "switch",
+        "subtype": "tactile",
+        "sourceUrl": "https://www.swagkey.kr/40",
+        "metadata": {
+          "spring_weight_g": 46,
+          "bottom_out_force_g": 60,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": true,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      }
+    ],
+    "click": [
+      {
+        "id": "sw-click-001",
+        "name": "Wuque BigLucky 빅럭키 클릭 스위치 Cliky",
+        "category": "switch",
+        "subtype": "click",
+        "sourceUrl": "https://www.swagkey.kr/99",
+        "metadata": {
+          "spring_weight_g": 55,
+          "bottom_out_force_g": 64,
+          "travel_distance_mm": 3.6,
+          "pretravel_mm": 1.8,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      }
+    ],
+    "silent": [
+      {
+        "id": "sw-silent-001",
+        "name": "스웨그키 HMX Peach 반저소음 리니어 키보드 스위치",
+        "category": "switch",
+        "subtype": "silent",
+        "sourceUrl": "https://www.swagkey.kr/41",
+        "metadata": {
+          "spring_weight_g": 45,
+          "bottom_out_force_g": 52,
+          "travel_distance_mm": 3.7,
+          "pretravel_mm": 1.9,
+          "long_pole": false,
+          "housing_material_top": "POM",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": true,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-silent-002",
+        "name": "WEKT Kunzite 쿤자이트 저소음 리니어 스위치",
+        "category": "switch",
+        "subtype": "silent",
+        "sourceUrl": "https://www.swagkey.kr/41",
+        "metadata": {
+          "spring_weight_g": 45,
+          "bottom_out_force_g": 52,
+          "travel_distance_mm": 3.7,
+          "pretravel_mm": 1.9,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": true,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-silent-003",
+        "name": "TTC 피넛 라떼 저소음 택타일 스위치",
+        "category": "switch",
+        "subtype": "silent",
+        "sourceUrl": "https://www.swagkey.kr/41",
+        "metadata": {
+          "spring_weight_g": 45,
+          "bottom_out_force_g": 60,
+          "travel_distance_mm": 3.7,
+          "pretravel_mm": 1.9,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": true,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-silent-004",
+        "name": "오테뮤 크림 옐로우 저소음 키보드 스위치 스웨그키",
+        "category": "switch",
+        "subtype": "silent",
+        "sourceUrl": "https://www.swagkey.kr/41",
+        "metadata": {
+          "spring_weight_g": 45,
+          "bottom_out_force_g": 52,
+          "travel_distance_mm": 3.7,
+          "pretravel_mm": 1.9,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": true,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      }
+    ],
+    "magnetic": [
+      {
+        "id": "sw-magnetic-001",
+        "name": "스웨그키 Owlab Nova N극 HE 키보드 스위치",
+        "category": "switch",
+        "subtype": "magnetic",
+        "sourceUrl": "https://www.swagkey.kr/31",
+        "metadata": {
+          "spring_weight_g": 42,
+          "bottom_out_force_g": 50,
+          "travel_distance_mm": 3.5,
+          "pretravel_mm": 1.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": true,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-magnetic-002",
+        "name": "SW x SWK 피오니 HE 마그네틱 스위치",
+        "category": "switch",
+        "subtype": "magnetic",
+        "sourceUrl": "https://www.swagkey.kr/31",
+        "metadata": {
+          "spring_weight_g": 42,
+          "bottom_out_force_g": 50,
+          "travel_distance_mm": 3.5,
+          "pretravel_mm": 1.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": true,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-magnetic-003",
+        "name": "Owlab Ti HE 마그네틱 스위치",
+        "category": "switch",
+        "subtype": "magnetic",
+        "sourceUrl": "https://www.swagkey.kr/31",
+        "metadata": {
+          "spring_weight_g": 42,
+          "bottom_out_force_g": 50,
+          "travel_distance_mm": 3.5,
+          "pretravel_mm": 1.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": true,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-magnetic-004",
+        "name": "NEO 라벤더 HE 마그네틱 스위치",
+        "category": "switch",
+        "subtype": "magnetic",
+        "sourceUrl": "https://www.swagkey.kr/31",
+        "metadata": {
+          "spring_weight_g": 42,
+          "bottom_out_force_g": 50,
+          "travel_distance_mm": 3.5,
+          "pretravel_mm": 1.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": true,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-new-001-cherry-mx2a-blossom-리니어-스위치",
+        "name": "Cherry MX2A Blossom 리니어 스위치",
+        "category": "switch",
+        "subtype": "magnetic",
+        "sourceUrl": "https://www.swagkey.kr/21/?idx=1303",
+        "metadata": {
+          "spring_weight_g": 42.0,
+          "bottom_out_force_g": 50.0,
+          "travel_distance_mm": 3.5,
+          "pretravel_mm": 1.0,
+          "factory_lubed": true,
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-new-002-cherry-mx2a-northern-light-리니어-스위치",
+        "name": "Cherry MX2A Northern Light 리니어 스위치",
+        "category": "switch",
+        "subtype": "magnetic",
+        "sourceUrl": "https://www.swagkey.kr/21/?idx=1304",
+        "metadata": {
+          "spring_weight_g": 42.0,
+          "bottom_out_force_g": 50.0,
+          "travel_distance_mm": 3.5,
+          "pretravel_mm": 1.0,
+          "factory_lubed": true,
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-new-003-cherry-mx2a-비윤활-흑축-키보드-스위치-450개-벌크",
+        "name": "Cherry MX2A 비윤활 흑축 키보드 스위치 - 450개 벌크",
+        "category": "switch",
+        "subtype": "magnetic",
+        "sourceUrl": "https://www.swagkey.kr/21/?idx=1302",
+        "metadata": {
+          "spring_weight_g": 42.0,
+          "bottom_out_force_g": 50.0,
+          "travel_distance_mm": 3.5,
+          "pretravel_mm": 1.0,
+          "factory_lubed": false,
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-new-004-haimu-스노우-저소음-자석축-키보드-스위치",
+        "name": "Haimu 스노우 저소음 자석축 키보드 스위치",
+        "category": "switch",
+        "subtype": "magnetic",
+        "sourceUrl": "https://www.swagkey.kr/21/?idx=1251",
+        "metadata": {
+          "spring_weight_g": 42.0,
+          "bottom_out_force_g": 50.0,
+          "travel_distance_mm": 3.5,
+          "pretravel_mm": 1.0,
+          "factory_lubed": true,
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-new-005-owlab-london-fog-v2-런던포그-키보드-스위치",
+        "name": "Owlab London Fog V2 런던포그 키보드 스위치",
+        "category": "switch",
+        "subtype": "magnetic",
+        "sourceUrl": "https://www.swagkey.kr/21/?idx=1822",
+        "metadata": {
+          "spring_weight_g": 42.0,
+          "bottom_out_force_g": 50.0,
+          "travel_distance_mm": 3.5,
+          "pretravel_mm": 1.0,
+          "factory_lubed": true,
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-new-006-ttc-아이스-프로즌-저소음-v2-커스텀-기계식-키보드-스위치-공장윤활-",
+        "name": "TTC 아이스 프로즌 저소음 V2 커스텀 기계식 키보드 스위치 공장윤활 사무용",
+        "category": "switch",
+        "subtype": "magnetic",
+        "sourceUrl": "https://www.swagkey.kr/21/?idx=596",
+        "metadata": {
+          "spring_weight_g": 42.0,
+          "bottom_out_force_g": 50.0,
+          "travel_distance_mm": 3.5,
+          "pretravel_mm": 1.0,
+          "factory_lubed": true,
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-new-007-wuque-flux-he-자석축-키보드-스위치-n극",
+        "name": "Wuque Flux HE 자석축 키보드 스위치 (N극)",
+        "category": "switch",
+        "subtype": "magnetic",
+        "sourceUrl": "https://www.swagkey.kr/21/?idx=1205",
+        "metadata": {
+          "spring_weight_g": 42.0,
+          "bottom_out_force_g": 50.0,
+          "travel_distance_mm": 3.5,
+          "pretravel_mm": 1.0,
+          "factory_lubed": true,
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-new-008-스웨그키-bdg-optical-white-리니어-키보드-스위치",
+        "name": "스웨그키 BDG Optical White 리니어 키보드 스위치",
+        "category": "switch",
+        "subtype": "magnetic",
+        "sourceUrl": "https://www.swagkey.kr/21/?idx=1804",
+        "metadata": {
+          "spring_weight_g": 42.0,
+          "bottom_out_force_g": 50.0,
+          "travel_distance_mm": 3.5,
+          "pretravel_mm": 1.0,
+          "factory_lubed": true,
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-new-009-스웨그키-ion-이온-리니어-로우피치-키보드-스위치",
+        "name": "스웨그키 Ion 이온 리니어 로우피치 키보드 스위치",
+        "category": "switch",
+        "subtype": "magnetic",
+        "sourceUrl": "https://www.swagkey.kr/21/?idx=1873",
+        "metadata": {
+          "spring_weight_g": 42.0,
+          "bottom_out_force_g": 50.0,
+          "travel_distance_mm": 3.5,
+          "pretravel_mm": 1.0,
+          "factory_lubed": true,
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-new-010-스웨그키-keygeek-b1-리니어-키보드-스위치",
+        "name": "스웨그키 Keygeek B1 리니어 키보드 스위치",
+        "category": "switch",
+        "subtype": "magnetic",
+        "sourceUrl": "https://www.swagkey.kr/21/?idx=1830",
+        "metadata": {
+          "spring_weight_g": 42.0,
+          "bottom_out_force_g": 50.0,
+          "travel_distance_mm": 3.5,
+          "pretravel_mm": 1.0,
+          "factory_lubed": true,
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-new-011-스웨그키-keygeek-cera-x-리니어-키보드-스위치",
+        "name": "스웨그키 Keygeek Cera X 리니어 키보드 스위치",
+        "category": "switch",
+        "subtype": "magnetic",
+        "sourceUrl": "https://www.swagkey.kr/21/?idx=1805",
+        "metadata": {
+          "spring_weight_g": 42.0,
+          "bottom_out_force_g": 50.0,
+          "travel_distance_mm": 3.5,
+          "pretravel_mm": 1.0,
+          "factory_lubed": true,
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-new-012-스웨그키-keygeek-peach-cheesecake-리니어-키보드-스위",
+        "name": "스웨그키 Keygeek peach cheesecake 리니어 키보드 스위치",
+        "category": "switch",
+        "subtype": "magnetic",
+        "sourceUrl": "https://www.swagkey.kr/21/?idx=1806",
+        "metadata": {
+          "spring_weight_g": 42.0,
+          "bottom_out_force_g": 50.0,
+          "travel_distance_mm": 3.5,
+          "pretravel_mm": 1.0,
+          "factory_lubed": true,
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-new-013-스웨그키-keygeek-쉐이크-shake-리니어-키보드-스위치",
+        "name": "스웨그키 Keygeek 쉐이크 Shake 리니어 키보드 스위치",
+        "category": "switch",
+        "subtype": "magnetic",
+        "sourceUrl": "https://www.swagkey.kr/21/?idx=1841",
+        "metadata": {
+          "spring_weight_g": 42.0,
+          "bottom_out_force_g": 50.0,
+          "travel_distance_mm": 3.5,
+          "pretravel_mm": 1.0,
+          "factory_lubed": true,
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-new-014-스웨그키-mz-studio-t2-리니어-키보드-스위치",
+        "name": "스웨그키 MZ Studio T2 리니어 키보드 스위치",
+        "category": "switch",
+        "subtype": "magnetic",
+        "sourceUrl": "https://www.swagkey.kr/21/?idx=1807",
+        "metadata": {
+          "spring_weight_g": 42.0,
+          "bottom_out_force_g": 50.0,
+          "travel_distance_mm": 3.5,
+          "pretravel_mm": 1.0,
+          "factory_lubed": true,
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-new-015-스웨그키-wingtree-anon-리니어-키보드-스위치",
+        "name": "스웨그키 Wingtree ANON 리니어 키보드 스위치",
+        "category": "switch",
+        "subtype": "magnetic",
+        "sourceUrl": "https://www.swagkey.kr/21/?idx=1826",
+        "metadata": {
+          "spring_weight_g": 42.0,
+          "bottom_out_force_g": 50.0,
+          "travel_distance_mm": 3.5,
+          "pretravel_mm": 1.0,
+          "factory_lubed": true,
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-new-016-체리-mx2a-rgb-silver-은축-리니어-기계식-키보드-스위치",
+        "name": "체리 MX2A RGB Silver 은축 리니어 기계식 키보드 스위치",
+        "category": "switch",
+        "subtype": "magnetic",
+        "sourceUrl": "https://www.swagkey.kr/21/?idx=1253",
+        "metadata": {
+          "spring_weight_g": 42.0,
+          "bottom_out_force_g": 50.0,
+          "travel_distance_mm": 3.5,
+          "pretravel_mm": 1.0,
+          "factory_lubed": true,
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-new-017-체리-mx2a-클래식-히로세-키보드-스위치",
+        "name": "체리 MX2A 클래식 히로세 키보드 스위치",
+        "category": "switch",
+        "subtype": "magnetic",
+        "sourceUrl": "https://www.swagkey.kr/21/?idx=1808",
+        "metadata": {
+          "spring_weight_g": 42.0,
+          "bottom_out_force_g": 50.0,
+          "travel_distance_mm": 3.5,
+          "pretravel_mm": 2.0,
+          "stem_material": "POM",
+          "factory_lubed": true,
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      }
+    ],
+    "other": [
+      {
+        "id": "sw-other-001",
+        "name": "스웨그키 Wingtree Golden Apple 키보드 스위치",
+        "category": "switch",
+        "subtype": "other",
+        "sourceUrl": "https://www.swagkey.kr/21",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 58,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-other-002",
+        "name": "TTC Brother V2 스위치",
+        "category": "switch",
+        "subtype": "other",
+        "sourceUrl": "https://www.swagkey.kr/21",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 58,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-other-003",
+        "name": "Tecsee x SW Flow Black 기계식 키보드 스위치",
+        "category": "switch",
+        "subtype": "other",
+        "sourceUrl": "https://www.swagkey.kr/21",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 58,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-other-004",
+        "name": "QK01 키보드 스위치",
+        "category": "switch",
+        "subtype": "other",
+        "sourceUrl": "https://www.swagkey.kr/21",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 58,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-other-005",
+        "name": "Bsun 민트 키보드 스위치",
+        "category": "switch",
+        "subtype": "other",
+        "sourceUrl": "https://www.swagkey.kr/21",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 58,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-other-006",
+        "name": "체리 MX RGB 키보드 스위치",
+        "category": "switch",
+        "subtype": "other",
+        "sourceUrl": "https://www.swagkey.kr/21",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 60,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-other-007",
+        "name": "체리 MX 흑축 삼신흑 키보드 스위치",
+        "category": "switch",
+        "subtype": "other",
+        "sourceUrl": "https://www.swagkey.kr/21",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 58,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-other-008",
+        "name": "체리 MX 3핀 키보드 스위치",
+        "category": "switch",
+        "subtype": "other",
+        "sourceUrl": "https://www.swagkey.kr/21",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 58,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-other-009",
+        "name": "HMX Toast 키보드 스위치",
+        "category": "switch",
+        "subtype": "other",
+        "sourceUrl": "https://www.swagkey.kr/21",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 58,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "POM",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-other-010",
+        "name": "HMX Duckduck V2 덕덕 키보드 스위치",
+        "category": "switch",
+        "subtype": "other",
+        "sourceUrl": "https://www.swagkey.kr/21",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 58,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "POM",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-other-011",
+        "name": "SW 코코블랙 키보드 스위치",
+        "category": "switch",
+        "subtype": "other",
+        "sourceUrl": "https://www.swagkey.kr/21",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 58,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-other-012",
+        "name": "Gazzew U4T 키보드 스위치",
+        "category": "switch",
+        "subtype": "other",
+        "sourceUrl": "https://www.swagkey.kr/21",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 63,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "slow",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-other-013",
+        "name": "HMX T-Rex 키보드 스위치",
+        "category": "switch",
+        "subtype": "other",
+        "sourceUrl": "https://www.swagkey.kr/21",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 58,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "POM",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-other-014",
+        "name": "체리 MX2A Petal 키보드 스위치",
+        "category": "switch",
+        "subtype": "other",
+        "sourceUrl": "https://www.swagkey.kr/21",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 58,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-other-015",
+        "name": "Peach Mellow 키보드 스위치",
+        "category": "switch",
+        "subtype": "other",
+        "sourceUrl": "https://www.swagkey.kr/21",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 58,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-other-016",
+        "name": "HMX 망고 푸딩 키보드 스위치",
+        "category": "switch",
+        "subtype": "other",
+        "sourceUrl": "https://www.swagkey.kr/21",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 58,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "POM",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-other-017",
+        "name": "Cherry MX2A 흑축 비윤활 스위치",
+        "category": "switch",
+        "subtype": "other",
+        "sourceUrl": "https://www.swagkey.kr/21",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 58,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-other-018",
+        "name": "게이트론 Melodic 기계식 키보드 스위치.",
+        "category": "switch",
+        "subtype": "other",
+        "sourceUrl": "https://www.swagkey.kr/21",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 58,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-other-019",
+        "name": "Cherry MX2A 스위치",
+        "category": "switch",
+        "subtype": "other",
+        "sourceUrl": "https://www.swagkey.kr/21",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 58,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-other-020",
+        "name": "SW x 게이트론 onyx : UHMWPE 스위치",
+        "category": "switch",
+        "subtype": "other",
+        "sourceUrl": "https://www.swagkey.kr/21",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 58,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      },
+      {
+        "id": "sw-other-021",
+        "name": "Haimu 바다살구 스위치",
+        "category": "switch",
+        "subtype": "other",
+        "sourceUrl": "https://www.swagkey.kr/21",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 58,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "click",
+            "linear",
+            "magnetic",
+            "silent",
+            "tactile"
+          ]
+        }
+      }
+    ]
+  },
+  "plates": [
+    {
+      "id": "plate-001",
+      "name": "Qwertykeys NEO98 보강판",
+      "category": "plate",
+      "subtype": "plate",
+      "sourceUrl": "https://www.swagkey.kr/88",
+      "metadata": {
+        "material": "FR4",
+        "flex_rating": 5,
+        "mounting_bias": "gasket",
+        "density_character": "balanced",
+        "compatible_layout_sizes": [
+          "60",
+          "65",
+          "75",
+          "80_tkl",
+          "alice",
+          "full"
+        ],
+        "compatible_standards": [
+          "ansi"
+        ],
+        "supports_blockers": false,
+        "supports_exploded": false,
+        "mounting_support": [
+          "gasket"
+        ]
+      }
+    },
+    {
+      "id": "plate-002",
+      "name": "Qwertykeys NEO75 보강판",
+      "category": "plate",
+      "subtype": "plate",
+      "sourceUrl": "https://www.swagkey.kr/88",
+      "metadata": {
+        "material": "FR4",
+        "flex_rating": 6,
+        "mounting_bias": "gasket",
+        "density_character": "balanced",
+        "compatible_layout_sizes": [
+          "60",
+          "65",
+          "75",
+          "80_tkl",
+          "alice",
+          "full"
+        ],
+        "compatible_standards": [
+          "ansi"
+        ],
+        "supports_blockers": true,
+        "supports_exploded": true,
+        "mounting_support": [
+          "gasket"
+        ]
+      }
+    },
+    {
+      "id": "plate-003",
+      "name": "Shelby65 보강판",
+      "category": "plate",
+      "subtype": "plate",
+      "sourceUrl": "https://www.swagkey.kr/88",
+      "metadata": {
+        "material": "FR4",
+        "flex_rating": 4,
+        "mounting_bias": "top",
+        "density_character": "dense",
+        "compatible_layout_sizes": [
+          "60",
+          "65",
+          "75",
+          "80_tkl",
+          "alice",
+          "full"
+        ],
+        "compatible_standards": [
+          "ansi"
+        ],
+        "supports_blockers": false,
+        "supports_exploded": false,
+        "mounting_support": [
+          "top"
+        ]
+      }
+    },
+    {
+      "id": "plate-004",
+      "name": "Qwertykeys QK65 MK3 보강판",
+      "category": "plate",
+      "subtype": "plate",
+      "sourceUrl": "https://www.swagkey.kr/88",
+      "metadata": {
+        "material": "FR4",
+        "flex_rating": 7,
+        "mounting_bias": "gasket",
+        "density_character": "balanced",
+        "compatible_layout_sizes": [
+          "60",
+          "65",
+          "75",
+          "80_tkl",
+          "alice",
+          "full"
+        ],
+        "compatible_standards": [
+          "ansi"
+        ],
+        "supports_blockers": true,
+        "supports_exploded": true,
+        "mounting_support": [
+          "gasket"
+        ]
+      }
+    },
+    {
+      "id": "plate-new-001-bowl-oblique-기판-및-보강판",
+      "name": "Bowl Oblique 기판 및 보강판",
+      "category": "plate",
+      "subtype": "plate",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1802",
+      "metadata": {
+        "material": "FR4",
+        "flex_rating": 5,
+        "mounting_bias": "gasket",
+        "density_character": "balanced",
+        "compatible_layout_sizes": [
+          "60",
+          "65",
+          "75"
+        ],
+        "compatible_standards": [
+          "ansi"
+        ],
+        "supports_blockers": true,
+        "supports_exploded": true,
+        "mounting_support": [
+          "gasket"
+        ]
+      }
+    },
+    {
+      "id": "plate-new-002-gdk-lab-dk1-tkl-보강판",
+      "name": "GDK Lab - DK1 TKL 보강판",
+      "category": "plate",
+      "subtype": "plate",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1854",
+      "metadata": {
+        "material": "FR4",
+        "flex_rating": 5,
+        "mounting_bias": "gasket",
+        "density_character": "balanced",
+        "compatible_layout_sizes": [
+          "80_tkl"
+        ],
+        "compatible_standards": [
+          "ansi"
+        ],
+        "supports_blockers": true,
+        "supports_exploded": true,
+        "mounting_support": [
+          "gasket"
+        ]
+      }
+    },
+    {
+      "id": "plate-new-003-mm-studio-class-100-전용-보강판",
+      "name": "MM Studio - Class 100 전용 보강판",
+      "category": "plate",
+      "subtype": "plate",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1870",
+      "metadata": {
+        "material": "PC",
+        "flex_rating": 5,
+        "mounting_bias": "gasket",
+        "density_character": "balanced",
+        "compatible_layout_sizes": [
+          "full"
+        ],
+        "compatible_standards": [
+          "ansi"
+        ],
+        "supports_blockers": true,
+        "supports_exploded": true,
+        "mounting_support": [
+          "gasket"
+        ]
+      }
+    },
+    {
+      "id": "plate-new-004-neo65-core-plus-보강판",
+      "name": "NEO65 Core Plus 보강판",
+      "category": "plate",
+      "subtype": "plate",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1520",
+      "metadata": {
+        "material": "PC",
+        "flex_rating": 5,
+        "mounting_bias": "gasket",
+        "density_character": "balanced",
+        "compatible_layout_sizes": [
+          "65"
+        ],
+        "compatible_standards": [
+          "ansi"
+        ],
+        "supports_blockers": true,
+        "supports_exploded": true,
+        "mounting_support": [
+          "gasket"
+        ]
+      }
+    },
+    {
+      "id": "plate-new-005-owlab-hellcat-mech-01-기판-보강판",
+      "name": "Owlab Hellcat Mech-01 기판&보강판",
+      "category": "plate",
+      "subtype": "plate",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1566",
+      "metadata": {
+        "material": "FR4",
+        "flex_rating": 5,
+        "mounting_bias": "gasket",
+        "density_character": "balanced",
+        "compatible_layout_sizes": [
+          "alice"
+        ],
+        "compatible_standards": [
+          "ansi"
+        ],
+        "supports_blockers": true,
+        "supports_exploded": true,
+        "mounting_support": [
+          "gasket"
+        ]
+      }
+    },
+    {
+      "id": "plate-new-006-qwertykeys-neo60-core-보강판",
+      "name": "Qwertykeys NEO60 Core 보강판",
+      "category": "plate",
+      "subtype": "plate",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1518",
+      "metadata": {
+        "material": "FR4",
+        "flex_rating": 5,
+        "mounting_bias": "gasket",
+        "density_character": "balanced",
+        "compatible_layout_sizes": [
+          "60",
+          "65",
+          "75"
+        ],
+        "compatible_standards": [
+          "ansi"
+        ],
+        "supports_blockers": true,
+        "supports_exploded": true,
+        "mounting_support": [
+          "gasket"
+        ]
+      }
+    },
+    {
+      "id": "plate-new-007-qwertykeys-neo65-cu-보강판",
+      "name": "Qwertykeys NEO65 CU 보강판",
+      "category": "plate",
+      "subtype": "plate",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1612",
+      "metadata": {
+        "material": "PC",
+        "flex_rating": 5,
+        "mounting_bias": "gasket",
+        "density_character": "balanced",
+        "compatible_layout_sizes": [
+          "65"
+        ],
+        "compatible_standards": [
+          "ansi"
+        ],
+        "supports_blockers": true,
+        "supports_exploded": true,
+        "mounting_support": [
+          "gasket"
+        ]
+      }
+    },
+    {
+      "id": "plate-new-008-qwertykeys-neo80-cu-보강판",
+      "name": "Qwertykeys NEO80 CU 보강판",
+      "category": "plate",
+      "subtype": "plate",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1502",
+      "metadata": {
+        "material": "PC",
+        "flex_rating": 5,
+        "mounting_bias": "gasket",
+        "density_character": "balanced",
+        "compatible_layout_sizes": [
+          "80_tkl"
+        ],
+        "compatible_standards": [
+          "ansi"
+        ],
+        "supports_blockers": true,
+        "supports_exploded": true,
+        "mounting_support": [
+          "gasket"
+        ]
+      }
+    },
+    {
+      "id": "plate-new-009-sw-eave65-보강판",
+      "name": "SW Eave65 보강판",
+      "category": "plate",
+      "subtype": "plate",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1190",
+      "metadata": {
+        "material": "FR4",
+        "flex_rating": 5,
+        "mounting_bias": "gasket",
+        "density_character": "balanced",
+        "compatible_layout_sizes": [
+          "65"
+        ],
+        "compatible_standards": [
+          "ansi"
+        ],
+        "supports_blockers": true,
+        "supports_exploded": true,
+        "mounting_support": [
+          "gasket"
+        ]
+      }
+    },
+    {
+      "id": "plate-new-010-스웨그키-트랜지션-라이트-보강판",
+      "name": "스웨그키 트랜지션 라이트 보강판",
+      "category": "plate",
+      "subtype": "plate",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1525",
+      "metadata": {
+        "material": "FR4",
+        "flex_rating": 5,
+        "mounting_bias": "gasket",
+        "density_character": "balanced",
+        "compatible_layout_sizes": [
+          "60",
+          "65",
+          "75"
+        ],
+        "compatible_standards": [
+          "ansi"
+        ],
+        "supports_blockers": true,
+        "supports_exploded": true,
+        "mounting_support": [
+          "gasket"
+        ]
+      }
+    }
+  ],
+  "foams": [
+    {
+      "id": "foam-001",
+      "name": "포론 하부 흡음재",
+      "category": "foam",
+      "subtype": "dampening",
+      "sourceUrl": "https://www.swagkey.kr/132/?idx=253",
+      "metadata": {
+        "dampening_strength": 8,
+        "compression_character": "soft",
+        "placement_type": "switch",
+        "compatible_layout_sizes": [
+          "60",
+          "65",
+          "75",
+          "80_tkl",
+          "alice",
+          "full"
+        ],
+        "mounting_compatibility": [
+          "gasket",
+          "top",
+          "tray"
+        ],
+        "tactile_preservation": "medium"
+      }
+    },
+    {
+      "id": "foam-002",
+      "name": "키보드용 신슐레이터 흡음재",
+      "category": "foam",
+      "subtype": "dampening",
+      "sourceUrl": "https://www.swagkey.kr/132/?idx=523",
+      "metadata": {
+        "dampening_strength": 7,
+        "compression_character": "soft",
+        "placement_type": "switch",
+        "compatible_layout_sizes": [
+          "60",
+          "65",
+          "75",
+          "80_tkl",
+          "alice",
+          "full"
+        ],
+        "mounting_compatibility": [
+          "gasket",
+          "top",
+          "tray"
+        ],
+        "tactile_preservation": "high"
+      }
+    },
+    {
+      "id": "foam-003",
+      "name": "스웨그키 스페이스바 흡음재.",
+      "category": "foam",
+      "subtype": "dampening",
+      "sourceUrl": "https://www.swagkey.kr/132/?idx=462",
+      "metadata": {
+        "dampening_strength": 6,
+        "compression_character": "soft",
+        "placement_type": "spacebar",
+        "compatible_layout_sizes": [
+          "60",
+          "65",
+          "75",
+          "80_tkl",
+          "alice",
+          "full"
+        ],
+        "mounting_compatibility": [
+          "gasket",
+          "top",
+          "tray",
+          "leaf_spring",
+          "sandwich"
+        ],
+        "tactile_preservation": "high"
+      }
+    },
+    {
+      "id": "foam-004",
+      "name": "EPDM 흡음재",
+      "category": "foam",
+      "subtype": "dampening",
+      "sourceUrl": "https://www.swagkey.kr/132/?idx=524",
+      "metadata": {
+        "dampening_strength": 9,
+        "compression_character": "firm",
+        "placement_type": "switch",
+        "compatible_layout_sizes": [
+          "60",
+          "65",
+          "75",
+          "80_tkl",
+          "alice",
+          "full"
+        ],
+        "mounting_compatibility": [
+          "gasket",
+          "top",
+          "tray"
+        ],
+        "tactile_preservation": "low"
+      }
+    },
+    {
+      "id": "foam-005",
+      "name": "스웨그키 포론 기보강 흡음재 - 텐키리스용",
+      "category": "foam",
+      "subtype": "dampening",
+      "sourceUrl": "https://www.swagkey.kr/132/?idx=1572",
+      "metadata": {
+        "dampening_strength": 8,
+        "compression_character": "soft",
+        "placement_type": "spacebar",
+        "compatible_layout_sizes": [
+          "60",
+          "65",
+          "75",
+          "80_tkl",
+          "alice",
+          "full"
+        ],
+        "mounting_compatibility": [
+          "gasket",
+          "top"
+        ],
+        "tactile_preservation": "medium"
+      }
+    },
+    {
+      "id": "foam-new-001-gdk-lab-dk1-tkl-여분-폼킷",
+      "name": "GDK Lab - DK1 TKL 여분 폼킷",
+      "category": "foam",
+      "subtype": "dampening",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1856",
+      "metadata": {
+        "dampening_strength": 7,
+        "compression_character": "soft",
+        "placement_type": "plate",
+        "compatible_layout_sizes": [
+          "80_tkl"
+        ],
+        "mounting_compatibility": [
+          "tray",
+          "top",
+          "gasket",
+          "leaf_spring",
+          "sandwich"
+        ],
+        "tactile_preservation": "medium"
+      }
+    },
+    {
+      "id": "foam-new-002-스웨그키-스위치-폼-필름-v2",
+      "name": "스웨그키 스위치 폼 필름 v2",
+      "category": "foam",
+      "subtype": "dampening",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=259",
+      "metadata": {
+        "dampening_strength": 7,
+        "compression_character": "soft",
+        "placement_type": "switch",
+        "compatible_layout_sizes": [
+          "60",
+          "65",
+          "75",
+          "80_tkl",
+          "96",
+          "full",
+          "alice",
+          "split"
+        ],
+        "mounting_compatibility": [
+          "tray",
+          "top",
+          "gasket",
+          "leaf_spring",
+          "sandwich"
+        ],
+        "tactile_preservation": "medium"
+      }
+    },
+    {
+      "id": "foam-new-003-스웨그키-포론-기보강-흡음재-60배열용",
+      "name": "스웨그키 포론 기보강 흡음재 - 60배열용",
+      "category": "foam",
+      "subtype": "dampening",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=1572",
+      "metadata": {
+        "dampening_strength": 7,
+        "compression_character": "soft",
+        "placement_type": "spacebar",
+        "compatible_layout_sizes": [
+          "60"
+        ],
+        "mounting_compatibility": [
+          "tray",
+          "top",
+          "gasket",
+          "leaf_spring",
+          "sandwich"
+        ],
+        "tactile_preservation": "medium"
+      }
+    },
+    {
+      "id": "foam-new-004-스위치-하부-pe-폼",
+      "name": "스위치 하부 PE 폼",
+      "category": "foam",
+      "subtype": "dampening",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=546",
+      "metadata": {
+        "dampening_strength": 7,
+        "compression_character": "soft",
+        "placement_type": "switch",
+        "compatible_layout_sizes": [
+          "60",
+          "65",
+          "75",
+          "80_tkl",
+          "96",
+          "full",
+          "alice",
+          "split"
+        ],
+        "mounting_compatibility": [
+          "tray",
+          "top",
+          "gasket",
+          "leaf_spring",
+          "sandwich"
+        ],
+        "tactile_preservation": "medium"
+      }
+    }
+  ],
+  "layouts": [
+    {
+      "id": "layout-001",
+      "name": "60% Standard",
+      "category": "layout",
+      "subtype": "layout",
+      "metadata": {
+        "layout_size": "60",
+        "ansi_iso_support": "both",
+        "blocker_style": "standard",
+        "typing_density": 5,
+        "has_arrow_cluster": false,
+        "has_function_row": false,
+        "is_exploded": false,
+        "supports_blockers": true,
+        "supported_mounting_styles": [
+          "tray",
+          "top",
+          "gasket"
+        ]
+      }
+    },
+    {
+      "id": "layout-002",
+      "name": "65% Compact",
+      "category": "layout",
+      "subtype": "layout",
+      "metadata": {
+        "layout_size": "65",
+        "ansi_iso_support": "both",
+        "blocker_style": "standard",
+        "typing_density": 6,
+        "has_arrow_cluster": true,
+        "has_function_row": false,
+        "is_exploded": false,
+        "supports_blockers": true,
+        "supported_mounting_styles": [
+          "tray",
+          "top",
+          "gasket"
+        ]
+      }
+    },
+    {
+      "id": "layout-003",
+      "name": "TKL (80%)",
+      "category": "layout",
+      "subtype": "layout",
+      "metadata": {
+        "layout_size": "80_tkl",
+        "ansi_iso_support": "both",
+        "blocker_style": "winkeyless",
+        "typing_density": 7,
+        "has_arrow_cluster": true,
+        "has_function_row": true,
+        "is_exploded": false,
+        "supports_blockers": true,
+        "supported_mounting_styles": [
+          "top",
+          "gasket"
+        ]
+      }
+    },
+    {
+      "id": "layout-004",
+      "name": "Full-size",
+      "category": "layout",
+      "subtype": "layout",
+      "metadata": {
+        "layout_size": "full",
+        "ansi_iso_support": "both",
+        "blocker_style": "standard",
+        "typing_density": 9,
+        "has_arrow_cluster": true,
+        "has_function_row": true,
+        "is_exploded": false,
+        "supports_blockers": false,
+        "supported_mounting_styles": [
+          "tray",
+          "top",
+          "gasket"
+        ]
+      }
+    },
+    {
+      "id": "layout-005",
+      "name": "75% Exploded",
+      "category": "layout",
+      "subtype": "layout",
+      "metadata": {
+        "layout_size": "75",
+        "ansi_iso_support": "both",
+        "blocker_style": "standard",
+        "typing_density": 7,
+        "has_arrow_cluster": true,
+        "has_function_row": true,
+        "is_exploded": true,
+        "supports_blockers": false,
+        "supported_mounting_styles": [
+          "top",
+          "gasket"
+        ]
+      }
+    },
+    {
+      "id": "layout-006",
+      "name": "Alice Ergonomic",
+      "category": "layout",
+      "subtype": "layout",
+      "metadata": {
+        "layout_size": "alice",
+        "ansi_iso_support": "ansi",
+        "blocker_style": "alice",
+        "typing_density": 6,
+        "has_arrow_cluster": true,
+        "has_function_row": false,
+        "is_exploded": false,
+        "supports_blockers": true,
+        "supported_mounting_styles": [
+          "top",
+          "gasket",
+          "leaf_spring"
+        ]
+      }
+    },
+    {
+      "id": "layout-007",
+      "name": "Split 60",
+      "category": "layout",
+      "subtype": "layout",
+      "metadata": {
+        "layout_size": "split",
+        "ansi_iso_support": "both",
+        "blocker_style": "split",
+        "typing_density": 4,
+        "has_arrow_cluster": false,
+        "has_function_row": false,
+        "is_exploded": false,
+        "supports_blockers": true,
+        "supported_mounting_styles": [
+          "tray",
+          "gasket",
+          "leaf_spring"
+        ]
+      }
+    },
+    {
+      "id": "layout-new-001-gdk-lab-dk1-tkl-기판",
+      "name": "GDK Lab - DK1 TKL 기판",
+      "category": "layout",
+      "subtype": "layout",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1853",
+      "metadata": {
+        "layout_size": "80_tkl",
+        "ansi_iso_support": "both",
+        "blocker_style": "standard",
+        "typing_density": 7,
+        "has_arrow_cluster": true,
+        "has_function_row": true,
+        "is_exploded": false,
+        "supports_blockers": false,
+        "supported_mounting_styles": [
+          "tray",
+          "top",
+          "gasket",
+          "leaf_spring",
+          "sandwich"
+        ]
+      }
+    },
+    {
+      "id": "layout-new-002-mm-studio-class-100-전용-기판",
+      "name": "MM Studio - Class 100 전용 기판",
+      "category": "layout",
+      "subtype": "layout",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1869",
+      "metadata": {
+        "layout_size": "full",
+        "ansi_iso_support": "both",
+        "blocker_style": "standard",
+        "typing_density": 9,
+        "has_arrow_cluster": true,
+        "has_function_row": true,
+        "is_exploded": false,
+        "supports_blockers": false,
+        "supported_mounting_styles": [
+          "tray",
+          "top",
+          "gasket",
+          "leaf_spring",
+          "sandwich"
+        ]
+      }
+    },
+    {
+      "id": "layout-new-003-neo60-core-기판",
+      "name": "NEO60 Core 기판",
+      "category": "layout",
+      "subtype": "layout",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1519",
+      "metadata": {
+        "layout_size": "60",
+        "ansi_iso_support": "both",
+        "blocker_style": "standard",
+        "typing_density": 5,
+        "has_arrow_cluster": false,
+        "has_function_row": false,
+        "is_exploded": false,
+        "supports_blockers": false,
+        "supported_mounting_styles": [
+          "tray",
+          "top",
+          "gasket",
+          "leaf_spring",
+          "sandwich"
+        ]
+      }
+    },
+    {
+      "id": "layout-new-004-neo65-cu-기판",
+      "name": "NEO65 CU 기판",
+      "category": "layout",
+      "subtype": "layout",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1611",
+      "metadata": {
+        "layout_size": "65",
+        "ansi_iso_support": "both",
+        "blocker_style": "standard",
+        "typing_density": 6,
+        "has_arrow_cluster": true,
+        "has_function_row": false,
+        "is_exploded": false,
+        "supports_blockers": false,
+        "supported_mounting_styles": [
+          "tray",
+          "top",
+          "gasket",
+          "leaf_spring",
+          "sandwich"
+        ]
+      }
+    },
+    {
+      "id": "layout-new-005-neo65-core-plus-기판",
+      "name": "NEO65 Core Plus 기판",
+      "category": "layout",
+      "subtype": "layout",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1416",
+      "metadata": {
+        "layout_size": "65",
+        "ansi_iso_support": "both",
+        "blocker_style": "standard",
+        "typing_density": 6,
+        "has_arrow_cluster": true,
+        "has_function_row": false,
+        "is_exploded": false,
+        "supports_blockers": false,
+        "supported_mounting_styles": [
+          "tray",
+          "top",
+          "gasket",
+          "leaf_spring",
+          "sandwich"
+        ]
+      }
+    },
+    {
+      "id": "layout-new-006-neo75-기판",
+      "name": "NEO75 기판",
+      "category": "layout",
+      "subtype": "layout",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1747",
+      "metadata": {
+        "layout_size": "75",
+        "ansi_iso_support": "both",
+        "blocker_style": "standard",
+        "typing_density": 6,
+        "has_arrow_cluster": true,
+        "has_function_row": true,
+        "is_exploded": false,
+        "supports_blockers": false,
+        "supported_mounting_styles": [
+          "tray",
+          "top",
+          "gasket",
+          "leaf_spring",
+          "sandwich"
+        ]
+      }
+    },
+    {
+      "id": "layout-new-007-neo80-cu-기판",
+      "name": "NEO80 CU 기판",
+      "category": "layout",
+      "subtype": "layout",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1500",
+      "metadata": {
+        "layout_size": "80_tkl",
+        "ansi_iso_support": "both",
+        "blocker_style": "standard",
+        "typing_density": 7,
+        "has_arrow_cluster": true,
+        "has_function_row": true,
+        "is_exploded": false,
+        "supports_blockers": false,
+        "supported_mounting_styles": [
+          "tray",
+          "top",
+          "gasket",
+          "leaf_spring",
+          "sandwich"
+        ]
+      }
+    },
+    {
+      "id": "layout-new-008-neo98-기판",
+      "name": "NEO98 기판",
+      "category": "layout",
+      "subtype": "layout",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1750",
+      "metadata": {
+        "layout_size": "75",
+        "ansi_iso_support": "both",
+        "blocker_style": "standard",
+        "typing_density": 6,
+        "has_arrow_cluster": true,
+        "has_function_row": true,
+        "is_exploded": false,
+        "supports_blockers": false,
+        "supported_mounting_styles": [
+          "tray",
+          "top",
+          "gasket",
+          "leaf_spring",
+          "sandwich"
+        ]
+      }
+    },
+    {
+      "id": "layout-new-009-nono-studio-n65-기판",
+      "name": "NONO Studio N65 기판",
+      "category": "layout",
+      "subtype": "layout",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1326",
+      "metadata": {
+        "layout_size": "65",
+        "ansi_iso_support": "both",
+        "blocker_style": "standard",
+        "typing_density": 6,
+        "has_arrow_cluster": true,
+        "has_function_row": false,
+        "is_exploded": false,
+        "supports_blockers": false,
+        "supported_mounting_styles": [
+          "tray",
+          "top",
+          "gasket",
+          "leaf_spring",
+          "sandwich"
+        ]
+      }
+    },
+    {
+      "id": "layout-new-010-qk65-mk3-기판",
+      "name": "QK65 MK3 기판",
+      "category": "layout",
+      "subtype": "layout",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1660",
+      "metadata": {
+        "layout_size": "65",
+        "ansi_iso_support": "both",
+        "blocker_style": "standard",
+        "typing_density": 6,
+        "has_arrow_cluster": true,
+        "has_function_row": false,
+        "is_exploded": false,
+        "supports_blockers": false,
+        "supported_mounting_styles": [
+          "tray",
+          "top",
+          "gasket",
+          "leaf_spring",
+          "sandwich"
+        ]
+      }
+    },
+    {
+      "id": "layout-new-011-shelby65-기판",
+      "name": "Shelby65 기판",
+      "category": "layout",
+      "subtype": "layout",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1699",
+      "metadata": {
+        "layout_size": "65",
+        "ansi_iso_support": "both",
+        "blocker_style": "standard",
+        "typing_density": 6,
+        "has_arrow_cluster": true,
+        "has_function_row": false,
+        "is_exploded": false,
+        "supports_blockers": false,
+        "supported_mounting_styles": [
+          "tray",
+          "top",
+          "gasket",
+          "leaf_spring",
+          "sandwich"
+        ]
+      }
+    },
+    {
+      "id": "layout-new-012-스웨그키-eave65-전용-기판",
+      "name": "스웨그키 Eave65 전용 기판",
+      "category": "layout",
+      "subtype": "layout",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1867",
+      "metadata": {
+        "layout_size": "65",
+        "ansi_iso_support": "both",
+        "blocker_style": "standard",
+        "typing_density": 6,
+        "has_arrow_cluster": true,
+        "has_function_row": false,
+        "is_exploded": false,
+        "supports_blockers": false,
+        "supported_mounting_styles": [
+          "tray",
+          "top",
+          "gasket",
+          "leaf_spring",
+          "sandwich"
+        ]
+      }
+    },
+    {
+      "id": "layout-new-013-스웨그키-sw-a87-레이아웃-8k-게이밍-기판",
+      "name": "스웨그키 SW A87 레이아웃 8K 게이밍 기판",
+      "category": "layout",
+      "subtype": "layout",
+      "sourceUrl": "https://www.swagkey.kr/205/?idx=1001",
+      "metadata": {
+        "layout_size": "75",
+        "ansi_iso_support": "both",
+        "blocker_style": "standard",
+        "typing_density": 6,
+        "has_arrow_cluster": true,
+        "has_function_row": true,
+        "is_exploded": false,
+        "supports_blockers": false,
+        "supported_mounting_styles": [
+          "tray",
+          "top",
+          "gasket",
+          "leaf_spring",
+          "sandwich"
+        ]
+      }
+    },
+    {
+      "id": "layout-new-014-스웨그키-트랜지션-라이트-기판",
+      "name": "스웨그키 트랜지션 라이트 기판",
+      "category": "layout",
+      "subtype": "layout",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1528",
+      "metadata": {
+        "layout_size": "75",
+        "ansi_iso_support": "both",
+        "blocker_style": "standard",
+        "typing_density": 6,
+        "has_arrow_cluster": true,
+        "has_function_row": true,
+        "is_exploded": false,
+        "supports_blockers": false,
+        "supported_mounting_styles": [
+          "tray",
+          "top",
+          "gasket",
+          "leaf_spring",
+          "sandwich"
+        ]
+      }
+    },
+    {
+      "id": "layout-new-015-트랜지션-라이트-전용-mx-8k-게이밍-기판",
+      "name": "트랜지션 라이트 전용 MX 8K 게이밍 기판",
+      "category": "layout",
+      "subtype": "layout",
+      "sourceUrl": "https://www.swagkey.kr/205/?idx=1526",
+      "metadata": {
+        "layout_size": "75",
+        "ansi_iso_support": "both",
+        "blocker_style": "standard",
+        "typing_density": 6,
+        "has_arrow_cluster": true,
+        "has_function_row": true,
+        "is_exploded": false,
+        "supports_blockers": false,
+        "supported_mounting_styles": [
+          "tray",
+          "top",
+          "gasket",
+          "leaf_spring",
+          "sandwich"
+        ]
+      }
+    }
+  ],
+  "cases": [
+    {
+      "id": "case-001",
+      "inventoryId": "inv-0002",
+      "name": "NEO65 Core Plus 커스텀 기계식 키보드",
+      "category": "case",
+      "subtype": "kit",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1415",
+      "metadata": {
+        "kit_type": "kit",
+        "mounting_style": "gasket",
+        "layout_size": "65",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "NEO STUDIO",
+        "kit",
+        "65"
+      ]
+    },
+    {
+      "id": "case-002",
+      "inventoryId": "inv-0005",
+      "name": "NEO80 CU 커스텀 기계식 키보드",
+      "category": "case",
+      "subtype": "kit",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1499",
+      "metadata": {
+        "kit_type": "kit",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "NEO Studio",
+        "kit"
+      ]
+    },
+    {
+      "id": "case-003",
+      "inventoryId": "inv-0007",
+      "name": "[GB] Agar Micro 파츠",
+      "category": "case",
+      "subtype": "parts",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1866",
+      "metadata": {
+        "kit_type": "parts",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": false,
+        "includes_plate": false,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "KBDFANS",
+        "parts"
+      ]
+    },
+    {
+      "id": "case-004",
+      "inventoryId": "inv-0008",
+      "name": "EVO80 에보80 알루미늄 커스텀 기계식 키보드",
+      "category": "case",
+      "subtype": "kit",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1641",
+      "metadata": {
+        "kit_type": "kit",
+        "material": "Aluminum",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "heavy",
+        "acoustic_character": "deep"
+      },
+      "tags": [
+        "EVOWORKS",
+        "kit"
+      ]
+    },
+    {
+      "id": "case-005",
+      "inventoryId": "inv-0009",
+      "name": "DP104 알루미늄 커스텀 기계식 키보드",
+      "category": "case",
+      "subtype": "kit",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1604",
+      "metadata": {
+        "kit_type": "kit",
+        "material": "Aluminum",
+        "mounting_style": "gasket",
+        "layout_size": "full",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "heavy",
+        "acoustic_character": "deep"
+      },
+      "tags": [
+        "Ticktype",
+        "kit",
+        "full"
+      ]
+    },
+    {
+      "id": "case-006",
+      "inventoryId": "inv-0010",
+      "name": "[GB] Agar Micro 커스텀 기계식 키보드",
+      "category": "case",
+      "subtype": "kit",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1865",
+      "metadata": {
+        "kit_type": "kit",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "KBDFANS",
+        "kit"
+      ]
+    },
+    {
+      "id": "case-007",
+      "inventoryId": "inv-0012",
+      "name": "스웨그키 Eave65 커스텀 기계식 키보드",
+      "category": "case",
+      "subtype": "kit",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1151",
+      "metadata": {
+        "kit_type": "kit",
+        "mounting_style": "gasket",
+        "layout_size": "65",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "스웨그키",
+        "kit",
+        "65"
+      ]
+    },
+    {
+      "id": "case-008",
+      "inventoryId": "inv-0014",
+      "name": "Baionlenja Ophanim 파츠",
+      "category": "case",
+      "subtype": "parts",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1834",
+      "metadata": {
+        "kit_type": "parts",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": false,
+        "includes_plate": false,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "Baionlenja",
+        "parts"
+      ]
+    },
+    {
+      "id": "case-009",
+      "inventoryId": "inv-0015",
+      "name": "NEO65 Cu 커스텀 기계식 키보드",
+      "category": "case",
+      "subtype": "kit",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1581",
+      "metadata": {
+        "kit_type": "kit",
+        "mounting_style": "gasket",
+        "layout_size": "65",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "NEO",
+        "kit",
+        "65"
+      ]
+    },
+    {
+      "id": "case-010",
+      "inventoryId": "inv-0017",
+      "name": "EVO75 에보75 알루미늄 커스텀 기계식 키보드",
+      "category": "case",
+      "subtype": "kit",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1373",
+      "metadata": {
+        "kit_type": "kit",
+        "material": "Aluminum",
+        "mounting_style": "gasket",
+        "layout_size": "75",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "heavy",
+        "acoustic_character": "deep"
+      },
+      "tags": [
+        "Evoworks",
+        "kit",
+        "75"
+      ]
+    },
+    {
+      "id": "case-011",
+      "inventoryId": "inv-0018",
+      "name": "스웨그키 트랜지션 라이트 커스텀 기계식 키보드",
+      "category": "case",
+      "subtype": "kit",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=860",
+      "metadata": {
+        "kit_type": "kit",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "스웨그키",
+        "kit"
+      ]
+    },
+    {
+      "id": "case-012",
+      "inventoryId": "inv-0019",
+      "name": "AM Relic80 커스텀 기계식 완제품 키보드 R1.5",
+      "category": "case",
+      "subtype": "complete",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1789",
+      "metadata": {
+        "kit_type": "complete",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": true,
+        "includes_switches": true,
+        "includes_keycaps": true,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "AM",
+        "complete"
+      ]
+    },
+    {
+      "id": "case-013",
+      "inventoryId": "inv-0021",
+      "name": "Baionlenja Ophanim 베어본 킷",
+      "category": "case",
+      "subtype": "barebone",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1832",
+      "metadata": {
+        "kit_type": "barebone",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "Baionlenja",
+        "barebone"
+      ]
+    },
+    {
+      "id": "case-014",
+      "inventoryId": "inv-0022",
+      "name": "스웨그키 Smurve80 커스텀 기계식 완제품 키보드",
+      "category": "case",
+      "subtype": "complete",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1785",
+      "metadata": {
+        "kit_type": "complete",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": true,
+        "includes_switches": true,
+        "includes_keycaps": true,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "Swagkeys, Play Keyboard",
+        "complete"
+      ]
+    },
+    {
+      "id": "case-015",
+      "inventoryId": "inv-0024",
+      "name": "MM Studio - Class 100",
+      "category": "case",
+      "subtype": "kit",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1868",
+      "metadata": {
+        "kit_type": "kit",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "MM Studio",
+        "kit"
+      ]
+    },
+    {
+      "id": "case-016",
+      "inventoryId": "inv-0026",
+      "name": "[GB]Bowl x Alexotos - Schema 파츠",
+      "category": "case",
+      "subtype": "parts",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1844",
+      "metadata": {
+        "kit_type": "parts",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": false,
+        "includes_plate": false,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "Bowl Keyboard",
+        "parts"
+      ]
+    },
+    {
+      "id": "case-017",
+      "inventoryId": "inv-0027",
+      "name": "QK80MK2 커스텀 기계식 키보드",
+      "category": "case",
+      "subtype": "kit",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1838",
+      "metadata": {
+        "kit_type": "kit",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "Qwertykeys",
+        "kit"
+      ]
+    },
+    {
+      "id": "case-018",
+      "inventoryId": "inv-0029",
+      "name": "NEO98 커스텀 기계식 키보드",
+      "category": "case",
+      "subtype": "kit",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1748",
+      "metadata": {
+        "kit_type": "kit",
+        "mounting_style": "gasket",
+        "layout_size": "96",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "NEO STUDIO",
+        "kit",
+        "96"
+      ]
+    },
+    {
+      "id": "case-019",
+      "inventoryId": "inv-0030",
+      "name": "트랜지션 라이트 Alu 상부 하우징 상판",
+      "category": "case",
+      "subtype": "parts",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1392",
+      "metadata": {
+        "kit_type": "parts",
+        "material": "Aluminum",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": false,
+        "includes_plate": false,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "heavy",
+        "acoustic_character": "deep"
+      },
+      "tags": [
+        "스웨그키",
+        "parts"
+      ]
+    },
+    {
+      "id": "case-020",
+      "inventoryId": "inv-0031",
+      "name": "스웨그키 트랜지션 87 라이트 게이밍 8K 커스텀 기계식 완제품 키보드",
+      "category": "case",
+      "subtype": "complete",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1820",
+      "metadata": {
+        "kit_type": "complete",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": true,
+        "includes_switches": true,
+        "includes_keycaps": true,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "스웨그키",
+        "complete"
+      ]
+    },
+    {
+      "id": "case-021",
+      "inventoryId": "inv-0032",
+      "name": "세라키 Zen75 기계식 완제품 키보드",
+      "category": "case",
+      "subtype": "complete",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1730",
+      "metadata": {
+        "kit_type": "complete",
+        "mounting_style": "gasket",
+        "layout_size": "75",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": true,
+        "includes_switches": true,
+        "includes_keycaps": true,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "Cerakey",
+        "complete",
+        "75"
+      ]
+    },
+    {
+      "id": "case-022",
+      "inventoryId": "inv-0036",
+      "name": "GDK Lab - DK1 TKL Barebone Kit",
+      "category": "case",
+      "subtype": "barebone",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1852",
+      "metadata": {
+        "kit_type": "barebone",
+        "mounting_style": "gasket",
+        "layout_size": "80_tkl",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "GDK Lab",
+        "barebone",
+        "80_tkl"
+      ]
+    },
+    {
+      "id": "case-023",
+      "inventoryId": "inv-0037",
+      "name": "[GB]Bowl x Alexotos - Schema 상판",
+      "category": "case",
+      "subtype": "parts",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1843",
+      "metadata": {
+        "kit_type": "parts",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": false,
+        "includes_plate": false,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "Bowl Keyboard",
+        "parts"
+      ]
+    },
+    {
+      "id": "case-024",
+      "inventoryId": "inv-0038",
+      "name": "[GB]Bowl x Alexotos - Schema Barebone Kit",
+      "category": "case",
+      "subtype": "barebone",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1842",
+      "metadata": {
+        "kit_type": "barebone",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "Bowl Keyboard",
+        "barebone"
+      ]
+    },
+    {
+      "id": "case-025",
+      "inventoryId": "inv-0039",
+      "name": "NEO75 & NEO98 커스텀 기계식 완제품 키보드",
+      "category": "case",
+      "subtype": "complete",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1837",
+      "metadata": {
+        "kit_type": "complete",
+        "mounting_style": "gasket",
+        "layout_size": "96",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": true,
+        "includes_switches": true,
+        "includes_keycaps": true,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "NEO STUDIO",
+        "complete",
+        "96"
+      ]
+    },
+    {
+      "id": "case-026",
+      "inventoryId": "inv-0041",
+      "name": "Bowl Keyboard Oblique 커스텀 기계식 키보드 R2",
+      "category": "case",
+      "subtype": "kit",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1801",
+      "metadata": {
+        "kit_type": "kit",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "Bowl Keyboard",
+        "kit"
+      ]
+    },
+    {
+      "id": "case-027",
+      "inventoryId": "inv-0042",
+      "name": "Meletrix Zoom64 MX버전 커스텀 기계식 키보드",
+      "category": "case",
+      "subtype": "kit",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1799",
+      "metadata": {
+        "kit_type": "kit",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "Wuque Studio",
+        "kit"
+      ]
+    },
+    {
+      "id": "case-028",
+      "inventoryId": "inv-0043",
+      "name": "QK65 MK3 커스텀 기계식 완제품 키보드",
+      "category": "case",
+      "subtype": "complete",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1757",
+      "metadata": {
+        "kit_type": "complete",
+        "mounting_style": "gasket",
+        "layout_size": "65",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": true,
+        "includes_switches": true,
+        "includes_keycaps": true,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "Qwertykeys",
+        "complete",
+        "65"
+      ]
+    },
+    {
+      "id": "case-029",
+      "inventoryId": "inv-0044",
+      "name": "AM ATM98 커스텀 기계식 완제품 키보드",
+      "category": "case",
+      "subtype": "complete",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1754",
+      "metadata": {
+        "kit_type": "complete",
+        "mounting_style": "gasket",
+        "layout_size": "96",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": true,
+        "includes_switches": true,
+        "includes_keycaps": true,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "AngryMiao",
+        "complete",
+        "96"
+      ]
+    },
+    {
+      "id": "case-030",
+      "inventoryId": "inv-0047",
+      "name": "NEO75 커스텀 기계식 키보드",
+      "category": "case",
+      "subtype": "kit",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1746",
+      "metadata": {
+        "kit_type": "kit",
+        "mounting_style": "gasket",
+        "layout_size": "75",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "NEO STUDIO",
+        "kit",
+        "75"
+      ]
+    },
+    {
+      "id": "case-031",
+      "inventoryId": "inv-0049",
+      "name": "MatrixLab NOOS Wing 커스텀 기계식 키보드",
+      "category": "case",
+      "subtype": "kit",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1650",
+      "metadata": {
+        "kit_type": "kit",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "MatrixLab",
+        "kit"
+      ]
+    },
+    {
+      "id": "case-032",
+      "inventoryId": "inv-0056",
+      "name": "MatrixLab One Thing 커스텀 기계식 키보드",
+      "category": "case",
+      "subtype": "kit",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1233",
+      "metadata": {
+        "kit_type": "kit",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "TOLNTOY",
+        "kit"
+      ]
+    },
+    {
+      "id": "case-033",
+      "inventoryId": "inv-0057",
+      "name": "[GB] QK Alice Duo Barebone Kit [Batch 5]",
+      "category": "case",
+      "subtype": "barebone",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1781",
+      "metadata": {
+        "kit_type": "barebone",
+        "mounting_style": "gasket",
+        "layout_size": "alice",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "QWERTYKEYS",
+        "barebone",
+        "alice"
+      ]
+    },
+    {
+      "id": "case-034",
+      "inventoryId": "inv-0059",
+      "name": "MatrixLab NoStation",
+      "category": "case",
+      "subtype": "kit",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1283",
+      "metadata": {
+        "kit_type": "kit",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "MatrixLab",
+        "kit"
+      ]
+    },
+    {
+      "id": "case-035",
+      "inventoryId": "inv-0060",
+      "name": "Meletrix Zoom64 HE버전 커스텀 기계식 키보드",
+      "category": "case",
+      "subtype": "kit",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1798",
+      "metadata": {
+        "kit_type": "kit",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "Wuque Studio",
+        "kit"
+      ]
+    },
+    {
+      "id": "case-036",
+      "inventoryId": "inv-0061",
+      "name": "NP-R Numpad",
+      "category": "case",
+      "subtype": "kit",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1741",
+      "metadata": {
+        "kit_type": "kit",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "Bagri x Flatbrains",
+        "kit"
+      ]
+    },
+    {
+      "id": "case-037",
+      "inventoryId": "inv-0065",
+      "name": "[GB] MatrixLab Carnival [TKL] - Barebone Kit",
+      "category": "case",
+      "subtype": "barebone",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1615",
+      "metadata": {
+        "kit_type": "barebone",
+        "mounting_style": "gasket",
+        "layout_size": "80_tkl",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "MatrixLab",
+        "barebone",
+        "80_tkl"
+      ]
+    },
+    {
+      "id": "case-038",
+      "inventoryId": "inv-0066",
+      "name": "[GB] Neighbourhood Shy60 Barebone Kit",
+      "category": "case",
+      "subtype": "barebone",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1504",
+      "metadata": {
+        "kit_type": "barebone",
+        "mounting_style": "gasket",
+        "layout_size": "60",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "NBH",
+        "barebone",
+        "60"
+      ]
+    },
+    {
+      "id": "case-039",
+      "inventoryId": "inv-0067",
+      "name": "[GB] Baionlenja Synovia Parts",
+      "category": "case",
+      "subtype": "parts",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1409",
+      "metadata": {
+        "kit_type": "parts",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": false,
+        "includes_plate": false,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "Baionlenja",
+        "parts"
+      ]
+    },
+    {
+      "id": "case-040",
+      "inventoryId": "inv-0068",
+      "name": "[GB] Baionlenja Synovia Barebone Kit",
+      "category": "case",
+      "subtype": "barebone",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1408",
+      "metadata": {
+        "kit_type": "barebone",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "Baionlenja",
+        "barebone"
+      ]
+    },
+    {
+      "id": "case-041",
+      "inventoryId": "inv-0070",
+      "name": "[GB] ai03 Altair and Altair-X Barebone Kit R2",
+      "category": "case",
+      "subtype": "barebone",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1295",
+      "metadata": {
+        "kit_type": "barebone",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "ai03",
+        "barebone"
+      ]
+    },
+    {
+      "id": "case-042",
+      "inventoryId": "inv-0071",
+      "name": "Swagkeys x JJW Integral 커스텀 기계식 키보드",
+      "category": "case",
+      "subtype": "kit",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1228",
+      "metadata": {
+        "kit_type": "kit",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "스웨그키",
+        "kit"
+      ]
+    },
+    {
+      "id": "case-043",
+      "inventoryId": "inv-0073",
+      "name": "MatrixLab Prologue & Chapter One 커스텀 기계식 키보드",
+      "category": "case",
+      "subtype": "kit",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1170",
+      "metadata": {
+        "kit_type": "kit",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "TOLNTOY",
+        "kit"
+      ]
+    },
+    {
+      "id": "case-044",
+      "inventoryId": "inv-0074",
+      "name": "NEO60 Core 커스텀 기계식 키보드",
+      "category": "case",
+      "subtype": "kit",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1165",
+      "metadata": {
+        "kit_type": "kit",
+        "mounting_style": "gasket",
+        "layout_size": "60",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "NEO",
+        "kit",
+        "60"
+      ]
+    },
+    {
+      "id": "case-045",
+      "inventoryId": "inv-0075",
+      "name": "[GB] Cannonkeys VIDA",
+      "category": "case",
+      "subtype": "kit",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1025",
+      "metadata": {
+        "kit_type": "kit",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "Cannonkeys",
+        "kit"
+      ]
+    },
+    {
+      "id": "case-046",
+      "inventoryId": "inv-0077",
+      "name": "[GB] Cannonkeys Cerberus Barebone Kit",
+      "category": "case",
+      "subtype": "barebone",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=987",
+      "metadata": {
+        "kit_type": "barebone",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "Cannonkeys",
+        "barebone"
+      ]
+    },
+    {
+      "id": "case-047",
+      "inventoryId": "inv-0081",
+      "name": "Owlab Hellcat Mech-01 커스텀 기계식 키보드",
+      "category": "case",
+      "subtype": "kit",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1565",
+      "metadata": {
+        "kit_type": "kit",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "Owlab",
+        "kit"
+      ]
+    },
+    {
+      "id": "case-048",
+      "inventoryId": "inv-0082",
+      "name": "NEON Transition LITE HE Kit",
+      "category": "case",
+      "subtype": "he_kit",
+      "sourceUrl": "https://www.swagkey.kr/205/?idx=1301",
+      "metadata": {
+        "kit_type": "he_kit",
+        "mounting_style": "gasket",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "NEON",
+        "he_kit"
+      ]
+    },
+    {
+      "id": "case-049",
+      "inventoryId": "inv-0291",
+      "name": "NEO65 Sonic He+",
+      "category": "case",
+      "subtype": "he_kit",
+      "sourceUrl": "https://www.swagkey.kr/205/?idx=1574",
+      "metadata": {
+        "kit_type": "he_kit",
+        "mounting_style": "gasket",
+        "layout_size": "65",
+        "ansi_iso_support": "both",
+        "includes_pcb": true,
+        "includes_plate": true,
+        "includes_foam": false,
+        "includes_switches": false,
+        "includes_keycaps": false,
+        "weight_class": "balanced",
+        "acoustic_character": "balanced"
+      },
+      "tags": [
+        "NEO STUDIO",
+        "he_kit",
+        "65"
+      ]
+    }
+  ]
+}

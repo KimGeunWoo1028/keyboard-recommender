@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1.0.0",
+  "gatePassed": true,
+  "families": {
+    "switch": {
+      "recommend": 67,
+      "browse": 68,
+      "ceiling": 70,
+      "gatePassed": true
+    },
+    "plate": {
+      "recommend": 14,
+      "browse": 20,
+      "ceiling": 20,
+      "gatePassed": true
+    },
+    "foam": {
+      "recommend": 9,
+      "browse": 10,
+      "ceiling": 12,
+      "gatePassed": true
+    },
+    "layout": {
+      "recommend": 7,
+      "browse": 45,
+      "ceiling": 7,
+      "gatePassed": true
+    },
+    "case": {
+      "recommend": 49,
+      "browse": 126,
+      "ceiling": 55,
+      "gatePassed": true
+    },
+    "keycap": {
+      "recommend": 18,
+      "browse": 62,
+      "ceiling": 22,
+      "gatePassed": true
+    }
+  },
+  "summaryLines": [
+    "recommendation pool vs browse seed:",
+    "  switch: recommend=67 browse=68 ceiling=70 ok=True",
+    "  plate: recommend=14 browse=20 ceiling=20 ok=True",
+    "  foam: recommend=9 browse=10 ceiling=12 ok=True",
+    "  layout: recommend=7 browse=45 ceiling=7 ok=True",
+    "  case: recommend=49 browse=126 ceiling=55 ok=True",
+    "  keycap: recommend=18 browse=62 ceiling=22 ok=True",
+    "gate passed: True"
+  ]
+}

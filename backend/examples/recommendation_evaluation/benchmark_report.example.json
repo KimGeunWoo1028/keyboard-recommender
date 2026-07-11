@@ -1,0 +1,60 @@
+{
+  "baselineLabel": "run_a",
+  "comment": "Minimal shape from build_benchmark_report(); fill with real paired snapshots in tooling.",
+  "compatibilityImpact": {
+    "absoluteDelta": -0.15,
+    "baselineEffectivePenalty": 0.55,
+    "schemaVersion": "evaluation.compat_penalty_impact.v1",
+    "summaryLines": [
+      "Compatibility penalties reduced harsh build combinations in the treatment run."
+    ],
+    "treatmentEffectivePenalty": 0.4
+  },
+  "fallbackTreatment": {
+    "present": false,
+    "schemaVersion": "evaluation.fallback_effectiveness.v1",
+    "summaryLines": [
+      "fallback: no fallback audit (no recovery path triggered)."
+    ]
+  },
+  "metricComparison": {
+    "perMetric": {
+      "trait_alignment": {
+        "absoluteDelta": 0.03,
+        "baseline": 0.6,
+        "current": 0.63,
+        "percentChange": 5.0,
+        "relativeDelta": 0.05
+      }
+    },
+    "schemaVersion": "evaluation.compare_metrics.v1"
+  },
+  "narrativeLines": [
+    "trait_alignment: increased by about 5.0% vs baseline (improvement)."
+  ],
+  "rerankingImpactTreatment": {
+    "familiesAnalyzed": 4,
+    "familiesChanged": 2,
+    "fractionFamiliesChanged": 0.5,
+    "meanFootrulePerChangedFamily": 2.5,
+    "perFamily": [],
+    "schemaVersion": "evaluation.reranking_impact.v1",
+    "summaryLines": [
+      "diversity reranking: 2/4 families had order changes (fraction=0.500)."
+    ]
+  },
+  "schemaVersion": "evaluation.benchmark_report.v1",
+  "signalComparison": {
+    "schemaVersion": "evaluation.compare_snapshots_signals.v1",
+    "signals": {
+      "confidenceOverall": {
+        "absoluteDelta": 0.05,
+        "baseline": 0.5,
+        "current": 0.55,
+        "percentChange": 10.0,
+        "relativeDelta": 0.1
+      }
+    }
+  },
+  "treatmentLabel": "run_b"
+}

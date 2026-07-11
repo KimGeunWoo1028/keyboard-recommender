@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KeebSmith - Custom Keyboard Workshop</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;500;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#322f39",
+                        "on-surface-variant": "#cbc3d7",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "outline": "#958ea0",
+                        "surface-dim": "#15121b",
+                        "on-secondary-fixed-variant": "#004c6e",
+                        "on-secondary-fixed": "#001e2f",
+                        "primary-fixed-dim": "#d0bcff",
+                        "surface-container-low": "#1d1a23",
+                        "on-tertiary": "#003824",
+                        "surface-container-lowest": "#0f0d15",
+                        "on-tertiary-container": "#00311f",
+                        "on-primary-container": "#340080",
+                        "primary-fixed": "#e9ddff",
+                        "on-surface": "#e7e0ed",
+                        "secondary-fixed-dim": "#89ceff",
+                        "on-error-container": "#ffdad6",
+                        "primary-container": "#a078ff",
+                        "error": "#ffb4ab",
+                        "surface-tint": "#d0bcff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "surface": "#15121b",
+                        "inverse-primary": "#6d3bd7",
+                        "surface-container": "#211e27",
+                        "background": "#15121b",
+                        "on-primary": "#3c0091",
+                        "tertiary": "#4edea3",
+                        "on-primary-fixed-variant": "#5516be",
+                        "on-error": "#690005",
+                        "error-container": "#93000a",
+                        "on-primary-fixed": "#23005c",
+                        "on-secondary-container": "#00344e",
+                        "secondary-container": "#00a2e6",
+                        "surface-container-highest": "#37333d",
+                        "tertiary-container": "#00a572",
+                        "inverse-surface": "#e7e0ed",
+                        "primary": "#d0bcff",
+                        "on-background": "#e7e0ed",
+                        "surface-container-high": "#2c2832",
+                        "surface-variant": "#37333d",
+                        "surface-bright": "#3b3742",
+                        "secondary": "#89ceff",
+                        "on-tertiary-fixed": "#002113",
+                        "secondary-fixed": "#c9e6ff",
+                        "on-secondary": "#00344d",
+                        "outline-variant": "#494454",
+                        "tertiary-fixed-dim": "#4edea3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "margin-desktop": "40px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "label-sm": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0D0D15;
+            color: #e7e0ed;
+            overflow-x: hidden;
+        }
+        .glass-panel {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-panel:hover {
+            border-color: rgba(208, 188, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 40px rgba(109, 59, 215, 0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #00a2e6;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .neon-border {
+            border: 1px solid transparent;
+            background: linear-gradient(#15121b, #15121b) padding-box,
+                        linear-gradient(to bottom, rgba(208, 188, 255, 0.5), transparent) border-box;
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<header class="bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-xl docked full-width top-0 sticky z-50 border-b border-outline-variant/30 shadow-sm">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-8">
+<a class="text-headline-md font-headline-md font-bold bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent" href="#">KeebSmith</a>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-primary border-b-2 border-primary font-bold pb-1 text-label-sm font-label-sm" href="#">Build</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors text-label-sm font-label-sm" href="#">Explore</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors text-label-sm font-label-sm" href="#">Community</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="bg-surface-container-highest/50 border-none rounded-full pl-10 pr-4 py-2 text-label-sm focus:ring-2 focus:ring-primary w-64 transition-all" placeholder="Search components..." type="text"/>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant/50 rounded-lg p-2 transition-all">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant/50 rounded-lg p-2 transition-all">settings</button>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-bold hover:scale-95 active:scale-90 transition-transform">Sign In</button>
+</div>
+</div>
+</header>
+<main class="min-h-screen relative">
+<!-- Hero Background Animation -->
+<div class="absolute inset-0 -z-10 overflow-hidden">
+
+</div>
+<div class="max-w-container-max mx-auto px-margin-desktop py-12 md:py-24">
+<!-- Hero Section -->
+<div class="grid lg:grid-cols-2 gap-16 items-center mb-32">
+<div class="space-y-8">
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary-container/20 border border-primary/30 text-primary font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                        New Switches Dropping Soon
+                    </div>
+<h1 class="font-display-lg text-display-lg leading-tight tracking-tighter">
+                        Precision Crafted <br/>
+<span class="bg-gradient-to-r from-secondary to-tertiary bg-clip-text text-transparent">Mechanical Mastery</span>
+</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant max-w-xl">
+                        Design, simulate, and build your ultimate keyboard with our analytical toolset. High-precision data meets boutique aesthetics.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-primary text-on-primary-fixed px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-[0_0_20px_rgba(208,188,255,0.4)] transition-all">
+<span class="material-symbols-outlined">construction</span>
+                            Start New Build
+                        </button>
+<button class="border border-outline-variant/30 hover:bg-surface-variant/30 px-8 py-4 rounded-xl font-bold transition-all">
+                            Browse Gallery
+                        </button>
+</div>
+</div>
+<div class="relative group animate-float">
+<div class="absolute -inset-4 bg-gradient-to-br from-primary/20 via-transparent to-secondary/20 blur-3xl opacity-50"></div>
+<img class="w-full h-auto rounded-3xl neon-border shadow-2xl" data-alt="A highly detailed, professional overhead 3D render of a custom 65% mechanical keyboard with semi-translucent smoke-grey keycaps and an industrial aluminum case. The scene is lit with moody neon purple and blue backlighting reflecting off a glass surface. The atmosphere is high-end, elite, and atmospheric, resembling a high-tech workshop at midnight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCT2Qmy7a7923-5-5MfUe3y-9D6UFNIIcwfP0mmUYGlO4eHDDMIT-pEB5ckGAl4OB5D3Fzl0umwkT9FmIUYSRjjIPdhjEUS7lWhWK_c6lV8FtJ6qMMioeKYQCEwTPczLlMNaKUD6qKX1oscm1lEGcsHkRrOajCg6hF_WjH2vDChPfZS6OrctPxf0ed7dCLA8YnSLngrZLtrVgFAmrDIGILpx51TdtJgmAArpsfO1x7YzAdUZZXC9OEdw"/>
+</div>
+</div>
+<!-- Bento Dashboard Section -->
+<div class="mb-32">
+<div class="flex justify-between items-end mb-12">
+<div>
+<h2 class="font-headline-lg text-headline-lg mb-2">Build Workspace</h2>
+<p class="text-on-surface-variant font-label-sm text-label-sm">ANALYTICS &amp; SPECIFICATIONS</p>
+</div>
+<button class="text-secondary font-bold flex items-center gap-2 hover:underline">
+                        View Detailed Metrics <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-gutter">
+<!-- Feature Card 1: Sound Profile -->
+<div class="md:col-span-2 glass-panel p-8 rounded-3xl flex flex-col justify-between h-[320px]">
+<div class="flex justify-between items-start">
+<div>
+<span class="material-symbols-outlined text-tertiary text-[32px] mb-4" style="font-variation-settings: 'FILL' 1;">graphic_eq</span>
+<h3 class="font-headline-md text-headline-md">Acoustic Analysis</h3>
+</div>
+<span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full text-label-sm font-label-sm">TACTILE</span>
+</div>
+<div class="h-24 w-full flex items-end gap-1">
+<!-- Mock Audio Wave -->
+<div class="flex-1 bg-tertiary/40 rounded-full h-1/4 animate-pulse"></div>
+<div class="flex-1 bg-tertiary/60 rounded-full h-2/3"></div>
+<div class="flex-1 bg-tertiary/30 rounded-full h-1/2"></div>
+<div class="flex-1 bg-tertiary/80 rounded-full h-full"></div>
+<div class="flex-1 bg-tertiary/40 rounded-full h-3/4"></div>
+<div class="flex-1 bg-tertiary/90 rounded-full h-2/3"></div>
+<div class="flex-1 bg-tertiary/20 rounded-full h-1/2"></div>
+<div class="flex-1 bg-tertiary/50 rounded-full h-3/4"></div>
+<div class="flex-1 bg-tertiary/40 rounded-full h-1/4"></div>
+</div>
+<div class="flex justify-between items-center text-label-sm font-label-sm text-on-surface-variant">
+<span>Thock Potential: 94%</span>
+<span>Frequency: 140Hz - 2.4kHz</span>
+</div>
+</div>
+<!-- Feature Card 2: Cost Estimator -->
+<div class="glass-panel p-8 rounded-3xl flex flex-col justify-between h-[320px]">
+<div>
+<span class="material-symbols-outlined text-secondary text-[32px] mb-4">payments</span>
+<h3 class="font-headline-md text-headline-md">Estimated Total</h3>
+<p class="text-display-lg font-display-lg text-secondary mt-4">$486.32</p>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant text-label-sm">Case</span>
+<span class="font-label-sm">$220.00</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-secondary h-full w-[45%]"></div>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant text-label-sm">Switches</span>
+<span class="font-label-sm">$85.00</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-secondary h-full w-[18%]"></div>
+</div>
+</div>
+</div>
+<!-- Feature Card 3: Weight -->
+<div class="glass-panel p-8 rounded-3xl flex flex-col justify-between h-[320px]">
+<div>
+<span class="material-symbols-outlined text-primary text-[32px] mb-4">balance</span>
+<h3 class="font-headline-md text-headline-md">Mass Profile</h3>
+</div>
+<div class="text-center py-4">
+<span class="text-display-lg font-display-lg">2.4</span>
+<span class="text-on-surface-variant text-body-lg">kg</span>
+</div>
+<div class="flex justify-center gap-2">
+<span class="px-2 py-1 bg-primary/10 text-primary border border-primary/20 rounded text-[10px] font-label-sm">BRASS WEIGHT</span>
+<span class="px-2 py-1 bg-primary/10 text-primary border border-primary/20 rounded text-[10px] font-label-sm">SOLID ALU</span>
+</div>
+</div>
+<!-- Feature Card 4: Switch Chart -->
+<div class="md:col-span-2 glass-panel p-8 rounded-3xl h-[320px] overflow-hidden relative">
+<div class="flex justify-between mb-4">
+<h3 class="font-headline-md text-headline-md">Actuation Force Curve</h3>
+<div class="flex gap-2">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<div class="w-3 h-3 rounded-full bg-secondary"></div>
+</div>
+</div>
+<div class="h-48 w-full mt-4">
+<canvas class="w-full h-full" id="actuationCurve"></canvas>
+</div>
+<p class="absolute bottom-6 left-8 text-on-surface-variant text-label-sm">Current Selection: Gateron Oil Kings</p>
+</div>
+<!-- Feature Card 5: Inventory -->
+<div class="md:col-span-2 glass-panel p-8 rounded-3xl h-[320px]">
+<h3 class="font-headline-md text-headline-md mb-6">Component Status</h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl border border-white/5">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-high rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">keyboard</span>
+</div>
+<div>
+<p class="font-bold">Mode65 Case - Carbon</p>
+<p class="text-label-sm text-on-surface-variant">Estimated Delivery: Nov 24</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-tertiary">check_circle</span>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl border border-white/5">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-high rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">touch_app</span>
+</div>
+<div>
+<p class="font-bold">PBTfans Neon Keycaps</p>
+<p class="text-label-sm text-error">Backordered (3 weeks)</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">hourglass_empty</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Featured Builds List -->
+<div>
+<div class="flex justify-between items-center mb-12">
+<h2 class="font-headline-lg text-headline-lg">Trending Builds</h2>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg border border-outline-variant/30 hover:bg-surface-variant/30 transition-all">
+<span class="material-symbols-outlined">grid_view</span>
+</button>
+<button class="p-2 rounded-lg bg-primary-container/20 border border-primary text-primary">
+<span class="material-symbols-outlined">list</span>
+</button>
+</div>
+</div>
+<div class="space-y-4">
+<!-- Build Entry 1 -->
+<div class="glass-panel p-6 rounded-2xl flex flex-col md:flex-row items-center gap-8 group">
+<div class="w-full md:w-48 h-32 rounded-xl overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Close up photographic shot of a premium custom mechanical keyboard featuring deep navy blue anodized aluminum and white minimalist keycaps. The lighting is cold, surgical, and clear, emphasizing the sharp edges of the case and the texture of the PBT keycaps. Professional product photography style for an elite brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_1DBMpF_986r6SJY_H-aryt7ejRLV1Y-icKr9dvO27axkaToTWWfWDOCyDOmCy4MQD0O4YB59b7MgwFfy__TNXH0FdsMbNiYarOue5vVZK8LguOVU-ehU-_hQlq5zgdG3DBLeQ5tF1Tm0wizknBZNpIGzlTdAUbEjBppADKinTpRjkaSa05rzXdCyGGQTBnL7i0naupAHtihoaFauM6YB2xx-C7fTj3oDznEZw_Q6k0p15Q_2v1cjMw"/>
+</div>
+<div class="flex-grow">
+<div class="flex flex-wrap gap-2 mb-2">
+<span class="text-[10px] font-label-sm px-2 py-0.5 rounded bg-surface-variant text-on-surface-variant">LINEAR</span>
+<span class="text-[10px] font-label-sm px-2 py-0.5 rounded bg-surface-variant text-on-surface-variant">GASKET MOUNT</span>
+<span class="text-[10px] font-label-sm px-2 py-0.5 rounded bg-surface-variant text-on-surface-variant">POM PLATE</span>
+</div>
+<h4 class="font-headline-md text-headline-md">Deep Sea Minimalist v2</h4>
+<p class="text-on-surface-variant text-body-md mt-1">A silent, heavy-actuation build optimized for nocturnal coding sessions.</p>
+</div>
+<div class="flex items-center gap-8 w-full md:w-auto">
+<div class="text-center">
+<p class="text-label-sm text-on-surface-variant">LIKES</p>
+<p class="font-headline-md">1.2k</p>
+</div>
+<div class="text-center">
+<p class="text-label-sm text-on-surface-variant">BUDGET</p>
+<p class="font-headline-md text-secondary">$520</p>
+</div>
+<button class="bg-surface-variant/50 hover:bg-primary hover:text-on-primary w-12 h-12 rounded-full flex items-center justify-center transition-all group-hover:translate-x-2">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Build Entry 2 -->
+<div class="glass-panel p-6 rounded-2xl flex flex-col md:flex-row items-center gap-8 group">
+<div class="w-full md:w-48 h-32 rounded-xl overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A top-down aesthetic product photo of an ergonomic Alice-style mechanical keyboard made of frosted acrylic with a warm amber glow emanating from within. The keycaps are a soft cream color. The setting is cozy but technically precise, with a focus on symmetry and high-end hardware. Atmospheric, warm midnight workshop feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqNQ_9C_PNcISXZtIc5gT7Zaov9qLWRFQsnYBE8cHJ9Xfz31sdZAuK73YfvZ3YTy_JjWykAFbMscYtwzge2dAKdH7kxJ8AP_Kl7chx4DE8ISOU7B0Zok19mXb0HaMrIk-qSBxFJH1XrbDQXwAuh_Y8U4-DR69TVFP8H9srN38tWMgEvR_AIMf-PkZgsc7glYpDXAtLDLQ98PbkST7B7tnr1U4ju5NFjzCsLCaQOh2_7c3oA2vvyaYHEg"/>
+</div>
+<div class="flex-grow">
+<div class="flex flex-wrap gap-2 mb-2">
+<span class="text-[10px] font-label-sm px-2 py-0.5 rounded bg-surface-variant text-on-surface-variant">TACTILE</span>
+<span class="text-[10px] font-label-sm px-2 py-0.5 rounded bg-surface-variant text-on-surface-variant">ALICE LAYOUT</span>
+<span class="text-[10px] font-label-sm px-2 py-0.5 rounded bg-surface-variant text-on-surface-variant">FROSTED</span>
+</div>
+<h4 class="font-headline-md text-headline-md">The Amber Alice Project</h4>
+<p class="text-on-surface-variant text-body-md mt-1">Ergonomic flow combined with high-pitch 'clack' acoustics for rapid typing.</p>
+</div>
+<div class="flex items-center gap-8 w-full md:w-auto">
+<div class="text-center">
+<p class="text-label-sm text-on-surface-variant">LIKES</p>
+<p class="font-headline-md">840</p>
+</div>
+<div class="text-center">
+<p class="text-label-sm text-on-surface-variant">BUDGET</p>
+<p class="font-headline-md text-secondary">$385</p>
+</div>
+<button class="bg-surface-variant/50 hover:bg-primary hover:text-on-primary w-12 h-12 rounded-full flex items-center justify-center transition-all group-hover:translate-x-2">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- SideNavBar (Mobile Bottom Nav Pivot) -->
+<aside class="md:hidden fixed bottom-0 left-0 w-full bg-surface-container-low/90 backdrop-blur-xl border-t border-outline-variant/20 z-50 px-6 py-2 flex justify-between items-center">
+<div class="flex flex-col items-center text-primary">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-label-sm">Home</span>
+</div>
+<div class="flex flex-col items-center text-on-surface-variant">
+<span class="material-symbols-outlined">tune</span>
+<span class="text-[10px] font-label-sm">Filters</span>
+</div>
+<div class="flex flex-col items-center -mt-8">
+<button class="w-14 h-14 bg-secondary text-on-secondary rounded-full shadow-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-[32px]">add</span>
+</button>
+</div>
+<div class="flex flex-col items-center text-on-surface-variant">
+<span class="material-symbols-outlined">history</span>
+<span class="text-[10px] font-label-sm">History</span>
+</div>
+<div class="flex flex-col items-center text-on-surface-variant">
+<span class="material-symbols-outlined">bookmark</span>
+<span class="text-[10px] font-label-sm">Saved</span>
+</div>
+</aside>
+<!-- Footer -->
+<footer class="bg-surface dark:bg-surface-dim full-width py-12 border-t border-outline-variant/10">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop w-full max-w-container-max mx-auto gap-8">
+<div class="text-center md:text-left">
+<p class="text-body-lg font-bold text-on-surface mb-2">KeebSmith</p>
+<p class="text-on-surface-variant text-label-sm font-label-sm">© 2024 KeebSmith. Precision Crafted.</p>
+</div>
+<div class="flex gap-8">
+<a class="text-on-surface-variant hover:text-primary hover:underline transition-all text-label-sm font-label-sm" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary hover:underline transition-all text-label-sm font-label-sm" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary hover:underline transition-all text-label-sm font-label-sm" href="#">API Documentation</a>
+<a class="text-on-surface-variant hover:text-primary hover:underline transition-all text-label-sm font-label-sm" href="#">Contact</a>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors">hub</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors">terminal</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors">public</span>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interaction for drawing the actuation curve chart
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('actuationCurve');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            
+            function drawCurve() {
+                const w = canvas.width = canvas.parentElement.clientWidth;
+                const h = canvas.height = canvas.parentElement.clientHeight;
+                
+                ctx.clearRect(0, 0, w, h);
+                
+                // Draw Grid
+                ctx.strokeStyle = 'rgba(203, 195, 215, 0.1)';
+                ctx.lineWidth = 1;
+                for(let i = 0; i < 5; i++) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, h * (i/4));
+                    ctx.lineTo(w, h * (i/4));
+                    ctx.stroke();
+                }
+
+                // Draw Primary Curve
+                ctx.beginPath();
+                ctx.lineWidth = 3;
+                ctx.strokeStyle = '#d0bcff'; // primary
+                ctx.moveTo(0, h * 0.9);
+                ctx.bezierCurveTo(w * 0.3, h * 0.8, w * 0.4, h * 0.4, w * 0.6, h * 0.5);
+                ctx.bezierCurveTo(w * 0.8, h * 0.6, w * 0.9, h * 0.1, w, 0);
+                ctx.stroke();
+
+                // Fill gradient under curve
+                const grad = ctx.createLinearGradient(0, 0, 0, h);
+                grad.addColorStop(0, 'rgba(208, 188, 255, 0.2)');
+                grad.addColorStop(1, 'transparent');
+                ctx.lineTo(w, h);
+                ctx.lineTo(0, h);
+                ctx.fillStyle = grad;
+                ctx.fill();
+            }
+
+            window.addEventListener('resize', drawCurve);
+            drawCurve();
+        });
+    </script>
+</body></html>

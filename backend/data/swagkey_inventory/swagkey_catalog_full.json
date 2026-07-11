@@ -1,0 +1,2009 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": {
+    "candidatesPath": "C:/Users/jeung/keyboard-recommender/backend/data/swagkey_inventory/recommender_candidates.json",
+    "inventoryPath": "C:/Users/jeung/keyboard-recommender/backend/data/swagkey_inventory/swagkey_inventory.v2.json",
+    "generatedAt": "2026-07-06T06:07:20.207332+00:00",
+    "note": "out_of_scope only — not part of swagkey_products.seed.json recommendation pool"
+  },
+  "stats": {
+    "total": 153,
+    "withUrl": 153,
+    "missingUrl": 0,
+    "byCatalogCategory": {
+      "keycap": 65,
+      "accessory": 52,
+      "deskpad": 27,
+      "gaming": 7,
+      "merch": 2
+    }
+  },
+  "items": [
+    {
+      "id": "full-001",
+      "inventoryId": "inv-0023",
+      "name": "스웨그키 키보드 빌드 서비스(나이트 스테빌라이저 포함)",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Keyboards",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1857",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "스테빌",
+        "빌드 서비스",
+        "라이저"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-002",
+      "inventoryId": "inv-0058",
+      "name": "Swagkeys x StelLive 하나코 나나 콜라보 굿즈",
+      "brand": "Swgakeys",
+      "swagkeyCategory": "Keyboards",
+      "catalogCategory": "merch",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1591",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "굿즈"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-003",
+      "inventoryId": "inv-0078",
+      "name": "Qwertykeys NEO SS 내부 무게추",
+      "brand": "Qwertykeys",
+      "swagkeyCategory": "Keyboards",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1779",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "무게추"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-004",
+      "inventoryId": "inv-0079",
+      "name": "Owlab Hellcat Mech-01 가방",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Keyboards",
+      "catalogCategory": "merch",
+      "sourceUrl": "https://www.swagkey.kr/22/?idx=1813",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "가방"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-005",
+      "inventoryId": "inv-0137",
+      "name": "[GB]SWG Midnight Rainbow ABS 이중사출 키캡",
+      "brand": "SWG",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1850",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-006",
+      "inventoryId": "inv-0138",
+      "name": "[GB]GMK CYL Pandemonium 키캡",
+      "brand": "GMK",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1819",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-007",
+      "inventoryId": "inv-0139",
+      "name": "Hammerworks CRP R7 키캡",
+      "brand": "hammerworks",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1874",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-008",
+      "inventoryId": "inv-0140",
+      "name": "SWG Яubber ABS 이중사출 키캡",
+      "brand": "SWG",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1590",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-009",
+      "inventoryId": "inv-0141",
+      "name": "스웨그키 Calm Beige PBT 염료승화 키캡",
+      "brand": "Swagkeys",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1489",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-010",
+      "inventoryId": "inv-0142",
+      "name": "스웨그키 포인트 키캡",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1521",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-011",
+      "inventoryId": "inv-0143",
+      "name": "스웨그키 투명 키보드 키캡",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=874",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-012",
+      "inventoryId": "inv-0144",
+      "name": "SWG Euler ABS 이중사출 키캡",
+      "brand": "SWG",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1744",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-013",
+      "inventoryId": "inv-0145",
+      "name": "스웨그키 Calm Beige 스탠다드 버전 PBT 염료승화 키캡",
+      "brand": "Swagkeys",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1732",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-014",
+      "inventoryId": "inv-0146",
+      "name": "DoodleCaps 낙서 블랙 PBT 염료승화 키캡",
+      "brand": "DoodleCaps",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1729",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-015",
+      "inventoryId": "inv-0147",
+      "name": "[GB]MW Philosopher's Stone 키캡",
+      "brand": "MilkyWay",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1862",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-016",
+      "inventoryId": "inv-0148",
+      "name": "스웨그키 MOA 키보드 키캡",
+      "brand": "OSHID",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1720",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-017",
+      "inventoryId": "inv-0149",
+      "name": "스웨그키 Black on Black BoB 키캡 - 65%",
+      "brand": "Swagkeys",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1681",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-018",
+      "inventoryId": "inv-0150",
+      "name": "DoodleCaps 낙서 PBT 염료승화 키캡",
+      "brand": "DoodleCaps",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1623",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-019",
+      "inventoryId": "inv-0151",
+      "name": "스웨그키 Qwertykeys Bubble Tea Marshmallow 키보드 키캡",
+      "brand": "Qwertykeys",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1479",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-020",
+      "inventoryId": "inv-0152",
+      "name": "Keyboard Science Heyball 키캡",
+      "brand": "Keyboard Science",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1209",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-021",
+      "inventoryId": "inv-0153",
+      "name": "스웨그키 Qwertykeys Milk Tea 키캡",
+      "brand": "Qwertykeys",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1148",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-022",
+      "inventoryId": "inv-0154",
+      "name": "스웨그키 SW Antarctic 이중사출 키캡 세트",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=986",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-023",
+      "inventoryId": "inv-0155",
+      "name": "[GB]SWG Classic Red ABS 이중사출 키캡",
+      "brand": "SWG",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1762",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-024",
+      "inventoryId": "inv-0156",
+      "name": "Geistmaschine - TP-1 키캡",
+      "brand": "Geistmaschine",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1718",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-025",
+      "inventoryId": "inv-0157",
+      "name": "RAMA CAPS 키캡",
+      "brand": "RAMA Works",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1825",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-026",
+      "inventoryId": "inv-0158",
+      "name": "[GB]SWG Rainbow Alert ABS 이중사출 키캡",
+      "brand": "SWG",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1817",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-027",
+      "inventoryId": "inv-0159",
+      "name": "[GB]GMK CYL Thunder God 키캡",
+      "brand": "GMK",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1803",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-028",
+      "inventoryId": "inv-0160",
+      "name": "[GB]SWG Skeletoon ABS 이중사출 키캡",
+      "brand": "SWG",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1797",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-029",
+      "inventoryId": "inv-0161",
+      "name": "LeleLab LowSup-Ocean Blue 키보드 키캡 로우프로파일",
+      "brand": "Lelelab",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1790",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-030",
+      "inventoryId": "inv-0162",
+      "name": "[GB]SWG Classic Blue ABS 이중사출 키캡",
+      "brand": "SWG",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1786",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-031",
+      "inventoryId": "inv-0163",
+      "name": "GMK Cherry Love 키캡 Add-on",
+      "brand": "GMK",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1772",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-032",
+      "inventoryId": "inv-0164",
+      "name": "[GB]SWG Ferrofluid ABS 이중사출 키캡",
+      "brand": "SWG",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1764",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-033",
+      "inventoryId": "inv-0165",
+      "name": "스웨그키 DMK Red Bean 키캡 Add-on",
+      "brand": "KnockKnockStudio&Fannie",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1756",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-034",
+      "inventoryId": "inv-0166",
+      "name": "[GB]SWG Prepress ABS 이중사출 키캡",
+      "brand": "SWG",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1755",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-035",
+      "inventoryId": "inv-0167",
+      "name": "LeleLab Good Night Cocoa 키보드 키캡",
+      "brand": "Lelelab",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1753",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-036",
+      "inventoryId": "inv-0168",
+      "name": "스웨그키 KAP MV Classic 키캡",
+      "brand": "Keyreative",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1745",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-037",
+      "inventoryId": "inv-0169",
+      "name": "[GB]SWG Euler ABS 이중사출 키캡",
+      "brand": "SWG",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1744",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-038",
+      "inventoryId": "inv-0170",
+      "name": "스웨그키 Hammer Mirror Image 키보드 키캡 80s All-in",
+      "brand": "HAMMER",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1721",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-039",
+      "inventoryId": "inv-0171",
+      "name": "Hammerworks CRP R6 Add-on kit",
+      "brand": "HAMMER",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1713",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-040",
+      "inventoryId": "inv-0172",
+      "name": "스웨그키 DMK Silent Plateau 키보드 키캡 Add-on",
+      "brand": "DMK",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1712",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-041",
+      "inventoryId": "inv-0173",
+      "name": "스웨그키 KBM Love Detective 키보드 키캡 Add-on",
+      "brand": "KBM",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1711",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-042",
+      "inventoryId": "inv-0174",
+      "name": "스웨그키 Hammerworks CRP RGBY 키보드 키캡",
+      "brand": "HAMMER",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1710",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-043",
+      "inventoryId": "inv-0175",
+      "name": "스웨그키 Lelelab Gems 키보드 키캡",
+      "brand": "Lelelab",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1674",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-044",
+      "inventoryId": "inv-0176",
+      "name": "[GB]Hammerworks CRP R7 - Add on",
+      "brand": "Hammerworks",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1665",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-045",
+      "inventoryId": "inv-0177",
+      "name": "[GB]Hammerworks CRP R7 - Mod",
+      "brand": "Hammerworks",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1664",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-046",
+      "inventoryId": "inv-0178",
+      "name": "[GB]Hammerworks CRP R7 - Base",
+      "brand": "Hammerworks",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1663",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-047",
+      "inventoryId": "inv-0179",
+      "name": "[GB]Hammerworks CRP R7 - Alpha",
+      "brand": "Hammerworks",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1662",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-048",
+      "inventoryId": "inv-0180",
+      "name": "[GB]SWG Яubber ABS 이중사출 키캡",
+      "brand": "SWG",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1590",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-049",
+      "inventoryId": "inv-0181",
+      "name": "SWG Beige ABS 이중사출 키캡 - Add on",
+      "brand": "SWG",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1588",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-050",
+      "inventoryId": "inv-0182",
+      "name": "[GB]GMK MTNU Foundation R2",
+      "brand": "GMK",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1576",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-051",
+      "inventoryId": "inv-0183",
+      "name": "[GB]GMK CYL Foundation R2",
+      "brand": "GMK",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1575",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-052",
+      "inventoryId": "inv-0184",
+      "name": "KAT WoB Candy 키캡 Accent kit",
+      "brand": "Keyreative",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1491",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-053",
+      "inventoryId": "inv-0185",
+      "name": "스웨그키 SW Maestro 키캡",
+      "brand": "Swagkey",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1442",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-054",
+      "inventoryId": "inv-0186",
+      "name": "스웨그키 ZOMO X B.Duck 3D 아티산 포인트 키캡",
+      "brand": "ZOMOPLUS",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1438",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-055",
+      "inventoryId": "inv-0187",
+      "name": "스웨그키 ZOMO 크리스마스 굴뚝 테마 포인트 키캡",
+      "brand": "ZOMOPLUS",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1436",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-056",
+      "inventoryId": "inv-0188",
+      "name": "[GB] KAP Santa LLum",
+      "brand": "KAP",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1390",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-057",
+      "inventoryId": "inv-0189",
+      "name": "스웨그키 KKB Instant 키보드 키캡 Novelties / Extension",
+      "brand": "Keykobo",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1337",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-058",
+      "inventoryId": "inv-0190",
+      "name": "KAP White on Black 기계식 키보드 키캡",
+      "brand": "Keyreative",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1246",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-059",
+      "inventoryId": "inv-0191",
+      "name": "Keykobo Outer bounds",
+      "brand": "Keykobo",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=751",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-060",
+      "inventoryId": "inv-0192",
+      "name": "LeleLab Snowspire Lake 키보드 키캡",
+      "brand": "Lelelab",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1752",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-061",
+      "inventoryId": "inv-0193",
+      "name": "스웨그키 세라키 세라믹 V2 키캡 Blue Crazed",
+      "brand": "Cerakey",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1456",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-062",
+      "inventoryId": "inv-0194",
+      "name": "SWG Nimbus ABS 이중사출 키캡",
+      "brand": "SWG",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1625",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-063",
+      "inventoryId": "inv-0195",
+      "name": "스웨그키 세라키 세라믹 V2 키캡 Pink",
+      "brand": "Cerakey",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1457",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-064",
+      "inventoryId": "inv-0196",
+      "name": "[GB]SWG Tars ABS 이중사출 키캡",
+      "brand": "SWG",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1839",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-065",
+      "inventoryId": "inv-0197",
+      "name": "[GB]GMK CYL Gonzales 키캡",
+      "brand": "GMK",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1787",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-066",
+      "inventoryId": "inv-0198",
+      "name": "SWG Beige ABS 이중사출 키캡 - Base",
+      "brand": "SWG",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1587",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-067",
+      "inventoryId": "inv-0199",
+      "name": "[GB] GMK Cherry Love 키캡",
+      "brand": "GMK",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1413",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-068",
+      "inventoryId": "inv-0200",
+      "name": "[GB] KAP - Y",
+      "brand": "KAP",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1235",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-069",
+      "inventoryId": "inv-0201",
+      "name": "[GB] KAP MV Classic",
+      "brand": "Keyreative",
+      "swagkeyCategory": "Keycaps",
+      "catalogCategory": "keycap",
+      "sourceUrl": "https://www.swagkey.kr/23/?idx=1227",
+      "ruleId": "category:keycaps",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-070",
+      "inventoryId": "inv-0202",
+      "name": "스웨그키 나이트 무보강용 스테빌라이저",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=538",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "스테빌",
+        "라이저"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-071",
+      "inventoryId": "inv-0203",
+      "name": "스웨그키 윤활붓",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=514",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "윤활",
+        "붓"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-072",
+      "inventoryId": "inv-0204",
+      "name": "크라이톡스 Krytox 205g0 5g",
+      "brand": "크라이톡스",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=185",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "krytox"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-073",
+      "inventoryId": "inv-0205",
+      "name": "스웨그키 투명 커스텀 키링",
+      "brand": "Swagkey",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=1410",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "키링"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-074",
+      "inventoryId": "inv-0206",
+      "name": "스웨그키 SW 신형 기보강 포크 노폼 빌드용 툴",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=1021",
+      "ruleId": "category:accessories_fallback",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-075",
+      "inventoryId": "inv-0207",
+      "name": "스웨그키 SW 츄이 커스텀 케이블 AtoC / CtoC 18W 100W",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=1005",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "케이블"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-076",
+      "inventoryId": "inv-0209",
+      "name": "체리 스크류인 Screw-in 무보강 스테빌 라이저",
+      "brand": "체리",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=234",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "스테빌",
+        "라이저"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-077",
+      "inventoryId": "inv-0210",
+      "name": "VETUS 윤활용 정밀 핀셋",
+      "brand": "VETUS",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=244",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "윤활",
+        "핀셋"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-078",
+      "inventoryId": "inv-0211",
+      "name": "스웨그키 스위치 풀러",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=785",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "풀러"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-079",
+      "inventoryId": "inv-0212",
+      "name": "워큐 키캡 풀러 Wuque Studio WS",
+      "brand": "Wuque StudioFBB",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=960",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "키캡",
+        "풀러"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-080",
+      "inventoryId": "inv-0213",
+      "name": "스웨그키 신형 스위치 슬라이더 픽커",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=618",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "슬라이더",
+        "픽커"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-081",
+      "inventoryId": "inv-0214",
+      "name": "윤활제 주입기",
+      "brand": "윤활제",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=515",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "윤활",
+        "주입기"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-082",
+      "inventoryId": "inv-0215",
+      "name": "kelowna 스테빌 라이저 교정기",
+      "brand": "kelowna",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=490",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "스테빌",
+        "라이저",
+        "교정기"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-083",
+      "inventoryId": "inv-0216",
+      "name": "Superlube 슈퍼루브 12g",
+      "brand": "Superlube",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=194",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "superlube"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-084",
+      "inventoryId": "inv-0217",
+      "name": "NANCH 난치 정밀 드라이버",
+      "brand": "NANCH",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=252",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "드라이버"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-085",
+      "inventoryId": "inv-0218",
+      "name": "에버글라이드 키캡 풀러",
+      "brand": "에버글라이드",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=573",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "키캡",
+        "풀러"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-086",
+      "inventoryId": "inv-0219",
+      "name": "스테빌 라이저 포론 철심 패드",
+      "brand": "스테빌",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=256",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "스테빌",
+        "라이저"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-087",
+      "inventoryId": "inv-0220",
+      "name": "크라이톡스 Krytox GPL105 10g",
+      "brand": "크라이톡스",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=183",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "krytox"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-088",
+      "inventoryId": "inv-0222",
+      "name": "스웨그키 키보드 가방 60% 65% 80% TKL 보호 케이스",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=1692",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "가방"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-089",
+      "inventoryId": "inv-0223",
+      "name": "게이트론 키캡 & 스위치 풀러 & 오프너 3 in 1",
+      "brand": "게이트론",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=1595",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "키캡",
+        "풀러",
+        "오프너"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-090",
+      "inventoryId": "inv-0224",
+      "name": "스웨그키 Long 스위치 스프링 (20mm)",
+      "brand": "swagkeys",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=1508",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "스프링"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-091",
+      "inventoryId": "inv-0225",
+      "name": "kelowna All in one 윤활 스테이션",
+      "brand": "kelowna",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=1124",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "윤활"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-092",
+      "inventoryId": "inv-0226",
+      "name": "게이트론 아크릴 테스터 (20구)",
+      "brand": "게이트론",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=663",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "테스터"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-093",
+      "inventoryId": "inv-0228",
+      "name": "Kelowna 2in1 스위치 오프너",
+      "brand": "Kelowna",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=246",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "오프너"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-094",
+      "inventoryId": "inv-0229",
+      "name": "SPRiT Designs Slow Extreme 스프릿 스위치 스프링",
+      "brand": "SPRiT",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=1827",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "스프링"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-095",
+      "inventoryId": "inv-0230",
+      "name": "스웨그키 스위치 스펙 스티커 (화이트 소형)",
+      "brand": "스웨그키 x 쿄다이",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=1666",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "스티커"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-096",
+      "inventoryId": "inv-0231",
+      "name": "스웨그키 나이트 스테빌라이저 전용 철심",
+      "brand": "swagkeys",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=1311",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "스테빌",
+        "라이저"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-097",
+      "inventoryId": "inv-0232",
+      "name": "SW 접착식 스테빌 스페이서",
+      "brand": "이름역순",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=1212",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "스테빌",
+        "접착식",
+        "스페이서"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-098",
+      "inventoryId": "inv-0233",
+      "name": "Bowl Bowl - Alu 나사트레이",
+      "brand": "Bowl",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=1199",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "트레이"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-099",
+      "inventoryId": "inv-0234",
+      "name": "스웨그키 더스트커버 체크베이지 키보드덮개",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=1116",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "덮개",
+        "체크베이지"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-100",
+      "inventoryId": "inv-0236",
+      "name": "스테빌 라이저 철심(이바리 제거)",
+      "brand": "스테빌",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=339",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "스테빌",
+        "라이저"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-101",
+      "inventoryId": "inv-0238",
+      "name": "스웨그키 x 화홍 납작붓",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=243",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "붓"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-102",
+      "inventoryId": "inv-0239",
+      "name": "스웨그키 Chewy 스위치 스프링(17.5mm)",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=241",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "스프링"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-103",
+      "inventoryId": "inv-0240",
+      "name": "C³ EQUALZ 스테빌라이저 소울메이트",
+      "brand": "C³",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=228",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "스테빌",
+        "라이저"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-104",
+      "inventoryId": "inv-0241",
+      "name": "크라이톡스 Krytox 103 10g",
+      "brand": "크라이톡스",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=195",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "krytox"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-105",
+      "inventoryId": "inv-0242",
+      "name": "SPRiT Designs Slow Extreme SE Edition 스프릿 스위치 스프링",
+      "brand": "SPRiT",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=1828",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "스프링"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-106",
+      "inventoryId": "inv-0243",
+      "name": "SPRiT Designs Slow Extreme 3 Ultra 스프릿 스위치 스프링",
+      "brand": "SPRiT",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=1824",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "스프링"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-107",
+      "inventoryId": "inv-0244",
+      "name": "SPRiT Designs MX Supreme 스프릿 스위치 스프링",
+      "brand": "SPRiT",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=1823",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "스프링"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-108",
+      "inventoryId": "inv-0245",
+      "name": "AM Slant Magnetic 케이블 C to C",
+      "brand": "AngryMiao",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=1793",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "케이블"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-109",
+      "inventoryId": "inv-0246",
+      "name": "SW 키보드 아크릴 네임택 V2 가방이름표",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=1690",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "가방",
+        "네임택"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-110",
+      "inventoryId": "inv-0247",
+      "name": "TEGIC X SW 크리스탈 어댑터 40",
+      "brand": "tegic",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=1653",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "어댑터"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-111",
+      "inventoryId": "inv-0248",
+      "name": "JJW Play Tray V2",
+      "brand": "JJW",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=1599",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "tray"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-112",
+      "inventoryId": "inv-0249",
+      "name": "스웨그키 Tegic LED 마그네틱 C to C 케이블 240W",
+      "brand": "tegic",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=1573",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "케이블"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-113",
+      "inventoryId": "inv-0251",
+      "name": "[NEW] AM Emptiness phone case for iphone 17 air",
+      "brand": "AM",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=1480",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "phone case",
+        "iphone"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-114",
+      "inventoryId": "inv-0252",
+      "name": "HIBI Single Unit 키보드 스탠드",
+      "brand": "HIBI",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=1042",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "스탠드"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-115",
+      "inventoryId": "inv-0254",
+      "name": "스웨그키 스위치 프로그레시브 스프링 (16.5mm)",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=342",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "스프링"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-116",
+      "inventoryId": "inv-0255",
+      "name": "이퀄즈 스테빌 라이저 철심",
+      "brand": "이퀄즈",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=318",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "스테빌",
+        "라이저"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-117",
+      "inventoryId": "inv-0256",
+      "name": "스웨그키 Classic 스위치 스프링 (14.5mm)",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=242",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "스프링"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-118",
+      "inventoryId": "inv-0257",
+      "name": "체리 보강용 스테빌 라이저",
+      "brand": "체리",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=238",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "스테빌",
+        "라이저"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-119",
+      "inventoryId": "inv-0258",
+      "name": "체리 스냅인 Snap-in 무보강 스테빌 라이저",
+      "brand": "체리",
+      "swagkeyCategory": "Accessories",
+      "catalogCategory": "accessory",
+      "sourceUrl": "https://www.swagkey.kr/24/?idx=233",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "스테빌",
+        "라이저"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-120",
+      "inventoryId": "inv-0259",
+      "name": "스웨그키 x Kyodiy 6XV Corsa 장패드",
+      "brand": "이름역순",
+      "swagkeyCategory": "Deskpads",
+      "catalogCategory": "deskpad",
+      "sourceUrl": "https://www.swagkey.kr/25/?idx=670",
+      "ruleId": "category:deskpads",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-121",
+      "inventoryId": "inv-0260",
+      "name": "스웨그키 Euler 오일러 장패드 데스크매트",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Deskpads",
+      "catalogCategory": "deskpad",
+      "sourceUrl": "https://www.swagkey.kr/25/?idx=1293",
+      "ruleId": "category:deskpads",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-122",
+      "inventoryId": "inv-0261",
+      "name": "스웨그키 x Kyodiy 체크 장패드 데스크매트",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Deskpads",
+      "catalogCategory": "deskpad",
+      "sourceUrl": "https://www.swagkey.kr/25/?idx=973",
+      "ruleId": "category:deskpads",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-123",
+      "inventoryId": "inv-0262",
+      "name": "스웨그키 SW x Kyodiy 흰냥 키보드 매트 80% 100%",
+      "brand": "Swagkey",
+      "swagkeyCategory": "Deskpads",
+      "catalogCategory": "deskpad",
+      "sourceUrl": "https://www.swagkey.kr/25/?idx=1430",
+      "ruleId": "category:deskpads",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-124",
+      "inventoryId": "inv-0263",
+      "name": "스웨그키 x Kyodiy 스케이트보드 장패드 데스크매트",
+      "brand": "Swagkeys",
+      "swagkeyCategory": "Deskpads",
+      "catalogCategory": "deskpad",
+      "sourceUrl": "https://www.swagkey.kr/25/?idx=1860",
+      "ruleId": "category:deskpads",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-125",
+      "inventoryId": "inv-0264",
+      "name": "스웨그키 x Kyodiy NFC 장패드 데스크매트",
+      "brand": "Swagkeys",
+      "swagkeyCategory": "Deskpads",
+      "catalogCategory": "deskpad",
+      "sourceUrl": "https://www.swagkey.kr/25/?idx=1859",
+      "ruleId": "category:deskpads",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-126",
+      "inventoryId": "inv-0265",
+      "name": "스웨그키 x Kyodiy 포켓볼 마우스패드",
+      "brand": "Swagkey",
+      "swagkeyCategory": "Deskpads",
+      "catalogCategory": "deskpad",
+      "sourceUrl": "https://www.swagkey.kr/25/?idx=1434",
+      "ruleId": "category:deskpads",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-127",
+      "inventoryId": "inv-0266",
+      "name": "스웨그키 x Kyodiy 스트라이프 마우스패드",
+      "brand": "Swagkey",
+      "swagkeyCategory": "Deskpads",
+      "catalogCategory": "deskpad",
+      "sourceUrl": "https://www.swagkey.kr/25/?idx=1431",
+      "ruleId": "category:deskpads",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-128",
+      "inventoryId": "inv-0267",
+      "name": "스웨그키 SW x Kyodiy 얼룩냥 키보드 매트 80% 100%",
+      "brand": "Swagkey",
+      "swagkeyCategory": "Deskpads",
+      "catalogCategory": "deskpad",
+      "sourceUrl": "https://www.swagkey.kr/25/?idx=1428",
+      "ruleId": "category:deskpads",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-129",
+      "inventoryId": "inv-0268",
+      "name": "스웨그키 SW x Kyodiy 코코심플 키보드 매트 60/65% 80%",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Deskpads",
+      "catalogCategory": "deskpad",
+      "sourceUrl": "https://www.swagkey.kr/25/?idx=1020",
+      "ruleId": "category:deskpads",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-130",
+      "inventoryId": "inv-0269",
+      "name": "스웨그키 SW x Kyodiy 코코낙서 키보드 매트 60/65% 80%",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Deskpads",
+      "catalogCategory": "deskpad",
+      "sourceUrl": "https://www.swagkey.kr/25/?idx=1019",
+      "ruleId": "category:deskpads",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-131",
+      "inventoryId": "inv-0270",
+      "name": "스웨그키 x Kyodiy 밀크 마우스패드",
+      "brand": "Swagkeys",
+      "swagkeyCategory": "Deskpads",
+      "catalogCategory": "deskpad",
+      "sourceUrl": "https://www.swagkey.kr/25/?idx=1861",
+      "ruleId": "category:deskpads",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-132",
+      "inventoryId": "inv-0271",
+      "name": "스웨그키 x Kyodiy LP 장패드 데스크매트",
+      "brand": "Swagkeys",
+      "swagkeyCategory": "Deskpads",
+      "catalogCategory": "deskpad",
+      "sourceUrl": "https://www.swagkey.kr/25/?idx=1858",
+      "ruleId": "category:deskpads",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-133",
+      "inventoryId": "inv-0272",
+      "name": "Child's Play 장패드 데스크매트",
+      "brand": "Krakenkap",
+      "swagkeyCategory": "Deskpads",
+      "catalogCategory": "deskpad",
+      "sourceUrl": "https://www.swagkey.kr/25/?idx=1851",
+      "ruleId": "category:deskpads",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-134",
+      "inventoryId": "inv-0273",
+      "name": "스웨그키 x Kyodiy 러브 마우스패드",
+      "brand": "Swagkey",
+      "swagkeyCategory": "Deskpads",
+      "catalogCategory": "deskpad",
+      "sourceUrl": "https://www.swagkey.kr/25/?idx=1433",
+      "ruleId": "category:deskpads",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-135",
+      "inventoryId": "inv-0274",
+      "name": "스웨그키 x Kyodiy STOP 마우스패드",
+      "brand": "Swagkey",
+      "swagkeyCategory": "Deskpads",
+      "catalogCategory": "deskpad",
+      "sourceUrl": "https://www.swagkey.kr/25/?idx=1432",
+      "ruleId": "category:deskpads",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-136",
+      "inventoryId": "inv-0275",
+      "name": "스웨그키 SW x Kyodiy 만세멍 키보드 매트 80% 100%",
+      "brand": "Swagkey",
+      "swagkeyCategory": "Deskpads",
+      "catalogCategory": "deskpad",
+      "sourceUrl": "https://www.swagkey.kr/25/?idx=1429",
+      "ruleId": "category:deskpads",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-137",
+      "inventoryId": "inv-0276",
+      "name": "스웨그키 SW x Kyodiy 찡긋멍 키보드 매트 80% 100%",
+      "brand": "Swagkey",
+      "swagkeyCategory": "Deskpads",
+      "catalogCategory": "deskpad",
+      "sourceUrl": "https://www.swagkey.kr/25/?idx=1427",
+      "ruleId": "category:deskpads",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-138",
+      "inventoryId": "inv-0277",
+      "name": "스웨그키 x Kyodiy [NEW] 장패드 데스크매트",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Deskpads",
+      "catalogCategory": "deskpad",
+      "sourceUrl": "https://www.swagkey.kr/25/?idx=1262",
+      "ruleId": "category:deskpads",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-139",
+      "inventoryId": "inv-0278",
+      "name": "SW x Kyodiy 아이러브 SW 마우스패드",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Deskpads",
+      "catalogCategory": "deskpad",
+      "sourceUrl": "https://www.swagkey.kr/25/?idx=1128",
+      "ruleId": "category:deskpads",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-140",
+      "inventoryId": "inv-0279",
+      "name": "SW x Kyodiy 스위치 사냥 마우스패드",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Deskpads",
+      "catalogCategory": "deskpad",
+      "sourceUrl": "https://www.swagkey.kr/25/?idx=1127",
+      "ruleId": "category:deskpads",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-141",
+      "inventoryId": "inv-0280",
+      "name": "스웨그키 SW x Kyodiy 체크 키보드 매트 60/65% 80%",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Deskpads",
+      "catalogCategory": "deskpad",
+      "sourceUrl": "https://www.swagkey.kr/25/?idx=1018",
+      "ruleId": "category:deskpads",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-142",
+      "inventoryId": "inv-0281",
+      "name": "SW x Kyodiy NEO ERGO 전용 데스크매트",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Deskpads",
+      "catalogCategory": "deskpad",
+      "sourceUrl": "https://www.swagkey.kr/25/?idx=1017",
+      "ruleId": "category:deskpads",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-143",
+      "inventoryId": "inv-0282",
+      "name": "스웨그키 SW x Kyodiy 스프레이 키보드 매트 60/65% 80%",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Deskpads",
+      "catalogCategory": "deskpad",
+      "sourceUrl": "https://www.swagkey.kr/25/?idx=1016",
+      "ruleId": "category:deskpads",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-144",
+      "inventoryId": "inv-0283",
+      "name": "스웨그키 SW x Kyodiy 방수 마우스패드",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Deskpads",
+      "catalogCategory": "deskpad",
+      "sourceUrl": "https://www.swagkey.kr/25/?idx=1015",
+      "ruleId": "category:deskpads",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-145",
+      "inventoryId": "inv-0284",
+      "name": "스웨그키 x Kyodiy Owlab 장패드",
+      "brand": "스웨그키",
+      "swagkeyCategory": "Deskpads",
+      "catalogCategory": "deskpad",
+      "sourceUrl": "https://www.swagkey.kr/25/?idx=672",
+      "ruleId": "category:deskpads",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-146",
+      "inventoryId": "inv-0285",
+      "name": "[GB] MatrixLab MP-01 강화유리 마우스패드",
+      "brand": "MatrixLab",
+      "swagkeyCategory": "Deskpads",
+      "catalogCategory": "deskpad",
+      "sourceUrl": "https://www.swagkey.kr/205/?idx=1863",
+      "ruleId": "category:deskpads",
+      "matchedKeywords": [],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-147",
+      "inventoryId": "inv-0286",
+      "name": "AM Infinity .97 경량 무선 8K 게이밍 마우스",
+      "brand": "AngryMiao",
+      "swagkeyCategory": "Gaming",
+      "catalogCategory": "gaming",
+      "sourceUrl": "https://www.swagkey.kr/205/?idx=1864",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "마우스"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-148",
+      "inventoryId": "inv-0287",
+      "name": "AM Infinity Mouse 인피니티 마우스 전용 그립테이프&피트 세트",
+      "brand": "AngryMiao",
+      "swagkeyCategory": "Gaming",
+      "catalogCategory": "gaming",
+      "sourceUrl": "https://www.swagkey.kr/205/?idx=1849",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "마우스",
+        "mouse",
+        "그립테이프"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-149",
+      "inventoryId": "inv-0288",
+      "name": "스웨그키 NEON 게이밍 포론 마우스패드",
+      "brand": "Swagkey",
+      "swagkeyCategory": "Gaming",
+      "catalogCategory": "gaming",
+      "sourceUrl": "https://www.swagkey.kr/205/?idx=1731",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "마우스패드",
+        "마우스"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-150",
+      "inventoryId": "inv-0289",
+      "name": "스웨그키 AM Silkglass 강화유리 마우스패드",
+      "brand": "AngryMiao",
+      "swagkeyCategory": "Gaming",
+      "catalogCategory": "gaming",
+      "sourceUrl": "https://www.swagkey.kr/205/?idx=1689",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "마우스패드",
+        "마우스"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-151",
+      "inventoryId": "inv-0290",
+      "name": "AM Infinity 무선 8K 게이밍 마우스 Basalt Black",
+      "brand": "AngryMiao",
+      "swagkeyCategory": "Gaming",
+      "catalogCategory": "gaming",
+      "sourceUrl": "https://www.swagkey.kr/205/?idx=1688",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "마우스"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-152",
+      "inventoryId": "inv-0292",
+      "name": "AM Infinity 무선 8K 게이밍 마우스 Blazed Orange",
+      "brand": "AngryMiao",
+      "swagkeyCategory": "Gaming",
+      "catalogCategory": "gaming",
+      "sourceUrl": "https://www.swagkey.kr/205/?idx=1476",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "마우스"
+      ],
+      "inRecommendationPool": false
+    },
+    {
+      "id": "full-153",
+      "inventoryId": "inv-0293",
+      "name": "AM Infinity 무선 8K 게이밍 마우스 Cloud White",
+      "brand": "AngryMiao",
+      "swagkeyCategory": "Gaming",
+      "catalogCategory": "gaming",
+      "sourceUrl": "https://www.swagkey.kr/205/?idx=1280",
+      "ruleId": "keyword:accessory_or_merch",
+      "matchedKeywords": [
+        "마우스"
+      ],
+      "inRecommendationPool": false
+    }
+  ]
+}

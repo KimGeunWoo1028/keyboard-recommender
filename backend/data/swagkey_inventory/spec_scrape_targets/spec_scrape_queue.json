@@ -1,0 +1,1113 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-11T16:40:13.169538+00:00",
+  "priorityOrder": [
+    "case",
+    "switch",
+    "keycap",
+    "plate",
+    "foam"
+  ],
+  "stats": {
+    "schemaVersion": "1.0.0",
+    "generatedAt": "2026-07-11T16:40:13.169538+00:00",
+    "seedPath": "C:/Users/jeung/keyboard-recommender/backend/src/keyboard_recommender/catalog/swagkey_products.seed.json",
+    "totalCandidates": 331,
+    "queued": 119,
+    "skippedRecommendEligible": 157,
+    "skippedKeycapBrowseOnly": 10,
+    "skippedMissingUrl": 0,
+    "byFamily": {
+      "case": 77,
+      "switch": 1,
+      "keycap": 34,
+      "plate": 6,
+      "foam": 1
+    },
+    "summaryLines": [
+      "spec scrape queue: 119 targets",
+      "skipped recommend-eligible: 157",
+      "skipped keycap browse-only: 10",
+      "skipped missing url: 0",
+      "by family:",
+      "  - case: 77",
+      "  - switch: 1",
+      "  - keycap: 34",
+      "  - plate: 6",
+      "  - foam: 1"
+    ]
+  },
+  "targets": [
+    {
+      "id": "case-051",
+      "family": "case",
+      "name": "Meletrix - ZOOM TKL Dyna",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1603",
+      "inventoryId": "inv-0298",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-053",
+      "family": "case",
+      "name": "MW Mass80 커스텀 키보드 베어본 킷",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1831",
+      "inventoryId": "inv-0300",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-055",
+      "family": "case",
+      "name": "[GB] Outva Solid Alex Alice",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1004",
+      "inventoryId": "inv-0303",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-057",
+      "family": "case",
+      "name": "Whatever Studio - Vany Alice",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1099",
+      "inventoryId": "inv-0304",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-059",
+      "family": "case",
+      "name": "[Raffle] FAUKWAA – [Carnival] Alice 결제용",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1594",
+      "inventoryId": "inv-0305",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-061",
+      "family": "case",
+      "name": "Whatever Studio - Vany Alice Parts",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1101",
+      "inventoryId": "inv-0306",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-063",
+      "family": "case",
+      "name": "Owlab Hellcat Mech-01 파츠",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1313",
+      "inventoryId": "inv-0308",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-065",
+      "family": "case",
+      "name": "[Raffle]FAUKWAA Carnival",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1585",
+      "inventoryId": "inv-0309",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-067",
+      "family": "case",
+      "name": "Owlab Hellcat Mech-01 Barebone Kit",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1314",
+      "inventoryId": "inv-0310",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-069",
+      "family": "case",
+      "name": "[Raffle] Owlab Hellcat Mech-01 Barebone Kit Babypink",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1315",
+      "inventoryId": "inv-0311",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-071",
+      "family": "case",
+      "name": "[Raffle] Owlab Hellcat Mech-01 Barebone Kit Dark Grey",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1316",
+      "inventoryId": "inv-0312",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-073",
+      "family": "case",
+      "name": "[Raffle] Owlab Hellcat Mech-01 Barebone Kit Grey",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1317",
+      "inventoryId": "inv-0313",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-075",
+      "family": "case",
+      "name": "[Pre-order] AM Compact Touch R2",
+      "url": "https://www.swagkey.kr/shop_view/?idx=754",
+      "inventoryId": "inv-0315",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-077",
+      "family": "case",
+      "name": "[예약판매] Qwertykeys NEO Ergo Barebone Kit",
+      "url": "https://www.swagkey.kr/shop_view/?idx=857",
+      "inventoryId": "inv-0316",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-079",
+      "family": "case",
+      "name": "[GB] Anorexus Void65",
+      "url": "https://www.swagkey.kr/shop_view/?idx=934",
+      "inventoryId": "inv-0317",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-081",
+      "family": "case",
+      "name": "[예약판매] Qwertykeys NEO Ergo Parts",
+      "url": "https://www.swagkey.kr/shop_view/?idx=858",
+      "inventoryId": "inv-0319",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-083",
+      "family": "case",
+      "name": "MatrixLab FAUKWAA - [MY-2K] 1999 베어본",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1810",
+      "inventoryId": "inv-0320",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-085",
+      "family": "case",
+      "name": "[당첨자결제용] MatrixLab FAUKWAA - [MY-2K] 1999 베어본",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1815",
+      "inventoryId": "inv-0321",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-087",
+      "family": "case",
+      "name": "[GB] FAUKWAA - [MY-2K] 100NG Edition",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1050",
+      "inventoryId": "inv-0322",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-089",
+      "family": "case",
+      "name": "[GB] PBS Granite",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1389",
+      "inventoryId": "inv-0323",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-091",
+      "family": "case",
+      "name": "[GB] Artkey - AK75",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1065",
+      "inventoryId": "inv-0325",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-093",
+      "family": "case",
+      "name": "[GB] TKD Cycle 7 Parts",
+      "url": "https://www.swagkey.kr/shop_view/?idx=607",
+      "inventoryId": "inv-0326",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-095",
+      "family": "case",
+      "name": "[GB] MW - Reel to Reel",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1177",
+      "inventoryId": "inv-0328",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-097",
+      "family": "case",
+      "name": "[GB] Mode Envoy 65% 추가 파츠",
+      "url": "https://www.swagkey.kr/shop_view/?idx=531",
+      "inventoryId": "inv-0330",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-099",
+      "family": "case",
+      "name": "[GB] Pangea Fullsize",
+      "url": "https://www.swagkey.kr/shop_view/?idx=948",
+      "inventoryId": "inv-0331",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-101",
+      "family": "case",
+      "name": "[GB] MatrixLab Gator",
+      "url": "https://www.swagkey.kr/shop_view/?idx=917",
+      "inventoryId": "inv-0332",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-103",
+      "family": "case",
+      "name": "[GB] TKD Cycle 7 Keyboard",
+      "url": "https://www.swagkey.kr/shop_view/?idx=603",
+      "inventoryId": "inv-0333",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-105",
+      "family": "case",
+      "name": "[GB] Neson Design 810E v3",
+      "url": "https://www.swagkey.kr/shop_view/?idx=676",
+      "inventoryId": "inv-0334",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-107",
+      "family": "case",
+      "name": "[GB] Mode Envoy 65% 추가 케이스",
+      "url": "https://www.swagkey.kr/shop_view/?idx=528",
+      "inventoryId": "inv-0336",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-109",
+      "family": "case",
+      "name": "[GB] Mode Envoy 65% 추가 악센트",
+      "url": "https://www.swagkey.kr/shop_view/?idx=530",
+      "inventoryId": "inv-0338",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-111",
+      "family": "case",
+      "name": "[GB] TKD Cycle 8 Add-on",
+      "url": "https://www.swagkey.kr/shop_view/?idx=907",
+      "inventoryId": "inv-0339",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-113",
+      "family": "case",
+      "name": "[GB] Mode Envoy 65% Diy Kit",
+      "url": "https://www.swagkey.kr/shop_view/?idx=521",
+      "inventoryId": "inv-0341",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-115",
+      "family": "case",
+      "name": "[GB] Mode Themes Desk Mats",
+      "url": "https://www.swagkey.kr/shop_view/?idx=542",
+      "inventoryId": "inv-0342",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-117",
+      "family": "case",
+      "name": "[GB] Artkey - AK75 Parts",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1067",
+      "inventoryId": "inv-0343",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-119",
+      "family": "case",
+      "name": "[GB] Plywrks Spyder TKL",
+      "url": "https://www.swagkey.kr/shop_view/?idx=913",
+      "inventoryId": "inv-0344",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-121",
+      "family": "case",
+      "name": "[GB] FoxLab Time65 Parts",
+      "url": "https://www.swagkey.kr/shop_view/?idx=854",
+      "inventoryId": "inv-0347",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-123",
+      "family": "case",
+      "name": "[GB] Cannonkeys VIDA 여분 상판",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1027",
+      "inventoryId": "inv-0348",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-125",
+      "family": "case",
+      "name": "[GB]Meletrix Zoom64 - HE 버전",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1624",
+      "inventoryId": "inv-0349",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-127",
+      "family": "case",
+      "name": "[GB] MM Studio Class 0413 상판",
+      "url": "https://www.swagkey.kr/shop_view/?idx=849",
+      "inventoryId": "inv-0352",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-129",
+      "family": "case",
+      "name": "[GB] MatrixLab CP.8XV 3 ⅓ Pad",
+      "url": "https://www.swagkey.kr/shop_view/?idx=956",
+      "inventoryId": "inv-0354",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-131",
+      "family": "case",
+      "name": "[GB] \bNeson Design 810E v3 Parts",
+      "url": "https://www.swagkey.kr/shop_view/?idx=677",
+      "inventoryId": "inv-0355",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-133",
+      "family": "case",
+      "name": "[GB] XINGZHI x QIN 篆Seal Parts",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1009",
+      "inventoryId": "inv-0356",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-135",
+      "family": "case",
+      "name": "[GB]ZOOM64 Mechanical Kit 추가 파츠",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1652",
+      "inventoryId": "inv-0359",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-137",
+      "family": "case",
+      "name": "[GB] Plywrks Spyder TKL Add-on",
+      "url": "https://www.swagkey.kr/shop_view/?idx=914",
+      "inventoryId": "inv-0360",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-139",
+      "family": "case",
+      "name": "[GB] MM Studio Class 1800 Parts",
+      "url": "https://www.swagkey.kr/shop_view/?idx=962",
+      "inventoryId": "inv-0361",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-141",
+      "family": "case",
+      "name": "[GB] Cannonkeys VIDA Blackout",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1031",
+      "inventoryId": "inv-0363",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-143",
+      "family": "case",
+      "name": "[GB] MM Studio Class 0413 Parts",
+      "url": "https://www.swagkey.kr/shop_view/?idx=848",
+      "inventoryId": "inv-0364",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-145",
+      "family": "case",
+      "name": "[GB] Neighbourhood Shy60 Parts",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1505",
+      "inventoryId": "inv-0365",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-147",
+      "family": "case",
+      "name": "[GB] TKD Cycle 7 Keyboard Barebones",
+      "url": "https://www.swagkey.kr/shop_view/?idx=606",
+      "inventoryId": "inv-0366",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-149",
+      "family": "case",
+      "name": "[GB] 篆Seal x Cosmos Barebone Kit",
+      "url": "https://www.swagkey.kr/shop_view/?idx=964",
+      "inventoryId": "inv-0367",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-151",
+      "family": "case",
+      "name": "[GB] FoxLab Time65 Barebone Kit",
+      "url": "https://www.swagkey.kr/shop_view/?idx=853",
+      "inventoryId": "inv-0368",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-153",
+      "family": "case",
+      "name": "[GB] Bowl x Alexotos Manta Add-on",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1238",
+      "inventoryId": "inv-0369",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-155",
+      "family": "case",
+      "name": "[GB] Pangea Fullsize 추가 TKL Frames",
+      "url": "https://www.swagkey.kr/shop_view/?idx=951",
+      "inventoryId": "inv-0371",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-157",
+      "family": "case",
+      "name": "[GB] Pangea Fullsize 추가 TOP Frames",
+      "url": "https://www.swagkey.kr/shop_view/?idx=952",
+      "inventoryId": "inv-0372",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-159",
+      "family": "case",
+      "name": "[GB]Meletrix Zoom64 - Mechanical 버전",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1646",
+      "inventoryId": "inv-0373",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-161",
+      "family": "case",
+      "name": "[GB] MatrixLab Carnival [TKL] - Parts",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1626",
+      "inventoryId": "inv-0374",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-163",
+      "family": "case",
+      "name": "[GB] Deadline studio X Hammer works - HMC",
+      "url": "https://www.swagkey.kr/shop_view/?idx=584",
+      "inventoryId": "inv-0375",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-165",
+      "family": "case",
+      "name": "[GB] ai03 Altair and Altair-X R2 Parts",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1296",
+      "inventoryId": "inv-0376",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-167",
+      "family": "case",
+      "name": "[GB] XINGZHI x QIN 篆Seal Barebone Kit",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1006",
+      "inventoryId": "inv-0377",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-169",
+      "family": "case",
+      "name": "[GB] Hammer x BUGER CRP-X Parallel Worlds",
+      "url": "https://www.swagkey.kr/shop_view/?idx=583",
+      "inventoryId": "inv-0378",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-171",
+      "family": "case",
+      "name": "[GB] MM Studio Class 1800 Barebone Kit",
+      "url": "https://www.swagkey.kr/shop_view/?idx=961",
+      "inventoryId": "inv-0379",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-173",
+      "family": "case",
+      "name": "[GB] 인스탁 구매자용 Matrix Navi & Corsa HE Kit",
+      "url": "https://www.swagkey.kr/shop_view/?idx=743",
+      "inventoryId": "inv-0380",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-175",
+      "family": "case",
+      "name": "[GB] MM Studio Class 0413 Barebone Kit",
+      "url": "https://www.swagkey.kr/shop_view/?idx=847",
+      "inventoryId": "inv-0381",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-177",
+      "family": "case",
+      "name": "[GB] FAUKWAA [MY-2K] 100NG Edition - Parts",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1164",
+      "inventoryId": "inv-0382",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-179",
+      "family": "case",
+      "name": "Qwertykeys NEO65 Parts",
+      "url": "https://www.swagkey.kr/shop_view/?idx=885",
+      "inventoryId": "inv-0383",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-181",
+      "family": "case",
+      "name": "Qwertykeys NEO Ergo 파츠 & 팜레스트",
+      "url": "https://www.swagkey.kr/shop_view/?idx=959",
+      "inventoryId": "inv-0384",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-183",
+      "family": "case",
+      "name": "[Pre-order] Qwertykeys QK60 R2",
+      "url": "https://www.swagkey.kr/shop_view/?idx=389",
+      "inventoryId": "inv-0385",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-185",
+      "family": "case",
+      "name": "[In-stock] Qwertykeys QK80 Parts",
+      "url": "https://www.swagkey.kr/shop_view/?idx=465",
+      "inventoryId": "inv-0386",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-187",
+      "family": "case",
+      "name": "[Pre-order] Qwertykeys - NEO60 Cu",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1082",
+      "inventoryId": "inv-0387",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-189",
+      "family": "case",
+      "name": "[Pre-order] Qwertykeys - NEO 65&amp;60 Parts",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1083",
+      "inventoryId": "inv-0388",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-191",
+      "family": "case",
+      "name": "[Group Buy] Pixelspace Shadow80 Barebone Kit",
+      "url": "https://www.swagkey.kr/shop_view/?idx=685",
+      "inventoryId": "inv-0389",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-193",
+      "family": "case",
+      "name": "Volt Plus+",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1056",
+      "inventoryId": "inv-0390",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-195",
+      "family": "case",
+      "name": "[Group Buy] Shadow80 Limited Edition 당첨자용",
+      "url": "https://www.swagkey.kr/shop_view/?idx=714",
+      "inventoryId": "inv-0392",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-197",
+      "family": "case",
+      "name": "[예약판매]Percent Studio - Platinum PT750",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1096",
+      "inventoryId": "inv-0394",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-199",
+      "family": "case",
+      "name": "Owlab Jelly Evolv Barebones Kit",
+      "url": "https://www.swagkey.kr/shop_view/?idx=611",
+      "inventoryId": "inv-0397",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-201",
+      "family": "case",
+      "name": "[In-Stock] Owlab Link65 DIY Kit",
+      "url": "https://www.swagkey.kr/shop_view/?idx=532",
+      "inventoryId": "inv-0398",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "case-203",
+      "family": "case",
+      "name": "[Raffle] Owlab Vento 80 Barebone Kit Light Wisteria WK",
+      "url": "https://www.swagkey.kr/shop_view/?idx=807",
+      "inventoryId": "inv-0399",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "sw-idx-536",
+      "family": "switch",
+      "name": "[GB] Mode Themes Switches",
+      "url": "https://www.swagkey.kr/shop_view/?idx=536",
+      "inventoryId": "inv-0340",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-020",
+      "family": "keycap",
+      "name": "Hammerworks CRP R7 키캡",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1874",
+      "inventoryId": "inv-0139",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-022",
+      "family": "keycap",
+      "name": "스웨그키 포인트 키캡",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1521",
+      "inventoryId": "inv-0142",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-024",
+      "family": "keycap",
+      "name": "스웨그키 투명 키보드 키캡",
+      "url": "https://www.swagkey.kr/shop_view/?idx=874",
+      "inventoryId": "inv-0143",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-026",
+      "family": "keycap",
+      "name": "DoodleCaps 낙서 블랙 PBT 염료승화 키캡",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1729",
+      "inventoryId": "inv-0146",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-028",
+      "family": "keycap",
+      "name": "[GB]MW Philosopher's Stone 키캡",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1862",
+      "inventoryId": "inv-0147",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-030",
+      "family": "keycap",
+      "name": "스웨그키 Qwertykeys Bubble Tea Marshmallow 키보드 키캡",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1479",
+      "inventoryId": "inv-0151",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-032",
+      "family": "keycap",
+      "name": "Keyboard Science Heyball 키캡",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1209",
+      "inventoryId": "inv-0152",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-034",
+      "family": "keycap",
+      "name": "스웨그키 Qwertykeys Milk Tea 키캡",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1148",
+      "inventoryId": "inv-0153",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-036",
+      "family": "keycap",
+      "name": "스웨그키 SW Antarctic 이중사출 키캡 세트",
+      "url": "https://www.swagkey.kr/shop_view/?idx=986",
+      "inventoryId": "inv-0154",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-038",
+      "family": "keycap",
+      "name": "Geistmaschine - TP-1 키캡",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1141",
+      "inventoryId": "inv-0156",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-040",
+      "family": "keycap",
+      "name": "RAMA CAPS 키캡",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1825",
+      "inventoryId": "inv-0157",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-042",
+      "family": "keycap",
+      "name": "[GB]SWG Skeletoon ABS 이중사출 키캡",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1797",
+      "inventoryId": "inv-0160",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-044",
+      "family": "keycap",
+      "name": "LeleLab LowSup-Ocean Blue 키보드 키캡 로우프로파일",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1790",
+      "inventoryId": "inv-0161",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-048",
+      "family": "keycap",
+      "name": "[GB]SWG Ferrofluid ABS 이중사출 키캡",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1764",
+      "inventoryId": "inv-0164",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-052",
+      "family": "keycap",
+      "name": "[GB]SWG Prepress ABS 이중사출 키캡",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1755",
+      "inventoryId": "inv-0166",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-054",
+      "family": "keycap",
+      "name": "LeleLab Good Night Cocoa 키보드 키캡",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1753",
+      "inventoryId": "inv-0167",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-056",
+      "family": "keycap",
+      "name": "스웨그키 KAP MV Classic 키캡",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1745",
+      "inventoryId": "inv-0168",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-058",
+      "family": "keycap",
+      "name": "스웨그키 Hammer Mirror Image 키보드 키캡 80s All-in",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1721",
+      "inventoryId": "inv-0170",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-066",
+      "family": "keycap",
+      "name": "스웨그키 Hammerworks CRP RGBY 키보드 키캡",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1710",
+      "inventoryId": "inv-0174",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-068",
+      "family": "keycap",
+      "name": "스웨그키 Lelelab Gems 키보드 키캡",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1674",
+      "inventoryId": "inv-0175",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-080",
+      "family": "keycap",
+      "name": "스웨그키 SW Maestro 키캡",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1442",
+      "inventoryId": "inv-0185",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-082",
+      "family": "keycap",
+      "name": "스웨그키 ZOMO X B.Duck 3D 아티산 포인트 키캡",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1438",
+      "inventoryId": "inv-0186",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-084",
+      "family": "keycap",
+      "name": "스웨그키 ZOMO 크리스마스 굴뚝 테마 포인트 키캡",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1436",
+      "inventoryId": "inv-0187",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-086",
+      "family": "keycap",
+      "name": "[GB] KAP Santa LLum",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1390",
+      "inventoryId": "inv-0188",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-088",
+      "family": "keycap",
+      "name": "KAP White on Black 기계식 키보드 키캡",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1246",
+      "inventoryId": "inv-0190",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-090",
+      "family": "keycap",
+      "name": "Keykobo Outer bounds",
+      "url": "https://www.swagkey.kr/shop_view/?idx=751",
+      "inventoryId": "inv-0191",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-092",
+      "family": "keycap",
+      "name": "LeleLab Snowspire Lake 키보드 키캡",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1752",
+      "inventoryId": "inv-0192",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-094",
+      "family": "keycap",
+      "name": "SWG Nimbus ABS 이중사출 키캡",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1625",
+      "inventoryId": "inv-0194",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-096",
+      "family": "keycap",
+      "name": "[GB]SWG Tars ABS 이중사출 키캡",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1839",
+      "inventoryId": "inv-0196",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-098",
+      "family": "keycap",
+      "name": "[GB] GMK Cherry Love 키캡",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1413",
+      "inventoryId": "inv-0199",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-100",
+      "family": "keycap",
+      "name": "[GB] KAP - Y",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1235",
+      "inventoryId": "inv-0200",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-102",
+      "family": "keycap",
+      "name": "[GB] KAP MV Classic",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1227",
+      "inventoryId": "inv-0201",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-104",
+      "family": "keycap",
+      "name": "SWG Euler ABS 이중사출 키캡",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1845",
+      "inventoryId": "inv-0295",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "kc-106",
+      "family": "keycap",
+      "name": "SWG Яubber ABS 이중사출 키캡",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1800",
+      "inventoryId": "inv-0296",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "plate-idx-1878",
+      "family": "plate",
+      "name": "QK Alice Duo 보강판",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1878",
+      "inventoryId": "inv-0299",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "plate-idx-527",
+      "family": "plate",
+      "name": "[GB] Mode Envoy 65% 추가 보강판",
+      "url": "https://www.swagkey.kr/shop_view/?idx=527",
+      "inventoryId": "inv-0335",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "plate-idx-534",
+      "family": "plate",
+      "name": "[In-Stock] Owlab Link65 Plate",
+      "url": "https://www.swagkey.kr/shop_view/?idx=534",
+      "inventoryId": "inv-0396",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "plate-idx-579",
+      "family": "plate",
+      "name": "[GB] DMK Silent Plateau",
+      "url": "https://www.swagkey.kr/shop_view/?idx=579",
+      "inventoryId": "inv-0329",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "plate-idx-935",
+      "family": "plate",
+      "name": "[GB] Anorexus Void65 PCB / Plate",
+      "url": "https://www.swagkey.kr/shop_view/?idx=935",
+      "inventoryId": "inv-0314",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "plate-idx-950",
+      "family": "plate",
+      "name": "[GB] Pangea Fullsize 추가 보강판",
+      "url": "https://www.swagkey.kr/shop_view/?idx=950",
+      "inventoryId": "inv-0351",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    },
+    {
+      "id": "foam-idx-1029",
+      "family": "foam",
+      "name": "[GB] Cannonkeys VIDA 폼킷 & 여분 가스켓",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1029",
+      "inventoryId": "inv-0362",
+      "traitConfidence": "name_inferred",
+      "recommendationEligible": false
+    }
+  ]
+}

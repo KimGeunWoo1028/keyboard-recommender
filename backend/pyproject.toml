@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "keyboard-recommender"
+version = "0.1.0"
+description = "Keyboard recommendation API"
+readme = "README.md"
+# pydantic-core (Rust extension) must ship wheels for your Python minor; avoid bleeding-edge
+# interpreters (e.g. 3.14 preview) until those wheels exist — use 3.11–3.13 LTS builds locally/CI.
+requires-python = ">=3.11,<3.14"
+# Keep in sync with requirements.txt (pip install -r requirements.txt is the default for this repo)
+dependencies = [
+    "fastapi==0.115.6",
+    "uvicorn[standard]==0.32.1",
+    "sqlalchemy==2.0.36",
+    "psycopg[binary]==3.2.3",
+    "pydantic-settings==2.6.1",
+    "alembic==1.14.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==8.3.4",
+    "httpx==0.28.1",
+    "ruff==0.8.6",
+]
+
+[tool.ruff]
+target-version = "py311"
+src = ["src"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "W"]
+
+[tool.ruff.lint.per-file-ignores]
+# SQLAlchemy relationship forward refs use quoted class names; ruff cannot resolve them.
+"src/keyboard_recommender/infrastructure/persistence/models/*.py" = ["F821"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+# Used when pytest's rootdir is `backend/` (e.g. `cd backend && pytest`).
+# From repo root with no args, use the root `pytest.ini` instead.
+minversion = "7.0"
+testpaths = ["tests"]
+pythonpath = ["src"]
+markers = [
+    "postgres: requires PostgreSQL at DATABASE_URL (migration/schema smoke)",
+]

@@ -1,0 +1,9 @@
+{
+  "structured_feeds": [
+    {
+      "path": "../src/keyboard_recommender/catalog/swagkey_products.seed.json"
+    }
+  ],
+  "vendor_pages": [],
+  "manual_overrides": []
+}

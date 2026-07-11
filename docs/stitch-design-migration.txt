@@ -1,0 +1,297 @@
+Keyboard Recommender — Stitch(KeebSmith) 디자인 마이그레이션 로드맵
+====================================================================
+
+작성 목적
+---------
+Stitch 시안(stitch_keyboard_curator.zip)의 룩앤필만 입히고,
+기존 기능·라우트·API·상태 로직은 100% 유지한다.
+
+기준일: 2026-07-08
+시안 경로 (원본): c:\Users\jeung\Downloads\stitch_keyboard_curator.zip
+시안 구성:
+  - cyber_artisan/DESIGN.md          … 디자인 토큰 (Cyber-Artisan)
+  - keebsmith_modernized_1           … Recommended Builds (= /results)
+  - keebsmith_modernized_2           … 랜딩/홈 (= /)
+  - keebsmith_modernized_3           … 마이페이지 (= /mypage)
+  - keebsmith_modernized_4           … Build Comparison (= 비교 워크스페이스)
+
+
+핵심 원칙
+---------
+- 기능 100% 유지: 설문 → 추천 compute → 결과 → 북마크 → 마이페이지 → 카탈로그 → auth
+- Stitch HTML을 페이지로 통째 교체하지 않는다. 기존 React 컴포넌트에 스타일·마크업만 이식한다.
+- 시안에 있으나 백엔드에 없는 데이터(가격 $, Acoustic chart, Mass, Actuation curve,
+  Credits, 알림 종 등)는 실기능처럼 넣지 않는다. 스킵하거나 순수 장식(비인터랙션)만.
+- 카탈로그 5탭 · 스웨그키 shop_view/?idx= · responseContractRev · 쿠키 auth 규칙 유지
+- 한국어 UI 유지 (시안 영문 카피는 톤만 참고, 라벨은 기존 한국어 우선)
+
+
+시안 ↔ 기존 앱 매핑
+-------------------
+| Stitch screen | 폴더                      | 기존 라우트/기능              |
+|---------------|---------------------------|-------------------------------|
+| 2             | keebsmith_modernized_2    | `/` 홈                        |
+| 1             | keebsmith_modernized_1    | `/results` 추천 결과          |
+| 3             | keebsmith_modernized_3    | `/mypage`                     |
+| 4             | keebsmith_modernized_4    | 마이페이지 비교 (localStorage)|
+| DESIGN.md     | cyber_artisan             | 전역 토큰·폰트·글래스         |
+
+시안에 없음 → 동일 쉘(헤더/푸터/토큰)로만 톤 맞춤:
+  `/recommend` · `/catalog` · `/auth*` · discovery/용어 · `/debug/*`
+
+
+네비 라벨 매핑 (권장)
+--------------------
+- Build     → `/recommend`
+- Explore   → `/catalog`
+- Saved     → `/mypage` (저장 빌드)
+- Compare   → 마이페이지 비교 탭
+- Community → discovery 있으면 연결 / 없으면 숨김
+- 검색바    → `/catalog?q=` 만 연결, 미연결이면 숨김
+- 알림/설정 아이콘 → 기능 없으면 숨김 (가짜 배지 금지)
+
+
+사전 결정 (구현 전)
+-------------------
+1. 브랜드명: 시안 `KeebSmith` vs 현재 한국 제품명 (헤더·카피만, API 무관)
+2. 시안 전용 장식 데이터: 생략 vs 정적 데코(클릭/저장 없음)
+3. 라이트 모드: 시안은 다크 중심 — next-themes 유지 여부
+
+
+================================================================================
+[Phase 0] 디자인 시스템 (토큰만) — 공통 기반
+================================================================================
+목표: 페이지 로직은 안 건드리고 Cyber-Artisan 토큰만 주입
+상태: **완료 (2026-07-08)** — 기존 semantic 클래스 유지 + `ca-*` 토큰/유틸 추가
+
+[x] DESIGN.md → Tailwind config + CSS variables
+    · surface / surface-container* / on-surface
+    · primary (Electric Purple) · secondary (Neon Blue) · tertiary (Emerald)
+    · outline / ghost border
+    · 다크 `.dark` legacy semantic(background/primary/…)도 Cyber-Artisan 톤으로 매핑
+[x] 폰트: Hanken Grotesk (headline) · Inter (body) · JetBrains Mono (label/meta)
+    · frontend/src/app/layout.tsx — next/font/google + CSS variables
+[x] 글래스 패널 · Primary/Ghost 버튼 · 칩 · input · focus glow · type scale 유틸
+    · `.ca-glass-panel` · `.ca-btn-primary` · `.ca-btn-ghost` · `.ca-chip` · `.ca-input` …
+[x] 기본 테마 = dark (시안) · light = Luminous Artisan (`Downloads/DESIGN.md` 토큰)
+    · `:root` Electric Violet / Mint / Rose · ambient shadow (glow 없음)
+    · `.dark` Cyber-Artisan 유지
+
+건드린 곳:
+  - frontend/tailwind.config.ts
+  - frontend/src/app/globals.css
+  - frontend/src/app/layout.tsx
+  - frontend/src/components/providers/theme-provider.tsx (defaultTheme=dark)
+
+건드리지 않은 것:
+  - API client · survey definition · recommendation compute · session/auth 로직
+
+사용 예 (Phase 1+):
+  className="bg-ca-surface text-ca-on-surface font-headline"
+  className="ca-glass-panel ca-btn-primary"
+  className="text-ca-headline-lg text-ca-primary"
+
+완료 기준: 기존 페이지가 깨지지 않고, 새 토큰 클래스를 쓸 수 있는 상태 ✓
+
+
+================================================================================
+[Phase 1] 쉘 — TopNav / Footer (전 페이지 공통)
+================================================================================
+목표: 모든 라우트에 시안형 헤더·푸터 한 번에 적용
+상태: **완료 (2026-07-08)** — 기능 경로 유지, 알림/설정·가짜 Privacy 링크 미포함
+
+[x] site-header.tsx → KeebSmith형 TopNav (그라데이션 로고, 활성 underline 네비)
+    · 라벨: 추천·카탈로그·결과·마이페이지 (+ debug 플래그 시 디버그)
+    · 모바일: 햄버거 + 드로어 (홈 포함)
+[x] 검색바: HeaderCatalogSearch → `/catalog?q=` (catalogHref) · sm+ 표시, 모바일 메뉴 안에도
+[x] 알림/설정 아이콘: 기능 없음 → 미구현(숨김)
+[x] SiteFooter — 실존 라우트만 (카탈로그·추천 설문·마이페이지) · Privacy/Terms 가짜 링크 없음
+[x] AuthControls · ThemeToggle 헤더 우측 · 로그인 CTA 시안형 · 표시이름→/mypage
+
+건드린 곳:
+  - frontend/src/components/layout/site-header.tsx
+  - frontend/src/components/layout/header-catalog-search.tsx (신규)
+  - frontend/src/components/layout/site-footer.tsx (신규)
+  - frontend/src/components/layout/auth-controls.tsx
+  - frontend/src/components/layout/theme-toggle.tsx
+  - frontend/src/app/layout.tsx
+
+검증: 로그인/로그아웃 · 네비 경로 · 검색→카탈로그 · RequireAuth 리다이렉트 동일
+
+
+
+================================================================================
+[Phase 2] `/` 홈 ← screen 2 (여기서부터 화면 적용 시작 권장)
+================================================================================
+목표: 히어로·CTA·FeatureGrid를 시안 랜딩 톤으로. 가장 독립적·효과 큼.
+상태: **완료 (2026-07-08)** — Acoustic/$ 위젯 생략 · discovery 실데이터만
+
+| 시안 블록              | 기존 기능 연결                         | 처리 |
+|------------------------|----------------------------------------|------|
+| Hero + CTA             | 설문 시작                              | [x] «새 빌드 시작» → `/auth?next=/recommend` |
+| Browse Gallery         | 카탈로그                               | [x] → `/catalog` · 최근 결과 링크 유지 |
+| Build Workspace 카드들 | Acoustic/$/Mass/Curve 등 데이터 없음   | [x] WorkshopStrip — 설문/카탈로그/마이페이지 CTA만 |
+| Trending Builds        | GET /builds/discovery                  | [x] TrendingBuilds 클라이언트 · trending+curated |
+| Feature Grid 5카테고리 | `/catalog?family=`                     | [x] ca-glass 카드 · deep link 유지 |
+
+건드린 곳:
+  - frontend/src/app/page.tsx
+  - frontend/src/components/features/home/hero.tsx
+  - frontend/src/components/features/home/feature-grid.tsx
+  - frontend/src/components/features/home/workshop-strip.tsx (신규)
+  - frontend/src/components/features/home/trending-builds.tsx (신규)
+
+검증: CTA → 설문/카탈로그 · discovery 표시 · FeatureGrid deep link
+
+
+================================================================================
+[Phase 3] `/results` ← screen 1
+================================================================================
+목표: RecommendationResultView 로직 유지, 빌드 카드·대안만 시안 리스킨.
+상태: **완료 (2026-07-08)** — hydration/stale refresh/compute 로직 미변경
+
+| 시안                         | 기존 매핑                    | 처리 |
+|------------------------------|------------------------------|------|
+| 메인 빌드 카드               | 추천 build (6축)             | [x] SharedResultHeader glass + PRIMARY BUILD |
+| Match % / Global Match       | confidence                   | [x] MatchGauge SVG + badge |
+| Plate / Keycaps / Mount 타일 | plate · keycap · layout/case | [x] 6축 구성 타일 ca 톤 |
+| Alternate Configurations     | alternatives / picks         | [x] 후보·대안 카드 glass |
+| Acoustic / Smart Comparison  | 데이터 없음                  | [x] 스킵 (trait/explain 기존 유지) |
+| 스웨그키 · 북마크 · 비교     | 100% 유지                    | [x] 링크·저장 CTA 스타일만 |
+
+건드린 곳:
+  - frontend/src/app/results/page.tsx
+  - frontend/src/components/features/recommendation/results-view.tsx
+  - frontend/src/components/features/recommendation/recommendation-result-view.tsx
+
+건드리지 않은 것:
+  - sessionStorage hydration · stale 재조회 · compute API · responseContractRev
+
+검증: 설문→결과→스웨그키 링크→북마크→비교→스태그 재조회
+
+
+================================================================================
+[Phase 4] `/mypage` ← screen 3
+================================================================================
+목표: 저장 빌드·활동·계정 섹션을 시안 대시보드 카드로. stub는 Phase 3 A와 연동.
+상태: **완료 (2026-07-08)** — Credits/Elite 미포함 · ComingSoon은 허브 미사용(컴포넌트만 톤 정리)
+
+| 시안                | 기존                         | 처리 |
+|---------------------|------------------------------|------|
+| 저장 추천 빌드      | saved builds API             | [x] 글래스 카드·필터/메모/삭제 유지 |
+| 최근 분석 기록      | activity timeline             | [x] HISTORY 섹션 리스킨 |
+| 계정 관리           | display name / password       | [x] ACCOUNT/SECURITY/SESSIONS 카드 |
+| Credits / Elite 배지| 없음                         | [x] 넣지 않음 · 실데이터(저장·활동 수)만 |
+| Coming Soon 섹션    | MyPageComingSoon             | [x] 허브에서 미사용 · placeholder만 ca 톤 |
+
+건드린 곳:
+  - frontend/src/app/mypage/page.tsx · loading.tsx
+  - frontend/src/components/features/mypage/mypage-hub.tsx
+  - mypage-overview · section-card · saved-builds · activity* · comparisons · comparison-card · account · coming-soon
+
+검증: 저장/삭제/메모 · 활동 · 표시이름·비밀번호 · 로그아웃
+
+
+================================================================================
+[Phase 5] 비교 ← screen 4
+================================================================================
+목표: 기존 비교 워크스페이스를 표형 시안으로 리스킨. 없는 스펙 행은 만들지 않음.
+상태: **완료 (2026-07-08)** — `#comparison-hub` 표형 리스킨 · Export/가격/Acoustic 미포함
+
+[x] 비교 테이블: 있는 축만 행
+    · 도메인 · 이름 · 점수 · confidence · 요약 · 성향 · 트레이드오프 · 스웨그키
+    · (6축 부품 풀빌드 비교가 아닌) 현재 API picks A/B 후보 비교 — 데이터 모델에 맞춤
+[x] Export / Share / 가격 / 폴링레이트 등 시안-only → 숨김
+[x] Acoustic Curve 미니차트 → 데이터 없으면 생략
+[x] «Finalize Build» 류 CTA → «빌드 저장» · «저장/비교 탭» · «이 비교 저장» (기존 흐름)
+[x] 선택 초기화 · A/B 바꾸기 · localStorage workspace hydrate 로직 유지
+
+건드린 곳:
+  - frontend/src/components/features/recommendation/recommendation-result-view.tsx
+    (`#comparison-hub` / `data-testid="e2e-compare-panel"`)
+  - 마이페이지 비교 카드는 Phase 4에서 이미 ca 톤
+
+검증: 결과에서 비교 추가 → 비교 화면 → 항목 제거 · 데이터 정합
+
+
+================================================================================
+[Phase 6] 시안 없는 페이지 — 동일 쉘·토큰으로 톤만
+================================================================================
+순서 권장:
+  1) `/catalog`     — CatalogBrowseView · detail panel · 5탭 · 검색·페이지네이션
+  2) `/recommend`   — SurveyWizard 스텝·검증·NL 유지, 카드/버튼/입력만
+  3) `/auth*`       — 로그인/회원가입/비밀번호 재설정 폼 톤만
+
+[x] `/catalog` — ca glass 카드 · 5탭 · 서브타입 칩 · ca-input 검색 · 페이지네이션 · detail panel
+[x] `/recommend` — SurveyWizard / SurveyQuestion ca 톤 · NL·검증·제출 로직 유지
+[x] `/auth*` — 로그인/회원가입 · forgot/reset · Suspense fallback 톤만
+
+건드린 곳:
+  - frontend/src/components/features/catalog/*
+  - frontend/src/app/catalog/page.tsx
+  - frontend/src/components/features/recommendation/survey-wizard.tsx
+  - frontend/src/components/features/recommendation/survey-question.tsx
+  - frontend/src/app/recommend/page.tsx
+  - frontend/src/app/auth/*
+
+검증: 카탈로그 5탭·스웨그키 · 설문 제출 · auth 전 플로우
+
+
+================================================================================
+[Phase 7] 사이드바 (마지막 · 조심)
+================================================================================
+시안 좌측 Workshop(Filters / History / Saved / Compare)은 현재 앱 IA와 다름.
+전 페이지 고정 사이드바를 먼저 넣으면 라우팅이 꼬이기 쉽다.
+
+권장:
+[x] 마이페이지 · 결과 · 비교에만 Workshop 사이드바 부분 적용 (한 번 도입)
+[x] → **제거 (2026-07-09)**: 사용자 요청으로 WorkshopSidebar / BottomNav 전부 삭제
+    · `workshop-nav.tsx` 삭제
+    · `/mypage` · `/results` 에서 `WorkshopShell` 해제
+[x] 마이페이지 탭 ↔ `?section=` 딥링크는 유지 (사이드바 없이도 유용)
+
+금지: Phase 0–1 단계에서 전역 사이드바 강제 도입 — 준수
+
+검증: 홈·마이페이지·결과에서 좌측 rail / 하단 Workshop 바 없음
+
+
+================================================================================
+하지 말아야 할 것
+================================================================================
+- Stitch code.html을 Next page로 통째 교체
+- Acoustic / $ / Credits / 알림 등 가짜 인터랙션을 실기능처럼 노출
+- 설문 단계 수·필드 · compute payload · responseContractRev 변경
+- sessionStorage / 쿠키(kr_session) / localhost vs 127.0.0.1 규칙 변경
+- 카탈로그에 full catalog 액세서리 탭 재도입
+- 스웨그키 링크를 카테고리 URL(/39 등)로 되돌림
+
+
+권장 진행 순서 (한 줄)
+----------------------
+Phase 0 토큰
+  → 1 헤더/푸터
+  → 2 홈(screen 2)
+  → 3 결과(screen 1)
+  → 4 마이페이지(screen 3)
+  → 5 비교(screen 4)
+  → 6 카탈로그·설문·auth
+  → 7 사이드바(선택·축소)
+
+
+관련 문서
+---------
+- 프로젝트 컨텍스트: docs/PROJECT_CONTEXT.md
+- Swagkey 로드맵 (기능 후속 A/B/C): docs/swagkey-catalog-roadmap.txt
+- 시안 DESIGN.md: (zip) stitch_keyboard_curator/cyber_artisan/DESIGN.md
+
+
+완료 체크 (릴리스 전)
+---------------------
+[ ] 설문 → 결과 → 스웨그키 → 북마크 → 마이페이지
+[ ] 비교 워크스페이스
+[ ] 카탈로그 5탭 + 검색 + 상세 + shop_view 링크
+[ ] 로그인/로그아웃/비밀번호 재설정
+[ ] 다크(시안)에서 깨짐 없음 · (유지 시) 라이트도 치명적 깨짐 없음
+[ ] E2E 또는 수동 critical-flows 통과
+
+*이 문서는 Stitch 디자인만 입히는 UI 마이그레이션 계획이다. API·추천 엔진·카탈로그 파이프라인 변경은 포함하지 않는다.*

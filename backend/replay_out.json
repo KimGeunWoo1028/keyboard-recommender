@@ -1,0 +1,1216 @@
+{
+  "apiPayload": {
+    "answers": {
+      "bottom_out": "soft",
+      "sound_profile": "muted",
+      "switch_feel": "linear",
+      "typing_pressure": "light",
+      "volume": "quiet"
+    },
+    "build": {
+      "engineScores": {
+        "foamId": "foam-heavy",
+        "foamScore": 0.8422926086122041,
+        "layoutId": "lay-full",
+        "layoutScore": 0.4973080765958358,
+        "plateId": "plate-pom",
+        "plateScore": 0.6255107169331494,
+        "switchId": "sw-silent-linear",
+        "switchScore": 0.862399370723158
+      },
+      "foam": "Heavy damp — Quietest / most muted; watch for mush.",
+      "highlights": [
+        "v2 engine — switch 0.862 (Silent linear)",
+        "Plate 0.626 · Foam 0.842 · Layout 0.497",
+        "User trait peaks: deep_sound 0.0, muted 8.0, soft_bottom_out 8.0, smooth 5.0",
+        "Diversity rerank: alternate picks reordered for trait variety (rank-1 pick unchanged).",
+        "Build confidence: high (85%) — see recommendationConfidence for hooks."
+      ],
+      "id": "engine-sw-silent-linear-plate-pom",
+      "layout": "Full-size — Numpad included; heavier case.",
+      "plate": "POM plate — Dense, muted character; dampened builds.",
+      "switches": "Silent linear — Dampened rails; quiet without a tactile bump.",
+      "tagline": "Matched with weighted cosine similarity on a multi-axis trait profile (switches, plates, foam, layouts each carry the same axes).",
+      "title": "Your stack: Warm / deep-leaning · smooth-leaning"
+    },
+    "compatibilityAudit": {
+      "effectivePenaltyTotal": 0.0,
+      "intentMultiplier": 1.0,
+      "lines": [],
+      "rawPenaltyTotal": 0.0
+    },
+    "diversityAudit": {
+      "families": [
+        {
+          "family": "switch",
+          "notes": [
+            "diversity_hook:rank2_trait_distance_to_winner",
+            "diversity_reorder:no_change"
+          ],
+          "originalOrderIds": [
+            "sw-silent-linear",
+            "sw-longpole-linear",
+            "sw-light-tactile",
+            "sw-speed-linear",
+            "sw-strong-tactile"
+          ],
+          "rerankedOrderIds": [
+            "sw-silent-linear",
+            "sw-longpole-linear",
+            "sw-light-tactile",
+            "sw-speed-linear",
+            "sw-strong-tactile"
+          ]
+        },
+        {
+          "family": "plate",
+          "notes": [
+            "diversity_hook:rank2_trait_distance_to_winner",
+            "diversity_reorder:no_change"
+          ],
+          "originalOrderIds": [
+            "plate-pom",
+            "plate-pc",
+            "plate-fr4",
+            "plate-alu",
+            "plate-brass"
+          ],
+          "rerankedOrderIds": [
+            "plate-pom",
+            "plate-pc",
+            "plate-fr4",
+            "plate-alu",
+            "plate-brass"
+          ]
+        },
+        {
+          "family": "foam",
+          "notes": [
+            "diversity_hook:rank2_trait_distance_to_winner",
+            "diversity_reorder:applied"
+          ],
+          "originalOrderIds": [
+            "foam-heavy",
+            "foam-case-poron",
+            "foam-case-plate",
+            "foam-minimal"
+          ],
+          "rerankedOrderIds": [
+            "foam-heavy",
+            "foam-case-plate",
+            "foam-case-poron",
+            "foam-minimal"
+          ]
+        },
+        {
+          "family": "layout",
+          "notes": [
+            "diversity_hook:rank2_trait_distance_to_winner",
+            "diversity_reorder:applied"
+          ],
+          "originalOrderIds": [
+            "lay-full",
+            "lay-65",
+            "lay-60",
+            "lay-tkl"
+          ],
+          "rerankedOrderIds": [
+            "lay-full",
+            "lay-60",
+            "lay-65",
+            "lay-tkl"
+          ]
+        }
+      ]
+    },
+    "fallbackAudit": {
+      "compatibilityRelaxMult": 1.0,
+      "confidenceAfter": 0.8493,
+      "confidenceBefore": 0.8633,
+      "diversityStrengthMult": 1.0,
+      "notes": [
+        "fallback_hook:quality_accepted"
+      ],
+      "overallLabel": "high",
+      "recovered": false,
+      "tier": 0,
+      "triggers": []
+    },
+    "legacyTraits": {
+      "firmBottom": -2.0,
+      "heavyPress": 0,
+      "lightPress": 3.0,
+      "linearLean": 3.0,
+      "softBottom": 4.0,
+      "soundBright": -2.0,
+      "soundClacky": 0,
+      "soundMuted": 6.0,
+      "soundThocky": 0,
+      "tactileLean": -1.0,
+      "volumeLoud": 0,
+      "volumeQuiet": 5.0
+    },
+    "matchExplanations": [
+      {
+        "confidence": 0.9227,
+        "domain": "switch",
+        "explanation": "Top weighted axis contributions: muted (+75.60); soft_bottom_out (+64.00); smooth (+48.00); light_typing_force (+22.00).",
+        "itemId": "sw-silent-linear",
+        "rawCosine": 0.8454895791403509,
+        "score": 0.862399370723158,
+        "summary": "We recommended Silent linear mainly because your trait profile emphasizes muted / dampened presentation, soft bottom-out, and smooth typing feel, and this option lines up strongly on those same weighted axes.",
+        "tradeOffs": [
+          "Trade-off on brighter top end: weighted agreement is pulled down here (-3.0)—the part is less aligned on this axis than on your top drivers.",
+          "Trade-off on firm bottom-out: weighted agreement is pulled down here (-3.0)—the part is less aligned on this axis than on your top drivers.",
+          "You lean brighter top end (≈-3.0), while this SKU trends the other way on that axis (≈+1.0)—overall score still reflects stronger matches elsewhere."
+        ],
+        "whyTraits": [
+          "Muted / dampened presentation — your profile is around +8.0 here; this pick reinforces that direction (match strength +75.6).",
+          "Soft bottom-out — your profile is around +8.0 here; this pick reinforces that direction (match strength +64.0).",
+          "Smooth typing feel — your profile is around +5.0 here; this pick reinforces that direction (match strength +48.0).",
+          "Lighter typing force — your profile is around +4.0 here; this pick reinforces that direction (match strength +22.0)."
+        ]
+      },
+      {
+        "confidence": 0.8128,
+        "domain": "plate",
+        "explanation": "Top weighted axis contributions: muted (+56.00); soft_bottom_out (+48.00); smooth (+35.00); light_typing_force (+16.00).",
+        "itemId": "plate-pom",
+        "rawCosine": 0.6255107169331494,
+        "score": 0.6255107169331494,
+        "summary": "We recommended POM plate mainly because your trait profile emphasizes muted / dampened presentation, soft bottom-out, and smooth typing feel, and this option lines up strongly on those same weighted axes.",
+        "tradeOffs": [
+          "Trade-off on brighter top end: weighted agreement is pulled down here (-6.6)—the part is less aligned on this axis than on your top drivers.",
+          "Trade-off on firm bottom-out: weighted agreement is pulled down here (-4.8)—the part is less aligned on this axis than on your top drivers.",
+          "Trade-off on strong tactile feedback: weighted agreement is pulled down here (-4.0)—the part is less aligned on this axis than on your top drivers.",
+          "You lean brighter top end (≈-3.0), while this SKU trends the other way on that axis (≈+2.0)—overall score still reflects stronger matches elsewhere.",
+          "You lean strong tactile feedback (≈-2.0), while this SKU trends the other way on that axis (≈+2.0)—overall score still reflects stronger matches elsewhere."
+        ],
+        "whyTraits": [
+          "Muted / dampened presentation — your profile is around +8.0 here; this pick reinforces that direction (match strength +56.0).",
+          "Soft bottom-out — your profile is around +8.0 here; this pick reinforces that direction (match strength +48.0).",
+          "Smooth typing feel — your profile is around +5.0 here; this pick reinforces that direction (match strength +35.0).",
+          "Lighter typing force — your profile is around +4.0 here; this pick reinforces that direction (match strength +16.0)."
+        ]
+      },
+      {
+        "confidence": 0.9211,
+        "domain": "foam",
+        "explanation": "Top weighted axis contributions: muted (+104.40); soft_bottom_out (+86.40); smooth (+25.00); light_typing_force (+16.00).",
+        "itemId": "foam-heavy",
+        "rawCosine": 0.8422926086122041,
+        "score": 0.8422926086122041,
+        "summary": "We recommended Heavy damp mainly because your trait profile emphasizes muted / dampened presentation, soft bottom-out, and smooth typing feel, and this option lines up strongly on those same weighted axes.",
+        "tradeOffs": [
+          "Trade-off on strong tactile feedback: weighted agreement is pulled down here (-4.0)—the part is less aligned on this axis than on your top drivers.",
+          "Trade-off on brighter top end: weighted agreement is pulled down here (-3.3)—the part is less aligned on this axis than on your top drivers.",
+          "Trade-off on firm bottom-out: weighted agreement is pulled down here (-3.0)—the part is less aligned on this axis than on your top drivers.",
+          "You lean brighter top end (≈-3.0), while this SKU trends the other way on that axis (≈+1.0)—overall score still reflects stronger matches elsewhere.",
+          "You lean strong tactile feedback (≈-2.0), while this SKU trends the other way on that axis (≈+2.0)—overall score still reflects stronger matches elsewhere."
+        ],
+        "whyTraits": [
+          "Muted / dampened presentation — your profile is around +8.0 here; this pick reinforces that direction (match strength +104.4).",
+          "Soft bottom-out — your profile is around +8.0 here; this pick reinforces that direction (match strength +86.4).",
+          "Smooth typing feel — your profile is around +5.0 here; this pick reinforces that direction (match strength +25.0).",
+          "Lighter typing force — your profile is around +4.0 here; this pick reinforces that direction (match strength +16.0)."
+        ]
+      },
+      {
+        "confidence": 0.7537,
+        "domain": "layout",
+        "explanation": "Top weighted axis contributions: soft_bottom_out (+48.00); muted (+40.00); smooth (+20.00); light_typing_force (+17.60).",
+        "itemId": "lay-full",
+        "rawCosine": 0.507457221016159,
+        "score": 0.4973080765958358,
+        "summary": "We recommended Full-size mainly because your trait profile emphasizes soft bottom-out, muted / dampened presentation, and smooth typing feel, and this option lines up strongly on those same weighted axes.",
+        "tradeOffs": [
+          "Trade-off on brighter top end: weighted agreement is pulled down here (-12.0)—the part is less aligned on this axis than on your top drivers.",
+          "Trade-off on strong tactile feedback: weighted agreement is pulled down here (-6.0)—the part is less aligned on this axis than on your top drivers.",
+          "Trade-off on firm bottom-out: weighted agreement is pulled down here (-4.2)—the part is less aligned on this axis than on your top drivers.",
+          "You lean brighter top end (≈-3.0), while this SKU trends the other way on that axis (≈+4.0)—overall score still reflects stronger matches elsewhere.",
+          "You lean strong tactile feedback (≈-2.0), while this SKU trends the other way on that axis (≈+3.0)—overall score still reflects stronger matches elsewhere."
+        ],
+        "whyTraits": [
+          "Soft bottom-out — your profile is around +8.0 here; this pick reinforces that direction (match strength +48.0).",
+          "Muted / dampened presentation — your profile is around +8.0 here; this pick reinforces that direction (match strength +40.0).",
+          "Smooth typing feel — your profile is around +5.0 here; this pick reinforces that direction (match strength +20.0).",
+          "Lighter typing force — your profile is around +4.0 here; this pick reinforces that direction (match strength +17.6)."
+        ]
+      }
+    ],
+    "nlPreferenceAnalysis": {
+      "applied": false,
+      "matchedTermIds": [],
+      "normalizedText": "",
+      "parsingConfidence": 0.0,
+      "unknownTokens": [],
+      "warnings": []
+    },
+    "overallConfidence": 0.8526,
+    "recommendationConfidence": {
+      "compatibilityComponent": 1.0,
+      "diversityDistortionComponent": 0.825,
+      "fallbackTier": 0,
+      "hooks": [
+        "confidence:similarity=0.853",
+        "confidence:compatibility_headroom=1.000",
+        "confidence:diversity_distortion_index=0.500",
+        "confidence:label=high"
+      ],
+      "label": "high",
+      "overall": 0.8493,
+      "similarityComponent": 0.8526
+    },
+    "recommendations": [
+      {
+        "confidence": 0.9227,
+        "domain": "switch",
+        "explanation": "Top weighted axis contributions: muted (+75.60); soft_bottom_out (+64.00); smooth (+48.00); light_typing_force (+22.00).",
+        "itemId": "sw-silent-linear",
+        "rawCosine": 0.8454895791403509,
+        "score": 0.862399370723158,
+        "summary": "We recommended Silent linear mainly because your trait profile emphasizes muted / dampened presentation, soft bottom-out, and smooth typing feel, and this option lines up strongly on those same weighted axes.",
+        "tradeOffs": [
+          "Trade-off on brighter top end: weighted agreement is pulled down here (-3.0)—the part is less aligned on this axis than on your top drivers.",
+          "Trade-off on firm bottom-out: weighted agreement is pulled down here (-3.0)—the part is less aligned on this axis than on your top drivers.",
+          "You lean brighter top end (≈-3.0), while this SKU trends the other way on that axis (≈+1.0)—overall score still reflects stronger matches elsewhere."
+        ],
+        "whyTraits": [
+          "Muted / dampened presentation — your profile is around +8.0 here; this pick reinforces that direction (match strength +75.6).",
+          "Soft bottom-out — your profile is around +8.0 here; this pick reinforces that direction (match strength +64.0).",
+          "Smooth typing feel — your profile is around +5.0 here; this pick reinforces that direction (match strength +48.0).",
+          "Lighter typing force — your profile is around +4.0 here; this pick reinforces that direction (match strength +22.0)."
+        ]
+      },
+      {
+        "confidence": 0.8128,
+        "domain": "plate",
+        "explanation": "Top weighted axis contributions: muted (+56.00); soft_bottom_out (+48.00); smooth (+35.00); light_typing_force (+16.00).",
+        "itemId": "plate-pom",
+        "rawCosine": 0.6255107169331494,
+        "score": 0.6255107169331494,
+        "summary": "We recommended POM plate mainly because your trait profile emphasizes muted / dampened presentation, soft bottom-out, and smooth typing feel, and this option lines up strongly on those same weighted axes.",
+        "tradeOffs": [
+          "Trade-off on brighter top end: weighted agreement is pulled down here (-6.6)—the part is less aligned on this axis than on your top drivers.",
+          "Trade-off on firm bottom-out: weighted agreement is pulled down here (-4.8)—the part is less aligned on this axis than on your top drivers.",
+          "Trade-off on strong tactile feedback: weighted agreement is pulled down here (-4.0)—the part is less aligned on this axis than on your top drivers.",
+          "You lean brighter top end (≈-3.0), while this SKU trends the other way on that axis (≈+2.0)—overall score still reflects stronger matches elsewhere.",
+          "You lean strong tactile feedback (≈-2.0), while this SKU trends the other way on that axis (≈+2.0)—overall score still reflects stronger matches elsewhere."
+        ],
+        "whyTraits": [
+          "Muted / dampened presentation — your profile is around +8.0 here; this pick reinforces that direction (match strength +56.0).",
+          "Soft bottom-out — your profile is around +8.0 here; this pick reinforces that direction (match strength +48.0).",
+          "Smooth typing feel — your profile is around +5.0 here; this pick reinforces that direction (match strength +35.0).",
+          "Lighter typing force — your profile is around +4.0 here; this pick reinforces that direction (match strength +16.0)."
+        ]
+      },
+      {
+        "confidence": 0.9211,
+        "domain": "foam",
+        "explanation": "Top weighted axis contributions: muted (+104.40); soft_bottom_out (+86.40); smooth (+25.00); light_typing_force (+16.00).",
+        "itemId": "foam-heavy",
+        "rawCosine": 0.8422926086122041,
+        "score": 0.8422926086122041,
+        "summary": "We recommended Heavy damp mainly because your trait profile emphasizes muted / dampened presentation, soft bottom-out, and smooth typing feel, and this option lines up strongly on those same weighted axes.",
+        "tradeOffs": [
+          "Trade-off on strong tactile feedback: weighted agreement is pulled down here (-4.0)—the part is less aligned on this axis than on your top drivers.",
+          "Trade-off on brighter top end: weighted agreement is pulled down here (-3.3)—the part is less aligned on this axis than on your top drivers.",
+          "Trade-off on firm bottom-out: weighted agreement is pulled down here (-3.0)—the part is less aligned on this axis than on your top drivers.",
+          "You lean brighter top end (≈-3.0), while this SKU trends the other way on that axis (≈+1.0)—overall score still reflects stronger matches elsewhere.",
+          "You lean strong tactile feedback (≈-2.0), while this SKU trends the other way on that axis (≈+2.0)—overall score still reflects stronger matches elsewhere."
+        ],
+        "whyTraits": [
+          "Muted / dampened presentation — your profile is around +8.0 here; this pick reinforces that direction (match strength +104.4).",
+          "Soft bottom-out — your profile is around +8.0 here; this pick reinforces that direction (match strength +86.4).",
+          "Smooth typing feel — your profile is around +5.0 here; this pick reinforces that direction (match strength +25.0).",
+          "Lighter typing force — your profile is around +4.0 here; this pick reinforces that direction (match strength +16.0)."
+        ]
+      },
+      {
+        "confidence": 0.7537,
+        "domain": "layout",
+        "explanation": "Top weighted axis contributions: soft_bottom_out (+48.00); muted (+40.00); smooth (+20.00); light_typing_force (+17.60).",
+        "itemId": "lay-full",
+        "rawCosine": 0.507457221016159,
+        "score": 0.4973080765958358,
+        "summary": "We recommended Full-size mainly because your trait profile emphasizes soft bottom-out, muted / dampened presentation, and smooth typing feel, and this option lines up strongly on those same weighted axes.",
+        "tradeOffs": [
+          "Trade-off on brighter top end: weighted agreement is pulled down here (-12.0)—the part is less aligned on this axis than on your top drivers.",
+          "Trade-off on strong tactile feedback: weighted agreement is pulled down here (-6.0)—the part is less aligned on this axis than on your top drivers.",
+          "Trade-off on firm bottom-out: weighted agreement is pulled down here (-4.2)—the part is less aligned on this axis than on your top drivers.",
+          "You lean brighter top end (≈-3.0), while this SKU trends the other way on that axis (≈+4.0)—overall score still reflects stronger matches elsewhere.",
+          "You lean strong tactile feedback (≈-2.0), while this SKU trends the other way on that axis (≈+3.0)—overall score still reflects stronger matches elsewhere."
+        ],
+        "whyTraits": [
+          "Soft bottom-out — your profile is around +8.0 here; this pick reinforces that direction (match strength +48.0).",
+          "Muted / dampened presentation — your profile is around +8.0 here; this pick reinforces that direction (match strength +40.0).",
+          "Smooth typing feel — your profile is around +5.0 here; this pick reinforces that direction (match strength +20.0).",
+          "Lighter typing force — your profile is around +4.0 here; this pick reinforces that direction (match strength +17.6)."
+        ]
+      }
+    ],
+    "traitAxes": [
+      "deep_sound",
+      "high_pitch",
+      "muted",
+      "poppy",
+      "marbly",
+      "smooth",
+      "scratchy",
+      "soft_bottom_out",
+      "firm_bottom_out",
+      "flexible",
+      "stiff",
+      "strong_tactile",
+      "light_typing_force"
+    ],
+    "userTraitScores": {
+      "deep_sound": 0.0,
+      "firm_bottom_out": -1.0,
+      "flexible": 0.0,
+      "high_pitch": -3.0,
+      "light_typing_force": 4.0,
+      "marbly": 0.0,
+      "muted": 8.0,
+      "poppy": 0.0,
+      "scratchy": 0.0,
+      "smooth": 5.0,
+      "soft_bottom_out": 8.0,
+      "stiff": 0.0,
+      "strong_tactile": -2.0
+    },
+    "userVector": {
+      "clacky": -3.0,
+      "deep_sound": 1.2,
+      "firm": -1.0,
+      "smooth": 5.96,
+      "soft": 11.4,
+      "tactile_strength": -2.25
+    }
+  },
+  "diagnostics": {
+    "hooks": [
+      "diagnostics_hook:explain_tradeoff_high_diversity_low_alignment",
+      "diagnostics_hook:penalty_trace_for_compatibility_debug"
+    ],
+    "metricValues": {
+      "build_coherence": 0.70168,
+      "compatibility_stability": 1.0,
+      "diversity_intervention": 0.5,
+      "reranking_distortion_index": 0.5,
+      "trait_alignment": 0.275924,
+      "winner_trait_diversity": 0.070777
+    },
+    "penaltyTrace": [],
+    "rerankTrace": [
+      {
+        "changed": false,
+        "family": "switch",
+        "notes": [
+          "diversity_hook:rank2_trait_distance_to_winner",
+          "diversity_reorder:no_change"
+        ]
+      },
+      {
+        "changed": false,
+        "family": "plate",
+        "notes": [
+          "diversity_hook:rank2_trait_distance_to_winner",
+          "diversity_reorder:no_change"
+        ]
+      },
+      {
+        "changed": true,
+        "family": "foam",
+        "notes": [
+          "diversity_hook:rank2_trait_distance_to_winner",
+          "diversity_reorder:applied"
+        ]
+      },
+      {
+        "changed": true,
+        "family": "layout",
+        "notes": [
+          "diversity_hook:rank2_trait_distance_to_winner",
+          "diversity_reorder:applied"
+        ]
+      }
+    ],
+    "summaryLines": [
+      "diversity: intervention_fraction=0.500 (fraction of families where rerank changed order).",
+      "compatibility: effective_penalty=0.0000, stability_metric=1.000.",
+      "fallback: tier=0, recovered=False, compat_relax_mult=1.000.",
+      "confidence_signal: label=high, overall=0.849 (evaluation trait_alignment=0.276).",
+      "coherence: build_coherence reflects low spread across winners on key axes; winner_trait_diversity=0.071 measures part-to-part contrast."
+    ]
+  },
+  "inputs": {
+    "answers": {
+      "bottom_out": "soft",
+      "sound_profile": "muted",
+      "switch_feel": "linear",
+      "typing_pressure": "light",
+      "volume": "quiet"
+    },
+    "naturalLanguage": null
+  },
+  "metrics": {
+    "build_coherence": 0.70168,
+    "compatibility_stability": 1.0,
+    "diversity_intervention": 0.5,
+    "reranking_distortion_index": 0.5,
+    "trait_alignment": 0.275924,
+    "winner_trait_diversity": 0.070777
+  },
+  "pipelineTrace": {
+    "flatSummaryLines": [
+      "=== inputs :: Survey answers ===",
+      "keys: ['bottom_out', 'sound_profile', 'switch_feel', 'typing_pressure', 'volume']",
+      "=== natural_language :: NLP preference blend ===",
+      "natural_language: not applied (empty or whitespace input).",
+      "=== trait_similarity :: Weighted cosine winners (per domain) ===",
+      "switch: pick='sw-silent-linear' raw_cosine=0.84549 blended_score=0.862399",
+      "plate: pick='plate-pom' raw_cosine=0.625511 blended_score=0.625511",
+      "foam: pick='foam-heavy' raw_cosine=0.842293 blended_score=0.842293",
+      "layout: pick='lay-full' raw_cosine=0.507457 blended_score=0.497308",
+      "=== compatibility_penalties :: Soft compatibility adjustments ===",
+      "compatibility: effective_penalty=0.0000 raw_penalty=0.0000 rules=0.",
+      "=== diversity_reranking :: Diversity rerank (alternate slots) ===",
+      "diversity reranking: 2/4 families had order changes (fraction=0.500).",
+      "Among changed lists, mean Spearman footrule displacement is 2.00 (higher → more reordering).",
+      "Interpretation: diversity stage altered ranking behavior on about 50% of families.",
+      "=== fallback_recovery :: Fallback recovery ===",
+      "Confidence fell after fallback adjustments (Δ≈-0.0140).",
+      "=== final_selection :: API recommendations + confidence ===",
+      "final_pick: domain='switch' itemId='sw-silent-linear' confidence=0.9227",
+      "final_pick: domain='plate' itemId='plate-pom' confidence=0.8128",
+      "final_pick: domain='foam' itemId='foam-heavy' confidence=0.9211",
+      "final_pick: domain='layout' itemId='lay-full' confidence=0.7537",
+      "engine_scores: switch=0.862399370723158 plate=0.6255107169331494 foam=0.8422926086122041 layout=0.4973080765958358",
+      "diversity: intervention_fraction=0.500 (fraction of families where rerank changed order).",
+      "compatibility: effective_penalty=0.0000, stability_metric=1.000.",
+      "fallback: tier=0, recovered=False, compat_relax_mult=1.000."
+    ],
+    "penaltyTrace": [],
+    "rerankTrace": [
+      {
+        "changed": false,
+        "family": "switch",
+        "notes": [
+          "diversity_hook:rank2_trait_distance_to_winner",
+          "diversity_reorder:no_change"
+        ]
+      },
+      {
+        "changed": false,
+        "family": "plate",
+        "notes": [
+          "diversity_hook:rank2_trait_distance_to_winner",
+          "diversity_reorder:no_change"
+        ]
+      },
+      {
+        "changed": true,
+        "family": "foam",
+        "notes": [
+          "diversity_hook:rank2_trait_distance_to_winner",
+          "diversity_reorder:applied"
+        ]
+      },
+      {
+        "changed": true,
+        "family": "layout",
+        "notes": [
+          "diversity_hook:rank2_trait_distance_to_winner",
+          "diversity_reorder:applied"
+        ]
+      }
+    ],
+    "schemaVersion": "debug.pipeline_trace.v1",
+    "stages": [
+      {
+        "data": {
+          "answers": {
+            "bottom_out": "soft",
+            "sound_profile": "muted",
+            "switch_feel": "linear",
+            "typing_pressure": "light",
+            "volume": "quiet"
+          }
+        },
+        "id": "inputs",
+        "summaryLines": [
+          "keys: ['bottom_out', 'sound_profile', 'switch_feel', 'typing_pressure', 'volume']"
+        ],
+        "title": "Survey answers"
+      },
+      {
+        "data": {
+          "applied": false,
+          "matchedTermIds": [],
+          "normalizedText": "",
+          "parsingConfidence": 0.0,
+          "unknownTokens": [],
+          "warnings": []
+        },
+        "id": "natural_language",
+        "summaryLines": [
+          "natural_language: not applied (empty or whitespace input)."
+        ],
+        "title": "NLP preference blend"
+      },
+      {
+        "data": {
+          "selected": {
+            "foam": {
+              "family": "foam",
+              "itemId": "foam-heavy",
+              "rawCosine": 0.842293,
+              "score": 0.842293
+            },
+            "layout": {
+              "family": "layout",
+              "itemId": "lay-full",
+              "rawCosine": 0.507457,
+              "score": 0.497308
+            },
+            "plate": {
+              "family": "plate",
+              "itemId": "plate-pom",
+              "rawCosine": 0.625511,
+              "score": 0.625511
+            },
+            "switch": {
+              "family": "switch",
+              "itemId": "sw-silent-linear",
+              "rawCosine": 0.84549,
+              "score": 0.862399
+            }
+          }
+        },
+        "id": "trait_similarity",
+        "summaryLines": [
+          "switch: pick='sw-silent-linear' raw_cosine=0.84549 blended_score=0.862399",
+          "plate: pick='plate-pom' raw_cosine=0.625511 blended_score=0.625511",
+          "foam: pick='foam-heavy' raw_cosine=0.842293 blended_score=0.842293",
+          "layout: pick='lay-full' raw_cosine=0.507457 blended_score=0.497308"
+        ],
+        "title": "Weighted cosine winners (per domain)"
+      },
+      {
+        "data": {
+          "effectivePenaltyTotal": 0.0,
+          "intentMultiplier": 1.0,
+          "lines": [],
+          "rawPenaltyTotal": 0.0
+        },
+        "id": "compatibility_penalties",
+        "summaryLines": [
+          "compatibility: effective_penalty=0.0000 raw_penalty=0.0000 rules=0."
+        ],
+        "title": "Soft compatibility adjustments"
+      },
+      {
+        "data": {
+          "diversityAudit": {
+            "families": [
+              {
+                "family": "switch",
+                "notes": [
+                  "diversity_hook:rank2_trait_distance_to_winner",
+                  "diversity_reorder:no_change"
+                ],
+                "originalOrderIds": [
+                  "sw-silent-linear",
+                  "sw-longpole-linear",
+                  "sw-light-tactile",
+                  "sw-speed-linear",
+                  "sw-strong-tactile"
+                ],
+                "rerankedOrderIds": [
+                  "sw-silent-linear",
+                  "sw-longpole-linear",
+                  "sw-light-tactile",
+                  "sw-speed-linear",
+                  "sw-strong-tactile"
+                ]
+              },
+              {
+                "family": "plate",
+                "notes": [
+                  "diversity_hook:rank2_trait_distance_to_winner",
+                  "diversity_reorder:no_change"
+                ],
+                "originalOrderIds": [
+                  "plate-pom",
+                  "plate-pc",
+                  "plate-fr4",
+                  "plate-alu",
+                  "plate-brass"
+                ],
+                "rerankedOrderIds": [
+                  "plate-pom",
+                  "plate-pc",
+                  "plate-fr4",
+                  "plate-alu",
+                  "plate-brass"
+                ]
+              },
+              {
+                "family": "foam",
+                "notes": [
+                  "diversity_hook:rank2_trait_distance_to_winner",
+                  "diversity_reorder:applied"
+                ],
+                "originalOrderIds": [
+                  "foam-heavy",
+                  "foam-case-poron",
+                  "foam-case-plate",
+                  "foam-minimal"
+                ],
+                "rerankedOrderIds": [
+                  "foam-heavy",
+                  "foam-case-plate",
+                  "foam-case-poron",
+                  "foam-minimal"
+                ]
+              },
+              {
+                "family": "layout",
+                "notes": [
+                  "diversity_hook:rank2_trait_distance_to_winner",
+                  "diversity_reorder:applied"
+                ],
+                "originalOrderIds": [
+                  "lay-full",
+                  "lay-65",
+                  "lay-60",
+                  "lay-tkl"
+                ],
+                "rerankedOrderIds": [
+                  "lay-full",
+                  "lay-60",
+                  "lay-65",
+                  "lay-tkl"
+                ]
+              }
+            ]
+          },
+          "rerankingImpact": {
+            "familiesAnalyzed": 4,
+            "familiesChanged": 2,
+            "fractionFamiliesChanged": 0.5,
+            "meanFootrulePerChangedFamily": 2.0,
+            "perFamily": [
+              {
+                "changed": false,
+                "family": "switch",
+                "footrule": 0,
+                "originalOrderIds": [
+                  "sw-silent-linear",
+                  "sw-longpole-linear",
+                  "sw-light-tactile",
+                  "sw-speed-linear",
+                  "sw-strong-tactile"
+                ],
+                "rerankedOrderIds": [
+                  "sw-silent-linear",
+                  "sw-longpole-linear",
+                  "sw-light-tactile",
+                  "sw-speed-linear",
+                  "sw-strong-tactile"
+                ]
+              },
+              {
+                "changed": false,
+                "family": "plate",
+                "footrule": 0,
+                "originalOrderIds": [
+                  "plate-pom",
+                  "plate-pc",
+                  "plate-fr4",
+                  "plate-alu",
+                  "plate-brass"
+                ],
+                "rerankedOrderIds": [
+                  "plate-pom",
+                  "plate-pc",
+                  "plate-fr4",
+                  "plate-alu",
+                  "plate-brass"
+                ]
+              },
+              {
+                "changed": true,
+                "family": "foam",
+                "footrule": 2,
+                "originalOrderIds": [
+                  "foam-heavy",
+                  "foam-case-poron",
+                  "foam-case-plate",
+                  "foam-minimal"
+                ],
+                "rerankedOrderIds": [
+                  "foam-heavy",
+                  "foam-case-plate",
+                  "foam-case-poron",
+                  "foam-minimal"
+                ]
+              },
+              {
+                "changed": true,
+                "family": "layout",
+                "footrule": 2,
+                "originalOrderIds": [
+                  "lay-full",
+                  "lay-65",
+                  "lay-60",
+                  "lay-tkl"
+                ],
+                "rerankedOrderIds": [
+                  "lay-full",
+                  "lay-60",
+                  "lay-65",
+                  "lay-tkl"
+                ]
+              }
+            ],
+            "schemaVersion": "evaluation.reranking_impact.v1",
+            "summaryLines": [
+              "diversity reranking: 2/4 families had order changes (fraction=0.500).",
+              "Among changed lists, mean Spearman footrule displacement is 2.00 (higher → more reordering).",
+              "Interpretation: diversity stage altered ranking behavior on about 50% of families."
+            ]
+          }
+        },
+        "id": "diversity_reranking",
+        "summaryLines": [
+          "diversity reranking: 2/4 families had order changes (fraction=0.500).",
+          "Among changed lists, mean Spearman footrule displacement is 2.00 (higher → more reordering).",
+          "Interpretation: diversity stage altered ranking behavior on about 50% of families."
+        ],
+        "title": "Diversity rerank (alternate slots)"
+      },
+      {
+        "data": {
+          "fallbackAudit": {
+            "compatibilityRelaxMult": 1.0,
+            "confidenceAfter": 0.8493,
+            "confidenceBefore": 0.8633,
+            "diversityStrengthMult": 1.0,
+            "notes": [
+              "fallback_hook:quality_accepted"
+            ],
+            "overallLabel": "high",
+            "recovered": false,
+            "tier": 0,
+            "triggers": []
+          },
+          "fallbackEffectiveness": {
+            "confidenceAfter": 0.8493,
+            "confidenceBefore": 0.8633,
+            "confidenceLift": -0.014,
+            "present": true,
+            "recovered": false,
+            "schemaVersion": "evaluation.fallback_effectiveness.v1",
+            "summaryLines": [
+              "Confidence fell after fallback adjustments (Δ≈-0.0140)."
+            ],
+            "tier": 0
+          }
+        },
+        "id": "fallback_recovery",
+        "summaryLines": [
+          "Confidence fell after fallback adjustments (Δ≈-0.0140)."
+        ],
+        "title": "Fallback recovery"
+      },
+      {
+        "data": {
+          "diagnosticSummary": [
+            "diversity: intervention_fraction=0.500 (fraction of families where rerank changed order).",
+            "compatibility: effective_penalty=0.0000, stability_metric=1.000.",
+            "fallback: tier=0, recovered=False, compat_relax_mult=1.000.",
+            "confidence_signal: label=high, overall=0.849 (evaluation trait_alignment=0.276).",
+            "coherence: build_coherence reflects low spread across winners on key axes; winner_trait_diversity=0.071 measures part-to-part contrast."
+          ],
+          "recommendationConfidence": {
+            "compatibilityComponent": 1.0,
+            "diversityDistortionComponent": 0.825,
+            "fallbackTier": 0,
+            "hooks": [
+              "confidence:similarity=0.853",
+              "confidence:compatibility_headroom=1.000",
+              "confidence:diversity_distortion_index=0.500",
+              "confidence:label=high"
+            ],
+            "label": "high",
+            "overall": 0.8493,
+            "similarityComponent": 0.8526
+          }
+        },
+        "id": "final_selection",
+        "summaryLines": [
+          "final_pick: domain='switch' itemId='sw-silent-linear' confidence=0.9227",
+          "final_pick: domain='plate' itemId='plate-pom' confidence=0.8128",
+          "final_pick: domain='foam' itemId='foam-heavy' confidence=0.9211",
+          "final_pick: domain='layout' itemId='lay-full' confidence=0.7537",
+          "engine_scores: switch=0.862399370723158 plate=0.6255107169331494 foam=0.8422926086122041 layout=0.4973080765958358",
+          "diversity: intervention_fraction=0.500 (fraction of families where rerank changed order).",
+          "compatibility: effective_penalty=0.0000, stability_metric=1.000.",
+          "fallback: tier=0, recovered=False, compat_relax_mult=1.000."
+        ],
+        "title": "API recommendations + confidence"
+      }
+    ]
+  },
+  "schemaVersion": "debug.replay_bundle.v1",
+  "snapshot": {
+    "compatibilityAudit": {
+      "effectivePenaltyTotal": 0.0,
+      "intentMultiplier": 1.0,
+      "lines": [],
+      "rawPenaltyTotal": 0.0
+    },
+    "diversityAudit": {
+      "families": [
+        {
+          "family": "switch",
+          "notes": [
+            "diversity_hook:rank2_trait_distance_to_winner",
+            "diversity_reorder:no_change"
+          ],
+          "originalOrderIds": [
+            "sw-silent-linear",
+            "sw-longpole-linear",
+            "sw-light-tactile",
+            "sw-speed-linear",
+            "sw-strong-tactile"
+          ],
+          "rerankedOrderIds": [
+            "sw-silent-linear",
+            "sw-longpole-linear",
+            "sw-light-tactile",
+            "sw-speed-linear",
+            "sw-strong-tactile"
+          ]
+        },
+        {
+          "family": "plate",
+          "notes": [
+            "diversity_hook:rank2_trait_distance_to_winner",
+            "diversity_reorder:no_change"
+          ],
+          "originalOrderIds": [
+            "plate-pom",
+            "plate-pc",
+            "plate-fr4",
+            "plate-alu",
+            "plate-brass"
+          ],
+          "rerankedOrderIds": [
+            "plate-pom",
+            "plate-pc",
+            "plate-fr4",
+            "plate-alu",
+            "plate-brass"
+          ]
+        },
+        {
+          "family": "foam",
+          "notes": [
+            "diversity_hook:rank2_trait_distance_to_winner",
+            "diversity_reorder:applied"
+          ],
+          "originalOrderIds": [
+            "foam-heavy",
+            "foam-case-poron",
+            "foam-case-plate",
+            "foam-minimal"
+          ],
+          "rerankedOrderIds": [
+            "foam-heavy",
+            "foam-case-plate",
+            "foam-case-poron",
+            "foam-minimal"
+          ]
+        },
+        {
+          "family": "layout",
+          "notes": [
+            "diversity_hook:rank2_trait_distance_to_winner",
+            "diversity_reorder:applied"
+          ],
+          "originalOrderIds": [
+            "lay-full",
+            "lay-65",
+            "lay-60",
+            "lay-tkl"
+          ],
+          "rerankedOrderIds": [
+            "lay-full",
+            "lay-60",
+            "lay-65",
+            "lay-tkl"
+          ]
+        }
+      ]
+    },
+    "fallbackAudit": {
+      "compatibilityRelaxMult": 1.0,
+      "confidenceAfter": 0.8493,
+      "confidenceBefore": 0.8633,
+      "diversityStrengthMult": 1.0,
+      "notes": [
+        "fallback_hook:quality_accepted"
+      ],
+      "overallLabel": "high",
+      "recovered": false,
+      "tier": 0,
+      "triggers": []
+    },
+    "rankedLists": {
+      "foams": [
+        {
+          "family": "foam",
+          "itemId": "foam-heavy",
+          "rawCosine": 0.842293,
+          "score": 0.842293
+        },
+        {
+          "family": "foam",
+          "itemId": "foam-case-plate",
+          "rawCosine": 0.698732,
+          "score": 0.698732
+        },
+        {
+          "family": "foam",
+          "itemId": "foam-case-poron",
+          "rawCosine": 0.68113,
+          "score": 0.715187
+        },
+        {
+          "family": "foam",
+          "itemId": "foam-minimal",
+          "rawCosine": 0.12779,
+          "score": 0.1214
+        }
+      ],
+      "layouts": [
+        {
+          "family": "layout",
+          "itemId": "lay-full",
+          "rawCosine": 0.507457,
+          "score": 0.497308
+        },
+        {
+          "family": "layout",
+          "itemId": "lay-60",
+          "rawCosine": 0.43238,
+          "score": 0.43238
+        },
+        {
+          "family": "layout",
+          "itemId": "lay-65",
+          "rawCosine": 0.424097,
+          "score": 0.466506
+        },
+        {
+          "family": "layout",
+          "itemId": "lay-tkl",
+          "rawCosine": 0.382288,
+          "score": 0.401402
+        }
+      ],
+      "plates": [
+        {
+          "family": "plate",
+          "itemId": "plate-pom",
+          "rawCosine": 0.625511,
+          "score": 0.625511
+        },
+        {
+          "family": "plate",
+          "itemId": "plate-pc",
+          "rawCosine": 0.539244,
+          "score": 0.539244
+        },
+        {
+          "family": "plate",
+          "itemId": "plate-fr4",
+          "rawCosine": 0.249307,
+          "score": 0.249307
+        },
+        {
+          "family": "plate",
+          "itemId": "plate-alu",
+          "rawCosine": 0.144224,
+          "score": 0.151435
+        },
+        {
+          "family": "plate",
+          "itemId": "plate-brass",
+          "rawCosine": 0.053956,
+          "score": 0.051258
+        }
+      ],
+      "switches": [
+        {
+          "family": "switch",
+          "itemId": "sw-silent-linear",
+          "rawCosine": 0.84549,
+          "score": 0.862399
+        },
+        {
+          "family": "switch",
+          "itemId": "sw-longpole-linear",
+          "rawCosine": 0.508592,
+          "score": 0.534022
+        },
+        {
+          "family": "switch",
+          "itemId": "sw-light-tactile",
+          "rawCosine": 0.501448,
+          "score": 0.501448
+        },
+        {
+          "family": "switch",
+          "itemId": "sw-speed-linear",
+          "rawCosine": 0.298751,
+          "score": 0.292776
+        },
+        {
+          "family": "switch",
+          "itemId": "sw-strong-tactile",
+          "rawCosine": 0.030916,
+          "score": 0.030916
+        }
+      ]
+    },
+    "recommendationConfidence": {
+      "compatibilityComponent": 1.0,
+      "diversityDistortionComponent": 0.825,
+      "fallbackTier": 0,
+      "hooks": [
+        "confidence:similarity=0.853",
+        "confidence:compatibility_headroom=1.000",
+        "confidence:diversity_distortion_index=0.500",
+        "confidence:label=high"
+      ],
+      "label": "high",
+      "overall": 0.8493,
+      "similarityComponent": 0.8526
+    },
+    "schemaVersion": "evaluation.snapshot.v1",
+    "selected": {
+      "foam": {
+        "family": "foam",
+        "itemId": "foam-heavy",
+        "rawCosine": 0.842293,
+        "score": 0.842293
+      },
+      "layout": {
+        "family": "layout",
+        "itemId": "lay-full",
+        "rawCosine": 0.507457,
+        "score": 0.497308
+      },
+      "plate": {
+        "family": "plate",
+        "itemId": "plate-pom",
+        "rawCosine": 0.625511,
+        "score": 0.625511
+      },
+      "switch": {
+        "family": "switch",
+        "itemId": "sw-silent-linear",
+        "rawCosine": 0.84549,
+        "score": 0.862399
+      }
+    },
+    "surveyAnswers": {
+      "bottom_out": "soft",
+      "sound_profile": "muted",
+      "switch_feel": "linear",
+      "typing_pressure": "light",
+      "volume": "quiet"
+    },
+    "userTraitScores": {
+      "deep_sound": 0.0,
+      "firm_bottom_out": -1.0,
+      "flexible": 0.0,
+      "high_pitch": -3.0,
+      "light_typing_force": 4.0,
+      "marbly": 0.0,
+      "muted": 8.0,
+      "poppy": 0.0,
+      "scratchy": 0.0,
+      "smooth": 5.0,
+      "soft_bottom_out": 8.0,
+      "stiff": 0.0,
+      "strong_tactile": -2.0
+    },
+    "winnerTraits": [
+      {
+        "deep_sound": 3.0,
+        "firm_bottom_out": 3.0,
+        "flexible": 4.0,
+        "high_pitch": 1.0,
+        "light_typing_force": 5.0,
+        "marbly": 2.0,
+        "muted": 9.0,
+        "poppy": 1.0,
+        "scratchy": 1.0,
+        "smooth": 8.0,
+        "soft_bottom_out": 8.0,
+        "stiff": 2.0,
+        "strong_tactile": 0.0
+      },
+      {
+        "deep_sound": 6.0,
+        "firm_bottom_out": 4.0,
+        "flexible": 3.0,
+        "high_pitch": 2.0,
+        "light_typing_force": 4.0,
+        "marbly": 3.0,
+        "muted": 7.0,
+        "poppy": 2.0,
+        "scratchy": 2.0,
+        "smooth": 7.0,
+        "soft_bottom_out": 6.0,
+        "stiff": 4.0,
+        "strong_tactile": 2.0
+      },
+      {
+        "deep_sound": 4.0,
+        "firm_bottom_out": 3.0,
+        "flexible": 3.0,
+        "high_pitch": 1.0,
+        "light_typing_force": 4.0,
+        "marbly": 2.0,
+        "muted": 9.0,
+        "poppy": 1.0,
+        "scratchy": 1.0,
+        "smooth": 5.0,
+        "soft_bottom_out": 8.0,
+        "stiff": 2.0,
+        "strong_tactile": 2.0
+      },
+      {
+        "deep_sound": 6.0,
+        "firm_bottom_out": 4.0,
+        "flexible": 3.0,
+        "high_pitch": 4.0,
+        "light_typing_force": 4.0,
+        "marbly": 3.0,
+        "muted": 5.0,
+        "poppy": 2.0,
+        "scratchy": 3.0,
+        "smooth": 4.0,
+        "soft_bottom_out": 6.0,
+        "stiff": 4.0,
+        "strong_tactile": 3.0
+      }
+    ]
+  }
+}

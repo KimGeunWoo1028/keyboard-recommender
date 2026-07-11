@@ -1,0 +1,256 @@
+Keyboard Recommender — Swagkey · 카탈로그 로드맵 (Phase 1–2 완료 · Phase 3 후속)
+================================================================================
+
+작성 목적
+---------
+Phase 1(인벤토리·seed·브라우징) → Phase 2(추천↔쇼핑·6축·ops)까지 완료한 뒤,
+후속(Phase 3): stub UI · 선택적 키캡/설문 확장 · 운영 자동화를 추적한다.
+
+기준일: 2026-07-08 (⑩~⑮ 완료 · Phase 3 후속 항목 정리)
+
+
+핵심 원칙 (유지)
+----------------
+- Backend / Frontend / 서버 아키텍처는 유지한다. (전면 재설계하지 않음)
+- 크롤 CSV/MD = 인벤토리 · swagkey_products.seed.json = 추천 풀 · swagkey_catalog_full.json = 브라우징 전용(추천 제외)
+- trait·spec·상품 상세 URL 없이 seed에 대량 추가하지 않는다.
+- 상품 링크는 반드시 `?idx=` 포함 상세 URL (카테고리 목록 `/39` 등 금지)
+- 권장 canonical 형식: `https://www.swagkey.kr/shop_view/?idx={id}` (카테고리 slug `/132/` 등 404 방지)
+
+
+현재 baseline (Phase 1 + ⑩~⑮ 완료 요약)
+----------------------------------------
+- 인벤토리 파이프라인: 정제 → 분류 → diff → URL 크롤 → seed merge → regression (①~⑨)
+- 추천 풀 seed: switch 67 · plate 14 · foam 9 · layout 22 · case 49 · keycap 12 · 합계 173
+- full catalog: 153건 (keycap 65 · accessory 52 · deskpad 27 · gaming 7 · merch 2) — 브라우징 전용
+- browse API/UI: GET /switches|plates|foam|cases|keycaps · Frontend /catalog
+  · 탭 5개만: 스위치 · 플레이트 · 폼 · 케이스/키트 · 키캡 (추천풀/키캡·기타 모드 제거)
+  · 액세서리·데스크패드·게이밍·굿즈·기타는 UI 미노출 (inventory full JSON은 ops 전용 유지)
+  · 검색 `q` (이름·ID) · 페이지네이션 limit=24 + offset
+  · 카드 클릭 → 상세 패널 (traits·metadata·스웨그키 링크)
+  · URL deep link: /catalog?family=&subtype=&q=&page=
+- sourceUrl 보정: fix_swagkey_seed_source_urls.py + apply_seed_quality_cleanup.py
+  · 전 switch/plate/foam URL → shop_view/?idx= (unresolved 0)
+  · 단종·중복 SKU 5건 seed 제거
+  · seed_only 21건 잔여 (layout 7 · foam variant 1 · crawl 미매칭 switch 13 — URL 있음)
+- ops ⑮: inventory recheck alert · E2E schedule/path-filter · feedback dry-run · HTTPS config check
+- regression: run_swagkey_catalog_regression.py — backend 89+ passed · frontend 17 passed
+- 추천 API: POST /recommendations/compute — picks·build.sourceUrls·alternatives에 sourceUrl
+- 결과 UI: /results «스웨그키에서 보기» (switch·plate·foam·layout·case·keycap·대안)
+  · stale sessionStorage 자동 재조회 (responseContractRev: 7)
+  · 프론트·백엔드 모두 shop_view URL 정규화
+
+- 추천 엔진: build_selection 6축 (switch·plate·foam·layout·case·keycap)
+  · case ↔ layout 호환 (layout_size, mounting_style)
+  · keycap ↔ layout 호환 (compatible_layout_sizes) · kit_scope warning
+  · API build.keycap · engineScores.keycapId/keycapScore · picks domain=keycap
+
+
+데이터 흐름 (현재 → 목표)
+--------------------------
+  [완료] CSV → inventory → seed 173 + catalog_full 153
+              → /catalog 브라우징 + 스웨그키 링크
+
+  [완료] 설문 → 추천 API (6축) → /results 각 pick + 케이스/키트·키캡 카드에 sourceUrl
+              → 스웨그키 shop_view 상세 페이지 직행
+
+  [완료] /catalog 5탭 (스위치·플레이트·폼·케이스/키트·키캡) · 비추천 카테고리 UI 제거
+
+  [완료] keycap curated seed 12건 → 엔진 6번째 축 · GET /keycaps browse
+
+  [완료] 운영 재크롤 알림 · E2E 주기화 · feedback/HTTPS 검증 스크립트
+
+  [후속] Phase 3 — stub · 선택적 확장 · 운영 자동화 (아래 §Phase 3)
+
+
+================================================================================
+[우선 — 이번에 할 것]
+================================================================================
+
+(Phase 2 ①~⑮ 완료. 남은 작업은 Phase 3 후속으로 이동.)
+
+당장 필수는 없음. 우선순위를 잡을 때는 Phase 3 아래 순서를 따름:
+  1) stub (마이페이지 Coming Soon) — UX 구멍 메우기
+  2) 선택적 확장 (키캡/설문) — 추천 품질·선호 입력 강화
+  3) 운영 자동화 (live crawl / webhook) — 손이 덜 가게
+
+
+================================================================================
+[Phase 3 — 후속 (stub · 선택적 확장 · 운영 자동화)]
+================================================================================
+
+요약 (PROJECT_CONTEXT §4.9 대응)
+--------------------------------
+Phase 2로 추천↔쇼핑·6축·카탈로그 5탭·ops 검증까지는 끝났다.
+아래는 **필수가 아닌 후속**이다. 없어도 핵심 플로우는 동작한다.
+
+A. Stub (자리만 잡아 둔 UI)
+---------------------------
+제품 흐름은 이미 동작하지만, 마이페이지 일부는 placeholder만 있다.
+
+[ ] A1. 마이페이지 Coming Soon 섹션 실구현
+    · 현재: features/mypage 일부 → MyPageComingSoon placeholder
+    · 이미 동작: 저장 빌드 · 비교 · 활동 타임라인 · 계정 관리
+    · 범위: Coming Soon으로 남은 탭/섹션을 실기능으로 교체 (또는 미사용이면 UI에서 제거)
+    · 비고: Swagkey 데이터 파이프라인과 무관 · 제품 UX 마무리
+
+B. 선택적 확장 (키캡·선호 UX)
+----------------------------
+키캡은 이미 curated 12 + 엔진 6축 + GET /keycaps + /catalog 키캡 탭까지 들어갔다.
+남는 것은 **풀을 키우고 / 설문·NL이 키캡을 직접 말하게** 하는 보강이다.
+
+[ ] B1. 키캡 seed 확대
+    · 현재: full catalog keycap 65건 중 Base/완결 키트 12건만 seed
+    · 목표: trait·spec·shop_view URL이 있는 후보만 추가로 curated 병합
+    · 원칙: URL/trait 없이 대량 추가 금지 (핵심 원칙 유지)
+    · 산출: seed keycaps[] 증가 · GET /keycaps · regression golden 재생성
+
+[ ] B2. 설문 / NL 키캡 축
+    · 현재: 키캡은 엔진·호환 규칙·소리 성향 매칭 위주 (설문 전용 질문·NL 용어 미구현)
+    · 목표: 설문에 키캡 프로필/재질 등 선호 질문 추가 · NL에 키캡 용어 → trait delta
+    · 관련: ⑭·⑫에서 남겨 둔 설문/NL 후속 항목을 여기로 승격
+    · (검토) kit/barebone/complete 설문 질문도 같은 “선호 입력 확장” 계열
+
+[ ] B3. (선택) spec scrape 재실행으로 metadata 정밀도
+    · run_all_swagkey_pipeline.cmd — seed sourceUrl 기준 HTML → enrich
+    · ⑪에서 남겨 둔 선택 항목 · 추천 풀 품질 보강용
+
+C. 운영 자동화 (ops)
+--------------------
+지금: fixture 주간 recheck · alert JSON/artifact · live 크롤은 운영자 수동.
+남는 것: **실제 크롤을 스케줄로**, **알림을 채널로** 보내는 자동화.
+
+[ ] C1. live crawl 완전 자동화
+    · 현재: swagkey-inventory-recheck.yml = fixture diff → alert artifact
+             live는 run_swagkey_inventory_recheck.py --mode live (수동)
+    · 목표: Actions secret + schedule로 크롤 → 정제 → diff → alert까지 끊김 없이
+    · 주의: Swagkey 사이트 부하·차단 · secret에 쿠키/헤더 필요 시 문서화
+    · 산출: workflow live job · docs/swagkey-inventory-recheck.md 갱신
+
+[ ] C2. catalog alert webhook
+    · 현재: catalog_change_alert.{json,txt} + CI artifact
+    · 목표: OPERATIONAL_ALERT_WEBHOOK_URL → Slack/Discord/이메일 등 즉시 통지
+    · 트리거: seed_only(품절 후보) · new_in_crawl(신규) · name_changed
+    · 산출: alert publisher · env 문서 · staging dry-run
+
+
+================================================================================
+[완료] Phase 2 (⑩~⑮) + Phase 1 요약은 하단·PROJECT_CONTEXT 참고
+================================================================================
+
+⑮ 운영·품질 (2026-07-08)
+   [x] crawl→diff→알림: catalog_change_alert + run_swagkey_inventory_recheck.py
+       · seed_only ≈ 품절/단종 후보 · new_in_crawl ≈ 신규 · name_changed ≈ 이름 드리프트
+       · CI fixture 주간 workflow (swagkey-inventory-recheck.yml) · live 크롤은 운영자 수동
+   [x] E2E CI: e2e.yml schedule + path-filtered PR + workflow_dispatch (수동 전용 해제)
+       · ci.yml Quality · E2E는 기존 merge gate 유지 · start-stack CI pip skip · retries=2
+   [x] ENABLE_FEEDBACK_LEARNING_MVP 스테이징 검증 경로
+       · verify_feedback_learning_mvp.py (--dry-run-local / --base-url)
+       · docs/staging-feedback-learning-mvp.md · runbook 링크
+   [x] production HTTPS: docs/production-https.md 보강 + check_production_https_config.py
+       · nginx 스케치 · env 표 · curl 검증 · failure matrix · CI offline check
+   [x] verify_ops_quality_15.py 로컬 일괄 검증
+
+⑭ 키캡 추천 축 (2026-07-08)
+   [x] KeycapMetadata + derive_keycap_traits (ABS/PBT·프로필·각인 방식 → 소리 축)
+   [x] full catalog 65건 중 Base/완결 키트 12건 curated → seed keycaps[]
+   [x] seed inRecommendationPool=true · full catalog는 browse-only(false) 유지
+   [x] KEYCAPS 로드 · build_selection/fallback/diversity 6축
+   [x] keycap_layout_size_mismatch (hard) · keycap_kit_scope_incomplete (warning)
+   [x] API build.keycap · sourceUrls.keycap · picks domain=keycap · responseContractRev: 7
+   [x] Frontend /results 빌드 카드 «키캡» + stale keycap 자동 재조회
+   [x] snapshot golden 재생성 · regression 89 passed
+   [→] 설문 키캡 프로필·NL 키캡 용어 — Phase 3 B2로 이동
+
+⑬ 카탈로그 UX 보강 (2026-07-07)
+   [x] API `q` 검색 — 추천 풀(이름·ID) · full catalog(이름·브랜드)
+   [x] 페이지네이션 — PAGE_SIZE 24 · limit/offset · 이전/다음 UI
+   [x] 카드 → 상세 패널 — traits·metadata·matchedKeywords · 스웨그키 링크
+   [x] fetchFullCatalogItem + parseFullCatalogItemDetail
+   [x] 홈 hero/feature-grid · /results «관련 부품 더 탐색하기» 링크
+   [x] test_catalog_browse · test_swagkey_catalog_full · catalog contract tests
+
+⑫ 케이스를 추천 엔진 5번째 축으로 (2026-07-07)
+   [x] catalog_sample CASES 49건 로드 · derive_case_traits 매칭 편입
+   [x] rank_parts / build_selection / fallback / diversity 5축 확장
+   [x] case ↔ layout 호환 규칙 (case_layout_size_mismatch, case_mounting_mismatch)
+   [x] API build.case · sourceUrls.case · picks domain=case · responseContractRev: 6
+   [x] snapshot golden 재생성 (random.seed 20260505) · regression 78 passed
+   [x] Frontend /results 빌드 카드 «케이스/키트» + 스웨그키 링크
+   [→] 설문 kit/barebone/complete 선호 질문 — Phase 3 B2 (선호 입력 확장)로 이동
+
+⑩ 추천 결과 ↔ 스웨그키 링크 연결 (2026-07-07)
+   [x] POST /recommendations/compute — picks·build.sourceUrls·alternatives에 sourceUrl
+   [x] resolve_catalog_source_url + swagkey_source_url resolver (browse와 동일 규칙)
+   [x] Frontend /results — 스위치·플레이트·폼·레이아웃·대안 «스웨그키에서 보기»
+   [x] contract: recommendation-response + API contract + snapshot golden
+   [x] stale 결과 자동 재조회 (링크 누락·구형 URL 감지)
+   [x] shop_view/?idx= URL 정규화 (흡음재 /132/ 404 등 카테고리 slug 불일치 해결)
+   [x] seed sourceUrl 146건 shop_view 형식으로 일괄 보정
+
+⑪ 데이터 품질 마무리 (2026-07-07)
+   [x] apply_seed_quality_cleanup.py — 단종·중복 SKU 5건 제거 · URL 13건 보정
+   [x] fix_swagkey_seed_source_urls.py — unresolved 0 (layout은 URL 없음 정상)
+   [x] diff_swagkey_seed_inventory.py 재실행 — seed_only 26→21
+   [x] seed_quality.py + test_seed_quality.py · 수동 curation·카탈로그 카운트 갱신
+   [→] (선택) spec scrape 재실행 → Phase 3 B3로 이동
+
+
+================================================================================
+[장기] → Phase 3로 통합
+================================================================================
+
+위 §Phase 3 (A stub · B 선택적 확장 · C 운영 자동화) 참고.
+중복 목록을 두지 않는다.
+
+
+기대 효과
+---------
+- ⑩·⑪ [완료] 추천↔쇼핑 링크 + 단종 SKU 정리 — 신뢰도 향상
+- ⑫ [완료] case 5축 추천 — 키트까지 한 번에 조합
+- ⑬ [완료] 카탈로그 검색·페이지네이션·상세 패널 — 추천 후 탐색 UX
+- ⑭ [완료] keycap 6축 추천 — 소리 성향 기반 키캡 매칭
+- ⑮ [완료] 운영 재크롤 알림 · E2E 주기화 · feedback/HTTPS 검증
+- Phase 3 A [후속] 마이페이지 stub 제거 — 계정 UX 완성도
+- Phase 3 B [후속] 키캡 seed·설문/NL — 키캡 매칭·선호 입력 강화
+- Phase 3 C [후속] live crawl + webhook — 품절/신규 알림을 손이 덜 가게
+
+주의사항
+--------
+- localhost:3000 ↔ localhost:8010 호스트 일치 (127.0.0.1 혼용 금지)
+- .env / .env.local 커밋 금지
+- regression random.seed(20260505) 고정 — golden 임의 변경 금지
+- 한국어 UI 유지
+- Windows pytest: `python -m pytest tests -k swagkey -q` (glob 미지원)
+- Frontend dev ChunkLoadError 시: .next 삭제 후 npm run dev 재시작
+
+
+관련 파일
+---------
+- 프로젝트 컨텍스트: docs/PROJECT_CONTEXT.md
+- seed: backend/src/keyboard_recommender/catalog/swagkey_products.seed.json
+- full catalog: backend/data/swagkey_inventory/swagkey_catalog_full.json
+- 엔진: backend/src/keyboard_recommender/trait_engine/catalog_sample.py
+- build selection: backend/src/keyboard_recommender/recommendation_quality/build_selection.py
+- 추천 envelope: backend/src/keyboard_recommender/trait_engine/api_envelope.py
+- sourceUrl: backend/src/keyboard_recommender/catalog/swagkey_source_url.py
+- sourceUrl (프론트 정규화): frontend/src/lib/swagkey-source-links.ts
+- 결과 재조회: frontend/src/components/features/recommendation/results-view.tsx
+- catalog browse: backend/src/keyboard_recommender/application/catalog_browse_service.py
+- 결과 UI: frontend/src/components/features/recommendation/recommendation-result-view.tsx
+- 카탈로그 UI: frontend/src/app/catalog/page.tsx
+- 카탈로그 상세 패널: frontend/src/components/features/catalog/catalog-detail-panel.tsx
+- 카탈로그 deep link: frontend/src/lib/catalog-links.ts
+- keycap seed builder: backend/src/keyboard_recommender/catalog/swagkey_keycap_seed_builder.py
+- keycap seed merge: backend/scripts/apply_keycap_seed_merge.py
+- inventory recheck: backend/scripts/run_swagkey_inventory_recheck.py
+- catalog change alert: backend/src/keyboard_recommender/catalog/catalog_change_alert.py
+- 마이페이지 (Phase 3 A): frontend/src/components/features/mypage/
+- ops docs: docs/swagkey-inventory-recheck.md · docs/staging-feedback-learning-mvp.md · docs/production-https.md
+- 미구현 목록(대응): docs/PROJECT_CONTEXT.md §4.9
+- regression: backend/scripts/run_swagkey_catalog_regression.py
+- URL 보정: backend/scripts/fix_swagkey_seed_source_urls.py
+- seed 품질: backend/scripts/apply_seed_quality_cleanup.py
+- seed 품질 리포트: backend/data/swagkey_inventory/seed_quality_cleanup_report.json
+- 인벤토리 데이터: backend/data/swagkey_inventory/
+- 크롤 원본 (외부): c:\Users\jeung\swagkey_products.csv

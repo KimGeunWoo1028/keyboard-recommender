@@ -1,0 +1,48 @@
+{
+  "plates": [
+    {
+      "id": "plate-idx-1878",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1878",
+      "name": "QK Alice Duo 보강판",
+      "inventoryId": "inv-0299"
+    },
+    {
+      "id": "plate-idx-527",
+      "url": "https://www.swagkey.kr/shop_view/?idx=527",
+      "name": "[GB] Mode Envoy 65% 추가 보강판",
+      "inventoryId": "inv-0335"
+    },
+    {
+      "id": "plate-idx-534",
+      "url": "https://www.swagkey.kr/shop_view/?idx=534",
+      "name": "[In-Stock] Owlab Link65 Plate",
+      "inventoryId": "inv-0396"
+    },
+    {
+      "id": "plate-idx-579",
+      "url": "https://www.swagkey.kr/shop_view/?idx=579",
+      "name": "[GB] DMK Silent Plateau",
+      "inventoryId": "inv-0329"
+    },
+    {
+      "id": "plate-idx-935",
+      "url": "https://www.swagkey.kr/shop_view/?idx=935",
+      "name": "[GB] Anorexus Void65 PCB / Plate",
+      "inventoryId": "inv-0314"
+    },
+    {
+      "id": "plate-idx-950",
+      "url": "https://www.swagkey.kr/shop_view/?idx=950",
+      "name": "[GB] Pangea Fullsize 추가 보강판",
+      "inventoryId": "inv-0351"
+    }
+  ],
+  "foams": [
+    {
+      "id": "foam-idx-1029",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1029",
+      "name": "[GB] Cannonkeys VIDA 폼킷 & 여분 가스켓",
+      "inventoryId": "inv-0362"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "plates": [
+    {
+      "id": "plate-001",
+      "url": "https://www.swagkey.kr/88",
+      "name": "Qwertykeys NEO98 보강판"
+    },
+    {
+      "id": "plate-002",
+      "url": "https://www.swagkey.kr/88",
+      "name": "Qwertykeys NEO75 보강판"
+    },
+    {
+      "id": "plate-003",
+      "url": "https://www.swagkey.kr/88",
+      "name": "Shelby65 보강판"
+    },
+    {
+      "id": "plate-004",
+      "url": "https://www.swagkey.kr/88",
+      "name": "Qwertykeys QK65 MK3 보강판"
+    }
+  ],
+  "foams": [
+    {
+      "id": "foam-001",
+      "url": "https://www.swagkey.kr/132/?idx=253",
+      "name": "포론 하부 흡음재"
+    },
+    {
+      "id": "foam-002",
+      "url": "https://www.swagkey.kr/132/?idx=523",
+      "name": "키보드용 신슐레이터 흡음재"
+    },
+    {
+      "id": "foam-003",
+      "url": "https://www.swagkey.kr/132/?idx=462",
+      "name": "스웨그키 스페이스바 흡음재."
+    },
+    {
+      "id": "foam-004",
+      "url": "https://www.swagkey.kr/132/?idx=524",
+      "name": "EPDM 흡음재"
+    },
+    {
+      "id": "foam-005",
+      "url": "https://www.swagkey.kr/132/?idx=1572",
+      "name": "스웨그키 포론 기보강 흡음재 - 텐키리스용"
+    }
+  ]
+}

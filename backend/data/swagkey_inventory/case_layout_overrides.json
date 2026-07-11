@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0.0",
+  "overrides": [
+    {
+      "inventoryId": "inv-0301",
+      "layout_size": "alice",
+      "note": "QK Alice Duo PCB"
+    },
+    {
+      "inventoryId": "inv-1781",
+      "layout_size": "alice",
+      "note": "QK Alice Duo Barebone Kit Batch 5"
+    }
+  ]
+}

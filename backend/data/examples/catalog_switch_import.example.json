@@ -1,0 +1,16 @@
+{
+  "family": "switch",
+  "external_slug": "vendor-oil-king-linear-v1",
+  "display_name": "Oil King (linear)",
+  "description": "Example row for import tooling — not a measured claim.",
+  "tags": ["linear", "long-pole", "community-thock"],
+  "popularity_weight": 1.0,
+  "provenance": "manual_expert",
+  "traits": [
+    { "trait_id": "deep_sound", "tier": "high" },
+    { "trait_id": "smooth", "tier": "high" },
+    { "trait_id": "tactile_strength", "tier": "low" },
+    { "trait_id": "soft_bottom_out", "tier": "medium" },
+    { "trait_id": "loudness", "tier": "medium" }
+  ]
+}

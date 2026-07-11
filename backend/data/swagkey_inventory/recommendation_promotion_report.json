@@ -1,0 +1,311 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-11T16:58:12.864137+00:00",
+  "dryRun": true,
+  "seedPath": "C:/Users/jeung/keyboard-recommender/backend/src/keyboard_recommender/catalog/swagkey_products.seed.json",
+  "promotedCount": 0,
+  "eligiblePreview": [],
+  "rejectedPreview": [
+    {
+      "family": "switch",
+      "seedId": "sw-linear-001",
+      "name": "스웨그키 HMX Taro 타로 스위치 리니어",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-linear-002",
+      "name": "스웨그키 HMX Custard 커스터드 스위치 리니어",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-linear-003",
+      "name": "스웨그키 HMX Peach 반저소음 리니어 키보드 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-linear-005",
+      "name": "Keygeek Muse 리니어 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-linear-006",
+      "name": "Gateron X 리니어 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-linear-007",
+      "name": "SWK 지음 v2 리니어 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-linear-008",
+      "name": "WEKT Kunzite 쿤자이트 저소음 리니어 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-linear-009",
+      "name": "Outemu Cream Pink 크림핑크 리니어축 키보드 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-linear-010",
+      "name": "Cherry MX2A RGB Silver 리니어 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-linear-011",
+      "name": "Keygeek 오트 리니어 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-linear-012",
+      "name": "HMX 신하이 리니어 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-linear-013",
+      "name": "Neo Rye 라이 리니어 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-linear-015",
+      "name": "Neo Amber 앰버 리니어 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-linear-016",
+      "name": "HMX 아주르 리니어 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-linear-017",
+      "name": "SWK 네온 리니어 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-linear-018",
+      "name": "SW x Gateron 디핑 리니어 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-idx-536",
+      "name": "[GB] Mode Themes Switches",
+      "reason": "trait_confidence_not_ready:name_inferred"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-tactile-001",
+      "name": "Cherry MX2A 비윤활 갈축 키보드 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-tactile-002",
+      "name": "텍스트 Cherry MX2A 비윤활 갈축 키보드 스위치 - 450개 벌크",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-tactile-003",
+      "name": "Cherry MX2A 비윤활 갈축 키보드 스위치 - 450개 벌크",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-tactile-004",
+      "name": "Cherry MX Falcon 택타일 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-tactile-005",
+      "name": "Cherry MX2A Honey 택타일 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-tactile-006",
+      "name": "SW x Haimu MP 택타일 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-tactile-007",
+      "name": "TTC 피넛 라떼 저소음 택타일 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-click-001",
+      "name": "Wuque BigLucky 빅럭키 클릭 스위치 Cliky",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-silent-002",
+      "name": "WEKT Kunzite 쿤자이트 저소음 리니어 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-silent-003",
+      "name": "TTC 피넛 라떼 저소음 택타일 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-silent-004",
+      "name": "오테뮤 크림 옐로우 저소음 키보드 스위치 스웨그키",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-magnetic-001",
+      "name": "스웨그키 Owlab Nova N극 HE 키보드 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-magnetic-002",
+      "name": "SW x SWK 피오니 HE 마그네틱 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-magnetic-003",
+      "name": "Owlab Ti HE 마그네틱 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-magnetic-004",
+      "name": "NEO 라벤더 HE 마그네틱 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-new-001-cherry-mx2a-blossom-리니어-스위치",
+      "name": "Cherry MX2A Blossom 리니어 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-new-002-cherry-mx2a-northern-light-리니어-스위치",
+      "name": "Cherry MX2A Northern Light 리니어 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-new-003-cherry-mx2a-비윤활-흑축-키보드-스위치-450개-벌크",
+      "name": "Cherry MX2A 비윤활 흑축 키보드 스위치 - 450개 벌크",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-new-004-haimu-스노우-저소음-자석축-키보드-스위치",
+      "name": "Haimu 스노우 저소음 자석축 키보드 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-new-005-owlab-london-fog-v2-런던포그-키보드-스위치",
+      "name": "Owlab London Fog V2 런던포그 키보드 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-new-006-ttc-아이스-프로즌-저소음-v2-커스텀-기계식-키보드-스위치-공장윤활-",
+      "name": "TTC 아이스 프로즌 저소음 V2 커스텀 기계식 키보드 스위치 공장윤활 사무용",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-new-007-wuque-flux-he-자석축-키보드-스위치-n극",
+      "name": "Wuque Flux HE 자석축 키보드 스위치 (N극)",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-new-008-스웨그키-bdg-optical-white-리니어-키보드-스위치",
+      "name": "스웨그키 BDG Optical White 리니어 키보드 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-new-009-스웨그키-ion-이온-리니어-로우피치-키보드-스위치",
+      "name": "스웨그키 Ion 이온 리니어 로우피치 키보드 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-new-010-스웨그키-keygeek-b1-리니어-키보드-스위치",
+      "name": "스웨그키 Keygeek B1 리니어 키보드 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-new-011-스웨그키-keygeek-cera-x-리니어-키보드-스위치",
+      "name": "스웨그키 Keygeek Cera X 리니어 키보드 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-new-012-스웨그키-keygeek-peach-cheesecake-리니어-키보드-스위",
+      "name": "스웨그키 Keygeek peach cheesecake 리니어 키보드 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-new-013-스웨그키-keygeek-쉐이크-shake-리니어-키보드-스위치",
+      "name": "스웨그키 Keygeek 쉐이크 Shake 리니어 키보드 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-new-014-스웨그키-mz-studio-t2-리니어-키보드-스위치",
+      "name": "스웨그키 MZ Studio T2 리니어 키보드 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-new-015-스웨그키-wingtree-anon-리니어-키보드-스위치",
+      "name": "스웨그키 Wingtree ANON 리니어 키보드 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-new-016-체리-mx2a-rgb-silver-은축-리니어-기계식-키보드-스위치",
+      "name": "체리 MX2A RGB Silver 은축 리니어 기계식 키보드 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-new-017-체리-mx2a-클래식-히로세-키보드-스위치",
+      "name": "체리 MX2A 클래식 히로세 키보드 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-001",
+      "name": "스웨그키 Wingtree Golden Apple 키보드 스위치",
+      "reason": "already_recommendation_eligible"
+    }
+  ],
+  "promoted": []
+}

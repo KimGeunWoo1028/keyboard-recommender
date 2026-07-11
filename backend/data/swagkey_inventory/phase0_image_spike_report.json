@@ -1,0 +1,162 @@
+{
+  "schemaVersion": "1.0.0",
+  "phase": 0,
+  "status": "completed",
+  "generatedAt": "2026-07-10T06:50:57.802332+00:00",
+  "decision": {
+    "extraction_source": "meta[property=og:image] on shop_view product detail page",
+    "listing_thumb_fallback": false,
+    "phase1_ready": true
+  },
+  "summary": {
+    "cache_samples": 6,
+    "product_detail_cache_samples": 4,
+    "legacy_category_cache_samples": 2,
+    "product_detail_cache_og_image_ok": true,
+    "live_detail_probes": 2,
+    "live_detail_all_ok": true,
+    "listing_vs_detail_has_detail_image": true,
+    "listing_vs_detail_same_url": false
+  },
+  "cache_probes": [
+    {
+      "source": "cache",
+      "file_or_url": "backend\\data\\swagkey_html_cache\\sw-linear-001.html",
+      "og_url": "https://www.swagkey.kr/39",
+      "canonical": "https://www.swagkey.kr/39",
+      "og_image": "https://cdn.imweb.me/upload/S20220103536cb52c56eda/40cb6d924983a.png",
+      "has_product_idx": false,
+      "image_host_ok": true,
+      "notes": [
+        "category_or_listing_url_not_product_detail",
+        "generic_upload_path_on_non_product_page"
+      ]
+    },
+    {
+      "source": "cache",
+      "file_or_url": "backend\\data\\swagkey_html_cache\\plates\\plate-001.html",
+      "og_url": "https://www.swagkey.kr/88",
+      "canonical": "https://www.swagkey.kr/88",
+      "og_image": "https://cdn.imweb.me/upload/S20220103536cb52c56eda/40cb6d924983a.png",
+      "has_product_idx": false,
+      "image_host_ok": true,
+      "notes": [
+        "category_or_listing_url_not_product_detail",
+        "generic_upload_path_on_non_product_page"
+      ]
+    },
+    {
+      "source": "cache",
+      "file_or_url": "backend\\data\\swagkey_html_cache\\foams\\foam-001.html",
+      "og_url": "https://www.swagkey.kr/24/?idx=253",
+      "canonical": "https://www.swagkey.kr/24/?idx=253",
+      "og_image": "https://cdn.imweb.me/thumbnail/20250916/17413e2972115.jpg",
+      "has_product_idx": true,
+      "image_host_ok": true,
+      "notes": []
+    },
+    {
+      "source": "cache",
+      "file_or_url": "backend\\data\\swagkey_inventory\\new_in_crawl_specs\\switch_html_cache\\sw-new-001-cherry-mx2a-blossom-리니어-스위치.html",
+      "og_url": "https://www.swagkey.kr/shop_view/?idx=1303",
+      "canonical": "https://www.swagkey.kr/shop_view/?idx=1303",
+      "og_image": "https://cdn.imweb.me/thumbnail/20250929/20e180cf66330.jpg",
+      "has_product_idx": true,
+      "image_host_ok": true,
+      "notes": []
+    },
+    {
+      "source": "cache",
+      "file_or_url": "backend\\data\\swagkey_inventory\\new_in_crawl_specs\\compat_html_cache\\plates\\plate-new-001-bowl-oblique-기판-및-보강판.html",
+      "og_url": "https://www.swagkey.kr/88/?idx=1802",
+      "canonical": "https://www.swagkey.kr/88/?idx=1802",
+      "og_image": "https://cdn.imweb.me/thumbnail/20260519/ad65340a8b5e2.jpg",
+      "has_product_idx": true,
+      "image_host_ok": true,
+      "notes": []
+    },
+    {
+      "source": "cache",
+      "file_or_url": "backend\\data\\swagkey_inventory\\new_in_crawl_specs\\compat_html_cache\\foams\\foam-new-001-gdk-lab-dk1-tkl-여분-폼킷.html",
+      "og_url": "https://www.swagkey.kr/201/?idx=1856",
+      "canonical": "https://www.swagkey.kr/201/?idx=1856",
+      "og_image": "https://cdn.imweb.me/thumbnail/20260623/d91a82cf7201b.png",
+      "has_product_idx": true,
+      "image_host_ok": true,
+      "notes": []
+    }
+  ],
+  "live_detail_probes": [
+    {
+      "source": "live_detail",
+      "file_or_url": "https://www.swagkey.kr/shop_view/?idx=1792",
+      "og_url": "https://www.swagkey.kr/shop_view/?idx=1792",
+      "canonical": "https://www.swagkey.kr/shop_view/?idx=1792",
+      "og_image": "https://cdn.imweb.me/thumbnail/20260507/f4d4a59fbeb2b.jpg",
+      "has_product_idx": true,
+      "image_host_ok": true,
+      "notes": []
+    },
+    {
+      "source": "live_detail",
+      "file_or_url": "https://www.swagkey.kr/shop_view/?idx=1303",
+      "og_url": "https://www.swagkey.kr/shop_view/?idx=1303",
+      "canonical": "https://www.swagkey.kr/shop_view/?idx=1303",
+      "og_image": "https://cdn.imweb.me/thumbnail/20250929/20e180cf66330.jpg",
+      "has_product_idx": true,
+      "image_host_ok": true,
+      "notes": []
+    }
+  ],
+  "listing_vs_detail": {
+    "listing_url": "https://www.swagkey.kr/21",
+    "product_idx": "1281",
+    "detail_url": "https://www.swagkey.kr/shop_view/?idx=1281",
+    "listing_thumb_url": "https://cdn-optimized.imweb.me/upload/S20220103536cb52c56eda/855e3743b38e2.jpg?w=800",
+    "detail_og_image": "https://cdn.imweb.me/thumbnail/20250909/d0cc413699912.jpg",
+    "same_normalized_url": false,
+    "listing_uses_thumbnail_cdn": false,
+    "detail_uses_thumbnail_cdn": true,
+    "recommendation": "use_detail_og_image",
+    "rationale": "Detail og:image is product-specific, stable absolute CDN URL, and matches or supersedes listing thumb quality."
+  },
+  "failure_examples": [
+    {
+      "case": "synthetic_layout_taxonomy",
+      "seed_id": "layout-002",
+      "name": "65% Compact",
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1415",
+      "expected_failure": "layout_is_taxonomy_not_product_photo",
+      "phase1_action": "optional image from linked PCB product; default placeholder"
+    },
+    {
+      "case": "seed_only_discontinued_candidate",
+      "seed_id": "foam-005",
+      "name": "스웨그키 포론 기보강 흡음재 - 텐키리스용",
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1572",
+      "inventory_status": "seed_only in seed_inventory_diff",
+      "expected_failure": "page_may_404_or_show_generic_content",
+      "phase1_action": "fetch shop_view; on missing og:image leave empty"
+    },
+    {
+      "case": "legacy_cache_category_page",
+      "file": "backend\\data\\swagkey_html_cache\\sw-linear-001.html",
+      "seed_sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1792",
+      "cache_canonical": "https://www.swagkey.kr/39",
+      "cache_og_image": "https://cdn.imweb.me/upload/S20220103536cb52c56eda/40cb6d924983a.png",
+      "live_detail_og_image": "https://cdn.imweb.me/thumbnail/20260507/f4d4a59fbeb2b.jpg",
+      "expected_failure": "generic_category_og_image_in_stale_cache",
+      "phase1_action": "require idx on canonical/og:url before trusting cache; else refetch",
+      "cache_vs_live_same_image": false
+    }
+  ],
+  "validation": {
+    "step1_product_detail_cache_og_image": true,
+    "step2_live_detail_og_image_present": true,
+    "step3_live_detail_has_product_idx": true,
+    "step4_listing_compare_done": true,
+    "step5_failure_examples_documented": true,
+    "step6_legacy_cache_risk_noted": true,
+    "all_passed": true
+  }
+}

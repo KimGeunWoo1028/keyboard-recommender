@@ -1,0 +1,596 @@
+{
+  "switches": [
+    {
+      "id": "sw-click-001",
+      "url": "https://www.swagkey.kr/99",
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-linear-001",
+      "url": "https://www.swagkey.kr/39",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-linear-002",
+      "url": "https://www.swagkey.kr/39",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-linear-003",
+      "url": "https://www.swagkey.kr/39",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-linear-005",
+      "url": "https://www.swagkey.kr/39",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-linear-006",
+      "url": "https://www.swagkey.kr/39",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-linear-007",
+      "url": "https://www.swagkey.kr/39",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-linear-008",
+      "url": "https://www.swagkey.kr/39",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-linear-009",
+      "url": "https://www.swagkey.kr/39",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "creamy",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-linear-010",
+      "url": "https://www.swagkey.kr/39",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-linear-011",
+      "url": "https://www.swagkey.kr/39",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-linear-012",
+      "url": "https://www.swagkey.kr/39",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-linear-013",
+      "url": "https://www.swagkey.kr/39",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-linear-015",
+      "url": "https://www.swagkey.kr/39",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-linear-016",
+      "url": "https://www.swagkey.kr/39",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-linear-017",
+      "url": "https://www.swagkey.kr/39",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-linear-018",
+      "url": "https://www.swagkey.kr/39",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-magnetic-001",
+      "url": "https://www.swagkey.kr/31",
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-magnetic-002",
+      "url": "https://www.swagkey.kr/31",
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-magnetic-003",
+      "url": "https://www.swagkey.kr/31",
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-magnetic-004",
+      "url": "https://www.swagkey.kr/31",
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-other-001",
+      "url": "https://www.swagkey.kr/21",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-other-003",
+      "url": "https://www.swagkey.kr/21",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-other-004",
+      "url": "https://www.swagkey.kr/21",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-other-005",
+      "url": "https://www.swagkey.kr/21",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-other-006",
+      "url": "https://www.swagkey.kr/21",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-other-007",
+      "url": "https://www.swagkey.kr/21",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-other-008",
+      "url": "https://www.swagkey.kr/21",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-other-009",
+      "url": "https://www.swagkey.kr/21",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-other-010",
+      "url": "https://www.swagkey.kr/21",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-other-011",
+      "url": "https://www.swagkey.kr/21",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-other-013",
+      "url": "https://www.swagkey.kr/21",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-other-014",
+      "url": "https://www.swagkey.kr/21",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-other-015",
+      "url": "https://www.swagkey.kr/21",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-other-016",
+      "url": "https://www.swagkey.kr/21",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-other-017",
+      "url": "https://www.swagkey.kr/21",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-other-018",
+      "url": "https://www.swagkey.kr/21",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-other-019",
+      "url": "https://www.swagkey.kr/21",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-other-020",
+      "url": "https://www.swagkey.kr/21",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-other-021",
+      "url": "https://www.swagkey.kr/21",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-silent-002",
+      "url": "https://www.swagkey.kr/41",
+      "factory_lubed": true,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-silent-003",
+      "url": "https://www.swagkey.kr/41",
+      "factory_lubed": true,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-silent-004",
+      "url": "https://www.swagkey.kr/41",
+      "factory_lubed": true,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-tactile-001",
+      "url": "https://www.swagkey.kr/40",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-tactile-002",
+      "url": "https://www.swagkey.kr/40",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-tactile-003",
+      "url": "https://www.swagkey.kr/40",
+      "factory_lubed": false,
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-tactile-004",
+      "url": "https://www.swagkey.kr/40",
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-tactile-005",
+      "url": "https://www.swagkey.kr/40",
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-tactile-006",
+      "url": "https://www.swagkey.kr/40",
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    },
+    {
+      "id": "sw-tactile-007",
+      "url": "https://www.swagkey.kr/40",
+      "sound_signature_tags": [
+        "click",
+        "linear",
+        "magnetic",
+        "silent",
+        "tactile"
+      ]
+    }
+  ]
+}

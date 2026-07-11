@@ -1,0 +1,32 @@
+{
+  "distributions": {
+    "build_coherence": {
+      "count": 3,
+      "max": 0.82,
+      "mean": 0.75,
+      "min": 0.68,
+      "p50": 0.75,
+      "std": 0.057735
+    },
+    "trait_alignment": {
+      "count": 3,
+      "max": 0.62,
+      "mean": 0.58,
+      "min": 0.52,
+      "p50": 0.6,
+      "std": 0.041633
+    }
+  },
+  "label": "dev_batch_may",
+  "metricsParsed": 3,
+  "recordCount": 3,
+  "scenarioId": "survey_muted_linear",
+  "schemaVersion": "evaluation.aggregate_summary.v1",
+  "stability": {
+    "traitAlignmentStd": 0.041633
+  },
+  "trendInputs": {
+    "confidenceOverallSeries": [0.52, 0.55, 0.61],
+    "winnerTraitDiversitySeries": [0.22, 0.24, 0.31]
+  }
+}

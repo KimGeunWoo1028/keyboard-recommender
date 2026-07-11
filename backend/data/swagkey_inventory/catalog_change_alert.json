@@ -1,0 +1,785 @@
+{
+  "schemaVersion": "1.2.0",
+  "kind": "swagkey_catalog_change_alert",
+  "generatedAt": "2026-07-11T17:27:22+00:00",
+  "source": {
+    "seedPath": "C:/Users/jeung/keyboard-recommender/backend/src/keyboard_recommender/catalog/swagkey_products.seed.json",
+    "candidatesPath": "C:/Users/jeung/keyboard-recommender/backend/data/swagkey_inventory/recommender_candidates.json",
+    "diffGeneratedAt": "2026-07-11T17:26:00.090250+00:00"
+  },
+  "counts": {
+    "matched": 106,
+    "newInCrawl": 0,
+    "possiblyDiscontinued": 36,
+    "nameChanged": 1,
+    "imageUrlChanged": 0,
+    "browseMergeCandidates": 0,
+    "informationalTotal": 15,
+    "blockingAlertTotal": 22,
+    "alertTotal": 22
+  },
+  "hasAlerts": true,
+  "hasBlockingAlerts": true,
+  "newInCrawl": [],
+  "browseMergeCandidates": [],
+  "possiblyDiscontinued": [
+    {
+      "family": "foam",
+      "seedId": "foam-005",
+      "seedName": "스웨그키 포론 기보강 흡음재 - 텐키리스용",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-001",
+      "seedName": "60% Standard",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-002",
+      "seedName": "65% Compact",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-005",
+      "seedName": "75% Exploded",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-006",
+      "seedName": "Alice Ergonomic",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-004",
+      "seedName": "Full-size",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1853",
+      "seedName": "GDK Lab - DK1 TKL 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1869",
+      "seedName": "MM Studio - Class 100 전용 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1519",
+      "seedName": "NEO60 Core 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1611",
+      "seedName": "NEO65 CU 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1416",
+      "seedName": "NEO65 Core Plus 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1747",
+      "seedName": "NEO75 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1500",
+      "seedName": "NEO80 CU 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1750",
+      "seedName": "NEO98 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1326",
+      "seedName": "NONO Studio N65 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1660",
+      "seedName": "QK65 MK3 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1699",
+      "seedName": "Shelby65 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-007",
+      "seedName": "Split 60",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-003",
+      "seedName": "TKL (80%)",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1867",
+      "seedName": "스웨그키 Eave65 전용 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1001",
+      "seedName": "스웨그키 SW A87 레이아웃 8K 게이밍 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1528",
+      "seedName": "스웨그키 트랜지션 라이트 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1526",
+      "seedName": "트랜지션 라이트 전용 MX 8K 게이밍 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-005",
+      "seedName": "Bsun 민트 키보드 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-tactile-003",
+      "seedName": "Cherry MX2A 비윤활 갈축 키보드 스위치 - 450개 벌크",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-linear-006",
+      "seedName": "Gateron X 리니어 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-016",
+      "seedName": "HMX 망고 푸딩 키보드 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-021",
+      "seedName": "Haimu 바다살구 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-020",
+      "seedName": "SW x 게이트론 onyx : UHMWPE 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-011",
+      "seedName": "SW 코코블랙 키보드 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-silent-003",
+      "seedName": "TTC 피넛 라떼 저소음 택타일 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-003",
+      "seedName": "Tecsee x SW Flow Black 기계식 키보드 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-silent-002",
+      "seedName": "WEKT Kunzite 쿤자이트 저소음 리니어 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-silent-004",
+      "seedName": "오테뮤 크림 옐로우 저소음 키보드 스위치 스웨그키",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-008",
+      "seedName": "체리 MX 3핀 키보드 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-006",
+      "seedName": "체리 MX RGB 키보드 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    }
+  ],
+  "blockingPossiblyDiscontinued": [
+    {
+      "family": "foam",
+      "seedId": "foam-005",
+      "seedName": "스웨그키 포론 기보강 흡음재 - 텐키리스용",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-001",
+      "seedName": "60% Standard",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-002",
+      "seedName": "65% Compact",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-005",
+      "seedName": "75% Exploded",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-006",
+      "seedName": "Alice Ergonomic",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-004",
+      "seedName": "Full-size",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-007",
+      "seedName": "Split 60",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-003",
+      "seedName": "TKL (80%)",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-005",
+      "seedName": "Bsun 민트 키보드 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-tactile-003",
+      "seedName": "Cherry MX2A 비윤활 갈축 키보드 스위치 - 450개 벌크",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-linear-006",
+      "seedName": "Gateron X 리니어 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-016",
+      "seedName": "HMX 망고 푸딩 키보드 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-021",
+      "seedName": "Haimu 바다살구 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-020",
+      "seedName": "SW x 게이트론 onyx : UHMWPE 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-011",
+      "seedName": "SW 코코블랙 키보드 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-silent-003",
+      "seedName": "TTC 피넛 라떼 저소음 택타일 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-003",
+      "seedName": "Tecsee x SW Flow Black 기계식 키보드 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-silent-002",
+      "seedName": "WEKT Kunzite 쿤자이트 저소음 리니어 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-silent-004",
+      "seedName": "오테뮤 크림 옐로우 저소음 키보드 스위치 스웨그키",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-008",
+      "seedName": "체리 MX 3핀 키보드 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-006",
+      "seedName": "체리 MX RGB 키보드 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    }
+  ],
+  "informationalPossiblyDiscontinued": [
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1853",
+      "seedName": "GDK Lab - DK1 TKL 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1869",
+      "seedName": "MM Studio - Class 100 전용 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1519",
+      "seedName": "NEO60 Core 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1611",
+      "seedName": "NEO65 CU 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1416",
+      "seedName": "NEO65 Core Plus 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1747",
+      "seedName": "NEO75 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1500",
+      "seedName": "NEO80 CU 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1750",
+      "seedName": "NEO98 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1326",
+      "seedName": "NONO Studio N65 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1660",
+      "seedName": "QK65 MK3 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1699",
+      "seedName": "Shelby65 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1867",
+      "seedName": "스웨그키 Eave65 전용 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1001",
+      "seedName": "스웨그키 SW A87 레이아웃 8K 게이밍 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1528",
+      "seedName": "스웨그키 트랜지션 라이트 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-idx-1526",
+      "seedName": "트랜지션 라이트 전용 MX 8K 게이밍 기판",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    }
+  ],
+  "nameChanged": [
+    {
+      "family": "switch",
+      "seedId": "sw-linear-003",
+      "seedName": "스웨그키 HMX Peach 반저소음 리니어 키보드 스위치",
+      "crawlId": "inv-0085",
+      "crawlName": "스웨그키 HMX Peach 피치 반저소음 리니어 키보드 스위치",
+      "similarity": 0.9545,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    }
+  ],
+  "blockingNameChanged": [
+    {
+      "family": "switch",
+      "seedId": "sw-linear-003",
+      "seedName": "스웨그키 HMX Peach 반저소음 리니어 키보드 스위치",
+      "crawlId": "inv-0085",
+      "crawlName": "스웨그키 HMX Peach 피치 반저소음 리니어 키보드 스위치",
+      "similarity": 0.9545,
+      "alertTier": "blocking",
+      "recommendationEligible": true
+    }
+  ],
+  "informationalNameChanged": [],
+  "imageUrlChanged": [],
+  "notes": [
+    "seed_only is treated as possibly discontinued (missing from latest crawl inventory).",
+    "new_in_crawl are browse merge candidates (informational; run merge_inventory_browse_seed dry-run).",
+    "blocking alerts require recommendationEligible=true on the seed row.",
+    "Crawl inventory has no explicit stock/품절 flag; title stock markers are stripped at crawl time.",
+    "imageUrlChanged compares seed imageUrl to refetched og:image (fixture cache or live HTTP).",
+    "Webhooks notify blockingAlertTotal + imageUrlChanged only (Phase 7)."
+  ]
+}

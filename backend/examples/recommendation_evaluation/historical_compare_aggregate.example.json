@@ -1,0 +1,13 @@
+{
+  "comment": "Output shape from compare_aggregate_summaries(baseline_summary, current_summary).",
+  "perMetric": {
+    "trait_alignment": {
+      "absoluteDelta": 0.05,
+      "baselineMean": 0.55,
+      "currentMean": 0.6,
+      "percentChange": 9.0909,
+      "relativeDelta": 0.090909
+    }
+  },
+  "schemaVersion": "evaluation.compare_aggregate_summaries.v1"
+}

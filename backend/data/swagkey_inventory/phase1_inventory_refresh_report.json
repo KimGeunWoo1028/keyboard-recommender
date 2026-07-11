@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0.0",
+  "phase": 1,
+  "generatedAt": "2026-07-11T15:45:00+00:00",
+  "tasks": {
+    "1-1_category_crawl": {
+      "crawlJson": "swagkey_crawl_urls.v2.json",
+      "categoryUniqueIdx": 292,
+      "pagesFetched": 20,
+      "maxPagesPerCategory": 30
+    },
+    "1-2_search_supplement": {
+      "keywords": ["Alice", "Split", "Arisu", "베어본", "GB", "Qwertykeys", "NEO", "Owlab", "KBDFANS"],
+      "searchOnlyIdxAdded": 100,
+      "combinedUniqueIdx": 392
+    },
+    "1-3_inventory_merge": {
+      "inventoryOut": "swagkey_inventory.v4.json",
+      "priorInventory": "swagkey_inventory.v3.json",
+      "itemCount": 400,
+      "uniqueIdx": 392,
+      "baselineUniqueIdx": 291,
+      "deltaIdx": 101,
+      "crawlMerge": {
+        "matched": 287,
+        "matchedByName": "see crawlMerge.matched_by_name in inventory stats",
+        "appendedNew": 107,
+        "unmatchedInventory": 6,
+        "nameChanged": 0
+      },
+      "aliceSkuCount": 7
+    },
+    "1-3_recheck": {
+      "newInCrawl": 15,
+      "seedOnly": 21,
+      "nameChanged": 1,
+      "imageUrlChanged": 3,
+      "alertTotal": 40
+    }
+  },
+  "devGate": {
+    "uniqueIdxGte293": true,
+    "newInCrawlReviewed": true,
+    "notes": [
+      "new_in_crawl 15건은 Phase 3 browse merge 전 리뷰 대상 (자동 --apply-to-seed 금지)",
+      "seed_only 21건 중 layout archetype 7건은 정상 (참조 배열, inventory 비대상)",
+      "case_kit 127 분류는 Phase 2 재분류 점검 대상"
+    ]
+  }
+}

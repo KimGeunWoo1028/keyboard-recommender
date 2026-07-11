@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KeebSmith | Compare Builds</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-on-surface": "#322f39",
+                    "on-surface-variant": "#cbc3d7",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "outline": "#958ea0",
+                    "surface-dim": "#15121b",
+                    "on-secondary-fixed-variant": "#004c6e",
+                    "on-secondary-fixed": "#001e2f",
+                    "primary-fixed-dim": "#d0bcff",
+                    "surface-container-low": "#1d1a23",
+                    "on-tertiary": "#003824",
+                    "surface-container-lowest": "#0f0d15",
+                    "on-tertiary-container": "#00311f",
+                    "on-primary-container": "#340080",
+                    "primary-fixed": "#e9ddff",
+                    "on-surface": "#e7e0ed",
+                    "secondary-fixed-dim": "#89ceff",
+                    "on-error-container": "#ffdad6",
+                    "primary-container": "#a078ff",
+                    "error": "#ffb4ab",
+                    "surface-tint": "#d0bcff",
+                    "tertiary-fixed": "#6ffbbe",
+                    "surface": "#15121b",
+                    "inverse-primary": "#6d3bd7",
+                    "surface-container": "#211e27",
+                    "background": "#15121b",
+                    "on-primary": "#3c0091",
+                    "tertiary": "#4edea3",
+                    "on-primary-fixed-variant": "#5516be",
+                    "on-error": "#690005",
+                    "error-container": "#93000a",
+                    "on-primary-fixed": "#23005c",
+                    "on-secondary-container": "#00344e",
+                    "secondary-container": "#00a2e6",
+                    "surface-container-highest": "#37333d",
+                    "tertiary-container": "#00a572",
+                    "inverse-surface": "#e7e0ed",
+                    "primary": "#d0bcff",
+                    "on-background": "#e7e0ed",
+                    "surface-container-high": "#2c2832",
+                    "surface-variant": "#37333d",
+                    "surface-bright": "#3b3742",
+                    "secondary": "#89ceff",
+                    "on-tertiary-fixed": "#002113",
+                    "secondary-fixed": "#c9e6ff",
+                    "on-secondary": "#00344d",
+                    "outline-variant": "#494454",
+                    "tertiary-fixed-dim": "#4edea3"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "unit": "4px",
+                    "margin-desktop": "40px",
+                    "container-max": "1440px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "label-sm": ["JetBrains Mono"],
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Hanken Grotesk"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "display-lg": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0d0d15;
+            color: #e7e0ed;
+            overflow-x: hidden;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            border-color: rgba(208, 188, 255, 0.3);
+            background: rgba(255, 255, 255, 0.04);
+        }
+        .glow-button-primary {
+            box-shadow: 0 0 15px rgba(208, 188, 255, 0.2);
+        }
+        .glow-button-primary:hover {
+            box-shadow: 0 0 25px rgba(208, 188, 255, 0.4);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #89ceff;
+            border-radius: 9999px;
+        }
+        .compare-row:nth-child(even) {
+            background: rgba(255, 255, 255, 0.01);
+        }
+        .diff-highlight {
+            color: #d0bcff;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- Top Navigation Shell -->
+<header class="bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-xl docked full-width top-0 sticky z-50 border-b border-outline-variant/30 shadow-sm">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-headline-md font-headline-md font-bold bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent">KeebSmith</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-label-sm text-label-sm" href="#">Build</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-label-sm text-label-sm" href="#">Explore</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-label-sm text-label-sm" href="#">Community</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 bg-surface-container-highest px-3 py-1.5 rounded-lg border border-outline-variant/20">
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-label-sm font-label-sm text-on-surface w-32 md:w-64 p-0" placeholder="Search components..." type="text"/>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant p-2 hover:bg-surface-variant/50 rounded-lg transition-all scale-95 active:scale-90">notifications</button>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center overflow-hidden border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="A close-up portrait of a tech-savvy user in high-end studio lighting, reflecting a cool blue and purple ambient glow, designed for a premium web profile avatar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIdrhMBvb8r3UayfEx_Fokl0oMDckXbwHIXqOJYzIbbZYLDbVsPcLWELO4icVjIUFa2_MxVTABvJLERO0XBY8SJ659MxPN5bFSkRpaCdjJTGF6fjbuBCG-AtsrRVyN_Ahgp4z_oWg-npmLKSaVEfJCZuGAzBmqfwCNJRAAIhGyTlWk_5uO3OIBXrzwmd1qdMVZ5gcn6oDWMxmEAzSOnHj11QmLEEJj7gWWVQyQiZhUjkh8WprwtBa_uw"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex min-h-screen">
+<!-- Side Navigation Shell -->
+<aside class="hidden lg:flex flex-col h-screen w-64 fixed left-0 top-0 pt-20 border-r border-outline-variant/20 bg-surface-container-low dark:bg-surface-container-lowest backdrop-blur-md shadow-xl z-40 overflow-y-auto">
+<div class="px-6 py-4">
+<span class="text-headline-sm font-headline-md text-secondary">Workshop</span>
+<p class="text-label-sm font-label-sm text-on-surface-variant opacity-60">Analytical Mode</p>
+</div>
+<nav class="flex-1 mt-4">
+<a class="text-on-surface-variant hover:text-on-surface flex items-center gap-3 px-6 py-3 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">tune</span>
+<span class="font-label-sm text-label-sm">Filters</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface flex items-center gap-3 px-6 py-3 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-sm text-label-sm">History</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface flex items-center gap-3 px-6 py-3 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">bookmark</span>
+<span class="font-label-sm text-label-sm">Saved Builds</span>
+</a>
+<a class="bg-secondary-container/20 text-secondary border-r-4 border-secondary flex items-center gap-3 px-6 py-3 translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined">compare_arrows</span>
+<span class="font-label-sm text-label-sm">Compare</span>
+</a>
+</nav>
+<div class="p-6 mt-auto">
+<button class="w-full bg-secondary-container text-on-secondary-container py-3 rounded-xl font-bold flex items-center justify-center gap-2 glow-button-primary transition-all active:scale-95">
+<span class="material-symbols-outlined">add</span>
+                    New Build
+                </button>
+<div class="mt-8 pt-8 border-t border-outline-variant/20 space-y-4">
+<a class="text-on-surface-variant hover:text-on-surface flex items-center gap-3 px-0 py-1 transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-sm text-label-sm">Support</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface flex items-center gap-3 px-0 py-1 transition-all" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="font-label-sm text-label-sm">Account</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 lg:ml-64 pt-24 pb-12 px-margin-mobile md:px-margin-desktop relative overflow-hidden">
+<!-- Background Decoration -->
+<div class="absolute -top-[20%] -right-[10%] w-[600px] h-[600px] bg-primary/10 blur-[120px] rounded-full -z-10"></div>
+<div class="absolute bottom-0 -left-[10%] w-[400px] h-[400px] bg-secondary/5 blur-[100px] rounded-full -z-10"></div>
+<div class="max-w-container-max mx-auto">
+<!-- Comparison Header -->
+<div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Build Comparison</h1>
+<p class="text-body-lg text-on-surface-variant max-w-2xl">Analyze the technical specifications and acoustic profiles of your curated mechanical keyboard builds side-by-side.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-5 py-2.5 rounded-lg border border-outline-variant/30 text-label-sm font-label-sm hover:bg-surface-variant/30 transition-all">Export Analysis</button>
+<button class="px-5 py-2.5 rounded-lg bg-primary text-on-primary font-bold text-label-sm glow-button-primary transition-all active:scale-95">Share Report</button>
+</div>
+</div>
+<!-- Comparison Grid -->
+<div class="glass-panel rounded-3xl overflow-hidden shadow-2xl">
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full min-w-[900px] border-collapse text-left">
+<thead>
+<tr class="bg-surface-container-high/50">
+<th class="p-8 w-1/4 border-b border-outline-variant/20">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-sm text-label-sm tracking-widest uppercase">Metrics</span>
+</div>
+</th>
+<th class="p-8 w-1/4 border-b border-outline-variant/20">
+<div class="relative group">
+<div class="aspect-square w-full rounded-2xl overflow-hidden mb-4 glass-card p-4">
+<img class="w-full h-full object-contain" data-alt="A professional product shot of a sleek 65% custom mechanical keyboard with matte black housing and lilac PBT keycaps, captured with dramatic top-down studio lighting against a dark carbon-fiber textured surface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQwGl9qLkqmUqEYPru5D-v2mtgsu1gmFBD6aNQc5sYrykEw_S4ZU4hZbV4spZZUe5YXZQOQ6fEi3QVD6vAZJwypJd9Wakz_l0RnMXIWx52PZHdspfgDLgFKOfqVIEEG9yh99J9btKhVBIV2KO8-0hbEyXU8Z1WDDg3HNmZXc1H6Z9FOl2np1bDLdERW1TXnG_t3bvFFNdiG62QzUOPz9CD6qGHPHHr7uI_wPgoFyEMigptgbwOv299yg"/>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">The Obsidian 65</h3>
+<span class="text-label-sm font-label-sm text-tertiary">Premium Linear</span>
+</div>
+</th>
+<th class="p-8 w-1/4 border-b border-outline-variant/20">
+<div class="relative group">
+<div class="aspect-square w-full rounded-2xl overflow-hidden mb-4 glass-card p-4">
+<img class="w-full h-full object-contain" data-alt="A high-end mechanical keyboard with a transparent polycarbonate case and glowing RGB underglow, featuring bright white keycaps and frosted aesthetics, shot in a high-tech workshop setting at night." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBdbVkdWdHxMbeYl1iCCQZPb3BKvyebjyLJLvk9ZMg_7luT0fVtwiULQuaHHPf_hrYC44uvojqQE2372ROaa1s1YzjlAdLiWdKPrrv1SqpXysc366yIzpjs5t2UjfTbCJXvzwjdIIgDw_qZW7CikNH4t6ZWuhqbXU9OJcPXBxtxb4fF9vqiAdMjnlxC2k441nrRVhME76YQ2zsQ_M-t9DnNQ9l8VVOsFELUup6hHErA44N910FgEkJ3g"/>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Cloud Walker</h3>
+<span class="text-label-sm font-label-sm text-secondary">Tactile Workhorse</span>
+</div>
+</th>
+<th class="p-8 w-1/4 border-b border-outline-variant/20">
+<div class="flex flex-col items-center justify-center h-full gap-4 border-2 border-dashed border-outline-variant/40 rounded-2xl p-6 cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all">
+<span class="material-symbols-outlined text-outline-variant text-[40px]">add_circle</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Add to Compare</span>
+</div>
+</th>
+</tr>
+</thead>
+<tbody>
+<!-- Row: Total Cost -->
+<tr class="compare-row group">
+<td class="p-6 border-b border-outline-variant/10">
+<div class="font-label-sm text-label-sm text-on-surface-variant">Estimated Total</div>
+</td>
+<td class="p-6 border-b border-outline-variant/10">
+<div class="text-headline-md font-headline-md text-on-surface">$542.00</div>
+</td>
+<td class="p-6 border-b border-outline-variant/10">
+<div class="text-headline-md font-headline-md text-on-surface">$389.50</div>
+</td>
+<td class="p-6 border-b border-outline-variant/10"></td>
+</tr>
+<!-- Row: Mounting -->
+<tr class="compare-row">
+<td class="p-6 border-b border-outline-variant/10">
+<div class="font-label-sm text-label-sm text-on-surface-variant">Mounting Style</div>
+</td>
+<td class="p-6 border-b border-outline-variant/10 text-body-md">Gasket Mount (Isolation)</td>
+<td class="p-6 border-b border-outline-variant/10 text-body-md">Top Mount (Firm)</td>
+<td class="p-6 border-b border-outline-variant/10"></td>
+</tr>
+<!-- Row: Switches -->
+<tr class="compare-row">
+<td class="p-6 border-b border-outline-variant/10">
+<div class="font-label-sm text-label-sm text-on-surface-variant">Switch Type</div>
+</td>
+<td class="p-6 border-b border-outline-variant/10">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-full bg-tertiary/10 text-tertiary text-label-sm font-label-sm">Gateron Ink Black V2</span>
+</div>
+</td>
+<td class="p-6 border-b border-outline-variant/10">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-full bg-secondary/10 text-secondary text-label-sm font-label-sm">BobU4T Tactile</span>
+</div>
+</td>
+<td class="p-6 border-b border-outline-variant/10"></td>
+</tr>
+<!-- Row: Plate Material -->
+<tr class="compare-row">
+<td class="p-6 border-b border-outline-variant/10">
+<div class="font-label-sm text-label-sm text-on-surface-variant">Plate Material</div>
+</td>
+<td class="p-6 border-b border-outline-variant/10 text-body-md">FR4 (Flex Optimized)</td>
+<td class="p-6 border-b border-outline-variant/10 text-body-md">Brass (Acoustic Depth)</td>
+<td class="p-6 border-b border-outline-variant/10"></td>
+</tr>
+<!-- Row: Weight -->
+<tr class="compare-row">
+<td class="p-6 border-b border-outline-variant/10">
+<div class="font-label-sm text-label-sm text-on-surface-variant">Net Weight</div>
+</td>
+<td class="p-6 border-b border-outline-variant/10 text-body-md">2.4 kg</td>
+<td class="p-6 border-b border-outline-variant/10 text-body-md diff-highlight">1.8 kg</td>
+<td class="p-6 border-b border-outline-variant/10"></td>
+</tr>
+<!-- Row: Polling Rate -->
+<tr class="compare-row">
+<td class="p-6 border-b border-outline-variant/10">
+<div class="font-label-sm text-label-sm text-on-surface-variant">Polling Rate</div>
+</td>
+<td class="p-6 border-b border-outline-variant/10 text-body-md diff-highlight">8,000 Hz (eSports)</td>
+<td class="p-6 border-b border-outline-variant/10 text-body-md">1,000 Hz (Standard)</td>
+<td class="p-6 border-b border-outline-variant/10"></td>
+</tr>
+<!-- Acoustic Profile Visualization -->
+<tr class="compare-row">
+<td class="p-6 border-b border-outline-variant/10">
+<div class="font-label-sm text-label-sm text-on-surface-variant">Acoustic Curve</div>
+</td>
+<td class="p-6 border-b border-outline-variant/10">
+<div class="h-16 w-full relative flex items-end gap-1">
+<div class="w-1 bg-primary/40 h-[20%]"></div>
+<div class="w-1 bg-primary/40 h-[35%]"></div>
+<div class="w-1 bg-primary/60 h-[50%]"></div>
+<div class="w-1 bg-primary/80 h-[80%]"></div>
+<div class="w-1 bg-primary h-[100%]"></div>
+<div class="w-1 bg-primary/80 h-[75%]"></div>
+<div class="w-1 bg-primary/60 h-[45%]"></div>
+<div class="w-1 bg-primary/40 h-[30%]"></div>
+<div class="w-1 bg-primary/20 h-[15%]"></div>
+</div>
+<p class="text-[10px] text-on-surface-variant mt-2 font-label-sm">Damped Thock (Deep)</p>
+</td>
+<td class="p-6 border-b border-outline-variant/10">
+<div class="h-16 w-full relative flex items-end gap-1">
+<div class="w-1 bg-secondary h-[40%]"></div>
+<div class="w-1 bg-secondary/80 h-[60%]"></div>
+<div class="w-1 bg-secondary/60 h-[30%]"></div>
+<div class="w-1 bg-secondary/80 h-[90%]"></div>
+<div class="w-1 bg-secondary/60 h-[20%]"></div>
+<div class="w-1 bg-secondary/40 h-[50%]"></div>
+<div class="w-1 bg-secondary/80 h-[100%]"></div>
+<div class="w-1 bg-secondary/60 h-[40%]"></div>
+<div class="w-1 bg-secondary/40 h-[70%]"></div>
+</div>
+<p class="text-[10px] text-on-surface-variant mt-2 font-label-sm">High-Clack (Sharp)</p>
+</td>
+<td class="p-6 border-b border-outline-variant/10"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Summary Cards Section -->
+<div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="glass-card p-6 rounded-2xl relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[64px]">speed</span>
+</div>
+<h4 class="font-label-sm text-label-sm text-secondary mb-4 uppercase tracking-widest">Performance Edge</h4>
+<p class="text-body-md text-on-surface mb-6">The Obsidian 65 leads with an <span class="text-primary font-bold">8x faster</span> polling rate, making it the analytical choice for competitive scenarios.</p>
+<div class="w-full bg-surface-container rounded-full h-1">
+<div class="bg-primary w-full h-full rounded-full"></div>
+</div>
+</div>
+<div class="glass-card p-6 rounded-2xl relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[64px]">vibration</span>
+</div>
+<h4 class="font-label-sm text-label-sm text-tertiary mb-4 uppercase tracking-widest">Tactile Feedback</h4>
+<p class="text-body-md text-on-surface mb-6">Cloud Walker offers <span class="text-tertiary font-bold">distinct haptic stages</span>, preferred by professional copywriters and software engineers.</p>
+<div class="w-full bg-surface-container rounded-full h-1">
+<div class="bg-tertiary w-3/4 h-full rounded-full"></div>
+</div>
+</div>
+<div class="glass-card p-6 rounded-2xl border-primary/20 bg-primary/5 flex flex-col justify-center items-center text-center">
+<span class="material-symbols-outlined text-primary text-[48px] mb-4">auto_awesome</span>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-2">Build Recommendation</h4>
+<p class="text-label-sm font-label-sm text-on-surface-variant px-4">Based on your "Deep Thock" preference profile, <span class="text-primary">Obsidian 65</span> is your 94% match.</p>
+<button class="mt-6 px-6 py-2 bg-primary text-on-primary rounded-lg font-bold transition-transform hover:scale-105 active:scale-95">Finalize Build</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer Shell -->
+<footer class="bg-surface dark:bg-surface-dim full-width py-12 border-t border-outline-variant/10">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop w-full max-w-container-max mx-auto gap-8">
+<div class="flex flex-col gap-2">
+<span class="text-body-lg font-bold text-on-surface">KeebSmith</span>
+<p class="text-label-sm font-label-sm text-on-surface-variant opacity-60">© 2024 KeebSmith. Precision Crafted.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Privacy Policy</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Terms of Service</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">API Documentation</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Contact</a>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-all">language</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-all">share</span>
+</div>
+</div>
+</footer>
+<!-- Interactive Layer for Hover Effects -->
+<script>
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    </script>
+</body></html>

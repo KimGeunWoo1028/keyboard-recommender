@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "1.0.0",
+  "phase": 2,
+  "generatedAt": "2026-07-11T16:30:00+00:00",
+  "inventory": "swagkey_inventory.v4.json",
+  "classification": {
+    "totalItems": 400,
+    "byFamily": {
+      "switch": 55,
+      "plate": 20,
+      "foam": 9,
+      "layout": 23,
+      "case_kit": 126,
+      "keycap": 67,
+      "out_of_scope": 100
+    },
+    "byRule": {
+      "category:keycaps": 67,
+      "category:switches": 54,
+      "keyword:case_kit": 87,
+      "category:keyboards_fallback": 39,
+      "keyword:layout": 23,
+      "keyword:plate": 20,
+      "keyword:foam": 9,
+      "keyword:accessory_or_merch": 72,
+      "category:deskpads": 27,
+      "category:accessories_fallback": 1,
+      "keyword:switch": 1
+    },
+    "recommenderCandidateCount": 300
+  },
+  "task22_keyboards_review": {
+    "keyboardsCategoryByFamily": {
+      "case_kit": 125,
+      "layout": 23,
+      "plate": 19,
+      "out_of_scope": 15,
+      "foam": 2,
+      "switch": 1
+    },
+    "changesFromPhase2Rules": {
+      "keycapMovedFromOutOfScope": 67,
+      "plateEnglishKeywordAdded": 3,
+      "keyboardsFallbackExcludePlatePcb": 1,
+      "caseKitNetChange": -1
+    },
+    "notes": [
+      "case_kit 126 is elevated vs v1 (49) because Phase 1 inventory added Alice/GB keyboard kits — expected",
+      "keyboards_fallback 39 items are mostly barebone/complete keyboards without plate/pcb keywords"
+    ]
+  },
+  "devGate": {
+    "keycapCount": 67,
+    "csvKeycapsRaw": 73,
+    "inventoryKeycapsCategory": 67,
+    "keycapGatePass": true,
+    "outOfScopeBeforePhase2": 167,
+    "outOfScopeAfterPhase2": 100,
+    "outOfScopeDelta": -67
+  }
+}

@@ -1,0 +1,85 @@
+# Optional: standalone E2E (schedule / path-filtered PR / manual dispatch).
+# Primary PR gate remains `.github/workflows/ci.yml` → job `Quality · E2E`.
+name: E2E
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Monday 06:00 UTC
+    - cron: "0 6 * * 1"
+  pull_request:
+    paths:
+      - "e2e/**"
+      - "frontend/**"
+      - "backend/src/**"
+      - "backend/pyproject.toml"
+      - ".github/workflows/e2e.yml"
+
+jobs:
+  playwright:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: keyboard
+          POSTGRES_PASSWORD: keyboard
+          POSTGRES_DB: keyboard_recommender
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U keyboard -d keyboard_recommender"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
+
+    env:
+      DATABASE_URL: postgresql+psycopg://keyboard:keyboard@localhost:5432/keyboard_recommender
+      ENABLE_EVALUATION_PERSISTENCE: "false"
+      CI: "true"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+          cache-dependency-path: backend/pyproject.toml
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: |
+            frontend/package-lock.json
+            e2e/package-lock.json
+
+      - name: Install backend (editable)
+        working-directory: backend
+        run: |
+          python -m pip install -U pip
+          pip install -e ".[dev]"
+
+      - name: Alembic upgrade + E2E user seed
+        working-directory: backend
+        run: |
+          python -m alembic upgrade head
+          python scripts/seed_e2e_user.py
+
+      - name: Install frontend deps
+        working-directory: frontend
+        run: npm ci
+
+      - name: Install E2E deps + Chromium
+        working-directory: e2e
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+
+      - name: Run Playwright (functional chromium)
+        working-directory: e2e
+        run: npm test
+        # Phase D visual (`npm run test:visual`) is opt-in / local-or-same-OS baselines.
+        # Platform-specific PNGs (e.g. *-win32.png); do not gate PR CI on cross-OS pixels.

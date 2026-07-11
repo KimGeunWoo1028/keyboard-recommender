@@ -1,0 +1,12 @@
+Swagkey full catalog build report (step ⑨)
+generated: 2026-07-06T06:07:20.207332+00:00
+items: 153 (candidates=153)
+with url: 153
+missing url: 0
+
+by catalog category:
+  keycap: 65
+  accessory: 52
+  deskpad: 27
+  gaming: 7
+  merch: 2

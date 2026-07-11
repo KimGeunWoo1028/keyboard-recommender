@@ -1,0 +1,70 @@
+Swagkey catalog change alert (roadmap ⑮)
+generated: 2026-07-11T17:27:22+00:00
+
+matched: 106
+new in crawl (browse merge): 0
+possibly discontinued (seed_only): 36
+name changed: 1
+image url changed: 0
+blocking alert total: 22
+informational total: 15
+
+## BROWSE MERGE CANDIDATES (new_in_crawl) (0)
+(none)
+
+## BLOCKING — POSSIBLY DISCONTINUED (21)
+- [foam] tier=blocking seed=foam-005/스웨그키 포론 기보강 흡음재 - 텐키리스용 crawl=-/-
+- [layout] tier=blocking seed=layout-001/60% Standard crawl=-/-
+- [layout] tier=blocking seed=layout-002/65% Compact crawl=-/-
+- [layout] tier=blocking seed=layout-005/75% Exploded crawl=-/-
+- [layout] tier=blocking seed=layout-006/Alice Ergonomic crawl=-/-
+- [layout] tier=blocking seed=layout-004/Full-size crawl=-/-
+- [layout] tier=blocking seed=layout-007/Split 60 crawl=-/-
+- [layout] tier=blocking seed=layout-003/TKL (80%) crawl=-/-
+- [switch] tier=blocking seed=sw-other-005/Bsun 민트 키보드 스위치 crawl=-/-
+- [switch] tier=blocking seed=sw-tactile-003/Cherry MX2A 비윤활 갈축 키보드 스위치 - 450개 벌크 crawl=-/-
+- [switch] tier=blocking seed=sw-linear-006/Gateron X 리니어 스위치 crawl=-/-
+- [switch] tier=blocking seed=sw-other-016/HMX 망고 푸딩 키보드 스위치 crawl=-/-
+- [switch] tier=blocking seed=sw-other-021/Haimu 바다살구 스위치 crawl=-/-
+- [switch] tier=blocking seed=sw-other-020/SW x 게이트론 onyx : UHMWPE 스위치 crawl=-/-
+- [switch] tier=blocking seed=sw-other-011/SW 코코블랙 키보드 스위치 crawl=-/-
+- [switch] tier=blocking seed=sw-silent-003/TTC 피넛 라떼 저소음 택타일 스위치 crawl=-/-
+- [switch] tier=blocking seed=sw-other-003/Tecsee x SW Flow Black 기계식 키보드 스위치 crawl=-/-
+- [switch] tier=blocking seed=sw-silent-002/WEKT Kunzite 쿤자이트 저소음 리니어 스위치 crawl=-/-
+- [switch] tier=blocking seed=sw-silent-004/오테뮤 크림 옐로우 저소음 키보드 스위치 스웨그키 crawl=-/-
+- [switch] tier=blocking seed=sw-other-008/체리 MX 3핀 키보드 스위치 crawl=-/-
+- [switch] tier=blocking seed=sw-other-006/체리 MX RGB 키보드 스위치 crawl=-/-
+
+## INFORMATIONAL — POSSIBLY DISCONTINUED (15)
+- [layout] tier=informational seed=layout-idx-1853/GDK Lab - DK1 TKL 기판 crawl=-/-
+- [layout] tier=informational seed=layout-idx-1869/MM Studio - Class 100 전용 기판 crawl=-/-
+- [layout] tier=informational seed=layout-idx-1519/NEO60 Core 기판 crawl=-/-
+- [layout] tier=informational seed=layout-idx-1611/NEO65 CU 기판 crawl=-/-
+- [layout] tier=informational seed=layout-idx-1416/NEO65 Core Plus 기판 crawl=-/-
+- [layout] tier=informational seed=layout-idx-1747/NEO75 기판 crawl=-/-
+- [layout] tier=informational seed=layout-idx-1500/NEO80 CU 기판 crawl=-/-
+- [layout] tier=informational seed=layout-idx-1750/NEO98 기판 crawl=-/-
+- [layout] tier=informational seed=layout-idx-1326/NONO Studio N65 기판 crawl=-/-
+- [layout] tier=informational seed=layout-idx-1660/QK65 MK3 기판 crawl=-/-
+- [layout] tier=informational seed=layout-idx-1699/Shelby65 기판 crawl=-/-
+- [layout] tier=informational seed=layout-idx-1867/스웨그키 Eave65 전용 기판 crawl=-/-
+- [layout] tier=informational seed=layout-idx-1001/스웨그키 SW A87 레이아웃 8K 게이밍 기판 crawl=-/-
+- [layout] tier=informational seed=layout-idx-1528/스웨그키 트랜지션 라이트 기판 crawl=-/-
+- [layout] tier=informational seed=layout-idx-1526/트랜지션 라이트 전용 MX 8K 게이밍 기판 crawl=-/-
+
+## BLOCKING — NAME CHANGED (1)
+- [switch] tier=blocking seed=sw-linear-003/스웨그키 HMX Peach 반저소음 리니어 키보드 스위치 crawl=inv-0085/스웨그키 HMX Peach 피치 반저소음 리니어 키보드 스위치
+
+## INFORMATIONAL — NAME CHANGED (0)
+(none)
+
+## IMAGE URL CHANGED (0)
+(none)
+
+notes:
+  - seed_only is treated as possibly discontinued (missing from latest crawl inventory).
+  - new_in_crawl are browse merge candidates (informational; run merge_inventory_browse_seed dry-run).
+  - blocking alerts require recommendationEligible=true on the seed row.
+  - Crawl inventory has no explicit stock/품절 flag; title stock markers are stripped at crawl time.
+  - imageUrlChanged compares seed imageUrl to refetched og:image (fixture cache or live HTTP).
+  - Webhooks notify blockingAlertTotal + imageUrlChanged only (Phase 7).

@@ -1,0 +1,48 @@
+Swagkey inventory cleaning report
+================================
+
+input rows: 322
+kept: 293
+removed: 29
+brand corrections: 47
+removals by reason:
+  - discount_only_product_name: 21
+  - duplicate_cross_category: 8
+kept by category:
+  - Switches: 54
+  - Keyboards: 82
+  - Keycaps: 65
+  - Accessories: 57
+  - Deskpads: 27
+  - Gaming: 8
+
+removed rows (sample up to 30):
+  line 50: [discount_only_product_name] Keyboards | AM ATM98 커스텀 기계식 완제품 키보드 | 10%
+  line 63: [discount_only_product_name] Keyboards | MatrixLab One Thing 커스텀 기계식 키보드 | 30%
+  line 103: [discount_only_product_name] Switches | Haimu 스노우 저소음 자석축 키보드 스위치 | 50%
+  line 105: [discount_only_product_name] Switches | SW x SWK 피오니 HE 마그네틱 스위치 | 50%
+  line 125: [discount_only_product_name] Switches | NEO 라벤더 HE 마그네틱 스위치 | 60%
+  line 159: [discount_only_product_name] Keycaps | 스웨그키 MOA 키보드 키캡 | 50%
+  line 164: [discount_only_product_name] Keycaps | Keyboard Science Heyball 키캡 | 20%
+  line 167: [discount_only_product_name] Keycaps | 스웨그키 SW Antarctic 이중사출 키캡 세트 | 50%
+  line 186: [discount_only_product_name] Keycaps | 스웨그키 DMK Silent Plateau 키보드 키캡 Add-on | 50%
+  line 188: [discount_only_product_name] Keycaps | 스웨그키 KBM Love Detective 키보드 키캡 Add-on | 50%
+  line 190: [discount_only_product_name] Keycaps | 스웨그키 Hammerworks CRP RGBY 키보드 키캡 | 50%
+  line 201: [discount_only_product_name] Keycaps | KAT WoB Candy 키캡 Accent kit | 30%
+  line 209: [discount_only_product_name] Keycaps | Keykobo Outer bounds | 50%
+  line 243: [discount_only_product_name] Accessories | 스웨그키 Long 스위치 스프링 (20mm) | 30%
+  line 272: [discount_only_product_name] Accessories | HIBI Single Unit 키보드 스탠드. | 20%
+  line 280: [discount_only_product_name] Deskpads | 스웨그키 x Kyodiy 6XV Corsa 장패드. | 70%
+  line 290: [discount_only_product_name] Deskpads | 스웨그키 SW x Kyodiy 코코심플 키보드 매트 60/65% 80% | 10%
+  line 303: [discount_only_product_name] Deskpads | 스웨그키 SW x Kyodiy 체크 키보드 매트 60/65% 80% | 10%
+  line 305: [discount_only_product_name] Deskpads | SW x Kyodiy NEO ERGO 전용 데스크매트 | 10%
+  line 307: [discount_only_product_name] Deskpads | 스웨그키 SW x Kyodiy 스프레이 키보드 매트 60/65% 80% | 10%
+  line 315: [discount_only_product_name] Gaming | 스웨그키 NEON 게이밍 포론 마우스패드 | 23%
+  line 2: [duplicate_cross_category] Main | 스웨그키 | Keygeek 오트 리니어 스위치 (replaced_by_line=91; kept_category=Switches)
+  line 3: [duplicate_cross_category] Main | HMX | 스웨그키 HMX Peach 피치 반저소음 리니어 키보드 스위치 (replaced_by_line=92; kept_category=Switches)
+  line 4: [duplicate_cross_category] Main | TTC | TTC 아이스 프로즌 저소음 V2 커스텀 기계식 키보드 스위치 공장윤활 사무용 (replaced_by_line=93; kept_category=Switches)
+  line 5: [duplicate_cross_category] Main | Swagkeys | 스웨그키 Ion 이온 리니어 로우피치 키보드 스위치 (replaced_by_line=94; kept_category=Switches)
+  line 311: [duplicate_cross_category] Gaming | 스웨그키 | 트랜지션 라이트 전용 MX 8K 게이밍 기판 (kept_category=Keyboards; kept_line=58)
+  line 321: [duplicate_cross_category] Gaming | 스웨그키 | 스웨그키 SW A87 레이아웃 8K 게이밍 기판 (kept_category=Keyboards; kept_line=83)
+  line 322: [duplicate_cross_category] Gaming | MatrixLab | [GB] MatrixLab MP-01 강화유리 마우스패드 (kept_category=Deskpads; kept_line=310)
+  line 323: [duplicate_cross_category] Gaming | NEON | NEON Transition LITE HE Kit (kept_category=Keyboards; kept_line=89)

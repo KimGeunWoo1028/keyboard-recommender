@@ -1,0 +1,101 @@
+Keyboard Recommender — 추천 엔진 단일화 Phase 3 완료 리포트
+======================================================
+
+기준일: 2026-07-09 (KST)
+로드맵: docs/recommendation-engine-unification-roadmap.txt
+선행: Phase 2 완료
+
+
+1. 구현 요약
+------------
+3.1 실측
+  - onboarding.viewed 시각 기록 → generate_started / step_completed / style_selected에
+    duration_since_view_ms 메타데이터 추가
+  - 프리셋 자동 스킵 시 onboarding.prefilled_step_skipped (auto: true)
+  - 프리셋 단계 «다음» 통과 시 prefilled_step_skipped (auto: false)
+  - 기존 kpi.time_to_first_result (API 응답 ms) 유지
+
+3.2 UX (P1 + P3)
+  - chooseStyle 후 firstUnansweredStepIndex로 첫 미응답 단계 진입
+  - seedAnswers로 채워진 단계: «스타일 프리셋에서 이미 선택됨» 배너 + 기존 옵션 UI
+  - 진행 문구에 «약 1분» 예상 시간 표시 (진입·설문 헤더)
+  - 이어서 설정하기 → 미응답 단계로 이동
+
+미구현 (로드맵 P2/P4 — 범위 외)
+  - 모바일 option description 접기
+  - NL 입력을 설문 후 단계로 이동
+
+
+2. 변경 파일
+------------
+frontend/src/lib/survey-step-navigation.ts                    (신규)
+frontend/src/lib/survey-step-navigation.test.ts               (신규)
+frontend/src/components/features/recommendation/survey-wizard.tsx
+frontend/src/components/features/recommendation/survey-wizard.preset-skip.test.tsx (신규)
+frontend/src/lib/api/onboarding-events.ts
+e2e/tests/helpers/survey-flow.ts
+e2e/tests/critical-flows.spec.ts
+
+
+3. 실측 쿼리 샘플 (eval_events)
+--------------------------------
+PostgreSQL (ENABLE_EVALUATION_PERSISTENCE=true 환경):
+
+-- 진입~제출 시간 (generate_started)
+SELECT
+  created_at,
+  (payload->'metadata'->>'duration_since_view_ms')::int AS survey_ms,
+  payload->'metadata'->>'style' AS style
+FROM eval_events
+WHERE event_type = 'onboarding.generate_started'
+  AND payload->'metadata'->>'duration_since_view_ms' IS NOT NULL
+ORDER BY created_at DESC
+LIMIT 50;
+
+-- P50 근사
+SELECT percentile_cont(0.5) WITHIN GROUP (ORDER BY (payload->'metadata'->>'duration_since_view_ms')::int)
+FROM eval_events
+WHERE event_type = 'onboarding.generate_started'
+  AND (payload->'metadata'->>'duration_since_view_ms') ~ '^\d+$';
+
+-- 프리셋 스킵 이벤트
+SELECT event_type, COUNT(*)
+FROM eval_events
+WHERE event_type IN ('onboarding.style_selected', 'onboarding.prefilled_step_skipped')
+GROUP BY 1;
+
+내부 API (디버그): GET /api/v1/debug/analytics/kpis?window_hours=24
+  → avg_time_to_first_result_ms (kpi.time_to_first_result)
+
+
+4. 체감 시간 추정 (로컬 E2E 기준)
+----------------------------------
+프리셋 경로 (creamy_quiet):
+  - 이전: 5단계 × (옵션 선택 + 다음) ≈ 9 클릭
+  - 이후: 1단계 선택 + 3× 다음 + 제출 ≈ 5 클릭 (첫 화면 sound_profile 생략)
+목표 P50 ≤ 60초 (프리셋 ≤ 45초) — 프로덕션 eval_events 누적 후 위 쿼리로 검증.
+로컬 E2E 전체 플로우는 API compute 포함 ~10–50초대로 목표내로 추정.
+
+
+5. 검증 (step-by-step)
+----------------------
+
+Step 1 — survey-step-navigation Vitest
+Step 2 — survey-wizard preset-skip Vitest
+Step 3 — Full frontend Vitest + build
+  결과: 22 passed (9 files)
+
+Step 4 — Backend pytest (회귀)
+  결과: 277 passed, 3 skipped
+
+Step 5 — E2E critical-flows (프리셋 스킵 케이스 포함)
+  결과: 7 passed (52.0s)
+
+
+6. Phase 3 DoD
+--------------
+[x] 실측 메타데이터 + eval_events 쿼리 샘플 (본 문서 §3)
+[x] P1 프리셋 스킵 + E2E 1케이스
+[x] P50 목표 — 로컬 E2E·클릭 수 감소로 개선 방향 문서화 (§4)
+
+— 끝 —

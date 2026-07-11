@@ -1,0 +1,148 @@
+{
+  "removed": [],
+  "urlOverrides": [],
+  "htmlCacheMatches": [
+    {
+      "id": "sw-linear-001",
+      "name": "스웨그키 HMX Taro 타로 스위치 리니어",
+      "idx": "1792"
+    },
+    {
+      "id": "sw-linear-002",
+      "name": "스웨그키 HMX Custard 커스터드 스위치 리니어",
+      "idx": "1791"
+    },
+    {
+      "id": "sw-linear-003",
+      "name": "스웨그키 HMX Peach 반저소음 리니어 키보드 스위치",
+      "idx": "1765"
+    },
+    {
+      "id": "sw-linear-005",
+      "name": "Keygeek Muse 리니어 스위치",
+      "idx": "1672"
+    },
+    {
+      "id": "sw-linear-007",
+      "name": "SWK 지음 v2 리니어 스위치",
+      "idx": "1656"
+    },
+    {
+      "id": "sw-linear-008",
+      "name": "WEKT Kunzite 쿤자이트 저소음 리니어 스위치",
+      "idx": "1589"
+    },
+    {
+      "id": "sw-linear-012",
+      "name": "HMX 신하이 리니어 스위치",
+      "idx": "674"
+    },
+    {
+      "id": "sw-linear-015",
+      "name": "Neo Amber 앰버 리니어 스위치",
+      "idx": "1282"
+    },
+    {
+      "id": "sw-linear-016",
+      "name": "HMX 아주르 리니어 스위치",
+      "idx": "994"
+    },
+    {
+      "id": "sw-linear-017",
+      "name": "SWK 네온 리니어 스위치",
+      "idx": "384"
+    },
+    {
+      "id": "sw-linear-018",
+      "name": "SW x Gateron 디핑 리니어 스위치",
+      "idx": "803"
+    },
+    {
+      "id": "sw-tactile-004",
+      "name": "Cherry MX Falcon 택타일 스위치",
+      "idx": "1307"
+    },
+    {
+      "id": "sw-tactile-005",
+      "name": "Cherry MX2A Honey 택타일 스위치",
+      "idx": "1305"
+    },
+    {
+      "id": "sw-tactile-006",
+      "name": "SW x Haimu MP 택타일 스위치",
+      "idx": "720"
+    },
+    {
+      "id": "sw-tactile-007",
+      "name": "TTC 피넛 라떼 저소음 택타일 스위치",
+      "idx": "1258"
+    },
+    {
+      "id": "sw-click-001",
+      "name": "Wuque BigLucky 빅럭키 클릭 스위치 Cliky",
+      "idx": "1248"
+    },
+    {
+      "id": "sw-magnetic-001",
+      "name": "스웨그키 Owlab Nova N극 HE 키보드 스위치",
+      "idx": "1759"
+    },
+    {
+      "id": "sw-magnetic-002",
+      "name": "SW x SWK 피오니 HE 마그네틱 스위치",
+      "idx": "871"
+    },
+    {
+      "id": "sw-magnetic-003",
+      "name": "Owlab Ti HE 마그네틱 스위치",
+      "idx": "1115"
+    },
+    {
+      "id": "sw-magnetic-004",
+      "name": "NEO 라벤더 HE 마그네틱 스위치",
+      "idx": "1010"
+    },
+    {
+      "id": "sw-other-001",
+      "name": "스웨그키 Wingtree Golden Apple 키보드 스위치",
+      "idx": "1788"
+    },
+    {
+      "id": "sw-other-007",
+      "name": "체리 MX 흑축 삼신흑 키보드 스위치",
+      "idx": "1659"
+    },
+    {
+      "id": "sw-other-009",
+      "name": "HMX Toast 키보드 스위치",
+      "idx": "1569"
+    },
+    {
+      "id": "sw-other-010",
+      "name": "HMX Duckduck V2 덕덕 키보드 스위치",
+      "idx": "1503"
+    },
+    {
+      "id": "sw-other-013",
+      "name": "HMX T-Rex 키보드 스위치",
+      "idx": "1494"
+    },
+    {
+      "id": "sw-other-017",
+      "name": "Cherry MX2A 흑축 비윤활 스위치",
+      "idx": "680"
+    },
+    {
+      "id": "sw-other-018",
+      "name": "게이트론 Melodic 기계식 키보드 스위치.",
+      "idx": "769"
+    },
+    {
+      "id": "sw-other-019",
+      "name": "Cherry MX2A 스위치",
+      "idx": "851"
+    }
+  ],
+  "removedCount": 0,
+  "urlOverrideCount": 0
+}

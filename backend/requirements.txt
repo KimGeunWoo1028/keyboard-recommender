@@ -1,0 +1,14 @@
+# Backend dependencies (install: pip install -r requirements.txt)
+# Versions pinned for reproducible installs; bump as needed.
+
+fastapi==0.115.6
+uvicorn[standard]==0.32.1
+python-multipart==0.0.20
+sqlalchemy==2.0.36
+psycopg[binary]==3.2.3
+pydantic-settings==2.6.1
+alembic==1.14.0
+
+# Optional dev (uncomment or use: pip install -r requirements-dev.txt)
+# pytest==8.3.4
+# httpx==0.28.1

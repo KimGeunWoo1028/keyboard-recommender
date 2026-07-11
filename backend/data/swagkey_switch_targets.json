@@ -1,0 +1,339 @@
+{
+  "switches": [
+    {
+      "id": "sw-linear-001",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1792",
+      "name": "스웨그키 HMX Taro 타로 스위치 리니어"
+    },
+    {
+      "id": "sw-linear-002",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1791",
+      "name": "스웨그키 HMX Custard 커스터드 스위치 리니어"
+    },
+    {
+      "id": "sw-linear-003",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1765",
+      "name": "스웨그키 HMX Peach 반저소음 리니어 키보드 스위치"
+    },
+    {
+      "id": "sw-linear-005",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1672",
+      "name": "Keygeek Muse 리니어 스위치"
+    },
+    {
+      "id": "sw-linear-006",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1668",
+      "name": "Gateron X 리니어 스위치"
+    },
+    {
+      "id": "sw-linear-007",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1656",
+      "name": "SWK 지음 v2 리니어 스위치"
+    },
+    {
+      "id": "sw-linear-008",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1589",
+      "name": "WEKT Kunzite 쿤자이트 저소음 리니어 스위치"
+    },
+    {
+      "id": "sw-linear-009",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1425",
+      "name": "Outemu Cream Pink 크림핑크 리니어축 키보드 스위치"
+    },
+    {
+      "id": "sw-linear-010",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1306",
+      "name": "Cherry MX2A RGB Silver 리니어 스위치"
+    },
+    {
+      "id": "sw-linear-011",
+      "url": "https://www.swagkey.kr/shop_view/?idx=993",
+      "name": "Keygeek 오트 리니어 스위치"
+    },
+    {
+      "id": "sw-linear-012",
+      "url": "https://www.swagkey.kr/shop_view/?idx=674",
+      "name": "HMX 신하이 리니어 스위치"
+    },
+    {
+      "id": "sw-linear-013",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1281",
+      "name": "Neo Rye 라이 리니어 스위치"
+    },
+    {
+      "id": "sw-linear-015",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1282",
+      "name": "Neo Amber 앰버 리니어 스위치"
+    },
+    {
+      "id": "sw-linear-016",
+      "url": "https://www.swagkey.kr/shop_view/?idx=994",
+      "name": "HMX 아주르 리니어 스위치"
+    },
+    {
+      "id": "sw-linear-017",
+      "url": "https://www.swagkey.kr/shop_view/?idx=384",
+      "name": "SWK 네온 리니어 스위치"
+    },
+    {
+      "id": "sw-linear-018",
+      "url": "https://www.swagkey.kr/shop_view/?idx=803",
+      "name": "SW x Gateron 디핑 리니어 스위치"
+    },
+    {
+      "id": "sw-tactile-001",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1444",
+      "name": "Cherry MX2A 비윤활 갈축 키보드 스위치"
+    },
+    {
+      "id": "sw-tactile-002",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1443",
+      "name": "텍스트 Cherry MX2A 비윤활 갈축 키보드 스위치 - 450개 벌크"
+    },
+    {
+      "id": "sw-tactile-003",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1443",
+      "name": "Cherry MX2A 비윤활 갈축 키보드 스위치 - 450개 벌크"
+    },
+    {
+      "id": "sw-tactile-004",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1307",
+      "name": "Cherry MX Falcon 택타일 스위치"
+    },
+    {
+      "id": "sw-tactile-005",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1305",
+      "name": "Cherry MX2A Honey 택타일 스위치"
+    },
+    {
+      "id": "sw-tactile-006",
+      "url": "https://www.swagkey.kr/shop_view/?idx=720",
+      "name": "SW x Haimu MP 택타일 스위치"
+    },
+    {
+      "id": "sw-tactile-007",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1258",
+      "name": "TTC 피넛 라떼 저소음 택타일 스위치"
+    },
+    {
+      "id": "sw-click-001",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1248",
+      "name": "Wuque BigLucky 빅럭키 클릭 스위치 Cliky"
+    },
+    {
+      "id": "sw-silent-002",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1589",
+      "name": "WEKT Kunzite 쿤자이트 저소음 리니어 스위치"
+    },
+    {
+      "id": "sw-silent-003",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1258",
+      "name": "TTC 피넛 라떼 저소음 택타일 스위치"
+    },
+    {
+      "id": "sw-silent-004",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1216",
+      "name": "오테뮤 크림 옐로우 저소음 키보드 스위치 스웨그키"
+    },
+    {
+      "id": "sw-magnetic-001",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1759",
+      "name": "스웨그키 Owlab Nova N극 HE 키보드 스위치"
+    },
+    {
+      "id": "sw-magnetic-002",
+      "url": "https://www.swagkey.kr/shop_view/?idx=871",
+      "name": "SW x SWK 피오니 HE 마그네틱 스위치"
+    },
+    {
+      "id": "sw-magnetic-003",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1115",
+      "name": "Owlab Ti HE 마그네틱 스위치"
+    },
+    {
+      "id": "sw-magnetic-004",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1010",
+      "name": "NEO 라벤더 HE 마그네틱 스위치"
+    },
+    {
+      "id": "sw-new-001-cherry-mx2a-blossom-리니어-스위치",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1303",
+      "name": "Cherry MX2A Blossom 리니어 스위치"
+    },
+    {
+      "id": "sw-new-002-cherry-mx2a-northern-light-리니어-스위치",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1304",
+      "name": "Cherry MX2A Northern Light 리니어 스위치"
+    },
+    {
+      "id": "sw-new-003-cherry-mx2a-비윤활-흑축-키보드-스위치-450개-벌크",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1302",
+      "name": "Cherry MX2A 비윤활 흑축 키보드 스위치 - 450개 벌크"
+    },
+    {
+      "id": "sw-new-004-haimu-스노우-저소음-자석축-키보드-스위치",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1251",
+      "name": "Haimu 스노우 저소음 자석축 키보드 스위치"
+    },
+    {
+      "id": "sw-new-005-owlab-london-fog-v2-런던포그-키보드-스위치",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1822",
+      "name": "Owlab London Fog V2 런던포그 키보드 스위치"
+    },
+    {
+      "id": "sw-new-006-ttc-아이스-프로즌-저소음-v2-커스텀-기계식-키보드-스위치-공장윤활-",
+      "url": "https://www.swagkey.kr/shop_view/?idx=596",
+      "name": "TTC 아이스 프로즌 저소음 V2 커스텀 기계식 키보드 스위치 공장윤활 사무용"
+    },
+    {
+      "id": "sw-new-007-wuque-flux-he-자석축-키보드-스위치-n극",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1205",
+      "name": "Wuque Flux HE 자석축 키보드 스위치 (N극)"
+    },
+    {
+      "id": "sw-new-008-스웨그키-bdg-optical-white-리니어-키보드-스위치",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1804",
+      "name": "스웨그키 BDG Optical White 리니어 키보드 스위치"
+    },
+    {
+      "id": "sw-new-009-스웨그키-ion-이온-리니어-로우피치-키보드-스위치",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1873",
+      "name": "스웨그키 Ion 이온 리니어 로우피치 키보드 스위치"
+    },
+    {
+      "id": "sw-new-010-스웨그키-keygeek-b1-리니어-키보드-스위치",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1830",
+      "name": "스웨그키 Keygeek B1 리니어 키보드 스위치"
+    },
+    {
+      "id": "sw-new-011-스웨그키-keygeek-cera-x-리니어-키보드-스위치",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1805",
+      "name": "스웨그키 Keygeek Cera X 리니어 키보드 스위치"
+    },
+    {
+      "id": "sw-new-012-스웨그키-keygeek-peach-cheesecake-리니어-키보드-스위",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1806",
+      "name": "스웨그키 Keygeek peach cheesecake 리니어 키보드 스위치"
+    },
+    {
+      "id": "sw-new-013-스웨그키-keygeek-쉐이크-shake-리니어-키보드-스위치",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1841",
+      "name": "스웨그키 Keygeek 쉐이크 Shake 리니어 키보드 스위치"
+    },
+    {
+      "id": "sw-new-014-스웨그키-mz-studio-t2-리니어-키보드-스위치",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1807",
+      "name": "스웨그키 MZ Studio T2 리니어 키보드 스위치"
+    },
+    {
+      "id": "sw-new-015-스웨그키-wingtree-anon-리니어-키보드-스위치",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1826",
+      "name": "스웨그키 Wingtree ANON 리니어 키보드 스위치"
+    },
+    {
+      "id": "sw-new-016-체리-mx2a-rgb-silver-은축-리니어-기계식-키보드-스위치",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1253",
+      "name": "체리 MX2A RGB Silver 은축 리니어 기계식 키보드 스위치"
+    },
+    {
+      "id": "sw-new-017-체리-mx2a-클래식-히로세-키보드-스위치",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1808",
+      "name": "체리 MX2A 클래식 히로세 키보드 스위치"
+    },
+    {
+      "id": "sw-other-001",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1788",
+      "name": "스웨그키 Wingtree Golden Apple 키보드 스위치"
+    },
+    {
+      "id": "sw-other-003",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1677",
+      "name": "Tecsee x SW Flow Black 기계식 키보드 스위치"
+    },
+    {
+      "id": "sw-other-004",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1676",
+      "name": "QK01 키보드 스위치"
+    },
+    {
+      "id": "sw-other-005",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1673",
+      "name": "Bsun 민트 키보드 스위치"
+    },
+    {
+      "id": "sw-other-006",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1667",
+      "name": "체리 MX RGB 키보드 스위치"
+    },
+    {
+      "id": "sw-other-007",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1659",
+      "name": "체리 MX 흑축 삼신흑 키보드 스위치"
+    },
+    {
+      "id": "sw-other-008",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1658",
+      "name": "체리 MX 3핀 키보드 스위치"
+    },
+    {
+      "id": "sw-other-009",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1569",
+      "name": "HMX Toast 키보드 스위치"
+    },
+    {
+      "id": "sw-other-010",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1503",
+      "name": "HMX Duckduck V2 덕덕 키보드 스위치"
+    },
+    {
+      "id": "sw-other-011",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1496",
+      "name": "SW 코코블랙 키보드 스위치"
+    },
+    {
+      "id": "sw-other-013",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1494",
+      "name": "HMX T-Rex 키보드 스위치"
+    },
+    {
+      "id": "sw-other-014",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1473",
+      "name": "체리 MX2A Petal 키보드 스위치"
+    },
+    {
+      "id": "sw-other-015",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1437",
+      "name": "Peach Mellow 키보드 스위치"
+    },
+    {
+      "id": "sw-other-016",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1340",
+      "name": "HMX 망고 푸딩 키보드 스위치"
+    },
+    {
+      "id": "sw-other-017",
+      "url": "https://www.swagkey.kr/shop_view/?idx=680",
+      "name": "Cherry MX2A 흑축 비윤활 스위치"
+    },
+    {
+      "id": "sw-other-018",
+      "url": "https://www.swagkey.kr/shop_view/?idx=769",
+      "name": "게이트론 Melodic 기계식 키보드 스위치."
+    },
+    {
+      "id": "sw-other-019",
+      "url": "https://www.swagkey.kr/shop_view/?idx=851",
+      "name": "Cherry MX2A 스위치"
+    },
+    {
+      "id": "sw-other-020",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1206",
+      "name": "SW x 게이트론 onyx : UHMWPE 스위치"
+    },
+    {
+      "id": "sw-other-021",
+      "url": "https://www.swagkey.kr/shop_view/?idx=1187",
+      "name": "Haimu 바다살구 스위치"
+    }
+  ]
+}

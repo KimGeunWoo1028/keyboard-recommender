@@ -1,0 +1,103 @@
+inventory switches: 54
+
+KEEP foam foam-005: 스웨그키 포론 기보강 흡음재 - 텐키리스용 (variant naming)
+KEEP layout layout-001: 60% Standard
+KEEP layout layout-002: 65% Compact
+KEEP layout layout-005: 75% Exploded
+KEEP layout layout-006: Alice Ergonomic
+KEEP layout layout-004: Full-size
+KEEP layout layout-007: Split 60
+KEEP layout layout-003: TKL (80%)
+=== sw-other-005: Bsun 민트 키보드 스위치 ===
+  0.545 | inv-0126 | QK01 키보드 스위치 | https://www.swagkey.kr/21/?idx=1676
+  0.538 | inv-0097 | HMX Toast 키보드 스위치 | https://www.swagkey.kr/21/?idx=1569
+  0.516 | inv-0112 | 스웨그키 Owlab Nova N극 HE 키보드 스위치 | https://www.swagkey.kr/21/?idx=1759
+  ACTION: remove from seed (weak/no match)
+
+=== sw-tactile-003: Cherry MX2A 비윤활 갈축 키보드 스위치 - 450개 벌크 ===
+  1.000 | inv-0128 | Cherry MX2A 비윤활 갈축 키보드 스위치 - 450개 벌크 | https://www.swagkey.kr/21/?idx=1443
+  0.875 | inv-0109 | Cherry MX2A 비윤활 갈축 키보드 스위치 | https://www.swagkey.kr/21/?idx=1444
+  0.650 | inv-0111 | Cherry MX2A 스위치 | https://www.swagkey.kr/21/?idx=851
+  ACTION: pair/update URL from top match
+
+=== sw-linear-006: Gateron X 리니어 스위치 ===
+  0.897 | inv-0133 | SW x Gateron 디핑 리니어 스위치 | https://www.swagkey.kr/21/?idx=803
+  0.600 | inv-0103 | Neo Amber 앰버 리니어 스위치 | https://www.swagkey.kr/21/?idx=1282
+  0.571 | inv-0083 | Neo Rye 라이 리니어 스위치 | https://www.swagkey.kr/21/?idx=1281
+  ACTION: pair/update URL from top match
+
+=== sw-other-012: Gazzew U4T 키보드 스위치 ===
+  0.562 | inv-0121 | 체리 MX2A Petal 키보드 스위치 | https://www.swagkey.kr/21/?idx=1473
+  0.562 | inv-0129 | Peach Mellow 키보드 스위치 | https://www.swagkey.kr/21/?idx=1437
+  0.552 | inv-0097 | HMX Toast 키보드 스위치 | https://www.swagkey.kr/21/?idx=1569
+  ACTION: remove from seed (weak/no match)
+
+=== sw-other-016: HMX 망고 푸딩 키보드 스위치 ===
+  0.692 | inv-0114 | HMX T-Rex 키보드 스위치 | https://www.swagkey.kr/21/?idx=1494
+  0.667 | inv-0097 | HMX Toast 키보드 스위치 | https://www.swagkey.kr/21/?idx=1569
+  0.571 | inv-0135 | 체리 MX 흑축 삼신흑 키보드 스위치 | https://www.swagkey.kr/21/?idx=1659
+  ACTION: remove from seed (weak/no match)
+
+=== sw-other-021: Haimu 바다살구 스위치 ===
+  0.640 | inv-0099 | SW x Haimu MP 택타일 스위치 | https://www.swagkey.kr/21/?idx=720
+  0.500 | inv-0095 | Haimu 스노우 저소음 자석축 키보드 스위치 | https://www.swagkey.kr/21/?idx=1251
+  ACTION: remove from seed (weak/no match)
+
+=== sw-linear-014: Keygeek Ash 리니어 스위치 ===
+  0.848 | inv-0127 | Keygeek Muse 리니어 스위치 | https://www.swagkey.kr/21/?idx=1672
+  0.839 | inv-0084 | Keygeek 오트 리니어 스위치 | https://www.swagkey.kr/21/?idx=993
+  0.765 | inv-0092 | 스웨그키 Keygeek B1 리니어 키보드 스위치 | https://www.swagkey.kr/21/?idx=1830
+  ACTION: remove from seed (weak/no match)
+
+=== sw-other-020: SW x 게이트론 onyx : UHMWPE 스위치 ===
+  ACTION: remove from seed (no inventory match)
+
+=== sw-other-011: SW 코코블랙 키보드 스위치 ===
+  0.600 | inv-0126 | QK01 키보드 스위치 | https://www.swagkey.kr/21/?idx=1676
+  0.522 | inv-0114 | HMX T-Rex 키보드 스위치 | https://www.swagkey.kr/21/?idx=1494
+  0.500 | inv-0097 | HMX Toast 키보드 스위치 | https://www.swagkey.kr/21/?idx=1569
+  ACTION: remove from seed (weak/no match)
+
+=== sw-other-002: TTC Brother V2 스위치 ===
+  0.571 | inv-0111 | Cherry MX2A 스위치 | https://www.swagkey.kr/21/?idx=851
+  ACTION: remove from seed (weak/no match)
+
+=== sw-silent-003: TTC 피넛 라떼 저소음 택타일 스위치 ===
+  1.000 | inv-0098 | TTC 피넛 라떼 저소음 택타일 스위치 | https://www.swagkey.kr/21/?idx=1258
+  ACTION: pair/update URL from top match
+
+=== sw-other-003: Tecsee x SW Flow Black 기계식 키보드 스위치 ===
+  0.553 | inv-0123 | 게이트론 Melodic 기계식 키보드 스위치 | https://www.swagkey.kr/21/?idx=769
+  0.545 | inv-0129 | Peach Mellow 키보드 스위치 | https://www.swagkey.kr/21/?idx=1437
+  ACTION: remove from seed (weak/no match)
+
+=== sw-silent-002: WEKT Kunzite 쿤자이트 저소음 리니어 스위치 ===
+  1.000 | inv-0105 | WEKT Kunzite 쿤자이트 저소음 리니어 스위치 | https://www.swagkey.kr/21/?idx=1589
+  ACTION: pair/update URL from top match
+
+=== sw-silent-001: 스웨그키 HMX Peach 반저소음 리니어 키보드 스위치 ===
+  0.955 | inv-0085 | 스웨그키 HMX Peach 피치 반저소음 리니어 키보드 스위치 | https://www.swagkey.kr/21/?idx=1765
+  0.588 | inv-0114 | HMX T-Rex 키보드 스위치 | https://www.swagkey.kr/21/?idx=1494
+  0.579 | inv-0121 | 체리 MX2A Petal 키보드 스위치 | https://www.swagkey.kr/21/?idx=1473
+  ACTION: pair/update URL from top match
+
+=== sw-linear-004: 스웨그키 Keygeek DingDing 키보드 스위치 리니어 ===
+  0.619 | inv-0092 | 스웨그키 Keygeek B1 리니어 키보드 스위치 | https://www.swagkey.kr/21/?idx=1830
+  0.578 | inv-0117 | 스웨그키 Keygeek Cera X 리니어 키보드 스위치 | https://www.swagkey.kr/21/?idx=1805
+  0.542 | inv-0124 | 스웨그키 Keygeek 쉐이크 Shake 리니어 키보드 스위치 | https://www.swagkey.kr/21/?idx=1841
+  ACTION: remove from seed (weak/no match)
+
+=== sw-silent-004: 오테뮤 크림 옐로우 저소음 키보드 스위치 스웨그키 ===
+  ACTION: remove from seed (no inventory match)
+
+=== sw-other-008: 체리 MX 3핀 키보드 스위치 ===
+  0.741 | inv-0135 | 체리 MX 흑축 삼신흑 키보드 스위치 | https://www.swagkey.kr/21/?idx=1659
+  0.690 | inv-0121 | 체리 MX2A Petal 키보드 스위치 | https://www.swagkey.kr/21/?idx=1473
+  0.667 | inv-0101 | 체리 MX2A 클래식 히로세 키보드 스위치 | https://www.swagkey.kr/21/?idx=1808
+  ACTION: remove from seed (weak/no match)
+
+=== sw-other-006: 체리 MX RGB 키보드 스위치 ===
+  0.714 | inv-0135 | 체리 MX 흑축 삼신흑 키보드 스위치 | https://www.swagkey.kr/21/?idx=1659
+  0.692 | inv-0114 | HMX T-Rex 키보드 스위치 | https://www.swagkey.kr/21/?idx=1494
+  0.667 | inv-0121 | 체리 MX2A Petal 키보드 스위치 | https://www.swagkey.kr/21/?idx=1473
+  ACTION: remove from seed (weak/no match)

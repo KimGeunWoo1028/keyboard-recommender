@@ -1,0 +1,542 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Design tokens:
+  - Light (:root) → Luminous Artisan (DESIGN.md)
+  - Dark (.dark) → Cyber-Artisan (Stitch)
+  Existing semantic names (background/primary/…) stay so current UI keeps working.
+*/
+
+@layer base {
+  :root {
+    /* Legacy semantic — Luminous Artisan light */
+    --background: 250 248 255;
+    --foreground: 19 27 46;
+    --card: 255 255 255;
+    --card-foreground: 19 27 46;
+    --primary: 124 58 237;
+    --primary-foreground: 255 255 255;
+    --secondary: 0 108 73;
+    --secondary-foreground: 255 255 255;
+    --muted: 242 243 255;
+    --muted-foreground: 74 68 85;
+    --border: 226 232 240;
+    --ring: 124 58 237;
+    --radius: 1rem;
+    --radius-btn: 0.5rem;
+
+    /* Luminous Artisan (light DESIGN.md) */
+    --ca-surface: 250 248 255;
+    --ca-surface-dim: 210 217 244;
+    --ca-surface-bright: 250 248 255;
+    --ca-surface-container-lowest: 255 255 255;
+    --ca-surface-container-low: 242 243 255;
+    --ca-surface-container: 234 237 255;
+    --ca-surface-container-high: 226 231 255;
+    --ca-surface-container-highest: 218 226 253;
+    --ca-on-surface: 19 27 46;
+    --ca-on-surface-variant: 74 68 85;
+    --ca-inverse-surface: 40 48 68;
+    --ca-inverse-on-surface: 238 240 255;
+    --ca-outline: 123 116 135;
+    --ca-outline-variant: 204 195 216;
+    --ca-surface-tint: 115 46 228;
+    --ca-primary: 99 14 212;
+    --ca-on-primary: 255 255 255;
+    --ca-primary-container: 124 58 237;
+    --ca-on-primary-container: 237 224 255;
+    --ca-inverse-primary: 210 187 255;
+    --ca-secondary: 0 108 73;
+    --ca-on-secondary: 255 255 255;
+    --ca-secondary-container: 108 248 187;
+    --ca-on-secondary-container: 0 113 77;
+    --ca-tertiary: 160 0 47;
+    --ca-on-tertiary: 255 255 255;
+    --ca-tertiary-container: 200 26 66;
+    --ca-on-tertiary-container: 255 222 223;
+    --ca-error: 186 26 26;
+    --ca-on-error: 255 255 255;
+    --ca-error-container: 255 218 214;
+    --ca-on-error-container: 147 0 10;
+    --ca-background: 250 248 255;
+    --ca-on-background: 19 27 46;
+    --ca-surface-variant: 218 226 253;
+    --ca-viz-emerald: 16 185 129;
+    --ca-viz-gold: 245 158 11;
+    --ca-base: 15 23 42;
+
+    /* Paper / ambient — not cyber glow */
+    --ca-ghost-border: 226 232 240;
+    --ca-ghost-border-opacity: 1;
+    --ca-glass-fill: 255 255 255;
+    --ca-glass-fill-opacity: 0.92;
+    --ca-input-fill: 255 255 255;
+    --ca-elevated-shadow:
+      0 1px 3px rgb(15 23 42 / 0.08),
+      0 4px 12px rgb(15 23 42 / 0.03);
+    --ca-btn-glow: none;
+    --ca-focus-glow: none;
+
+    color-scheme: light;
+  }
+
+  .dark {
+    /* Legacy semantic → Cyber-Artisan dark (existing bg-primary etc. pick up stitch) */
+    --background: 13 13 21;
+    --foreground: 231 224 237;
+    --card: 33 30 39;
+    --card-foreground: 231 224 237;
+    --primary: 208 188 255;
+    --primary-foreground: 60 0 145;
+    --secondary: 137 206 255;
+    --secondary-foreground: 0 52 77;
+    --muted: 44 40 50;
+    --muted-foreground: 203 195 215;
+    --border: 73 68 84;
+    --ring: 208 188 255;
+
+    /* Cyber-Artisan dark (DESIGN.md) */
+    --ca-surface: 21 18 27;
+    --ca-surface-dim: 21 18 27;
+    --ca-surface-bright: 59 55 66;
+    --ca-surface-container-lowest: 15 13 21;
+    --ca-surface-container-low: 29 26 35;
+    --ca-surface-container: 33 30 39;
+    --ca-surface-container-high: 44 40 50;
+    --ca-surface-container-highest: 55 51 61;
+    --ca-on-surface: 231 224 237;
+    --ca-on-surface-variant: 203 195 215;
+    --ca-inverse-surface: 231 224 237;
+    --ca-inverse-on-surface: 50 47 57;
+    --ca-outline: 149 142 160;
+    --ca-outline-variant: 73 68 84;
+    --ca-surface-tint: 208 188 255;
+    --ca-primary: 208 188 255;
+    --ca-on-primary: 60 0 145;
+    --ca-primary-container: 160 120 255;
+    --ca-on-primary-container: 52 0 128;
+    --ca-inverse-primary: 109 59 215;
+    --ca-secondary: 137 206 255;
+    --ca-on-secondary: 0 52 77;
+    --ca-secondary-container: 0 162 230;
+    --ca-on-secondary-container: 0 52 78;
+    --ca-tertiary: 78 222 163;
+    --ca-on-tertiary: 0 56 36;
+    --ca-tertiary-container: 0 165 114;
+    --ca-on-tertiary-container: 0 49 31;
+    --ca-error: 255 180 171;
+    --ca-on-error: 105 0 5;
+    --ca-error-container: 147 0 10;
+    --ca-on-error-container: 255 218 214;
+    --ca-background: 21 18 27;
+    --ca-on-background: 231 224 237;
+    --ca-surface-variant: 55 51 61;
+    --ca-viz-emerald: 16 185 129;
+    --ca-viz-gold: 245 158 11;
+    --ca-base: 13 13 21;
+
+    --ca-ghost-border: 255 255 255;
+    --ca-ghost-border-opacity: 0.1;
+    --ca-glass-fill: 255 255 255;
+    --ca-glass-fill-opacity: 0.03;
+    --ca-input-fill: 0 0 0;
+    --ca-elevated-shadow:
+      0 1px 2px rgb(0 0 0 / 0.45),
+      0 12px 40px rgb(var(--ca-primary) / 0.12);
+    --ca-btn-glow: 0 0 24px rgb(var(--ca-primary) / 0.35);
+    --ca-focus-glow: 0 0 20px rgb(var(--ca-primary) / 0.28);
+    --radius-btn: 0.75rem;
+
+    color-scheme: dark;
+  }
+
+  body {
+    /* Do not @apply font-body here — custom font utils are unavailable inside @layer base. */
+    @apply min-h-screen bg-background text-foreground antialiased;
+    font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  }
+
+  ::selection {
+    background-color: rgb(var(--ca-primary) / 0.35);
+    color: rgb(var(--ca-on-surface));
+  }
+
+  /* Secondary-blue minimal scrollbars (DESIGN.md) */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--ca-secondary) / 0.45) transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: rgb(var(--ca-secondary) / 0.45);
+    border-radius: 9999px;
+  }
+
+  /* Always-visible pane scrollbars (mypage saved builds master/detail) */
+  .mypage-pane-scroll {
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--ca-secondary) / 0.55) rgb(var(--ca-outline-variant) / 0.25);
+  }
+
+  .mypage-pane-scroll::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .mypage-pane-scroll::-webkit-scrollbar-track {
+    background: rgb(var(--ca-outline-variant) / 0.25);
+    border-radius: 9999px;
+  }
+
+  .mypage-pane-scroll::-webkit-scrollbar-thumb {
+    background-color: rgb(var(--ca-secondary) / 0.55);
+    border-radius: 9999px;
+  }
+}
+
+@layer components {
+  /* Level 1 panel — light: paper card · dark: glass */
+  .ca-glass-panel {
+    border-radius: var(--radius);
+    border: 1px solid rgb(var(--ca-ghost-border) / var(--ca-ghost-border-opacity));
+    background-color: rgb(var(--ca-glass-fill) / var(--ca-glass-fill-opacity));
+    box-shadow: var(--ca-elevated-shadow);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+  }
+
+  .dark .ca-glass-panel {
+    background-image: linear-gradient(to bottom, rgb(255 255 255 / 0.06), rgb(255 255 255 / 0));
+    box-shadow: none;
+  }
+
+  .ca-glass-panel-interactive {
+    border-radius: var(--radius);
+    border: 1px solid rgb(var(--ca-ghost-border) / var(--ca-ghost-border-opacity));
+    background-color: rgb(var(--ca-glass-fill) / var(--ca-glass-fill-opacity));
+    box-shadow: var(--ca-elevated-shadow);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
+  }
+
+  .dark .ca-glass-panel-interactive {
+    background-image: linear-gradient(to bottom, rgb(255 255 255 / 0.06), rgb(255 255 255 / 0));
+    box-shadow: none;
+  }
+
+  .ca-glass-panel-interactive:hover {
+    border-color: rgb(var(--ca-primary) / 0.35);
+    background-color: rgb(var(--ca-surface-container-low));
+  }
+
+  .dark .ca-glass-panel-interactive:hover {
+    border-color: rgb(var(--ca-ghost-border) / 0.22);
+    background-color: rgb(var(--ca-glass-fill) / var(--ca-glass-fill-opacity));
+  }
+
+  /* Level 2 / 3 popover · modal */
+  .ca-glass-elevated {
+    border-radius: var(--radius);
+    border: 1px solid rgb(var(--ca-ghost-border) / var(--ca-ghost-border-opacity));
+    background-color: rgb(var(--ca-surface-container-lowest));
+    -webkit-backdrop-filter: blur(40px);
+    backdrop-filter: blur(40px);
+    box-shadow: var(--ca-elevated-shadow);
+  }
+
+  .dark .ca-glass-elevated {
+    background-color: rgb(var(--ca-surface-container) / 0.85);
+  }
+
+  .ca-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-btn);
+    border: 1px solid transparent;
+    background-color: rgb(var(--ca-primary-container));
+    color: rgb(var(--ca-on-primary));
+    font-family: var(--font-headline), ui-sans-serif, system-ui, sans-serif;
+    font-weight: 600;
+    padding: 0.625rem 1.25rem;
+    transition: box-shadow 150ms ease, filter 150ms ease, transform 150ms ease;
+  }
+
+  .dark .ca-btn-primary {
+    border-color: rgb(var(--ca-primary) / 0.55);
+    color: rgb(var(--ca-on-primary-container));
+  }
+
+  .ca-btn-primary:hover {
+    filter: brightness(1.06);
+    box-shadow: var(--ca-btn-glow);
+  }
+
+  .ca-btn-primary:focus-visible {
+    outline: 2px solid rgb(var(--ca-primary));
+    outline-offset: 2px;
+  }
+
+  .ca-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-btn);
+    border: 1px solid rgb(var(--ca-ghost-border) / var(--ca-ghost-border-opacity));
+    background-color: rgb(var(--ca-surface-container-lowest));
+    color: rgb(var(--ca-on-surface));
+    font-family: var(--font-headline), ui-sans-serif, system-ui, sans-serif;
+    font-weight: 600;
+    padding: 0.625rem 1.25rem;
+    transition: border-color 150ms ease, background-color 150ms ease;
+  }
+
+  .dark .ca-btn-ghost {
+    border-color: rgb(var(--ca-outline-variant) / 0.8);
+    background-color: transparent;
+  }
+
+  .ca-btn-ghost:hover {
+    border-color: rgb(var(--ca-primary) / 0.55);
+    background-color: rgb(var(--ca-primary) / 0.08);
+  }
+
+  .ca-btn-ghost:focus-visible {
+    outline: 2px solid rgb(var(--ca-secondary));
+    outline-offset: 2px;
+  }
+
+  .ca-chip {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    background-color: rgb(var(--ca-secondary) / 0.1);
+    color: rgb(var(--ca-on-secondary-container));
+    font-family: var(--font-headline), ui-sans-serif, system-ui, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1rem;
+    padding: 0.25rem 0.625rem;
+  }
+
+  .dark .ca-chip {
+    background-color: rgb(var(--ca-surface-container-highest) / 0.7);
+    color: rgb(var(--ca-on-surface-variant));
+  }
+
+  .ca-input {
+    width: 100%;
+    border-radius: var(--radius-btn);
+    border: 1px solid rgb(var(--ca-ghost-border) / var(--ca-ghost-border-opacity));
+    background-color: rgb(var(--ca-input-fill) / 1);
+    color: rgb(var(--ca-on-surface));
+    padding: 0.625rem 0.875rem;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+  }
+
+  .dark .ca-input {
+    border-color: rgb(var(--ca-outline-variant));
+    /* Opaque surface so native <select> popups inherit readable contrast */
+    background-color: rgb(var(--ca-surface-container-high));
+    color: rgb(var(--ca-on-surface));
+    color-scheme: dark;
+  }
+
+  /* Native <option> list: avoid white-on-light when OS draws a light popup */
+  .ca-input option {
+    background-color: rgb(var(--ca-surface-container-lowest));
+    color: rgb(var(--ca-on-surface));
+  }
+
+  .dark .ca-input option {
+    background-color: rgb(var(--ca-surface-container-high));
+    color: rgb(var(--ca-on-surface));
+  }
+
+  .ca-input::placeholder {
+    color: rgb(var(--ca-on-surface-variant) / 0.7);
+  }
+
+  .ca-input:focus {
+    border-color: rgb(var(--ca-primary-container));
+    outline: none;
+    box-shadow: 0 0 0 3px rgb(var(--ca-primary-container) / 0.2);
+  }
+
+  .ca-label {
+    font-family: var(--font-headline), ui-sans-serif, system-ui, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1rem;
+    color: rgb(var(--ca-on-surface-variant));
+  }
+
+  .ca-focus-glow:focus-visible {
+    outline: 2px solid rgb(var(--ca-primary));
+    outline-offset: 2px;
+    box-shadow: var(--ca-focus-glow);
+  }
+
+  .ca-text-display-lg {
+    font-family: var(--font-headline), ui-sans-serif, system-ui, sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 3.5rem;
+  }
+
+  .ca-text-headline-lg {
+    font-family: var(--font-headline), ui-sans-serif, system-ui, sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 2.5rem;
+  }
+
+  @media (max-width: 767px) {
+    .ca-text-headline-lg {
+      font-size: 1.75rem;
+      line-height: 2.25rem;
+    }
+  }
+
+  .ca-text-headline-md {
+    font-family: var(--font-headline), ui-sans-serif, system-ui, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 2rem;
+  }
+
+  .ca-text-body-lg {
+    font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.75rem;
+  }
+
+  .ca-text-body-md {
+    font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+  }
+
+  .ca-text-label-sm {
+    font-family: var(--font-headline), ui-sans-serif, system-ui, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1rem;
+  }
+
+  /* Stitch Keyboard Curator — recommendation survey */
+  .survey-curator-shell {
+    width: 100%;
+    max-width: none;
+    margin-inline: auto;
+  }
+
+  .survey-curator-viewport {
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  @keyframes survey-option-glow {
+    0% {
+      box-shadow: 0 0 5px rgb(var(--ca-primary) / 0.2);
+    }
+    50% {
+      box-shadow: 0 0 20px rgb(var(--ca-primary) / 0.4);
+    }
+    100% {
+      box-shadow: 0 0 5px rgb(var(--ca-primary) / 0.2);
+    }
+  }
+
+  .survey-option-card--selected {
+    animation: survey-option-glow 3s infinite ease-in-out;
+  }
+
+  .survey-curator-nav-next {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    background-color: rgb(var(--ca-primary-container));
+    color: rgb(var(--ca-on-primary));
+    padding: 0.5rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    box-shadow: 0 4px 20px rgb(var(--ca-primary) / 0.3);
+    transition: filter 150ms ease, transform 150ms ease;
+  }
+
+  .dark .survey-curator-nav-next {
+    color: rgb(var(--ca-on-primary-container));
+  }
+
+  .survey-curator-nav-next:hover:not(:disabled) {
+    filter: brightness(1.08);
+  }
+
+  .survey-curator-nav-next:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+  }
+
+  .survey-nav-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    border: 1px solid rgb(var(--ca-outline-variant) / 0.55);
+    background-color: rgb(var(--ca-surface-container) / 0.65);
+    padding: 0.375rem 0.75rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: rgb(var(--ca-on-surface-variant));
+    white-space: nowrap;
+    transition:
+      border-color 150ms ease,
+      color 150ms ease,
+      background-color 150ms ease;
+  }
+
+  .survey-nav-secondary:hover:not(:disabled) {
+    border-color: rgb(var(--ca-primary) / 0.45);
+    background-color: rgb(var(--ca-primary) / 0.08);
+    color: rgb(var(--ca-on-surface));
+  }
+
+  .survey-nav-secondary:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+
+  .survey-prefilled-banner {
+    min-height: 4.25rem;
+  }
+
+  .survey-nl-panel textarea {
+    min-height: 4.75rem;
+  }
+}

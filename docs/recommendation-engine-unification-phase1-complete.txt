@@ -1,0 +1,76 @@
+Keyboard Recommender — 추천 엔진 단일화 Phase 1 완료 리포트
+======================================================
+
+기준일: 2026-07-09 (KST)
+로드맵: docs/recommendation-engine-unification-roadmap.txt
+선행: docs/recommendation-engine-unification-phase0-baseline.txt
+
+
+1. 구현 요약
+------------
+- UI «빠른 추천»(3 select + mode=quick) 제거
+- 설문 제출·API 호출은 항상 FULL 경로 (mode 필드 미전송)
+- 스타일 프리셋 3종 + 5단계 설문 플로우 유지
+- 결과 화면 «빠른 추천 결과» 배너 제거
+- experiments.ts: survey_length_v1 / quick_default 제거
+- Backend fallback (stable_fast_v1) 유지 — Phase 2 rename 예정
+
+
+2. 변경 파일
+------------
+frontend/src/components/features/recommendation/survey-wizard.tsx
+frontend/src/components/features/recommendation/recommendation-result-view.tsx
+frontend/src/lib/api/recommendations.ts
+frontend/src/types/survey.ts
+frontend/src/lib/experiments.ts
+frontend/src/components/features/recommendation/survey-wizard.quick-removal.test.tsx  (신규)
+e2e/tests/critical-flows.spec.ts          (홈 CTA «추천 설문 시작»)
+e2e/tests/auth.setup.ts                   (submit 버튼·timeout 개선)
+e2e/playwright.phase0.config.cjs          (webServer 비활성 — 로컬 재사용용)
+e2e/playwright.phase1-verify.config.cjs   (신규 — 격리 스택 검증용)
+
+
+3. 검증 (step-by-step)
+----------------------
+
+Step 1 — Frontend Vitest
+  명령: cd frontend && npm test -- --run
+  결과: 17 passed (7 files) — quick-removal 테스트 포함
+
+Step 2 — Frontend production build
+  명령: cd frontend && npm run build
+  결과: PASS (타입·린트 통과)
+
+Step 3 — Backend pytest
+  명령: cd backend && python -m pytest tests -q
+  결과: 271 passed, 3 skipped
+
+Step 4 — E2E critical-flows (로컬)
+  명령: cd e2e && npx playwright test tests/critical-flows.spec.ts --config playwright.phase1-verify.config.cjs
+  결과: BLOCKED — 로컬 포트 충돌 (3000/8000/8020 점유, dev 서버 500)
+  조치: CI 또는 포트 비운 뒤 `npx playwright test tests/critical-flows.spec.ts` (start-stack.cjs)
+  참고: Phase 0에서 동일 스펙 5/6 통과 이력; 홈 CTA 수정 반영됨
+
+
+4. Phase 1 DoD 체크리스트
+-------------------------
+[x] /recommend entry에 «빠른 추천» UI 없음 (Vitest + 코드 확인)
+[x] 프리셋 → 5단계 설문 → POST /compute body에 mode 없음
+[x] /results에 «빠른 추천 결과» 배너 없음
+[ ] CI 5-job 통과 — push/PR 시 확인 필요
+
+
+5. 진입 화면 카피 (after)
+-------------------------
+- Title: «취향에 맞는 키보드 찾기»
+- Description: 1단계: 스타일 선택 · 2단계: 설문 · 3단계: 결과
+- 프리셋 3카드 + «이어서 설정하기»
+
+
+6. 다음 단계 (Phase 2)
+----------------------
+- _quick_runtime_flags → _resilient_degraded_flags rename
+- runMode / degradedReason 계약 테스트
+- PROJECT_CONTEXT.md 반영
+
+— 끝 —

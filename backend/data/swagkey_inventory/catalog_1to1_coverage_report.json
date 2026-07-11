@@ -1,0 +1,153 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-11T17:28:46.678609+00:00",
+  "sources": {
+    "seedPath": "C:\\Users\\jeung\\keyboard-recommender\\backend\\src\\keyboard_recommender\\catalog\\swagkey_products.seed.json",
+    "inventoryPath": "C:\\Users\\jeung\\keyboard-recommender\\backend\\data\\swagkey_inventory\\swagkey_inventory.v4.json",
+    "candidatesPath": "C:\\Users\\jeung\\keyboard-recommender\\backend\\data\\swagkey_inventory\\recommender_candidates.json",
+    "csvPath": "C:\\Users\\jeung\\keyboard-recommender\\backend\\data\\swagkey_inventory\\swagkey_products.csv"
+  },
+  "layoutArchetype": {
+    "seed_archetype_count": 7,
+    "seed_real_pcb_count": 38,
+    "browse_archetype_count": 7,
+    "browse_real_pcb_count": 38,
+    "classified_real_pcb_count": 23,
+    "note": "1:1 layout coverage compares real PCB only; archetypes excluded"
+  },
+  "families": {
+    "switch": {
+      "family": "switch",
+      "csv_category_count": 57,
+      "inventory_classified_count": 55,
+      "seed_count": 68,
+      "seed_archetype_count": null,
+      "seed_real_count": null,
+      "browse_count": 53,
+      "browse_excluded_404": 0,
+      "expected_browse": 55,
+      "gap_inventory_vs_browse": 2,
+      "gap_inventory_vs_seed": -13,
+      "gap_pct_inventory_vs_browse": 3.64
+    },
+    "plate": {
+      "family": "plate",
+      "csv_category_count": null,
+      "inventory_classified_count": 20,
+      "seed_count": 20,
+      "seed_archetype_count": null,
+      "seed_real_count": null,
+      "browse_count": 20,
+      "browse_excluded_404": 0,
+      "expected_browse": 20,
+      "gap_inventory_vs_browse": 0,
+      "gap_inventory_vs_seed": 0,
+      "gap_pct_inventory_vs_browse": 0.0
+    },
+    "foam": {
+      "family": "foam",
+      "csv_category_count": null,
+      "inventory_classified_count": 9,
+      "seed_count": 10,
+      "seed_archetype_count": null,
+      "seed_real_count": null,
+      "browse_count": 9,
+      "browse_excluded_404": 0,
+      "expected_browse": 9,
+      "gap_inventory_vs_browse": 0,
+      "gap_inventory_vs_seed": -1,
+      "gap_pct_inventory_vs_browse": 0.0
+    },
+    "layout": {
+      "family": "layout",
+      "csv_category_count": null,
+      "inventory_classified_count": 23,
+      "seed_count": 38,
+      "seed_archetype_count": 7,
+      "seed_real_count": 38,
+      "browse_count": 38,
+      "browse_excluded_404": 0,
+      "expected_browse": 23,
+      "gap_inventory_vs_browse": -15,
+      "gap_inventory_vs_seed": -15,
+      "gap_pct_inventory_vs_browse": -65.22
+    },
+    "case": {
+      "family": "case",
+      "csv_category_count": null,
+      "inventory_classified_count": 126,
+      "seed_count": 126,
+      "seed_archetype_count": null,
+      "seed_real_count": null,
+      "browse_count": 126,
+      "browse_excluded_404": 0,
+      "expected_browse": 126,
+      "gap_inventory_vs_browse": 0,
+      "gap_inventory_vs_seed": 0,
+      "gap_pct_inventory_vs_browse": 0.0
+    },
+    "keycap": {
+      "family": "keycap",
+      "csv_category_count": 73,
+      "inventory_classified_count": 67,
+      "seed_count": 62,
+      "seed_archetype_count": null,
+      "seed_real_count": null,
+      "browse_count": 62,
+      "browse_excluded_404": 0,
+      "expected_browse": 67,
+      "gap_inventory_vs_browse": 5,
+      "gap_inventory_vs_seed": 5,
+      "gap_pct_inventory_vs_browse": 7.46
+    }
+  },
+  "summaryLines": [
+    "catalog 1:1 coverage (1.0.0)",
+    "inventory: C:\\Users\\jeung\\keyboard-recommender\\backend\\data\\swagkey_inventory\\swagkey_inventory.v4.json",
+    "seed: C:\\Users\\jeung\\keyboard-recommender\\backend\\src\\keyboard_recommender\\catalog\\swagkey_products.seed.json",
+    "browse excluded idx (12): 384, 1187, 1206, 1216, 1340, 1496, 1589, 1658, 1667, 1668, 1673, 1677",
+    "",
+    "family | inv | seed | browse | 404ex | gap(inv-browse) | gap%",
+    "switch  |  55 |   68 |     53 |     0 |   +2 |   3.6%",
+    "plate   |  20 |   20 |     20 |     0 |   +0 |   0.0%",
+    "foam    |   9 |   10 |      9 |     0 |   +0 |   0.0%",
+    "layout  |  23 |   38 |     38 |     0 |  -15 | -65.2%",
+    "case    | 126 |  126 |    126 |     0 |   +0 |   0.0%",
+    "keycap  |  67 |   62 |     62 |     0 |   +5 |   7.5%",
+    "",
+    "layout archetype seed: 7 (browse 7)",
+    "layout real PCB - classified: 23 seed: 38",
+    "",
+    "CSV categories (raw rows): Switches=57 Keycaps=73",
+    "inventory keptByCategory: Switches=54 Keycaps=67",
+    "keycap seed gap (documented baseline target): 5 rows to merge in Phase 3"
+  ],
+  "gapThresholdPct": 2.0,
+  "gapCheckPassed": false,
+  "gapViolations": [
+    {
+      "family": "switch",
+      "inventory_count": 55,
+      "browse_count": 53,
+      "gap": 2,
+      "gap_pct": 3.64,
+      "threshold_pct": 2.0
+    },
+    {
+      "family": "layout",
+      "inventory_count": 23,
+      "browse_count": 38,
+      "gap": -15,
+      "gap_pct": 65.22,
+      "threshold_pct": 2.0
+    },
+    {
+      "family": "keycap",
+      "inventory_count": 67,
+      "browse_count": 62,
+      "gap": 5,
+      "gap_pct": 7.46,
+      "threshold_pct": 2.0
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+Keyboard Recommender — 추천 엔진 단일화 Phase 2 완료 리포트
+======================================================
+
+기준일: 2026-07-09 (KST)
+로드맵: docs/recommendation-engine-unification-roadmap.txt
+선행: Phase 1 완료
+
+
+1. 구현 요약 (보수적 API 계약)
+------------------------------
+- _quick_runtime_flags → _resilient_degraded_flags
+- model_version stable_fast_v1 → resilient_degraded_v1
+- 로그/노트: quick-start → resilient degraded compute
+- 요청 mode 필드 제거; mode=quick → 422; mode=full 레거시는 무시
+- 응답 runMode "quick" 유지 (contract rev 7) — 내부 degraded fallback 전용
+- degradedReason + «안정 모드» UI 유지
+
+
+2. 변경 파일
+------------
+backend/src/keyboard_recommender/application/recommendation_service.py
+backend/src/keyboard_recommender/schemas/recommendation.py
+backend/tests/test_recommendation_resilient_fallback.py  (신규)
+backend/tests/contract/test_recommendation_compute_contract.py
+frontend/src/lib/api/recommendation-response.ts  (주석)
+frontend/src/types/recommendation-api.ts  (주석)
+
+
+3. 검증 (step-by-step)
+----------------------
+
+Step 1 — Phase 2 backend tests
+  pytest tests/test_recommendation_resilient_fallback.py
+  pytest tests/contract/test_recommendation_compute_contract.py
+  결과: 11 passed
+
+Step 2 — Full backend pytest
+  결과: 277 passed, 3 skipped
+
+Step 3 — Frontend Vitest
+  결과: 17 passed (7 files)
+
+Step 4 — E2E critical-flows
+  결과: 6 passed (46.5s)
+
+
+4. Phase 2 DoD
+--------------
+[x] stable_fast_v1 / mode=quick 사용자 요청 불가
+[x] resilient fallback + degradedReason 테스트
+[x] 사용자 «quick recommendation» 언급 제거 (응답 runMode quick은 내부 fallback 문서화)
+
+
+5. 다음 단계 (Phase 3)
+----------------------
+- 설문 체감 시간 실측
+- 프리셋 후 pre-filled 단계 스킵 UX
+
+— 끝 —

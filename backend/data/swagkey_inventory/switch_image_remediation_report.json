@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-10T14:53:28.016872+00:00",
+  "rows": [
+    {
+      "seedId": "sw-other-003",
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1677",
+      "swagkeyProductId": "1677",
+      "httpStatus": 404,
+      "detail": "Not Found",
+      "action": "browse_exclude"
+    },
+    {
+      "seedId": "sw-other-005",
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1673",
+      "swagkeyProductId": "1673",
+      "httpStatus": 404,
+      "detail": "Not Found",
+      "action": "browse_exclude"
+    },
+    {
+      "seedId": "sw-other-006",
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1667",
+      "swagkeyProductId": "1667",
+      "httpStatus": 404,
+      "detail": "Not Found",
+      "action": "browse_exclude"
+    },
+    {
+      "seedId": "sw-other-008",
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1658",
+      "swagkeyProductId": "1658",
+      "httpStatus": 404,
+      "detail": "Not Found",
+      "action": "browse_exclude"
+    },
+    {
+      "seedId": "sw-other-011",
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1496",
+      "swagkeyProductId": "1496",
+      "httpStatus": 404,
+      "detail": "Not Found",
+      "action": "browse_exclude"
+    },
+    {
+      "seedId": "sw-other-016",
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1340",
+      "swagkeyProductId": "1340",
+      "httpStatus": 404,
+      "detail": "Not Found",
+      "action": "browse_exclude"
+    },
+    {
+      "seedId": "sw-other-020",
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1206",
+      "swagkeyProductId": "1206",
+      "httpStatus": 404,
+      "detail": "Not Found",
+      "action": "browse_exclude"
+    },
+    {
+      "seedId": "sw-other-021",
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1187",
+      "swagkeyProductId": "1187",
+      "httpStatus": 404,
+      "detail": "Not Found",
+      "action": "browse_exclude"
+    },
+    {
+      "seedId": "sw-linear-006",
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1668",
+      "swagkeyProductId": "1668",
+      "httpStatus": 404,
+      "detail": "Not Found",
+      "action": "browse_exclude"
+    }
+  ],
+  "browseExcludeIdx": [
+    "1187",
+    "1206",
+    "1340",
+    "1496",
+    "1658",
+    "1667",
+    "1668",
+    "1673",
+    "1677"
+  ]
+}

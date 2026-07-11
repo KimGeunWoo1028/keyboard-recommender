@@ -1,0 +1,96 @@
+# Weekly fixture-based inventory recheck (no live Swagkey crawl).
+# Live crawl schedule: .github/workflows/swagkey-inventory-recheck-live.yml
+# Optional webhook: repo secret CATALOG_CHANGE_ALERT_WEBHOOK_URL (never commit).
+# See docs/swagkey-inventory-recheck.md
+name: Swagkey inventory recheck
+
+on:
+  schedule:
+    # Monday 09:00 UTC
+    - cron: "0 9 * * 1"
+  workflow_dispatch:
+    inputs:
+      fail_on_alert:
+        description: "Fail the job when alertTotal > 0"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+      notify_webhook:
+        description: "POST alert when CATALOG_CHANGE_ALERT_WEBHOOK_URL secret is set"
+        required: false
+        default: "true"
+        type: choice
+        options:
+          - "false"
+          - "true"
+      check_image_urls:
+        description: "Compare seed imageUrl to fixture HTML cache (Phase 8)"
+        required: false
+        default: "true"
+        type: choice
+        options:
+          - "false"
+          - "true"
+
+jobs:
+  recheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: backend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+          cache-dependency-path: backend/pyproject.toml
+
+      - name: Install package (editable)
+        run: |
+          python -m pip install -U pip
+          pip install -e ".[dev]"
+
+      - name: Build catalog change alert from committed diff
+        id: alert
+        env:
+          CATALOG_CHANGE_ALERT_WEBHOOK_URL: ${{ secrets.CATALOG_CHANGE_ALERT_WEBHOOK_URL }}
+        run: |
+          EXTRA=""
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.fail_on_alert }}" = "true" ]; then
+            EXTRA="$EXTRA --fail-on-alert"
+          fi
+          # schedule always attempts notify when secret present; dispatch respects input
+          if [ "${{ github.event_name }}" != "workflow_dispatch" ] || [ "${{ inputs.notify_webhook }}" = "true" ]; then
+            EXTRA="$EXTRA --notify-webhook"
+          fi
+          if [ "${{ github.event_name }}" != "workflow_dispatch" ] || [ "${{ inputs.check_image_urls }}" = "true" ]; then
+            EXTRA="$EXTRA --check-image-urls --image-check-mode fixture"
+          fi
+          set +e
+          python scripts/run_swagkey_inventory_recheck.py --mode fixture $EXTRA
+          code=$?
+          set -e
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
+            exit "$code"
+          fi
+          if [ "$code" -eq 2 ]; then
+            echo "::warning::Catalog change alerts present (alertTotal > 0). Review artifact."
+          fi
+
+      - name: Upload alert artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: catalog-change-alert
+          path: |
+            backend/data/swagkey_inventory/catalog_change_alert.json
+            backend/data/swagkey_inventory/catalog_change_alert.txt
+            backend/data/swagkey_inventory/image_url_recheck_report.json
+          if-no-files-found: error

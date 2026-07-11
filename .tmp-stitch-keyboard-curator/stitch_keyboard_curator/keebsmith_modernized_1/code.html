@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KeebSmith - Recommendation Engine</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Hanken+Grotesk:wght@600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#322f39",
+                        "on-surface-variant": "#cbc3d7",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "outline": "#958ea0",
+                        "surface-dim": "#15121b",
+                        "on-secondary-fixed-variant": "#004c6e",
+                        "on-secondary-fixed": "#001e2f",
+                        "primary-fixed-dim": "#d0bcff",
+                        "surface-container-low": "#1d1a23",
+                        "on-tertiary": "#003824",
+                        "surface-container-lowest": "#0f0d15",
+                        "on-tertiary-container": "#00311f",
+                        "on-primary-container": "#340080",
+                        "primary-fixed": "#e9ddff",
+                        "on-surface": "#e7e0ed",
+                        "secondary-fixed-dim": "#89ceff",
+                        "on-error-container": "#ffdad6",
+                        "primary-container": "#a078ff",
+                        "error": "#ffb4ab",
+                        "surface-tint": "#d0bcff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "surface": "#15121b",
+                        "inverse-primary": "#6d3bd7",
+                        "surface-container": "#211e27",
+                        "background": "#15121b",
+                        "on-primary": "#3c0091",
+                        "tertiary": "#4edea3",
+                        "on-primary-fixed-variant": "#5516be",
+                        "on-error": "#690005",
+                        "error-container": "#93000a",
+                        "on-primary-fixed": "#23005c",
+                        "on-secondary-container": "#00344e",
+                        "secondary-container": "#00a2e6",
+                        "surface-container-highest": "#37333d",
+                        "tertiary-container": "#00a572",
+                        "inverse-surface": "#e7e0ed",
+                        "primary": "#d0bcff",
+                        "on-background": "#e7e0ed",
+                        "surface-container-high": "#2c2832",
+                        "surface-variant": "#37333d",
+                        "surface-bright": "#3b3742",
+                        "secondary": "#89ceff",
+                        "on-tertiary-fixed": "#002113",
+                        "secondary-fixed": "#c9e6ff",
+                        "on-secondary": "#00344d",
+                        "outline-variant": "#494454",
+                        "tertiary-fixed-dim": "#4edea3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "margin-desktop": "40px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "label-sm": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0D0D15;
+            color: #e7e0ed;
+            overflow-x: hidden;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .glass-panel:hover {
+            border: 1px solid rgba(208, 188, 255, 0.3);
+            box-shadow: 0 0 20px rgba(109, 59, 215, 0.1);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #89ceff;
+            border-radius: 999px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        @keyframes neon-pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; filter: drop-shadow(0 0 8px #d0bcff); }
+        }
+        .pulse-glow {
+            animation: neon-pulse 2s infinite ease-in-out;
+        }
+
+        .asymmetric-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md custom-scrollbar">
+<!-- TopNavBar -->
+<header class="bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-xl border-b border-outline-variant/30 shadow-sm docked full-width top-0 sticky z-50">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-headline-md font-headline-md font-bold bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent">KeebSmith</span>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-primary border-b-2 border-primary font-bold pb-1 text-label-sm font-label-sm" href="#">Build</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors text-label-sm font-label-sm" href="#">Explore</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors text-label-sm font-label-sm" href="#">Community</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex items-center bg-surface-container rounded-full px-4 py-1.5 border border-outline-variant/20">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-label-sm placeholder-on-surface-variant/50 w-48" placeholder="Search components..." type="text"/>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant p-2 hover:bg-surface-variant/50 rounded-lg transition-all scale-95 active:scale-90">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant p-2 hover:bg-surface-variant/50 rounded-lg transition-all scale-95 active:scale-90">settings</button>
+<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-bold text-label-sm hover:opacity-90 transition-opacity">Sign In</button>
+</div>
+</div>
+</header>
+<main class="max-w-container-max mx-auto px-margin-desktop py-12">
+<!-- Dashboard Header -->
+<section class="mb-12 flex flex-col md:flex-row justify-between items-end gap-6">
+<div class="max-w-2xl">
+<div class="flex items-center gap-2 text-tertiary mb-2">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Analysis Complete</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg md:text-display-lg md:font-display-lg leading-tight mb-4">Precision Recommended Builds</h1>
+<p class="text-on-surface-variant text-body-lg max-w-xl">Based on your sound profile preference (Creamy/Thocky) and 75% layout requirement, our engine has calculated 3 optimal configurations.</p>
+</div>
+<div class="glass-panel p-6 rounded-xl flex items-center gap-6">
+<div class="relative w-20 h-20">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-outline-variant/20" cx="40" cy="40" fill="transparent" r="36" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-tertiary" cx="40" cy="40" fill="transparent" r="36" stroke="currentColor" stroke-dasharray="226" stroke-dashoffset="45" stroke-width="4"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center font-label-sm text-tertiary">82%</div>
+</div>
+<div>
+<div class="text-label-sm text-on-surface-variant uppercase mb-1">Global Match</div>
+<div class="text-headline-md font-bold">Elite Performance</div>
+</div>
+</div>
+</section>
+<!-- Main Bento Grid -->
+<div class="asymmetric-grid mb-12">
+<!-- Primary Recommendation Card -->
+<div class="col-span-12 lg:col-span-7 glass-panel rounded-2xl overflow-hidden group">
+<div class="relative h-80 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A macro cinematic shot of a high-end custom mechanical keyboard with a matte black aluminum case and gradient purple keycaps. The lighting is moody, midnight workshop style with neon purple and teal accents reflecting off the keycaps. The shallow depth of field emphasizes the precision-engineered textures and the bespoke aesthetic of the hardware." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBy9LjfpXBBoSW8b4FyWzsUc6mkhPCcaGTp6VChlJtcQsj8yGrWDynSceiXkyysIBuyc73q4RT6ri9cmkG3EDxuxETrmbOwLA10gotJT1Gtid7mwemj2u3MsGefPvWebRy8ZSvKbae4fbSJmHLMKVkU2KwDOXaWMYR7xqVEdBzSWZ8csVxkwANX21F3xATAzr4vITeFnW5wCtLS3zeS__SY7iYFCCvH3-iY8Z423PBsuIx9iYvxqKr_CA"/>
+<div class="absolute top-6 left-6 flex gap-2">
+<span class="bg-primary text-on-primary px-3 py-1 rounded-full text-label-sm font-bold">TOP MATCH</span>
+<span class="bg-surface/80 backdrop-blur-md px-3 py-1 rounded-full text-label-sm">Thocky King</span>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h2 class="font-headline-lg text-headline-lg mb-1">Obsidian-75 "The Architect"</h2>
+<p class="font-label-sm text-on-surface-variant">Estimated Build Price: $542.00</p>
+</div>
+<div class="text-right">
+<div class="text-headline-md font-bold text-primary">98.4%</div>
+<div class="text-label-sm text-on-surface-variant uppercase">Match Score</div>
+</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+<div class="bg-surface-container p-4 rounded-lg border border-outline-variant/10">
+<div class="text-label-sm text-on-surface-variant mb-1 uppercase">Switch</div>
+<div class="font-bold">Morandi Linear</div>
+</div>
+<div class="bg-surface-container p-4 rounded-lg border border-outline-variant/10">
+<div class="text-label-sm text-on-surface-variant mb-1 uppercase">Plate</div>
+<div class="font-bold">Polycarbonate</div>
+</div>
+<div class="bg-surface-container p-4 rounded-lg border border-outline-variant/10">
+<div class="text-label-sm text-on-surface-variant mb-1 uppercase">Keycaps</div>
+<div class="font-bold">PBT Gradient</div>
+</div>
+<div class="bg-surface-container p-4 rounded-lg border border-outline-variant/10">
+<div class="text-label-sm text-on-surface-variant mb-1 uppercase">Mount</div>
+<div class="font-bold">Gasket</div>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mb-8">
+<span class="bg-secondary-container/20 text-secondary border border-secondary/30 px-3 py-1 rounded-full text-label-sm">Deep Acoustic</span>
+<span class="bg-secondary-container/20 text-secondary border border-secondary/30 px-3 py-1 rounded-full text-label-sm">Heavy Feel</span>
+<span class="bg-secondary-container/20 text-secondary border border-secondary/30 px-3 py-1 rounded-full text-label-sm">RGB Optimized</span>
+<span class="bg-secondary-container/20 text-secondary border border-secondary/30 px-3 py-1 rounded-full text-label-sm">Elite Case</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex-1 bg-primary text-on-primary py-4 rounded-xl font-bold uppercase tracking-widest hover:shadow-[0_0_20px_rgba(208,188,255,0.4)] transition-all">Proceed to Workshop</button>
+<button class="w-14 h-14 flex items-center justify-center rounded-xl border border-outline-variant/30 hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined">bookmark</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Analysis Sidebar -->
+<div class="col-span-12 lg:col-span-5 space-y-6">
+<!-- Sound Profile Chart -->
+<div class="glass-panel p-6 rounded-2xl">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-headline-md">Acoustic Analysis</h3>
+<span class="material-symbols-outlined text-secondary">equalizer</span>
+</div>
+<div class="h-48 flex items-end gap-2 px-2">
+<div class="flex-1 bg-gradient-to-t from-primary/20 to-primary h-[40%] rounded-t-sm relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface-container px-2 py-1 rounded text-[10px] opacity-0 group-hover:opacity-100 transition-opacity">120Hz</div>
+</div>
+<div class="flex-1 bg-gradient-to-t from-primary/20 to-primary h-[70%] rounded-t-sm relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface-container px-2 py-1 rounded text-[10px] opacity-0 group-hover:opacity-100 transition-opacity">250Hz</div>
+</div>
+<div class="flex-1 bg-gradient-to-t from-primary/20 to-primary h-[90%] rounded-t-sm relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface-container px-2 py-1 rounded text-[10px] opacity-0 group-hover:opacity-100 transition-opacity">500Hz</div>
+</div>
+<div class="flex-1 bg-gradient-to-t from-primary/20 to-primary h-[55%] rounded-t-sm relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface-container px-2 py-1 rounded text-[10px] opacity-0 group-hover:opacity-100 transition-opacity">1kHz</div>
+</div>
+<div class="flex-1 bg-gradient-to-t from-primary/20 to-primary h-[30%] rounded-t-sm relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface-container px-2 py-1 rounded text-[10px] opacity-0 group-hover:opacity-100 transition-opacity">2kHz</div>
+</div>
+<div class="flex-1 bg-gradient-to-t from-primary/20 to-primary h-[15%] rounded-t-sm relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface-container px-2 py-1 rounded text-[10px] opacity-0 group-hover:opacity-100 transition-opacity">4kHz</div>
+</div>
+</div>
+<div class="flex justify-between mt-4 text-[10px] font-label-sm text-on-surface-variant uppercase tracking-tighter">
+<span>Low/Thock</span>
+<span>Mid/Clack</span>
+<span>High/Crisp</span>
+</div>
+</div>
+<!-- Comparison Widget -->
+<div class="glass-panel p-6 rounded-2xl">
+<h3 class="font-headline-md text-headline-md mb-4">Smart Comparison</h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-3 bg-surface-container/50 rounded-xl">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">bolt</span>
+</div>
+<span class="text-label-sm">Actuation Speed</span>
+</div>
+<span class="text-label-sm text-on-surface">1.2ms (Elite)</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container/50 rounded-xl">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">vibration</span>
+</div>
+<span class="text-label-sm">Vibration Dampening</span>
+</div>
+<span class="text-label-sm text-on-surface">High (Gasket)</span>
+</div>
+<button class="w-full text-center py-2 text-primary text-label-sm font-bold border border-primary/20 rounded-lg hover:bg-primary/5 transition-all">View Full Analytics</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Secondary Recommendations -->
+<h3 class="font-headline-md text-headline-md mb-6 px-4 border-l-4 border-tertiary">Alternate Configurations</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Alt Card 1 -->
+<div class="glass-panel rounded-2xl p-6 group cursor-pointer">
+<div class="flex gap-6">
+<div class="w-32 h-32 rounded-xl overflow-hidden shrink-0 border border-outline-variant/20">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A detailed close-up of a frosted acrylic keyboard case with RGB lighting diffusing through the material. The keycaps are semi-transparent with a clean, modern typeface. The aesthetic is vaporwave-inspired with soft blue and pink glow, presented in a high-end hardware showroom style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBurN1rxRLb7xDemh4I3JotiICuCYdKyOqBbfpP2kbvFH5ZHFieGGQMIAsklNmSS6iNxfne5pSixgsPmEEpQ6IYL8W_2rofrEzqU-VmEole6Q9GgqWMhjYZI_8lyf4FR0A9aMXylhVgpjUfzdKFnR715Fz8KHT889oU6CHVgF1QSoLQ0xbWMM38aOaU9rLW7hr2IudZeqAbzzwBW7NwoiGtch4xkWSSQVG5W4bKG1E_lM07pnHe5NDxvA"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-headline-md text-headline-md">Frost-75 Lite</h4>
+<span class="text-label-sm font-bold text-secondary">92% Match</span>
+</div>
+<p class="text-on-surface-variant text-label-sm mb-4">Focused on aesthetic luminosity and higher-pitched clack profile.</p>
+<div class="flex gap-2">
+<span class="bg-surface-container-highest px-2 py-1 rounded text-[10px] font-label-sm">Acrylic</span>
+<span class="bg-surface-container-highest px-2 py-1 rounded text-[10px] font-label-sm">Oil King Switches</span>
+<span class="bg-surface-container-highest px-2 py-1 rounded text-[10px] font-label-sm">$320.00</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Alt Card 2 -->
+<div class="glass-panel rounded-2xl p-6 group cursor-pointer">
+<div class="flex gap-6">
+<div class="w-32 h-32 rounded-xl overflow-hidden shrink-0 border border-outline-variant/20">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="An industrial-style mechanical keyboard featuring a heavy raw aluminum chassis with visible machining marks and brass weight inserts. The design is brutalist yet refined, with dark grey textured keycaps and exposed screws. The lighting is harsh and direct, highlighting the metallic textures of the keyboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpaNlxKryZrLqojxhcrC4wERhE9VP9IfqsKyKuvfQTLhnKtZc35o2FKEy8Xv7tVgHQYXxfjUKCeC0YkHGeWf5IDlifwOD2BliluKOjfYSqvhVXfrb20XESAl3Y9fYz1ntREuEHHPhtbHg4TjYGk-yiZ12IU5_gq9QLVq0gdkvRrVtkibZZQbtJtOk9y59QNVfYGUn804YoSUlwBaVKrPb8AGBi87viMFU8ufIvw55_tAZq-ygZKUr19w"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-headline-md text-headline-md">Ironclad V2</h4>
+<span class="text-label-sm font-bold text-tertiary">87% Match</span>
+</div>
+<p class="text-on-surface-variant text-label-sm mb-4">Industrial durability with a muted, professional sound signature.</p>
+<div class="flex gap-2">
+<span class="bg-surface-container-highest px-2 py-1 rounded text-[10px] font-label-sm">Brass Plate</span>
+<span class="bg-surface-container-highest px-2 py-1 rounded text-[10px] font-label-sm">Ink Black V2</span>
+<span class="bg-surface-container-highest px-2 py-1 rounded text-[10px] font-label-sm">$610.00</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- SideNavBar (Mobile Toggle/Web Fixed) -->
+<aside class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface-container-low dark:bg-surface-container-lowest backdrop-blur-md border-r border-outline-variant/20 py-8 overflow-y-auto z-40 transition-transform -translate-x-full lg:translate-x-0">
+<div class="px-6 mb-8 mt-12">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined">precision_manufacturing</span>
+</div>
+<div>
+<div class="text-headline-sm font-headline-md">Workshop</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Analytical Mode</div>
+</div>
+</div>
+</div>
+<nav class="flex-1">
+<a class="text-on-surface-variant hover:text-on-surface flex items-center gap-3 px-6 py-3 hover:bg-white/5 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">tune</span>
+<span class="font-label-sm text-label-sm">Filters</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface flex items-center gap-3 px-6 py-3 hover:bg-white/5 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-sm text-label-sm">History</span>
+</a>
+<a class="bg-secondary-container/20 text-secondary border-r-4 border-secondary flex items-center gap-3 px-6 py-3 translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined">bookmark</span>
+<span class="font-label-sm text-label-sm">Saved Builds</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface flex items-center gap-3 px-6 py-3 hover:bg-white/5 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">compare_arrows</span>
+<span class="font-label-sm text-label-sm">Compare</span>
+</a>
+</nav>
+<div class="px-6 pt-8 mt-auto border-t border-outline-variant/10">
+<button class="w-full bg-primary py-3 rounded-lg font-bold text-on-primary mb-6 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                New Build
+            </button>
+<div class="space-y-4">
+<a class="flex items-center gap-3 text-on-surface-variant text-label-sm hover:text-on-surface" href="#">
+<span class="material-symbols-outlined text-[18px]">help</span>
+                    Support
+                </a>
+<a class="flex items-center gap-3 text-on-surface-variant text-label-sm hover:text-on-surface" href="#">
+<span class="material-symbols-outlined text-[18px]">account_circle</span>
+                    Account
+                </a>
+</div>
+</div>
+</aside>
+<!-- Footer -->
+<footer class="bg-surface dark:bg-surface-dim border-t border-outline-variant/10 full-width py-12 mt-20">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop w-full max-w-container-max mx-auto gap-8">
+<div>
+<div class="text-body-lg font-bold text-on-surface mb-2">KeebSmith</div>
+<p class="text-on-surface-variant text-label-sm">© 2024 KeebSmith. Precision Crafted.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-on-surface-variant hover:text-primary text-label-sm hover:underline transition-all" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary text-label-sm hover:underline transition-all" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary text-label-sm hover:underline transition-all" href="#">API Documentation</a>
+<a class="text-on-surface-variant hover:text-primary text-label-sm hover:underline transition-all" href="#">Contact</a>
+</div>
+<div class="flex gap-4">
+<a class="opacity-80 hover:opacity-100 transition-opacity material-symbols-outlined" href="#">share</a>
+<a class="opacity-80 hover:opacity-100 transition-opacity material-symbols-outlined" href="#">language</a>
+</div>
+</div>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<div class="md:hidden fixed bottom-0 left-0 right-0 bg-surface/90 backdrop-blur-xl border-t border-outline-variant/30 flex justify-around py-3 z-50">
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined">build</span>
+<span class="text-[10px] font-label-sm">Build</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">explore</span>
+<span class="text-[10px] font-label-sm">Explore</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">groups</span>
+<span class="text-[10px] font-label-sm">Community</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="text-[10px] font-label-sm">Profile</span>
+</button>
+</div>
+</body></html>

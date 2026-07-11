@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KeebSmith - Recommendation Survey</title>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'keeb-bg': '#0f0e13',
+            'keeb-card': '#1a1823',
+            'keeb-border': '#2d2b38',
+            'keeb-accent': '#a78bfa', // Purple
+            'keeb-neon': '#7c3aed',
+          },
+          backgroundImage: {
+            'glass-gradient': 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%)',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-animations">
+    @keyframes glow {
+      0% { box-shadow: 0 0 5px rgba(167, 139, 250, 0.2); }
+      50% { box-shadow: 0 0 20px rgba(167, 139, 250, 0.4); }
+      100% { box-shadow: 0 0 5px rgba(167, 139, 250, 0.2); }
+    }
+    .selected-card {
+      border-color: #a78bfa !important;
+      animation: glow 3s infinite ease-in-out;
+      background: rgba(167, 139, 250, 0.05);
+    }
+    .glass-effect {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+  </style>
+</head>
+<body class="bg-keeb-bg text-gray-200 min-h-screen flex flex-col font-sans">
+<!-- BEGIN: MainHeader -->
+<header class="border-b border-keeb-border glass-effect sticky top-0 z-50 bg-keeb-bg/80">
+<div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+<div class="flex items-center gap-8">
+<h1 class="text-xl font-bold tracking-tight text-white">KeebSmith</h1>
+<nav class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-400">
+<a class="hover:text-keeb-accent transition-colors" href="#">Build</a>
+<a class="hover:text-keeb-accent transition-colors" href="#">Explore</a>
+<a class="hover:text-keeb-accent transition-colors" href="#">Community</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-gray-400 hover:text-white">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<div class="w-8 h-8 rounded-full bg-keeb-border flex items-center justify-center overflow-hidden border border-gray-700">
+<svg class="h-5 w-5 text-gray-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" fill-rule="evenodd"></path></svg>
+</div>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="flex-grow flex flex-col items-center justify-center p-6 sm:p-12">
+<!-- Onboarding Container -->
+<div class="w-full max-w-3xl" data-purpose="survey-container">
+<!-- Progress Indicator -->
+<div class="mb-12 flex flex-col items-center">
+<span class="text-xs uppercase tracking-[0.2em] text-keeb-accent mb-4 font-bold">Step 02 of 05</span>
+<div class="w-full h-1 bg-keeb-border rounded-full overflow-hidden flex">
+<div class="h-full bg-gray-600 w-1/5"></div>
+<div class="h-full bg-keeb-accent w-1/5 shadow-[0_0_8px_rgba(167,139,250,0.6)]"></div>
+<div class="h-full bg-transparent w-3/5"></div>
+</div>
+</div>
+<!-- Question Header -->
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold text-white mb-4">원하시는 타건음의 성향은 무엇인가요?</h2>
+<p class="text-gray-400 text-sm leading-relaxed">키보드의 소리는 사용자의 집중력과 주변 환경에 큰 영향을 미칩니다.<br/>선호하시는 소리 톤을 선택해 주세요.</p>
+</div>
+<!-- Option Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+<!-- Option: Low Pitch -->
+<div class="group cursor-pointer bg-keeb-card border border-keeb-border p-8 rounded-2xl transition-all hover:border-gray-500 flex flex-col items-center text-center" data-purpose="survey-option">
+<div class="w-12 h-12 mb-6 text-gray-400 group-hover:text-keeb-accent transition-colors">
+<svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M4 12c0-4.418 3.582-8 8-8s8 3.582 8 8-3.582 8-8 8-8-3.582-8-8z"></path><path d="M8 12h8m-4-4v8"></path></svg>
+</div>
+<h3 class="text-lg font-semibold text-white mb-2">Low Pitch</h3>
+<p class="text-sm text-gray-500">묵직하고 낮은 '도마토'음</p>
+<div class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="text-xs text-keeb-accent font-medium">Thocky</span>
+</div>
+</div>
+<!-- Option: High Pitch (Selected) -->
+<div class="selected-card cursor-pointer bg-keeb-card border p-8 rounded-2xl flex flex-col items-center text-center relative overflow-hidden" data-purpose="survey-option-selected">
+<div class="w-12 h-12 mb-6 text-keeb-accent">
+<svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+</div>
+<h3 class="text-lg font-semibold text-white mb-2">High Pitch</h3>
+<p class="text-sm text-gray-400">경쾌하고 또렷한 '짤깍'음</p>
+<div class="mt-4 flex items-center gap-1.5 bg-keeb-accent/20 px-3 py-1 rounded-full border border-keeb-accent/30">
+<svg class="h-3 w-3 text-keeb-accent" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill-rule="evenodd"></path></svg>
+<span class="text-xs text-keeb-accent font-bold">Clacky</span>
+</div>
+</div>
+<!-- Option: Silent -->
+<div class="group cursor-pointer bg-keeb-card border border-keeb-border p-8 rounded-2xl transition-all hover:border-gray-500 flex flex-col items-center text-center" data-purpose="survey-option">
+<div class="w-12 h-12 mb-6 text-gray-400 group-hover:text-keeb-accent transition-colors">
+<svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path><path d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"></path></svg>
+</div>
+<h3 class="text-lg font-semibold text-white mb-2">Silent</h3>
+<p class="text-sm text-gray-500">사무실에서도 조용한 저음</p>
+<div class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="text-xs text-keeb-accent font-medium">Quiet</span>
+</div>
+</div>
+</div>
+<!-- Additional Preferences Field -->
+<div class="mt-16 pt-8 border-t border-keeb-border" data-purpose="additional-field">
+<label class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Additional Preferences</label>
+<textarea class="w-full bg-keeb-card border border-keeb-border rounded-xl p-4 text-sm text-gray-300 focus:ring-1 focus:ring-keeb-accent focus:border-keeb-accent outline-none transition-all resize-none" placeholder="더 구체적인 취향이 있다면 입력해 주세요 (예: 조용하고 부드러운 타건감)" rows="3"></textarea>
+<p class="mt-3 text-[10px] text-gray-600 flex items-center gap-1.5">
+<svg class="h-3 w-3" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" fill-rule="evenodd"></path></svg>
+          입력하신 내용은 인공지능이 분석하여 최적의 스위치를 추천하는 데 사용됩니다.
+        </p>
+</div>
+<!-- Navigation Buttons -->
+<div class="mt-12 flex items-center justify-between">
+<button class="flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-white transition-colors group">
+<svg class="h-4 w-4 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 19l-7-7m0 0l7-7m-7 7h18" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+          이전
+        </button>
+<button class="bg-keeb-accent hover:bg-keeb-neon text-white px-8 py-3 rounded-full font-bold text-sm shadow-[0_4px_20px_rgba(124,58,237,0.3)] transition-all flex items-center gap-2 group">
+          다음 단계로
+          <svg class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+</div>
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: MainFooter -->
+<footer class="border-t border-keeb-border py-8 mt-auto">
+<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="text-xs text-gray-500">
+        © 2024 KeebSmith. All rights reserved. Precision crafted for enthusiasts.
+      </div>
+<div class="flex items-center gap-6 text-xs text-gray-500">
+<a class="hover:text-gray-300" href="#">Privacy Policy</a>
+<a class="hover:text-gray-300" href="#">Terms of Service</a>
+<a class="hover:text-gray-300" href="#">Support</a>
+<a class="hover:text-gray-300" href="#">GitHub</a>
+</div>
+</div>
+</footer>
+<!-- END: MainFooter -->
+</body></html>

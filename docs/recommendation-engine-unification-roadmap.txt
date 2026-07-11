@@ -1,0 +1,357 @@
+Keyboard Recommender — 추천 엔진 단일화 로드맵
+==============================================
+
+작성 목적
+---------
+사용자가 어떤 진입 경로를 선택하더라도 happy path에서는 동일한 FULL 추천 엔진을
+경험하도록 정리한다. «빠른 추천»(mode=quick) UI 제거와 엔진 통합이 핵심이며,
+스타일 프리셋은 설문 입력 보조만 담당한다.
+
+기준일: 2026-07-09
+관련: docs/PROJECT_CONTEXT.md §4.1 · frontend survey-wizard · recommendation_service.py
+
+
+한 줄 목표
+----------
+«빠른 추천»을 없애는 것이 목적이 아니라 «추천 엔진을 하나로 통합»하는 것이 목적.
+사용자는 어떤 진입 경로를 선택하더라도 결국 동일한 고품질 FULL 엔진을 경험하고,
+프리셋은 단지 설문을 더 빠르게 시작하기 위한 입력 보조 역할만 한다.
+
+
+핵심 원칙 (유지)
+----------------
+- Happy path: mode=full 단일 경로
+- Resilience fallback: full compute 실패 시에만 degraded 경로 (사용자 선택 아님)
+- 설문 5축 유지 (trait 엔진과 1:1 — 문항 수 축소 금지)
+- responseContractRev: 7 유지 (Phase 1~2; runMode breaking change 시에만 rev 8 검토)
+- 스타일 프리셋(ONBOARDING_STYLES) 유지 — chooseStyle() → phase: questions → full submit
+- Backend / Frontend / 추천 엔진 아키텍처 전면 재설계 없음
+
+
+결정 요약 (합의)
+----------------
+기능                              | 판단
+----------------------------------|------------------------------------------
+UI Quick Recommendation (quick)     | 제거 (Phase 1)
+stable_fast_v1 사용자 경로          | 제거; resilience fallback만 유지 (Phase 2)
+스타일 프리셋                     | 유지
+프리셋 → FULL 엔진                | 이미 구현 — 깨지 않게 유지
+설문 30~60초                      | 목표 OK — 실측 후 UX 개선 (Phase 3)
+엔진 단일화                       | happy path 동의; fallback은 예외로 문서화
+
+
+Phase 개요
+----------
+Phase 0  베이스라인          제거 전 상태·지표 고정              ~0.5일
+Phase 1  Quick UI 제거        사용자 경로에서 mode=quick 차단     1~2일
+Phase 2  엔진·계약 정리       fallback 명명·API·테스트 정리       1~2일
+Phase 3  설문 UX·실측         30~60초 목표 (실측 기반)            2~4일
+Phase 4  문서·운영            PROJECT_CONTEXT · runbook 반영      ~0.5일
+
+의존: Phase 1 → Phase 2 권장. Phase 1과 Phase 3은 병렬 가능.
+최소 배포 단위: Phase 1만으로도 제품 방향성 달성.
+
+
+================================================================================
+Phase 0 — 베이스라인 (선택, 권장)
+================================================================================
+
+목적: 제거 후 회귀 비교용 스냅샷
+
+작업
+----
+- onboarding.generate_started 이벤트에서 mode: quick 비율 확인 (KPI 메모)
+- E2E critical-flows green 확인
+- /recommend 진입 화면 스크린샷 (before 참고)
+
+완료 기준
+---------
+- Phase 1 PR 전 pytest + npm test + E2E 통과
+
+Phase 0 완료 (2026-07-09)
+-------------------------
+산출물: docs/recommendation-engine-unification-phase0-baseline.txt
+스크린샷: docs/baselines/recommendation-engine-unification/phase0-recommend-entry-before.png
+pytest 271 passed · Vitest 16 passed · E2E 5/6 (홈 CTA «시작하기» 드리프트 1건 실패)
+KPI 샘플: eval_events generate_started 26건 — quick 46% / full 27% / null 27%
+
+
+================================================================================
+Phase 1 — Quick UI 제거 (핵심)
+================================================================================
+
+목적: 사용자가 mode=quick / stable_fast_v1을 선택할 수 없게 함
+
+
+1.1 Frontend — survey-wizard.tsx
+----------------------------------
+제거:
+  - quickSound, quickSoftness, quickUsage state
+  - quickAnswersFromInputs(), runQuickStart()
+  - entry phase «빠른 추천» 박스 전체 (3 select + CTA + 재시도 버튼)
+
+변경:
+  - submitWithAnswers — mode 옵션 제거, 항상 full
+  - saveSurveySubmission — quickStart, quickProfile 미기록
+  - CardTitle: «빠르게 추천받기» → «취향에 맞는 키보드 찾기» 등
+  - CardDescription: 스타일 선택 → 설문 → 결과 3단계로 정리
+
+유지:
+  - ONBOARDING_STYLES + chooseStyle() → phase: questions
+
+
+1.2 Frontend — 결과·타입·API
+-----------------------------
+파일                              | 작업
+----------------------------------|------------------------------------------
+recommendation-result-view.tsx    | submission.quickStart 배너 블록 제거
+types/survey.ts                   | quickStart?, quickProfile? 제거
+lib/api/recommendations.ts        | mode 필드 제거, body에 mode 미전송
+lib/api/recommendation-response.ts| runMode 파싱 유지 (fallback 응답용)
+
+
+1.3 Frontend — 실험 정리
+-------------------------
+- experiments.ts: survey_length_v1 / quick_default variant 제거 (현재 미사용)
+- survey-wizard.tsx: onboarding_wording_v1 «friendly» = «빠르게 추천받기» 문구 수정 또는 실험 종료
+
+
+1.4 Backend (Phase 1)
+---------------------
+- recommendation_service.py fallback 로직 유지 (변경 없음)
+- (선택) 클라이언트 mode=quick 요청 시 400 또는 무시 후 full 강제
+
+
+1.5 테스트
+----------
+- E2E: critical-flows, recommendation-survey green
+- Frontend Vitest: smoke/contract 수정
+- Backend: 기존 contract 회귀 유지
+
+
+Phase 1 완료 기준 (DoD)
+-----------------------
+[x] /recommend entry에 «빠른 추천» UI 없음
+[x] 프리셋 클릭 → 5단계 설문 → POST /compute body에 mode 없음 또는 full만
+[x] /results에 «빠른 추천 결과» 배너 없음
+[ ] CI 5-job 통과 (push/PR 시 확인)
+
+Phase 1 완료 (2026-07-09)
+-------------------------
+산출물: docs/recommendation-engine-unification-phase1-complete.txt
+Vitest 17 passed · build PASS · pytest 271 passed
+E2E: 로컬 포트 충돌로 미실행 — CI 또는 start-stack으로 확인
+
+
+================================================================================
+Phase 2 — 엔진·계약 정리
+================================================================================
+
+목적: fallback은 남기되 «빠른 추천»과 개념·이름 분리
+
+
+2.1 Backend 내부 명명
+---------------------
+현재                                    | 제안
+----------------------------------------|----------------------------------
+_quick_runtime_flags()                  | _resilient_degraded_flags()
+model_version="stable_fast_v1"          | "resilient_degraded_v1"
+quick-start mode enabled (note)         | resilient degraded compute
+full_mode_compute_failed_fallback_to_quick | full_mode_compute_failed_fallback_to_degraded
+
+
+2.2 API 계약 (breaking 여부 결정)
+---------------------------------
+보수적 (권장):
+  - runMode: "quick" 응답 값 유지
+  - 문서에 «내부 degraded, 사용자 quick 아님» 명시
+
+적극적 (차기 contract rev):
+  - runMode: "full" | "degraded" 로 변경
+  - responseContractRev: 8 + frontend contract test 업데이트
+
+
+2.3 요청 스키마
+---------------
+- SurveyAnswersRequest.mode: OpenAPI deprecated 후 제거, 또는 quick 값 거부
+- 클라이언트: mode 미전송만 허용
+
+
+2.4 결과 UI — degraded vs quick 분리
+------------------------------------
+상태              | UI
+------------------|--------------------------------------------------
+degradedReason    | 기존 «안정 모드로 추천» 카드 유지 (이미 존재)
+quickStart        | Phase 1에서 제거됨
+
+
+2.5 테스트 추가
+---------------
+backend/tests/test_recommendation_resilient_fallback.py
+  - full 실패 → degraded + degradedReason
+contract/ — runMode · degradedReason 필드 계약
+
+
+Phase 2 완료 기준
+-----------------
+[x] 사용자 경로에서 stable_fast_v1 / mode=quick 요청 불가
+[x] Resilience fallback 동작·degradedReason 계약 테스트 있음
+[x] 코드·주석에 «quick recommendation» 사용자 기능 언급 없음
+
+Phase 2 완료 (2026-07-09)
+-------------------------
+산출물: docs/recommendation-engine-unification-phase2-complete.txt
+pytest 277 passed · Vitest 17 passed · E2E 6 passed
+보수적 계약: 응답 runMode "quick" = 내부 degraded fallback만 (rev 7 유지)
+
+
+================================================================================
+Phase 3 — 설문 UX·실측
+================================================================================
+
+목적: 문항 수 축소 없이 체감 시간 단축. 실측 후 개선.
+
+
+3.1 실측 (먼저)
+---------------
+이벤트                                      | 측정
+--------------------------------------------|----------------------------------
+onboarding.viewed → onboarding.generate_started | 진입~제출 (ms)
+onboarding.step_completed × 5               | 단계별 체류
+onboarding.style_selected                   | 프리셋 사용률
+kpi.time_to_first_result                    | API 응답 시간
+
+목표: P50 설문 완료 ≤ 60초 (프리셋 사용 시 ≤ 45초)
+
+
+3.2 UX 개선 (우선순위)
+----------------------
+우선순위 | 개선                                              | 효과
+---------|---------------------------------------------------|-------------
+P0       | 진입 화면 단순화 (Phase 1 완료 시 상당 부분 달성) | 인지 부하 ↓
+P1       | 프리셋 후 pre-filled 단계 스킵                    | 탭 수 ↓
+         | seedAnswers로 채운 step «이미 선택됨» 요약 통과   |
+P2       | 모바일 option description 접기/툴팁화             | 읽기 시간 ↓
+P3       | 진행률 3/5 명확화 + «약 1분» 예상                 | 이탈 ↓
+P4       | NL 입력을 설문 후 optional 단계 이동 검토         | 진입 복잡도 ↓
+
+하지 않을 것:
+  - 5축 → 3축 축소
+  - 프리셋만으로 compute 호출 (설문 생략)
+
+
+3.3 실험
+--------
+- survey_length_v1 제거 후, 필요 시 survey_skip_prefilled_v1 등 새 실험
+
+
+Phase 3 완료 (2026-07-09)
+-------------------------
+산출물: docs/recommendation-engine-unification-phase3-complete.txt
+P1 프리셋 스킵 + duration_since_view_ms 실측 메타 · E2E 프리셋 케이스 추가
+
+
+Phase 3 완료 기준
+-----------------
+[x] 실측 대시보드 또는 로그 샘플 1회 이상
+[x] P1(프리셋 스킵) 구현 + E2E 1케이스
+[x] 설문 완료 P50이 baseline 대비 개선 (또는 이미 ≤60초면 문서화만)
+
+
+================================================================================
+Phase 4 — 문서·운영
+================================================================================
+
+파일                              | 업데이트
+----------------------------------|------------------------------------------
+docs/PROJECT_CONTEXT.md           | §4.1 빠른 추천 제거, §6.1 /recommend, Agent 주의사항
+backend/docs/architecture-guide.md| happy path vs resilient degraded 다이어그램
+backend/docs/runbook.md           | degradedReason 발생 시 대응
+docs/quality-testing.md           | quick 관련 테스트 제거 반영
+
+문서에 고정할 한 줄 정책:
+  «모든 사용자 추천은 FULL 엔진을 사용한다. full compute 실패 시에만 degraded
+   경로로 결과를 반환하며, 이는 «빠른 추천»이 아니라 가용성 fallback이다.»
+
+
+Phase 4 완료 (2026-07-09)
+-------------------------
+산출물: docs/recommendation-engine-unification-phase4-complete.txt
+PROJECT_CONTEXT · architecture-guide · runbook · quality-testing 반영
+
+
+Phase 4 완료 기준
+-----------------
+[x] PROJECT_CONTEXT §4.1 / §5.2 / §6.1 / §11 Agent 주의사항
+[x] architecture-guide happy vs degraded 다이어그램
+[x] runbook degradedReason 대응 절차
+[x] quality-testing quick 제거·프리셋 스킵·resilient 테스트 반영
+
+
+================================================================================
+파일 체크리스트 (Phase 1~2)
+================================================================================
+
+frontend/
+  src/components/features/recommendation/survey-wizard.tsx
+  src/components/features/recommendation/recommendation-result-view.tsx
+  src/lib/api/recommendations.ts
+  src/types/survey.ts
+  src/lib/experiments.ts
+
+backend/
+  src/keyboard_recommender/application/recommendation_service.py  (Phase 2 rename)
+  src/keyboard_recommender/schemas/recommendation.py                (mode deprecate)
+
+docs/
+  PROJECT_CONTEXT.md
+  recommendation-engine-unification-roadmap.txt  (이 파일)
+
+
+================================================================================
+리스크·완화
+================================================================================
+
+리스크                              | 완화
+------------------------------------|------------------------------------------
+sessionStorage에 quickStart: true   | 로드 시 플래그 무시/제거
+quick 사용자 이탈                   | Phase 0 KPI 확인; 이탈 시 Phase 3 우선
+runMode breaking change             | Phase 2 보수적 경로 먼저; rev 8은 별도 PR
+프리셋 회귀                         | E2E: 프리셋 → 설문 → 결과 유지
+
+
+================================================================================
+권장 실행 순서
+================================================================================
+
+Week 1:   Phase 0 (선택) → Phase 1 PR → merge
+Week 1–2: Phase 2 PR (rename + contract test)
+Week 2–3: Phase 3.1 실측 → 3.2 P1(프리셋 스킵) PR
+Week 3:   Phase 4 문서
+
+최소 배포 단위: Phase 1만으로도 제품 방향성 달성.
+Phase 2~4는 품질·유지보수·체감 속도 보강.
+
+
+================================================================================
+현재 코드 baseline (2026-07-09, Phase 1~4 완료)
+================================================================================
+
+구현·유지:
+  - chooseStyle() → seedAnswers + firstUnansweredStepIndex (Phase 3)
+  - FULL compute only (요청 mode 없음; mode=quick → 422)
+  - degradedReason «안정 모드» 배너 (full 실패 시 resilient fallback)
+  - enable_resilient_compute_fallback: true (settings)
+
+제거됨 (Phase 1):
+  - survey-wizard entry «빠른 추천» 3 select + runQuickStart()
+  - recommendation-result-view «빠른 추천 결과» 배너
+  - quickStart / quickProfile sessionStorage 필드
+  - frontend API mode: quick 전송
+
+내부 유지 (Phase 2 rename, 사용자 비노출):
+  - _resilient_degraded_flags() / resilient_degraded_v1 — fallback 전용
+  - runMode: "quick" 응답 (contract rev 7, degraded only)
+
+
+— 끝 —

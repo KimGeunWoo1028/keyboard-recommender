@@ -1,0 +1,275 @@
+# CI quality gates — separate jobs so failures name the pillar (unit vs regression vs contract vs e2e).
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main, master]
+
+jobs:
+  quality-regression:
+    name: "Quality · regression (ranking / snapshot / drift)"
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: keyboard
+          POSTGRES_PASSWORD: keyboard
+          POSTGRES_DB: keyboard_recommender
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U keyboard -d keyboard_recommender"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
+
+    env:
+      DATABASE_URL: postgresql+psycopg://keyboard:keyboard@localhost:5432/keyboard_recommender
+      ENABLE_EVALUATION_PERSISTENCE: "false"
+
+    defaults:
+      run:
+        working-directory: backend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+          cache-dependency-path: backend/pyproject.toml
+
+      - name: Install package (editable) + dev tools
+        run: |
+          python -m pip install -U pip
+          pip install -e ".[dev]"
+
+      - name: Determinism + golden profiles (ranking / compatibility / diversity)
+        run: pytest -q tests/recommendation_regression
+
+      - name: Snapshot stability (full payload byte match)
+        run: pytest -q tests/snapshot_testing
+
+      - name: Benchmark drift validation
+        run: pytest -q tests/benchmark_validation
+
+  quality-contract:
+    name: "Quality · API contract"
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: keyboard
+          POSTGRES_PASSWORD: keyboard
+          POSTGRES_DB: keyboard_recommender
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U keyboard -d keyboard_recommender"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
+
+    env:
+      DATABASE_URL: postgresql+psycopg://keyboard:keyboard@localhost:5432/keyboard_recommender
+      ENABLE_EVALUATION_PERSISTENCE: "false"
+
+    defaults:
+      run:
+        working-directory: backend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+          cache-dependency-path: backend/pyproject.toml
+
+      - name: Install package (editable) + dev tools
+        run: |
+          python -m pip install -U pip
+          pip install -e ".[dev]"
+
+      - name: Recommendation compute + Pydantic schemas
+        run: pytest -q tests/contract
+
+  quality-unit:
+    name: "Quality · unit + integration (default pytest)"
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: keyboard
+          POSTGRES_PASSWORD: keyboard
+          POSTGRES_DB: keyboard_recommender
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U keyboard -d keyboard_recommender"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
+
+    env:
+      DATABASE_URL: postgresql+psycopg://keyboard:keyboard@localhost:5432/keyboard_recommender
+      ENABLE_EVALUATION_PERSISTENCE: "false"
+
+    defaults:
+      run:
+        working-directory: backend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+          cache-dependency-path: backend/pyproject.toml
+
+      - name: Install package (editable) + dev tools
+        run: |
+          python -m pip install -U pip
+          pip install -e ".[dev]"
+
+      - name: Ruff (lint)
+        run: ruff check src tests
+
+      - name: Alembic upgrade (head)
+        run: python -m alembic upgrade head
+
+      - name: Schema smoke (eval tables + alembic_version)
+        run: python scripts/check_migration_schema.py
+
+      - name: Pytest (excludes quality-* buckets above)
+        run: >-
+          pytest -q
+          --ignore=tests/recommendation_regression
+          --ignore=tests/snapshot_testing
+          --ignore=tests/benchmark_validation
+          --ignore=tests/contract
+
+      - name: Catalog 1:1 coverage audit (warning stage)
+        run: python scripts/audit_catalog_1to1_coverage.py --check-threshold --warn-only
+        continue-on-error: true
+
+      - name: Ops scripts (inventory alert · feedback dry-run · HTTPS config)
+        run: |
+          pytest -q tests/test_catalog_change_alert.py tests/test_swagkey_image_url_recheck.py
+          python scripts/verify_feedback_learning_mvp.py --dry-run-local
+          APP_ENV=production \
+          AUTH_COOKIE_SECURE=true \
+          PUBLIC_FRONTEND_BASE_URL=https://app.example.com \
+          CORS_ORIGINS=https://app.example.com \
+          DATABASE_URL=postgresql+psycopg://app_user:secret@db.internal:5432/keyboard \
+          EMAIL_PROVIDER=resend \
+          RESEND_API_KEY=re_test_placeholder \
+          RESEND_FROM_EMAIL=noreply@example.com \
+          python scripts/check_production_https_config.py --require-production
+          python scripts/run_swagkey_inventory_recheck.py --mode fixture --check-image-urls
+
+  frontend:
+    name: "Quality · frontend (lint / build / Vitest)"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: ESLint
+        run: npm run lint
+
+      - name: Vitest (component + client contract)
+        run: npm run test -- --run
+
+      - name: Production build
+        run: npm run build
+
+  quality-e2e:
+    name: "Quality · E2E (Playwright)"
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: keyboard
+          POSTGRES_PASSWORD: keyboard
+          POSTGRES_DB: keyboard_recommender
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U keyboard -d keyboard_recommender"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
+
+    env:
+      DATABASE_URL: postgresql+psycopg://keyboard:keyboard@localhost:5432/keyboard_recommender
+      ENABLE_EVALUATION_PERSISTENCE: "false"
+      CI: "true"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+          cache-dependency-path: backend/pyproject.toml
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: |
+            frontend/package-lock.json
+            e2e/package-lock.json
+
+      - name: Install backend (editable)
+        working-directory: backend
+        run: |
+          python -m pip install -U pip
+          pip install -e ".[dev]"
+
+      - name: Alembic upgrade + E2E user seed
+        working-directory: backend
+        env:
+          DATABASE_URL: postgresql+psycopg://keyboard:keyboard@localhost:5432/keyboard_recommender
+        run: |
+          python -m alembic upgrade head
+          python scripts/seed_e2e_user.py
+
+      - name: Install frontend deps (Next dev for stack script)
+        working-directory: frontend
+        run: npm ci
+
+      - name: Install E2E deps + Chromium
+        working-directory: e2e
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+
+      - name: Run Playwright
+        working-directory: e2e
+        env:
+          DATABASE_URL: postgresql+psycopg://keyboard:keyboard@localhost:5432/keyboard_recommender
+        run: npm test

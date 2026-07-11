@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-11T16:44:34.459943+00:00",
+  "seedPath": "C:/Users/jeung/keyboard-recommender/backend/src/keyboard_recommender/catalog/swagkey_products.seed.json",
+  "minCoveragePct": 85.0,
+  "gatePassed": true,
+  "families": {
+    "switch": {
+      "family": "switch",
+      "browseListable": 55,
+      "withImage": 55,
+      "withoutImage": 0,
+      "coveragePct": 100.0,
+      "missingIds": [],
+      "missingIdsTruncated": false
+    },
+    "plate": {
+      "family": "plate",
+      "browseListable": 20,
+      "withImage": 20,
+      "withoutImage": 0,
+      "coveragePct": 100.0,
+      "missingIds": [],
+      "missingIdsTruncated": false
+    },
+    "foam": {
+      "family": "foam",
+      "browseListable": 10,
+      "withImage": 10,
+      "withoutImage": 0,
+      "coveragePct": 100.0,
+      "missingIds": [],
+      "missingIdsTruncated": false
+    },
+    "layout": {
+      "family": "layout",
+      "browseListable": 7,
+      "withImage": 7,
+      "withoutImage": 0,
+      "coveragePct": 100.0,
+      "missingIds": [],
+      "missingIdsTruncated": false
+    },
+    "case": {
+      "family": "case",
+      "browseListable": 126,
+      "withImage": 126,
+      "withoutImage": 0,
+      "coveragePct": 100.0,
+      "missingIds": [],
+      "missingIdsTruncated": false
+    },
+    "keycap": {
+      "family": "keycap",
+      "browseListable": 62,
+      "withImage": 62,
+      "withoutImage": 0,
+      "coveragePct": 100.0,
+      "missingIds": [],
+      "missingIdsTruncated": false
+    }
+  },
+  "summaryLines": [
+    "browse image coverage by family:",
+    "  switch: 55/55 (100.0%)",
+    "  plate: 20/20 (100.0%)",
+    "  foam: 10/10 (100.0%)",
+    "  layout: 7/7 (100.0%)",
+    "  case: 126/126 (100.0%)",
+    "  keycap: 62/62 (100.0%)",
+    "gate >= 85.0%: True"
+  ]
+}

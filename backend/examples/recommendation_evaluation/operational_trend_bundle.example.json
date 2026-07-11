@@ -1,0 +1,35 @@
+{
+  "comment": "Shape returned by queries.operational_trend_bundle(session, scenario_id).",
+  "compatibilityStability": {
+    "count": 12,
+    "first": 0.62,
+    "last": 0.71,
+    "twoWindowTrend": "up"
+  },
+  "confidenceOverall": {
+    "count": 12,
+    "first": 0.55,
+    "last": 0.61,
+    "twoWindowTrend": "down"
+  },
+  "scenarioId": "demo_scenario",
+  "schemaVersion": "evaluation.operational_trend_bundle.v1",
+  "seriesLength": 12,
+  "summaryLines": [
+    "Recommendation confidence decreased over recent recorded evaluations in this scenario.",
+    "Winner-level trait diversity increased across recent runs (check reranking / catalog mix).",
+    "Compatibility stability improved over time (effective penalties likely eased)."
+  ],
+  "traitAlignment": {
+    "count": 12,
+    "first": 0.58,
+    "last": 0.64,
+    "twoWindowTrend": "up"
+  },
+  "winnerTraitDiversity": {
+    "count": 12,
+    "first": 0.22,
+    "last": 0.29,
+    "twoWindowTrend": "up"
+  }
+}

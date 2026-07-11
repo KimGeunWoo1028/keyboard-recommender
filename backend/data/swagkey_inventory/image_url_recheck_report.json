@@ -1,0 +1,17 @@
+{
+  "generatedAt": "2026-07-11T17:27:21+00:00",
+  "mode": "fixture",
+  "seedPath": "C:/Users/jeung/keyboard-recommender/backend/src/keyboard_recommender/catalog/swagkey_products.seed.json",
+  "cacheDir": "C:/Users/jeung/keyboard-recommender/backend/data/swagkey_inventory/product_image_html_cache",
+  "stats": {
+    "checked": 282,
+    "unchanged": 282,
+    "changed": 0,
+    "missingBaseline": 13,
+    "missingRefetch": 0,
+    "skippedNoCache": 36,
+    "failures": 0
+  },
+  "changes": [],
+  "errors": []
+}

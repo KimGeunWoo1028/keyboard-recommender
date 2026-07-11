@@ -1,0 +1,54 @@
+Keyboard Recommender — 추천 엔진 단일화 Phase 4 완료 리포트
+======================================================
+
+기준일: 2026-07-09 (KST)
+로드맵: docs/recommendation-engine-unification-roadmap.txt
+선행: Phase 3 완료
+
+
+1. 목적
+-------
+운영·Agent·테스트 문서에 엔진 단일화 정책을 고정하고, resilient degraded fallback 운영 절차를 명시.
+
+
+2. 고정 정책 (한 줄)
+--------------------
+«모든 사용자 추천은 FULL 엔진을 사용한다. full compute 실패 시에만 degraded
+경로로 결과를 반환하며, 이는 «빠른 추천»이 아니라 가용성 fallback이다.»
+
+
+3. 변경 파일
+------------
+docs/PROJECT_CONTEXT.md
+  - §4.1 정책 블록, quick UI 제거·프리셋 스킵·degraded 배너
+  - §4.4 resilient degraded fallback
+  - §5.2 happy path vs degraded 절차
+  - §6.1 /recommend, §6.2 SurveyWizard, §6.5 Vitest 목록
+  - §7.1 E2E 프리셋 스킵
+  - §11 Agent 주의사항 #24–25
+  - §13 로드맵 링크
+
+backend/docs/architecture-guide.md
+  - § Recommendation compute paths — mermaid + 표
+
+backend/docs/runbook.md
+  - § degradedReason on successful compute (triage / mitigation / monitoring)
+
+docs/quality-testing.md
+  - resilient fallback pytest, survey wizard tests, E2E preset helper
+
+
+4. 검증 (문서 일관성)
+---------------------
+- [x] PROJECT_CONTEXT에 «빠른 추천» 사용자 경로 언급 제거 (역사/UI 정리 문맥 제외)
+- [x] architecture-guide에 full vs degraded 흐름도
+- [x] runbook에 degradedReason 대응
+- [x] quality-testing에 Phase 1~3 테스트 반영
+- [x] 로드맵 Phase 4 DoD 체크
+
+
+5. 엔진 단일화 로드맵 상태
+---------------------------
+Phase 0 baseline · Phase 1 UI · Phase 2 contract · Phase 3 UX · **Phase 4 문서** — 완료.
+
+— 끝 —

@@ -1,0 +1,24 @@
+catalog 1:1 coverage (1.0.0)
+inventory: C:\Users\jeung\keyboard-recommender\backend\data\swagkey_inventory\swagkey_inventory.v4.json
+seed: C:\Users\jeung\keyboard-recommender\backend\src\keyboard_recommender\catalog\swagkey_products.seed.json
+browse excluded idx (12): 384, 1187, 1206, 1216, 1340, 1496, 1589, 1658, 1667, 1668, 1673, 1677
+
+family | inv | seed | browse | 404ex | gap(inv-browse) | gap%
+switch  |  55 |   68 |     53 |     0 |   +2 |   3.6%
+plate   |  20 |   20 |     20 |     0 |   +0 |   0.0%
+foam    |   9 |   10 |      9 |     0 |   +0 |   0.0%
+layout  |  23 |   38 |     38 |     0 |  -15 | -65.2%
+case    | 126 |  126 |    126 |     0 |   +0 |   0.0%
+keycap  |  67 |   62 |     62 |     0 |   +5 |   7.5%
+
+layout archetype seed: 7 (browse 7)
+layout real PCB - classified: 23 seed: 38
+
+CSV categories (raw rows): Switches=57 Keycaps=73
+inventory keptByCategory: Switches=54 Keycaps=67
+keycap seed gap (documented baseline target): 5 rows to merge in Phase 3
+
+coverage gap violations (threshold <= 2%):
+  - switch: gap=+2 (3.6%) inventory=55 browse=53
+  - layout: gap=-15 (65.2%) inventory=23 browse=38
+  - keycap: gap=+5 (7.5%) inventory=67 browse=62

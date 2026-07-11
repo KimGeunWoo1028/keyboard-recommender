@@ -1,0 +1,123 @@
+Keyboard Recommender — 추천 엔진 단일화 Phase 0 베이스라인
+======================================================
+
+기준일: 2026-07-09 (KST)
+로드맵: docs/recommendation-engine-unification-roadmap.txt
+상태: Phase 0 완료 → Phase 1 착수 가능
+
+
+1. KPI — onboarding.generate_started (mode 분포)
+-------------------------------------------------
+데이터 소스: 로컬 PostgreSQL eval_events (ENABLE_EVALUATION_PERSISTENCE 기록분)
+기간: 2026-05-05 ~ 2026-05-07 (개발·테스트 트래픽; 프로덕션 아님)
+
+총 이벤트: 26건
+
+mode   | 건수 | 비율
+-------|------|------
+quick  |   12 | 46.2%
+full   |    7 | 26.9%
+(null) |    7 | 26.9%  ← metadata.mode 미기록 (구버전·mock 경로 추정)
+
+해석
+----
+- quick는 survey-wizard.runQuickStart() 단일 경로에서만 mode: quick 전송
+- full은 5단계 설문·프리셋 후 정식 제출
+- null 7건은 Phase 1 제거 후에도 비교용으로 보존 (이력만)
+- 로컬 DB 샘플이므로 절대 사용자 비율로 해석하지 말 것
+- Phase 1 완료 후 동일 쿼리로 quick=0 확인 권장
+
+재현 쿼리 (PowerShell + Docker Postgres):
+  docker exec keyboard-recommender-postgres-1 psql -U keyboard -d keyboard_recommender -c ^
+    "SELECT payload->'metadata'->>'mode' AS mode, COUNT(*) FROM eval_events ^
+     WHERE event_type = 'onboarding.generate_started' GROUP BY 1 ORDER BY 2 DESC;"
+
+
+2. 테스트 베이스라인
+--------------------
+
+2.1 Backend pytest
+  명령: cd backend && .\.venv\Scripts\python.exe -m pytest tests -q
+  결과: 271 passed, 3 skipped (45.31s)
+  일시: 2026-07-09
+
+2.2 Frontend Vitest
+  명령: cd frontend && npm test -- --run
+  결과: 16 passed (6 files, 6.00s)
+  일시: 2026-07-09
+
+2.3 E2E critical-flows
+  명령: cd e2e && npx playwright test tests/critical-flows.spec.ts --config playwright.phase0.config.cjs
+  환경: 기존 dev 서버 재사용 (localhost:3000 + localhost:8010 API)
+  결과: 5 passed, 1 failed (35.1s)
+
+  통과:
+    - recommendation: survey → results with ranked picks
+    - save build
+    - compare panel visible
+    - mypage hub loads
+    - (auth setup)
+
+  실패 (기존 UI 드리프트, Phase 0/1 범위 외):
+    - onboarding: authenticated user reaches survey wizard
+    - 원인: 홈 Hero CTA가 «시작하기» → «추천 설문 시작»으로 변경됨
+    - E2E: getByRole('link', { name: /시작하기/i }) 미매칭
+    - 파일: e2e/tests/critical-flows.spec.ts:8
+    - 권장: Phase 1 또는 별도 PR에서 /추천 설문 시작/ 로 수정
+
+  CI 기준 스택 (포트 3000 비어 있을 때):
+    cd e2e && npx playwright test tests/critical-flows.spec.ts
+    (start-stack.cjs → API 127.0.0.1:8000 + FE 127.0.0.1:3000)
+
+
+3. UI 스냅샷 (before)
+---------------------
+파일: docs/baselines/recommendation-engine-unification/phase0-recommend-entry-before.png
+캡처: e2e/scripts/capture-recommend-entry-baseline.cjs
+URL:  /recommend (인증 후 entry phase)
+뷰포트: 1280×900, fullPage
+
+스냅샷에 포함된 제거 대상 (Phase 1):
+  - «빠른 추천 (약 10초)» 박스 + 3 select + «빠른 추천 받기»
+  - CardTitle «3단계로 간단히 시작하기» (카피 변경 예정)
+
+유지 대상:
+  - 스타일 프리셋 3카드 (부드럽고 조용한 / 또렷하고 경쾌한 / 균형형)
+  - 5단계 설문 플로우 (프리셋 → questions)
+
+
+4. 코드 경로 메모 (제거 영향 범위)
+----------------------------------
+Frontend (Phase 1 직접 수정):
+  - survey-wizard.tsx: runQuickStart, quickAnswersFromInputs, quick* state
+  - recommendation-result-view.tsx: submission.quickStart 배너
+  - lib/api/recommendations.ts: mode?: quick
+  - types/survey.ts: quickStart, quickProfile
+  - experiments.ts: survey_length_v1 / quick_default (미사용)
+
+Backend (Phase 1 변경 없음, Phase 2 rename):
+  - recommendation_service.py: _quick_runtime_flags, mode==quick 분기
+  - schemas/recommendation.py: mode Literal full|quick
+
+유지 (resilience):
+  - full 실패 → degraded fallback + degradedReason 배너
+
+
+5. Phase 0 완료 체크리스트
+--------------------------
+[x] mode:quick KPI 메모 (eval_events 26건 샘플)
+[x] pytest green (271 passed)
+[x] npm test green (16 passed)
+[x] E2E critical-flows 실행 (5/6; 1건 홈 CTA 드리프트로 실패 — 문서화)
+[x] /recommend entry before 스크린샷 저장
+
+→ Phase 1 (Quick UI 제거) 착수 가능
+
+
+6. Phase 1 착수 시 참고
+-----------------------
+- E2E 홈 CTA 수정은 Phase 1과 함께 하면 green 복구 가능
+- 스크린샷 재캡처: node e2e/scripts/capture-recommend-entry-baseline.cjs
+- Phase 1 완료 후 동일 파일명으로 phase1-recommend-entry-after.png 추가 권장
+
+— 끝 —

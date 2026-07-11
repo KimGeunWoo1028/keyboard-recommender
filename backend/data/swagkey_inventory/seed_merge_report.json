@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-06T06:07:12.360133+00:00",
+  "beforeCounts": {
+    "switch": 72,
+    "plate": 14,
+    "foam": 9,
+    "layout": 22,
+    "case": 49
+  },
+  "afterCounts": {
+    "switch": 72,
+    "plate": 14,
+    "foam": 9,
+    "layout": 22,
+    "case": 49
+  },
+  "added": {
+    "plate": 0,
+    "foam": 0,
+    "layout": 0,
+    "switch": 0
+  },
+  "skippedExisting": [],
+  "rejected": []
+}

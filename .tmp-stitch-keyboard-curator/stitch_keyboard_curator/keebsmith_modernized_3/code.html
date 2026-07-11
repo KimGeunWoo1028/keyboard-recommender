@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>마이페이지 - KeebSmith</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Hanken+Grotesk:wght@600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#322f39",
+                        "on-surface-variant": "#cbc3d7",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "outline": "#958ea0",
+                        "surface-dim": "#15121b",
+                        "on-secondary-fixed-variant": "#004c6e",
+                        "on-secondary-fixed": "#001e2f",
+                        "primary-fixed-dim": "#d0bcff",
+                        "surface-container-low": "#1d1a23",
+                        "on-tertiary": "#003824",
+                        "surface-container-lowest": "#0f0d15",
+                        "on-tertiary-container": "#00311f",
+                        "on-primary-container": "#340080",
+                        "primary-fixed": "#e9ddff",
+                        "on-surface": "#e7e0ed",
+                        "secondary-fixed-dim": "#89ceff",
+                        "on-error-container": "#ffdad6",
+                        "primary-container": "#a078ff",
+                        "error": "#ffb4ab",
+                        "surface-tint": "#d0bcff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "surface": "#15121b",
+                        "inverse-primary": "#6d3bd7",
+                        "surface-container": "#211e27",
+                        "background": "#15121b",
+                        "on-primary": "#3c0091",
+                        "tertiary": "#4edea3",
+                        "on-primary-fixed-variant": "#5516be",
+                        "on-error": "#690005",
+                        "error-container": "#93000a",
+                        "on-primary-fixed": "#23005c",
+                        "on-secondary-container": "#00344e",
+                        "secondary-container": "#00a2e6",
+                        "surface-container-highest": "#37333d",
+                        "tertiary-container": "#00a572",
+                        "inverse-surface": "#e7e0ed",
+                        "primary": "#d0bcff",
+                        "on-background": "#e7e0ed",
+                        "surface-container-high": "#2c2832",
+                        "surface-variant": "#37333d",
+                        "surface-bright": "#3b3742",
+                        "secondary": "#89ceff",
+                        "on-tertiary-fixed": "#002113",
+                        "secondary-fixed": "#c9e6ff",
+                        "on-secondary": "#00344d",
+                        "outline-variant": "#494454",
+                        "tertiary-fixed-dim": "#4edea3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "margin-desktop": "40px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "label-sm": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0D0D15;
+            color: #e7e0ed;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-panel:hover {
+            border-color: rgba(208, 188, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #00a2e6;
+            border-radius: 10px;
+        }
+        .terminal-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .glow-purple {
+            box-shadow: 0 0 15px rgba(208, 188, 255, 0.2);
+        }
+        .sidebar-active {
+            background: rgba(137, 206, 255, 0.1);
+            color: #89ceff;
+            border-right: 4px solid #89ceff;
+        }
+    </style>
+</head>
+<body class="font-body-md custom-scrollbar">
+<!-- Top Navigation Bar (Immutable JSON Command) -->
+<nav class="bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-xl sticky top-0 z-50 border-b border-outline-variant/30 shadow-sm">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-headline-md font-headline-md font-bold bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent">KeebSmith</span>
+<div class="hidden md:flex gap-6 items-center">
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-label-sm text-label-sm" href="#">Build</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-label-sm text-label-sm" href="#">Explore</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-label-sm text-label-sm" href="#">Community</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-body-md">search</span>
+<input class="bg-surface-container-low border border-outline-variant/30 rounded-lg pl-10 pr-4 py-2 text-label-sm terminal-font focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all w-64" placeholder="Search components..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-surface-variant/50 rounded-lg transition-all active:scale-90">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+<button class="p-2 hover:bg-surface-variant/50 rounded-lg transition-all active:scale-90">
+<span class="material-symbols-outlined text-on-surface-variant">settings</span>
+</button>
+</div>
+<div class="h-10 w-10 rounded-full border-2 border-primary overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A sophisticated close-up portrait of a tech-savvy professional user for an avatar. The lighting is moody with deep purple and electric blue neon accents reflecting on their face, set against a dark, minimalist workshop background. The aesthetic is ultra-modern and high-end, matching an elite hardware developer vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBq8NU6Y9Rq-XHWjcrawOAusTwkfurak_kbS4N3GB0TvTkAI5DWDEp9ToQis-HuLOi4sGm1w2aod2fdYB318_axJumPBQxJuJdROFFZIvpQyiueZ9R55OIy4e22deiuagS-eUfe8gtKDg9hr6WHTcqJwtlSVRr6d17y6KDUkmy5fP2RyfVVHj-1-x-hGE5Lyk9OBQS9XA_SKVMvIHz6l23oVLCqsQaTW4TiQ9xItV2SAhHFKFhWsgm1Mg"/>
+</div>
+</div>
+</div>
+</nav>
+<div class="max-w-container-max mx-auto px-margin-desktop py-10 flex flex-col md:flex-row gap-10">
+<!-- Sidebar Navigation (JSON Mapping) -->
+<aside class="w-full md:w-64 flex flex-col shrink-0">
+<div class="mb-8 px-4">
+<h3 class="font-headline-md text-headline-sm text-on-surface">Workshop</h3>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Analytical Mode</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="text-on-surface-variant hover:text-on-surface flex items-center gap-3 px-4 py-3 hover:bg-white/5 transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">tune</span>
+<span class="font-label-sm text-label-sm">Filters</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface flex items-center gap-3 px-4 py-3 hover:bg-white/5 transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-sm text-label-sm">History</span>
+</a>
+<a class="sidebar-active flex items-center gap-3 px-4 py-3 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">bookmark</span>
+<span class="font-label-sm text-label-sm">Saved Builds</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface flex items-center gap-3 px-4 py-3 hover:bg-white/5 transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">compare_arrows</span>
+<span class="font-label-sm text-label-sm">Compare</span>
+</a>
+</nav>
+<button class="mt-8 bg-primary-container text-on-primary-container font-label-sm text-label-sm py-4 rounded-xl flex items-center justify-center gap-2 hover:brightness-110 active:scale-95 transition-all glow-purple">
+<span class="material-symbols-outlined">add</span>
+                New Build
+            </button>
+<div class="mt-auto pt-10 flex flex-col gap-1">
+<a class="text-on-surface-variant hover:text-on-surface flex items-center gap-3 px-4 py-3 hover:bg-white/5 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-sm text-label-sm">Support</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface flex items-center gap-3 px-4 py-3 hover:bg-white/5 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="font-label-sm text-label-sm">Account</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-grow space-y-10">
+<!-- User Status & Stats Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Profile Summary Card -->
+<div class="col-span-1 md:col-span-2 glass-panel p-8 rounded-3xl relative overflow-hidden">
+<div class="relative z-10 flex flex-col md:flex-row md:items-center gap-6">
+<div class="h-24 w-24 rounded-2xl border-2 border-primary/50 p-1">
+<img class="w-full h-full object-cover rounded-xl" data-alt="A portrait of a male keyboard enthusiast with glasses, looking thoughtfully at a circuit board. The lighting is cinematic with deep purple shadows and sharp white highlights. Dark workshop atmosphere with blurred keyboard parts in the background. Elite professional photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA19kA6nt0o5D6KlY-sXLytQASXUh6tn1iC6cETL3InRch3DUyyGK92SqI4PnB3LbUOilP0H_ssFLEtgVVSkvGflAncHn0xi3PybfRNvcZZLNe9RRWfU64iEjXWihA_AzRmjgwpBOUfJ5AuJHW1o6L63SpGEMCsnFKsn4b5bs7i78dOg-yggDG9m_vkdchQxdJBsyuWVy1KjP2lz9vsxCiZVSZMLsJplF53H5RCTxSS_Z7KbULSP3moLQ"/>
+</div>
+<div>
+<h1 class="text-headline-lg font-headline-lg text-on-surface">Alex "KeebGod" Rivet</h1>
+<div class="flex items-center gap-3 mt-1">
+<span class="px-3 py-1 bg-tertiary-container/20 text-tertiary rounded-full terminal-font text-label-sm">ELITE ANALYST</span>
+<span class="text-on-surface-variant text-label-sm terminal-font">EST. 2021</span>
+</div>
+</div>
+<div class="md:ml-auto flex flex-col items-end">
+<span class="text-on-surface-variant text-label-sm uppercase tracking-widest">Active Credits</span>
+<span class="text-display-lg font-display-lg text-secondary">2,482</span>
+</div>
+</div>
+<!-- Background aesthetic glow -->
+<div class="absolute -bottom-20 -right-20 w-64 h-64 bg-primary/10 blur-[100px] rounded-full"></div>
+</div>
+<!-- Quick Action Stats -->
+<div class="glass-panel p-6 rounded-3xl flex flex-col justify-between border-secondary/20">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-secondary text-headline-md">analytics</span>
+<span class="text-on-secondary-fixed text-label-sm bg-secondary-container rounded px-2 py-1 terminal-font">+12%</span>
+</div>
+<div>
+<p class="text-on-surface-variant text-label-sm font-label-sm uppercase">Total Analyses</p>
+<h2 class="text-headline-lg font-headline-lg">148,50</h2>
+</div>
+</div>
+</section>
+<!-- Saved Builds & History Section (Split Layout) -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Saved Recommendation Builds (Grid Card View) -->
+<div class="lg:col-span-8 space-y-6">
+<div class="flex justify-between items-end">
+<h2 class="font-headline-md text-headline-md text-on-surface">저장된 추천 빌드</h2>
+<button class="text-primary font-label-sm text-label-sm hover:underline">모두 보기</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Build Card 1 -->
+<div class="glass-panel rounded-3xl overflow-hidden group cursor-pointer transition-all duration-300 hover:-translate-y-1">
+<div class="h-48 relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A top-down view of a custom 65% mechanical keyboard with translucent purple keycaps and an aluminum frosted case. The RGB lighting is glowing electric blue. The background is a dark, tech-oriented workshop desk with specialized tools. High-contrast cinematic lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuArCpRbLtcT1vuSL4UkwueEHB7t9Op0NqqXvVYiassjwiHxc1AFy5PB7SIIWnJrsw-6YFF-RQ_YWBB3AZygiPYI9Q8wuu307b9xHMkw2ei7KltMuO8iV3m7dnEPPdZaGVhxfdtFbu_AMVSAwRsu9mBi0cTaSaytEEjQ_o1C3nH90tpt34PfNnjktirgWf8vx5Ru661WKlADVMx85f6Hhz0odC5uoxxwPg08wowf8Vn2fZDGJkQQeoQ7wA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#0D0D15] via-transparent opacity-60"></div>
+<div class="absolute top-4 right-4 bg-surface-container-highest/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="terminal-font text-label-sm text-on-surface">4.9</span>
+</div>
+</div>
+<div class="p-6">
+<div class="flex gap-2 mb-3">
+<span class="px-2 py-0.5 bg-surface-container-high rounded text-[10px] terminal-font text-on-surface-variant">65% LAYOUT</span>
+<span class="px-2 py-0.5 bg-surface-container-high rounded text-[10px] terminal-font text-on-surface-variant">LINEAR</span>
+</div>
+<h3 class="font-headline-md text-body-lg text-on-surface mb-1">Cyber-Ghost Edition</h3>
+<p class="text-on-surface-variant text-label-sm line-clamp-1">Ultramarine PBT keycaps on Gateron Ink Black V2s.</p>
+<div class="mt-6 flex justify-between items-center">
+<span class="text-primary font-label-sm text-label-sm">$389.00</span>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">favorite</button>
+</div>
+</div>
+</div>
+<!-- Build Card 2 -->
+<div class="glass-panel rounded-3xl overflow-hidden group cursor-pointer transition-all duration-300 hover:-translate-y-1">
+<div class="h-48 relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A macro shot of a sleek silver metal mechanical keyboard with minimalist white and gray keycaps. Soft orange warm backlighting under the keys. The shot is clean and analytical, highlighting the precision of the hardware. Corporate modernism style with shallow depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4nskFKdfN38fo3LhcDEhKFyAsG-ueD0IBwj_XHgJLaZ4CWAVD3_nzdgy5eUNIrQ_qDZaC0tnpUVnA60mpbMX3Xw_-sR2TN30AtuO584sNrysxtR-Vz0WN49wBa_3h6MrOaX_mRxvOMJ49CDnEV4k8HVCHX0qolNdhRspbw0T2EshV8FSt_qyENUoS__liGKU5zEocsg3AOgJurr8_8D_VQt1pti4aBwEkaz-1Sfadn_pHeCHY1Mu0Jg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#0D0D15] via-transparent opacity-60"></div>
+<div class="absolute top-4 right-4 bg-surface-container-highest/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="terminal-font text-label-sm text-on-surface">4.7</span>
+</div>
+</div>
+<div class="p-6">
+<div class="flex gap-2 mb-3">
+<span class="px-2 py-0.5 bg-surface-container-high rounded text-[10px] terminal-font text-on-surface-variant">75% TKL</span>
+<span class="px-2 py-0.5 bg-surface-container-high rounded text-[10px] terminal-font text-on-surface-variant">TACTILE</span>
+</div>
+<h3 class="font-headline-md text-body-lg text-on-surface mb-1">Analytical Minimalist</h3>
+<p class="text-on-surface-variant text-label-sm line-clamp-1">CNC-milled case with Holy Panda switches.</p>
+<div class="mt-6 flex justify-between items-center">
+<span class="text-primary font-label-sm text-label-sm">$450.50</span>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">favorite</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Activity Timeline (Side List) -->
+<div class="lg:col-span-4 space-y-6">
+<h2 class="font-headline-md text-headline-md text-on-surface">최근 분석 기록</h2>
+<div class="glass-panel rounded-3xl p-6 h-full flex flex-col">
+<div class="space-y-8 relative">
+<!-- Timeline line -->
+<div class="absolute left-[11px] top-2 bottom-2 w-0.5 bg-outline-variant/30"></div>
+<!-- History Item 1 -->
+<div class="relative pl-10">
+<div class="absolute left-0 top-1 h-6 w-6 rounded-full bg-secondary flex items-center justify-center border-4 border-surface shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-on-secondary">history</span>
+</div>
+<div class="space-y-1">
+<p class="text-on-surface font-label-sm text-label-sm">Case Material Resonance Analysis</p>
+<p class="text-on-surface-variant text-[12px] terminal-font">2024.11.23 • 완료</p>
+</div>
+</div>
+<!-- History Item 2 -->
+<div class="relative pl-10">
+<div class="absolute left-0 top-1 h-6 w-6 rounded-full bg-primary flex items-center justify-center border-4 border-surface shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-on-primary">precision_manufacturing</span>
+</div>
+<div class="space-y-1">
+<p class="text-on-surface font-label-sm text-label-sm">Plate Flex Parameter Optimization</p>
+<p class="text-on-surface-variant text-[12px] terminal-font">2024.11.21 • 완료</p>
+</div>
+</div>
+<!-- History Item 3 -->
+<div class="relative pl-10 opacity-60">
+<div class="absolute left-0 top-1 h-6 w-6 rounded-full bg-outline-variant flex items-center justify-center border-4 border-surface shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-on-surface">tune</span>
+</div>
+<div class="space-y-1">
+<p class="text-on-surface font-label-sm text-label-sm">Custom Switch Lubrication Log</p>
+<p class="text-on-surface-variant text-[12px] terminal-font">2024.11.18 • 아카이브</p>
+</div>
+</div>
+</div>
+<button class="mt-auto pt-8 text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2 font-label-sm text-label-sm group">
+                            전체 히스토리 보기
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Settings Section (Banking Style Grouped UI) -->
+<section class="space-y-6">
+<h2 class="font-headline-md text-headline-md text-on-surface">설정 및 관리</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Group 1: Identity -->
+<div class="glass-panel rounded-3xl p-2">
+<div class="p-4 border-b border-outline-variant/10">
+<h3 class="font-headline-md text-label-sm text-primary uppercase tracking-widest">계정 관리</h3>
+</div>
+<div class="divide-y divide-outline-variant/10">
+<button class="w-full flex items-center justify-between p-4 hover:bg-surface-variant/30 transition-all group rounded-lg">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant">person</span>
+<span class="font-label-sm text-on-surface">프로필 정보 수정</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-4 hover:bg-surface-variant/30 transition-all group rounded-lg">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant">shield</span>
+<span class="font-label-sm text-on-surface">보안 및 비밀번호</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Group 2: Preferences -->
+<div class="glass-panel rounded-3xl p-2">
+<div class="p-4 border-b border-outline-variant/10">
+<h3 class="font-headline-md text-label-sm text-tertiary uppercase tracking-widest">워크숍 설정</h3>
+</div>
+<div class="divide-y divide-outline-variant/10">
+<button class="w-full flex items-center justify-between p-4 hover:bg-surface-variant/30 transition-all group rounded-lg">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant">dark_mode</span>
+<span class="font-label-sm text-on-surface">디스플레이 모드</span>
+</div>
+<span class="text-label-sm text-on-surface-variant terminal-font px-2 bg-surface-variant rounded">DARK</span>
+</button>
+<button class="w-full flex items-center justify-between p-4 hover:bg-surface-variant/30 transition-all group rounded-lg">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant">notifications_active</span>
+<span class="font-label-sm text-on-surface">푸시 알림 설정</span>
+</div>
+<div class="w-10 h-5 bg-primary/20 rounded-full relative flex items-center px-0.5">
+<div class="w-4 h-4 bg-primary rounded-full translate-x-5 transition-transform"></div>
+</div>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- Footer (Immutable JSON Command) -->
+<footer class="bg-surface dark:bg-surface-dim border-t border-outline-variant/10 py-12 mt-20">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop w-full max-w-container-max mx-auto">
+<div class="mb-6 md:mb-0">
+<span class="text-body-lg font-bold text-on-surface">KeebSmith</span>
+<p class="text-on-surface-variant font-label-sm text-label-sm mt-1">© 2024 KeebSmith. Precision Crafted.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-on-surface-variant hover:text-primary transition-all font-label-sm text-label-sm" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-all font-label-sm text-label-sm" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary transition-all font-label-sm text-label-sm" href="#">API Documentation</a>
+<a class="text-on-surface-variant hover:text-primary transition-all font-label-sm text-label-sm" href="#">Contact</a>
+</div>
+</div>
+</footer>
+<!-- FAB Overlay for Contextual Action -->
+<button class="fixed bottom-10 right-10 w-16 h-16 bg-primary text-on-primary rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all flex items-center justify-center glow-purple">
+<span class="material-symbols-outlined" style="font-size: 32px;">bolt</span>
+</button>
+<script>
+        // Simple micro-interaction for glass panels on mouse move
+        document.querySelectorAll('.glass-panel').forEach(panel => {
+            panel.addEventListener('mousemove', (e) => {
+                const rect = panel.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                panel.style.setProperty('--mouse-x', `${x}px`);
+                panel.style.setProperty('--mouse-y', `${y}px`);
+                
+                // Subtle perspective effect
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 50;
+                const rotateY = (centerX - x) / 50;
+                
+                panel.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+
+            panel.addEventListener('mouseleave', () => {
+                panel.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+            });
+        });
+    </script>
+</body></html>
