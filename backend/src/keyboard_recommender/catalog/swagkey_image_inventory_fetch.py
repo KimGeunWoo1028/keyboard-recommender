@@ -17,7 +17,6 @@ from keyboard_recommender.catalog.swagkey_image_cache_backfill import (
     CacheImageItem,
     _item_to_dict,
     build_seed_indexes,
-    load_seed_payload,
 )
 from keyboard_recommender.catalog.swagkey_image_extractor import (
     OgImageResult,

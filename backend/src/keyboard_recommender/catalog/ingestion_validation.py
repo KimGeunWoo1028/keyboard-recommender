@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from collections import defaultdict
 from collections.abc import Sequence
-from typing import Any
 
 from keyboard_recommender.catalog.metadata_mapping import (
     derive_case_traits,

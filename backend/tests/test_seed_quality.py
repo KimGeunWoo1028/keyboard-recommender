@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import json
 
 from keyboard_recommender.catalog.seed_quality import (
     SEED_REMOVE_IDS,

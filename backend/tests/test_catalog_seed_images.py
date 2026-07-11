@@ -39,8 +39,10 @@ def test_build_recommendation_result_includes_image_url() -> None:
         assert isinstance(pick["imageUrl"], str)
         if pick["domain"] == "layout":
             assert pick["imageUrl"]
-            assert pick["imageUrl"].startswith("/media/swagkey-images/") or pick["imageUrl"].startswith(
-                "https://cdn.imweb.me/thumbnail/"
+            assert (
+                pick["imageUrl"].startswith("/layout-diagrams/")
+                or pick["imageUrl"].startswith("/media/swagkey-images/")
+                or pick["imageUrl"].startswith("https://cdn.imweb.me/thumbnail/")
             )
         for alt in pick.get("alternatives") or []:
             assert "imageUrl" in alt

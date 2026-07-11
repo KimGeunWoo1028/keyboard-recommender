@@ -14,7 +14,6 @@ from keyboard_recommender.application.catalog_browse_service import list_catalog
 from keyboard_recommender.catalog.catalog_browse_policy import (
     BROWSE_EXCLUDED_SWAGKEY_IDX,
     is_browse_excluded_source_url,
-    swagkey_product_idx,
 )
 from keyboard_recommender.catalog.layout_diagrams import is_layout_archetype_part_id
 

@@ -22,8 +22,6 @@ from keyboard_recommender.catalog.swagkey_new_in_crawl_seed_merge import (
     _append_switch_row,
     build_stub_row,
     count_seed_items,
-    enrich_stub_metadata,
-    infer_switch_subtype,
 )
 from keyboard_recommender.catalog.swagkey_source_url import normalize_product_detail_url
 
@@ -284,7 +282,6 @@ def _build_switch_stub(
     name = str(candidate.get("productName") or candidate.get("normalizedName") or "").strip()
     url = normalize_product_detail_url(str(inv.get("sourceUrl") or ""))
     target = {"id": stub_id, "name": name, "url": url}
-    subtype = infer_switch_subtype(name)
     stub = build_stub_row(target, family="switch")
     stub["inventoryId"] = str(candidate.get("id") or "")
     stub.update(_inventory_row_fields(inv))
@@ -349,7 +346,6 @@ def _build_keycap_stub(
     url = normalize_product_detail_url(str(inv.get("sourceUrl") or ""))
     if "idx=" not in url:
         raise ValueError("missing product idx URL")
-    browse_only = _is_keycap_browse_only(meta_dict)
     row = {
         "id": stub_id,
         "name": name,

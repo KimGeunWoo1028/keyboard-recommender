@@ -154,12 +154,12 @@ export function CatalogDetailPanel({ open, loading, error, family, partDetail, o
               {family ? (
                 <p className="font-label text-ca-label-sm font-medium text-ca-on-surface-variant">
                   {FAMILY_LABELS[family]}
-                  {partDetail.referenceLayout ? (
+                  {partDetail?.referenceLayout ? (
                     <span className="ml-2 rounded-full border border-ca-outline-variant/50 px-2 py-0.5 text-ca-on-surface-variant">
                       참조 배열
                     </span>
                   ) : null}
-                  {family === "layout" && !partDetail.referenceLayout ? (
+                  {family === "layout" && partDetail && !partDetail.referenceLayout ? (
                     <span className="ml-2 rounded-full border border-ca-outline-variant/50 px-2 py-0.5 text-ca-on-surface-variant">
                       기판 상품
                     </span>
