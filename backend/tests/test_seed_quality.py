@@ -58,4 +58,6 @@ def test_apply_seed_quality_cleanup_removes_discontinued_and_sets_urls() -> None
 def test_remove_ids_frozen_set_documents_roadmap_actions() -> None:
     assert "sw-silent-001" in SEED_REMOVE_IDS
     assert "sw-linear-004" in SEED_REMOVE_IDS
-    assert len(SEED_REMOVE_IDS) == 5
+    assert "sw-tactile-002" in SEED_REMOVE_IDS  # Phase 0 duplicate of sw-tactile-003
+    assert "sw-tactile-007" in SEED_REMOVE_IDS  # Phase 0 duplicate of sw-silent-003
+    assert len(SEED_REMOVE_IDS) == 7
