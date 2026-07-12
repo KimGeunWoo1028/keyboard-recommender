@@ -14,7 +14,7 @@
       "https://www.swagkey.kr/132"
     ],
     "note": "상품명은 원문 유지, 설명/trait은 후속 매핑 단계에서 보강.",
-    "imageMergedAt": "2026-07-10T14:53:29.393909+00:00"
+    "imageMergedAt": "2026-07-11T16:40:11.063883+00:00"
   },
   "switches": {
     "linear": [
@@ -90,7 +90,7 @@
       },
       {
         "id": "sw-linear-003",
-        "name": "스웨그키 HMX Peach 반저소음 리니어 키보드 스위치",
+        "name": "스웨그키 HMX Peach 피치 반저소음 리니어 키보드 스위치",
         "category": "switch",
         "subtype": "linear",
         "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1765",
@@ -187,8 +187,12 @@
           "listed": true,
           "source": "inventory_v4"
         },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
+        "recommendationEligible": false,
+        "traitConfidence": "manual_curated",
+        "phase0Triage": {
+          "date": "2026-07-12",
+          "reason": "discontinued_not_in_inventory"
+        }
       },
       {
         "id": "sw-linear-007",
@@ -255,7 +259,8 @@
           "source": "inventory_v4"
         },
         "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
+        "traitConfidence": "manual_curated",
+        "inventoryId": "inv-0105"
       },
       {
         "id": "sw-linear-009",
@@ -590,7 +595,9 @@
           "source": "inventory_v4"
         },
         "recommendationEligible": false,
-        "traitConfidence": "name_inferred"
+        "traitConfidence": "name_inferred",
+        "imageUrl": "https://cdn.imweb.me/thumbnail/20230419/80403b59a24bb.png",
+        "imageSource": "og:image"
       }
     ],
     "tactile": [
@@ -628,40 +635,6 @@
         "recommendationEligible": true,
         "traitConfidence": "manual_curated",
         "inventoryId": "inv-0109"
-      },
-      {
-        "id": "sw-tactile-002",
-        "name": "텍스트 Cherry MX2A 비윤활 갈축 키보드 스위치 - 450개 벌크",
-        "category": "switch",
-        "subtype": "tactile",
-        "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1443",
-        "metadata": {
-          "spring_weight_g": 53,
-          "bottom_out_force_g": 62,
-          "travel_distance_mm": 3.8,
-          "pretravel_mm": 2.0,
-          "long_pole": false,
-          "housing_material_top": "Nylon",
-          "housing_material_bottom": "Nylon",
-          "stem_material": "POM",
-          "factory_lubed": false,
-          "spring_type": "single_stage",
-          "sound_signature_tags": [
-            "click",
-            "linear",
-            "magnetic",
-            "silent",
-            "tactile"
-          ]
-        },
-        "imageUrl": "https://cdn.imweb.me/thumbnail/20251126/05a6606efa44d.jpg",
-        "imageSource": "og:image",
-        "browse": {
-          "listed": true,
-          "source": "inventory_v4"
-        },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
       },
       {
         "id": "sw-tactile-003",
@@ -802,40 +775,6 @@
         "recommendationEligible": true,
         "traitConfidence": "manual_curated",
         "inventoryId": "inv-0099"
-      },
-      {
-        "id": "sw-tactile-007",
-        "name": "TTC 피넛 라떼 저소음 택타일 스위치",
-        "category": "switch",
-        "subtype": "tactile",
-        "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1258",
-        "metadata": {
-          "spring_weight_g": 46,
-          "bottom_out_force_g": 60,
-          "travel_distance_mm": 3.8,
-          "pretravel_mm": 2.0,
-          "long_pole": false,
-          "housing_material_top": "Nylon",
-          "housing_material_bottom": "Nylon",
-          "stem_material": "POM",
-          "factory_lubed": true,
-          "spring_type": "single_stage",
-          "sound_signature_tags": [
-            "click",
-            "linear",
-            "magnetic",
-            "silent",
-            "tactile"
-          ]
-        },
-        "imageUrl": "https://cdn.imweb.me/thumbnail/20250926/70bfcffdf151a.png",
-        "imageSource": "og:image",
-        "browse": {
-          "listed": true,
-          "source": "inventory_v4"
-        },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
       }
     ],
     "click": [
@@ -905,8 +844,12 @@
           "listed": true,
           "source": "inventory_v4"
         },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
+        "recommendationEligible": false,
+        "traitConfidence": "manual_curated",
+        "phase0Triage": {
+          "date": "2026-07-12",
+          "reason": "duplicate_of_sw-linear-008"
+        }
       },
       {
         "id": "sw-silent-003",
@@ -972,8 +915,12 @@
           "listed": true,
           "source": "inventory_v4"
         },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
+        "recommendationEligible": false,
+        "traitConfidence": "manual_curated",
+        "phase0Triage": {
+          "date": "2026-07-12",
+          "reason": "discontinued_not_in_inventory"
+        }
       }
     ],
     "magnetic": [
@@ -1694,8 +1641,12 @@
           "listed": true,
           "source": "inventory_v4"
         },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
+        "recommendationEligible": false,
+        "traitConfidence": "manual_curated",
+        "phase0Triage": {
+          "date": "2026-07-12",
+          "reason": "discontinued_not_in_inventory"
+        }
       },
       {
         "id": "sw-other-004",
@@ -1761,8 +1712,12 @@
           "listed": true,
           "source": "inventory_v4"
         },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
+        "recommendationEligible": false,
+        "traitConfidence": "manual_curated",
+        "phase0Triage": {
+          "date": "2026-07-12",
+          "reason": "discontinued_not_in_inventory"
+        }
       },
       {
         "id": "sw-other-006",
@@ -1793,8 +1748,12 @@
           "listed": true,
           "source": "inventory_v4"
         },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
+        "recommendationEligible": false,
+        "traitConfidence": "manual_curated",
+        "phase0Triage": {
+          "date": "2026-07-12",
+          "reason": "discontinued_not_in_inventory"
+        }
       },
       {
         "id": "sw-other-007",
@@ -1860,8 +1819,12 @@
           "listed": true,
           "source": "inventory_v4"
         },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
+        "recommendationEligible": false,
+        "traitConfidence": "manual_curated",
+        "phase0Triage": {
+          "date": "2026-07-12",
+          "reason": "discontinued_not_in_inventory"
+        }
       },
       {
         "id": "sw-other-009",
@@ -1962,8 +1925,12 @@
           "listed": true,
           "source": "inventory_v4"
         },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
+        "recommendationEligible": false,
+        "traitConfidence": "manual_curated",
+        "phase0Triage": {
+          "date": "2026-07-12",
+          "reason": "discontinued_not_in_inventory"
+        }
       },
       {
         "id": "sw-other-013",
@@ -2099,8 +2066,12 @@
           "listed": true,
           "source": "inventory_v4"
         },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
+        "recommendationEligible": false,
+        "traitConfidence": "manual_curated",
+        "phase0Triage": {
+          "date": "2026-07-12",
+          "reason": "discontinued_not_in_inventory"
+        }
       },
       {
         "id": "sw-other-017",
@@ -2236,8 +2207,12 @@
           "listed": true,
           "source": "inventory_v4"
         },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
+        "recommendationEligible": false,
+        "traitConfidence": "manual_curated",
+        "phase0Triage": {
+          "date": "2026-07-12",
+          "reason": "discontinued_not_in_inventory"
+        }
       },
       {
         "id": "sw-other-021",
@@ -2268,8 +2243,12 @@
           "listed": true,
           "source": "inventory_v4"
         },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
+        "recommendationEligible": false,
+        "traitConfidence": "manual_curated",
+        "phase0Triage": {
+          "date": "2026-07-12",
+          "reason": "discontinued_not_in_inventory"
+        }
       }
     ]
   },
@@ -2792,7 +2771,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20260708/762ba0f8abf2f.png",
+      "imageSource": "og:image"
     },
     {
       "id": "plate-idx-935",
@@ -2823,7 +2804,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20240909/639e1824264ef.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "plate-idx-579",
@@ -2855,7 +2838,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20230614/6de3ef0369e4b.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "plate-idx-527",
@@ -2885,7 +2870,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20230419/0f3ea5bffb628.png",
+      "imageSource": "og:image"
     },
     {
       "id": "plate-idx-950",
@@ -2917,7 +2904,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20240917/b0d47ed42c9b7.png",
+      "imageSource": "og:image"
     },
     {
       "id": "plate-idx-534",
@@ -2947,7 +2936,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20230417/3a137c0fcbab6.png",
+      "imageSource": "og:image"
     }
   ],
   "foams": [
@@ -3123,8 +3114,12 @@
         "listed": true,
         "source": "inventory_v4"
       },
-      "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "recommendationEligible": false,
+      "traitConfidence": "manual_curated",
+      "phase0Triage": {
+        "date": "2026-07-12",
+        "reason": "discontinued_idx_recycled"
+      }
     },
     {
       "id": "foam-new-001-gdk-lab-dk1-tkl-여분-폼킷",
@@ -3303,7 +3298,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20241129/b71cb0f65028b.jpg",
+      "imageSource": "og:image"
     }
   ],
   "layouts": [
@@ -3505,9 +3502,7 @@
           "leaf_spring"
         ]
       },
-      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1504",
-      "imageUrl": "https://cdn.imweb.me/thumbnail/20251215/40289badf505e.jpg",
-      "imageSource": "og:image",
+      "sourceUrl": "",
       "browse": {
         "listed": true,
         "source": "inventory_v4"
@@ -4519,7 +4514,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20250730/5f1cca0fec6b1.png",
+      "imageSource": "og:image"
     },
     {
       "id": "layout-idx-1052",
@@ -4550,7 +4547,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20241231/a98c8216f0aae.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "layout-idx-526",
@@ -4581,7 +4580,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20230419/8658b912414b0.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "layout-idx-949",
@@ -4612,7 +4613,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20240917/35f13b1777b9b.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "layout-idx-957",
@@ -4643,7 +4646,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20240923/b3539ab908900.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "layout-idx-686",
@@ -4674,7 +4679,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20231127/d359318e628ad.png",
+      "imageSource": "og:image"
     },
     {
       "id": "layout-idx-1420",
@@ -4705,7 +4712,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20251111/9bec15b05cb60.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "layout-idx-533",
@@ -4736,7 +4745,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20230417/d8127966c0b98.png",
+      "imageSource": "og:image"
     }
   ],
   "cases": [
@@ -6376,7 +6387,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20260116/9be685298abf7.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-053",
@@ -6406,7 +6419,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20260605/b5f610bead2e6.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-055",
@@ -6438,7 +6453,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20241114/dab4340a1259e.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-057",
@@ -6470,7 +6487,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20250225/575126e42afa0.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-059",
@@ -6502,7 +6521,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20260113/db2c990142430.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-061",
@@ -6534,7 +6555,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20250226/f432eea7af82f.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-063",
@@ -6564,7 +6587,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20250930/f0f8ef0961c98.png",
+      "imageSource": "og:image"
     },
     {
       "id": "case-065",
@@ -6594,7 +6619,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20260109/6c3a16156013c.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-067",
@@ -6624,7 +6651,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20250930/9ebadccde7faf.png",
+      "imageSource": "og:image"
     },
     {
       "id": "case-069",
@@ -6654,7 +6683,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20250930/7dee997efbee6.png",
+      "imageSource": "og:image"
     },
     {
       "id": "case-071",
@@ -6684,7 +6715,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20250930/749eee32f88bc.png",
+      "imageSource": "og:image"
     },
     {
       "id": "case-073",
@@ -6714,7 +6747,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20250930/9c933f722694c.png",
+      "imageSource": "og:image"
     },
     {
       "id": "case-075",
@@ -6744,7 +6779,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20240229/7a4693fd9dc38.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-077",
@@ -6774,7 +6811,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20240513/b7268632ec806.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-079",
@@ -6806,7 +6845,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20240909/1e2452d7793e0.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-081",
@@ -6836,7 +6877,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20240514/16f66b2bfe2c0.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-083",
@@ -6866,7 +6909,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20260526/63dbf81e0e929.png",
+      "imageSource": "og:image"
     },
     {
       "id": "case-085",
@@ -6896,7 +6941,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20260529/e58aaa20e8ea3.png",
+      "imageSource": "og:image"
     },
     {
       "id": "case-087",
@@ -6926,7 +6973,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20241231/15b9495b2a36b.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-089",
@@ -6956,7 +7005,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20251016/d13f1ab38a1cd.png",
+      "imageSource": "og:image"
     },
     {
       "id": "case-091",
@@ -6988,7 +7039,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20250113/6b14a0671ac1c.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-093",
@@ -7018,7 +7071,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20230721/504a6b55d1b23.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-095",
@@ -7048,7 +7103,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20250512/add394977a618.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-097",
@@ -7080,7 +7137,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20230419/3e953a6ed5618.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-099",
@@ -7112,7 +7171,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20240923/55ae947ae5ba8.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-101",
@@ -7142,7 +7203,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20240802/70e1bf65f4c47.jpeg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-103",
@@ -7172,7 +7235,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20230720/f37e021d36156.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-105",
@@ -7202,7 +7267,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20231115/8381738a44f50.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-107",
@@ -7234,7 +7301,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20230419/3cae7a9d11fe9.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-109",
@@ -7266,7 +7335,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20230419/de27fd1662cd9.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-111",
@@ -7296,7 +7367,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20240711/940a865616f1e.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-113",
@@ -7328,7 +7401,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20230420/267b6f21b233c.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-115",
@@ -7358,7 +7433,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20230419/681a3f8ea8082.png",
+      "imageSource": "og:image"
     },
     {
       "id": "case-117",
@@ -7390,7 +7467,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20250113/6af29077d4b15.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-119",
@@ -7422,7 +7501,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20240730/da594f7ac5ab9.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-121",
@@ -7454,7 +7535,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20240502/565e396963e17.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-123",
@@ -7484,7 +7567,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20241129/4c622ae239ecf.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-125",
@@ -7514,7 +7599,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20260202/a910589648f5f.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-127",
@@ -7544,7 +7631,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20240503/0eb758bcf21ed.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-129",
@@ -7574,7 +7663,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20240923/d759ed9fa71a4.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-131",
@@ -7604,7 +7695,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20231115/74ea9b798104a.png",
+      "imageSource": "og:image"
     },
     {
       "id": "case-133",
@@ -7634,7 +7727,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20241006/9194644c621b5.png",
+      "imageSource": "og:image"
     },
     {
       "id": "case-135",
@@ -7664,7 +7759,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20260202/c1f6306b87ad6.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-137",
@@ -7696,7 +7793,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20240731/70589849bfc03.png",
+      "imageSource": "og:image"
     },
     {
       "id": "case-139",
@@ -7726,7 +7825,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20240930/52be51f3356f5.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-141",
@@ -7756,7 +7857,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20241129/9202e84313b3d.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-143",
@@ -7786,7 +7889,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20240503/6478914dd5e2e.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-145",
@@ -7818,7 +7923,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20251215/421230a55de01.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-147",
@@ -7848,7 +7955,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20230720/f37e021d36156.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-149",
@@ -7878,7 +7987,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20241007/13d605df461da.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-151",
@@ -7910,7 +8021,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20240502/899419545d356.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-153",
@@ -7940,7 +8053,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20250804/0ace75cbf2117.png",
+      "imageSource": "og:image"
     },
     {
       "id": "case-155",
@@ -7972,7 +8087,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20240917/5bb5e118c6774.png",
+      "imageSource": "og:image"
     },
     {
       "id": "case-157",
@@ -8004,7 +8121,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20240917/e0ccc0000a771.png",
+      "imageSource": "og:image"
     },
     {
       "id": "case-159",
@@ -8034,7 +8153,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20260202/43d86c3132c11.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-161",
@@ -8066,7 +8187,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20260202/b06295d968dca.png",
+      "imageSource": "og:image"
     },
     {
       "id": "case-163",
@@ -8096,7 +8219,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20230619/4200169e87f48.png",
+      "imageSource": "og:image"
     },
     {
       "id": "case-165",
@@ -8126,7 +8251,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20240429/a7e90d8fe0b6f.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-167",
@@ -8156,7 +8283,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20241121/f4697f4db2710.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-169",
@@ -8186,7 +8315,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20230618/03ca61ae6bf0c.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-171",
@@ -8216,7 +8347,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20240930/d1e60dcdab905.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-173",
@@ -8246,7 +8379,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20240220/3755c72a3601b.png",
+      "imageSource": "og:image"
     },
     {
       "id": "case-175",
@@ -8276,7 +8411,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20240502/ec8aae9670332.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-177",
@@ -8306,7 +8443,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20250430/46508e2795af1.png",
+      "imageSource": "og:image"
     },
     {
       "id": "case-179",
@@ -8338,7 +8477,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20240613/28a89c37441b0.jpeg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-181",
@@ -8368,7 +8509,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20250307/dff1a953f6774.png",
+      "imageSource": "og:image"
     },
     {
       "id": "case-183",
@@ -8400,7 +8543,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20230605/d05aba8d977d6.png",
+      "imageSource": "og:image"
     },
     {
       "id": "case-185",
@@ -8430,7 +8575,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20230301/db962afb0b8df.jpeg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-187",
@@ -8462,7 +8609,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20250204/16aab89a66b48.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-189",
@@ -8494,7 +8643,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20250206/57b003c6c731d.png",
+      "imageSource": "og:image"
     },
     {
       "id": "case-191",
@@ -8524,7 +8675,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20231127/a005a8391f644.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-193",
@@ -8554,7 +8707,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20250107/5dfbd935a1c33.png",
+      "imageSource": "og:image"
     },
     {
       "id": "case-195",
@@ -8584,7 +8739,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20231226/9ce596139e954.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-197",
@@ -8616,7 +8773,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20250224/d3d2743cbeb8f.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-199",
@@ -8646,7 +8805,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20230804/f7cae9d418ce3.png",
+      "imageSource": "og:image"
     },
     {
       "id": "case-201",
@@ -8678,7 +8839,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20230417/f8947c9da3157.jpeg",
+      "imageSource": "og:image"
     },
     {
       "id": "case-203",
@@ -8710,7 +8873,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20240403/c6b653125df13.jpg",
+      "imageSource": "og:image"
     }
   ],
   "keycaps": [
@@ -9430,7 +9595,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20250328/d0c6a6d230c52.jpg",
+      "imageSource": "og:image"
     },
     {
       "id": "kc-040",
@@ -10253,7 +10420,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20260619/b100eede00c8d.png",
+      "imageSource": "og:image"
     },
     {
       "id": "kc-106",
@@ -10276,7 +10445,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20260515/ab6af68de0e9f.png",
+      "imageSource": "og:image"
     }
   ]
 }

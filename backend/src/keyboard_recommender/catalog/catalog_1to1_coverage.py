@@ -14,6 +14,7 @@ from keyboard_recommender.application.catalog_browse_service import list_catalog
 from keyboard_recommender.catalog.catalog_browse_policy import (
     BROWSE_EXCLUDED_SWAGKEY_IDX,
     is_browse_excluded_source_url,
+    is_browse_listed_seed_row,
 )
 from keyboard_recommender.catalog.layout_diagrams import is_layout_archetype_part_id
 
@@ -208,7 +209,11 @@ def _seed_counts(seed_path: Path) -> dict[str, Any]:
     payload = json.loads(seed_path.read_text(encoding="utf-8"))
     layout_rows = _iter_seed_rows(payload, "layouts")
     layout_archetype = sum(1 for row in layout_rows if is_layout_archetype_part_id(str(row.get("id") or "")))
-    layout_real = len(layout_rows) - layout_archetype
+    layout_real = sum(
+        1
+        for row in layout_rows
+        if not is_layout_archetype_part_id(str(row.get("id") or "")) and is_browse_listed_seed_row(row)
+    )
     return {
         "switch": len(_iter_seed_rows(payload, "switches")),
         "plate": len(_iter_seed_rows(payload, "plates")),

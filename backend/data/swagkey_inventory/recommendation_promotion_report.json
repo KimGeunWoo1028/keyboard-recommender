@@ -1,10 +1,83 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-07-11T16:58:12.864137+00:00",
+  "generatedAt": "2026-07-12T05:43:24.634420+00:00",
   "dryRun": true,
   "seedPath": "C:/Users/jeung/keyboard-recommender/backend/src/keyboard_recommender/catalog/swagkey_products.seed.json",
   "promotedCount": 0,
-  "eligiblePreview": [],
+  "eligiblePreview": [
+    {
+      "family": "switch",
+      "seedId": "sw-linear-006",
+      "name": "Gateron X 리니어 스위치",
+      "reason": "ready"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-silent-002",
+      "name": "WEKT Kunzite 쿤자이트 저소음 리니어 스위치",
+      "reason": "ready"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-silent-004",
+      "name": "오테뮤 크림 옐로우 저소음 키보드 스위치 스웨그키",
+      "reason": "ready"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-003",
+      "name": "Tecsee x SW Flow Black 기계식 키보드 스위치",
+      "reason": "ready"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-005",
+      "name": "Bsun 민트 키보드 스위치",
+      "reason": "ready"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-006",
+      "name": "체리 MX RGB 키보드 스위치",
+      "reason": "ready"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-008",
+      "name": "체리 MX 3핀 키보드 스위치",
+      "reason": "ready"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-011",
+      "name": "SW 코코블랙 키보드 스위치",
+      "reason": "ready"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-016",
+      "name": "HMX 망고 푸딩 키보드 스위치",
+      "reason": "ready"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-020",
+      "name": "SW x 게이트론 onyx : UHMWPE 스위치",
+      "reason": "ready"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-021",
+      "name": "Haimu 바다살구 스위치",
+      "reason": "ready"
+    },
+    {
+      "family": "foam",
+      "seedId": "foam-005",
+      "name": "스웨그키 포론 기보강 흡음재 - 텐키리스용",
+      "reason": "ready"
+    }
+  ],
   "rejectedPreview": [
     {
       "family": "switch",
@@ -21,19 +94,13 @@
     {
       "family": "switch",
       "seedId": "sw-linear-003",
-      "name": "스웨그키 HMX Peach 반저소음 리니어 키보드 스위치",
+      "name": "스웨그키 HMX Peach 피치 반저소음 리니어 키보드 스위치",
       "reason": "already_recommendation_eligible"
     },
     {
       "family": "switch",
       "seedId": "sw-linear-005",
       "name": "Keygeek Muse 리니어 스위치",
-      "reason": "already_recommendation_eligible"
-    },
-    {
-      "family": "switch",
-      "seedId": "sw-linear-006",
-      "name": "Gateron X 리니어 스위치",
       "reason": "already_recommendation_eligible"
     },
     {
@@ -116,12 +183,6 @@
     },
     {
       "family": "switch",
-      "seedId": "sw-tactile-002",
-      "name": "텍스트 Cherry MX2A 비윤활 갈축 키보드 스위치 - 450개 벌크",
-      "reason": "already_recommendation_eligible"
-    },
-    {
-      "family": "switch",
       "seedId": "sw-tactile-003",
       "name": "Cherry MX2A 비윤활 갈축 키보드 스위치 - 450개 벌크",
       "reason": "already_recommendation_eligible"
@@ -146,32 +207,14 @@
     },
     {
       "family": "switch",
-      "seedId": "sw-tactile-007",
-      "name": "TTC 피넛 라떼 저소음 택타일 스위치",
-      "reason": "already_recommendation_eligible"
-    },
-    {
-      "family": "switch",
       "seedId": "sw-click-001",
       "name": "Wuque BigLucky 빅럭키 클릭 스위치 Cliky",
       "reason": "already_recommendation_eligible"
     },
     {
       "family": "switch",
-      "seedId": "sw-silent-002",
-      "name": "WEKT Kunzite 쿤자이트 저소음 리니어 스위치",
-      "reason": "already_recommendation_eligible"
-    },
-    {
-      "family": "switch",
       "seedId": "sw-silent-003",
       "name": "TTC 피넛 라떼 저소음 택타일 스위치",
-      "reason": "already_recommendation_eligible"
-    },
-    {
-      "family": "switch",
-      "seedId": "sw-silent-004",
-      "name": "오테뮤 크림 옐로우 저소음 키보드 스위치 스웨그키",
       "reason": "already_recommendation_eligible"
     },
     {
@@ -304,6 +347,36 @@
       "family": "switch",
       "seedId": "sw-other-001",
       "name": "스웨그키 Wingtree Golden Apple 키보드 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-004",
+      "name": "QK01 키보드 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-007",
+      "name": "체리 MX 흑축 삼신흑 키보드 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-009",
+      "name": "HMX Toast 키보드 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-010",
+      "name": "HMX Duckduck V2 덕덕 키보드 스위치",
+      "reason": "already_recommendation_eligible"
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-013",
+      "name": "HMX T-Rex 키보드 스위치",
       "reason": "already_recommendation_eligible"
     }
   ],

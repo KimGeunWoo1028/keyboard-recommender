@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-07-11T16:44:34.459943+00:00",
+  "generatedAt": "2026-07-12T07:32:45.204159+00:00",
   "seedPath": "C:/Users/jeung/keyboard-recommender/backend/src/keyboard_recommender/catalog/swagkey_products.seed.json",
   "minCoveragePct": 85.0,
   "gatePassed": true,
   "families": {
     "switch": {
       "family": "switch",
-      "browseListable": 55,
-      "withImage": 55,
+      "browseListable": 53,
+      "withImage": 53,
       "withoutImage": 0,
       "coveragePct": 100.0,
       "missingIds": [],
@@ -34,8 +34,8 @@
     },
     "layout": {
       "family": "layout",
-      "browseListable": 7,
-      "withImage": 7,
+      "browseListable": 45,
+      "withImage": 45,
       "withoutImage": 0,
       "coveragePct": 100.0,
       "missingIds": [],
@@ -62,10 +62,10 @@
   },
   "summaryLines": [
     "browse image coverage by family:",
-    "  switch: 55/55 (100.0%)",
+    "  switch: 53/53 (100.0%)",
     "  plate: 20/20 (100.0%)",
     "  foam: 10/10 (100.0%)",
-    "  layout: 7/7 (100.0%)",
+    "  layout: 45/45 (100.0%)",
     "  case: 126/126 (100.0%)",
     "  keycap: 62/62 (100.0%)",
     "gate >= 85.0%: True"

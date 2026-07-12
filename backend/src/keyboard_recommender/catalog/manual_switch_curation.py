@@ -81,7 +81,6 @@ SWITCH_METADATA_OVERRIDES: dict[str, dict[str, Any]] = {
     "sw-linear-002": _with(_LINEAR_SMOOTH, spring_weight_g=45, bottom_out_force_g=53, sound_signature_tags=["linear", "muted", "creamy"]),
     "sw-linear-003": _with(_SILENT, spring_weight_g=44, bottom_out_force_g=52, sound_signature_tags=["silent", "muted", "linear", "thocky"]),
     "sw-linear-005": _LINEAR_SMOOTH,
-    "sw-linear-006": _with(_LINEAR_BRIGHT, spring_type="dual_stage", sound_signature_tags=["linear", "bright", "poppy"]),
     "sw-linear-007": _LINEAR_SMOOTH,
     "sw-linear-008": _with(_SILENT, spring_weight_g=43, bottom_out_force_g=51),
     "sw-linear-009": _with(_LINEAR_SMOOTH, spring_weight_g=45, bottom_out_force_g=53, housing_material_top="POM", sound_signature_tags=["linear", "creamy", "muted"]),
@@ -95,18 +94,15 @@ SWITCH_METADATA_OVERRIDES: dict[str, dict[str, Any]] = {
     "sw-linear-018": _with(_LINEAR_SMOOTH, spring_type="dual_stage", sound_signature_tags=["linear", "poppy"]),
     # Tactile (7)
     "sw-tactile-001": _TACTILE_BALANCED,
-    "sw-tactile-002": _TACTILE_BALANCED,
     "sw-tactile-003": _TACTILE_BALANCED,
     "sw-tactile-004": _TACTILE_SHARP,
     "sw-tactile-005": _with(_TACTILE_BALANCED, sound_signature_tags=["tactile", "muted"]),
     "sw-tactile-006": _TACTILE_BALANCED,
-    "sw-tactile-007": _with(_TACTILE_BALANCED, spring_weight_g=47, bottom_out_force_g=56, sound_signature_tags=["tactile", "silent", "muted"]),
+    # sw-tactile-007 duplicate of sw-silent-003 — recommend pool excluded
     # Click (1)
     "sw-click-001": _with(_TACTILE_SHARP, sound_signature_tags=["click", "clacky"]),
-    # Silent (3)
-    "sw-silent-002": _SILENT,
+    # Silent (1)
     "sw-silent-003": _with(_SILENT, spring_weight_g=47, bottom_out_force_g=56, sound_signature_tags=["silent", "muted", "tactile"]),
-    "sw-silent-004": _with(_SILENT, spring_weight_g=42, bottom_out_force_g=50, factory_lubed=False),
     # Magnetic (4)
     "sw-magnetic-001": _MAGNETIC_FAST,
     "sw-magnetic-002": _MAGNETIC_FAST,
@@ -114,9 +110,7 @@ SWITCH_METADATA_OVERRIDES: dict[str, dict[str, Any]] = {
     "sw-magnetic-004": _with(_MAGNETIC_FAST, spring_weight_g=42, bottom_out_force_g=50, sound_signature_tags=["magnetic", "linear", "fast", "muted"]),
     # Other selected (6)
     "sw-other-001": _with(_OTHER_GENERAL, sound_signature_tags=["linear", "thocky"]),
-    "sw-other-003": _with(_OTHER_GENERAL, spring_type="dual_stage", sound_signature_tags=["linear", "balanced", "poppy"]),
     "sw-other-010": _with(_OTHER_GENERAL, housing_material_top="POM", sound_signature_tags=["linear", "thocky"]),
     "sw-other-017": _with(_LINEAR_BRIGHT, sound_signature_tags=["linear", "clacky"]),
-    "sw-other-020": _with(_LINEAR_THOCK, housing_material_top="UHMWPE", stem_material="UHMWPE", long_pole=False, sound_signature_tags=["linear", "smooth", "thocky"]),
 }
 

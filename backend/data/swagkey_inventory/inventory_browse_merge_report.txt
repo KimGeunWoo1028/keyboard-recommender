@@ -1,9 +1,9 @@
 Swagkey inventory browse seed merge report
-generated: 2026-07-11T16:30:49.171395+00:00
-dry_run: True
+generated: 2026-07-12T05:43:25.759708+00:00
+dry_run: False
 
 counts (before -> after):
-  switch: 68 -> 68 (+0)
+  switch: 66 -> 66 (+0)
   plate: 20 -> 20 (+0)
   foam: 10 -> 10 (+0)
   layout: 45 -> 45 (+0)

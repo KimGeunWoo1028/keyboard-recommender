@@ -1,0 +1,11 @@
+Phase 2 blocking alert trend (fixture recheck)
+================================================
+
+Format: date | blocking | informational | note
+
+2026-07-12 | 15 | 22 | Phase 0 baseline (pre-triage)
+2026-07-12 | 0  | 34 | Phase 0 complete (triage + regression)
+2026-07-12 | 0  | 34 | Phase 1 verify (layout gap 0; switch/keycap exceptions)
+2026-07-12 | 0  | 34 | Phase 2 kickoff recheck (Task 2-1)
+
+Policy: blocking > 0 → resume Phase 0 triage before seed --apply-to-seed.

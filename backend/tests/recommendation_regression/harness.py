@@ -124,7 +124,7 @@ PROFILE_EXPECTATIONS: dict[str, ProfileExpectation] = {
             {
                 "sw-linear-003",
                 "plate-004",
-                "foam-005",
+                "foam-001",
                 "layout-004",
                 "layout-new-001-gdk-lab-dk1-tkl-기판",
             },
@@ -150,10 +150,10 @@ PROFILE_EXPECTATIONS: dict[str, ProfileExpectation] = {
         min_diversity_families=6,
     ),
     "gaming_linear": ProfileExpectation(
-        expected_winner_switch_id="sw-linear-006",
+        expected_winner_switch_id="sw-linear-010",
         allowed_top5_switch_ids=frozenset(
             {
-                "sw-linear-006",
+                "sw-linear-010",
                 "plate-003",
                 "foam-003",
                 "layout-001",

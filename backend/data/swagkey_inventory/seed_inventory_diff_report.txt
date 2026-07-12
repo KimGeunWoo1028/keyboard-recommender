@@ -2,34 +2,29 @@ Swagkey seed vs inventory diff report
 ====================================
 
 fuzzy threshold: 0.86
-matched: 106
-name_changed: 1
+matched: 107
+name_changed: 0
 new_in_crawl: 0
-seed_only: 36
+seed_only: 34
 by family:
-  - switch: matched=54, name_changed=1, seed_only=13
+  - switch: matched=55, seed_only=11
   - plate: matched=20
   - foam: matched=9, seed_only=1
   - layout: matched=23, seed_only=22
 
-name_changed (1):
-  [switch] 0.955 | eligible=yes | seed: 스웨그키 HMX Peach 반저소음 리니어 키보드 스위치  <->  crawl: 스웨그키 HMX Peach 피치 반저소음 리니어 키보드 스위치
-
-seed_only (review queue) (36):
-  [switch] eligible=yes | Gateron X 리니어 스위치 (sw-linear-006)
-  [switch] eligible=yes | Cherry MX2A 비윤활 갈축 키보드 스위치 - 450개 벌크 (sw-tactile-003)
-  [switch] eligible=yes | WEKT Kunzite 쿤자이트 저소음 리니어 스위치 (sw-silent-002)
-  [switch] eligible=yes | TTC 피넛 라떼 저소음 택타일 스위치 (sw-silent-003)
-  [switch] eligible=yes | 오테뮤 크림 옐로우 저소음 키보드 스위치 스웨그키 (sw-silent-004)
-  [switch] eligible=yes | Tecsee x SW Flow Black 기계식 키보드 스위치 (sw-other-003)
-  [switch] eligible=yes | Bsun 민트 키보드 스위치 (sw-other-005)
-  [switch] eligible=yes | 체리 MX RGB 키보드 스위치 (sw-other-006)
-  [switch] eligible=yes | 체리 MX 3핀 키보드 스위치 (sw-other-008)
-  [switch] eligible=yes | SW 코코블랙 키보드 스위치 (sw-other-011)
-  [switch] eligible=yes | HMX 망고 푸딩 키보드 스위치 (sw-other-016)
-  [switch] eligible=yes | SW x 게이트론 onyx : UHMWPE 스위치 (sw-other-020)
-  [switch] eligible=yes | Haimu 바다살구 스위치 (sw-other-021)
-  [foam] eligible=yes | 스웨그키 포론 기보강 흡음재 - 텐키리스용 (foam-005)
+seed_only (review queue) (34):
+  [switch] eligible=no | Gateron X 리니어 스위치 (sw-linear-006)
+  [switch] eligible=no | WEKT Kunzite 쿤자이트 저소음 리니어 스위치 (sw-silent-002)
+  [switch] eligible=no | 오테뮤 크림 옐로우 저소음 키보드 스위치 스웨그키 (sw-silent-004)
+  [switch] eligible=no | Tecsee x SW Flow Black 기계식 키보드 스위치 (sw-other-003)
+  [switch] eligible=no | Bsun 민트 키보드 스위치 (sw-other-005)
+  [switch] eligible=no | 체리 MX RGB 키보드 스위치 (sw-other-006)
+  [switch] eligible=no | 체리 MX 3핀 키보드 스위치 (sw-other-008)
+  [switch] eligible=no | SW 코코블랙 키보드 스위치 (sw-other-011)
+  [switch] eligible=no | HMX 망고 푸딩 키보드 스위치 (sw-other-016)
+  [switch] eligible=no | SW x 게이트론 onyx : UHMWPE 스위치 (sw-other-020)
+  [switch] eligible=no | Haimu 바다살구 스위치 (sw-other-021)
+  [foam] eligible=no | 스웨그키 포론 기보강 흡음재 - 텐키리스용 (foam-005)
   [layout] eligible=yes | 60% Standard (layout-001)
   [layout] eligible=yes | 65% Compact (layout-002)
   [layout] eligible=yes | TKL (80%) (layout-003)
@@ -41,4 +36,6 @@ seed_only (review queue) (36):
   [layout] eligible=no | NEO80 CU 기판 (layout-idx-1500)
   [layout] eligible=no | NEO65 CU 기판 (layout-idx-1611)
   [layout] eligible=no | MM Studio - Class 100 전용 기판 (layout-idx-1869)
-  ... and 11 more
+  [layout] eligible=no | 스웨그키 Eave65 전용 기판 (layout-idx-1867)
+  [layout] eligible=no | GDK Lab - DK1 TKL 기판 (layout-idx-1853)
+  ... and 9 more

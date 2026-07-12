@@ -41,6 +41,14 @@ def is_browse_excluded_source_url(source_url: str) -> bool:
     return bool(idx) and idx in BROWSE_EXCLUDED_SWAGKEY_IDX
 
 
+def is_browse_listed_seed_row(row: dict) -> bool:
+    """Respect seed ``browse.listed: false`` (operator unlist without deleting row)."""
+    browse = row.get("browse")
+    if isinstance(browse, dict) and browse.get("listed") is False:
+        return False
+    return True
+
+
 def _canonical_rank(summary: CatalogPartSummary) -> tuple[int, int, int, int, str]:
     has_image = 0 if str(summary.image_url or "").strip() else 1
     legacy_id = 0 if "-new-" not in summary.id else 1

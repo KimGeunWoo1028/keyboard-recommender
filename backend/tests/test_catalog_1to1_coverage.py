@@ -55,7 +55,7 @@ def test_layout_browse_splits_archetype_and_real_pcb(inventory_paths: tuple[Path
     archetype = report.layout_archetype
     assert archetype["browse_archetype_count"] == 7
     assert layout["browse_count"] == archetype["browse_real_pcb_count"]
-    assert layout["browse_count"] >= 30
+    assert layout["browse_count"] == 23
 
 
 def test_coverage_gap_threshold_check_runs(inventory_paths: tuple[Path, Path, Path]) -> None:

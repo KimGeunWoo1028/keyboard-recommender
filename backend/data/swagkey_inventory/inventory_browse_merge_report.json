@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-07-11T16:30:49.171395+00:00",
-  "dryRun": true,
+  "generatedAt": "2026-07-12T05:43:25.759708+00:00",
+  "dryRun": false,
   "beforeCounts": {
-    "switch": 68,
+    "switch": 66,
     "plate": 20,
     "foam": 10,
     "layout": 45,
@@ -11,7 +11,7 @@
     "keycap": 62
   },
   "afterCounts": {
-    "switch": 68,
+    "switch": 66,
     "plate": 20,
     "foam": 10,
     "layout": 45,

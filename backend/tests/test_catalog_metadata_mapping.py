@@ -141,7 +141,7 @@ def test_seed_plate_foam_rows_include_compatibility_metadata() -> None:
 
 
 def test_manual_switch_curation_table_has_priority_skus() -> None:
-    assert len(SWITCH_METADATA_OVERRIDES) == 36
+    assert len(SWITCH_METADATA_OVERRIDES) == 29
     by_id = {p.id: p for p in SWITCHES}
     for sku in SWITCH_METADATA_OVERRIDES:
         assert sku in by_id

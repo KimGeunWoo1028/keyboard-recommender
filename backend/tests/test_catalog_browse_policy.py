@@ -61,7 +61,7 @@ def test_browse_layout_shows_archetypes_and_real_pcb_products() -> None:
     from keyboard_recommender.application.catalog_browse_service import get_catalog_part
 
     payload = list_catalog_parts("layout", limit=200)
-    assert payload.total == 45
+    assert payload.total == 30
     archetypes = [item for item in payload.items if item.reference_layout]
     products = [item for item in payload.items if not item.reference_layout]
     assert len(archetypes) == 7

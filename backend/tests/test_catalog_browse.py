@@ -135,7 +135,7 @@ def test_catalog_browse_api_contract() -> None:
         ("/api/v1/switches", 50),
         ("/api/v1/plates", 14),
         ("/api/v1/foam", 8),
-        ("/api/v1/layouts", 38),
+        ("/api/v1/layouts", 30),
         ("/api/v1/cases", 100),
         ("/api/v1/keycaps", 50),
     ):

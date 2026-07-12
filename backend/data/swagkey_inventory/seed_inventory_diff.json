@@ -3,19 +3,18 @@
   "source": {
     "seedPath": "C:/Users/jeung/keyboard-recommender/backend/src/keyboard_recommender/catalog/swagkey_products.seed.json",
     "candidatesPath": "C:/Users/jeung/keyboard-recommender/backend/data/swagkey_inventory/recommender_candidates.json",
-    "generatedAt": "2026-07-11T17:26:00.090250+00:00"
+    "generatedAt": "2026-07-12T07:32:48.417784+00:00"
   },
   "stats": {
     "fuzzyThreshold": 0.86,
-    "matched": 106,
-    "nameChanged": 1,
+    "matched": 107,
+    "nameChanged": 0,
     "newInCrawl": 0,
-    "seedOnly": 36,
+    "seedOnly": 34,
     "byFamily": {
       "switch": {
-        "matched": 54,
-        "name_changed": 1,
-        "seed_only": 13
+        "matched": 55,
+        "seed_only": 11
       },
       "plate": {
         "matched": 20
@@ -847,6 +846,20 @@
       "status": "matched",
       "family": "switch",
       "similarity": 1.0,
+      "seed_id": "sw-tactile-003",
+      "seed_name": "Cherry MX2A 비윤활 갈축 키보드 스위치 - 450개 벌크",
+      "crawl_id": "inv-0128",
+      "crawl_name": "Cherry MX2A 비윤활 갈축 키보드 스위치 - 450개 벌크",
+      "crawl_category": "Switches",
+      "crawl_brand": "CHERRY",
+      "match_key_seed": "cherrymx2a비윤활갈축키보드스위치450개벌크",
+      "match_key_crawl": "cherrymx2a비윤활갈축키보드스위치450개벌크",
+      "recommendation_eligible": true
+    },
+    {
+      "status": "matched",
+      "family": "switch",
+      "similarity": 1.0,
       "seed_id": "sw-new-003-cherry-mx2a-비윤활-흑축-키보드-스위치-450개-벌크",
       "seed_name": "Cherry MX2A 비윤활 흑축 키보드 스위치 - 450개 벌크",
       "crawl_id": "inv-0131",
@@ -1197,7 +1210,7 @@
       "status": "matched",
       "family": "switch",
       "similarity": 1.0,
-      "seed_id": "sw-tactile-007",
+      "seed_id": "sw-silent-003",
       "seed_name": "TTC 피넛 라떼 저소음 택타일 스위치",
       "crawl_id": "inv-0098",
       "crawl_name": "TTC 피넛 라떼 저소음 택타일 스위치",
@@ -1303,6 +1316,20 @@
       "crawl_brand": "HMX",
       "match_key_seed": "hmxcustard커스터드스위치리니어",
       "match_key_crawl": "hmxcustard커스터드스위치리니어",
+      "recommendation_eligible": true
+    },
+    {
+      "status": "matched",
+      "family": "switch",
+      "similarity": 1.0,
+      "seed_id": "sw-linear-003",
+      "seed_name": "스웨그키 HMX Peach 피치 반저소음 리니어 키보드 스위치",
+      "crawl_id": "inv-0085",
+      "crawl_name": "스웨그키 HMX Peach 피치 반저소음 리니어 키보드 스위치",
+      "crawl_category": "Switches",
+      "crawl_brand": "HMX",
+      "match_key_seed": "hmxpeach피치반저소음리니어키보드스위치",
+      "match_key_crawl": "hmxpeach피치반저소음리니어키보드스위치",
       "recommendation_eligible": true
     },
     {
@@ -1500,38 +1527,9 @@
       "match_key_seed": "체리mx2a클래식히로세키보드스위치",
       "match_key_crawl": "체리mx2a클래식히로세키보드스위치",
       "recommendation_eligible": true
-    },
-    {
-      "status": "matched",
-      "family": "switch",
-      "similarity": 1.0,
-      "seed_id": "sw-tactile-002",
-      "seed_name": "텍스트 Cherry MX2A 비윤활 갈축 키보드 스위치 - 450개 벌크",
-      "crawl_id": "inv-0128",
-      "crawl_name": "Cherry MX2A 비윤활 갈축 키보드 스위치 - 450개 벌크",
-      "crawl_category": "Switches",
-      "crawl_brand": "CHERRY",
-      "match_key_seed": "cherrymx2a비윤활갈축키보드스위치450개벌크",
-      "match_key_crawl": "cherrymx2a비윤활갈축키보드스위치450개벌크",
-      "recommendation_eligible": true
     }
   ],
-  "name_changed": [
-    {
-      "status": "name_changed",
-      "family": "switch",
-      "similarity": 0.9545,
-      "seed_id": "sw-linear-003",
-      "seed_name": "스웨그키 HMX Peach 반저소음 리니어 키보드 스위치",
-      "crawl_id": "inv-0085",
-      "crawl_name": "스웨그키 HMX Peach 피치 반저소음 리니어 키보드 스위치",
-      "crawl_category": "Switches",
-      "crawl_brand": "HMX",
-      "match_key_seed": "hmxpeach반저소음리니어키보드스위치",
-      "match_key_crawl": "hmxpeach피치반저소음리니어키보드스위치",
-      "recommendation_eligible": true
-    }
-  ],
+  "name_changed": [],
   "new_in_crawl": [],
   "seed_only": [
     {
@@ -1546,7 +1544,7 @@
       "crawl_brand": null,
       "match_key_seed": "포론기보강흡음재텐키리스용",
       "match_key_crawl": null,
-      "recommendation_eligible": true
+      "recommendation_eligible": false
     },
     {
       "status": "seed_only",
@@ -1868,21 +1866,7 @@
       "crawl_brand": null,
       "match_key_seed": "bsun민트키보드스위치",
       "match_key_crawl": null,
-      "recommendation_eligible": true
-    },
-    {
-      "status": "seed_only",
-      "family": "switch",
-      "similarity": 0.0,
-      "seed_id": "sw-tactile-003",
-      "seed_name": "Cherry MX2A 비윤활 갈축 키보드 스위치 - 450개 벌크",
-      "crawl_id": null,
-      "crawl_name": null,
-      "crawl_category": null,
-      "crawl_brand": null,
-      "match_key_seed": "cherrymx2a비윤활갈축키보드스위치450개벌크",
-      "match_key_crawl": null,
-      "recommendation_eligible": true
+      "recommendation_eligible": false
     },
     {
       "status": "seed_only",
@@ -1896,7 +1880,7 @@
       "crawl_brand": null,
       "match_key_seed": "gateronx리니어스위치",
       "match_key_crawl": null,
-      "recommendation_eligible": true
+      "recommendation_eligible": false
     },
     {
       "status": "seed_only",
@@ -1910,7 +1894,7 @@
       "crawl_brand": null,
       "match_key_seed": "hmx망고푸딩키보드스위치",
       "match_key_crawl": null,
-      "recommendation_eligible": true
+      "recommendation_eligible": false
     },
     {
       "status": "seed_only",
@@ -1924,7 +1908,7 @@
       "crawl_brand": null,
       "match_key_seed": "haimu바다살구스위치",
       "match_key_crawl": null,
-      "recommendation_eligible": true
+      "recommendation_eligible": false
     },
     {
       "status": "seed_only",
@@ -1938,7 +1922,7 @@
       "crawl_brand": null,
       "match_key_seed": "게이트론onyxuhmwpe스위치",
       "match_key_crawl": null,
-      "recommendation_eligible": true
+      "recommendation_eligible": false
     },
     {
       "status": "seed_only",
@@ -1952,21 +1936,7 @@
       "crawl_brand": null,
       "match_key_seed": "코코블랙키보드스위치",
       "match_key_crawl": null,
-      "recommendation_eligible": true
-    },
-    {
-      "status": "seed_only",
-      "family": "switch",
-      "similarity": 0.0,
-      "seed_id": "sw-silent-003",
-      "seed_name": "TTC 피넛 라떼 저소음 택타일 스위치",
-      "crawl_id": null,
-      "crawl_name": null,
-      "crawl_category": null,
-      "crawl_brand": null,
-      "match_key_seed": "ttc피넛라떼저소음택타일스위치",
-      "match_key_crawl": null,
-      "recommendation_eligible": true
+      "recommendation_eligible": false
     },
     {
       "status": "seed_only",
@@ -1980,7 +1950,7 @@
       "crawl_brand": null,
       "match_key_seed": "tecseexswflowblack기계식키보드스위치",
       "match_key_crawl": null,
-      "recommendation_eligible": true
+      "recommendation_eligible": false
     },
     {
       "status": "seed_only",
@@ -1994,7 +1964,7 @@
       "crawl_brand": null,
       "match_key_seed": "wektkunzite쿤자이트저소음리니어스위치",
       "match_key_crawl": null,
-      "recommendation_eligible": true
+      "recommendation_eligible": false
     },
     {
       "status": "seed_only",
@@ -2008,7 +1978,7 @@
       "crawl_brand": null,
       "match_key_seed": "오테뮤크림옐로우저소음키보드스위치스웨그키",
       "match_key_crawl": null,
-      "recommendation_eligible": true
+      "recommendation_eligible": false
     },
     {
       "status": "seed_only",
@@ -2022,7 +1992,7 @@
       "crawl_brand": null,
       "match_key_seed": "체리mx3핀키보드스위치",
       "match_key_crawl": null,
-      "recommendation_eligible": true
+      "recommendation_eligible": false
     },
     {
       "status": "seed_only",
@@ -2036,7 +2006,7 @@
       "crawl_brand": null,
       "match_key_seed": "체리mxrgb키보드스위치",
       "match_key_crawl": null,
-      "recommendation_eligible": true
+      "recommendation_eligible": false
     }
   ]
 }

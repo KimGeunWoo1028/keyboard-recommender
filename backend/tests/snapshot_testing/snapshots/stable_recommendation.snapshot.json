@@ -1,48 +1,801 @@
 {
   "answers": {
-    "sound_profile": "muted",
-    "typing_pressure": "light",
-    "switch_feel": "linear",
     "bottom_out": "soft",
+    "sound_profile": "muted",
+    "switch_feel": "linear",
+    "typing_pressure": "light",
     "volume": "quiet"
   },
+  "build": {
+    "case": "DP104 알루미늄 커스텀 기계식 키보드 — 케이스·키트는 마운팅 방식과 재질에 따라 소리와 타건감의 기반이 되며, 레이아웃 크기와 함께 맞춰야 합니다.",
+    "engineScores": {
+      "caseId": "case-005",
+      "caseScore": 0.4759884822841546,
+      "foamId": "foam-001",
+      "foamScore": 0.5995776526298375,
+      "keycapId": "kc-004",
+      "keycapScore": 0.4799771737356221,
+      "layoutId": "layout-004",
+      "layoutScore": 0.40231209034805954,
+      "plateId": "plate-004",
+      "plateScore": 0.47227280643060354,
+      "switchId": "sw-linear-003",
+      "switchScore": 0.6714086062065675
+    },
+    "foam": "포론 하부 흡음재 — 통울림과 잔향을 줄여 소리를 더 정돈하고, 바닥감을 부드럽게 다듬는 데 도움이 되는 흡음재 구성입니다.",
+    "highlights": [
+      "추천 엔진 v2 — 스위치 0.671 (스웨그키 HMX Peach 피치 반저소음 리니어 키보드 스위치)",
+      "플레이트 0.472 · 폼 0.600 · 레이아웃 0.402 · 케이스 0.476 · 키캡 0.480",
+      "주요 성향 축: deep_sound 1.5, muted 10.0, soft_bottom_out 8.0, smooth 5.0",
+      "다양성 재정렬: 성향 다양성을 위해 대안 후보 순서를 조정했습니다. (1순위는 유지)",
+      "추천 신뢰도: high (79%)"
+    ],
+    "id": "engine-sw-linear-003-plate-004-case-005-kc-004",
+    "keycap": "스웨그키 Calm Beige PBT 염료승화 키캡 — 키캡은 프로필·재질·각인 방식에 따라 소리 톤과 타건감이 달라지며, 레이아웃 호환도 함께 확인합니다.",
+    "layout": "Full-size — 배열 크기와 키 배치 밀도에 따라 작업 동선과 사용감이 달라지므로, 사용 목적에 맞춘 선택이 중요한 구성입니다.",
+    "plate": "Qwertykeys QK65 MK3 보강판 — 보강판 특성에 따라 타건 강성, 소리 성향, 바닥감이 달라지므로 사용 취향에 맞춰 조정하는 핵심 요소입니다.",
+    "sourceUrls": {
+      "case": "https://www.swagkey.kr/shop_view/?idx=1604",
+      "foam": "https://www.swagkey.kr/shop_view/?idx=253",
+      "keycap": "https://www.swagkey.kr/shop_view/?idx=1489",
+      "layout": "https://www.swagkey.kr/shop_view/?idx=1604",
+      "plate": "https://www.swagkey.kr/shop_view/?idx=1661",
+      "switch": "https://www.swagkey.kr/shop_view/?idx=1765"
+    },
+    "switches": "스웨그키 HMX Peach 피치 반저소음 리니어 키보드 스위치 — 입력이 매끈하고 반응이 빨라, 부드러운 타건감과 안정적인 복귀감을 원하는 사용자에게 잘 맞는 타입입니다.",
+    "tagline": "다축 취향 프로필의 가중 유사도를 기반으로 추천된 조합입니다. (스위치, 플레이트, 폼, 레이아웃, 케이스/키트, 키캡에 동일한 성향 축을 적용)",
+    "title": "추천 조합: 묵직한 저음 중심 (Thocky) · 매끈한 키감 (Linear)"
+  },
+  "compatibilityAudit": {
+    "effectivePenaltyTotal": 0.0,
+    "hardIncompatibilityCount": 0,
+    "hasHardIncompatibility": false,
+    "intentMultiplier": 1.0,
+    "lines": [],
+    "rawPenaltyTotal": 0.0,
+    "softPenaltyCount": 0,
+    "summaryLines": [],
+    "warningCount": 0
+  },
+  "confidenceGuidance": null,
+  "diversityAudit": {
+    "families": [
+      {
+        "family": "switch",
+        "notes": [
+          "diversity_hook:rank2_trait_distance_to_winner",
+          "diversity_reorder:applied"
+        ],
+        "originalOrderIds": [
+          "sw-linear-003",
+          "sw-linear-012",
+          "sw-linear-016",
+          "sw-linear-008",
+          "sw-linear-002"
+        ],
+        "rerankedOrderIds": [
+          "sw-linear-003",
+          "sw-linear-016",
+          "sw-linear-008",
+          "sw-linear-012",
+          "sw-linear-002"
+        ]
+      },
+      {
+        "family": "plate",
+        "notes": [
+          "diversity_hook:rank2_trait_distance_to_winner",
+          "diversity_reorder:applied"
+        ],
+        "originalOrderIds": [
+          "plate-004",
+          "plate-002",
+          "plate-new-003-mm-studio-class-100-전용-보강판",
+          "plate-new-004-neo65-core-plus-보강판",
+          "plate-new-007-qwertykeys-neo65-cu-보강판"
+        ],
+        "rerankedOrderIds": [
+          "plate-004",
+          "plate-002",
+          "plate-new-007-qwertykeys-neo65-cu-보강판",
+          "plate-new-004-neo65-core-plus-보강판",
+          "plate-new-003-mm-studio-class-100-전용-보강판"
+        ]
+      },
+      {
+        "family": "foam",
+        "notes": [
+          "diversity_hook:rank2_trait_distance_to_winner",
+          "diversity_reorder:no_change"
+        ],
+        "originalOrderIds": [
+          "foam-001",
+          "foam-004",
+          "foam-new-003-스웨그키-포론-기보강-흡음재-60배열용",
+          "foam-002",
+          "foam-new-002-스웨그키-스위치-폼-필름-v2"
+        ],
+        "rerankedOrderIds": [
+          "foam-001",
+          "foam-004",
+          "foam-new-003-스웨그키-포론-기보강-흡음재-60배열용",
+          "foam-002",
+          "foam-new-002-스웨그키-스위치-폼-필름-v2"
+        ]
+      },
+      {
+        "family": "layout",
+        "notes": [
+          "diversity_hook:rank2_trait_distance_to_winner",
+          "diversity_reorder:applied"
+        ],
+        "originalOrderIds": [
+          "layout-003",
+          "layout-004",
+          "layout-002",
+          "layout-007",
+          "layout-006"
+        ],
+        "rerankedOrderIds": [
+          "layout-004",
+          "layout-007",
+          "layout-002",
+          "layout-003",
+          "layout-006"
+        ]
+      },
+      {
+        "family": "case",
+        "notes": [
+          "diversity_hook:rank2_trait_distance_to_winner",
+          "diversity_reorder:applied"
+        ],
+        "originalOrderIds": [
+          "case-005",
+          "case-019",
+          "case-004",
+          "case-010",
+          "case-018"
+        ],
+        "rerankedOrderIds": [
+          "case-005",
+          "case-018",
+          "case-019",
+          "case-010",
+          "case-004"
+        ]
+      },
+      {
+        "family": "keycap",
+        "notes": [
+          "diversity_hook:rank2_trait_distance_to_winner",
+          "diversity_reorder:applied"
+        ],
+        "originalOrderIds": [
+          "kc-004",
+          "kc-008",
+          "kc-013",
+          "kc-006",
+          "kc-009"
+        ],
+        "rerankedOrderIds": [
+          "kc-004",
+          "kc-006",
+          "kc-009",
+          "kc-013",
+          "kc-008"
+        ]
+      }
+    ]
+  },
+  "fallbackAudit": {
+    "compatibilityRelaxMult": 1.0,
+    "confidenceAfter": 0.7911,
+    "confidenceBefore": 0.8144,
+    "diversityStrengthMult": 1.0,
+    "notes": [
+      "fallback_hook:quality_accepted"
+    ],
+    "overallLabel": "high",
+    "recovered": false,
+    "tier": 0,
+    "triggers": []
+  },
   "legacyTraits": {
-    "soundMuted": 7.0,
-    "soundBright": -3.0,
-    "soundThocky": 0,
-    "soundClacky": 0,
-    "volumeQuiet": 5.0,
-    "volumeLoud": 0,
-    "linearLean": 3.0,
-    "tactileLean": -1.0,
-    "softBottom": 4.0,
     "firmBottom": -2.0,
+    "heavyPress": 0,
     "lightPress": 3.0,
-    "heavyPress": 0
+    "linearLean": 3.0,
+    "softBottom": 4.0,
+    "soundBright": -3.0,
+    "soundClacky": 0,
+    "soundMuted": 7.0,
+    "soundThocky": 0,
+    "tactileLean": -1.0,
+    "volumeLoud": 0,
+    "volumeQuiet": 5.0
   },
-  "userVector": {
-    "deep_sound": 3.0,
-    "clacky": -4.0,
-    "soft": 12.1,
-    "firm": -1.0,
-    "smooth": 6.2,
-    "tactile_strength": -2.25
+  "matchExplanations": [
+    {
+      "alternatives": [
+        {
+          "description": "입력이 매끈하고 반응이 빨라, 부드러운 타건감과 안정적인 복귀감을 원하는 사용자에게 잘 맞는 타입입니다.",
+          "imageUrl": "https://cdn.imweb.me/thumbnail/20241121/0dbfb484a761d.jpg",
+          "itemId": "sw-linear-016",
+          "itemName": "HMX 아주르 리니어 스위치",
+          "score": 0.6544861551822649,
+          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=994",
+          "summary": "HMX 아주르 리니어 스위치은(는) 중간 무게의 스프링(48g) 설정입니다. 그리고 차분한 감쇠음 · 매끈한 타건감 성향 정합이 높아 상위 추천되었습니다.",
+          "tradeOff": "구분감 있는 키감 축은 타협이 있습니다. 선호(-2.0) 대비 후보 특성(+2.6)이 어긋나 기여가 낮아집니다(-7.0)."
+        },
+        {
+          "description": "입력이 매끈하고 반응이 빨라, 부드러운 타건감과 안정적인 복귀감을 원하는 사용자에게 잘 맞는 타입입니다.",
+          "imageUrl": "",
+          "itemId": "sw-linear-008",
+          "itemName": "WEKT Kunzite 쿤자이트 저소음 리니어 스위치",
+          "score": 0.648719373097655,
+          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1589",
+          "summary": "WEKT Kunzite 쿤자이트 저소음 리니어 스위치은(는) 가벼운 스프링(43g) 설정입니다. 그리고 차분한 감쇠음 · 매끈한 타건감 성향 정합이 높아 상위 추천되었습니다.",
+          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+3.2)이 어긋나 기여가 낮아집니다(-12.8)."
+        }
+      ],
+      "confidence": 0.8357,
+      "domain": "switch",
+      "explanation": "가중 기여 축 요약: muted (+105.00); smooth (+55.20); soft_bottom_out (+47.26); light_typing_force (+26.03).",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20260408/652e8c8c5dfd5.jpg",
+      "itemId": "sw-linear-003",
+      "itemName": "스웨그키 HMX Peach 피치 반저소음 리니어 키보드 스위치",
+      "rawCosine": 0.6714086062065675,
+      "score": 0.6714086062065675,
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1765",
+      "summary": "스웨그키 HMX Peach 피치 반저소음 리니어 키보드 스위치은(는) 중간 무게의 스프링(44g) 설정입니다. 그리고 차분한 감쇠음 · 매끈한 타건감 성향 정합이 높아 상위 추천되었습니다.",
+      "tradeOffs": [
+        "구분감 있는 키감 축은 타협이 있습니다. 선호(-2.0) 대비 후보 특성(+2.6)이 어긋나 기여가 낮아집니다(-7.0).",
+        "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+1.7)이 어긋나 기여가 낮아집니다(-6.8).",
+        "단단한 바닥감 축은 타협이 있습니다. 선호(-1.0) 대비 후보 특성(+4.0)이 어긋나 기여가 낮아집니다(-4.0).",
+        "대안 HMX 아주르 리니어 스위치은(는) 또렷한 고음 측면을 더 보완하지만, 매끈한 타건감 축 정합성이 낮아 전체 순위는 현재 후보가 앞섰습니다."
+      ],
+      "whyTraits": [
+        "중간 무게의 스프링(44g) 설정입니다.",
+        "팩토리 윤활이 적용되어 마찰감을 줄인 세팅입니다.",
+        "차분한 감쇠음 선호(+10.0)와 후보 특성(+10.0)이 같은 방향이라 정합 기여가 큽니다(+105.0).",
+        "매끈한 타건감 선호(+5.0)와 후보 특성(+9.2)이 같은 방향이라 정합 기여가 큽니다(+55.2).",
+        "푹신한 바닥감 선호(+8.0)와 후보 특성(+5.9)이 같은 방향이라 정합 기여가 큽니다(+47.3)."
+      ]
+    },
+    {
+      "alternatives": [
+        {
+          "description": "보강판 특성에 따라 타건 강성, 소리 성향, 바닥감이 달라지므로 사용 취향에 맞춰 조정하는 핵심 요소입니다.",
+          "imageUrl": "https://cdn.imweb.me/thumbnail/20260310/ecff81352fc2e.jpg",
+          "itemId": "plate-002",
+          "itemName": "Qwertykeys NEO75 보강판",
+          "score": 0.458928117063009,
+          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1749",
+          "summary": "Qwertykeys NEO75 보강판은(는) FR4 소재 플레이트입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
+          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+4.1)이 어긋나 기여가 낮아집니다(-18.0)."
+        },
+        {
+          "description": "보강판 특성에 따라 타건 강성, 소리 성향, 바닥감이 달라지므로 사용 취향에 맞춰 조정하는 핵심 요소입니다.",
+          "imageUrl": "https://cdn.imweb.me/thumbnail/20260119/b85bc8d74a92b.jpg",
+          "itemId": "plate-new-007-qwertykeys-neo65-cu-보강판",
+          "itemName": "Qwertykeys NEO65 CU 보강판",
+          "score": 0.44396788348663285,
+          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1612",
+          "summary": "Qwertykeys NEO65 CU 보강판은(는) PC 소재 플레이트입니다. 그리고 푹신한 바닥감 · 차분한 감쇠음 성향 정합이 높아 상위 추천되었습니다.",
+          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+4.2)이 어긋나 기여가 낮아집니다(-18.5)."
+        }
+      ],
+      "confidence": 0.7361,
+      "domain": "plate",
+      "explanation": "가중 기여 축 요약: muted (+66.00); soft_bottom_out (+54.00); smooth (+25.00); light_typing_force (+20.00).",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20260206/9fe53baf2c19b.jpg",
+      "itemId": "plate-004",
+      "itemName": "Qwertykeys QK65 MK3 보강판",
+      "rawCosine": 0.47227280643060354,
+      "score": 0.47227280643060354,
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1661",
+      "summary": "Qwertykeys QK65 MK3 보강판은(는) FR4 소재 플레이트입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
+      "tradeOffs": [
+        "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+4.1)이 어긋나 기여가 낮아집니다(-18.0).",
+        "구분감 있는 키감 축은 타협이 있습니다. 선호(-2.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-10.0).",
+        "단단한 바닥감 축은 타협이 있습니다. 선호(-1.0) 대비 후보 특성(+4.2)이 어긋나 기여가 낮아집니다(-5.1)."
+      ],
+      "whyTraits": [
+        "FR4 소재 플레이트입니다.",
+        "플렉스 강도는 7/10 수준입니다.",
+        "차분한 감쇠음 선호(+10.0)와 후보 특성(+6.6)이 같은 방향이라 정합 기여가 큽니다(+66.0).",
+        "푹신한 바닥감 선호(+8.0)와 후보 특성(+6.8)이 같은 방향이라 정합 기여가 큽니다(+54.0).",
+        "매끈한 타건감 선호(+5.0)와 후보 특성(+5.0)이 같은 방향이라 정합 기여가 큽니다(+25.0)."
+      ]
+    },
+    {
+      "alternatives": [
+        {
+          "description": "통울림과 잔향을 줄여 소리를 더 정돈하고, 바닥감을 부드럽게 다듬는 데 도움이 되는 흡음재 구성입니다.",
+          "imageUrl": "https://cdn.imweb.me/thumbnail/20250916/344c36c475224.jpg",
+          "itemId": "foam-004",
+          "itemName": "EPDM 흡음재",
+          "score": 0.5748124307109156,
+          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=524",
+          "summary": "EPDM 흡음재은(는) 감쇠 강도 9/10으로 소리 정돈을 강화하는 방향입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
+          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+3.2)이 어긋나 기여가 낮아집니다(-14.3)."
+        },
+        {
+          "description": "통울림과 잔향을 줄여 소리를 더 정돈하고, 바닥감을 부드럽게 다듬는 데 도움이 되는 흡음재 구성입니다.",
+          "imageUrl": "https://cdn.imweb.me/thumbnail/20251226/cf57e1862963e.png",
+          "itemId": "foam-new-003-스웨그키-포론-기보강-흡음재-60배열용",
+          "itemName": "스웨그키 포론 기보강 흡음재 - 60배열용",
+          "score": 0.5743323352197819,
+          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1572",
+          "summary": "스웨그키 포론 기보강 흡음재 - 60배열용은(는) 감쇠 강도 7/10으로 소리 정돈을 강화하는 방향입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
+          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+4.2)이 어긋나 기여가 낮아집니다(-18.7)."
+        }
+      ],
+      "confidence": 0.7998,
+      "domain": "foam",
+      "explanation": "가중 기여 축 요약: muted (+98.68); soft_bottom_out (+80.04); smooth (+29.00); light_typing_force (+20.00).",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20250916/17413e2972115.jpg",
+      "itemId": "foam-001",
+      "itemName": "포론 하부 흡음재",
+      "rawCosine": 0.5995776526298375,
+      "score": 0.5995776526298375,
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=253",
+      "summary": "포론 하부 흡음재은(는) 감쇠 강도 8/10으로 소리 정돈을 강화하는 방향입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
+      "tradeOffs": [
+        "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+3.8)이 어긋나 기여가 낮아집니다(-16.5).",
+        "구분감 있는 키감 축은 타협이 있습니다. 선호(-2.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-10.0).",
+        "단단한 바닥감 축은 타협이 있습니다. 선호(-1.0) 대비 후보 특성(+4.0)이 어긋나 기여가 낮아집니다(-4.0).",
+        "대안 EPDM 흡음재은(는) 차분한 감쇠음 측면을 더 보완하지만, 푹신한 바닥감 축 정합성이 낮아 전체 순위는 현재 후보가 앞섰습니다."
+      ],
+      "whyTraits": [
+        "감쇠 강도 8/10으로 소리 정돈을 강화하는 방향입니다.",
+        "switch 위치 중심 흡음 구성입니다.",
+        "차분한 감쇠음 선호(+10.0)와 후보 특성(+6.8)이 같은 방향이라 정합 기여가 큽니다(+98.7).",
+        "푹신한 바닥감 선호(+8.0)와 후보 특성(+7.4)이 같은 방향이라 정합 기여가 큽니다(+80.0).",
+        "매끈한 타건감 선호(+5.0)와 후보 특성(+5.8)이 같은 방향이라 정합 기여가 큽니다(+29.0)."
+      ]
+    },
+    {
+      "alternatives": [
+        {
+          "description": "배열 크기와 키 배치 밀도에 따라 작업 동선과 사용감이 달라지므로, 사용 목적에 맞춘 선택이 중요한 구성입니다.",
+          "imageUrl": "/layout-diagrams/split-60.svg",
+          "itemId": "layout-007",
+          "itemName": "Split 60",
+          "score": 0.3860117909856586,
+          "sourceUrl": "",
+          "summary": "Split 60은(는) split 배열 기반 레이아웃입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
+          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-20.0)."
+        },
+        {
+          "description": "배열 크기와 키 배치 밀도에 따라 작업 동선과 사용감이 달라지므로, 사용 목적에 맞춘 선택이 중요한 구성입니다.",
+          "imageUrl": "/layout-diagrams/65-compact.svg",
+          "itemId": "layout-002",
+          "itemName": "65% Compact",
+          "score": 0.38619777094052743,
+          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1415",
+          "summary": "65% Compact은(는) 65 배열 기반 레이아웃입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
+          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-20.0)."
+        }
+      ],
+      "confidence": 0.7012,
+      "domain": "layout",
+      "explanation": "가중 기여 축 요약: muted (+56.00); soft_bottom_out (+40.00); smooth (+25.00); light_typing_force (+22.00).",
+      "imageUrl": "/layout-diagrams/full-size.svg",
+      "itemId": "layout-004",
+      "itemName": "Full-size",
+      "rawCosine": 0.40231209034805954,
+      "score": 0.40231209034805954,
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1604",
+      "summary": "Full-size은(는) full 배열 기반 레이아웃입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
+      "tradeOffs": [
+        "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+4.5)이 어긋나 기여가 낮아집니다(-18.0).",
+        "구분감 있는 키감 축은 타협이 있습니다. 선호(-2.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-10.0).",
+        "단단한 바닥감 축은 타협이 있습니다. 선호(-1.0) 대비 후보 특성(+5.6)이 어긋나 기여가 낮아집니다(-5.9).",
+        "대안 Split 60은(는) 단단한 바닥감 측면을 더 보완하지만, 차분한 감쇠음 축 정합성이 낮아 전체 순위는 현재 후보가 앞섰습니다."
+      ],
+      "whyTraits": [
+        "full 배열 기반 레이아웃입니다.",
+        "키 밀도는 9/10 수준입니다.",
+        "차분한 감쇠음 선호(+10.0)와 후보 특성(+5.6)이 같은 방향이라 정합 기여가 큽니다(+56.0).",
+        "푹신한 바닥감 선호(+8.0)와 후보 특성(+5.0)이 같은 방향이라 정합 기여가 큽니다(+40.0).",
+        "매끈한 타건감 선호(+5.0)와 후보 특성(+5.0)이 같은 방향이라 정합 기여가 큽니다(+25.0)."
+      ]
+    },
+    {
+      "alternatives": [
+        {
+          "description": "케이스·키트는 마운팅 방식과 재질에 따라 소리와 타건감의 기반이 되며, 레이아웃 크기와 함께 맞춰야 합니다.",
+          "imageUrl": "https://cdn.imweb.me/thumbnail/20260310/b8d43ccbb80dd.jpg",
+          "itemId": "case-018",
+          "itemName": "NEO98 커스텀 기계식 키보드",
+          "score": 0.44953167276194084,
+          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1748",
+          "summary": "NEO98 커스텀 기계식 키보드은(는) 차분한 감쇠음 · 푹신한 바닥감 축 정합이 높아 상위 추천되었습니다.",
+          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-20.0)."
+        },
+        {
+          "description": "파츠·하우징은 기존 빌드에 맞춰 교체·보강할 때 선택하는 케이스 구성입니다.",
+          "imageUrl": "https://cdn.imweb.me/thumbnail/20251017/b8dd9ce04a801.jpg",
+          "itemId": "case-019",
+          "itemName": "트랜지션 라이트 Alu 상부 하우징 상판",
+          "score": 0.47287042281154895,
+          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1392",
+          "summary": "트랜지션 라이트 Alu 상부 하우징 상판은(는) 차분한 감쇠음 · 푹신한 바닥감 축 정합이 높아 상위 추천되었습니다.",
+          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+2.8)이 어긋나 기여가 낮아집니다(-11.2)."
+        }
+      ],
+      "confidence": 0.738,
+      "domain": "case",
+      "explanation": "가중 기여 축 요약: muted (+74.75); soft_bottom_out (+57.20); smooth (+25.00); light_typing_force (+20.00).",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20260119/0cce5068726e4.jpeg",
+      "itemId": "case-005",
+      "itemName": "DP104 알루미늄 커스텀 기계식 키보드",
+      "rawCosine": 0.4759884822841546,
+      "score": 0.4759884822841546,
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1604",
+      "summary": "DP104 알루미늄 커스텀 기계식 키보드은(는) 차분한 감쇠음 · 푹신한 바닥감 축 정합이 높아 상위 추천되었습니다.",
+      "tradeOffs": [
+        "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+2.8)이 어긋나 기여가 낮아집니다(-11.2).",
+        "구분감 있는 키감 축은 타협이 있습니다. 선호(-2.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-10.0).",
+        "단단한 바닥감 축은 타협이 있습니다. 선호(-1.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-5.2).",
+        "대안 NEO98 커스텀 기계식 키보드은(는) 단단한 바닥감 측면을 더 보완하지만, 차분한 감쇠음 축 정합성이 낮아 전체 순위는 현재 후보가 앞섰습니다."
+      ],
+      "whyTraits": [
+        "차분한 감쇠음 선호(+10.0)와 후보 특성(+6.5)이 같은 방향이라 정합 기여가 큽니다(+74.8).",
+        "푹신한 바닥감 선호(+8.0)와 후보 특성(+6.5)이 같은 방향이라 정합 기여가 큽니다(+57.2).",
+        "매끈한 타건감 선호(+5.0)와 후보 특성(+5.0)이 같은 방향이라 정합 기여가 큽니다(+25.0)."
+      ]
+    },
+    {
+      "alternatives": [
+        {
+          "description": "키캡은 프로필·재질·각인 방식에 따라 소리 톤과 타건감이 달라지며, 레이아웃 호환도 함께 확인합니다.",
+          "imageUrl": "https://cdn.imweb.me/thumbnail/20260213/9e921831efab3.jpg",
+          "itemId": "kc-006",
+          "itemName": "스웨그키 MOA 키보드 키캡",
+          "score": 0.42106634301666485,
+          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1720",
+          "summary": "스웨그키 MOA 키보드 키캡은(는) 차분한 감쇠음 · 푹신한 바닥감 축 정합이 높아 상위 추천되었습니다.",
+          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-24.0)."
+        },
+        {
+          "description": "키캡은 프로필·재질·각인 방식에 따라 소리 톤과 타건감이 달라지며, 레이아웃 호환도 함께 확인합니다.",
+          "imageUrl": "https://cdn.imweb.me/thumbnail/20260209/1ca7e0f123c0c.jpg",
+          "itemId": "kc-009",
+          "itemName": "[GB]Hammerworks CRP R7 - Base",
+          "score": 0.4123267876014801,
+          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1663",
+          "summary": "[GB]Hammerworks CRP R7 - Base은(는) 차분한 감쇠음 · 푹신한 바닥감 축 정합이 높아 상위 추천되었습니다.",
+          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-24.0)."
+        }
+      ],
+      "confidence": 0.74,
+      "domain": "keycap",
+      "explanation": "가중 기여 축 요약: muted (+89.60); soft_bottom_out (+40.00); smooth (+28.00); light_typing_force (+20.00).",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20251209/e11d1b0510a5f.png",
+      "itemId": "kc-004",
+      "itemName": "스웨그키 Calm Beige PBT 염료승화 키캡",
+      "rawCosine": 0.4799771737356221,
+      "score": 0.4799771737356221,
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1489",
+      "summary": "스웨그키 Calm Beige PBT 염료승화 키캡은(는) 차분한 감쇠음 · 푹신한 바닥감 축 정합이 높아 상위 추천되었습니다.",
+      "tradeOffs": [
+        "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+4.0)이 어긋나 기여가 낮아집니다(-19.2).",
+        "구분감 있는 키감 축은 타협이 있습니다. 선호(-2.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-10.0).",
+        "단단한 바닥감 축은 타협이 있습니다. 선호(-1.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-5.0).",
+        "대안 스웨그키 MOA 키보드 키캡은(는) 푹신한 바닥감 측면을 더 보완하지만, 차분한 감쇠음 축 정합성이 낮아 전체 순위는 현재 후보가 앞섰습니다."
+      ],
+      "whyTraits": [
+        "차분한 감쇠음 선호(+10.0)와 후보 특성(+6.4)이 같은 방향이라 정합 기여가 큽니다(+89.6).",
+        "푹신한 바닥감 선호(+8.0)와 후보 특성(+5.0)이 같은 방향이라 정합 기여가 큽니다(+40.0).",
+        "매끈한 타건감 선호(+5.0)와 후보 특성(+5.6)이 같은 방향이라 정합 기여가 큽니다(+28.0)."
+      ]
+    }
+  ],
+  "nlPreferenceAnalysis": {
+    "applied": false,
+    "matchedTermIds": [],
+    "normalizedText": "",
+    "parsingConfidence": 0.0,
+    "unknownTokens": [],
+    "warnings": []
   },
-  "userTraitScores": {
-    "deep_sound": 1.5,
-    "high_pitch": -4.0,
-    "muted": 10.0,
-    "poppy": 0.0,
-    "marbly": 0.0,
-    "smooth": 5.0,
-    "scratchy": 0.0,
-    "soft_bottom_out": 8.0,
-    "firm_bottom_out": -1.0,
-    "flexible": 0.0,
-    "stiff": 0.0,
-    "strong_tactile": -2.0,
-    "light_typing_force": 4.0
+  "overallConfidence": 0.7585,
+  "recommendationConfidence": {
+    "compatibilityComponent": 1.0,
+    "diversityDistortionComponent": 0.7083,
+    "fallbackTier": 0,
+    "hooks": [
+      "confidence:similarity=0.758",
+      "confidence:compatibility_headroom=1.000",
+      "confidence:diversity_distortion_index=0.833",
+      "confidence:label=high"
+    ],
+    "label": "high",
+    "overall": 0.7911,
+    "similarityComponent": 0.7585
   },
+  "recommendations": [
+    {
+      "alternatives": [
+        {
+          "description": "입력이 매끈하고 반응이 빨라, 부드러운 타건감과 안정적인 복귀감을 원하는 사용자에게 잘 맞는 타입입니다.",
+          "imageUrl": "https://cdn.imweb.me/thumbnail/20241121/0dbfb484a761d.jpg",
+          "itemId": "sw-linear-016",
+          "itemName": "HMX 아주르 리니어 스위치",
+          "score": 0.6544861551822649,
+          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=994",
+          "summary": "HMX 아주르 리니어 스위치은(는) 중간 무게의 스프링(48g) 설정입니다. 그리고 차분한 감쇠음 · 매끈한 타건감 성향 정합이 높아 상위 추천되었습니다.",
+          "tradeOff": "구분감 있는 키감 축은 타협이 있습니다. 선호(-2.0) 대비 후보 특성(+2.6)이 어긋나 기여가 낮아집니다(-7.0)."
+        },
+        {
+          "description": "입력이 매끈하고 반응이 빨라, 부드러운 타건감과 안정적인 복귀감을 원하는 사용자에게 잘 맞는 타입입니다.",
+          "imageUrl": "",
+          "itemId": "sw-linear-008",
+          "itemName": "WEKT Kunzite 쿤자이트 저소음 리니어 스위치",
+          "score": 0.648719373097655,
+          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1589",
+          "summary": "WEKT Kunzite 쿤자이트 저소음 리니어 스위치은(는) 가벼운 스프링(43g) 설정입니다. 그리고 차분한 감쇠음 · 매끈한 타건감 성향 정합이 높아 상위 추천되었습니다.",
+          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+3.2)이 어긋나 기여가 낮아집니다(-12.8)."
+        }
+      ],
+      "confidence": 0.8357,
+      "domain": "switch",
+      "explanation": "가중 기여 축 요약: muted (+105.00); smooth (+55.20); soft_bottom_out (+47.26); light_typing_force (+26.03).",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20260408/652e8c8c5dfd5.jpg",
+      "itemId": "sw-linear-003",
+      "itemName": "스웨그키 HMX Peach 피치 반저소음 리니어 키보드 스위치",
+      "rawCosine": 0.6714086062065675,
+      "score": 0.6714086062065675,
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1765",
+      "summary": "스웨그키 HMX Peach 피치 반저소음 리니어 키보드 스위치은(는) 중간 무게의 스프링(44g) 설정입니다. 그리고 차분한 감쇠음 · 매끈한 타건감 성향 정합이 높아 상위 추천되었습니다.",
+      "tradeOffs": [
+        "구분감 있는 키감 축은 타협이 있습니다. 선호(-2.0) 대비 후보 특성(+2.6)이 어긋나 기여가 낮아집니다(-7.0).",
+        "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+1.7)이 어긋나 기여가 낮아집니다(-6.8).",
+        "단단한 바닥감 축은 타협이 있습니다. 선호(-1.0) 대비 후보 특성(+4.0)이 어긋나 기여가 낮아집니다(-4.0).",
+        "대안 HMX 아주르 리니어 스위치은(는) 또렷한 고음 측면을 더 보완하지만, 매끈한 타건감 축 정합성이 낮아 전체 순위는 현재 후보가 앞섰습니다."
+      ],
+      "whyTraits": [
+        "중간 무게의 스프링(44g) 설정입니다.",
+        "팩토리 윤활이 적용되어 마찰감을 줄인 세팅입니다.",
+        "차분한 감쇠음 선호(+10.0)와 후보 특성(+10.0)이 같은 방향이라 정합 기여가 큽니다(+105.0).",
+        "매끈한 타건감 선호(+5.0)와 후보 특성(+9.2)이 같은 방향이라 정합 기여가 큽니다(+55.2).",
+        "푹신한 바닥감 선호(+8.0)와 후보 특성(+5.9)이 같은 방향이라 정합 기여가 큽니다(+47.3)."
+      ]
+    },
+    {
+      "alternatives": [
+        {
+          "description": "보강판 특성에 따라 타건 강성, 소리 성향, 바닥감이 달라지므로 사용 취향에 맞춰 조정하는 핵심 요소입니다.",
+          "imageUrl": "https://cdn.imweb.me/thumbnail/20260310/ecff81352fc2e.jpg",
+          "itemId": "plate-002",
+          "itemName": "Qwertykeys NEO75 보강판",
+          "score": 0.458928117063009,
+          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1749",
+          "summary": "Qwertykeys NEO75 보강판은(는) FR4 소재 플레이트입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
+          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+4.1)이 어긋나 기여가 낮아집니다(-18.0)."
+        },
+        {
+          "description": "보강판 특성에 따라 타건 강성, 소리 성향, 바닥감이 달라지므로 사용 취향에 맞춰 조정하는 핵심 요소입니다.",
+          "imageUrl": "https://cdn.imweb.me/thumbnail/20260119/b85bc8d74a92b.jpg",
+          "itemId": "plate-new-007-qwertykeys-neo65-cu-보강판",
+          "itemName": "Qwertykeys NEO65 CU 보강판",
+          "score": 0.44396788348663285,
+          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1612",
+          "summary": "Qwertykeys NEO65 CU 보강판은(는) PC 소재 플레이트입니다. 그리고 푹신한 바닥감 · 차분한 감쇠음 성향 정합이 높아 상위 추천되었습니다.",
+          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+4.2)이 어긋나 기여가 낮아집니다(-18.5)."
+        }
+      ],
+      "confidence": 0.7361,
+      "domain": "plate",
+      "explanation": "가중 기여 축 요약: muted (+66.00); soft_bottom_out (+54.00); smooth (+25.00); light_typing_force (+20.00).",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20260206/9fe53baf2c19b.jpg",
+      "itemId": "plate-004",
+      "itemName": "Qwertykeys QK65 MK3 보강판",
+      "rawCosine": 0.47227280643060354,
+      "score": 0.47227280643060354,
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1661",
+      "summary": "Qwertykeys QK65 MK3 보강판은(는) FR4 소재 플레이트입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
+      "tradeOffs": [
+        "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+4.1)이 어긋나 기여가 낮아집니다(-18.0).",
+        "구분감 있는 키감 축은 타협이 있습니다. 선호(-2.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-10.0).",
+        "단단한 바닥감 축은 타협이 있습니다. 선호(-1.0) 대비 후보 특성(+4.2)이 어긋나 기여가 낮아집니다(-5.1)."
+      ],
+      "whyTraits": [
+        "FR4 소재 플레이트입니다.",
+        "플렉스 강도는 7/10 수준입니다.",
+        "차분한 감쇠음 선호(+10.0)와 후보 특성(+6.6)이 같은 방향이라 정합 기여가 큽니다(+66.0).",
+        "푹신한 바닥감 선호(+8.0)와 후보 특성(+6.8)이 같은 방향이라 정합 기여가 큽니다(+54.0).",
+        "매끈한 타건감 선호(+5.0)와 후보 특성(+5.0)이 같은 방향이라 정합 기여가 큽니다(+25.0)."
+      ]
+    },
+    {
+      "alternatives": [
+        {
+          "description": "통울림과 잔향을 줄여 소리를 더 정돈하고, 바닥감을 부드럽게 다듬는 데 도움이 되는 흡음재 구성입니다.",
+          "imageUrl": "https://cdn.imweb.me/thumbnail/20250916/344c36c475224.jpg",
+          "itemId": "foam-004",
+          "itemName": "EPDM 흡음재",
+          "score": 0.5748124307109156,
+          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=524",
+          "summary": "EPDM 흡음재은(는) 감쇠 강도 9/10으로 소리 정돈을 강화하는 방향입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
+          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+3.2)이 어긋나 기여가 낮아집니다(-14.3)."
+        },
+        {
+          "description": "통울림과 잔향을 줄여 소리를 더 정돈하고, 바닥감을 부드럽게 다듬는 데 도움이 되는 흡음재 구성입니다.",
+          "imageUrl": "https://cdn.imweb.me/thumbnail/20251226/cf57e1862963e.png",
+          "itemId": "foam-new-003-스웨그키-포론-기보강-흡음재-60배열용",
+          "itemName": "스웨그키 포론 기보강 흡음재 - 60배열용",
+          "score": 0.5743323352197819,
+          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1572",
+          "summary": "스웨그키 포론 기보강 흡음재 - 60배열용은(는) 감쇠 강도 7/10으로 소리 정돈을 강화하는 방향입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
+          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+4.2)이 어긋나 기여가 낮아집니다(-18.7)."
+        }
+      ],
+      "confidence": 0.7998,
+      "domain": "foam",
+      "explanation": "가중 기여 축 요약: muted (+98.68); soft_bottom_out (+80.04); smooth (+29.00); light_typing_force (+20.00).",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20250916/17413e2972115.jpg",
+      "itemId": "foam-001",
+      "itemName": "포론 하부 흡음재",
+      "rawCosine": 0.5995776526298375,
+      "score": 0.5995776526298375,
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=253",
+      "summary": "포론 하부 흡음재은(는) 감쇠 강도 8/10으로 소리 정돈을 강화하는 방향입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
+      "tradeOffs": [
+        "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+3.8)이 어긋나 기여가 낮아집니다(-16.5).",
+        "구분감 있는 키감 축은 타협이 있습니다. 선호(-2.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-10.0).",
+        "단단한 바닥감 축은 타협이 있습니다. 선호(-1.0) 대비 후보 특성(+4.0)이 어긋나 기여가 낮아집니다(-4.0).",
+        "대안 EPDM 흡음재은(는) 차분한 감쇠음 측면을 더 보완하지만, 푹신한 바닥감 축 정합성이 낮아 전체 순위는 현재 후보가 앞섰습니다."
+      ],
+      "whyTraits": [
+        "감쇠 강도 8/10으로 소리 정돈을 강화하는 방향입니다.",
+        "switch 위치 중심 흡음 구성입니다.",
+        "차분한 감쇠음 선호(+10.0)와 후보 특성(+6.8)이 같은 방향이라 정합 기여가 큽니다(+98.7).",
+        "푹신한 바닥감 선호(+8.0)와 후보 특성(+7.4)이 같은 방향이라 정합 기여가 큽니다(+80.0).",
+        "매끈한 타건감 선호(+5.0)와 후보 특성(+5.8)이 같은 방향이라 정합 기여가 큽니다(+29.0)."
+      ]
+    },
+    {
+      "alternatives": [
+        {
+          "description": "배열 크기와 키 배치 밀도에 따라 작업 동선과 사용감이 달라지므로, 사용 목적에 맞춘 선택이 중요한 구성입니다.",
+          "imageUrl": "/layout-diagrams/split-60.svg",
+          "itemId": "layout-007",
+          "itemName": "Split 60",
+          "score": 0.3860117909856586,
+          "sourceUrl": "",
+          "summary": "Split 60은(는) split 배열 기반 레이아웃입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
+          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-20.0)."
+        },
+        {
+          "description": "배열 크기와 키 배치 밀도에 따라 작업 동선과 사용감이 달라지므로, 사용 목적에 맞춘 선택이 중요한 구성입니다.",
+          "imageUrl": "/layout-diagrams/65-compact.svg",
+          "itemId": "layout-002",
+          "itemName": "65% Compact",
+          "score": 0.38619777094052743,
+          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1415",
+          "summary": "65% Compact은(는) 65 배열 기반 레이아웃입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
+          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-20.0)."
+        }
+      ],
+      "confidence": 0.7012,
+      "domain": "layout",
+      "explanation": "가중 기여 축 요약: muted (+56.00); soft_bottom_out (+40.00); smooth (+25.00); light_typing_force (+22.00).",
+      "imageUrl": "/layout-diagrams/full-size.svg",
+      "itemId": "layout-004",
+      "itemName": "Full-size",
+      "rawCosine": 0.40231209034805954,
+      "score": 0.40231209034805954,
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1604",
+      "summary": "Full-size은(는) full 배열 기반 레이아웃입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
+      "tradeOffs": [
+        "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+4.5)이 어긋나 기여가 낮아집니다(-18.0).",
+        "구분감 있는 키감 축은 타협이 있습니다. 선호(-2.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-10.0).",
+        "단단한 바닥감 축은 타협이 있습니다. 선호(-1.0) 대비 후보 특성(+5.6)이 어긋나 기여가 낮아집니다(-5.9).",
+        "대안 Split 60은(는) 단단한 바닥감 측면을 더 보완하지만, 차분한 감쇠음 축 정합성이 낮아 전체 순위는 현재 후보가 앞섰습니다."
+      ],
+      "whyTraits": [
+        "full 배열 기반 레이아웃입니다.",
+        "키 밀도는 9/10 수준입니다.",
+        "차분한 감쇠음 선호(+10.0)와 후보 특성(+5.6)이 같은 방향이라 정합 기여가 큽니다(+56.0).",
+        "푹신한 바닥감 선호(+8.0)와 후보 특성(+5.0)이 같은 방향이라 정합 기여가 큽니다(+40.0).",
+        "매끈한 타건감 선호(+5.0)와 후보 특성(+5.0)이 같은 방향이라 정합 기여가 큽니다(+25.0)."
+      ]
+    },
+    {
+      "alternatives": [
+        {
+          "description": "케이스·키트는 마운팅 방식과 재질에 따라 소리와 타건감의 기반이 되며, 레이아웃 크기와 함께 맞춰야 합니다.",
+          "imageUrl": "https://cdn.imweb.me/thumbnail/20260310/b8d43ccbb80dd.jpg",
+          "itemId": "case-018",
+          "itemName": "NEO98 커스텀 기계식 키보드",
+          "score": 0.44953167276194084,
+          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1748",
+          "summary": "NEO98 커스텀 기계식 키보드은(는) 차분한 감쇠음 · 푹신한 바닥감 축 정합이 높아 상위 추천되었습니다.",
+          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-20.0)."
+        },
+        {
+          "description": "파츠·하우징은 기존 빌드에 맞춰 교체·보강할 때 선택하는 케이스 구성입니다.",
+          "imageUrl": "https://cdn.imweb.me/thumbnail/20251017/b8dd9ce04a801.jpg",
+          "itemId": "case-019",
+          "itemName": "트랜지션 라이트 Alu 상부 하우징 상판",
+          "score": 0.47287042281154895,
+          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1392",
+          "summary": "트랜지션 라이트 Alu 상부 하우징 상판은(는) 차분한 감쇠음 · 푹신한 바닥감 축 정합이 높아 상위 추천되었습니다.",
+          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+2.8)이 어긋나 기여가 낮아집니다(-11.2)."
+        }
+      ],
+      "confidence": 0.738,
+      "domain": "case",
+      "explanation": "가중 기여 축 요약: muted (+74.75); soft_bottom_out (+57.20); smooth (+25.00); light_typing_force (+20.00).",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20260119/0cce5068726e4.jpeg",
+      "itemId": "case-005",
+      "itemName": "DP104 알루미늄 커스텀 기계식 키보드",
+      "rawCosine": 0.4759884822841546,
+      "score": 0.4759884822841546,
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1604",
+      "summary": "DP104 알루미늄 커스텀 기계식 키보드은(는) 차분한 감쇠음 · 푹신한 바닥감 축 정합이 높아 상위 추천되었습니다.",
+      "tradeOffs": [
+        "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+2.8)이 어긋나 기여가 낮아집니다(-11.2).",
+        "구분감 있는 키감 축은 타협이 있습니다. 선호(-2.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-10.0).",
+        "단단한 바닥감 축은 타협이 있습니다. 선호(-1.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-5.2).",
+        "대안 NEO98 커스텀 기계식 키보드은(는) 단단한 바닥감 측면을 더 보완하지만, 차분한 감쇠음 축 정합성이 낮아 전체 순위는 현재 후보가 앞섰습니다."
+      ],
+      "whyTraits": [
+        "차분한 감쇠음 선호(+10.0)와 후보 특성(+6.5)이 같은 방향이라 정합 기여가 큽니다(+74.8).",
+        "푹신한 바닥감 선호(+8.0)와 후보 특성(+6.5)이 같은 방향이라 정합 기여가 큽니다(+57.2).",
+        "매끈한 타건감 선호(+5.0)와 후보 특성(+5.0)이 같은 방향이라 정합 기여가 큽니다(+25.0)."
+      ]
+    },
+    {
+      "alternatives": [
+        {
+          "description": "키캡은 프로필·재질·각인 방식에 따라 소리 톤과 타건감이 달라지며, 레이아웃 호환도 함께 확인합니다.",
+          "imageUrl": "https://cdn.imweb.me/thumbnail/20260213/9e921831efab3.jpg",
+          "itemId": "kc-006",
+          "itemName": "스웨그키 MOA 키보드 키캡",
+          "score": 0.42106634301666485,
+          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1720",
+          "summary": "스웨그키 MOA 키보드 키캡은(는) 차분한 감쇠음 · 푹신한 바닥감 축 정합이 높아 상위 추천되었습니다.",
+          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-24.0)."
+        },
+        {
+          "description": "키캡은 프로필·재질·각인 방식에 따라 소리 톤과 타건감이 달라지며, 레이아웃 호환도 함께 확인합니다.",
+          "imageUrl": "https://cdn.imweb.me/thumbnail/20260209/1ca7e0f123c0c.jpg",
+          "itemId": "kc-009",
+          "itemName": "[GB]Hammerworks CRP R7 - Base",
+          "score": 0.4123267876014801,
+          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1663",
+          "summary": "[GB]Hammerworks CRP R7 - Base은(는) 차분한 감쇠음 · 푹신한 바닥감 축 정합이 높아 상위 추천되었습니다.",
+          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-24.0)."
+        }
+      ],
+      "confidence": 0.74,
+      "domain": "keycap",
+      "explanation": "가중 기여 축 요약: muted (+89.60); soft_bottom_out (+40.00); smooth (+28.00); light_typing_force (+20.00).",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20251209/e11d1b0510a5f.png",
+      "itemId": "kc-004",
+      "itemName": "스웨그키 Calm Beige PBT 염료승화 키캡",
+      "rawCosine": 0.4799771737356221,
+      "score": 0.4799771737356221,
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1489",
+      "summary": "스웨그키 Calm Beige PBT 염료승화 키캡은(는) 차분한 감쇠음 · 푹신한 바닥감 축 정합이 높아 상위 추천되었습니다.",
+      "tradeOffs": [
+        "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+4.0)이 어긋나 기여가 낮아집니다(-19.2).",
+        "구분감 있는 키감 축은 타협이 있습니다. 선호(-2.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-10.0).",
+        "단단한 바닥감 축은 타협이 있습니다. 선호(-1.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-5.0).",
+        "대안 스웨그키 MOA 키보드 키캡은(는) 푹신한 바닥감 측면을 더 보완하지만, 차분한 감쇠음 축 정합성이 낮아 전체 순위는 현재 후보가 앞섰습니다."
+      ],
+      "whyTraits": [
+        "차분한 감쇠음 선호(+10.0)와 후보 특성(+6.4)이 같은 방향이라 정합 기여가 큽니다(+89.6).",
+        "푹신한 바닥감 선호(+8.0)와 후보 특성(+5.0)이 같은 방향이라 정합 기여가 큽니다(+40.0).",
+        "매끈한 타건감 선호(+5.0)와 후보 특성(+5.6)이 같은 방향이라 정합 기여가 큽니다(+28.0)."
+      ]
+    }
+  ],
   "traitAxes": [
     "deep_sound",
     "high_pitch",
@@ -58,780 +811,27 @@
     "strong_tactile",
     "light_typing_force"
   ],
-  "recommendations": [
-    {
-      "domain": "switch",
-      "itemId": "sw-linear-003",
-      "itemName": "스웨그키 HMX Peach 반저소음 리니어 키보드 스위치",
-      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1765",
-      "imageUrl": "https://cdn.imweb.me/thumbnail/20260408/652e8c8c5dfd5.jpg",
-      "score": 0.6714086062065675,
-      "rawCosine": 0.6714086062065675,
-      "confidence": 0.8357,
-      "summary": "스웨그키 HMX Peach 반저소음 리니어 키보드 스위치은(는) 중간 무게의 스프링(44g) 설정입니다. 그리고 차분한 감쇠음 · 매끈한 타건감 성향 정합이 높아 상위 추천되었습니다.",
-      "whyTraits": [
-        "중간 무게의 스프링(44g) 설정입니다.",
-        "팩토리 윤활이 적용되어 마찰감을 줄인 세팅입니다.",
-        "차분한 감쇠음 선호(+10.0)와 후보 특성(+10.0)이 같은 방향이라 정합 기여가 큽니다(+105.0).",
-        "매끈한 타건감 선호(+5.0)와 후보 특성(+9.2)이 같은 방향이라 정합 기여가 큽니다(+55.2).",
-        "푹신한 바닥감 선호(+8.0)와 후보 특성(+5.9)이 같은 방향이라 정합 기여가 큽니다(+47.3)."
-      ],
-      "tradeOffs": [
-        "구분감 있는 키감 축은 타협이 있습니다. 선호(-2.0) 대비 후보 특성(+2.6)이 어긋나 기여가 낮아집니다(-7.0).",
-        "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+1.7)이 어긋나 기여가 낮아집니다(-6.8).",
-        "단단한 바닥감 축은 타협이 있습니다. 선호(-1.0) 대비 후보 특성(+4.0)이 어긋나 기여가 낮아집니다(-4.0).",
-        "대안 HMX 아주르 리니어 스위치은(는) 또렷한 고음 측면을 더 보완하지만, 매끈한 타건감 축 정합성이 낮아 전체 순위는 현재 후보가 앞섰습니다."
-      ],
-      "explanation": "가중 기여 축 요약: muted (+105.00); smooth (+55.20); soft_bottom_out (+47.26); light_typing_force (+26.03).",
-      "alternatives": [
-        {
-          "itemId": "sw-linear-016",
-          "itemName": "HMX 아주르 리니어 스위치",
-          "score": 0.6544861551822649,
-          "description": "입력이 매끈하고 반응이 빨라, 부드러운 타건감과 안정적인 복귀감을 원하는 사용자에게 잘 맞는 타입입니다.",
-          "summary": "HMX 아주르 리니어 스위치은(는) 중간 무게의 스프링(48g) 설정입니다. 그리고 차분한 감쇠음 · 매끈한 타건감 성향 정합이 높아 상위 추천되었습니다.",
-          "tradeOff": "구분감 있는 키감 축은 타협이 있습니다. 선호(-2.0) 대비 후보 특성(+2.6)이 어긋나 기여가 낮아집니다(-7.0).",
-          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=994",
-          "imageUrl": "https://cdn.imweb.me/thumbnail/20241121/0dbfb484a761d.jpg"
-        },
-        {
-          "itemId": "sw-silent-002",
-          "itemName": "WEKT Kunzite 쿤자이트 저소음 리니어 스위치",
-          "score": 0.648719373097655,
-          "description": "소음 억제가 잘 되어 조용하면서도, 일상 사용에서 부담이 적은 방향의 세팅에 적합한 타입입니다.",
-          "summary": "WEKT Kunzite 쿤자이트 저소음 리니어 스위치은(는) 가벼운 스프링(43g) 설정입니다. 그리고 차분한 감쇠음 · 매끈한 타건감 성향 정합이 높아 상위 추천되었습니다.",
-          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+3.2)이 어긋나 기여가 낮아집니다(-12.8).",
-          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1589",
-          "imageUrl": ""
-        }
-      ]
-    },
-    {
-      "domain": "plate",
-      "itemId": "plate-004",
-      "itemName": "Qwertykeys QK65 MK3 보강판",
-      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1661",
-      "imageUrl": "https://cdn.imweb.me/thumbnail/20260206/9fe53baf2c19b.jpg",
-      "score": 0.47227280643060354,
-      "rawCosine": 0.47227280643060354,
-      "confidence": 0.7361,
-      "summary": "Qwertykeys QK65 MK3 보강판은(는) FR4 소재 플레이트입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
-      "whyTraits": [
-        "FR4 소재 플레이트입니다.",
-        "플렉스 강도는 7/10 수준입니다.",
-        "차분한 감쇠음 선호(+10.0)와 후보 특성(+6.6)이 같은 방향이라 정합 기여가 큽니다(+66.0).",
-        "푹신한 바닥감 선호(+8.0)와 후보 특성(+6.8)이 같은 방향이라 정합 기여가 큽니다(+54.0).",
-        "매끈한 타건감 선호(+5.0)와 후보 특성(+5.0)이 같은 방향이라 정합 기여가 큽니다(+25.0)."
-      ],
-      "tradeOffs": [
-        "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+4.1)이 어긋나 기여가 낮아집니다(-18.0).",
-        "구분감 있는 키감 축은 타협이 있습니다. 선호(-2.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-10.0).",
-        "단단한 바닥감 축은 타협이 있습니다. 선호(-1.0) 대비 후보 특성(+4.2)이 어긋나 기여가 낮아집니다(-5.1)."
-      ],
-      "explanation": "가중 기여 축 요약: muted (+66.00); soft_bottom_out (+54.00); smooth (+25.00); light_typing_force (+20.00).",
-      "alternatives": [
-        {
-          "itemId": "plate-002",
-          "itemName": "Qwertykeys NEO75 보강판",
-          "score": 0.458928117063009,
-          "description": "보강판 특성에 따라 타건 강성, 소리 성향, 바닥감이 달라지므로 사용 취향에 맞춰 조정하는 핵심 요소입니다.",
-          "summary": "Qwertykeys NEO75 보강판은(는) FR4 소재 플레이트입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
-          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+4.1)이 어긋나 기여가 낮아집니다(-18.0).",
-          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1749",
-          "imageUrl": "https://cdn.imweb.me/thumbnail/20260310/ecff81352fc2e.jpg"
-        },
-        {
-          "itemId": "plate-new-007-qwertykeys-neo65-cu-보강판",
-          "itemName": "Qwertykeys NEO65 CU 보강판",
-          "score": 0.44396788348663285,
-          "description": "보강판 특성에 따라 타건 강성, 소리 성향, 바닥감이 달라지므로 사용 취향에 맞춰 조정하는 핵심 요소입니다.",
-          "summary": "Qwertykeys NEO65 CU 보강판은(는) PC 소재 플레이트입니다. 그리고 푹신한 바닥감 · 차분한 감쇠음 성향 정합이 높아 상위 추천되었습니다.",
-          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+4.2)이 어긋나 기여가 낮아집니다(-18.5).",
-          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1612",
-          "imageUrl": "https://cdn.imweb.me/thumbnail/20260119/b85bc8d74a92b.jpg"
-        }
-      ]
-    },
-    {
-      "domain": "foam",
-      "itemId": "foam-005",
-      "itemName": "스웨그키 포론 기보강 흡음재 - 텐키리스용",
-      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1572",
-      "imageUrl": "https://cdn.imweb.me/thumbnail/20251226/cf57e1862963e.png",
-      "score": 0.6123314768499957,
-      "rawCosine": 0.6123314768499957,
-      "confidence": 0.8062,
-      "summary": "스웨그키 포론 기보강 흡음재 - 텐키리스용은(는) 감쇠 강도 8/10으로 소리 정돈을 강화하는 방향입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
-      "whyTraits": [
-        "감쇠 강도 8/10으로 소리 정돈을 강화하는 방향입니다.",
-        "spacebar 위치 중심 흡음 구성입니다.",
-        "차분한 감쇠음 선호(+10.0)와 후보 특성(+7.6)이 같은 방향이라 정합 기여가 큽니다(+110.3).",
-        "푹신한 바닥감 선호(+8.0)와 후보 특성(+7.4)이 같은 방향이라 정합 기여가 큽니다(+80.0).",
-        "매끈한 타건감 선호(+5.0)와 후보 특성(+5.0)이 같은 방향이라 정합 기여가 큽니다(+25.0)."
-      ],
-      "tradeOffs": [
-        "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+3.8)이 어긋나 기여가 낮아집니다(-16.5).",
-        "구분감 있는 키감 축은 타협이 있습니다. 선호(-2.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-10.0).",
-        "단단한 바닥감 축은 타협이 있습니다. 선호(-1.0) 대비 후보 특성(+4.0)이 어긋나 기여가 낮아집니다(-4.0).",
-        "대안 포론 하부 흡음재은(는) 매끈한 타건감 측면을 더 보완하지만, 차분한 감쇠음 축 정합성이 낮아 전체 순위는 현재 후보가 앞섰습니다."
-      ],
-      "explanation": "가중 기여 축 요약: muted (+110.28); soft_bottom_out (+80.04); smooth (+25.00); light_typing_force (+20.00).",
-      "alternatives": [
-        {
-          "itemId": "foam-001",
-          "itemName": "포론 하부 흡음재",
-          "score": 0.5995776526298375,
-          "description": "통울림과 잔향을 줄여 소리를 더 정돈하고, 바닥감을 부드럽게 다듬는 데 도움이 되는 흡음재 구성입니다.",
-          "summary": "포론 하부 흡음재은(는) 감쇠 강도 8/10으로 소리 정돈을 강화하는 방향입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
-          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+3.8)이 어긋나 기여가 낮아집니다(-16.5).",
-          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=253",
-          "imageUrl": "https://cdn.imweb.me/thumbnail/20250916/17413e2972115.jpg"
-        },
-        {
-          "itemId": "foam-004",
-          "itemName": "EPDM 흡음재",
-          "score": 0.5748124307109156,
-          "description": "통울림과 잔향을 줄여 소리를 더 정돈하고, 바닥감을 부드럽게 다듬는 데 도움이 되는 흡음재 구성입니다.",
-          "summary": "EPDM 흡음재은(는) 감쇠 강도 9/10으로 소리 정돈을 강화하는 방향입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
-          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+3.2)이 어긋나 기여가 낮아집니다(-14.3).",
-          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=524",
-          "imageUrl": "https://cdn.imweb.me/thumbnail/20250916/344c36c475224.jpg"
-        }
-      ]
-    },
-    {
-      "domain": "layout",
-      "itemId": "layout-004",
-      "itemName": "Full-size",
-      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1604",
-      "imageUrl": "/layout-diagrams/full-size.svg",
-      "score": 0.40231209034805954,
-      "rawCosine": 0.40231209034805954,
-      "confidence": 0.7012,
-      "summary": "Full-size은(는) full 배열 기반 레이아웃입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
-      "whyTraits": [
-        "full 배열 기반 레이아웃입니다.",
-        "키 밀도는 9/10 수준입니다.",
-        "차분한 감쇠음 선호(+10.0)와 후보 특성(+5.6)이 같은 방향이라 정합 기여가 큽니다(+56.0).",
-        "푹신한 바닥감 선호(+8.0)와 후보 특성(+5.0)이 같은 방향이라 정합 기여가 큽니다(+40.0).",
-        "매끈한 타건감 선호(+5.0)와 후보 특성(+5.0)이 같은 방향이라 정합 기여가 큽니다(+25.0)."
-      ],
-      "tradeOffs": [
-        "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+4.5)이 어긋나 기여가 낮아집니다(-18.0).",
-        "구분감 있는 키감 축은 타협이 있습니다. 선호(-2.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-10.0).",
-        "단단한 바닥감 축은 타협이 있습니다. 선호(-1.0) 대비 후보 특성(+5.6)이 어긋나 기여가 낮아집니다(-5.9).",
-        "대안 Split 60은(는) 단단한 바닥감 측면을 더 보완하지만, 차분한 감쇠음 축 정합성이 낮아 전체 순위는 현재 후보가 앞섰습니다."
-      ],
-      "explanation": "가중 기여 축 요약: muted (+56.00); soft_bottom_out (+40.00); smooth (+25.00); light_typing_force (+22.00).",
-      "alternatives": [
-        {
-          "itemId": "layout-007",
-          "itemName": "Split 60",
-          "score": 0.3860117909856586,
-          "description": "배열 크기와 키 배치 밀도에 따라 작업 동선과 사용감이 달라지므로, 사용 목적에 맞춘 선택이 중요한 구성입니다.",
-          "summary": "Split 60은(는) split 배열 기반 레이아웃입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
-          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-20.0).",
-          "sourceUrl": "",
-          "imageUrl": "/layout-diagrams/split-60.svg"
-        },
-        {
-          "itemId": "layout-002",
-          "itemName": "65% Compact",
-          "score": 0.38619777094052743,
-          "description": "배열 크기와 키 배치 밀도에 따라 작업 동선과 사용감이 달라지므로, 사용 목적에 맞춘 선택이 중요한 구성입니다.",
-          "summary": "65% Compact은(는) 65 배열 기반 레이아웃입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
-          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-20.0).",
-          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1415",
-          "imageUrl": "/layout-diagrams/65-compact.svg"
-        }
-      ]
-    },
-    {
-      "domain": "case",
-      "itemId": "case-005",
-      "itemName": "DP104 알루미늄 커스텀 기계식 키보드",
-      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1604",
-      "imageUrl": "https://cdn.imweb.me/thumbnail/20260119/0cce5068726e4.jpeg",
-      "score": 0.4759884822841546,
-      "rawCosine": 0.4759884822841546,
-      "confidence": 0.738,
-      "summary": "DP104 알루미늄 커스텀 기계식 키보드은(는) 차분한 감쇠음 · 푹신한 바닥감 축 정합이 높아 상위 추천되었습니다.",
-      "whyTraits": [
-        "차분한 감쇠음 선호(+10.0)와 후보 특성(+6.5)이 같은 방향이라 정합 기여가 큽니다(+74.8).",
-        "푹신한 바닥감 선호(+8.0)와 후보 특성(+6.5)이 같은 방향이라 정합 기여가 큽니다(+57.2).",
-        "매끈한 타건감 선호(+5.0)와 후보 특성(+5.0)이 같은 방향이라 정합 기여가 큽니다(+25.0)."
-      ],
-      "tradeOffs": [
-        "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+2.8)이 어긋나 기여가 낮아집니다(-11.2).",
-        "구분감 있는 키감 축은 타협이 있습니다. 선호(-2.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-10.0).",
-        "단단한 바닥감 축은 타협이 있습니다. 선호(-1.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-5.2).",
-        "대안 NEO98 커스텀 기계식 키보드은(는) 단단한 바닥감 측면을 더 보완하지만, 차분한 감쇠음 축 정합성이 낮아 전체 순위는 현재 후보가 앞섰습니다."
-      ],
-      "explanation": "가중 기여 축 요약: muted (+74.75); soft_bottom_out (+57.20); smooth (+25.00); light_typing_force (+20.00).",
-      "alternatives": [
-        {
-          "itemId": "case-018",
-          "itemName": "NEO98 커스텀 기계식 키보드",
-          "score": 0.44953167276194084,
-          "description": "케이스·키트는 마운팅 방식과 재질에 따라 소리와 타건감의 기반이 되며, 레이아웃 크기와 함께 맞춰야 합니다.",
-          "summary": "NEO98 커스텀 기계식 키보드은(는) 차분한 감쇠음 · 푹신한 바닥감 축 정합이 높아 상위 추천되었습니다.",
-          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-20.0).",
-          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1748",
-          "imageUrl": "https://cdn.imweb.me/thumbnail/20260310/b8d43ccbb80dd.jpg"
-        },
-        {
-          "itemId": "case-019",
-          "itemName": "트랜지션 라이트 Alu 상부 하우징 상판",
-          "score": 0.47287042281154895,
-          "description": "파츠·하우징은 기존 빌드에 맞춰 교체·보강할 때 선택하는 케이스 구성입니다.",
-          "summary": "트랜지션 라이트 Alu 상부 하우징 상판은(는) 차분한 감쇠음 · 푹신한 바닥감 축 정합이 높아 상위 추천되었습니다.",
-          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+2.8)이 어긋나 기여가 낮아집니다(-11.2).",
-          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1392",
-          "imageUrl": "https://cdn.imweb.me/thumbnail/20251017/b8dd9ce04a801.jpg"
-        }
-      ]
-    },
-    {
-      "domain": "keycap",
-      "itemId": "kc-004",
-      "itemName": "스웨그키 Calm Beige PBT 염료승화 키캡",
-      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1489",
-      "imageUrl": "https://cdn.imweb.me/thumbnail/20251209/e11d1b0510a5f.png",
-      "score": 0.4799771737356221,
-      "rawCosine": 0.4799771737356221,
-      "confidence": 0.74,
-      "summary": "스웨그키 Calm Beige PBT 염료승화 키캡은(는) 차분한 감쇠음 · 푹신한 바닥감 축 정합이 높아 상위 추천되었습니다.",
-      "whyTraits": [
-        "차분한 감쇠음 선호(+10.0)와 후보 특성(+6.4)이 같은 방향이라 정합 기여가 큽니다(+89.6).",
-        "푹신한 바닥감 선호(+8.0)와 후보 특성(+5.0)이 같은 방향이라 정합 기여가 큽니다(+40.0).",
-        "매끈한 타건감 선호(+5.0)와 후보 특성(+5.6)이 같은 방향이라 정합 기여가 큽니다(+28.0)."
-      ],
-      "tradeOffs": [
-        "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+4.0)이 어긋나 기여가 낮아집니다(-19.2).",
-        "구분감 있는 키감 축은 타협이 있습니다. 선호(-2.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-10.0).",
-        "단단한 바닥감 축은 타협이 있습니다. 선호(-1.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-5.0).",
-        "대안 스웨그키 MOA 키보드 키캡은(는) 푹신한 바닥감 측면을 더 보완하지만, 차분한 감쇠음 축 정합성이 낮아 전체 순위는 현재 후보가 앞섰습니다."
-      ],
-      "explanation": "가중 기여 축 요약: muted (+89.60); soft_bottom_out (+40.00); smooth (+28.00); light_typing_force (+20.00).",
-      "alternatives": [
-        {
-          "itemId": "kc-006",
-          "itemName": "스웨그키 MOA 키보드 키캡",
-          "score": 0.42106634301666485,
-          "description": "키캡은 프로필·재질·각인 방식에 따라 소리 톤과 타건감이 달라지며, 레이아웃 호환도 함께 확인합니다.",
-          "summary": "스웨그키 MOA 키보드 키캡은(는) 차분한 감쇠음 · 푹신한 바닥감 축 정합이 높아 상위 추천되었습니다.",
-          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-24.0).",
-          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1720",
-          "imageUrl": "https://cdn.imweb.me/thumbnail/20260213/9e921831efab3.jpg"
-        },
-        {
-          "itemId": "kc-009",
-          "itemName": "[GB]Hammerworks CRP R7 - Base",
-          "score": 0.4123267876014801,
-          "description": "키캡은 프로필·재질·각인 방식에 따라 소리 톤과 타건감이 달라지며, 레이아웃 호환도 함께 확인합니다.",
-          "summary": "[GB]Hammerworks CRP R7 - Base은(는) 차분한 감쇠음 · 푹신한 바닥감 축 정합이 높아 상위 추천되었습니다.",
-          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-24.0).",
-          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1663",
-          "imageUrl": "https://cdn.imweb.me/thumbnail/20260209/1ca7e0f123c0c.jpg"
-        }
-      ]
-    }
-  ],
-  "matchExplanations": [
-    {
-      "domain": "switch",
-      "itemId": "sw-linear-003",
-      "itemName": "스웨그키 HMX Peach 반저소음 리니어 키보드 스위치",
-      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1765",
-      "imageUrl": "https://cdn.imweb.me/thumbnail/20260408/652e8c8c5dfd5.jpg",
-      "score": 0.6714086062065675,
-      "rawCosine": 0.6714086062065675,
-      "confidence": 0.8357,
-      "summary": "스웨그키 HMX Peach 반저소음 리니어 키보드 스위치은(는) 중간 무게의 스프링(44g) 설정입니다. 그리고 차분한 감쇠음 · 매끈한 타건감 성향 정합이 높아 상위 추천되었습니다.",
-      "whyTraits": [
-        "중간 무게의 스프링(44g) 설정입니다.",
-        "팩토리 윤활이 적용되어 마찰감을 줄인 세팅입니다.",
-        "차분한 감쇠음 선호(+10.0)와 후보 특성(+10.0)이 같은 방향이라 정합 기여가 큽니다(+105.0).",
-        "매끈한 타건감 선호(+5.0)와 후보 특성(+9.2)이 같은 방향이라 정합 기여가 큽니다(+55.2).",
-        "푹신한 바닥감 선호(+8.0)와 후보 특성(+5.9)이 같은 방향이라 정합 기여가 큽니다(+47.3)."
-      ],
-      "tradeOffs": [
-        "구분감 있는 키감 축은 타협이 있습니다. 선호(-2.0) 대비 후보 특성(+2.6)이 어긋나 기여가 낮아집니다(-7.0).",
-        "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+1.7)이 어긋나 기여가 낮아집니다(-6.8).",
-        "단단한 바닥감 축은 타협이 있습니다. 선호(-1.0) 대비 후보 특성(+4.0)이 어긋나 기여가 낮아집니다(-4.0).",
-        "대안 HMX 아주르 리니어 스위치은(는) 또렷한 고음 측면을 더 보완하지만, 매끈한 타건감 축 정합성이 낮아 전체 순위는 현재 후보가 앞섰습니다."
-      ],
-      "explanation": "가중 기여 축 요약: muted (+105.00); smooth (+55.20); soft_bottom_out (+47.26); light_typing_force (+26.03).",
-      "alternatives": [
-        {
-          "itemId": "sw-linear-016",
-          "itemName": "HMX 아주르 리니어 스위치",
-          "score": 0.6544861551822649,
-          "description": "입력이 매끈하고 반응이 빨라, 부드러운 타건감과 안정적인 복귀감을 원하는 사용자에게 잘 맞는 타입입니다.",
-          "summary": "HMX 아주르 리니어 스위치은(는) 중간 무게의 스프링(48g) 설정입니다. 그리고 차분한 감쇠음 · 매끈한 타건감 성향 정합이 높아 상위 추천되었습니다.",
-          "tradeOff": "구분감 있는 키감 축은 타협이 있습니다. 선호(-2.0) 대비 후보 특성(+2.6)이 어긋나 기여가 낮아집니다(-7.0).",
-          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=994",
-          "imageUrl": "https://cdn.imweb.me/thumbnail/20241121/0dbfb484a761d.jpg"
-        },
-        {
-          "itemId": "sw-silent-002",
-          "itemName": "WEKT Kunzite 쿤자이트 저소음 리니어 스위치",
-          "score": 0.648719373097655,
-          "description": "소음 억제가 잘 되어 조용하면서도, 일상 사용에서 부담이 적은 방향의 세팅에 적합한 타입입니다.",
-          "summary": "WEKT Kunzite 쿤자이트 저소음 리니어 스위치은(는) 가벼운 스프링(43g) 설정입니다. 그리고 차분한 감쇠음 · 매끈한 타건감 성향 정합이 높아 상위 추천되었습니다.",
-          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+3.2)이 어긋나 기여가 낮아집니다(-12.8).",
-          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1589",
-          "imageUrl": ""
-        }
-      ]
-    },
-    {
-      "domain": "plate",
-      "itemId": "plate-004",
-      "itemName": "Qwertykeys QK65 MK3 보강판",
-      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1661",
-      "imageUrl": "https://cdn.imweb.me/thumbnail/20260206/9fe53baf2c19b.jpg",
-      "score": 0.47227280643060354,
-      "rawCosine": 0.47227280643060354,
-      "confidence": 0.7361,
-      "summary": "Qwertykeys QK65 MK3 보강판은(는) FR4 소재 플레이트입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
-      "whyTraits": [
-        "FR4 소재 플레이트입니다.",
-        "플렉스 강도는 7/10 수준입니다.",
-        "차분한 감쇠음 선호(+10.0)와 후보 특성(+6.6)이 같은 방향이라 정합 기여가 큽니다(+66.0).",
-        "푹신한 바닥감 선호(+8.0)와 후보 특성(+6.8)이 같은 방향이라 정합 기여가 큽니다(+54.0).",
-        "매끈한 타건감 선호(+5.0)와 후보 특성(+5.0)이 같은 방향이라 정합 기여가 큽니다(+25.0)."
-      ],
-      "tradeOffs": [
-        "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+4.1)이 어긋나 기여가 낮아집니다(-18.0).",
-        "구분감 있는 키감 축은 타협이 있습니다. 선호(-2.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-10.0).",
-        "단단한 바닥감 축은 타협이 있습니다. 선호(-1.0) 대비 후보 특성(+4.2)이 어긋나 기여가 낮아집니다(-5.1)."
-      ],
-      "explanation": "가중 기여 축 요약: muted (+66.00); soft_bottom_out (+54.00); smooth (+25.00); light_typing_force (+20.00).",
-      "alternatives": [
-        {
-          "itemId": "plate-002",
-          "itemName": "Qwertykeys NEO75 보강판",
-          "score": 0.458928117063009,
-          "description": "보강판 특성에 따라 타건 강성, 소리 성향, 바닥감이 달라지므로 사용 취향에 맞춰 조정하는 핵심 요소입니다.",
-          "summary": "Qwertykeys NEO75 보강판은(는) FR4 소재 플레이트입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
-          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+4.1)이 어긋나 기여가 낮아집니다(-18.0).",
-          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1749",
-          "imageUrl": "https://cdn.imweb.me/thumbnail/20260310/ecff81352fc2e.jpg"
-        },
-        {
-          "itemId": "plate-new-007-qwertykeys-neo65-cu-보강판",
-          "itemName": "Qwertykeys NEO65 CU 보강판",
-          "score": 0.44396788348663285,
-          "description": "보강판 특성에 따라 타건 강성, 소리 성향, 바닥감이 달라지므로 사용 취향에 맞춰 조정하는 핵심 요소입니다.",
-          "summary": "Qwertykeys NEO65 CU 보강판은(는) PC 소재 플레이트입니다. 그리고 푹신한 바닥감 · 차분한 감쇠음 성향 정합이 높아 상위 추천되었습니다.",
-          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+4.2)이 어긋나 기여가 낮아집니다(-18.5).",
-          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1612",
-          "imageUrl": "https://cdn.imweb.me/thumbnail/20260119/b85bc8d74a92b.jpg"
-        }
-      ]
-    },
-    {
-      "domain": "foam",
-      "itemId": "foam-005",
-      "itemName": "스웨그키 포론 기보강 흡음재 - 텐키리스용",
-      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1572",
-      "imageUrl": "https://cdn.imweb.me/thumbnail/20251226/cf57e1862963e.png",
-      "score": 0.6123314768499957,
-      "rawCosine": 0.6123314768499957,
-      "confidence": 0.8062,
-      "summary": "스웨그키 포론 기보강 흡음재 - 텐키리스용은(는) 감쇠 강도 8/10으로 소리 정돈을 강화하는 방향입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
-      "whyTraits": [
-        "감쇠 강도 8/10으로 소리 정돈을 강화하는 방향입니다.",
-        "spacebar 위치 중심 흡음 구성입니다.",
-        "차분한 감쇠음 선호(+10.0)와 후보 특성(+7.6)이 같은 방향이라 정합 기여가 큽니다(+110.3).",
-        "푹신한 바닥감 선호(+8.0)와 후보 특성(+7.4)이 같은 방향이라 정합 기여가 큽니다(+80.0).",
-        "매끈한 타건감 선호(+5.0)와 후보 특성(+5.0)이 같은 방향이라 정합 기여가 큽니다(+25.0)."
-      ],
-      "tradeOffs": [
-        "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+3.8)이 어긋나 기여가 낮아집니다(-16.5).",
-        "구분감 있는 키감 축은 타협이 있습니다. 선호(-2.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-10.0).",
-        "단단한 바닥감 축은 타협이 있습니다. 선호(-1.0) 대비 후보 특성(+4.0)이 어긋나 기여가 낮아집니다(-4.0).",
-        "대안 포론 하부 흡음재은(는) 매끈한 타건감 측면을 더 보완하지만, 차분한 감쇠음 축 정합성이 낮아 전체 순위는 현재 후보가 앞섰습니다."
-      ],
-      "explanation": "가중 기여 축 요약: muted (+110.28); soft_bottom_out (+80.04); smooth (+25.00); light_typing_force (+20.00).",
-      "alternatives": [
-        {
-          "itemId": "foam-001",
-          "itemName": "포론 하부 흡음재",
-          "score": 0.5995776526298375,
-          "description": "통울림과 잔향을 줄여 소리를 더 정돈하고, 바닥감을 부드럽게 다듬는 데 도움이 되는 흡음재 구성입니다.",
-          "summary": "포론 하부 흡음재은(는) 감쇠 강도 8/10으로 소리 정돈을 강화하는 방향입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
-          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+3.8)이 어긋나 기여가 낮아집니다(-16.5).",
-          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=253",
-          "imageUrl": "https://cdn.imweb.me/thumbnail/20250916/17413e2972115.jpg"
-        },
-        {
-          "itemId": "foam-004",
-          "itemName": "EPDM 흡음재",
-          "score": 0.5748124307109156,
-          "description": "통울림과 잔향을 줄여 소리를 더 정돈하고, 바닥감을 부드럽게 다듬는 데 도움이 되는 흡음재 구성입니다.",
-          "summary": "EPDM 흡음재은(는) 감쇠 강도 9/10으로 소리 정돈을 강화하는 방향입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
-          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+3.2)이 어긋나 기여가 낮아집니다(-14.3).",
-          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=524",
-          "imageUrl": "https://cdn.imweb.me/thumbnail/20250916/344c36c475224.jpg"
-        }
-      ]
-    },
-    {
-      "domain": "layout",
-      "itemId": "layout-004",
-      "itemName": "Full-size",
-      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1604",
-      "imageUrl": "/layout-diagrams/full-size.svg",
-      "score": 0.40231209034805954,
-      "rawCosine": 0.40231209034805954,
-      "confidence": 0.7012,
-      "summary": "Full-size은(는) full 배열 기반 레이아웃입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
-      "whyTraits": [
-        "full 배열 기반 레이아웃입니다.",
-        "키 밀도는 9/10 수준입니다.",
-        "차분한 감쇠음 선호(+10.0)와 후보 특성(+5.6)이 같은 방향이라 정합 기여가 큽니다(+56.0).",
-        "푹신한 바닥감 선호(+8.0)와 후보 특성(+5.0)이 같은 방향이라 정합 기여가 큽니다(+40.0).",
-        "매끈한 타건감 선호(+5.0)와 후보 특성(+5.0)이 같은 방향이라 정합 기여가 큽니다(+25.0)."
-      ],
-      "tradeOffs": [
-        "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+4.5)이 어긋나 기여가 낮아집니다(-18.0).",
-        "구분감 있는 키감 축은 타협이 있습니다. 선호(-2.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-10.0).",
-        "단단한 바닥감 축은 타협이 있습니다. 선호(-1.0) 대비 후보 특성(+5.6)이 어긋나 기여가 낮아집니다(-5.9).",
-        "대안 Split 60은(는) 단단한 바닥감 측면을 더 보완하지만, 차분한 감쇠음 축 정합성이 낮아 전체 순위는 현재 후보가 앞섰습니다."
-      ],
-      "explanation": "가중 기여 축 요약: muted (+56.00); soft_bottom_out (+40.00); smooth (+25.00); light_typing_force (+22.00).",
-      "alternatives": [
-        {
-          "itemId": "layout-007",
-          "itemName": "Split 60",
-          "score": 0.3860117909856586,
-          "description": "배열 크기와 키 배치 밀도에 따라 작업 동선과 사용감이 달라지므로, 사용 목적에 맞춘 선택이 중요한 구성입니다.",
-          "summary": "Split 60은(는) split 배열 기반 레이아웃입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
-          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-20.0).",
-          "sourceUrl": "",
-          "imageUrl": "/layout-diagrams/split-60.svg"
-        },
-        {
-          "itemId": "layout-002",
-          "itemName": "65% Compact",
-          "score": 0.38619777094052743,
-          "description": "배열 크기와 키 배치 밀도에 따라 작업 동선과 사용감이 달라지므로, 사용 목적에 맞춘 선택이 중요한 구성입니다.",
-          "summary": "65% Compact은(는) 65 배열 기반 레이아웃입니다. 그리고 차분한 감쇠음 · 푹신한 바닥감 성향 정합이 높아 상위 추천되었습니다.",
-          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-20.0).",
-          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1415",
-          "imageUrl": "/layout-diagrams/65-compact.svg"
-        }
-      ]
-    },
-    {
-      "domain": "case",
-      "itemId": "case-005",
-      "itemName": "DP104 알루미늄 커스텀 기계식 키보드",
-      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1604",
-      "imageUrl": "https://cdn.imweb.me/thumbnail/20260119/0cce5068726e4.jpeg",
-      "score": 0.4759884822841546,
-      "rawCosine": 0.4759884822841546,
-      "confidence": 0.738,
-      "summary": "DP104 알루미늄 커스텀 기계식 키보드은(는) 차분한 감쇠음 · 푹신한 바닥감 축 정합이 높아 상위 추천되었습니다.",
-      "whyTraits": [
-        "차분한 감쇠음 선호(+10.0)와 후보 특성(+6.5)이 같은 방향이라 정합 기여가 큽니다(+74.8).",
-        "푹신한 바닥감 선호(+8.0)와 후보 특성(+6.5)이 같은 방향이라 정합 기여가 큽니다(+57.2).",
-        "매끈한 타건감 선호(+5.0)와 후보 특성(+5.0)이 같은 방향이라 정합 기여가 큽니다(+25.0)."
-      ],
-      "tradeOffs": [
-        "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+2.8)이 어긋나 기여가 낮아집니다(-11.2).",
-        "구분감 있는 키감 축은 타협이 있습니다. 선호(-2.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-10.0).",
-        "단단한 바닥감 축은 타협이 있습니다. 선호(-1.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-5.2).",
-        "대안 NEO98 커스텀 기계식 키보드은(는) 단단한 바닥감 측면을 더 보완하지만, 차분한 감쇠음 축 정합성이 낮아 전체 순위는 현재 후보가 앞섰습니다."
-      ],
-      "explanation": "가중 기여 축 요약: muted (+74.75); soft_bottom_out (+57.20); smooth (+25.00); light_typing_force (+20.00).",
-      "alternatives": [
-        {
-          "itemId": "case-018",
-          "itemName": "NEO98 커스텀 기계식 키보드",
-          "score": 0.44953167276194084,
-          "description": "케이스·키트는 마운팅 방식과 재질에 따라 소리와 타건감의 기반이 되며, 레이아웃 크기와 함께 맞춰야 합니다.",
-          "summary": "NEO98 커스텀 기계식 키보드은(는) 차분한 감쇠음 · 푹신한 바닥감 축 정합이 높아 상위 추천되었습니다.",
-          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-20.0).",
-          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1748",
-          "imageUrl": "https://cdn.imweb.me/thumbnail/20260310/b8d43ccbb80dd.jpg"
-        },
-        {
-          "itemId": "case-019",
-          "itemName": "트랜지션 라이트 Alu 상부 하우징 상판",
-          "score": 0.47287042281154895,
-          "description": "파츠·하우징은 기존 빌드에 맞춰 교체·보강할 때 선택하는 케이스 구성입니다.",
-          "summary": "트랜지션 라이트 Alu 상부 하우징 상판은(는) 차분한 감쇠음 · 푹신한 바닥감 축 정합이 높아 상위 추천되었습니다.",
-          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+2.8)이 어긋나 기여가 낮아집니다(-11.2).",
-          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1392",
-          "imageUrl": "https://cdn.imweb.me/thumbnail/20251017/b8dd9ce04a801.jpg"
-        }
-      ]
-    },
-    {
-      "domain": "keycap",
-      "itemId": "kc-004",
-      "itemName": "스웨그키 Calm Beige PBT 염료승화 키캡",
-      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1489",
-      "imageUrl": "https://cdn.imweb.me/thumbnail/20251209/e11d1b0510a5f.png",
-      "score": 0.4799771737356221,
-      "rawCosine": 0.4799771737356221,
-      "confidence": 0.74,
-      "summary": "스웨그키 Calm Beige PBT 염료승화 키캡은(는) 차분한 감쇠음 · 푹신한 바닥감 축 정합이 높아 상위 추천되었습니다.",
-      "whyTraits": [
-        "차분한 감쇠음 선호(+10.0)와 후보 특성(+6.4)이 같은 방향이라 정합 기여가 큽니다(+89.6).",
-        "푹신한 바닥감 선호(+8.0)와 후보 특성(+5.0)이 같은 방향이라 정합 기여가 큽니다(+40.0).",
-        "매끈한 타건감 선호(+5.0)와 후보 특성(+5.6)이 같은 방향이라 정합 기여가 큽니다(+28.0)."
-      ],
-      "tradeOffs": [
-        "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+4.0)이 어긋나 기여가 낮아집니다(-19.2).",
-        "구분감 있는 키감 축은 타협이 있습니다. 선호(-2.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-10.0).",
-        "단단한 바닥감 축은 타협이 있습니다. 선호(-1.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-5.0).",
-        "대안 스웨그키 MOA 키보드 키캡은(는) 푹신한 바닥감 측면을 더 보완하지만, 차분한 감쇠음 축 정합성이 낮아 전체 순위는 현재 후보가 앞섰습니다."
-      ],
-      "explanation": "가중 기여 축 요약: muted (+89.60); soft_bottom_out (+40.00); smooth (+28.00); light_typing_force (+20.00).",
-      "alternatives": [
-        {
-          "itemId": "kc-006",
-          "itemName": "스웨그키 MOA 키보드 키캡",
-          "score": 0.42106634301666485,
-          "description": "키캡은 프로필·재질·각인 방식에 따라 소리 톤과 타건감이 달라지며, 레이아웃 호환도 함께 확인합니다.",
-          "summary": "스웨그키 MOA 키보드 키캡은(는) 차분한 감쇠음 · 푹신한 바닥감 축 정합이 높아 상위 추천되었습니다.",
-          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-24.0).",
-          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1720",
-          "imageUrl": "https://cdn.imweb.me/thumbnail/20260213/9e921831efab3.jpg"
-        },
-        {
-          "itemId": "kc-009",
-          "itemName": "[GB]Hammerworks CRP R7 - Base",
-          "score": 0.4123267876014801,
-          "description": "키캡은 프로필·재질·각인 방식에 따라 소리 톤과 타건감이 달라지며, 레이아웃 호환도 함께 확인합니다.",
-          "summary": "[GB]Hammerworks CRP R7 - Base은(는) 차분한 감쇠음 · 푹신한 바닥감 축 정합이 높아 상위 추천되었습니다.",
-          "tradeOff": "또렷한 고음 축은 타협이 있습니다. 선호(-4.0) 대비 후보 특성(+5.0)이 어긋나 기여가 낮아집니다(-24.0).",
-          "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1663",
-          "imageUrl": "https://cdn.imweb.me/thumbnail/20260209/1ca7e0f123c0c.jpg"
-        }
-      ]
-    }
-  ],
-  "overallConfidence": 0.7595,
-  "build": {
-    "id": "engine-sw-linear-003-plate-004-case-005-kc-004",
-    "title": "추천 조합: 묵직한 저음 중심 (Thocky) · 매끈한 키감 (Linear)",
-    "tagline": "다축 취향 프로필의 가중 유사도를 기반으로 추천된 조합입니다. (스위치, 플레이트, 폼, 레이아웃, 케이스/키트, 키캡에 동일한 성향 축을 적용)",
-    "switches": "스웨그키 HMX Peach 반저소음 리니어 키보드 스위치 — 입력이 매끈하고 반응이 빨라, 부드러운 타건감과 안정적인 복귀감을 원하는 사용자에게 잘 맞는 타입입니다.",
-    "plate": "Qwertykeys QK65 MK3 보강판 — 보강판 특성에 따라 타건 강성, 소리 성향, 바닥감이 달라지므로 사용 취향에 맞춰 조정하는 핵심 요소입니다.",
-    "foam": "스웨그키 포론 기보강 흡음재 - 텐키리스용 — 통울림과 잔향을 줄여 소리를 더 정돈하고, 바닥감을 부드럽게 다듬는 데 도움이 되는 흡음재 구성입니다.",
-    "layout": "Full-size — 배열 크기와 키 배치 밀도에 따라 작업 동선과 사용감이 달라지므로, 사용 목적에 맞춘 선택이 중요한 구성입니다.",
-    "case": "DP104 알루미늄 커스텀 기계식 키보드 — 케이스·키트는 마운팅 방식과 재질에 따라 소리와 타건감의 기반이 되며, 레이아웃 크기와 함께 맞춰야 합니다.",
-    "keycap": "스웨그키 Calm Beige PBT 염료승화 키캡 — 키캡은 프로필·재질·각인 방식에 따라 소리 톤과 타건감이 달라지며, 레이아웃 호환도 함께 확인합니다.",
-    "highlights": [
-      "추천 엔진 v2 — 스위치 0.671 (스웨그키 HMX Peach 반저소음 리니어 키보드 스위치)",
-      "플레이트 0.472 · 폼 0.612 · 레이아웃 0.402 · 케이스 0.476 · 키캡 0.480",
-      "주요 성향 축: deep_sound 1.5, muted 10.0, soft_bottom_out 8.0, smooth 5.0",
-      "다양성 재정렬: 성향 다양성을 위해 대안 후보 순서를 조정했습니다. (1순위는 유지)",
-      "추천 신뢰도: high (79%)"
-    ],
-    "engineScores": {
-      "switchId": "sw-linear-003",
-      "plateId": "plate-004",
-      "foamId": "foam-005",
-      "layoutId": "layout-004",
-      "caseId": "case-005",
-      "keycapId": "kc-004",
-      "switchScore": 0.6714086062065675,
-      "plateScore": 0.47227280643060354,
-      "foamScore": 0.6123314768499957,
-      "layoutScore": 0.40231209034805954,
-      "caseScore": 0.4759884822841546,
-      "keycapScore": 0.4799771737356221
-    },
-    "sourceUrls": {
-      "switch": "https://www.swagkey.kr/shop_view/?idx=1765",
-      "plate": "https://www.swagkey.kr/shop_view/?idx=1661",
-      "foam": "https://www.swagkey.kr/shop_view/?idx=1572",
-      "layout": "https://www.swagkey.kr/shop_view/?idx=1604",
-      "case": "https://www.swagkey.kr/shop_view/?idx=1604",
-      "keycap": "https://www.swagkey.kr/shop_view/?idx=1489"
-    }
+  "userTraitScores": {
+    "deep_sound": 1.5,
+    "firm_bottom_out": -1.0,
+    "flexible": 0.0,
+    "high_pitch": -4.0,
+    "light_typing_force": 4.0,
+    "marbly": 0.0,
+    "muted": 10.0,
+    "poppy": 0.0,
+    "scratchy": 0.0,
+    "smooth": 5.0,
+    "soft_bottom_out": 8.0,
+    "stiff": 0.0,
+    "strong_tactile": -2.0
   },
-  "nlPreferenceAnalysis": {
-    "applied": false,
-    "normalizedText": "",
-    "parsingConfidence": 0.0,
-    "matchedTermIds": [],
-    "unknownTokens": [],
-    "warnings": []
-  },
-  "compatibilityAudit": {
-    "intentMultiplier": 1.0,
-    "rawPenaltyTotal": 0.0,
-    "effectivePenaltyTotal": 0.0,
-    "lines": [],
-    "hasHardIncompatibility": false,
-    "hardIncompatibilityCount": 0,
-    "softPenaltyCount": 0,
-    "warningCount": 0,
-    "summaryLines": []
-  },
-  "diversityAudit": {
-    "families": [
-      {
-        "family": "switch",
-        "originalOrderIds": [
-          "sw-linear-003",
-          "sw-linear-012",
-          "sw-linear-016",
-          "sw-linear-008",
-          "sw-silent-002"
-        ],
-        "rerankedOrderIds": [
-          "sw-linear-003",
-          "sw-linear-016",
-          "sw-silent-002",
-          "sw-linear-012",
-          "sw-linear-008"
-        ],
-        "notes": [
-          "diversity_hook:rank2_trait_distance_to_winner",
-          "diversity_reorder:applied"
-        ]
-      },
-      {
-        "family": "plate",
-        "originalOrderIds": [
-          "plate-004",
-          "plate-002",
-          "plate-new-003-mm-studio-class-100-전용-보강판",
-          "plate-new-004-neo65-core-plus-보강판",
-          "plate-new-007-qwertykeys-neo65-cu-보강판"
-        ],
-        "rerankedOrderIds": [
-          "plate-004",
-          "plate-002",
-          "plate-new-007-qwertykeys-neo65-cu-보강판",
-          "plate-new-004-neo65-core-plus-보강판",
-          "plate-new-003-mm-studio-class-100-전용-보강판"
-        ],
-        "notes": [
-          "diversity_hook:rank2_trait_distance_to_winner",
-          "diversity_reorder:applied"
-        ]
-      },
-      {
-        "family": "foam",
-        "originalOrderIds": [
-          "foam-005",
-          "foam-001",
-          "foam-004",
-          "foam-new-003-스웨그키-포론-기보강-흡음재-60배열용",
-          "foam-002"
-        ],
-        "rerankedOrderIds": [
-          "foam-005",
-          "foam-001",
-          "foam-004",
-          "foam-new-003-스웨그키-포론-기보강-흡음재-60배열용",
-          "foam-002"
-        ],
-        "notes": [
-          "diversity_hook:rank2_trait_distance_to_winner",
-          "diversity_reorder:no_change"
-        ]
-      },
-      {
-        "family": "layout",
-        "originalOrderIds": [
-          "layout-003",
-          "layout-004",
-          "layout-002",
-          "layout-007",
-          "layout-006"
-        ],
-        "rerankedOrderIds": [
-          "layout-004",
-          "layout-007",
-          "layout-002",
-          "layout-003",
-          "layout-006"
-        ],
-        "notes": [
-          "diversity_hook:rank2_trait_distance_to_winner",
-          "diversity_reorder:applied"
-        ]
-      },
-      {
-        "family": "case",
-        "originalOrderIds": [
-          "case-005",
-          "case-019",
-          "case-004",
-          "case-010",
-          "case-018"
-        ],
-        "rerankedOrderIds": [
-          "case-005",
-          "case-018",
-          "case-019",
-          "case-010",
-          "case-004"
-        ],
-        "notes": [
-          "diversity_hook:rank2_trait_distance_to_winner",
-          "diversity_reorder:applied"
-        ]
-      },
-      {
-        "family": "keycap",
-        "originalOrderIds": [
-          "kc-004",
-          "kc-008",
-          "kc-013",
-          "kc-006",
-          "kc-009"
-        ],
-        "rerankedOrderIds": [
-          "kc-004",
-          "kc-006",
-          "kc-009",
-          "kc-013",
-          "kc-008"
-        ],
-        "notes": [
-          "diversity_hook:rank2_trait_distance_to_winner",
-          "diversity_reorder:applied"
-        ]
-      }
-    ]
-  },
-  "fallbackAudit": {
-    "recovered": false,
-    "tier": 0,
-    "compatibilityRelaxMult": 1.0,
-    "diversityStrengthMult": 1.0,
-    "triggers": [],
-    "confidenceBefore": 0.815,
-    "confidenceAfter": 0.7916,
-    "overallLabel": "high",
-    "notes": [
-      "fallback_hook:quality_accepted"
-    ]
-  },
-  "recommendationConfidence": {
-    "overall": 0.7916,
-    "similarityComponent": 0.7595,
-    "compatibilityComponent": 1.0,
-    "diversityDistortionComponent": 0.7083,
-    "fallbackTier": 0,
-    "label": "high",
-    "hooks": [
-      "confidence:similarity=0.760",
-      "confidence:compatibility_headroom=1.000",
-      "confidence:diversity_distortion_index=0.833",
-      "confidence:label=high"
-    ]
-  },
-  "confidenceGuidance": null
+  "userVector": {
+    "clacky": -4.0,
+    "deep_sound": 3.0,
+    "firm": -1.0,
+    "smooth": 6.2,
+    "soft": 12.1,
+    "tactile_strength": -2.25
+  }
 }

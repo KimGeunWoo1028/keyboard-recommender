@@ -10,7 +10,7 @@ from keyboard_recommender.catalog.swagkey_catalog_regression import validate_swa
 _BACKEND = Path(__file__).resolve().parents[1]
 _SEED = _BACKEND / "src" / "keyboard_recommender" / "catalog" / "swagkey_products.seed.json"
 _MANIFEST = _BACKEND / "data" / "catalog_ingestion_manifest.json"
-_MERGED_COUNTS = {"switch": 68, "plate": 20, "foam": 10, "layout": 45, "case": 126, "keycap": 62}
+_MERGED_COUNTS = {"switch": 66, "plate": 20, "foam": 10, "layout": 45, "case": 126, "keycap": 62}
 
 
 def test_swagkey_catalog_ingestion_validates_seed() -> None:

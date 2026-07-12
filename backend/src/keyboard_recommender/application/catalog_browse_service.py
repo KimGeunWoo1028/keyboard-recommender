@@ -11,6 +11,7 @@ from keyboard_recommender.catalog.catalog_seed_images import resolve_seed_row_im
 from keyboard_recommender.catalog.catalog_browse_policy import (
     apply_browse_list_policy,
     is_browse_listable_part,
+    is_browse_listed_seed_row,
     is_layout_archetype_part_id,
     sanitize_layout_browse_detail,
 )
@@ -264,6 +265,7 @@ def list_catalog_parts(
             r
             for r in rows
             if is_browse_listable_part("case", str(r.get("id") or ""), str(r.get("sourceUrl") or ""))
+            and is_browse_listed_seed_row(r)
         ]
         summaries = [_case_row_to_summary(r) for r in rows]
         summaries = apply_browse_list_policy("case", summaries)
@@ -295,6 +297,7 @@ def list_catalog_parts(
             p.id,
             str(_seed_row(family, p.id).get("sourceUrl") or _seed_row(family, p.id).get("source_url") or ""),
         )
+        and is_browse_listed_seed_row(_seed_row(family, p.id))
     ]
     summaries = [part_to_summary(p, seed_row=_seed_row(family, p.id)) for p in parts]
     summaries = apply_browse_list_policy(family, summaries)
@@ -335,6 +338,8 @@ def get_catalog_part(family: CatalogFamily, part_id: str) -> CatalogPartDetail |
             if str(row.get("id") or "") == needle:
                 if not is_browse_listable_part("case", needle, str(row.get("sourceUrl") or "")):
                     return None
+                if not is_browse_listed_seed_row(row):
+                    return None
                 return _case_row_to_detail(row)
         return None
     for part in _FAMILY_PARTS.get(family, []):
@@ -345,6 +350,8 @@ def get_catalog_part(family: CatalogFamily, part_id: str) -> CatalogPartDetail |
                 needle,
                 str(row.get("sourceUrl") or row.get("source_url") or ""),
             ):
+                return None
+            if not is_browse_listed_seed_row(row):
                 return None
             detail = part_to_detail(part, seed_row=row)
             if family == "layout" and is_layout_archetype_part_id(needle):

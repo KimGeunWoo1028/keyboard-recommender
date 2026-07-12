@@ -1,15 +1,15 @@
 Swagkey catalog regression (step ⑥) report
-generated: 2026-07-11T17:34:00.945884+00:00
+generated: 2026-07-12T07:37:32.437944+00:00
 seed: C:/Users/jeung/keyboard-recommender/backend/src/keyboard_recommender/catalog/swagkey_products.seed.json
 
-extracted: 331
+extracted: 329
 validation errors: 0
-validation warnings: 25
-diff: +0 ~331 -0
+validation warnings: 24
+diff: +0 ~329 -0
 published: False
 
 seed counts:
-  switch: 68
+  switch: 66
   plate: 20
   foam: 10
   layout: 45
@@ -18,10 +18,10 @@ seed counts:
 
 ingestion summary:
   sources detected: 1
-  records extracted: 331
-  records normalized: 331
+  records extracted: 329
+  records normalized: 329
   validation errors: 0
-  validation warnings: 25
-  changes: +0 ~331 -0
+  validation warnings: 24
+  changes: +0 ~329 -0
   publish skipped: review required and not approved
-  seed counts: switch=68 plate=20 foam=10 layout=45 case=126 keycap=62
+  seed counts: switch=66 plate=20 foam=10 layout=45 case=126 keycap=62

@@ -1,25 +1,25 @@
 {
   "schemaVersion": "1.2.0",
   "kind": "swagkey_catalog_change_alert",
-  "generatedAt": "2026-07-12T02:43:00+00:00",
+  "generatedAt": "2026-07-12T07:37:29+00:00",
   "source": {
     "seedPath": "C:/Users/jeung/keyboard-recommender/backend/src/keyboard_recommender/catalog/swagkey_products.seed.json",
     "candidatesPath": "C:/Users/jeung/keyboard-recommender/backend/data/swagkey_inventory/recommender_candidates.json",
-    "diffGeneratedAt": "2026-07-11T17:26:00.090250+00:00"
+    "diffGeneratedAt": "2026-07-12T07:32:48.417784+00:00"
   },
   "counts": {
-    "matched": 106,
+    "matched": 107,
     "newInCrawl": 0,
-    "possiblyDiscontinued": 36,
-    "nameChanged": 1,
+    "possiblyDiscontinued": 34,
+    "nameChanged": 0,
     "imageUrlChanged": 0,
     "browseMergeCandidates": 0,
-    "informationalTotal": 22,
-    "blockingAlertTotal": 15,
-    "alertTotal": 15
+    "informationalTotal": 34,
+    "blockingAlertTotal": 0,
+    "alertTotal": 0
   },
   "hasAlerts": true,
-  "hasBlockingAlerts": true,
+  "hasBlockingAlerts": false,
   "newInCrawl": [],
   "browseMergeCandidates": [],
   "possiblyDiscontinued": [
@@ -30,8 +30,8 @@
       "crawlId": null,
       "crawlName": null,
       "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
+      "alertTier": "informational",
+      "recommendationEligible": false
     },
     {
       "family": "layout",
@@ -260,18 +260,8 @@
       "crawlId": null,
       "crawlName": null,
       "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
-    },
-    {
-      "family": "switch",
-      "seedId": "sw-tactile-003",
-      "seedName": "Cherry MX2A 비윤활 갈축 키보드 스위치 - 450개 벌크",
-      "crawlId": null,
-      "crawlName": null,
-      "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
+      "alertTier": "informational",
+      "recommendationEligible": false
     },
     {
       "family": "switch",
@@ -280,8 +270,8 @@
       "crawlId": null,
       "crawlName": null,
       "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
+      "alertTier": "informational",
+      "recommendationEligible": false
     },
     {
       "family": "switch",
@@ -290,8 +280,8 @@
       "crawlId": null,
       "crawlName": null,
       "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
+      "alertTier": "informational",
+      "recommendationEligible": false
     },
     {
       "family": "switch",
@@ -300,8 +290,8 @@
       "crawlId": null,
       "crawlName": null,
       "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
+      "alertTier": "informational",
+      "recommendationEligible": false
     },
     {
       "family": "switch",
@@ -310,8 +300,8 @@
       "crawlId": null,
       "crawlName": null,
       "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
+      "alertTier": "informational",
+      "recommendationEligible": false
     },
     {
       "family": "switch",
@@ -320,18 +310,8 @@
       "crawlId": null,
       "crawlName": null,
       "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
-    },
-    {
-      "family": "switch",
-      "seedId": "sw-silent-003",
-      "seedName": "TTC 피넛 라떼 저소음 택타일 스위치",
-      "crawlId": null,
-      "crawlName": null,
-      "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
+      "alertTier": "informational",
+      "recommendationEligible": false
     },
     {
       "family": "switch",
@@ -340,8 +320,8 @@
       "crawlId": null,
       "crawlName": null,
       "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
+      "alertTier": "informational",
+      "recommendationEligible": false
     },
     {
       "family": "switch",
@@ -350,8 +330,8 @@
       "crawlId": null,
       "crawlName": null,
       "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
+      "alertTier": "informational",
+      "recommendationEligible": false
     },
     {
       "family": "switch",
@@ -360,8 +340,8 @@
       "crawlId": null,
       "crawlName": null,
       "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
+      "alertTier": "informational",
+      "recommendationEligible": false
     },
     {
       "family": "switch",
@@ -370,8 +350,8 @@
       "crawlId": null,
       "crawlName": null,
       "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
+      "alertTier": "informational",
+      "recommendationEligible": false
     },
     {
       "family": "switch",
@@ -380,11 +360,12 @@
       "crawlId": null,
       "crawlName": null,
       "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
+      "alertTier": "informational",
+      "recommendationEligible": false
     }
   ],
-  "blockingPossiblyDiscontinued": [
+  "blockingPossiblyDiscontinued": [],
+  "informationalPossiblyDiscontinued": [
     {
       "family": "foam",
       "seedId": "foam-005",
@@ -392,141 +373,9 @@
       "crawlId": null,
       "crawlName": null,
       "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
+      "alertTier": "informational",
+      "recommendationEligible": false
     },
-    {
-      "family": "switch",
-      "seedId": "sw-other-005",
-      "seedName": "Bsun 민트 키보드 스위치",
-      "crawlId": null,
-      "crawlName": null,
-      "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
-    },
-    {
-      "family": "switch",
-      "seedId": "sw-tactile-003",
-      "seedName": "Cherry MX2A 비윤활 갈축 키보드 스위치 - 450개 벌크",
-      "crawlId": null,
-      "crawlName": null,
-      "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
-    },
-    {
-      "family": "switch",
-      "seedId": "sw-linear-006",
-      "seedName": "Gateron X 리니어 스위치",
-      "crawlId": null,
-      "crawlName": null,
-      "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
-    },
-    {
-      "family": "switch",
-      "seedId": "sw-other-016",
-      "seedName": "HMX 망고 푸딩 키보드 스위치",
-      "crawlId": null,
-      "crawlName": null,
-      "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
-    },
-    {
-      "family": "switch",
-      "seedId": "sw-other-021",
-      "seedName": "Haimu 바다살구 스위치",
-      "crawlId": null,
-      "crawlName": null,
-      "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
-    },
-    {
-      "family": "switch",
-      "seedId": "sw-other-020",
-      "seedName": "SW x 게이트론 onyx : UHMWPE 스위치",
-      "crawlId": null,
-      "crawlName": null,
-      "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
-    },
-    {
-      "family": "switch",
-      "seedId": "sw-other-011",
-      "seedName": "SW 코코블랙 키보드 스위치",
-      "crawlId": null,
-      "crawlName": null,
-      "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
-    },
-    {
-      "family": "switch",
-      "seedId": "sw-silent-003",
-      "seedName": "TTC 피넛 라떼 저소음 택타일 스위치",
-      "crawlId": null,
-      "crawlName": null,
-      "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
-    },
-    {
-      "family": "switch",
-      "seedId": "sw-other-003",
-      "seedName": "Tecsee x SW Flow Black 기계식 키보드 스위치",
-      "crawlId": null,
-      "crawlName": null,
-      "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
-    },
-    {
-      "family": "switch",
-      "seedId": "sw-silent-002",
-      "seedName": "WEKT Kunzite 쿤자이트 저소음 리니어 스위치",
-      "crawlId": null,
-      "crawlName": null,
-      "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
-    },
-    {
-      "family": "switch",
-      "seedId": "sw-silent-004",
-      "seedName": "오테뮤 크림 옐로우 저소음 키보드 스위치 스웨그키",
-      "crawlId": null,
-      "crawlName": null,
-      "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
-    },
-    {
-      "family": "switch",
-      "seedId": "sw-other-008",
-      "seedName": "체리 MX 3핀 키보드 스위치",
-      "crawlId": null,
-      "crawlName": null,
-      "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
-    },
-    {
-      "family": "switch",
-      "seedId": "sw-other-006",
-      "seedName": "체리 MX RGB 키보드 스위치",
-      "crawlId": null,
-      "crawlName": null,
-      "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
-    }
-  ],
-  "informationalPossiblyDiscontinued": [
     {
       "family": "layout",
       "seedId": "layout-001",
@@ -746,32 +595,120 @@
       "similarity": 0.0,
       "alertTier": "informational",
       "recommendationEligible": false
-    }
-  ],
-  "nameChanged": [
+    },
     {
       "family": "switch",
-      "seedId": "sw-linear-003",
-      "seedName": "스웨그키 HMX Peach 반저소음 리니어 키보드 스위치",
-      "crawlId": "inv-0085",
-      "crawlName": "스웨그키 HMX Peach 피치 반저소음 리니어 키보드 스위치",
-      "similarity": 0.9545,
-      "alertTier": "blocking",
-      "recommendationEligible": true
-    }
-  ],
-  "blockingNameChanged": [
+      "seedId": "sw-other-005",
+      "seedName": "Bsun 민트 키보드 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
     {
       "family": "switch",
-      "seedId": "sw-linear-003",
-      "seedName": "스웨그키 HMX Peach 반저소음 리니어 키보드 스위치",
-      "crawlId": "inv-0085",
-      "crawlName": "스웨그키 HMX Peach 피치 반저소음 리니어 키보드 스위치",
-      "similarity": 0.9545,
-      "alertTier": "blocking",
-      "recommendationEligible": true
+      "seedId": "sw-linear-006",
+      "seedName": "Gateron X 리니어 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-016",
+      "seedName": "HMX 망고 푸딩 키보드 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-021",
+      "seedName": "Haimu 바다살구 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-020",
+      "seedName": "SW x 게이트론 onyx : UHMWPE 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-011",
+      "seedName": "SW 코코블랙 키보드 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-003",
+      "seedName": "Tecsee x SW Flow Black 기계식 키보드 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-silent-002",
+      "seedName": "WEKT Kunzite 쿤자이트 저소음 리니어 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-silent-004",
+      "seedName": "오테뮤 크림 옐로우 저소음 키보드 스위치 스웨그키",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-008",
+      "seedName": "체리 MX 3핀 키보드 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
+    },
+    {
+      "family": "switch",
+      "seedId": "sw-other-006",
+      "seedName": "체리 MX RGB 키보드 스위치",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": false
     }
   ],
+  "nameChanged": [],
+  "blockingNameChanged": [],
   "informationalNameChanged": [],
   "imageUrlChanged": [],
   "notes": [

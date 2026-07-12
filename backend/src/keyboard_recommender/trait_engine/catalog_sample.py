@@ -17,6 +17,7 @@ from keyboard_recommender.catalog.metadata_mapping import (
 )
 from keyboard_recommender.catalog.manual_switch_curation import SWITCH_METADATA_OVERRIDES
 from keyboard_recommender.catalog.layout_diagrams import is_layout_archetype_part_id
+from keyboard_recommender.catalog.catalog_browse_policy import is_browse_listed_seed_row
 from keyboard_recommender.catalog.metadata_models import (
     CaseMetadata,
     FoamMetadata,
@@ -593,6 +594,8 @@ def _load_external_seed_parts(
             for row in rows:
                 if not isinstance(row, dict):
                     continue
+                if not recommend_only and not is_browse_listed_seed_row(row):
+                    continue
                 if recommend_only and not is_recommendation_eligible_row(row, family="switch"):
                     continue
                 part = _to_external_part(row, family="switch", subtype=str(subtype))
@@ -604,6 +607,8 @@ def _load_external_seed_parts(
         for row in plates_node:
             if not isinstance(row, dict):
                 continue
+            if not recommend_only and not is_browse_listed_seed_row(row):
+                continue
             if recommend_only and not is_recommendation_eligible_row(row, family="plate"):
                 continue
             part = _to_external_part(row, family="plate", subtype="plate")
@@ -614,6 +619,8 @@ def _load_external_seed_parts(
     if isinstance(foams_node, list):
         for row in foams_node:
             if not isinstance(row, dict):
+                continue
+            if not recommend_only and not is_browse_listed_seed_row(row):
                 continue
             if recommend_only and not is_recommendation_eligible_row(row, family="foam"):
                 continue
@@ -627,6 +634,8 @@ def _load_external_seed_parts(
         for row in layouts_node:
             if not isinstance(row, dict):
                 continue
+            if not recommend_only and not is_browse_listed_seed_row(row):
+                continue
             if recommend_only and not is_recommendation_eligible_row(row, family="layout"):
                 continue
             subtype = str(row.get("subtype") or "layout").strip().lower()
@@ -639,6 +648,8 @@ def _load_external_seed_parts(
         for row in cases_node:
             if not isinstance(row, dict):
                 continue
+            if not recommend_only and not is_browse_listed_seed_row(row):
+                continue
             if recommend_only and not is_recommendation_eligible_row(row, family="case"):
                 continue
             subtype = str(row.get("subtype") or "kit").strip().lower()
@@ -650,6 +661,8 @@ def _load_external_seed_parts(
     if isinstance(keycaps_node, list):
         for row in keycaps_node:
             if not isinstance(row, dict):
+                continue
+            if not recommend_only and not is_browse_listed_seed_row(row):
                 continue
             if recommend_only and not is_recommendation_eligible_row(row, family="keycap"):
                 continue

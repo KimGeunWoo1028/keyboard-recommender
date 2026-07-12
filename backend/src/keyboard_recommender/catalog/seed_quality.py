@@ -20,6 +20,8 @@ SEED_REMOVE_IDS: frozenset[str] = frozenset(
         "sw-other-002",  # TTC Brother V2 — discontinued
         "sw-other-012",  # Gazzew U4T — discontinued
         "sw-silent-001",  # duplicate of sw-linear-003 (HMX Peach)
+        "sw-tactile-002",  # duplicate of sw-tactile-003 (MX2A bulk)
+        "sw-tactile-007",  # duplicate of sw-silent-003 (TTC peanut latte)
     },
 )
 

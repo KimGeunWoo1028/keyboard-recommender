@@ -18,7 +18,8 @@
 A Close-out → B Observe 표본 → C Analytics → D Visual 회귀 → E Catalog 선택 → F Ops 선택
 ```
 
-**한 Phase = 한 집중 구간.** Home Dashboard / Redirect는 **B 표본 충족 전 착수 금지**.
+**한 Phase = 한 집중 구간.** Home Dashboard / Redirect는 **B 표본 충족 전 착수 금지**.  
+**localhost만 개발 시:** 제품·표본 잔여는 Phase B 보류 → **`docs/localhost-execution-roadmap.md` Phase 0–2** 우선.
 
 ---
 
@@ -395,6 +396,7 @@ npm test -- tests/critical-flows.spec.ts tests/results-evidence-phase4.spec.ts
 | `docs/product-next-phases.md` | Home LOCK 이후 0–5 (구현 Phase **완료·부분**) |
 | `docs/product-next-phase5-home-revisit.md` | Home 데이터 전제 · 제품 LOCK |
 | `docs/home-ia-locked.md` | Landing · Revisit When |
+| `docs/localhost-execution-roadmap.md` | **localhost** 실행 Phase 0–6 (catalog · deploy · observe · Home) |
 | `docs/results-ux-phase7-validation-report.md` | Phase 7 Observe · 구 Iteration Top 3 |
 | `docs/results-ux-phase6-completion.md` | 구 375px 체크리스트 (Compare 항목 obsolete) |
 | `docs/swagkey-inventory-recheck.md` | ⑮ recheck |

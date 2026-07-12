@@ -1,49 +1,8 @@
 {
   "schemaVersion": "1.0.0",
-  "tabs": {
-    "레이아웃": {
-      "noImage": [
-        {
-          "id": "layout-001",
-          "name": "60% Standard",
-          "idx": ""
-        },
-        {
-          "id": "layout-002",
-          "name": "65% Compact",
-          "idx": ""
-        },
-        {
-          "id": "layout-003",
-          "name": "TKL (80%)",
-          "idx": ""
-        },
-        {
-          "id": "layout-004",
-          "name": "Full-size",
-          "idx": ""
-        },
-        {
-          "id": "layout-005",
-          "name": "75% Exploded",
-          "idx": ""
-        },
-        {
-          "id": "layout-006",
-          "name": "Alice Ergonomic",
-          "idx": ""
-        },
-        {
-          "id": "layout-007",
-          "name": "Split 60",
-          "idx": ""
-        }
-      ],
-      "sharedImage": []
-    }
-  },
+  "tabs": {},
   "summary": {
-    "noImageCount": 7,
+    "noImageCount": 0,
     "sharedImageCount": 0
   }
 }

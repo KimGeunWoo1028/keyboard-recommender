@@ -1,8 +1,8 @@
 browse image coverage by family:
-  switch: 55/55 (100.0%)
+  switch: 53/53 (100.0%)
   plate: 20/20 (100.0%)
   foam: 10/10 (100.0%)
-  layout: 7/7 (100.0%)
+  layout: 45/45 (100.0%)
   case: 126/126 (100.0%)
   keycap: 62/62 (100.0%)
 gate >= 85.0%: True

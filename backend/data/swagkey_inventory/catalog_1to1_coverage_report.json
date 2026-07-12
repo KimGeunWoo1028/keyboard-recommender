@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-07-11T17:28:46.678609+00:00",
+  "generatedAt": "2026-07-12T07:32:44.083408+00:00",
   "sources": {
     "seedPath": "C:\\Users\\jeung\\keyboard-recommender\\backend\\src\\keyboard_recommender\\catalog\\swagkey_products.seed.json",
     "inventoryPath": "C:\\Users\\jeung\\keyboard-recommender\\backend\\data\\swagkey_inventory\\swagkey_inventory.v4.json",
@@ -9,9 +9,9 @@
   },
   "layoutArchetype": {
     "seed_archetype_count": 7,
-    "seed_real_pcb_count": 38,
+    "seed_real_pcb_count": 23,
     "browse_archetype_count": 7,
-    "browse_real_pcb_count": 38,
+    "browse_real_pcb_count": 23,
     "classified_real_pcb_count": 23,
     "note": "1:1 layout coverage compares real PCB only; archetypes excluded"
   },
@@ -20,14 +20,14 @@
       "family": "switch",
       "csv_category_count": 57,
       "inventory_classified_count": 55,
-      "seed_count": 68,
+      "seed_count": 66,
       "seed_archetype_count": null,
       "seed_real_count": null,
       "browse_count": 53,
       "browse_excluded_404": 0,
       "expected_browse": 55,
       "gap_inventory_vs_browse": 2,
-      "gap_inventory_vs_seed": -13,
+      "gap_inventory_vs_seed": -11,
       "gap_pct_inventory_vs_browse": 3.64
     },
     "plate": {
@@ -62,15 +62,15 @@
       "family": "layout",
       "csv_category_count": null,
       "inventory_classified_count": 23,
-      "seed_count": 38,
+      "seed_count": 23,
       "seed_archetype_count": 7,
-      "seed_real_count": 38,
-      "browse_count": 38,
+      "seed_real_count": 23,
+      "browse_count": 23,
       "browse_excluded_404": 0,
       "expected_browse": 23,
-      "gap_inventory_vs_browse": -15,
-      "gap_inventory_vs_seed": -15,
-      "gap_pct_inventory_vs_browse": -65.22
+      "gap_inventory_vs_browse": 0,
+      "gap_inventory_vs_seed": 0,
+      "gap_pct_inventory_vs_browse": 0.0
     },
     "case": {
       "family": "case",
@@ -108,15 +108,15 @@
     "browse excluded idx (12): 384, 1187, 1206, 1216, 1340, 1496, 1589, 1658, 1667, 1668, 1673, 1677",
     "",
     "family | inv | seed | browse | 404ex | gap(inv-browse) | gap%",
-    "switch  |  55 |   68 |     53 |     0 |   +2 |   3.6%",
+    "switch  |  55 |   66 |     53 |     0 |   +2 |   3.6%",
     "plate   |  20 |   20 |     20 |     0 |   +0 |   0.0%",
     "foam    |   9 |   10 |      9 |     0 |   +0 |   0.0%",
-    "layout  |  23 |   38 |     38 |     0 |  -15 | -65.2%",
+    "layout  |  23 |   23 |     23 |     0 |   +0 |   0.0%",
     "case    | 126 |  126 |    126 |     0 |   +0 |   0.0%",
     "keycap  |  67 |   62 |     62 |     0 |   +5 |   7.5%",
     "",
     "layout archetype seed: 7 (browse 7)",
-    "layout real PCB - classified: 23 seed: 38",
+    "layout real PCB - classified: 23 seed: 23",
     "",
     "CSV categories (raw rows): Switches=57 Keycaps=73",
     "inventory keptByCategory: Switches=54 Keycaps=67",
@@ -131,14 +131,6 @@
       "browse_count": 53,
       "gap": 2,
       "gap_pct": 3.64,
-      "threshold_pct": 2.0
-    },
-    {
-      "family": "layout",
-      "inventory_count": 23,
-      "browse_count": 38,
-      "gap": -15,
-      "gap_pct": 65.22,
       "threshold_pct": 2.0
     },
     {

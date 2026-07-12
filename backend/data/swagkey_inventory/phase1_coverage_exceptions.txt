@@ -1,0 +1,15 @@
+Phase 1 coverage exceptions (2026-07-12)
+=====================================
+
+Resolved in Phase 1:
+  - layout: gap -15 -> 0 (unlisted 15 mislinked layout-new-* rows; browse.listed policy enforced)
+
+Remaining gaps (require live recrawl / idx enrichment):
+  - switch: +2 (3.6%) — inv-0093, inv-0105 missing swagkeyProductId/sourceUrl idx
+  - keycap: +5 (7.5%) — inv-0189, inv-0193, inv-0195 missing idx; +2 inventory rows without browse idx match
+
+merge rejected (documented, no --apply fix):
+  - inv-0093 (switch), inv-0105 (switch)
+  - inv-0189, inv-0193, inv-0195 (keycap)
+
+promote_to_recommendation_pool: promotedCount=0 (Phase 0 discontinued rows correctly excluded)
