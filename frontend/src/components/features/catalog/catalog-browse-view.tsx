@@ -23,6 +23,7 @@ import {
 } from "@/lib/api/catalog";
 import { getPublicApiBase } from "@/lib/api/client";
 import { catalogHref } from "@/lib/catalog-links";
+import { isReferenceOnlyLayoutArchetype } from "@/lib/layout-catalog-links";
 import { layoutSizeFilterLabel } from "@/lib/layout-size";
 import { cn } from "@/lib/utils";
 
@@ -84,6 +85,7 @@ function CatalogPartCard({
 }) {
   const layoutMeta = item.family === "layout" && item.referenceLayout ? layoutArchetypeMetadata(item.id) : null;
   const isReferenceLayout = item.family === "layout" && item.referenceLayout === true;
+  const isReferenceOnlyLayout = isReferenceLayout && isReferenceOnlyLayoutArchetype(item.id);
   const layoutSize =
     typeof layoutMeta?.layout_size === "string" ? layoutMeta.layout_size.trim() : "";
   const caseCatalogHref =
@@ -136,14 +138,18 @@ function CatalogPartCard({
           />
         ) : null}
         <CardDescription className="line-clamp-2 text-xs leading-5 text-ca-on-surface-variant">
-          {item.description || item.id}
+          {isReferenceOnlyLayout
+            ? "스웨그키 판매 제품 없음 · 배열 참고용"
+            : item.description || item.id}
         </CardDescription>
       </CardHeader>
       <CardContent className="mt-auto flex flex-wrap items-center gap-2 pt-0 text-xs text-ca-on-surface-variant">
         {item.subtype ? <span className="ca-chip">{item.subtype}</span> : null}
         {isReferenceLayout ? <span className="ca-chip">참조 배열</span> : null}
         {item.family === "layout" && !isReferenceLayout ? <span className="ca-chip">기판 상품</span> : null}
-        {caseCatalogHref ? (
+        {isReferenceOnlyLayout ? (
+          <span className="font-label text-ca-label-sm font-medium text-ca-on-surface-variant">상세 보기</span>
+        ) : caseCatalogHref ? (
           <Link
             href={caseCatalogHref}
             onClick={(event) => event.stopPropagation()}

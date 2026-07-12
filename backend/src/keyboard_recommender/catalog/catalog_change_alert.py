@@ -5,6 +5,8 @@ from __future__ import annotations
 from datetime import UTC, datetime
 from typing import Any, Literal
 
+from keyboard_recommender.catalog.layout_diagrams import is_layout_archetype_part_id
+
 ALERT_SCHEMA_VERSION = "1.2.0"
 
 AlertTier = Literal["blocking", "informational"]
@@ -29,6 +31,10 @@ def _row_eligible(row: dict[str, Any]) -> bool | None:
 def _is_blocking_row(row: dict[str, Any], status: str) -> bool:
     if status == "new_in_crawl":
         return False
+    if status == "seed_only":
+        seed_id = str(row.get("seed_id") or row.get("seedId") or "").strip()
+        if is_layout_archetype_part_id(seed_id):
+            return False
     eligible = _row_eligible(row)
     if eligible is None:
         return False
@@ -151,6 +157,7 @@ def build_catalog_change_alert(
             "seed_only is treated as possibly discontinued (missing from latest crawl inventory).",
             "new_in_crawl are browse merge candidates (informational; run merge_inventory_browse_seed dry-run).",
             "blocking alerts require recommendationEligible=true on the seed row.",
+            "layout archetype seed rows (layout-001…007) are reference-only and never blocking seed_only.",
             "Crawl inventory has no explicit stock/품절 flag; title stock markers are stripped at crawl time.",
             "imageUrlChanged compares seed imageUrl to refetched og:image (fixture cache or live HTTP).",
             "Webhooks notify blockingAlertTotal + imageUrlChanged only (Phase 7).",

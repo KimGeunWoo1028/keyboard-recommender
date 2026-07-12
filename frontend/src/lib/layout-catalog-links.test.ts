@@ -1,11 +1,16 @@
 import { describe, expect, it } from "vitest";
 
-import { isAbstractLayoutId, swagkeyProductLinkLabel } from "@/lib/layout-catalog-links";
+import { isAbstractLayoutId, isReferenceOnlyLayoutArchetype, swagkeyProductLinkLabel } from "@/lib/layout-catalog-links";
 
 describe("layout catalog link labels", () => {
   it("uses representative kit copy for abstract layout ids", () => {
     expect(swagkeyProductLinkLabel("layout", "layout-002")).toBe("이 배열의 대표 키트 보기");
     expect(isAbstractLayoutId("layout-007")).toBe(true);
+  });
+
+  it("marks split 60 as reference-only archetype", () => {
+    expect(isReferenceOnlyLayoutArchetype("layout-007")).toBe(true);
+    expect(isReferenceOnlyLayoutArchetype("layout-006")).toBe(false);
   });
 
   it("keeps default copy for kit-named layouts and other domains", () => {

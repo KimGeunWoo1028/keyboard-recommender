@@ -169,6 +169,7 @@ keyboard-recommender/
   · (선택 미착수) E2E 썸네일 스냅샷
 
 - [x] **Swagkey 6탭 카탈로그 1:1** (2026-07-11~12) — `docs/swagkey-catalog-1to1-roadmap.md` **Phase 0–8 ✅** · browse/recommend **이중 풀** · §4.10
+- [x] **레이아웃 다이어그램 (Blueprint)** (2026-07-10~12) — 정적 SVG → React `LayoutDiagram` 7종 · role 강조 · Alice 회전 튜닝 · Split 60 잭/케이블 · `layout-007` 참조 전용 정책 — §4.10
 
 **현재 이중 풀 규모 (2026-07-12, `audit_recommendation_pool.py`):**
 
@@ -580,7 +581,94 @@ keyboard-recommender/
 - 케이스 탭: `layoutSize` 필터 (alice **5**, 65 **15**, 80_tkl **7**)
 - 상세 패널: traits · metadata · 스웨그키 링크 · 레이아웃 다이어그램(참조만)
 
-**레이아웃 다이어그램 geometry LOCK:** `layout-diagram-definitions.ts` · `layout-diagram.tsx` · `public/layout-diagrams/*.svg` — 운영자 명시 요청 없이 수정 금지.
+**레이아웃 다이어그램 geometry LOCK:** `layout-diagram-definitions.ts` · `layout-diagram.tsx` · `public/layout-diagrams/*.svg` — 운영자 명시 요청 없이 수정 금지. **예외 (2026-07-12 운영자 튜닝 반영):** **Alice** (`alice` / `layout-006`) · **Split 60** (`split-60` / `layout-007`) — 아래 §.
+
+#### 레이아웃 다이어그램 아키텍처 (2026-07-10~12)
+
+**이미지 정책 (아키타입 vs 실제 기판):**
+
+| 종류 | ID | 카탈로그/추천 이미지 |
+|------|-----|---------------------|
+| **추상 아키타입** | `layout-001`…`007` | React **배열 다이어그램** (제품 사진 금지) |
+| **실제 PCB/기판** | `layout-new-*` | Swagkey **제품 사진** (mirror/CDN, 다른 축과 동일) |
+
+- 백엔드 `layout_diagrams.py` — archetype → `/layout-diagrams/*.svg` fallback 경로 (`resolve_part_image_url`)
+- 프론트 `resolveLayoutDiagramId(partId, imageUrl, layoutSize)` — ID 해석되면 **React `LayoutDiagram` 우선** (`layout-diagram-panel.tsx` · 카탈로그 카드 썸네일)
+- `catalog_seed_images.py` — archetype은 diagram URL · `layout-new-*`는 mirror/CDN
+
+**React Blueprint 렌더러:**
+
+| 모듈 | 역할 |
+|------|------|
+| `layout-diagram-definitions.ts` | 7종 `BLUEPRINTS` · 키 좌표(u 단위) · Alice 블록 분리·회전 |
+| `layout-diagram.tsx` | SVG 렌더 · 블록 `transform` · role 스타일 · `jacks`/`connectors` |
+| `layout-diagram-types.ts` | `LayoutKeyDef` · `LayoutBlueprint` · `LayoutJackDef` · `LayoutConnectorDef` |
+| `layout-diagram-id.ts` | `layout-00x` / `layoutSize` / diagram path → `LayoutDiagramId` |
+| `layout-archetype-metadata.ts` | browse 카드 trait 칩용 seed 메타 (list API 미포함 필드) |
+| `layout-trait-chips.tsx` · `layout-diagram-callouts` | 카드 칩 · hover 교육 문구 |
+
+**키 role 강조 (단색 Blueprint):** `accent`(ESC) · `enter` · `space` · `arrow` — `ca-primary` fill · 나머지 `default`는 stroke 와이어프레임.
+
+**겹침 방지:** `layout-diagram.test.ts` — 7 blueprint 전부 키 rect 겹침 없음 검증.
+
+#### 7종 참조 배열 geometry (`layout-001`~`007`)
+
+| diagramId | layout ID | geometry 요약 |
+|-----------|-----------|---------------|
+| `60-standard` | `layout-001` | 15u×5행 · ISO Enter(2.2u) · Space 6.25u · viewBox `220×92` |
+| `65-compact` | `layout-002` | 60% + 우측열 + 4·5행 방향키 클러스터 · 짧은 스페이스 |
+| `tkl` | `layout-003` | F행 + 알파 + **분리 네비 섬**(Ins/Home/PgUp…) + 방향키 · 2블록 |
+| `full-size` | `layout-004` | TKL + 우측 넘패드(세로 Enter) · 3블록 |
+| `75-exploded` | `layout-005` | ESC 분리 · F행 2덩어리 · 알파 15열 · 우측 네비·방향키 간격 |
+| `alice` | `layout-006` | 65% 기반 + 좌 매크로열 · **행별 블록 회전** (아래 §) |
+| `split-60` | `layout-007` | 60% 기반 · 1~4행 분리 · 5행 스페이스 병합 · TRRS 잭/케이블 (아래 §) |
+
+#### Alice Ergonomic 다이어그램 (`alice` / `layout-006`, 2026-07-12)
+
+- **베이스:** `sixtyFiveCore`에서 우측열·방향키 제거 → 좌측 **매크로열 4키** 추가 · 1행 8번 뒤 `0.25u` 갭
+- **우측 블록:** `x >= 9` (`ALICE_RIGHT_BLOCK_MIN_X`) 키에 `+0.5u` 수평 시프트 (`ALICE_RIGHT_BLOCK_X_SHIFT_U`)
+- **회전 (블록 단위 SVG `transform`):**
+  - **좌측 1~5행:** pivot = 해당 행 첫 키 **왼쪽 아래** · 시계 **+10°** (`ALICE_*_LEFT_ROTATE_DEG`)
+  - **우측 1~4행:** pivot = 행 내 **3번째 키 오른쪽 아래** · 반시계 **−10°** + `translate(0, alignPx)` 수직 보정
+  - **우측 5행 3·4번:** pivot 3번 **왼쪽 아래** · 반시계 **−10°**
+- **행별 alignPx 상수:** 기본 `−2.6px` · 1행 `−3.9px` · 2~4행 추가 `u` 오프셋 (`ALICE_RIGHT_ROW*_EXTRA_SHIFT_U`)
+- **role:** `applyAliceKeyRoles` — ESC·Enter·Space·Arrow (65%와 동일 규칙)
+- **viewBox:** `0 0 220 92` (bounds 자동 계산)
+
+#### Split 60 참조 배열 (`layout-007`, 2026-07-12)
+
+스웨그키 크롤에 **실제 Split 60 키보드(Corne/Lily58 등) 없음** — `layout-007`은 추천·다이어그램용 **참조 아키타입**으로 유지. Shy60(`idx=1504`)·Alice Duo 등과 **1:1 매핑 금지**.
+
+| 영역 | 정책 |
+|------|------|
+| **추천 풀** | `layout-007` 유지 · `recommendationEligible: true` |
+| **browse** | `referenceLayout: true` · diagram sanitize (`sourceUrl` 비움) |
+| **seed** | `sourceUrl: ""` (잘못된 Shy60 링크 제거) |
+| **추천 `sourceUrl`** | `is_layout_archetype_without_swagkey_product` → `layout-007` 빈 문자열 |
+| **Alice Duo** | `layout-idx-1286` · `case-033` 등 → `layout_size: alice` (Split 60과 분리) |
+| **alert** | `layout-001`~`007` `seed_only` → **informational** (blocking 제외, `catalog_change_alert.py`) |
+
+**카탈로그 UI (참조 전용 Split 60):**
+
+- 카드·상세: `스웨그키 판매 제품 없음 · 배열 참고용` (`isReferenceOnlyLayoutArchetype` → `layout-007`만)
+- **「케이스/키트 보기」 링크 숨김** — `layoutSize=split` 케이스 0건이라 빈 목록 방지
+- 추천 결과 Overview에서도 split 레이아웃 시 동일 링크 숨김
+
+**Split 60 다이어그램 geometry (`split-60`, 운영자 튜닝 2026-07-12):**
+
+- **베이스:** 60% Standard (`sixtyPercentCore`) 단일 블록
+- **행별 분리** (간격 **1.5u**, 해당 행만):
+  - 1행: 7·8번 키 사이 (`x=7`)
+  - 2행: 6·7번 (`x=6.5`)
+  - 3행: 6·7번 (`x=6.8`)
+  - 4행: 6·7번 (`x=7.3`)
+  - 5행: 분리 없음
+- **5행 스페이스:** 1.25u×5 분할 후 **4·5·6번 합침 `w=3.125`** · **5·6번 합침 `w=3.125`** · 5번째 칸부터 우측 정렬 (`rightEdge=16.5u`)
+- **TRRS 잭·케이블** (`layout-diagram.tsx` · blueprint `jacks`):
+  - 1행 **6·9번** 키 중심 위 작은 네모 (`0.5u×0.25u`, 키 상단 **0.1u**)
+  - 네모 **상단 중앙**에서 위로 올린 뒤 가운데 **둥근 아치**로 연결 (선 굵기 `1`)
+
+**관련 파일:** `frontend/.../layout-diagram/` (`definitions` · `layout-diagram.tsx` · `types` · `id` · `panel` · `test`) · `layout-catalog-links.ts` (`isReferenceOnlyLayoutArchetype`) · `catalog-part-thumbnail.tsx` · `catalog-browse-view.tsx` · `catalog-detail-panel.tsx` · `results-overview-tab.tsx` · `catalog_seed_images.py` · `swagkey_source_url.py` · `layout_diagrams.py` · `public/layout-diagrams/*.svg`
 
 #### 이후 주기 운영 (자동 merge 아님)
 
@@ -590,7 +678,7 @@ keyboard-recommender/
 2. **alert 확인** — `data/swagkey_inventory/catalog_change_alert.txt`
    - `new_in_crawl` → browse merge **후보** (informational)
    - `seed_only` / `name_changed` + `recommendationEligible` → **blocking** (webhook 대상)
-   - layout archetype `seed_only` 7건 → diff 노이즈 (단종 아님, 무시 가능)
+   - layout archetype `seed_only` 7건 → **informational** (`catalog_change_alert.py` — blocking 제외, 단종 아님)
 3. **dry-run merge** — `merge_inventory_browse_seed.py --dry-run` → 검토 → `--apply-to-seed`
 4. **재검증** — `audit_recommendation_pool.py` · `run_swagkey_catalog_regression.py`
 5. **gap 축소** — inventory **재크롤** 후 ①~③ 반복 (`docs/swagkey-inventory-recheck.md`)
@@ -1304,7 +1392,10 @@ cd e2e && npm ci && npx playwright install chromium && npm test  # E2E
 34. **Ops webhook:** `CATALOG_CHANGE_ALERT_WEBHOOK_URL` (또는 `OPERATIONAL_ALERT_WEBHOOK_URL`) — **커밋 금지** · CI secret / `.env`만. dry-run: `run_swagkey_inventory_recheck.py --webhook-dry-run`
 35. **Feedback Learning:** 기본 `ENABLE_FEEDBACK_LEARNING_MVP=false`. 로컬 검증 `verify_feedback_learning_mvp.py --dry-run-local`. 실 API는 `--base-url http://localhost:8000` (로컬은 **http**, https 아님)
 36. **제품 이미지 (§9.4):** seed `imageUrl`은 CDN source of truth · mirror는 `data/swagkey_images/` (**git 커밋 금지**) · browse/recommend **이중 풀**로 목록 건수 다름 · live `imageUrlChanged` 후 seed/mirror **수동** 갱신
-37. **Swagkey 1:1 카탈로그 (§4.10):** browse = seed 전체(331) · recommend = `recommendationEligible`만 · **절대** `merge_* --apply-to-seed` 자동 실행 금지 — dry-run → 운영자 검토. 로드맵: `docs/swagkey-catalog-1to1-roadmap.md` (Phase 0–8 ✅). layout diagram geometry **LOCK**
+37. **Swagkey 1:1 카탈로그 (§4.10):** browse = seed 전체(331) · recommend = `recommendationEligible`만 · **절대** `merge_* --apply-to-seed` 자동 실행 금지 — dry-run → 운영자 검토. 로드맵: `docs/swagkey-catalog-1to1-roadmap.md` (Phase 0–8 ✅). layout diagram geometry **LOCK** (Alice·Split 60 §4.10 예외 — 2026-07-12 반영)
+38. **레이아웃 다이어그램 (§4.10):** `layout-001`~`007` = React Blueprint · `layout-new-*` = Swagkey 사진 · role 강조 유지 · 겹침 테스트 통과 필수
+39. **Split 60 (`layout-007`):** 스웨그키 실제 상품 없음 · 참조 배열 전용 · 케이스/키트 링크·`sourceUrl` 없음 · 다이어그램 행별 분리·5행 스페이스·TRRS 잭/케이블 — §4.10
+40. **Alice (`layout-006`):** 65% 기반 + 매크로열 · 행별 블록 회전·alignPx 상수 — 운영자 튜닝 반영(2026-07-12) · geometry 임의 변경 금지 — §4.10
 
 ---
 
@@ -1336,6 +1427,9 @@ cd e2e && npm ci && npx playwright install chromium && npm test  # E2E
 | **catalog browse (UI)** | `frontend/src/app/catalog/page.tsx`, `frontend/src/components/features/catalog/catalog-browse-view.tsx` |
 | **catalog pagination** | `frontend/src/components/features/catalog/catalog-pagination.tsx`, `catalog-pagination.test.ts` |
 | **catalog detail panel** | `frontend/src/components/features/catalog/catalog-detail-panel.tsx` |
+| **layout diagram** | `frontend/src/components/features/catalog/layout-diagram/` (`definitions` · `layout-diagram.tsx` · `layout-diagram-types.ts`) |
+| **layout reference-only helpers** | `frontend/src/lib/layout-catalog-links.ts` (`isReferenceOnlyLayoutArchetype`) |
+| **Split 60 sourceUrl policy** | `backend/src/keyboard_recommender/catalog/swagkey_source_url.py` · `layout_diagrams.py` |
 | **catalog deep links** | `frontend/src/lib/catalog-links.ts` |
 | **home feature grid** | `frontend/src/components/features/home/feature-grid.tsx` |
 | **keycap seed builder** | `backend/src/keyboard_recommender/catalog/swagkey_keycap_seed_builder.py` |
@@ -1420,6 +1514,7 @@ cd e2e && npm ci && npx playwright install chromium && npm test  # E2E
 ---
 
 *이 문서는 keyboard-recommender 프로젝트의 전체 파일·구조·기능·설정을 AI Agent 컨텍스트용으로 정리한 것입니다. 코드 변경 시 이 파일도 함께 업데이트하세요.*  
+*최종 갱신 (2026-07-12): **§4.10 레이아웃 다이어그램 Blueprint** — React 7종 geometry · Alice 회전 튜닝 · Split 60 잭/케이블 · `layout-007` 참조 전용 정책 · archetype vs `layout-new-*` 이미지 분리.*
 *최종 갱신 (2026-07-12): **§4.6·§4.10 Swagkey 6탭 1:1 Phase 0–8 sign-off** — browse/recommend 이중 풀(331 ingestion) · Phase 5 UI · Phase 6–7 게이트·alert tier · Phase 8 regression 126 pytest · 주기 운영 절차 · `docs/swagkey-catalog-1to1-roadmap.md`.*  
 *최종 갱신 (2026-07-11): **§9.4 Swagkey 제품 이미지 Phase 0–8 완료** — API/FE 썸네일 · browse 정책(6.5–6.6) · local mirror · `imageUrlChanged` recheck · `PROJECT_CONTEXT` 파일 인덱스·ops 명령 갱신.*  
 *이전 (2026-07-10): **§4.16 Product Next Phases** — Phase 0–4 완료 · Phase 5 `home.viewed` 데이터 전제 · Home Landing LOCK · ranking-why pick 재연결 · MyPage 스모크.*  

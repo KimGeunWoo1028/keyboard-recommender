@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { layoutDiagramCallouts, resolveLayoutDiagramViewBox } from "@/components/features/catalog/layout-diagram/layout-diagram";
+import { layoutDiagramCallouts, keyBoundsInDiagram, resolveLayoutDiagramViewBox } from "@/components/features/catalog/layout-diagram/layout-diagram";
 import { getLayoutBlueprint, listLayoutBlueprintIds } from "@/components/features/catalog/layout-diagram/layout-diagram-definitions";
 import { resolveLayoutDiagramId } from "@/components/features/catalog/layout-diagram/layout-diagram-id";
 import type { LayoutKeyDef } from "@/components/features/catalog/layout-diagram/layout-diagram-types";
@@ -29,12 +29,14 @@ describe("layout blueprint geometry", () => {
   it("viewBox contains every key", () => {
     for (const id of listLayoutBlueprintIds()) {
       const blueprint = getLayoutBlueprint(id);
-      const [, , width, height] = resolveLayoutDiagramViewBox(id).split(" ").map(Number);
+      const [viewX, viewY, width, height] = resolveLayoutDiagramViewBox(id).split(" ").map(Number);
       for (const block of blueprint.blocks) {
         for (const key of block.keys) {
-          const rect = keyRect(key);
-          expect(rect.x + rect.width).toBeLessThanOrEqual(width!);
-          expect(rect.y + rect.height).toBeLessThanOrEqual(height!);
+          const rect = keyBoundsInDiagram(key, block.transform);
+          expect(rect.x).toBeGreaterThanOrEqual(viewX!);
+          expect(rect.y).toBeGreaterThanOrEqual(viewY!);
+          expect(rect.x + rect.width).toBeLessThanOrEqual(viewX! + width!);
+          expect(rect.y + rect.height).toBeLessThanOrEqual(viewY! + height!);
         }
       }
     }

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useMemo } from "react";
 
 import { catalogHref } from "@/lib/catalog-links";
+import { isReferenceOnlyLayoutArchetype } from "@/lib/layout-catalog-links";
 import { layoutSizeShortLabel } from "@/lib/layout-size";
 import { pickSourceUrlKey } from "@/lib/swagkey-source-links";
 import { layoutArchetypeMetadata } from "@/components/features/catalog/layout-diagram/layout-archetype-metadata";
@@ -195,7 +196,7 @@ export function ResultsOverviewTab({
                 <p className="mt-2">
                   <SwagkeyProductLink href={sourceUrl} domain={key} itemId={pick?.itemId} />
                 </p>
-                {key === "layout" && layoutSize ? (
+                {key === "layout" && layoutSize && !isReferenceOnlyLayoutArchetype(pick?.itemId) ? (
                   <p className="mt-2">
                     <Link
                       href={catalogHref({ family: "case", layoutSize })}

@@ -18,6 +18,10 @@ def test_resolve_catalog_source_url_matches_browse_rules() -> None:
     assert url == "https://www.swagkey.kr/shop_view/?idx=1765"
 
 
+def test_resolve_catalog_source_url_skips_split_60_reference_archetype() -> None:
+    assert resolve_catalog_source_url("layout", "layout-007", item_name="Split 60") == ""
+
+
 def test_build_recommendation_result_includes_source_urls() -> None:
     payload = build_recommendation_result(_VALID_SURVEY)
     build_urls = payload["build"]["sourceUrls"]

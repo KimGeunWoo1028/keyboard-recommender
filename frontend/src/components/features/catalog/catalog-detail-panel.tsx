@@ -10,7 +10,7 @@ import { layoutArchetypeMetadata } from "@/components/features/catalog/layout-di
 import type { CatalogFamily, CatalogPartDetail } from "@/lib/api/catalog";
 import { catalogHref } from "@/lib/catalog-links";
 import { layoutSizeFilterLabel, resolveLayoutSizeFromMetadata } from "@/lib/layout-size";
-import { swagkeyProductLinkLabel } from "@/lib/layout-catalog-links";
+import { isReferenceOnlyLayoutArchetype, swagkeyProductLinkLabel } from "@/lib/layout-catalog-links";
 import { normalizeSwagkeyProductUrl } from "@/lib/swagkey-source-links";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -232,18 +232,27 @@ export function CatalogDetailPanel({ open, loading, error, family, partDetail, o
               ) : null}
               {family === "layout" ? (
                 <div className="space-y-2 text-sm text-ca-on-surface-variant">
+                  {partDetail.referenceLayout && isReferenceOnlyLayoutArchetype(partDetail.id) ? (
+                    <p className="rounded-md border border-ca-outline-variant/50 bg-ca-surface-container/50 px-3 py-2 text-ca-on-surface-variant">
+                      스웨그키 판매 제품 없음 · 배열 참고용입니다.
+                    </p>
+                  ) : null}
                   <p>
-                    레이아웃은 배열 참고 정보입니다. 이 크기에 맞는 실제 키트·상품은 케이스/키트 탭에서 확인하세요.
+                    {partDetail.referenceLayout && isReferenceOnlyLayoutArchetype(partDetail.id)
+                      ? "이 배열은 추천·비교용 참고 정보입니다. 스웨그키에서 이 크기의 케이스/키트는 현재 판매하지 않습니다."
+                      : "레이아웃은 배열 참고 정보입니다. 이 크기에 맞는 실제 키트·상품은 케이스/키트 탭에서 확인하세요."}
                   </p>
-                  <Link
-                    href={caseCatalogHref}
-                    onClick={onClose}
-                    className="inline-flex h-9 items-center rounded-full border border-ca-primary/40 bg-ca-primary/10 px-3 font-label text-ca-label-sm font-medium text-ca-primary underline-offset-4 hover:bg-ca-primary/20 hover:underline"
-                  >
-                    {layoutSizeForLink
-                      ? `${layoutSizeFilterLabel(layoutSizeForLink)} 케이스/키트 보기`
-                      : "케이스/키트 탭으로 이동"}
-                  </Link>
+                  {partDetail.referenceLayout && isReferenceOnlyLayoutArchetype(partDetail.id) ? null : (
+                    <Link
+                      href={caseCatalogHref}
+                      onClick={onClose}
+                      className="inline-flex h-9 items-center rounded-full border border-ca-primary/40 bg-ca-primary/10 px-3 font-label text-ca-label-sm font-medium text-ca-primary underline-offset-4 hover:bg-ca-primary/20 hover:underline"
+                    >
+                      {layoutSizeForLink
+                        ? `${layoutSizeFilterLabel(layoutSizeForLink)} 케이스/키트 보기`
+                        : "케이스/키트 탭으로 이동"}
+                    </Link>
+                  )}
                 </div>
               ) : (
                 <SwagkeyLink href={partDetail.sourceUrl} family={family} itemId={partDetail.id} />

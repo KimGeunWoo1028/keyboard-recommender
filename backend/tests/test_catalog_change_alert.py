@@ -81,6 +81,26 @@ def test_build_catalog_change_alert_maps_statuses() -> None:
     assert "BLOCKING" in text
 
 
+def test_seed_only_layout_archetype_is_informational_not_blocking() -> None:
+    diff = {
+        "seed_only_count": 1,
+        "pairs": [
+            {
+                "status": "seed_only",
+                "family": "layout",
+                "seed_id": "layout-007",
+                "seed_name": "Split 60",
+                "crawl_id": None,
+                "recommendation_eligible": True,
+            },
+        ],
+    }
+    alert = build_catalog_change_alert(diff)
+    row = alert["possiblyDiscontinued"][0]
+    assert row["alertTier"] == "informational"
+    assert alert["counts"]["blockingAlertTotal"] == 0
+
+
 def test_no_alerts_when_all_matched() -> None:
     alert = build_catalog_change_alert(
         {

@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.2.0",
   "kind": "swagkey_catalog_change_alert",
-  "generatedAt": "2026-07-11T17:27:22+00:00",
+  "generatedAt": "2026-07-12T02:43:00+00:00",
   "source": {
     "seedPath": "C:/Users/jeung/keyboard-recommender/backend/src/keyboard_recommender/catalog/swagkey_products.seed.json",
     "candidatesPath": "C:/Users/jeung/keyboard-recommender/backend/data/swagkey_inventory/recommender_candidates.json",
@@ -14,9 +14,9 @@
     "nameChanged": 1,
     "imageUrlChanged": 0,
     "browseMergeCandidates": 0,
-    "informationalTotal": 15,
-    "blockingAlertTotal": 22,
-    "alertTotal": 22
+    "informationalTotal": 22,
+    "blockingAlertTotal": 15,
+    "alertTotal": 15
   },
   "hasAlerts": true,
   "hasBlockingAlerts": true,
@@ -40,7 +40,7 @@
       "crawlId": null,
       "crawlName": null,
       "similarity": 0.0,
-      "alertTier": "blocking",
+      "alertTier": "informational",
       "recommendationEligible": true
     },
     {
@@ -50,7 +50,7 @@
       "crawlId": null,
       "crawlName": null,
       "similarity": 0.0,
-      "alertTier": "blocking",
+      "alertTier": "informational",
       "recommendationEligible": true
     },
     {
@@ -60,7 +60,7 @@
       "crawlId": null,
       "crawlName": null,
       "similarity": 0.0,
-      "alertTier": "blocking",
+      "alertTier": "informational",
       "recommendationEligible": true
     },
     {
@@ -70,7 +70,7 @@
       "crawlId": null,
       "crawlName": null,
       "similarity": 0.0,
-      "alertTier": "blocking",
+      "alertTier": "informational",
       "recommendationEligible": true
     },
     {
@@ -80,7 +80,7 @@
       "crawlId": null,
       "crawlName": null,
       "similarity": 0.0,
-      "alertTier": "blocking",
+      "alertTier": "informational",
       "recommendationEligible": true
     },
     {
@@ -200,7 +200,7 @@
       "crawlId": null,
       "crawlName": null,
       "similarity": 0.0,
-      "alertTier": "blocking",
+      "alertTier": "informational",
       "recommendationEligible": true
     },
     {
@@ -210,7 +210,7 @@
       "crawlId": null,
       "crawlName": null,
       "similarity": 0.0,
-      "alertTier": "blocking",
+      "alertTier": "informational",
       "recommendationEligible": true
     },
     {
@@ -396,76 +396,6 @@
       "recommendationEligible": true
     },
     {
-      "family": "layout",
-      "seedId": "layout-001",
-      "seedName": "60% Standard",
-      "crawlId": null,
-      "crawlName": null,
-      "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
-    },
-    {
-      "family": "layout",
-      "seedId": "layout-002",
-      "seedName": "65% Compact",
-      "crawlId": null,
-      "crawlName": null,
-      "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
-    },
-    {
-      "family": "layout",
-      "seedId": "layout-005",
-      "seedName": "75% Exploded",
-      "crawlId": null,
-      "crawlName": null,
-      "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
-    },
-    {
-      "family": "layout",
-      "seedId": "layout-006",
-      "seedName": "Alice Ergonomic",
-      "crawlId": null,
-      "crawlName": null,
-      "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
-    },
-    {
-      "family": "layout",
-      "seedId": "layout-004",
-      "seedName": "Full-size",
-      "crawlId": null,
-      "crawlName": null,
-      "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
-    },
-    {
-      "family": "layout",
-      "seedId": "layout-007",
-      "seedName": "Split 60",
-      "crawlId": null,
-      "crawlName": null,
-      "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
-    },
-    {
-      "family": "layout",
-      "seedId": "layout-003",
-      "seedName": "TKL (80%)",
-      "crawlId": null,
-      "crawlName": null,
-      "similarity": 0.0,
-      "alertTier": "blocking",
-      "recommendationEligible": true
-    },
-    {
       "family": "switch",
       "seedId": "sw-other-005",
       "seedName": "Bsun 민트 키보드 스위치",
@@ -599,6 +529,56 @@
   "informationalPossiblyDiscontinued": [
     {
       "family": "layout",
+      "seedId": "layout-001",
+      "seedName": "60% Standard",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": true
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-002",
+      "seedName": "65% Compact",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": true
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-005",
+      "seedName": "75% Exploded",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": true
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-006",
+      "seedName": "Alice Ergonomic",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": true
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-004",
+      "seedName": "Full-size",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": true
+    },
+    {
+      "family": "layout",
       "seedId": "layout-idx-1853",
       "seedName": "GDK Lab - DK1 TKL 기판",
       "crawlId": null,
@@ -709,6 +689,26 @@
     },
     {
       "family": "layout",
+      "seedId": "layout-007",
+      "seedName": "Split 60",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": true
+    },
+    {
+      "family": "layout",
+      "seedId": "layout-003",
+      "seedName": "TKL (80%)",
+      "crawlId": null,
+      "crawlName": null,
+      "similarity": 0.0,
+      "alertTier": "informational",
+      "recommendationEligible": true
+    },
+    {
+      "family": "layout",
       "seedId": "layout-idx-1867",
       "seedName": "스웨그키 Eave65 전용 기판",
       "crawlId": null,
@@ -778,6 +778,7 @@
     "seed_only is treated as possibly discontinued (missing from latest crawl inventory).",
     "new_in_crawl are browse merge candidates (informational; run merge_inventory_browse_seed dry-run).",
     "blocking alerts require recommendationEligible=true on the seed row.",
+    "layout archetype seed rows (layout-001…007) are reference-only and never blocking seed_only.",
     "Crawl inventory has no explicit stock/품절 flag; title stock markers are stripped at crawl time.",
     "imageUrlChanged compares seed imageUrl to refetched og:image (fixture cache or live HTTP).",
     "Webhooks notify blockingAlertTotal + imageUrlChanged only (Phase 7)."

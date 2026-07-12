@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
 
+from keyboard_recommender.catalog.layout_diagrams import is_layout_archetype_without_swagkey_product
 from keyboard_recommender.catalog.swagkey_crawler_v2 import extract_product_id_from_url
 from keyboard_recommender.catalog.swagkey_seed_inventory_diff import build_match_key, name_similarity, pairing_allowed
 
@@ -411,6 +412,8 @@ def resolve_catalog_source_url(domain: str, item_id: str, *, item_name: str = ""
         return ""
     needle = str(item_id or "").strip()
     if not needle:
+        return ""
+    if family == "layout" and is_layout_archetype_without_swagkey_product(needle):
         return ""
     row = seed_row_index().get((family, needle), {})
     name = (item_name or str(row.get("name") or "")).strip()

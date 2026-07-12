@@ -27,3 +27,8 @@ def resolve_layout_archetype_diagram_url(part_id: str) -> str:
     if not is_layout_archetype_part_id(needle):
         return ""
     return _LAYOUT_DIAGRAM_BY_ID.get(needle, "")
+
+
+def is_layout_archetype_without_swagkey_product(part_id: str) -> bool:
+    """Reference-only archetypes: no 1:1 Swagkey listing (e.g. Split 60)."""
+    return str(part_id or "").strip() == "layout-007"
