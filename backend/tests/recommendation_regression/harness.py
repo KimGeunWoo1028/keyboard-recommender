@@ -4,11 +4,13 @@ from __future__ import annotations
 
 import json
 import random
+import tempfile
 from collections.abc import Iterator, Mapping
 from contextlib import contextmanager
 from dataclasses import dataclass
 from typing import Any
 
+from keyboard_recommender.config.settings import get_settings
 from tests.support.regression import STABLE_SURVEY, strip_volatile_recommendation_fields
 
 DEFAULT_SEED = 20260505
@@ -23,6 +25,23 @@ def deterministic_seed(seed: int = DEFAULT_SEED) -> Iterator[None]:
         yield
     finally:
         random.setstate(state)
+
+
+@contextmanager
+def deterministic_image_urls() -> Iterator[None]:
+    """Resolve product images from seed CDN URLs (no local mirror paths).
+
+    Matches CI where ``data/swagkey_images`` is absent; keeps snapshot/regression
+    stable when developers have downloaded thumbnails locally.
+    """
+    settings = get_settings()
+    previous = settings.swagkey_images_dir
+    with tempfile.TemporaryDirectory() as empty_dir:
+        settings.swagkey_images_dir = empty_dir
+        try:
+            yield
+        finally:
+            settings.swagkey_images_dir = previous
 
 
 def canonicalize_payload(payload: Mapping[str, Any]) -> dict[str, Any]:
