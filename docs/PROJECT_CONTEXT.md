@@ -23,8 +23,8 @@
 | **Backend** | FastAPI, SQLAlchemy 2, PostgreSQL 16, Alembic, Pydantic Settings, Ruff, pytest |
 | **E2E** | Playwright (TypeScript), Chromium |
 | **Infra (로컬)** | Docker Compose (PostgreSQL만) |
-| **CI** | GitHub Actions — 5개 병렬 job + catalog 1:1 coverage audit (warning) |
-| **Python** | 3.11–3.13 (`>=3.11,<3.14`) |
+| **CI** | GitHub Actions — 5개 병렬 job + catalog 1:1 coverage audit (warning) · **Python 3.12** · **Node 22** |
+| **Python** | 3.11–3.13 (`>=3.11,<3.14`; CI는 3.12 고정) |
 
 ---
 
@@ -33,6 +33,7 @@
 ```
 keyboard-recommender/
 ├── README.md
+├── .design-ref/stitch_keyboard_curator/  # Curator 설문 시안 (§4.12)
 ├── pytest.ini                    # 루트에서 pytest → backend/tests
 ├── docker-compose.yml            # Postgres 16만 (backend/frontend 컨테이너 없음)
 ├── run_all_swagkey_pipeline.cmd  # Swagkey 전체 8단계 파이프라인 (Windows)
@@ -60,22 +61,42 @@ keyboard-recommender/
 │   ├── swagkey-catalog-1to1-roadmap.md    # 6탭 실 SKU 1:1 · browse/recommend 이중 풀 (Phase 0–8 ✅)
 │   ├── swagkey-inventory-recheck.md # ⑮ inventory recheck / 품절·신규·imageUrl 알림
 │   ├── staging-feedback-learning-mvp.md # ⑮ feedback flag 스테이징 검증
+│   ├── recommendation-engine-unification-roadmap.txt
+│   ├── recommendation-engine-unification-phase0-baseline.txt
+│   ├── recommendation-engine-unification-phase1-complete.txt
+│   ├── recommendation-engine-unification-phase2-complete.txt
+│   ├── recommendation-engine-unification-phase3-complete.txt
+│   ├── recommendation-engine-unification-phase4-complete.txt
 │   ├── env-configuration.md
 │   ├── production-https.md       # ⑮ production HTTPS 체크리스트
 │   └── quality-testing.md
+├── .cursor/                      # gitignore — Agent 규칙·스킬 (로컬)
+│   ├── rules/swagkey-catalog-1to1.mdc  # 1:1 카탈로그 LOCK (always-applied)
+│   └── skills/git-sync/SKILL.md
 ├── .github/workflows/
 │   ├── ci.yml                    # PR/push 5-job gate
 │   ├── e2e.yml                   # schedule + path-filtered PR + workflow_dispatch
 │   ├── swagkey-inventory-recheck.yml # 주간 fixture recheck + optional webhook
 │   └── swagkey-inventory-recheck-live.yml # 월간 live pipeline + failure notify
 ├── backend/                      # FastAPI + 추천 엔진 + 카탈로그
+│   ├── Makefile                  # Unix/WSL: test · validate · inventory-recheck 등
+│   ├── alembic.ini
+│   ├── .env.example
+│   ├── README.md
 │   ├── data/
-│   │   ├── swagkey_inventory/    # 크롤 CSV·정제 JSON·diff·alert·image artifacts (§9.2–9.4)
+│   │   ├── avatars/              # 업로드 프로필 사진 (gitignore · /media/avatars)
+│   │   ├── catalog_ingestion_manifest.json (+ .template.json)
+│   │   ├── swagkey_inventory/    # 크롤 CSV·정제 JSON·diff·alert·image·1:1 artifacts (§9.2–9.4)
 │   │   ├── swagkey_images/       # mirror 썸네일 바이너리 (.gitignore · §9.4)
 │   │   └── swagkey_html_cache/   # spec scrape HTML (~64)
-│   └── scripts/                  # clean / classify / diff / ops verify 포함
+│   └── scripts/                  # 52개 CLI — clean / classify / 1:1 audit / ops verify 포함
 ├── frontend/                     # Next.js 웹앱
-└── e2e/                          # Playwright E2E
+│   ├── .env.example
+│   ├── next.config.ts            # image remotePatterns · `/api`·`/media` dev proxy
+│   ├── scripts/                  # Alice diagram 튜닝 dev tools (check-alice-align.mjs 등)
+│   └── README.md
+├── e2e/                          # Playwright E2E
+│   └── README.md
 ```
 
 ---
@@ -92,13 +113,13 @@ keyboard-recommender/
 - [x] **결과 페이지** (`/results`) — **Results UX Phase 0–7 (§4.13)** + **Evidence IA Phase 0–4 (§4.14)** + **§4.15 polish** + **§4.16 product-next 갭 수정**  
   · 탭: **추천 요약** · **추천 근거** 2개 (`save_compare`·`최근 활동` 탭 제거 — Continue는 `/mypage?section=saved`)  
   · **공통 신뢰 레이어** (Hero → 탭 사이): Confidence Story · 고정 6축 미니 · highlights ≤2  
-  · Overview: 6축 First View · CTA(**저장**) · 대안 · discovery · «저장한 빌드 보기» 링크  
+  · Overview: 6축 First View · CTA(**저장**) · 대안 · «저장한 빌드 보기» 링크  
   · Evidence: pick 설득(why · ranking why concrete · tradeoff 조건부) · MetricGuide·18축 `<details>` 접힘  
   · **Compare Drawer 제거** (재도입 금지) · stale sessionStorage 재조회 (`responseContractRev: 7`)  
   · `degradedReason` 시 «안정 모드로 추천했어요» 배너
 - [x] **홈 Landing** (`/`) — Hero + FeatureGrid · `WorkshopStrip` 삭제 · `home.viewed` 관측 (§4.16) · Dashboard/Redirect **LOCK**
 - [x] **커뮤니티 용어 해석** — `POST /api/v1/terminology/interpret` + 프론트 `keyboard-terminology/` 모듈
-- [x] **커뮤니티 디스커버리** — `GET /api/v1/builds/discovery` (트렌딩 빌드, 조합, 프로필)
+- ~~커뮤니티 디스커버리~~ — **`GET /api/v1/builds/discovery` 제거** (WorkshopStrip/TrendingBuilds teardown · Phase 0)
 - [x] **스타일 프리셋** — 설문 시작 시 «부드럽고 조용한 성향» 등 3종; `seedAnswers`로 답변 시드 후 **첫 미응답 단계**로 진입 (Phase 3)
 - [x] **«빠른 추천»(mode=quick) UI 제거** (Phase 1) — 프리셋은 설문 시드만, compute 생략 없음
 
@@ -110,12 +131,14 @@ keyboard-recommender/
 - [x] 표시 이름 변경 + 중복 확인
 - [x] 비밀번호 변경, 보안 요약
 - [x] **쿠키 기반 세션** (`kr_session`) — API origin에 설정, `credentials: "include"`
-- [x] DB 마이그레이션: users, auth_sessions, email_verifications, password_resets (004–006)
+- [x] **프로필 아바타** — `POST/DELETE /api/v1/auth/avatar` · `users.avatar_url` · `data/avatars/` → `/media/avatars` (007)
+- [x] DB 마이그레이션: users, auth_sessions, email_verifications, password_resets, avatar_url (004–007)
 
 ### 4.3 마이페이지
 
 - [x] `/mypage` — **개요 · 저장한 빌드 · 계정** 3탭 (활동/비교 탭 제거 · Continue는 `?section=saved`)
 - [x] 북마크 저장/목록/삭제 · master–detail · «추천 결과 다시 보기» (API + 게스트 localStorage 폴백)
+- [x] **활동 API** (`GET /activity`) — Results 탭은 제거됐으나 backend·`saved-recommendations.ts` merge용 **유지**
 - [x] 개요: 취향 6축 스냅샷 · 저장 허브 · 아바타
 - [x] 계정: 프로필 사진·닉네임·비밀번호·세션 로그아웃
 - [x] Vitest smoke (hub/overview/saved/build-stack) · E2E critical-flows mypage
@@ -149,7 +172,7 @@ keyboard-recommender/
 - [x] Swagkey HTML 스크래핑 파이프라인 (스위치 spec + plate/foam 호환)
 - [x] ~64개 HTML 캐시 (`backend/data/swagkey_html_cache/`)
 - [x] Catalog ingestion pipeline (detect → extract → normalize → validate → diff → ingest)
-- [x] Alembic 마이그레이션 001–006 (카탈로그 + eval + auth)
+- [x] Alembic 마이그레이션 001–007 (카탈로그 + eval + auth + avatar)
 - [x] **Swagkey 크롤 인벤토리 파이프라인 ①~⑨** (2026-07-06) — 아래 §9 참고
 - [x] **Phase 2 ⑩~⑮** (2026-07-08) — 추천↔쇼핑 링크 · 품질 cleanup · case/keycap 축 · 카탈로그 UX · 운영·품질 — §4.10
 - [x] **카탈로그 브라우징 UI** (`/catalog`) — **탭 6개**: 스위치 · 플레이트 · 폼 · **레이아웃** · 케이스/키트 · 키캡 (§4.15)
@@ -160,7 +183,7 @@ keyboard-recommender/
 - [x] **운영 ⑮** — inventory recheck→품절/신규 알림 · E2E schedule · feedback/HTTPS 검증 스크립트
 - [x] **Phase F Ops 자동화** — live 월간 pipeline · catalog alert webhook · Feedback dry-run (`remaining-work-phases.md`)
 - [x] **제품 이미지 파이프라인** (2026-07-10~11) — `docs/swagkey-product-images-roadmap.md` **Phase 0–8 완료**
-  · **0–4:** `og:image` 추출 → `swagkey_product_images.json` (285) → inventory **v3** 287/293 → seed **167/179** `imageUrl`
+  · **0–4:** `og:image` 추출 → `swagkey_product_images.json` (**392** unique) → inventory **v3** 287/293 → seed `imageUrl` (**317/331**, ≈96%)
   · **5–6:** API `imageUrl` · FE `catalog-part-thumbnail` · `cdn.imweb.me` remotePatterns
   · **6.5–6.6:** browse 정책 (`catalog_browse_policy.py`) — idx dedup · HTTP 404 **12 idx** 제외 · 레이아웃 archetype sanitize · fuzzy 이미지 merge 금지
   · **7:** 로컬 mirror `data/swagkey_images/{idx}.{ext}` · `/media/swagkey-images` · `download_swagkey_images.py` · 정책 `backend/docs/swagkey-image-storage-policy.md`
@@ -184,13 +207,14 @@ keyboard-recommender/
 
 - **seed ingestion:** `swagkey_products.seed.json` — **331** rows (`run_swagkey_catalog_regression.py`)
 - **게이트:** `catalog_sample.is_recommendation_eligible_row` · `promote_to_recommendation_pool.py` (dry-run 기본)
+- **seed `recommendationEligible: true`:** **179** rows · **게이트 후 recommend 풀:** **164** (`audit_recommendation_pool.py`)
 - **검증:** `run_swagkey_catalog_regression.py` — **126** pytest passed (2026-07-12)
 
-**이미지 (2026-07-10~11):** seed `imageUrl` **318/331** (96%) · local mirror `data/swagkey_images/` · `audit_browse_image_coverage.py`
+**이미지 (2026-07-10~12):** seed `imageUrl` **317/331** (≈96%) · `audit_browse_image_coverage.py` = browse **정책 listable** 행 기준 100% (family별 · raw seed 건수와 다를 수 있음) · local mirror `data/swagkey_images/` (gitignore)
 
 **Full catalog JSON (ops 전용, UI 미노출):** `swagkey_catalog_full.json` **153**건 — API `GET /catalog/full` 유지 · 프론트 browse는 seed **6탭**만
 
-**inventory vs browse gap (coverage warning CI):** switch/keycap/layout 일부 family는 inventory 재크롤 전 gap 존재 — `audit_catalog_1to1_coverage.py --check-threshold --warn-only` (Phase 7)
+**inventory vs browse gap (coverage warning CI):** switch/keycap/layout 일부 family는 inventory 재크롤 전 gap 존재 — `audit_catalog_1to1_coverage.py --check-threshold --warn-only` (Phase 7). **browse 건수 3종:** (1) seed browse pool (`audit_recommendation_pool.py`) (2) 정책 listable (`catalog_browse_policy.py` · 404/dedup) (3) image audit listable (`audit_browse_image_coverage.py`) — family별로 다를 수 있음
 
 ### 4.7 Frontend 부가 기능
 
@@ -199,8 +223,8 @@ keyboard-recommender/
 - [x] 다크/라이트/시스템 테마 (`next-themes`, **기본 다크**)
 - [x] Internal Debug UI (`/debug/*`) — `NEXT_PUBLIC_INTERNAL_DEBUG=1` 게이트
 - [x] A/B 실험 할당 (`experiments.ts`) → 이벤트에 첨부
-- [x] API 미연결 시 mock/engine 폴백
-- [x] Mixed content 경고 (HTTPS 페이지 + HTTP API)
+- [x] API 미연결 시 **client lite fallback** — `recommendation-engine/` + `results-lite-compare.tsx` (서버 ranked 경로와 별도; Compare Drawer 아님)
+- [x] Mixed content 경고 (`RuntimeApiGuards` — HTTPS 페이지 + HTTP API)
 
 ### 4.11 Stitch(KeebSmith) UI 마이그레이션 (2026-07-08~09)
 
@@ -289,7 +313,7 @@ keyboard-recommender/
 
 ### 4.13 Results UX 마이그레이션 (2026-07-09, Phase 0–7 **완료**)
 
-> **마스터 로드맵:** `docs/results-ux-roadmap.md` (v6.1)  
+> **마스터 로드맵:** `docs/results-ux-roadmap.md` (v6.2)  
 > **원칙:** 엔진·contract·sessionStorage 변경 없음 · `data-testid` 유지 · Product Decision은 Phase 4만
 
 | Phase | 상태 | 내용 |
@@ -309,7 +333,7 @@ keyboard-recommender/
 |------|------|
 | Hero | 빌드 제목 · MatchGauge · trait 배지 |
 | **공통 신뢰 레이어** (§4.14) | Confidence Story · 6축 미니 · highlights — 탭 위 고정 |
-| 추천 요약 | 6축 · 저장 CTA · 대안 · discovery · **마이페이지 저장 링크** (`/mypage?section=saved`) |
+| 추천 요약 | 6축 · 저장 CTA · 대안 · **마이페이지 저장 링크** (`/mypage?section=saved`) |
 | 추천 근거 | pick 설득 · MetricGuide·18축 접힘 (`e2e-pick-explanations`) |
 
 **탭 바:** `h-10` · `text-base` · `px-5` pill (§4.15)
@@ -324,7 +348,7 @@ keyboard-recommender/
 | `results-confidence-story.tsx` | Confidence Story (`e2e-confidence-story`) |
 | `results-trait-mini-profile.tsx` | 고정 6축 미니 (`e2e-trait-mini-profile`) |
 | `results-build-highlights.tsx` | highlights ≤2 (`e2e-build-highlights`) |
-| `results-overview-tab.tsx` | 6축 · CTA · 대안 · discovery |
+| `results-overview-tab.tsx` | 6축 · CTA · 대안 |
 | `results-evidence-tab.tsx` | Evidence pick·profile·context |
 | `results-evidence-pick-card.tsx` | pick why · ranking why · tradeoff |
 | `results-evidence-ranking-why-content.ts` | ranking gap 로직 · 카피 |
@@ -332,9 +356,10 @@ keyboard-recommender/
 | `results-trait-display.ts` | 14축 → 6축 매핑 (LOCKED) |
 | `results-text-utils.ts` | `formatEvidenceWhyLine` · `formatEvidenceTradeoff` |
 | `results-tab-shell.tsx` | Backend/Lite 탭 바 (`overview` \| `evidence` 2탭) |
-| ~~`compare-drawer.tsx`~~ | **제거됨** — Compare 재도입 금지 |
+| `results-lite-compare.tsx` | **API 미연결 lite fallback** — client engine 비교 카드 (`LiteResultTabBar` 경로) |
+| ~~`compare-drawer.tsx`~~ | **제거됨** — Compare Drawer 재도입 금지 (lite fallback과 별개) |
 | ~~`comparison-hub.tsx`~~ | **제거·미사용** |
-| `results-quality-diagnostics.tsx` | 품질 요약 (`e2e-quality-diagnostics`, legacy) |
+| `results-quality-status.tsx` | 품질 상태 derive (`deriveQualityStatus`) — Trust Layer·Confidence Story에서 재사용 · **독립 UI 카드 미노출** (`e2e-quality-status` count 0) |
 
 **이벤트 (`scenario_id: results_ux_v1`)**
 
@@ -411,7 +436,7 @@ keyboard-recommender/
 
 **카탈로그 (`/catalog`)**
 
-- [x] **6번째 탭 «레이아웃»** — `GET /api/v1/layouts` · seed 22건 · `?family=layout` · 홈 FeatureGrid·Overview «레이아웃 카탈로그» 링크
+- [x] **6번째 탭 «레이아웃»** — `GET /api/v1/layouts` · browse **45건** (archetype 7 + 실 PCB 38) · `?family=layout` · 홈 FeatureGrid·Overview «레이아웃 카탈로그» 링크
 - [x] **카테고리 탭 타이포** — family pill `font-headline text-sm font-semibold` · subtype `font-body`
 - [x] **페이지네이션** — `catalog-pagination.tsx`: `01` `02` `03` 숫자만 · 활성=밝음/비활성=muted · 5페이지 초과 시 ellipsis · chevron·슬라이딩 라인 없음 · `buildPaginationItems()` + Vitest
 - [x] **페이지 전환 스크롤** — `catalogTopRef` + `scroll-mt-24` · 클릭 즉시 `window.scrollTo(0,0)` + `scrollIntoView`
@@ -444,7 +469,7 @@ keyboard-recommender/
 
 | Phase | 상태 | 내용 |
 |-------|------|------|
-| **0** Home teardown | ✅ | `WorkshopStrip` 제거 · `workshop-strip.tsx` 삭제 · Hero → FeatureGrid → Footer |
+| **0** Home teardown | ✅ | `WorkshopStrip` 제거 · `workshop-strip.tsx` 삭제 · Hero(**`HomeWorkshopPreview` 장식 포함**) → FeatureGrid → Footer |
 | **1** Results | ✅ | 로드맵 vs 코드 감사 · 추가 구현 Task 없음 · Compare 미복원 |
 | **2** Evidence | ✅ | 유지/갭만 · ranking-why **concrete**를 pick 카드에 재연결 · fallback UI 숨김 · `NEXT_PUBLIC_EVIDENCE_RANKING_WHY=0` |
 | **3** MyPage | ✅ | 개요·저장·계정 스모크 · `MyPageComingSoon` 삭제 · Vitest + E2E hub |
@@ -480,7 +505,7 @@ keyboard-recommender/
 
 ### 4.8 테스트 & CI
 
-- [x] Backend: **90+** pytest (regression, snapshot, contract, catalog browse, keycaps, **swagkey/ops**)
+- [x] Backend: **~77** pytest 모듈 + regression/snapshot/contract/benchmark 버킷 (catalog browse, keycaps, **swagkey/ops**)
 - [x] Frontend: Vitest **catalog contract 등** (딥링크 `?family=` 형식)
 - [x] E2E: Playwright — `e2e.yml` **주간 schedule + path-filtered PR + workflow_dispatch** (수동 전용 해제)
 - [x] CI 5-pillar: regression / contract / unit / frontend / e2e
@@ -500,7 +525,7 @@ keyboard-recommender/
 | **B** Observe | ✅ 인프라 · 🔄 표본 | Unlock 14일/≥50 `home.viewed` · guest+auth · `unlock_ready` 전 **제품 UI LOCK** |
 | **C** Analytics | ✅ | funnel CLI/CSV · Compare 성공지표 제외 |
 | **D** Visual 375 | ✅ | `e2e/tests/results-visual-375.spec.ts` · `npm run test:visual` |
-| **E** Keycap | ✅ | curated 12→18 · survey/NL 축 · seed 179 |
+| **E** Keycap | ✅ | curated 12→18 · survey/NL 축 · recommend keycap **18** (browse **62**) |
 | **F** Ops | ✅ F-1~F-3 · ⏸ F-4 | live pipeline · webhook · Feedback dry-run · **F-4 Git은 요청 시만** |
 
 #### 아직 남은 것 (이 섹션의 실질 잔여)
@@ -760,6 +785,8 @@ API (FastAPI routes)
 | POST | `/display-name` |
 | POST | `/change-password` |
 | GET | `/display-name-availability` |
+| POST | `/avatar` |
+| DELETE | `/avatar` |
 
 #### Recommendations — `/api/v1/recommendations`
 | Method | Path | 설명 |
@@ -770,7 +797,7 @@ API (FastAPI routes)
 | GET | `/saved` | 북마크 목록 |
 | POST | `/saved/remove` | 북마크 삭제 |
 | POST | `/saved/update` | 북마크 메모 수정 |
-| GET | `/activity` | 활동 타임라인 |
+| GET | `/activity` | 활동 타임라인 (**Results UI 제거 · API 유지** — saved/클라이언트 merge용) |
 | GET | `/nl-vocab-candidates` | 미등록 NL 토큰 후보 |
 | POST | `/activity/remove` | 활동 삭제 |
 
@@ -779,12 +806,7 @@ API (FastAPI routes)
 |--------|------|
 | POST | `/interpret` |
 
-#### Builds — `/api/v1/builds`
-| Method | Path |
-|--------|------|
-| GET | `/discovery` |
-
-#### Catalog — `/api/v1/switches`, `/plates`, `/foam`, `/cases`, `/keycaps`
+#### Catalog — `/api/v1/switches`, `/plates`, `/foam`, `/layouts`, `/cases`, `/keycaps`
 | Method | Path | 설명 |
 |--------|------|------|
 | GET | `/switches` | 스위치 목록 (`?subtype=linear` · `?q=` · limit/offset) |
@@ -793,11 +815,11 @@ API (FastAPI routes)
 | GET | `/plates/{id}` | 플레이트 상세 |
 | GET | `/foam` | 폼 목록 |
 | GET | `/foam/{id}` | 폼 상세 |
-| GET | `/layouts` | 레이아웃 목록 (`?q=` · limit/offset) |
+| GET | `/layouts` | 레이아웃 목록 — browse **45건** (`?q=` · limit/offset) |
 | GET | `/layouts/{id}` | 레이아웃 상세 |
-| GET | `/cases` | 케이스/키트 목록 (`?subtype=kit` 등) |
+| GET | `/cases` | 케이스/키트 목록 (`?subtype=kit` 등) — browse **126건** |
 | GET | `/cases/{id}` | 케이스/키트 상세 |
-| GET | `/keycaps` | 키캡 목록 (seed curated **18**건) |
+| GET | `/keycaps` | 키캡 목록 — browse **62건** (recommend **18**) |
 | GET | `/keycaps/{id}` | 키캡 상세 |
 | GET | `/catalog/full` | ops용 full catalog (`?catalogCategory=…`) — **프론트 browse 미사용** |
 | GET | `/catalog/full/{id}` | full catalog 항목 상세 — **프론트 browse 미사용** |
@@ -815,9 +837,11 @@ Frontend: `/catalog` — **6탭** (`?family=switch|plate|foam|layout|case|keycap
 | GET | `/analytics/kpis` |
 | POST | `/benchmarks/compare-snapshots` |
 
-### 5.4 DB 모델 (24 테이블)
+### 5.4 DB 모델 (22 테이블)
 
-**카탈로그:**
+> **키캡 browse/recommend:** PostgreSQL 테이블 없음 — `swagkey_products.seed.json` + `catalog_sample.py` / `GET /keycaps` (seed-only 런타임).
+
+**카탈로그 (DB):**
 - `recommendation_traits`, `switches`, `switch_trait_scores`
 - `plates`, `plate_trait_scores`
 - `foam_configs`, `foam_config_trait_scores`
@@ -825,13 +849,15 @@ Frontend: `/catalog` — **6탭** (`?family=switch|plate|foam|layout|case|keycap
 - `keyboard_cases`, `keyboard_case_trait_scores`
 
 **인증:**
-- `users`, `auth_sessions`, `auth_email_verifications`, `auth_password_resets`
+- `users` (`avatar_url` nullable), `auth_sessions`, `auth_email_verifications`, `auth_password_resets`
 
 **평가 영속:**
 - `eval_recommendation_runs`, `eval_snapshots`, `eval_metrics`, `eval_diagnostics`
 - `eval_confidence_samples`, `eval_benchmark_runs`, `eval_events`
 
-**마이그레이션:** `001` → `002` → `003` → `004` → `005` → `006`
+**마이그레이션:** `001` → `002` → `003` → `004` → `005` → `006` → `007` (`users.avatar_url`)
+
+**정적 미디어 (런타임):** `/media/avatars` (`data/avatars/`) · `/media/swagkey-images` (`data/swagkey_images/`)
 
 ### 5.5 Backend 스크립트 (`backend/scripts/`)
 
@@ -875,8 +901,24 @@ Frontend: `/catalog` — **6탭** (`?family=switch|plate|foam|layout|case|keycap
 | **`check_production_https_config.py`** | **⑮ production HTTPS env offline check** |
 | **`verify_ops_quality_15.py`** | **⑮ 운영·품질 일괄 로컬 검증** |
 | **`run_swagkey_catalog_regression.py`** | **⑥ ingestion + pytest + (선택) frontend test** |
+| **`merge_inventory_browse_seed.py`** | **1:1 Phase 3 browse seed merge (`--dry-run` 기본)** |
+| **`audit_catalog_1to1_coverage.py`** | **1:1 inventory↔browse gap · CI `--check-threshold --warn-only`** |
+| **`audit_recommendation_pool.py`** | **recommend vs browse 풀 게이트 리포트** |
+| **`promote_to_recommendation_pool.py`** | **`recommendationEligible` 승격 후보 (`--dry-run` 기본)** |
+| **`audit_browse_image_coverage.py`** | **browse `imageUrl` 커버리지 감사** |
+| **`merge_swagkey_inventory_images.py`** | **v2 + imageUrl → `swagkey_inventory.v3.json`** |
+| **`extract_swagkey_images_from_cache.py`** | **HTML 캐시에서 `og:image` 추출 (이미지 Phase 0)** |
+| **`apply_seed_quality_cleanup.py`** | **⑪ seed 품질 cleanup (단종·중복·URL)** |
+| **`apply_layout_source_urls.py`** | **레이아웃 archetype `sourceUrl` 정책 적용** |
+| **`spike_phase0_swagkey_images.py`** | **이미지 파이프라인 Phase 0 스파이크** |
+| **`record_switch_image_remediation.py`** | **스위치 이미지 수동 보정 기록** |
+| **`report_funnel_analytics.py`** | **Phase C 퍼널 분석 CLI** |
+| **`report_observe_aggregates.py`** | **Phase B Observe 집계 (`home.viewed` 등)** |
+| **`regen_stable_snapshot.py`** | **regression/snapshot golden 재생성** |
 
-### 5.6 Backend 테스트 (45+ 모듈)
+> **Makefile** (`backend/Makefile`): `make test` · `validate` · `migrate-check` · `inventory-recheck` · `feedback-verify` · `https-config-check` (Unix/WSL; Windows는 `python scripts/…` 직접 실행)
+
+### 5.6 Backend 테스트 (~77 모듈 + 4 버킷)
 
 | 영역 | 파일 예시 |
 |------|-----------|
@@ -889,7 +931,13 @@ Frontend: `/catalog` — **6탭** (`?family=switch|plate|foam|layout|case|keycap
 | **Catalog browse** | **`test_catalog_browse.py`** · **`test_catalog_browse_policy.py`** (switches·plates·foam·**layouts**·cases·**keycaps**) |
 | **Catalog change alert** | **`test_catalog_change_alert.py`** · **`test_catalog_change_alert_webhook.py`** |
 | **Swagkey product images** | **`test_swagkey_image_extractor.py`** · **`test_swagkey_image_merge.py`** · **`test_swagkey_image_mirror.py`** · **`test_swagkey_image_url_recheck.py`** |
+| **Catalog 1:1 / pool gate** | **`test_catalog_1to1_coverage.py`** · **`test_recommendation_pool_gate.py`** · **`test_swagkey_recommendation_promotion.py`** · **`test_swagkey_inventory_browse_seed_merge.py`** · **`test_browse_image_coverage.py`** |
+| **Observe / funnel** | **`test_observe_aggregate.py`** · **`test_funnel_analytics.py`** · **`test_unified_event_pipeline.py`** |
+| **Layout diagrams** | **`test_layout_diagrams.py`** |
 | **Keycap seed / compat** | `test_keycap_seed_builder.py`, `test_keycap_compatibility_rules.py` |
+| **Resilience / source URL** | `test_recommendation_resilient_fallback.py`, `test_recommendation_source_url.py`, `test_seed_quality.py` |
+| **Swagkey image fetch** | `test_swagkey_image_inventory_fetch.py`, `test_swagkey_image_cache_backfill.py` |
+| **E2E fixture alignment** | `test_e2e_survey_fixture_alignment.py` |
 | Auth/Safety | `test_auth_cookie_settings.py`, `test_safety_layer.py` |
 | Regression | `recommendation_regression/test_recommendation_regression.py` |
 | Snapshot | `snapshot_testing/test_recommendation_snapshot.py` |
@@ -918,7 +966,7 @@ Frontend: `/catalog` — **6탭** (`?family=switch|plate|foam|layout|case|keycap
 
 | Route | 인증 | 설명 |
 |-------|------|------|
-| `/` | 공개 | 홈 Landing — Hero(«추천 설문 시작») + Feature Grid (WorkshopStrip 제거) |
+| `/` | 공개 | 홈 Landing — Hero(«추천 설문 시작» · 우측 `HomeWorkshopPreview` 장식) + Feature Grid (WorkshopStrip 제거) |
 | `/auth` | 공개 | 로그인/회원가입 |
 | `/auth/forgot-password` | 공개 | 비밀번호 재설정 요청 |
 | `/auth/reset-password` | 공개 | 비밀번호 재설정 확인 |
@@ -940,13 +988,15 @@ Frontend: `/catalog` — **6탭** (`?family=switch|plate|foam|layout|case|keycap
 | | `SurveySegmentedProgress` | `N / 5 단계` 세그먼트 바 + `약 1분` |
 | | `SurveyOptionIcon` / `SurveyOnboardingStyleIcon` | 설문·입구 카드 Lucide 아이콘 (`survey-option-icon.tsx`) |
 | | `ResultsView` | sessionStorage hydration + API refresh |
-| | `RecommendationResultView` | 오케스트레이터 · 탭·북마크·discovery · `degradedReason` (Compare Drawer 제거) |
+| | `RecommendationResultView` | 오케스트레이터 · 탭·북마크 · `degradedReason` · backend ranked vs lite fallback 분기 |
 | | `results/*` | Overview · Evidence · Trust Layer · Header · Quality (§4.13–4.16) |
 | `features/mypage/` | `MyPageHub` | 개요·저장·계정 · `?section=` URL 동기화 · Continue 본진 (`activity`→`saved`) |
 | `features/catalog/` | `CatalogBrowseView` | **6탭**·subtype 필터·검색(개수 행)·`CatalogPagination`·glass 카드 |
 | | `CatalogPagination` | `01` 형식 숫자 페이지네이션 · ellipsis |
 | | `CatalogDetailPanel` | traits · metadata · 스웨그키 링크 · 모달 닫기 |
-| `features/home/` | `Hero`, `FeatureGrid`, `HomeLandingObserve`, `HomeWorkshopPreview` | Landing · CTA · `home.viewed` (§4.16) · WorkshopStrip 삭제 |
+| | `CompatibleLayoutChips` | 케이스↔레이아웃 호환 칩 (`compatible-layout-chips.tsx`) |
+| `features/home/` | `Hero`, `FeatureGrid`, `HomeLandingObserve`, `HomeWorkshopPreview` | Landing · CTA · Hero 우측 **장식 preview** (`home-workshop-preview.tsx`) · `home.viewed` (§4.16) · WorkshopStrip 삭제 |
+| `providers/` | `AuthSessionProvider`, `ThemeProvider`, `RuntimeApiGuards` | `components/providers/` — 세션·테마·API 미연결/mixed-content 경고 |
 | `auth/` | `RequireAuth` | `GET /auth/me` → 미인증 시 redirect |
 | `layout/` | `SiteHeader`, `SiteFooter`, `HeaderCatalogSearch`, `AuthControls`(`AuthHeaderProvider`·`AuthNickname`·`AuthSessionAction`), `ThemeToggle` | TopNav·푸터·카탈로그 검색·인증·테마 (§4.15) |
 | `app/` | `error.tsx`, `global-error.tsx` | 세그먼트/루트 에러 경계 |
@@ -960,7 +1010,6 @@ Frontend: `/catalog` — **6탭** (`?family=switch|plate|foam|layout|case|keycap
 | `recommendations.ts` | `POST /recommendations/compute` (9s timeout, 12s retry; **mode 필드 없음**) |
 | `recommendation-response.ts` | 응답 파싱/검증 |
 | `saved-recommendations.ts` | `/saved`, `/activity`, `/events` |
-| `discovery.ts` | `GET /builds/discovery` |
 | **`catalog.ts`** | **`GET /switches|plates|foam|layouts|cases|keycaps`** (seed browse만; full catalog 클라이언트 제거됨) |
 | `catalog-links.ts` | `/catalog?family=&subtype=&q=` deep link |
 | `onboarding-events.ts` | 온보딩/KPI/Results UX/`home.viewed` (`home_landing_v1` · `results_ux_v1`: `results_tab_click`) |
@@ -970,7 +1019,7 @@ Frontend: `/catalog` — **6탭** (`?family=switch|plate|foam|layout|case|keycap
 **Base URL:** `NEXT_PUBLIC_API_URL` (예: `http://localhost:8010`)  
 **중요:** 브라우저 호스트와 API URL 호스트 일치 필수 (`localhost` vs `127.0.0.1` — 쿠키 공유 안 됨)
 
-**Dev proxy 옵션:** `INTERNAL_API_PROXY_TARGET` → Next.js가 `/api/*`를 backend로 rewrite
+**Dev proxy 옵션:** `INTERNAL_API_PROXY_TARGET` → Next.js `next.config.ts`가 `/api/*` **및 `/media/*`** (avatars·swagkey mirror)를 backend로 rewrite
 
 ### 6.4 클라이언트 사이드 엔진 (API 폴백용)
 
@@ -981,7 +1030,7 @@ Frontend: `/catalog` — **6탭** (`?family=switch|plate|foam|layout|case|keycap
 | `nl-preference/` | NL 파서 → engine traits |
 | `recommendation-mock.ts` | UI-facing `RecommendedBuild` 래퍼 |
 
-### 6.5 Frontend 테스트 (Vitest)
+### 6.5 Frontend 테스트 (Vitest, **31** 파일)
 
 - `recommendation-response.contract.test.ts` — API 응답 파싱 contract (`runMode`, `degradedReason`)
 - **`catalog-response.contract.test.ts`** — catalog list/detail 파싱 · `catalogHref({ family })` · layout family
@@ -993,6 +1042,7 @@ Frontend: `/catalog` — **6탭** (`?family=switch|plate|foam|layout|case|keycap
 - `survey-step-navigation.test.ts` — `firstUnansweredStepIndex` (Phase 3)
 - `drift-bundle-view.test.tsx` — drift UI
 - `collapsible-json.test.tsx` — JSON viewer toggle
+- **기타:** `mypage-*.smoke.test.tsx` · `layout-diagram.test.ts` · `layout-catalog-links.test.ts` · `layout-size.test.ts` · `swagkey-source-links.test.ts` · `home-landing.phase4.test.ts` · `home-landing-observe.test.tsx` · `phase4-observe-events.test.ts` · `results-evidence-pick-card.test.tsx` · `results-evidence-ranking-why-content.test.ts` · `results-quality-status.test.ts` · `results-text-utils.test.ts` · `results-build-utils.test.ts` · `saved-recommendations.activity.test.ts` 등
 
 **카탈로그 UX 규칙 (2026-07-08, §4.15 보강):**
 - 카드: 제목·설명 2줄 고정 높이 · `break-keep`(띄어쓰기 기준 줄바꿈) · 하단 태그 `mt-auto` 정렬 · `CardHeader` border 없음
@@ -1036,20 +1086,31 @@ Frontend: `/catalog` — **6탭** (`?family=switch|plate|foam|layout|case|keycap
 
 ```
 e2e/
-├── playwright.config.cjs       # baseURL: 127.0.0.1:3000, CI: workers=1, retries=2
+├── package.json                # test · test:visual · test:visual:update · test:all
+├── playwright.config.cjs       # baseURL: 127.0.0.1:3000 · projects: chromium, visual-375
 ├── scripts/start-stack.cjs     # uvicorn + next; CI에서는 pip install skip
 ├── fixtures/deterministic-survey.json
 └── tests/
     ├── auth.setup.ts           # e2e-ci@keyboard.local 로그인 → storage state 저장
-    ├── critical-flows.spec.ts  # 온보딩→프리셋 스킵→설문→결과→저장→비교→마이페이지
+    ├── critical-flows.spec.ts  # 온보딩→프리셋 스킵→설문→결과→저장→마이페이지 (Compare UI 없음)
     ├── recommendation-survey.spec.ts
-    └── recommendation-nlp.spec.ts
+    ├── recommendation-nlp.spec.ts
+    ├── results-evidence-phase4.spec.ts   # Evidence pick·ranking-why E2E
+    ├── results-visual-375.spec.ts        # 375px 스크린샷 (`npm run test:visual`)
+    ├── fixture-validation.spec.ts
+    └── helpers/
+        ├── survey-flow.ts
+        └── results-flow.ts
 ```
+
+**E2E 스크립트:** `npm test` (chromium) · `npm run test:visual` (visual-375) · `npm run test:all`
 
 **E2E 유저:** `e2e-ci@keyboard.local` / `E2e_test!9` (환경변수로 override 가능)
 
-**E2E workflow (`.github/workflows/e2e.yml`):** schedule(주간) + path-filtered `pull_request` + `workflow_dispatch`  
-**Inventory recheck:** fixture 주간 (`.github/workflows/swagkey-inventory-recheck.yml`) · live 월간 (`.github/workflows/swagkey-inventory-recheck-live.yml`) · secret `CATALOG_CHANGE_ALERT_WEBHOOK_URL`
+**E2E workflow (`.github/workflows/e2e.yml`):** Mon **06:00 UTC** schedule + path-filtered `pull_request` + `workflow_dispatch`  
+**Inventory recheck:** fixture Mon **09:00 UTC** (`.github/workflows/swagkey-inventory-recheck.yml` · `workflow_dispatch`: `fail_on_alert`, `notify_webhook`, `check_image_urls`) · live 월간 (`swagkey-inventory-recheck-live.yml`) · secret `CATALOG_CHANGE_ALERT_WEBHOOK_URL`
+
+**E2E API 포트:** Playwright `start-stack.cjs`는 backend **8000** · 로컬 dev 기본 **8010** (§10) — `NEXT_PUBLIC_API_URL`을 모드에 맞게 설정
 
 ### 7.2 CI Jobs (`.github/workflows/ci.yml`)
 
@@ -1057,7 +1118,7 @@ e2e/
 |-----|-----------|
 | `quality-regression` | recommendation_regression, snapshot, benchmark |
 | `quality-contract` | API contract tests |
-| `quality-unit` | Ruff, Alembic, schema smoke, unit/integration · ops scripts(alert/feedback/HTTPS) |
+| `quality-unit` | Ruff, Alembic, schema smoke, unit/integration · catalog 1:1 coverage audit (warning, `continue-on-error`) · ops scripts(alert/feedback/HTTPS) |
 | `frontend` | ESLint, Vitest, production build |
 | `quality-e2e` | Alembic + seed_e2e_user + Playwright |
 
@@ -1078,11 +1139,20 @@ e2e/
 | `DEBUG` | `false` | production에서 강제 false |
 | `ENABLE_EVALUATION_PERSISTENCE` | false | eval DB 저장 |
 | `ENABLE_FEEDBACK_LEARNING_MVP` | false | 피드백 학습 |
-| `SCALING_PROFILE` | `medium` | low/medium/high/custom |
+| `ENABLE_UNIFIED_EVENT_INGESTION` | true | persistence on 시 `eval_events` 수집 (best-effort) |
+| `ENABLE_RESILIENT_COMPUTE_FALLBACK` | true | full compute 실패 시 degraded 재시도 |
+| `ENABLE_RECOMMENDATION_CACHE` | true | compute 응답 캐시 |
+| `SCALING_PROFILE` | `custom` (코드) | low/medium/high/custom · `.env.example`는 `medium` 권장 |
+| `SWAGKEY_IMAGES_DIR` | `backend/data/swagkey_images` | mirror 썸네일 경로 |
+| `CATALOG_CHANGE_ALERT_WEBHOOK_URL` | — | inventory recheck blocking 알림 (커밋 금지) |
+| `OPERATIONAL_ALERT_WEBHOOK_URL` | — | 운영 알림 대체 env alias |
+| `SWAGKEY_PRODUCTS_CSV` | — | 외부 크롤 CSV 경로 override |
 | `INTERNAL_DEBUG_API_ENABLED` | — | debug API 게이트 |
 | `INTERNAL_DEBUG_TOKEN` | — | debug API 토큰 |
 | `AUTH_COOKIE_SECURE` | tier별 자동 | |
 | `EMAIL_PROVIDER` | smtp | smtp/resend |
+| `avatar_upload_dir` | `backend/data/avatars` | 프로필 사진 저장 경로 |
+| `avatar_max_bytes` | 2097152 (2MB) | 아바타 업로드 최대 크기 |
 
 > **주의:** Settings는 CWD 무관하게 `backend/.env` 절대경로 로드 (Alembic 포함)
 
@@ -1094,6 +1164,9 @@ e2e/
 | `INTERNAL_API_PROXY_TARGET` | Optional | dev proxy |
 | `INTERNAL_DEBUG_TOKEN` | Optional | server-only debug token |
 | `NEXT_PUBLIC_INTERNAL_DEBUG` | Optional | `1` → `/debug` 노출 |
+| `NEXT_PUBLIC_EVIDENCE_RANKING_WHY` | Optional | `0` → Evidence ranking-why concrete 비활성 (롤백) · `frontend/.env.example`에는 미포함 |
+
+> 전체 플래그·튜닝: `backend/src/keyboard_recommender/config/settings.py` · `backend/.env.example` · `docs/env-configuration.md`
 
 ---
 
@@ -1149,16 +1222,16 @@ run_swagkey_inventory_recheck.py --check-image-urls
 
 | 산출 / 경로 | 설명 |
 |-------------|------|
-| `swagkey_product_images.json` | productId → `imageUrl` (**285** unique) |
+| `swagkey_product_images.json` | productId → `imageUrl` (**392** unique) |
 | `product_image_html_cache/` | 이미지 fetch HTML 캐시 (`{idx}.html`) — fixture recheck 입력 |
-| `data/swagkey_images/` | 로컬 mirror (**141** files · git 제외) |
+| `data/swagkey_images/` | 로컬 mirror (gitignore · clone마다 건수 상이) |
 | `swagkey_image_mirror_report.json` | mirror 다운로드 리포트 |
 | `image_url_recheck_report.json` | seed vs refetched `og:image` diff |
 | `catalog_browse_audit_report.json` | browse shared/missing image 감사 |
 
 **핵심 모듈:** `swagkey_image_extractor.py` · `swagkey_image_merge.py` · `swagkey_image_mirror.py` · `swagkey_image_url_recheck.py` · `catalog_browse_policy.py` · `infrastructure/swagkey_images.py`
 
-**browse 정책 (Phase 5–6):** `idx` dedup · `BROWSE_EXCLUDED_SWAGKEY_IDX` (404 12건) · layout archetype `referenceLayout` + diagram sanitize · 실 PCB browse 허용 · recommend는 archetype만
+**browse 정책 (Phase 5–6):** `idx` dedup · `BROWSE_EXCLUDED_SWAGKEY_IDX` (404 12건) · layout archetype `referenceLayout` + diagram sanitize · 실 PCB browse 허용 · recommend는 archetype만 · **image audit** = listable 행 기준 (`audit_browse_image_coverage.py`)
 
 **로컬 검증:**
 
@@ -1206,7 +1279,7 @@ pytest tests/test_swagkey_image_mirror.py tests/test_swagkey_image_url_recheck.p
 | `swagkey_products_with_urls.csv` | ↑ | source_url + swagkey_product_id 포함 |
 | `swagkey_inventory.v2.json` | `merge_swagkey_inventory_urls.py` | v1 + URL 필드 (293/293 merge) |
 | `swagkey_inventory.v3.json` | `merge_swagkey_inventory_images.py` | v2 + `imageUrl` (**287/293**) |
-| `swagkey_product_images.json` | `extract_swagkey_images_from_cache.py` + `extract_swagkey_product_images.py` | productId → imageUrl (**285** unique) |
+| `swagkey_product_images.json` | `extract_swagkey_images_from_cache.py` + `extract_swagkey_product_images.py` | productId → imageUrl (**392** unique) |
 | `image_seed_merge_report.json` | `merge_image_urls_into_seed.py` | seed imageUrl merge 리포트 |
 | `new_in_crawl_targets/` | `generate_new_in_crawl_spec_targets.py` | spec scrape targets (⑤ 전 46건) |
 | `new_in_crawl_specs/` | `extract_new_in_crawl_specs.py` | 추출된 spec JSON |
@@ -1223,6 +1296,30 @@ pytest tests/test_swagkey_image_mirror.py tests/test_swagkey_image_url_recheck.p
 | `catalog_browse_audit_report.json` | `audit_catalog_browse_issues.py` | browse missing/shared image |
 | `swagkey_image_mirror_report.json` | `download_swagkey_images.py` | CDN → local mirror 리포트 |
 | `product_image_html_cache/` | `extract_swagkey_product_images.py` | 이미지 fetch HTML (`{idx}.html`) |
+| `swagkey_inventory.v4.json` | `classify_swagkey_inventory.py` (1:1 Phase 1) | v3 + 1:1 refresh 분류 입력 |
+| `swagkey_crawl_urls.v2.json` | `crawl_swagkey_product_urls.py` | URL 크롤 v2 (1:1 재크롤) |
+| `phase0_image_spike_report.json` | `spike_phase0_swagkey_images.py` | 이미지 Phase 0 스파이크 |
+| `phase1_inventory_refresh_report.json` | (1:1 Phase 1) | inventory v4 refresh 리포트 |
+| `phase2_classification_report.json` | `classify_swagkey_inventory.py` | 1:1 keycap/case_kit 분류 정교화 |
+| `swagkey_products.seed.browse_merged.json` | `merge_inventory_browse_seed.py` | browse merge dry-run/미리보기 |
+| `inventory_browse_merge_report.{json,txt}` | ↑ | browse merge 통계 |
+| `catalog_1to1_coverage_report.{json,txt}` | `audit_catalog_1to1_coverage.py` | inventory↔browse gap (CI warning) |
+| `browse_image_coverage_report.{json,txt}` | `audit_browse_image_coverage.py` | browse `imageUrl` 커버리지 |
+| `recommendation_pool_report.json` | `audit_recommendation_pool.py` | recommend vs browse 풀 게이트 |
+| `recommendation_promotion_report.json` | `promote_to_recommendation_pool.py` | `recommendationEligible` 승격 후보 |
+| `case_layout_overrides.json` | (수동) | case↔layout 호환 수동 오버라이드 |
+| `seed_quality_cleanup_report.json` | `apply_seed_quality_cleanup.py` | ⑪ seed 품질 cleanup |
+| `seed_quality_review.txt` | ↑ | cleanup 검토 요약 |
+| `switch_image_remediation_report.json` | `record_switch_image_remediation.py` | 스위치 이미지 수동 보정 |
+| `image_inventory_merge_report.json` | `merge_swagkey_inventory_images.py` | v2→v3 imageUrl merge |
+| `swagkey_products.seed.with_images.json` | `merge_image_urls_into_seed.py` | imageUrl merge 미리보기 |
+| `swagkey_product_images.failures.{json,csv}` | `extract_swagkey_product_images.py` | 이미지 추출 실패 목록 |
+| `spec_scrape_targets/` | `generate_swagkey_spec_targets.py` 등 | spec scrape 대상 JSON |
+| `swagkey_catalog_regression_report.{json,txt}` | `run_swagkey_catalog_regression.py` | ingestion + pytest regression 리포트 (루트 `backend/data/`) |
+
+**`backend/data/` (루트, inventory 외):** `catalog_ingestion_manifest.json` · `swagkey_catalog_regression_report.json` · `swagkey_switch_targets.json` / `swagkey_switch_specs.json` · `swagkey_compat_targets.json` / `swagkey_compat_specs.json` · `examples/catalog_switch_import.example.json`
+
+**시드 변형:** `catalog/swagkey_products.seed.json` (canonical) · `swagkey_products.seed.cleaned.json` (정제본)
 
 **핵심 모듈 (`backend/src/keyboard_recommender/catalog/` + application):**
 
@@ -1244,9 +1341,13 @@ pytest tests/test_swagkey_image_mirror.py tests/test_swagkey_image_url_recheck.p
 | `swagkey_image_merge.py` | image artifact → seed merge (fuzzy_name 금지) |
 | `infrastructure/swagkey_images.py` | local mirror path resolve · `/media/swagkey-images` |
 | `swagkey_catalog_regression.py` | ⑥ ingestion dry-run 검증 + regression 리포트 |
+| **`catalog_1to1_coverage.py`** | **1:1 inventory↔browse gap 계산** |
+| **`swagkey_inventory_browse_seed_merge.py`** | **inventory → browse seed merge 로직** |
+| **`swagkey_recommendation_promotion.py`** | **`recommendationEligible` 승격 게이트** |
 | **`swagkey_source_url.py`** | **상품 상세 URL 판별·seed URL 보정 (`SwagkeyUrlResolver`)** |
 | `application/catalog_browse_service.py` | seed → browse DTO (switch|plate|foam|**layout**|case|**keycap**) |
 | `application/full_catalog_browse_service.py` | full catalog JSON → browse DTO (ops API) |
+| `api/v1/catalog_handlers.py` | catalog list/detail 공통 핸들러 |
 | `api/v1/catalog_full.py` | `GET /catalog/full` 라우트 (ops) |
 | `api/v1/cases.py`, `switches.py`, `plates.py`, `foam.py`, **`layouts.py`**, **`keycaps.py`** | catalog browse 라우트 |
 
@@ -1260,7 +1361,7 @@ pytest tests/test_swagkey_image_mirror.py tests/test_swagkey_image_url_recheck.p
 | ⑧ | seed +49 cases, `GET /api/v1/cases` |
 | ⑨ | `swagkey_catalog_full.json` **153**, `GET /catalog/full` (이후 UI에서는 미사용) |
 | ⑩~⑪ | 추천/결과 sourceUrl · seed 품질 · shop_view canonical |
-| ⑫~⑭ | case·keycap 엔진 축 · seed **179** (Phase E keycap 18) · `GET /keycaps` |
+| ⑫~⑭ | case·keycap 엔진 축 · recommend **164** / browse **331** (Phase E keycap recommend 18) · `GET /keycaps` |
 | ⑮ | inventory recheck alert · E2E schedule · feedback/HTTPS verify |
 
 **① 정제 규칙:** 할인율-only 행 제거 · 숫자 브랜드 보정 · (category,name) dedupe · Gaming↔Keyboards cross-category dedupe  
@@ -1283,7 +1384,7 @@ pytest tests/test_swagkey_image_mirror.py tests/test_swagkey_image_url_recheck.p
 |------|------|
 | seed 파일 | `fix_swagkey_seed_source_urls.py --apply-to-seed` + 품질 cleanup |
 | API 런타임 | `catalog_browse_service` / recommendation `sourceUrls` resolve |
-| 잔여 seed_only | ≈21건 (layout·foam variant·미매칭 switch) — 알림 대상, 자동 삭제 아님 |
+| 잔여 seed_only | fixture recheck 기준 **36건** (`catalog_change_alert.txt` · blocking **15**) — layout·foam variant·미매칭 switch 등 · 자동 삭제 아님 |
 
 **로컬 실행 (DB 불필요, PowerShell):**
 
@@ -1344,12 +1445,13 @@ copy .env.example .env.local
 npm run dev
 
 # 4. 테스트
-cd backend && pytest                          # backend 전체
-cd frontend && npm test                       # vitest
-cd e2e && npm ci && npx playwright install chromium && npm test  # E2E
+cd backend && pytest                          # ~77 모듈 + 버킷
+cd frontend && npm test                       # vitest (31)
+cd e2e && npm ci && npx playwright install chromium && npm test  # E2E (API 8000)
 
 # 5. (선택) Swagkey 파이프라인 — §9.2 로컬 실행 블록 참고
 # 6. 카탈로그 UI 확인: http://localhost:3000/catalog (backend 8010 필요)
+# 7. E2E만: NEXT_PUBLIC_API_URL=http://127.0.0.1:8000 (start-stack.cjs 기본)
 ```
 
 ---
@@ -1365,7 +1467,7 @@ cd e2e && npm ci && npx playwright install chromium && npm test  # E2E
 7. **한국어 UI:** 설문 옵션, 버튼, 네비 라벨 등은 한국어
 8. **Git:** 커밋은 사용자 요청 시에만
 9. **Swagkey 데이터 계층:** 크롤 CSV/MD = 인벤토리 · seed JSON = 추천 풀(trait/spec 포함) · full catalog JSON = **ops 전용**(앱 카탈로그 미노출)
-10. **추천 풀 규모:** seed **179** (switch 67 · plate 14 · foam 9 · layout 22 · case 49 · keycap 18)
+10. **이중 풀 규모:** browse seed **331** · seed `recommendationEligible: true` **179** · **게이트 후 recommend** **164** (switch 67 · plate 14 · foam 9 · layout **7** · case 49 · keycap 18) — `audit_recommendation_pool.py` · browse listable 건수는 `catalog_browse_policy.py` (404/dedup)로 family별 상이
 11. **추천 엔진:** build_selection **6축** (switch·plate·foam·layout·case·keycap) · `responseContractRev: 7`
 12. **카탈로그 UI:** `/catalog` **6탭** (스위치·플레이트·폼·**레이아웃**·케이스/키트·키캡) · `GET /layouts` · 액세서리류 UI 금지
 13. **인벤토리 파이프라인:** ①~⑨ + Phase 2 ⑩~⑮ 완료 · regression `run_swagkey_catalog_regression.py` · ops `verify_ops_quality_15.py`
@@ -1380,22 +1482,24 @@ cd e2e && npm ci && npx playwright install chromium && npm test  # E2E
 22. **헤더:** 네비·검색 `font-body` · 로고·로그인/로그아웃 `font-headline` · 우측 **검색→테마→닉네임→로그인/로그아웃** · Workshop 전역 사이드바 없음
 23. **Next dev:** Manifest/`global-error` 오류 → `.next` 삭제 + dev 재시작 + 하드 리프레시
 24. **추천 엔진 단일화 (Phase 1~4):** 사용자 «빠른 추천»/ `mode=quick` UI·요청 금지. 프리셋은 `seedAnswers`만. 응답 `runMode: "quick"`는 내부 degraded fallback 표기 — 새 UI/문구에 «빠른 추천» 쓰지 말 것. 로드맵: `docs/recommendation-engine-unification-roadmap.txt`
-25. **E2E 스택:** Playwright 기본은 `127.0.0.1:3000` + `127.0.0.1:8000` — dev가 다른 API 포트를 쓰면 로그인/설문 실패 가능
-26. **설문 Curator UI (§4.12):** `/recommend` 레이아웃·아이콘·타이포 변경 시 E2E `data-testid`·프리셋 스킵·NL 항상 표시·FULL compute 정책 유지. 아이콘은 `lucide-react` — 커스텀 SVG path 재도입 지양
-27. **Results UX (§4.13–4.15):** Phase 0–7 완료. 탭 **2개** (`overview`|`evidence`). `save_compare`·`activity` 탭·Compare Drawer 재도입 금지 — Continue는 `/mypage?section=saved`. 엔진 변경 금지. 로드맵: `docs/results-ux-roadmap.md` (v6.2)
-28. **Evidence IA (§4.14):** Phase 0–4 완료. ranking why(switch) pick 카드 concrete · fallback 숨김. 롤백: `NEXT_PUBLIC_EVIDENCE_RANKING_WHY=0`
-29. **Product Next (§4.16):** Phase 0–4 ✅ · Phase 5 데이터 배선(`home.viewed`) ✅ · 제품 Home revisit 🔒. 마스터: `docs/product-next-phases.md`. Home Dashboard/Workspace/Redirect **금지** until 집계 표본
-30. **MyPage:** 개요·저장·계정만. `MyPageComingSoon` 제거. 활동/비교 탭 복원 금지
-31. **타이포 (§4.15):** UI 라벨·eyebrow는 **`font-label`** (Hanken Grotesk). `font-mono`는 숫자·디버그만
-32. **카탈로그 페이지네이션:** chevron·슬라이딩 라인·루프 애니메이션 재도입 시 infinite update 주의 — `buildPaginationItems` + guarded `setState` 패턴 유지
-33. **Remaining Work (§4.9 · `remaining-work-phases.md`):** A–F **구현 ✅** (2026-07-10). 잔여 = B 표본 · F-4 Git(요청 시) · Home revisit(Unlock+Why). Do not: Compare·빠른 추천·가짜 Match%·표본 전 Home Dashboard
-34. **Ops webhook:** `CATALOG_CHANGE_ALERT_WEBHOOK_URL` (또는 `OPERATIONAL_ALERT_WEBHOOK_URL`) — **커밋 금지** · CI secret / `.env`만. dry-run: `run_swagkey_inventory_recheck.py --webhook-dry-run`
-35. **Feedback Learning:** 기본 `ENABLE_FEEDBACK_LEARNING_MVP=false`. 로컬 검증 `verify_feedback_learning_mvp.py --dry-run-local`. 실 API는 `--base-url http://localhost:8000` (로컬은 **http**, https 아님)
-36. **제품 이미지 (§9.4):** seed `imageUrl`은 CDN source of truth · mirror는 `data/swagkey_images/` (**git 커밋 금지**) · browse/recommend **이중 풀**로 목록 건수 다름 · live `imageUrlChanged` 후 seed/mirror **수동** 갱신
-37. **Swagkey 1:1 카탈로그 (§4.10):** browse = seed 전체(331) · recommend = `recommendationEligible`만 · **절대** `merge_* --apply-to-seed` 자동 실행 금지 — dry-run → 운영자 검토. 로드맵: `docs/swagkey-catalog-1to1-roadmap.md` (Phase 0–8 ✅). layout diagram geometry **LOCK** (Alice·Split 60 §4.10 예외 — 2026-07-12 반영)
-38. **레이아웃 다이어그램 (§4.10):** `layout-001`~`007` = React Blueprint · `layout-new-*` = Swagkey 사진 · role 강조 유지 · 겹침 테스트 통과 필수
-39. **Split 60 (`layout-007`):** 스웨그키 실제 상품 없음 · 참조 배열 전용 · 케이스/키트 링크·`sourceUrl` 없음 · 다이어그램 행별 분리·5행 스페이스·TRRS 잭/케이블 — §4.10
-40. **Alice (`layout-006`):** 65% 기반 + 매크로열 · 행별 블록 회전·alignPx 상수 — 운영자 튜닝 반영(2026-07-12) · geometry 임의 변경 금지 — §4.10
+25. **E2E 스택:** Playwright 기본 `127.0.0.1:3000` + API **8000** (`start-stack.cjs`) · 로컬 dev는 backend **8010** — `NEXT_PUBLIC_API_URL` 혼용 금지
+26. **Results lite fallback:** API unreachable 시 `results-lite-compare.tsx` + client engine — **Compare Drawer와 별개** · happy path = backend ranked tabs only
+27. **설문 Curator UI (§4.12):** `/recommend` 레이아웃·아이콘·타이포 변경 시 E2E `data-testid`·프리셋 스킵·NL 항상 표시·FULL compute 정책 유지. 아이콘은 `lucide-react` — 커스텀 SVG path 재도입 지양
+28. **Results UX (§4.13–4.15):** Phase 0–7 완료. 탭 **2개** (`overview`|`evidence`). `save_compare`·`activity` 탭·Compare Drawer 재도입 금지 — Continue는 `/mypage?section=saved`. 엔진 변경 금지. 로드맵: `docs/results-ux-roadmap.md` (v6.2)
+29. **Evidence IA (§4.14):** Phase 0–4 완료. ranking why(switch) pick 카드 concrete · fallback 숨김. 롤백: `NEXT_PUBLIC_EVIDENCE_RANKING_WHY=0`
+30. **Product Next (§4.16):** Phase 0–4 ✅ · Phase 5 데이터 배선(`home.viewed`) ✅ · 제품 Home revisit 🔒. 마스터: `docs/product-next-phases.md`. Home Dashboard/Workspace/Redirect **금지** until 집계 표본
+31. **MyPage:** 개요·저장·계정만. `MyPageComingSoon` 제거. 활동/비교 탭 복원 금지
+32. **타이포 (§4.15):** UI 라벨·eyebrow는 **`font-label`** (Hanken Grotesk). `font-mono`는 숫자·디버그만
+33. **카탈로그 페이지네이션:** chevron·슬라이딩 라인·루프 애니메이션 재도입 시 infinite update 주의 — `buildPaginationItems` + guarded `setState` 패턴 유지
+34. **Remaining Work (§4.9 · `remaining-work-phases.md`):** A–F **구현 ✅** (2026-07-10). 잔여 = B 표본 · F-4 Git(요청 시) · Home revisit(Unlock+Why). Do not: Compare·빠른 추천·가짜 Match%·표본 전 Home Dashboard
+35. **Ops webhook:** `CATALOG_CHANGE_ALERT_WEBHOOK_URL` (또는 `OPERATIONAL_ALERT_WEBHOOK_URL`) — **커밋 금지** · CI secret / `.env`만. dry-run: `run_swagkey_inventory_recheck.py --webhook-dry-run`
+36. **Feedback Learning:** 기본 `ENABLE_FEEDBACK_LEARNING_MVP=false`. 로컬 검증 `verify_feedback_learning_mvp.py --dry-run-local`. 실 API는 `--base-url http://localhost:8000` (로컬은 **http**, https 아님)
+37. **제품 이미지 (§9.4):** seed `imageUrl` **317/331** · `swagkey_product_images.json` **392** unique · mirror `data/swagkey_images/` (**git 커밋 금지**) · browse image audit = **listable** 행 기준
+38. **Swagkey 1:1 카탈로그 (§4.10):** browse = seed 전체(331) · recommend = `recommendationEligible` 게이트(164) · **절대** `merge_* --apply-to-seed` 자동 실행 금지 — dry-run → 운영자 검토. 로드맵: `docs/swagkey-catalog-1to1-roadmap.md` (Phase 0–8 ✅). layout diagram geometry **LOCK** (Alice·Split 60 §4.10 예외 — 2026-07-12 반영)
+39. **레이아웃 다이어그램 (§4.10):** `layout-001`~`007` = React Blueprint · `layout-new-*` = Swagkey 사진 · role 강조 유지 · 겹침 테스트 통과 필수
+40. **Split 60 (`layout-007`):** 스웨그키 실제 상품 없음 · 참조 배열 전용 · 케이스/키트 링크·`sourceUrl` 없음 · 다이어그램 행별 분리·5행 스페이스·TRRS 잭/케이블 — §4.10
+41. **Alice (`layout-006`):** 65% 기반 + 매크로열 · 행별 블록 회전·alignPx 상수 — 운영자 튜닝 반영(2026-07-12) · geometry 임의 변경 금지 — §4.10
+42. **Discovery API:** `/api/v1/builds/discovery` **없음** — 재도입 시 Home IA LOCK·Phase 0 Why 필요
 
 ---
 
@@ -1409,6 +1513,8 @@ cd e2e && npm ci && npx playwright install chromium && npm test  # E2E
 | Trait engine | `backend/src/keyboard_recommender/trait_engine/pipeline.py` |
 | Build selection | `backend/src/keyboard_recommender/recommendation_quality/build_selection.py` |
 | Settings | `backend/src/keyboard_recommender/config/settings.py` |
+| **Avatar upload/storage** | `infrastructure/avatars.py` · `api/v1/auth.py` (`/avatar`) · `data/avatars/` |
+| **Avatar (FE)** | `frontend/src/lib/avatar.ts` · `mypage-account.tsx` |
 | 카탈로그 시드 | `backend/src/keyboard_recommender/catalog/swagkey_products.seed.json` |
 | **인벤토리 정제** | `backend/src/keyboard_recommender/catalog/swagkey_inventory.py` |
 | **인벤토리 분류** | `backend/src/keyboard_recommender/catalog/swagkey_inventory_classifier.py` |
@@ -1444,6 +1550,13 @@ cd e2e && npm ci && npx playwright install chromium && npm test  # E2E
 | **인벤토리 데이터** | `backend/data/swagkey_inventory/` |
 | **카탈로그 로드 (런타임)** | `backend/src/keyboard_recommender/trait_engine/catalog_sample.py` |
 | API v1 router | `backend/src/keyboard_recommender/api/v1/router.py` |
+| **Catalog handlers** | `backend/src/keyboard_recommender/api/v1/catalog_handlers.py` |
+| **Compatible layout chips** | `frontend/src/components/features/catalog/compatible-layout-chips.tsx` |
+| **Runtime API guards** | `frontend/src/components/providers/runtime-api-guards.tsx` |
+| **Next config** | `frontend/next.config.ts` (images · `/api`·`/media` proxy) |
+| **Swagkey source links** | `frontend/src/lib/swagkey-source-links.ts` |
+| **Results lite fallback** | `frontend/src/components/features/recommendation/results/results-lite-compare.tsx` |
+| **Layout page shell** | `frontend/src/components/layout/page-shell.tsx` |
 | Frontend layout | `frontend/src/app/layout.tsx` |
 | **Design tokens** | `frontend/src/app/globals.css`, `frontend/tailwind.config.ts` |
 | **Site header/footer** | `frontend/src/components/layout/site-header.tsx`, `site-footer.tsx`, `header-catalog-search.tsx`, `auth-controls.tsx`, `theme-toggle.tsx` |
@@ -1459,6 +1572,8 @@ cd e2e && npm ci && npx playwright install chromium && npm test  # E2E
 | 설문 페이지 쉘 | `frontend/src/app/recommend/page.tsx` |
 | 설문 단계 네비 | `frontend/src/lib/survey-step-navigation.ts` |
 | E2E 설문 헬퍼 | `e2e/tests/helpers/survey-flow.ts` |
+| E2E results 헬퍼 | `e2e/tests/helpers/results-flow.ts` |
+| E2E visual 375 | `e2e/tests/results-visual-375.spec.ts` · `e2e/package.json` `test:visual` |
 | 결과 오케스트레이터 | `frontend/src/components/features/recommendation/recommendation-result-view.tsx` |
 | **Results UX 컴포넌트** | `frontend/src/components/features/recommendation/results/` (§4.13–4.16) |
 | **MyPage** | `frontend/src/components/features/mypage/` (hub/overview/saved/account) |
@@ -1493,6 +1608,7 @@ cd e2e && npm ci && npx playwright install chromium && npm test  # E2E
 - **Evidence Tab Simplification:** `docs/evidence-tab-simplification-roadmap.md` (v1.4, Phase 0–4 **완료**)
 - **Evidence Phase 4 Validation:** `docs/evidence-tab-phase4-validation.md`
 - **추천 엔진 단일화 로드맵:** `docs/recommendation-engine-unification-roadmap.txt` (Phase 0~4)
+- **추천 엔진 단일화 Phase 완료 리포트:** `docs/recommendation-engine-unification-phase0-baseline.txt` · `phase1-complete.txt` · `phase2-complete.txt` · `phase3-complete.txt` · `phase4-complete.txt`
 - **Stitch UI 마이그레이션:** `docs/stitch-design-migration.txt` (Phase 0–7)
 - **Swagkey 카탈로그 로드맵:** `docs/swagkey-catalog-roadmap.txt` (①~⑮)
 - **Swagkey 6탭 1:1 로드맵:** `docs/swagkey-catalog-1to1-roadmap.md` (**Phase 0–8 ✅**, 2026-07-12)
@@ -1510,11 +1626,14 @@ cd e2e && npm ci && npx playwright install chromium && npm test  # E2E
 - DB 스키마: `backend/docs/database-schema.md`
 - 카탈로그: `backend/docs/catalog-data-architecture.md`
 - Frontend README: `frontend/README.md`
+- E2E README: `e2e/README.md`
+- **Cursor Agent 규칙 (로컬, gitignore):** `.cursor/rules/swagkey-catalog-1to1.mdc` — 1:1 카탈로그 LOCK · dry-run before seed apply
 
 ---
 
 *이 문서는 keyboard-recommender 프로젝트의 전체 파일·구조·기능·설정을 AI Agent 컨텍스트용으로 정리한 것입니다. 코드 변경 시 이 파일도 함께 업데이트하세요.*  
-*최종 갱신 (2026-07-12): **§4.10 레이아웃 다이어그램 Blueprint** — React 7종 geometry · Alice 회전 튜닝 · Split 60 잭/케이블 · `layout-007` 참조 전용 정책 · archetype vs `layout-new-*` 이미지 분리.*
+*최종 갱신 (2026-07-12): **2차 감사 반영** — discovery API 제거 · lite fallback · DB 22·keycap seed-only · 이미지 392/317 · seed_only 36 · HomeWorkshopPreview · env/CI/E2E 포트 · test 수치 정리.*
+*최종 갱신 (2026-07-12): **감사 반영** — 이중 풀 수치 정리(browse 331 · recommend 164) · 마이그레이션 007·아바타 API · §5.5/§9.2 1:1 스크립트·산출물 · E2E 7종 spec · unification-phase 리포트·`.cursor` 규칙 · `NEXT_PUBLIC_EVIDENCE_RANKING_WHY`.*
 *최종 갱신 (2026-07-12): **§4.6·§4.10 Swagkey 6탭 1:1 Phase 0–8 sign-off** — browse/recommend 이중 풀(331 ingestion) · Phase 5 UI · Phase 6–7 게이트·alert tier · Phase 8 regression 126 pytest · 주기 운영 절차 · `docs/swagkey-catalog-1to1-roadmap.md`.*  
 *최종 갱신 (2026-07-11): **§9.4 Swagkey 제품 이미지 Phase 0–8 완료** — API/FE 썸네일 · browse 정책(6.5–6.6) · local mirror · `imageUrlChanged` recheck · `PROJECT_CONTEXT` 파일 인덱스·ops 명령 갱신.*  
 *이전 (2026-07-10): **§4.16 Product Next Phases** — Phase 0–4 완료 · Phase 5 `home.viewed` 데이터 전제 · Home Landing LOCK · ranking-why pick 재연결 · MyPage 스모크.*  
