@@ -6,8 +6,9 @@ test.describe("NLP preference path", () => {
   test("parses NL on server and shows highlights / reranking context", async ({ page }) => {
     await completeDeterministicSurvey(page);
 
-    await page.getByRole("button", { name: /추가 선택 입력 \(고급\)/ }).click();
-    await page.getByTestId("e2e-nl-preference").fill("thocky linear quiet");
+    const nlField = page.getByTestId("e2e-nl-preference");
+    await expect(nlField).toBeVisible();
+    await nlField.fill("thocky linear quiet");
 
     await page.getByTestId("e2e-submit-survey").click();
     await expect(page).toHaveURL(/\/results$/);
