@@ -22,7 +22,7 @@ def health() -> dict[str, Any]:
     """
     settings = get_settings()
     env_path = resolved_env_file_path()
-    return {
+    payload: dict[str, Any] = {
         "status": "ok",
         "evaluationPersistenceEnabled": settings.enable_evaluation_persistence,
         "evaluationSnapshotsEnabled": settings.enable_evaluation_snapshots,
@@ -30,3 +30,11 @@ def health() -> dict[str, Any]:
         "envFile": str(env_path),
         "envFileExists": env_path.is_file(),
     }
+    if settings.app_environment in {"staging", "production"}:
+        key = (settings.resend_api_key or "").strip()
+        payload["emailProvider"] = settings.email_provider
+        payload["resendFromEmail"] = settings.resend_from_email
+        payload["resendApiKeyConfigured"] = bool(key)
+        if key:
+            payload["resendApiKeyHint"] = f"{key[:8]}...{key[-4:]}" if len(key) > 12 else key[:4] + "..."
+    return payload

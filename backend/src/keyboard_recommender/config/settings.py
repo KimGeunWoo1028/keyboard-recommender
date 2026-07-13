@@ -259,6 +259,29 @@ class Settings(BaseSettings):
         merged["auth_cookie_secure"] = True
         return merged
 
+    @staticmethod
+    def _strip_env_secret(v: Any) -> Any:
+        """Trim whitespace and one layer of wrapping quotes from platform env vars."""
+        if v is None:
+            return None
+        if not isinstance(v, str):
+            return v
+        s = v.strip()
+        if len(s) >= 2 and s[0] == s[-1] and s[0] in {"'", '"'}:
+            s = s[1:-1].strip()
+        return s or None
+
+    @field_validator(
+        "database_url",
+        "resend_api_key",
+        "resend_from_email",
+        "smtp_password",
+        mode="before",
+    )
+    @classmethod
+    def strip_wrapped_env_values(cls, v: Any) -> Any:
+        return cls._strip_env_secret(v)
+
     @field_validator("auth_session_ttl_minutes", mode="before")
     @classmethod
     def coerce_auth_session_ttl_minutes(cls, v: Any) -> int | None:

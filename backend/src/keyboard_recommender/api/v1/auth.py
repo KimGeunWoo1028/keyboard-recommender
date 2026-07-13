@@ -55,6 +55,29 @@ def _allow_debug_email_code(settings: SettingsDep) -> bool:
     return settings.debug and settings.app_environment in {"local", "development"}
 
 
+def _resend_api_key_hint(key: str | None) -> str | None:
+    k = (key or "").strip()
+    if not k:
+        return None
+    if len(k) <= 12:
+        return f"{k[:4]}..."
+    return f"{k[:8]}...{k[-4:]}"
+
+
+def _staging_email_ops_snapshot(settings: Settings) -> dict[str, str | None]:
+    if settings.app_environment != "staging":
+        return {
+            "ops_email_provider": None,
+            "ops_resend_from_email": None,
+            "ops_resend_api_key_hint": None,
+        }
+    return {
+        "ops_email_provider": settings.email_provider,
+        "ops_resend_from_email": settings.resend_from_email,
+        "ops_resend_api_key_hint": _resend_api_key_hint(settings.resend_api_key),
+    }
+
+
 def _normalize_email(raw: str) -> str:
     return raw.strip().lower()
 
@@ -265,6 +288,7 @@ def send_email_verification(
         sent=True,
         delivery=delivery,
         debug_code=code if _allow_debug_email_code(settings) else None,
+        **_staging_email_ops_snapshot(settings),
     )
 
 

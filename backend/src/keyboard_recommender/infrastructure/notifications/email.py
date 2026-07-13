@@ -57,7 +57,18 @@ def _deliver_via_resend(settings: Settings, *, to_email: str, subject: str, text
                 logger.warning("resend_send_failed status=%s", resp.status)
                 return "log"
     except urllib_error.HTTPError as exc:
-        logger.warning("resend_send_failed http_status=%s", exc.code)
+        detail = ""
+        try:
+            detail = exc.read().decode("utf-8", errors="replace")[:500]
+        except OSError:
+            detail = ""
+        logger.warning(
+            "resend_send_failed http_status=%s from=%s to=%s detail=%s",
+            exc.code,
+            settings.resend_from_email,
+            to_email,
+            detail,
+        )
         return "log"
     except urllib_error.URLError:
         logger.warning("resend_send_failed network_error")

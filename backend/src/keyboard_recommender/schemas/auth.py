@@ -56,6 +56,10 @@ class SendEmailVerificationResponse(BaseModel):
     sent: bool
     delivery: str
     debug_code: str | None = None
+    # Staging ops snapshot (non-secret) — verify Railway env without log tailing.
+    ops_email_provider: str | None = None
+    ops_resend_from_email: str | None = None
+    ops_resend_api_key_hint: str | None = None
 
 
 class VerifyEmailCodeResponse(BaseModel):
