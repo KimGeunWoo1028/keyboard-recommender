@@ -4,3 +4,6 @@ NIXPACKS_PYTHON_VERSION = "3.12"
 
 [phases.build]
 cmds = ["PYTHONPATH=src python scripts/download_swagkey_images.py --max-failures 20"]
+
+[start]
+cmd = "sh scripts/railway_entrypoint.sh"
