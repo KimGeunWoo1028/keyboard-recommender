@@ -4,7 +4,7 @@
 > **경로:** `c:\Users\jeung\keyboard-recommender`  
 > **최종 정리일:** 2026-07-12 (KST)  
 > **언어:** 한국어 UI (로그인, 마이페이지, 설문, 추천 근거, 카탈로그 등)  
-> **남은 일 Phase:** `docs/remaining-work-phases.md` — **A–F 구현 ✅** · B 표본 🔄 (배포 후) · **localhost 실행:** `docs/localhost-execution-roadmap.md` **Phase 0–2 ✅** (2026-07-12) · Phase 3–6 = 배포·표본·Unlock 후
+> **남은 일 Phase:** `docs/remaining-work-phases.md` — **A–F 구현 ✅** · B 표본 🔄 (배포 후) · **localhost 실행:** `docs/localhost-execution-roadmap.md` **Phase 0–2 ✅** (2026-07-12) · **배포:** `docs/deployment-roadmap.md` Phase 0–4 (staging→prod) · Phase 5 = observe·Unlock 후
 
 ---
 
@@ -43,6 +43,7 @@ keyboard-recommender/
 │   ├── PROJECT_CONTEXT.md        # ← 이 파일
 │   ├── remaining-work-phases.md       # 남은 일 Phase A–F · B 표본(배포 후) · Home revisit 🔒
 │   ├── localhost-execution-roadmap.md # localhost 실행 Phase 0–6 (catalog·deploy·observe·Home)
+│   ├── deployment-roadmap.md       # 배포 Phase 0–5 (인프라·env·staging·prod·observe)
 │   ├── product-next-phases.md    # Home IA LOCK 이후 Next Phases (0–5) 마스터
 │   ├── product-next-phase4-launch.md   # Phase 4 Launch·DoD·Observe
 │   ├── product-next-phase5-home-revisit.md  # Phase 5 데이터 전제 · 제품 LOCK
@@ -521,6 +522,7 @@ keyboard-recommender/
 
 > **남은 일 Phase 마스터:** `docs/remaining-work-phases.md` (v1.6)  
 > **localhost 실행 로드맵:** `docs/localhost-execution-roadmap.md` (v1.0) — **Phase 0–2 ✅** (2026-07-12) · **Phase 2 상시 반복** · Phase 3–4 = 배포 후 · Phase 5 = Unlock 후  
+> **배포 로드맵:** `docs/deployment-roadmap.md` (v1.0) — Phase 0–4 = staging→prod · Phase 5 = observe (배포 후)  
 > **구현 Task A–F:** ✅ 2026-07-10 완료. 아래는 **코딩 밖 잔여**만.
 
 #### Remaining-work Phase 구현 상태
@@ -542,7 +544,7 @@ keyboard-recommender/
 | **1** | layout coverage gap **0** — mislinked `layout-new-*` 15건 `browse.listed: false` · `browse.listed` 정책 코드 반영 · merge 메타 동기화 (added 0) · switch/keycap 잔여 gap **문서화** (`phase1_coverage_exceptions.txt`) |
 | **2** | fixture recheck·ops·regression·Vitest·E2E smoke green · blocking 추이 `phase2_blocking_trend.txt` · **주 1회·PR 전 반복** |
 
-**로컬 지금 할 일:** Phase **2** 유지보수 리듬만 반복. **Phase 3–5는 배포 전 보류** (localhost만으로 Phase 4 Unlock 판정 금지).
+**로컬 지금 할 일:** Phase **2** 유지보수 리듬만 반복. **배포 착수 시** `docs/deployment-roadmap.md` Phase 0–4 (localhost만으로 Phase 5 Unlock 판정 금지).
 
 #### 아직 남은 것 (이 섹션의 실질 잔여)
 
@@ -1543,7 +1545,7 @@ cd e2e && npm ci && npx playwright install chromium && npm test  # E2E (API 8000
 40. **Split 60 (`layout-007`):** 스웨그키 실제 상품 없음 · 참조 배열 전용 · 케이스/키트 링크·`sourceUrl` 없음 · 다이어그램 행별 분리·5행 스페이스·TRRS 잭/케이블 — §4.10
 41. **Alice (`layout-006`):** 65% 기반 + 매크로열 · 행별 블록 회전·alignPx 상수 — 운영자 튜닝 반영(2026-07-12) · geometry 임의 변경 금지 — §4.10
 42. **Discovery API:** `/api/v1/builds/discovery` **없음** — 재도입 시 Home IA LOCK·Phase 0 Why 필요
-43. **Localhost 실행 (§4.9):** `docs/localhost-execution-roadmap.md` — Phase **0–2 ✅** · **지금** = Phase 2 반복(recheck·ops·E2E) · Phase 3–5 = 배포·표본·Unlock 후 · `phase2_blocking_trend.txt`에 blocking 추이 기록 · E2E 연속 실행 시 `PW_REUSE_SERVER=1`
+43. **Localhost 실행 (§4.9):** `docs/localhost-execution-roadmap.md` — Phase **0–2 ✅** · **지금** = Phase 2 반복(recheck·ops·E2E) · **배포** = `docs/deployment-roadmap.md` Phase 0–4 · observe = Phase 5 · `phase2_blocking_trend.txt`에 blocking 추이 기록 · E2E 연속 실행 시 `PW_REUSE_SERVER=1`
 
 ---
 
@@ -1645,6 +1647,7 @@ cd e2e && npm ci && npx playwright install chromium && npm test  # E2E (API 8000
 
 - **Remaining Work Phases (남은 일 마스터):** `docs/remaining-work-phases.md` — A–F 구현 ✅ · B 표본 🔄 (배포 후) · Home revisit 🔒
 - **Localhost Execution Roadmap:** `docs/localhost-execution-roadmap.md` — **Phase 0–2 ✅** (2026-07-12) · Phase 2 상시 · Phase 3–6 deploy/observe/Home
+- **Deployment Roadmap:** `docs/deployment-roadmap.md` — Phase 0–4 staging→prod · Phase 5 observe · DB·env·smoke 체크리스트
 - **Product Next Phases (마스터):** `docs/product-next-phases.md` — Phase 0–4 ✅ · Phase 5 데이터 배선 ✅ · 제품 revisit 🔒 (표본 후)
 - **Phase 4 Launch 리포트:** `docs/product-next-phase4-launch.md`
 - **Phase 5 Home revisit:** `docs/product-next-phase5-home-revisit.md`
@@ -1666,7 +1669,7 @@ cd e2e && npm ci && npx playwright install chromium && npm test  # E2E (API 8000
 - Inventory recheck: `docs/swagkey-inventory-recheck.md`
 - Feedback staging: `docs/staging-feedback-learning-mvp.md`
 - 환경 설정: `docs/env-configuration.md`
-- HTTPS 배포: `docs/production-https.md`
+- HTTPS 배포: `docs/production-https.md` · 마스터 체크리스트: `docs/deployment-roadmap.md`
 - 테스트 전략: `docs/quality-testing.md`
 - Backend 아키텍처: `backend/docs/architecture-guide.md`
 - Backend 개발: `backend/docs/developer-guide.md`

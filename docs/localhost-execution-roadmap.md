@@ -312,25 +312,27 @@ REM 포트 3000/8000 사용 중이면: set PW_REUSE_SERVER=1 && npm test
 # Phase 3. Deploy gate — **P3 · 배포 결정 시**
 
 > **우선순위 4.** localhost를 벗어날 때.  
-> **Status:** ⏸ **로컬만 환경 — 보류**
+> **Status:** ⏸ **로컬만 환경 — 보류**  
+> **상세 체크리스트:** `docs/deployment-roadmap.md` (Phase 0–5 전체)
 
 ## Task 3-1 — 스테이징/프로덕션 배포
 
-**체크리스트:** `docs/production-https.md`
+**마스터:** `docs/deployment-roadmap.md` · **HTTPS:** `docs/production-https.md`
 
-- HTTPS · `NEXT_PUBLIC_API_URL` (https)
-- `CORS_ORIGINS` · `AUTH_COOKIE_SECURE`
-- `localhost` vs `127.0.0.1` 혼용 금지 (쿠키)
+- Phase 0 로컬 게이트 (blocking 0 · `verify_ops_quality_15.py`)
+- Phase 1 인프라 (관리형 Postgres · 도메인 · HTTPS 토폴로지)
+- Phase 2 env · `alembic upgrade head` · `download_swagkey_images.py`
+- Phase 3 Staging smoke → Phase 4 Production smoke
 
 ## Task 3-2 — 배포 smoke
 
-- 로그인 · 설문 · 결과 E2E 수동 확인
-- `ENABLE_EVALUATION_PERSISTENCE=true` 설정
+- 로그인 · 설문 · 결과 · 저장 · 마이페이지 수동 확인
+- `ENABLE_EVALUATION_PERSISTENCE=true` · `eval_events` 적재 확인
 
 **Dev Gate**
 
-- [ ] 배포 URL에서 critical flow smoke
-- [ ] persistence on 확인
+- [ ] `deployment-roadmap.md` Phase 3 Gate (staging smoke)
+- [ ] `deployment-roadmap.md` Phase 4 Gate (production smoke)
 
 **Out of Scope:** Home UI 변경
 
@@ -413,7 +415,7 @@ python scripts/report_observe_aggregates.py --json
 | **0** | Catalog blocking triage | **P0** | alert·seed 정책 | **즉시** |
 | **1** | Coverage gap | **P1** | 1:1 gap·dry-run merge | Phase 0 Gate 권장 |
 | **2** | Maintenance | **P2** | fixture recheck·E2E | 상시 |
-| **3** | Deploy gate | **P3** | HTTPS·persistence | 배포 결정 시 |
+| **3** | Deploy gate | **P3** | HTTPS·persistence | 배포 결정 시 · 상세 `deployment-roadmap.md` |
 | **4** | Observe & Unlock | P4 | 표본·14일/50 | Phase 3 후 |
 | **5** | Home revisit | P5 | 제품 UI | Phase 4 `unlock_ready` |
 | **6** | 선택 백로그 | P6 | F-4·Feedback 등 | 요청 시 |
@@ -448,7 +450,8 @@ python scripts/report_observe_aggregates.py --json
 | `docs/remaining-work-phases.md` | Remaining A–F · B 인프라 상세 |
 | `docs/swagkey-catalog-1to1-roadmap.md` | 1:1 sign-off · coverage 정책 |
 | `docs/swagkey-inventory-recheck.md` | recheck · alert tier |
-| `docs/production-https.md` | Phase 3 배포 |
+| `docs/deployment-roadmap.md` | **배포 Phase 0–5** (staging · prod · DB · smoke) |
+| `docs/production-https.md` | HTTPS · cookie · CORS 상세 |
 | `docs/home-ia-locked.md` | Phase 5 LOCK |
 
 ---

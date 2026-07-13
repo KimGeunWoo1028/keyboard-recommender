@@ -79,5 +79,6 @@ Do **not** put database URLs, SMTP passwords, or internal API tokens in `NEXT_PU
 
 ## Related
 
+- Deployment checklist: [deployment-roadmap.md](./deployment-roadmap.md)
 - HTTPS / cookies: [production-https.md](./production-https.md)
 - Backend onboarding: [../backend/docs/developer-guide.md](../backend/docs/developer-guide.md)

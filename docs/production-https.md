@@ -147,6 +147,8 @@ Use this after each deployment or cookie-flag change:
 
 ## Related files
 
+- Deployment master checklist: [deployment-roadmap.md](./deployment-roadmap.md)
+
 - Backend settings: `backend/src/keyboard_recommender/config/settings.py`
 - Env validation: `backend/src/keyboard_recommender/config/env_validation.py`
 - Offline check: `backend/scripts/check_production_https_config.py`

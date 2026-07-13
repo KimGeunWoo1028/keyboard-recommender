@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-07-11T16:40:14.256085+00:00",
+  "generatedAt": "2026-07-13T15:54:46.711140+00:00",
   "seedIn": "C:/Users/jeung/keyboard-recommender/backend/src/keyboard_recommender/catalog/swagkey_products.seed.json",
   "imagesDir": "C:/Users/jeung/keyboard-recommender/backend/data/swagkey_images",
   "stats": {
     "totalCandidates": 293,
-    "downloaded": 152,
-    "skippedExisting": 141,
+    "downloaded": 0,
+    "skippedExisting": 293,
     "failed": 0,
     "dryRun": false
   },
@@ -131,10 +131,10 @@
       "seed_id": "sw-idx-536",
       "idx": "536",
       "image_url": "https://cdn.imweb.me/thumbnail/20230419/80403b59a24bb.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "536.png",
       "reason": "",
-      "bytes_written": 103480
+      "bytes_written": 0
     },
     {
       "seed_id": "sw-tactile-001",
@@ -146,7 +146,7 @@
       "bytes_written": 0
     },
     {
-      "seed_id": "sw-tactile-002",
+      "seed_id": "sw-tactile-003",
       "idx": "1443",
       "image_url": "https://cdn.imweb.me/thumbnail/20251126/05a6606efa44d.jpg",
       "status": "skipped_existing",
@@ -182,20 +182,20 @@
       "bytes_written": 0
     },
     {
-      "seed_id": "sw-tactile-007",
-      "idx": "1258",
-      "image_url": "https://cdn.imweb.me/thumbnail/20250926/70bfcffdf151a.png",
-      "status": "skipped_existing",
-      "local_file": "1258.png",
-      "reason": "",
-      "bytes_written": 0
-    },
-    {
       "seed_id": "sw-click-001",
       "idx": "1248",
       "image_url": "https://cdn.imweb.me/thumbnail/20250814/3cc7dd395aca9.jpg",
       "status": "skipped_existing",
       "local_file": "1248.jpg",
+      "reason": "",
+      "bytes_written": 0
+    },
+    {
+      "seed_id": "sw-silent-003",
+      "idx": "1258",
+      "image_url": "https://cdn.imweb.me/thumbnail/20250926/70bfcffdf151a.png",
+      "status": "skipped_existing",
+      "local_file": "1258.png",
       "reason": "",
       "bytes_written": 0
     },
@@ -617,55 +617,55 @@
       "seed_id": "plate-idx-1878",
       "idx": "1878",
       "image_url": "https://cdn.imweb.me/thumbnail/20260708/762ba0f8abf2f.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1878.png",
       "reason": "",
-      "bytes_written": 665570
+      "bytes_written": 0
     },
     {
       "seed_id": "plate-idx-935",
       "idx": "935",
       "image_url": "https://cdn.imweb.me/thumbnail/20240909/639e1824264ef.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "935.jpg",
       "reason": "",
-      "bytes_written": 38213
+      "bytes_written": 0
     },
     {
       "seed_id": "plate-idx-579",
       "idx": "579",
       "image_url": "https://cdn.imweb.me/thumbnail/20230614/6de3ef0369e4b.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "579.jpg",
       "reason": "",
-      "bytes_written": 91284
+      "bytes_written": 0
     },
     {
       "seed_id": "plate-idx-527",
       "idx": "527",
       "image_url": "https://cdn.imweb.me/thumbnail/20230419/0f3ea5bffb628.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "527.png",
       "reason": "",
-      "bytes_written": 192237
+      "bytes_written": 0
     },
     {
       "seed_id": "plate-idx-950",
       "idx": "950",
       "image_url": "https://cdn.imweb.me/thumbnail/20240917/b0d47ed42c9b7.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "950.png",
       "reason": "",
-      "bytes_written": 471021
+      "bytes_written": 0
     },
     {
       "seed_id": "plate-idx-534",
       "idx": "534",
       "image_url": "https://cdn.imweb.me/thumbnail/20230417/3a137c0fcbab6.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "534.png",
       "reason": "",
-      "bytes_written": 472630
+      "bytes_written": 0
     },
     {
       "seed_id": "foam-001",
@@ -743,10 +743,10 @@
       "seed_id": "foam-idx-1029",
       "idx": "1029",
       "image_url": "https://cdn.imweb.me/thumbnail/20241129/b71cb0f65028b.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1029.jpg",
       "reason": "",
-      "bytes_written": 120682
+      "bytes_written": 0
     },
     {
       "seed_id": "layout-001",
@@ -815,208 +815,208 @@
       "seed_id": "layout-idx-1416",
       "idx": "1416",
       "image_url": "https://cdn.imweb.me/thumbnail/20251106/ff74f21d1c7c6.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1416.png",
       "reason": "",
-      "bytes_written": 370876
+      "bytes_written": 0
     },
     {
       "seed_id": "layout-idx-1500",
       "idx": "1500",
       "image_url": "https://cdn.imweb.me/thumbnail/20251212/bbc6000c03291.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1500.jpg",
       "reason": "",
-      "bytes_written": 52833
+      "bytes_written": 0
     },
     {
       "seed_id": "layout-idx-1611",
       "idx": "1611",
       "image_url": "https://cdn.imweb.me/thumbnail/20260119/6eb6d3e8d5bc0.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1611.jpg",
       "reason": "",
-      "bytes_written": 63057
+      "bytes_written": 0
     },
     {
       "seed_id": "layout-idx-1869",
       "idx": "1869",
       "image_url": "https://cdn.imweb.me/thumbnail/20260701/65789257ae3c1.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1869.jpg",
       "reason": "",
-      "bytes_written": 164127
+      "bytes_written": 0
     },
     {
       "seed_id": "layout-idx-1867",
       "idx": "1867",
       "image_url": "https://cdn.imweb.me/thumbnail/20260630/43afd9b9c07c6.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1867.jpg",
       "reason": "",
-      "bytes_written": 49671
+      "bytes_written": 0
     },
     {
       "seed_id": "layout-idx-1853",
       "idx": "1853",
       "image_url": "https://cdn.imweb.me/thumbnail/20260623/c8ec8f0de33e4.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1853.png",
       "reason": "",
-      "bytes_written": 657970
+      "bytes_written": 0
     },
     {
       "seed_id": "layout-idx-1750",
       "idx": "1750",
       "image_url": "https://cdn.imweb.me/thumbnail/20260310/a0bb93f86c25b.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1750.jpg",
       "reason": "",
-      "bytes_written": 64194
+      "bytes_written": 0
     },
     {
       "seed_id": "layout-idx-1660",
       "idx": "1660",
       "image_url": "https://cdn.imweb.me/thumbnail/20260206/6c87d88d8ddd2.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1660.jpg",
       "reason": "",
-      "bytes_written": 61283
+      "bytes_written": 0
     },
     {
       "seed_id": "layout-idx-1528",
       "idx": "1528",
       "image_url": "https://cdn.imweb.me/thumbnail/20251224/e52f4b64a3cb7.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1528.jpg",
       "reason": "",
-      "bytes_written": 56619
+      "bytes_written": 0
     },
     {
       "seed_id": "layout-idx-1526",
       "idx": "1526",
       "image_url": "https://cdn.imweb.me/thumbnail/20251224/545c98f286d0c.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1526.jpg",
       "reason": "",
-      "bytes_written": 56298
+      "bytes_written": 0
     },
     {
       "seed_id": "layout-idx-1519",
       "idx": "1519",
       "image_url": "https://cdn.imweb.me/thumbnail/20251224/4a95b6dcf9425.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1519.jpg",
       "reason": "",
-      "bytes_written": 63555
+      "bytes_written": 0
     },
     {
       "seed_id": "layout-idx-1699",
       "idx": "1699",
       "image_url": "https://cdn.imweb.me/thumbnail/20260212/2ae8796f74e78.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1699.jpg",
       "reason": "",
-      "bytes_written": 62553
+      "bytes_written": 0
     },
     {
       "seed_id": "layout-idx-1326",
       "idx": "1326",
       "image_url": "https://cdn.imweb.me/thumbnail/20251002/da96cb6302188.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1326.jpg",
       "reason": "",
-      "bytes_written": 58043
+      "bytes_written": 0
     },
     {
       "seed_id": "layout-idx-1001",
       "idx": "1001",
       "image_url": "https://cdn.imweb.me/thumbnail/20241106/c61ebbf4c0d09.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1001.png",
       "reason": "",
-      "bytes_written": 40510
+      "bytes_written": 0
     },
     {
       "seed_id": "layout-idx-1747",
       "idx": "1747",
       "image_url": "https://cdn.imweb.me/thumbnail/20260310/d21e49840c105.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1747.jpg",
       "reason": "",
-      "bytes_written": 63648
+      "bytes_written": 0
     },
     {
       "seed_id": "layout-idx-1286",
       "idx": "1286",
       "image_url": "https://cdn.imweb.me/thumbnail/20250730/5f1cca0fec6b1.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1286.png",
       "reason": "",
-      "bytes_written": 674361
+      "bytes_written": 0
     },
     {
       "seed_id": "layout-idx-1052",
       "idx": "1052",
       "image_url": "https://cdn.imweb.me/thumbnail/20241231/a98c8216f0aae.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1052.jpg",
       "reason": "",
-      "bytes_written": 53207
+      "bytes_written": 0
     },
     {
       "seed_id": "layout-idx-526",
       "idx": "526",
       "image_url": "https://cdn.imweb.me/thumbnail/20230419/8658b912414b0.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "526.jpg",
       "reason": "",
-      "bytes_written": 129677
+      "bytes_written": 0
     },
     {
       "seed_id": "layout-idx-949",
       "idx": "949",
       "image_url": "https://cdn.imweb.me/thumbnail/20240917/35f13b1777b9b.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "949.jpg",
       "reason": "",
-      "bytes_written": 394257
+      "bytes_written": 0
     },
     {
       "seed_id": "layout-idx-957",
       "idx": "957",
       "image_url": "https://cdn.imweb.me/thumbnail/20240923/b3539ab908900.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "957.jpg",
       "reason": "",
-      "bytes_written": 40881
+      "bytes_written": 0
     },
     {
       "seed_id": "layout-idx-686",
       "idx": "686",
       "image_url": "https://cdn.imweb.me/thumbnail/20231127/d359318e628ad.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "686.png",
       "reason": "",
-      "bytes_written": 302932
+      "bytes_written": 0
     },
     {
       "seed_id": "layout-idx-1420",
       "idx": "1420",
       "image_url": "https://cdn.imweb.me/thumbnail/20251111/9bec15b05cb60.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1420.jpg",
       "reason": "",
-      "bytes_written": 76494
+      "bytes_written": 0
     },
     {
       "seed_id": "layout-idx-533",
       "idx": "533",
       "image_url": "https://cdn.imweb.me/thumbnail/20230417/d8127966c0b98.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "533.png",
       "reason": "",
-      "bytes_written": 487990
+      "bytes_written": 0
     },
     {
       "seed_id": "case-002",
@@ -1400,694 +1400,694 @@
       "seed_id": "case-051",
       "idx": "1603",
       "image_url": "https://cdn.imweb.me/thumbnail/20260116/9be685298abf7.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1603.jpg",
       "reason": "",
-      "bytes_written": 137773
+      "bytes_written": 0
     },
     {
       "seed_id": "case-053",
       "idx": "1831",
       "image_url": "https://cdn.imweb.me/thumbnail/20260605/b5f610bead2e6.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1831.jpg",
       "reason": "",
-      "bytes_written": 201967
+      "bytes_written": 0
     },
     {
       "seed_id": "case-055",
       "idx": "1004",
       "image_url": "https://cdn.imweb.me/thumbnail/20241114/dab4340a1259e.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1004.jpg",
       "reason": "",
-      "bytes_written": 139888
+      "bytes_written": 0
     },
     {
       "seed_id": "case-057",
       "idx": "1099",
       "image_url": "https://cdn.imweb.me/thumbnail/20250225/575126e42afa0.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1099.jpg",
       "reason": "",
-      "bytes_written": 116267
+      "bytes_written": 0
     },
     {
       "seed_id": "case-059",
       "idx": "1594",
       "image_url": "https://cdn.imweb.me/thumbnail/20260113/db2c990142430.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1594.jpg",
       "reason": "",
-      "bytes_written": 71205
+      "bytes_written": 0
     },
     {
       "seed_id": "case-061",
       "idx": "1101",
       "image_url": "https://cdn.imweb.me/thumbnail/20250226/f432eea7af82f.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1101.jpg",
       "reason": "",
-      "bytes_written": 36572
+      "bytes_written": 0
     },
     {
       "seed_id": "case-063",
       "idx": "1313",
       "image_url": "https://cdn.imweb.me/thumbnail/20250930/f0f8ef0961c98.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1313.png",
       "reason": "",
-      "bytes_written": 480913
+      "bytes_written": 0
     },
     {
       "seed_id": "case-065",
       "idx": "1585",
       "image_url": "https://cdn.imweb.me/thumbnail/20260109/6c3a16156013c.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1585.jpg",
       "reason": "",
-      "bytes_written": 71205
+      "bytes_written": 0
     },
     {
       "seed_id": "case-067",
       "idx": "1314",
       "image_url": "https://cdn.imweb.me/thumbnail/20250930/9ebadccde7faf.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1314.png",
       "reason": "",
-      "bytes_written": 860815
+      "bytes_written": 0
     },
     {
       "seed_id": "case-069",
       "idx": "1315",
       "image_url": "https://cdn.imweb.me/thumbnail/20250930/7dee997efbee6.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1315.png",
       "reason": "",
-      "bytes_written": 886590
+      "bytes_written": 0
     },
     {
       "seed_id": "case-071",
       "idx": "1316",
       "image_url": "https://cdn.imweb.me/thumbnail/20250930/749eee32f88bc.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1316.png",
       "reason": "",
-      "bytes_written": 795111
+      "bytes_written": 0
     },
     {
       "seed_id": "case-073",
       "idx": "1317",
       "image_url": "https://cdn.imweb.me/thumbnail/20250930/9c933f722694c.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1317.png",
       "reason": "",
-      "bytes_written": 855857
+      "bytes_written": 0
     },
     {
       "seed_id": "case-075",
       "idx": "754",
       "image_url": "https://cdn.imweb.me/thumbnail/20240229/7a4693fd9dc38.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "754.jpg",
       "reason": "",
-      "bytes_written": 95364
+      "bytes_written": 0
     },
     {
       "seed_id": "case-077",
       "idx": "857",
       "image_url": "https://cdn.imweb.me/thumbnail/20240513/b7268632ec806.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "857.jpg",
       "reason": "",
-      "bytes_written": 104224
+      "bytes_written": 0
     },
     {
       "seed_id": "case-079",
       "idx": "934",
       "image_url": "https://cdn.imweb.me/thumbnail/20240909/1e2452d7793e0.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "934.jpg",
       "reason": "",
-      "bytes_written": 122667
+      "bytes_written": 0
     },
     {
       "seed_id": "case-081",
       "idx": "858",
       "image_url": "https://cdn.imweb.me/thumbnail/20240514/16f66b2bfe2c0.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "858.jpg",
       "reason": "",
-      "bytes_written": 81167
+      "bytes_written": 0
     },
     {
       "seed_id": "case-083",
       "idx": "1810",
       "image_url": "https://cdn.imweb.me/thumbnail/20260526/63dbf81e0e929.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1810.png",
       "reason": "",
-      "bytes_written": 268392
+      "bytes_written": 0
     },
     {
       "seed_id": "case-085",
       "idx": "1815",
       "image_url": "https://cdn.imweb.me/thumbnail/20260529/e58aaa20e8ea3.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1815.png",
       "reason": "",
-      "bytes_written": 268392
+      "bytes_written": 0
     },
     {
       "seed_id": "case-087",
       "idx": "1050",
       "image_url": "https://cdn.imweb.me/thumbnail/20241231/15b9495b2a36b.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1050.jpg",
       "reason": "",
-      "bytes_written": 161877
+      "bytes_written": 0
     },
     {
       "seed_id": "case-089",
       "idx": "1389",
       "image_url": "https://cdn.imweb.me/thumbnail/20251016/d13f1ab38a1cd.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1389.png",
       "reason": "",
-      "bytes_written": 445319
+      "bytes_written": 0
     },
     {
       "seed_id": "case-091",
       "idx": "1065",
       "image_url": "https://cdn.imweb.me/thumbnail/20250113/6b14a0671ac1c.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1065.jpg",
       "reason": "",
-      "bytes_written": 156774
+      "bytes_written": 0
     },
     {
       "seed_id": "case-093",
       "idx": "607",
       "image_url": "https://cdn.imweb.me/thumbnail/20230721/504a6b55d1b23.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "607.jpg",
       "reason": "",
-      "bytes_written": 116705
+      "bytes_written": 0
     },
     {
       "seed_id": "case-095",
       "idx": "1177",
       "image_url": "https://cdn.imweb.me/thumbnail/20250512/add394977a618.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1177.jpg",
       "reason": "",
-      "bytes_written": 83676
+      "bytes_written": 0
     },
     {
       "seed_id": "case-097",
       "idx": "531",
       "image_url": "https://cdn.imweb.me/thumbnail/20230419/3e953a6ed5618.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "531.jpg",
       "reason": "",
-      "bytes_written": 99288
+      "bytes_written": 0
     },
     {
       "seed_id": "case-099",
       "idx": "948",
       "image_url": "https://cdn.imweb.me/thumbnail/20240923/55ae947ae5ba8.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "948.jpg",
       "reason": "",
-      "bytes_written": 143825
+      "bytes_written": 0
     },
     {
       "seed_id": "case-101",
       "idx": "917",
       "image_url": "https://cdn.imweb.me/thumbnail/20240802/70e1bf65f4c47.jpeg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "917.jpg",
       "reason": "",
-      "bytes_written": 172187
+      "bytes_written": 0
     },
     {
       "seed_id": "case-103",
       "idx": "603",
       "image_url": "https://cdn.imweb.me/thumbnail/20230720/f37e021d36156.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "603.jpg",
       "reason": "",
-      "bytes_written": 100734
+      "bytes_written": 0
     },
     {
       "seed_id": "case-105",
       "idx": "676",
       "image_url": "https://cdn.imweb.me/thumbnail/20231115/8381738a44f50.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "676.jpg",
       "reason": "",
-      "bytes_written": 63101
+      "bytes_written": 0
     },
     {
       "seed_id": "case-107",
       "idx": "528",
       "image_url": "https://cdn.imweb.me/thumbnail/20230419/3cae7a9d11fe9.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "528.jpg",
       "reason": "",
-      "bytes_written": 71303
+      "bytes_written": 0
     },
     {
       "seed_id": "case-109",
       "idx": "530",
       "image_url": "https://cdn.imweb.me/thumbnail/20230419/de27fd1662cd9.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "530.jpg",
       "reason": "",
-      "bytes_written": 8285
+      "bytes_written": 0
     },
     {
       "seed_id": "case-111",
       "idx": "907",
       "image_url": "https://cdn.imweb.me/thumbnail/20240711/940a865616f1e.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "907.jpg",
       "reason": "",
-      "bytes_written": 153097
+      "bytes_written": 0
     },
     {
       "seed_id": "case-113",
       "idx": "521",
       "image_url": "https://cdn.imweb.me/thumbnail/20230420/267b6f21b233c.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "521.jpg",
       "reason": "",
-      "bytes_written": 94887
+      "bytes_written": 0
     },
     {
       "seed_id": "case-115",
       "idx": "542",
       "image_url": "https://cdn.imweb.me/thumbnail/20230419/681a3f8ea8082.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "542.png",
       "reason": "",
-      "bytes_written": 571008
+      "bytes_written": 0
     },
     {
       "seed_id": "case-117",
       "idx": "1067",
       "image_url": "https://cdn.imweb.me/thumbnail/20250113/6af29077d4b15.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1067.jpg",
       "reason": "",
-      "bytes_written": 78160
+      "bytes_written": 0
     },
     {
       "seed_id": "case-119",
       "idx": "913",
       "image_url": "https://cdn.imweb.me/thumbnail/20240730/da594f7ac5ab9.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "913.jpg",
       "reason": "",
-      "bytes_written": 146232
+      "bytes_written": 0
     },
     {
       "seed_id": "case-121",
       "idx": "854",
       "image_url": "https://cdn.imweb.me/thumbnail/20240502/565e396963e17.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "854.jpg",
       "reason": "",
-      "bytes_written": 41062
+      "bytes_written": 0
     },
     {
       "seed_id": "case-123",
       "idx": "1027",
       "image_url": "https://cdn.imweb.me/thumbnail/20241129/4c622ae239ecf.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1027.jpg",
       "reason": "",
-      "bytes_written": 75741
+      "bytes_written": 0
     },
     {
       "seed_id": "case-125",
       "idx": "1624",
       "image_url": "https://cdn.imweb.me/thumbnail/20260202/a910589648f5f.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1624.jpg",
       "reason": "",
-      "bytes_written": 92621
+      "bytes_written": 0
     },
     {
       "seed_id": "case-127",
       "idx": "849",
       "image_url": "https://cdn.imweb.me/thumbnail/20240503/0eb758bcf21ed.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "849.jpg",
       "reason": "",
-      "bytes_written": 34026
+      "bytes_written": 0
     },
     {
       "seed_id": "case-129",
       "idx": "956",
       "image_url": "https://cdn.imweb.me/thumbnail/20240923/d759ed9fa71a4.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "956.jpg",
       "reason": "",
-      "bytes_written": 63872
+      "bytes_written": 0
     },
     {
       "seed_id": "case-131",
       "idx": "677",
       "image_url": "https://cdn.imweb.me/thumbnail/20231115/74ea9b798104a.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "677.png",
       "reason": "",
-      "bytes_written": 375971
+      "bytes_written": 0
     },
     {
       "seed_id": "case-133",
       "idx": "1009",
       "image_url": "https://cdn.imweb.me/thumbnail/20241006/9194644c621b5.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1009.png",
       "reason": "",
-      "bytes_written": 998665
+      "bytes_written": 0
     },
     {
       "seed_id": "case-135",
       "idx": "1652",
       "image_url": "https://cdn.imweb.me/thumbnail/20260202/c1f6306b87ad6.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1652.jpg",
       "reason": "",
-      "bytes_written": 132099
+      "bytes_written": 0
     },
     {
       "seed_id": "case-137",
       "idx": "914",
       "image_url": "https://cdn.imweb.me/thumbnail/20240731/70589849bfc03.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "914.png",
       "reason": "",
-      "bytes_written": 385898
+      "bytes_written": 0
     },
     {
       "seed_id": "case-139",
       "idx": "962",
       "image_url": "https://cdn.imweb.me/thumbnail/20240930/52be51f3356f5.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "962.jpg",
       "reason": "",
-      "bytes_written": 114073
+      "bytes_written": 0
     },
     {
       "seed_id": "case-141",
       "idx": "1031",
       "image_url": "https://cdn.imweb.me/thumbnail/20241129/9202e84313b3d.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1031.jpg",
       "reason": "",
-      "bytes_written": 81700
+      "bytes_written": 0
     },
     {
       "seed_id": "case-143",
       "idx": "848",
       "image_url": "https://cdn.imweb.me/thumbnail/20240503/6478914dd5e2e.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "848.jpg",
       "reason": "",
-      "bytes_written": 90861
+      "bytes_written": 0
     },
     {
       "seed_id": "case-145",
       "idx": "1505",
       "image_url": "https://cdn.imweb.me/thumbnail/20251215/421230a55de01.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1505.jpg",
       "reason": "",
-      "bytes_written": 101004
+      "bytes_written": 0
     },
     {
       "seed_id": "case-147",
       "idx": "606",
       "image_url": "https://cdn.imweb.me/thumbnail/20230720/f37e021d36156.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "606.jpg",
       "reason": "",
-      "bytes_written": 100734
+      "bytes_written": 0
     },
     {
       "seed_id": "case-149",
       "idx": "964",
       "image_url": "https://cdn.imweb.me/thumbnail/20241007/13d605df461da.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "964.jpg",
       "reason": "",
-      "bytes_written": 60812
+      "bytes_written": 0
     },
     {
       "seed_id": "case-151",
       "idx": "853",
       "image_url": "https://cdn.imweb.me/thumbnail/20240502/899419545d356.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "853.jpg",
       "reason": "",
-      "bytes_written": 114002
+      "bytes_written": 0
     },
     {
       "seed_id": "case-153",
       "idx": "1238",
       "image_url": "https://cdn.imweb.me/thumbnail/20250804/0ace75cbf2117.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1238.png",
       "reason": "",
-      "bytes_written": 355056
+      "bytes_written": 0
     },
     {
       "seed_id": "case-155",
       "idx": "951",
       "image_url": "https://cdn.imweb.me/thumbnail/20240917/5bb5e118c6774.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "951.png",
       "reason": "",
-      "bytes_written": 545356
+      "bytes_written": 0
     },
     {
       "seed_id": "case-157",
       "idx": "952",
       "image_url": "https://cdn.imweb.me/thumbnail/20240917/e0ccc0000a771.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "952.png",
       "reason": "",
-      "bytes_written": 486886
+      "bytes_written": 0
     },
     {
       "seed_id": "case-159",
       "idx": "1646",
       "image_url": "https://cdn.imweb.me/thumbnail/20260202/43d86c3132c11.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1646.jpg",
       "reason": "",
-      "bytes_written": 108695
+      "bytes_written": 0
     },
     {
       "seed_id": "case-161",
       "idx": "1626",
       "image_url": "https://cdn.imweb.me/thumbnail/20260202/b06295d968dca.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1626.png",
       "reason": "",
-      "bytes_written": 75529
+      "bytes_written": 0
     },
     {
       "seed_id": "case-163",
       "idx": "584",
       "image_url": "https://cdn.imweb.me/thumbnail/20230619/4200169e87f48.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "584.png",
       "reason": "",
-      "bytes_written": 1072919
+      "bytes_written": 0
     },
     {
       "seed_id": "case-165",
       "idx": "1296",
       "image_url": "https://cdn.imweb.me/thumbnail/20240429/a7e90d8fe0b6f.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1296.jpg",
       "reason": "",
-      "bytes_written": 138941
+      "bytes_written": 0
     },
     {
       "seed_id": "case-167",
       "idx": "1006",
       "image_url": "https://cdn.imweb.me/thumbnail/20241121/f4697f4db2710.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1006.jpg",
       "reason": "",
-      "bytes_written": 47453
+      "bytes_written": 0
     },
     {
       "seed_id": "case-169",
       "idx": "583",
       "image_url": "https://cdn.imweb.me/thumbnail/20230618/03ca61ae6bf0c.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "583.jpg",
       "reason": "",
-      "bytes_written": 74959
+      "bytes_written": 0
     },
     {
       "seed_id": "case-171",
       "idx": "961",
       "image_url": "https://cdn.imweb.me/thumbnail/20240930/d1e60dcdab905.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "961.jpg",
       "reason": "",
-      "bytes_written": 142331
+      "bytes_written": 0
     },
     {
       "seed_id": "case-173",
       "idx": "743",
       "image_url": "https://cdn.imweb.me/thumbnail/20240220/3755c72a3601b.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "743.png",
       "reason": "",
-      "bytes_written": 88220
+      "bytes_written": 0
     },
     {
       "seed_id": "case-175",
       "idx": "847",
       "image_url": "https://cdn.imweb.me/thumbnail/20240502/ec8aae9670332.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "847.jpg",
       "reason": "",
-      "bytes_written": 147170
+      "bytes_written": 0
     },
     {
       "seed_id": "case-177",
       "idx": "1164",
       "image_url": "https://cdn.imweb.me/thumbnail/20250430/46508e2795af1.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1164.png",
       "reason": "",
-      "bytes_written": 47040
+      "bytes_written": 0
     },
     {
       "seed_id": "case-179",
       "idx": "885",
       "image_url": "https://cdn.imweb.me/thumbnail/20240613/28a89c37441b0.jpeg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "885.jpg",
       "reason": "",
-      "bytes_written": 11775
+      "bytes_written": 0
     },
     {
       "seed_id": "case-181",
       "idx": "959",
       "image_url": "https://cdn.imweb.me/thumbnail/20250307/dff1a953f6774.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "959.png",
       "reason": "",
-      "bytes_written": 217526
+      "bytes_written": 0
     },
     {
       "seed_id": "case-183",
       "idx": "389",
       "image_url": "https://cdn.imweb.me/thumbnail/20230605/d05aba8d977d6.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "389.png",
       "reason": "",
-      "bytes_written": 536091
+      "bytes_written": 0
     },
     {
       "seed_id": "case-185",
       "idx": "465",
       "image_url": "https://cdn.imweb.me/thumbnail/20230301/db962afb0b8df.jpeg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "465.jpg",
       "reason": "",
-      "bytes_written": 56361
+      "bytes_written": 0
     },
     {
       "seed_id": "case-187",
       "idx": "1082",
       "image_url": "https://cdn.imweb.me/thumbnail/20250204/16aab89a66b48.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1082.jpg",
       "reason": "",
-      "bytes_written": 91240
+      "bytes_written": 0
     },
     {
       "seed_id": "case-189",
       "idx": "1083",
       "image_url": "https://cdn.imweb.me/thumbnail/20250206/57b003c6c731d.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1083.png",
       "reason": "",
-      "bytes_written": 1258214
+      "bytes_written": 0
     },
     {
       "seed_id": "case-191",
       "idx": "685",
       "image_url": "https://cdn.imweb.me/thumbnail/20231127/a005a8391f644.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "685.jpg",
       "reason": "",
-      "bytes_written": 114579
+      "bytes_written": 0
     },
     {
       "seed_id": "case-193",
       "idx": "1056",
       "image_url": "https://cdn.imweb.me/thumbnail/20250107/5dfbd935a1c33.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1056.png",
       "reason": "",
-      "bytes_written": 356359
+      "bytes_written": 0
     },
     {
       "seed_id": "case-195",
       "idx": "714",
       "image_url": "https://cdn.imweb.me/thumbnail/20231226/9ce596139e954.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "714.jpg",
       "reason": "",
-      "bytes_written": 58600
+      "bytes_written": 0
     },
     {
       "seed_id": "case-197",
       "idx": "1096",
       "image_url": "https://cdn.imweb.me/thumbnail/20250224/d3d2743cbeb8f.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1096.jpg",
       "reason": "",
-      "bytes_written": 320049
+      "bytes_written": 0
     },
     {
       "seed_id": "case-199",
       "idx": "611",
       "image_url": "https://cdn.imweb.me/thumbnail/20230804/f7cae9d418ce3.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "611.png",
       "reason": "",
-      "bytes_written": 611423
+      "bytes_written": 0
     },
     {
       "seed_id": "case-201",
       "idx": "532",
       "image_url": "https://cdn.imweb.me/thumbnail/20230417/f8947c9da3157.jpeg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "532.jpg",
       "reason": "",
-      "bytes_written": 93450
+      "bytes_written": 0
     },
     {
       "seed_id": "case-203",
       "idx": "807",
       "image_url": "https://cdn.imweb.me/thumbnail/20240403/c6b653125df13.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "807.jpg",
       "reason": "",
-      "bytes_written": 96958
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-001",
@@ -2255,397 +2255,397 @@
       "seed_id": "kc-020",
       "idx": "1874",
       "image_url": "https://cdn.imweb.me/thumbnail/20260702/de27ca6715785.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1874.jpg",
       "reason": "",
-      "bytes_written": 93529
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-022",
       "idx": "1521",
       "image_url": "https://cdn.imweb.me/thumbnail/20251224/b17e680f2a206.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1521.jpg",
       "reason": "",
-      "bytes_written": 34406
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-024",
       "idx": "874",
       "image_url": "https://cdn.imweb.me/thumbnail/20240611/1bd4284fde5c9.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "874.jpg",
       "reason": "",
-      "bytes_written": 89972
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-026",
       "idx": "1729",
       "image_url": "https://cdn.imweb.me/thumbnail/20260224/6f4e8ba5f529e.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1729.jpg",
       "reason": "",
-      "bytes_written": 146355
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-028",
       "idx": "1862",
       "image_url": "https://cdn.imweb.me/thumbnail/20260625/ec214f1282225.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1862.jpg",
       "reason": "",
-      "bytes_written": 201843
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-030",
       "idx": "1479",
       "image_url": "https://cdn.imweb.me/thumbnail/20251209/3ce07dae36b7e.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1479.jpg",
       "reason": "",
-      "bytes_written": 54925
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-032",
       "idx": "1209",
       "image_url": "https://cdn.imweb.me/thumbnail/20250605/5b7dcd45c314b.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1209.jpg",
       "reason": "",
-      "bytes_written": 148920
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-034",
       "idx": "1148",
       "image_url": "https://cdn.imweb.me/thumbnail/20250404/b7aa402bef7f7.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1148.jpg",
       "reason": "",
-      "bytes_written": 96165
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-036",
       "idx": "986",
       "image_url": "https://cdn.imweb.me/thumbnail/20241025/2d10e0df4e2b1.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "986.jpg",
       "reason": "",
-      "bytes_written": 101484
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-038",
       "idx": "1141",
       "image_url": "https://cdn.imweb.me/thumbnail/20250328/d0c6a6d230c52.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1141.jpg",
       "reason": "",
-      "bytes_written": 47820
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-040",
       "idx": "1825",
       "image_url": "https://cdn.imweb.me/thumbnail/20260602/b73236679fcb6.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1825.jpg",
       "reason": "",
-      "bytes_written": 120042
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-042",
       "idx": "1797",
       "image_url": "https://cdn.imweb.me/thumbnail/20260518/60bdbbedfcf8c.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1797.png",
       "reason": "",
-      "bytes_written": 994085
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-044",
       "idx": "1790",
       "image_url": "https://cdn.imweb.me/thumbnail/20260507/f57ddbfe30f6f.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1790.jpg",
       "reason": "",
-      "bytes_written": 129425
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-046",
       "idx": "1772",
       "image_url": "https://cdn.imweb.me/thumbnail/20260410/18092ae0f4e2c.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1772.jpg",
       "reason": "",
-      "bytes_written": 56440
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-048",
       "idx": "1764",
       "image_url": "https://cdn.imweb.me/thumbnail/20260407/c1e8a596a5385.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1764.png",
       "reason": "",
-      "bytes_written": 1147520
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-050",
       "idx": "1756",
       "image_url": "https://cdn.imweb.me/thumbnail/20260416/b84ceea4df449.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1756.jpg",
       "reason": "",
-      "bytes_written": 108580
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-052",
       "idx": "1755",
       "image_url": "https://cdn.imweb.me/thumbnail/20260316/b0ec588d952f0.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1755.png",
       "reason": "",
-      "bytes_written": 282888
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-054",
       "idx": "1753",
       "image_url": "https://cdn.imweb.me/thumbnail/20260311/e6c8c38dbb2da.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1753.jpg",
       "reason": "",
-      "bytes_written": 63707
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-056",
       "idx": "1745",
       "image_url": "https://cdn.imweb.me/thumbnail/20260306/c66bda7cf66c1.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1745.jpg",
       "reason": "",
-      "bytes_written": 119415
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-058",
       "idx": "1721",
       "image_url": "https://cdn.imweb.me/thumbnail/20260213/c989dfd98f762.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1721.jpg",
       "reason": "",
-      "bytes_written": 58837
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-060",
       "idx": "1713",
       "image_url": "https://cdn.imweb.me/thumbnail/20260212/596ade27651f1.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1713.png",
       "reason": "",
-      "bytes_written": 167771
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-062",
       "idx": "1712",
       "image_url": "https://cdn.imweb.me/thumbnail/20260212/7f1c22a984f37.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1712.jpg",
       "reason": "",
-      "bytes_written": 17031
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-064",
       "idx": "1711",
       "image_url": "https://cdn.imweb.me/thumbnail/20260212/a25bce985fe3d.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1711.jpg",
       "reason": "",
-      "bytes_written": 78021
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-066",
       "idx": "1710",
       "image_url": "https://cdn.imweb.me/thumbnail/20260212/ede03c0972e31.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1710.jpg",
       "reason": "",
-      "bytes_written": 93850
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-068",
       "idx": "1674",
       "image_url": "https://cdn.imweb.me/thumbnail/20260211/741fb94244b72.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1674.jpg",
       "reason": "",
-      "bytes_written": 128665
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-070",
       "idx": "1665",
       "image_url": "https://cdn.imweb.me/thumbnail/20260209/4a6ff70da36fd.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1665.jpg",
       "reason": "",
-      "bytes_written": 47002
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-072",
       "idx": "1664",
       "image_url": "https://cdn.imweb.me/thumbnail/20260209/578cbd366f874.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1664.jpg",
       "reason": "",
-      "bytes_written": 70413
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-074",
       "idx": "1662",
       "image_url": "https://cdn.imweb.me/thumbnail/20260209/bf384951d0864.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1662.jpg",
       "reason": "",
-      "bytes_written": 53386
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-076",
       "idx": "1588",
       "image_url": "https://cdn.imweb.me/thumbnail/20260108/939bea119727a.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1588.png",
       "reason": "",
-      "bytes_written": 90440
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-078",
       "idx": "1491",
       "image_url": "https://cdn.imweb.me/thumbnail/20251209/d6b0f579c39c8.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1491.jpg",
       "reason": "",
-      "bytes_written": 59181
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-080",
       "idx": "1442",
       "image_url": "https://cdn.imweb.me/thumbnail/20251124/c3e0650fffd3e.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1442.jpg",
       "reason": "",
-      "bytes_written": 93467
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-082",
       "idx": "1438",
       "image_url": "https://cdn.imweb.me/thumbnail/20251119/4191cb4f5c989.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1438.png",
       "reason": "",
-      "bytes_written": 401680
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-084",
       "idx": "1436",
       "image_url": "https://cdn.imweb.me/thumbnail/20251119/0e56d3003dbeb.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1436.jpg",
       "reason": "",
-      "bytes_written": 41616
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-086",
       "idx": "1390",
       "image_url": "https://cdn.imweb.me/thumbnail/20251017/4db7cb43374f5.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1390.png",
       "reason": "",
-      "bytes_written": 569258
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-088",
       "idx": "1246",
       "image_url": "https://cdn.imweb.me/thumbnail/20250814/3b1aa438f6df0.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1246.jpg",
       "reason": "",
-      "bytes_written": 79506
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-090",
       "idx": "751",
       "image_url": "https://cdn.imweb.me/thumbnail/20240225/f4c133298cef6.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "751.png",
       "reason": "",
-      "bytes_written": 649612
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-092",
       "idx": "1752",
       "image_url": "https://cdn.imweb.me/thumbnail/20260311/285d704287c13.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1752.png",
       "reason": "",
-      "bytes_written": 1033260
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-094",
       "idx": "1625",
       "image_url": "https://cdn.imweb.me/thumbnail/20260123/fc2cf4b9a9055.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1625.png",
       "reason": "",
-      "bytes_written": 443605
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-096",
       "idx": "1839",
       "image_url": "https://cdn.imweb.me/thumbnail/20260615/b9e670ef8f410.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1839.jpg",
       "reason": "",
-      "bytes_written": 189424
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-098",
       "idx": "1413",
       "image_url": "https://cdn.imweb.me/thumbnail/20251105/24b0b23cf1c1c.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1413.png",
       "reason": "",
-      "bytes_written": 1290908
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-100",
       "idx": "1235",
       "image_url": "https://cdn.imweb.me/thumbnail/20250801/358b956dab067.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1235.png",
       "reason": "",
-      "bytes_written": 989427
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-102",
       "idx": "1227",
       "image_url": "https://cdn.imweb.me/thumbnail/20250715/c6fb49873c29a.jpg",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1227.jpg",
       "reason": "",
-      "bytes_written": 144049
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-104",
       "idx": "1845",
       "image_url": "https://cdn.imweb.me/thumbnail/20260619/b100eede00c8d.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1845.png",
       "reason": "",
-      "bytes_written": 702805
+      "bytes_written": 0
     },
     {
       "seed_id": "kc-106",
       "idx": "1800",
       "image_url": "https://cdn.imweb.me/thumbnail/20260515/ab6af68de0e9f.png",
-      "status": "downloaded",
+      "status": "skipped_existing",
       "local_file": "1800.png",
       "reason": "",
-      "bytes_written": 996503
+      "bytes_written": 0
     }
   ],
   "failures": []
