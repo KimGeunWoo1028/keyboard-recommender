@@ -1,15 +1,16 @@
 from __future__ import annotations
 
-import json
 import logging
 import smtplib
 from email.message import EmailMessage
-from urllib import error as urllib_error
-from urllib import request as urllib_request
+
+import httpx
 
 from keyboard_recommender.config.settings import Settings
 
 logger = logging.getLogger(__name__)
+
+_RESEND_USER_AGENT = "keyboard-recommender-api/0.1.0"
 
 
 def _deliver_via_smtp(settings: Settings, *, to_email: str, subject: str, text_body: str) -> str:
@@ -33,45 +34,37 @@ def _deliver_via_smtp(settings: Settings, *, to_email: str, subject: str, text_b
 def _deliver_via_resend(settings: Settings, *, to_email: str, subject: str, text_body: str) -> str:
     if not settings.resend_api_key or not settings.resend_from_email:
         return "log"
-    payload = json.dumps(
-        {
-            "from": settings.resend_from_email,
-            "to": [to_email],
-            "subject": subject,
-            "text": text_body,
-        },
-    ).encode("utf-8")
-    req = urllib_request.Request(
-        url="https://api.resend.com/emails",
-        data=payload,
-        method="POST",
-        headers={
-            "Authorization": f"Bearer {settings.resend_api_key}",
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-        },
-    )
+    headers = {
+        "Authorization": f"Bearer {settings.resend_api_key}",
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        # Cloudflare in front of api.resend.com blocks default Python-urllib signatures from cloud hosts.
+        "User-Agent": _RESEND_USER_AGENT,
+    }
+    body = {
+        "from": settings.resend_from_email,
+        "to": [to_email],
+        "subject": subject,
+        "text": text_body,
+    }
     try:
-        with urllib_request.urlopen(req, timeout=15) as resp:
-            if resp.status < 200 or resp.status >= 300:
-                logger.warning("resend_send_failed status=%s", resp.status)
-                return "log"
-    except urllib_error.HTTPError as exc:
-        detail = ""
-        try:
-            detail = exc.read().decode("utf-8", errors="replace")[:500]
-        except OSError:
-            detail = ""
-        logger.warning(
-            "resend_send_failed http_status=%s from=%s to=%s detail=%s",
-            exc.code,
-            settings.resend_from_email,
-            to_email,
-            detail,
+        resp = httpx.post(
+            "https://api.resend.com/emails",
+            headers=headers,
+            json=body,
+            timeout=15.0,
         )
-        return "log"
-    except urllib_error.URLError:
-        logger.warning("resend_send_failed network_error")
+        if resp.status_code < 200 or resp.status_code >= 300:
+            logger.warning(
+                "resend_send_failed http_status=%s from=%s to=%s detail=%s",
+                resp.status_code,
+                settings.resend_from_email,
+                to_email,
+                resp.text[:500],
+            )
+            return "log"
+    except httpx.HTTPError:
+        logger.warning("resend_send_failed network_error from=%s to=%s", settings.resend_from_email, to_email)
         return "log"
     return "resend"
 
