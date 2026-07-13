@@ -1,0 +1,6 @@
+# Railway/Nixpacks — mirror Swagkey thumbnails during image build (not in git).
+[variables]
+NIXPACKS_PYTHON_VERSION = "3.12"
+
+[phases.build]
+cmds = ["PYTHONPATH=src python scripts/download_swagkey_images.py --max-failures 20"]
