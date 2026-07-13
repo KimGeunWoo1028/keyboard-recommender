@@ -10,6 +10,8 @@ from typing import Any
 from fastapi import APIRouter
 
 from keyboard_recommender.config.settings import get_settings, resolved_env_file_path
+from keyboard_recommender.infrastructure.swagkey_image_startup import local_swagkey_image_count
+from keyboard_recommender.infrastructure.swagkey_images import swagkey_images_dir
 
 router = APIRouter(tags=["health"])
 
@@ -37,4 +39,5 @@ def health() -> dict[str, Any]:
         payload["resendApiKeyConfigured"] = bool(key)
         if key:
             payload["resendApiKeyHint"] = f"{key[:8]}...{key[-4:]}" if len(key) > 12 else key[:4] + "..."
+        payload["swagkeyLocalImageCount"] = local_swagkey_image_count(swagkey_images_dir(settings))
     return payload

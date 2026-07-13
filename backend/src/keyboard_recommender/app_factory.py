@@ -22,6 +22,7 @@ from keyboard_recommender.infrastructure.avatars import avatar_dir
 from keyboard_recommender.infrastructure.swagkey_images import swagkey_images_dir
 from keyboard_recommender.infrastructure.persistence import session as db_session
 from keyboard_recommender.infrastructure.safety import ProductionDebugBlockMiddleware, apply_runtime_log_policy
+from keyboard_recommender.infrastructure.swagkey_image_startup import start_swagkey_mirror_if_needed
 
 
 def create_app(settings: Settings | None = None) -> FastAPI:
@@ -35,6 +36,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         apply_runtime_log_policy(settings)
         avatar_dir(settings)
         swagkey_images_dir(settings)
+        start_swagkey_mirror_if_needed(settings)
         yield
         engine: Engine = db_session.engine
         engine.dispose()
