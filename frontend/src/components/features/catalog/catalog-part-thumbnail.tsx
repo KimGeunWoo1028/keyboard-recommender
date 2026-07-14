@@ -55,11 +55,10 @@ export function CatalogPartThumbnail({
   const showBlueprint = diagramId !== null;
   const isFullSizeBlueprint = diagramId === "full-size";
   const showImage = Boolean(trimmed) && !failed && !showBlueprint;
-  const useUnoptimized =
-    trimmed.includes("/media/swagkey-images/") &&
-    (trimmed.startsWith("http://localhost") ||
-      trimmed.startsWith("http://127.0.0.1") ||
-      trimmed.startsWith("/media/"));
+  // Local mirrors are served from the API host (often Railway). next/image's
+  // optimizer only allowlists localhost + cdn.imweb.me — skip optimization for
+  // all /media/swagkey-images/ URLs so absolute API origins still render.
+  const useUnoptimized = trimmed.includes("/media/swagkey-images/");
   const Icon = FAMILY_ICONS[family];
   const isLayoutBlueprint = visualVariant === "layout-blueprint" || (family === "layout" && showBlueprint);
   const traitMetadata =
