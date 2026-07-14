@@ -307,6 +307,10 @@ def list_catalog_parts(
             for summary in summaries
             if _keycap_matches_subtype_filter(_seed_row(family, summary.id), subtype_filter)
         ]
+    elif family == "layout" and subtype_filter in {"pcb", "reference"}:
+        # Browse virtual subtypes (not seed subtype): PCB SKUs vs reference archetypes.
+        want_reference = subtype_filter == "reference"
+        summaries = [s for s in summaries if bool(s.reference_layout) is want_reference]
     elif subtype_filter:
         summaries = [s for s in summaries if str(s.subtype or "").strip().lower() == subtype_filter]
     total = len(summaries)

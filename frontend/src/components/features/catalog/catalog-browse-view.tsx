@@ -64,6 +64,18 @@ const KEYCAP_SUBTYPES = [
   { id: "all", label: "전체" },
 ];
 
+/** Layout browse tabs — no "전체"; default is PCB products. */
+const LAYOUT_SUBTYPES = [
+  { id: "pcb", label: "기판" },
+  { id: "reference", label: "참조 배열" },
+] as const;
+
+type LayoutBrowseSubtype = (typeof LAYOUT_SUBTYPES)[number]["id"];
+
+function parseLayoutBrowseSubtype(raw: string | null): LayoutBrowseSubtype {
+  return raw === "reference" ? "reference" : "pcb";
+}
+
 function parseFamily(raw: string | null): CatalogFamily {
   if (raw === "plate" || raw === "foam" || raw === "layout" || raw === "case" || raw === "keycap") return raw;
   return "switch";
@@ -144,9 +156,7 @@ function CatalogPartCard({
         </CardDescription>
       </CardHeader>
       <CardContent className="mt-auto flex flex-wrap items-center gap-2 pt-0 text-xs text-ca-on-surface-variant">
-        {item.subtype ? <span className="ca-chip">{item.subtype}</span> : null}
-        {isReferenceLayout ? <span className="ca-chip">참조 배열</span> : null}
-        {item.family === "layout" && !isReferenceLayout ? <span className="ca-chip">기판 상품</span> : null}
+        {item.subtype && item.family !== "layout" ? <span className="ca-chip">{item.subtype}</span> : null}
         {isReferenceOnlyLayout ? (
           <span className="font-label text-ca-label-sm font-medium text-ca-on-surface-variant">상세 보기</span>
         ) : caseCatalogHref ? (
@@ -174,6 +184,7 @@ export function CatalogBrowseView() {
     searchParams.get("mode") === "full" && searchParams.get("category") === "keycap";
   const family: CatalogFamily = legacyKeycap ? "keycap" : parseFamily(searchParams.get("family"));
   const subtype = searchParams.get("subtype") ?? "";
+  const layoutBrowseSubtype = parseLayoutBrowseSubtype(subtype);
   const layoutSize = searchParams.get("layoutSize") ?? "";
   const searchQuery = searchParams.get("q") ?? "";
   const page = parsePage(searchParams.get("page"));
@@ -233,7 +244,13 @@ export function CatalogBrowseView() {
 
   useEffect(() => {
     setSelectedId(null);
-  }, [family, layoutSize, subtype, searchQuery, page]);
+  }, [family, layoutSize, subtype, layoutBrowseSubtype, searchQuery, page]);
+
+  useEffect(() => {
+    if (family !== "layout") return;
+    if (subtype === "pcb" || subtype === "reference") return;
+    replaceCatalogParams({ subtype: "pcb", page });
+  }, [family, subtype, page, replaceCatalogParams]);
 
   const scrollCatalogToTop = useCallback(() => {
     window.scrollTo(0, 0);
@@ -267,13 +284,15 @@ export function CatalogBrowseView() {
     try {
       const payload = await fetchCatalogList(family, {
         subtype:
-          family === "switch" && subtype
-            ? subtype
-            : family === "case" && subtype
+          family === "layout"
+            ? layoutBrowseSubtype
+            : family === "switch" && subtype
               ? subtype
-              : family === "keycap" && subtype
+              : family === "case" && subtype
                 ? subtype
-                : undefined,
+                : family === "keycap" && subtype
+                  ? subtype
+                  : undefined,
         layoutSize: family === "case" && layoutSize.trim() ? layoutSize.trim() : undefined,
         q: searchQuery || undefined,
         limit: PAGE_SIZE,
@@ -293,7 +312,7 @@ export function CatalogBrowseView() {
     } finally {
       setLoading(false);
     }
-  }, [family, layoutSize, subtype, searchQuery, page]);
+  }, [family, layoutSize, subtype, layoutBrowseSubtype, searchQuery, page]);
 
   useEffect(() => {
     void load();
@@ -329,16 +348,6 @@ export function CatalogBrowseView() {
     };
   }, [selectedId, family]);
 
-  const layoutSections = useMemo(() => {
-    if (family !== "layout") return null;
-    const reference = items.filter((item) => item.referenceLayout);
-    const products = items.filter((item) => !item.referenceLayout);
-    return [
-      { title: "참조 배열", items: reference },
-      { title: "기판 상품", items: products },
-    ].filter((section) => section.items.length > 0);
-  }, [family, items]);
-
   return (
     <PageShell className="max-w-ca space-y-6 px-ca-margin-mobile sm:px-ca-margin">
       <div ref={catalogTopRef} className="scroll-mt-24 space-y-2">
@@ -365,7 +374,7 @@ export function CatalogBrowseView() {
               onClick={() => {
                 replaceCatalogParams({
                   family: tab.id,
-                  subtype: "",
+                  subtype: tab.id === "layout" ? "pcb" : "",
                   layoutSize: tab.id === "case" ? layoutSize : null,
                   page: 1,
                 });
@@ -375,6 +384,25 @@ export function CatalogBrowseView() {
           </Button>
         ))}
       </div>
+
+      {family === "layout" ? (
+        <div className="flex flex-wrap gap-2">
+          {LAYOUT_SUBTYPES.map((row) => (
+            <Button
+              key={row.id}
+              type="button"
+              variant={layoutBrowseSubtype === row.id ? "secondary" : "ghost"}
+              size="sm"
+              className={cn("h-8 rounded-full font-body text-sm font-medium")}
+              onClick={() => {
+                replaceCatalogParams({ subtype: row.id, page: 1 });
+              }}
+            >
+              {row.label}
+            </Button>
+          ))}
+        </div>
+      ) : null}
 
       {family === "switch" ? (
         <div className="flex flex-wrap gap-2">
@@ -475,39 +503,16 @@ export function CatalogBrowseView() {
         <p className="text-sm text-ca-on-surface-variant">표시할 항목이 없습니다.</p>
       ) : null}
 
-      {layoutSections ? (
-        <div className="space-y-8">
-          {layoutSections.map((section) => (
-            <section key={section.title} className="space-y-4">
-              <div className="flex items-center justify-between gap-3">
-                <h2 className="font-headline text-lg font-semibold text-ca-on-surface">{section.title}</h2>
-                <span className="text-sm text-ca-on-surface-variant">{section.items.length}개</span>
-              </div>
-              <div className="grid items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {section.items.map((item) => (
-                  <CatalogPartCard
-                    key={item.id}
-                    item={item}
-                    selected={selectedId === item.id}
-                    onSelect={() => setSelectedId(item.id)}
-                  />
-                ))}
-              </div>
-            </section>
-          ))}
-        </div>
-      ) : (
-        <section className="grid items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((item) => (
-            <CatalogPartCard
-              key={item.id}
-              item={item}
-              selected={selectedId === item.id}
-              onSelect={() => setSelectedId(item.id)}
-            />
-          ))}
-        </section>
-      )}
+      <section className="grid items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {items.map((item) => (
+          <CatalogPartCard
+            key={item.id}
+            item={item}
+            selected={selectedId === item.id}
+            onSelect={() => setSelectedId(item.id)}
+          />
+        ))}
+      </section>
 
       <CatalogPagination
         page={page}

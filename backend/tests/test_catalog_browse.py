@@ -95,6 +95,19 @@ def test_list_switches_subtype_filter() -> None:
     assert all(item.subtype == "linear" for item in linear.items)
 
 
+def test_list_layouts_virtual_subtype_filters_pcb_and_reference() -> None:
+    all_layouts = list_catalog_parts("layout", limit=200)
+    pcb = list_catalog_parts("layout", subtype="pcb", limit=200)
+    reference = list_catalog_parts("layout", subtype="reference", limit=200)
+    assert pcb.total >= 1
+    assert reference.total >= 1
+    assert pcb.total + reference.total == all_layouts.total
+    assert all(not item.reference_layout for item in pcb.items)
+    assert all(item.reference_layout for item in reference.items)
+    assert pcb.subtype == "pcb"
+    assert reference.subtype == "reference"
+
+
 def test_list_switches_pagination() -> None:
     page1 = list_catalog_parts("switch", limit=10, offset=0)
     page2 = list_catalog_parts("switch", limit=10, offset=10)
