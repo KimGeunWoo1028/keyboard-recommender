@@ -74,7 +74,7 @@ Phase 0 LOCK → 1 API(재인증+삭제) → 2 연관데이터 → 3 FE 탈퇴 U
 
 | # | 결정 | 후보 | **권장(기본)** | **확정** |
 |---|------|------|----------------|----------|
-| L1 | 재인증 방식 | A) 비밀번호만 · B) 비밀번호 **또는** 이메일 코드 · C) 둘 다 필수 | **A → 이후 1b로 B 확장** | ✅ **A** (2026-07-14) |
+| L1 | 재인증 방식 | A) 비밀번호만 · B) 비밀번호 **또는** 이메일 코드 · C) 둘 다 필수 | **A → 이후 1b로 C 확장** | ✅ **C** (2026-07-14 — password **and** email code) |
 | L2 | `eval_events` | A) 해당 user_id 이벤트 **hard delete** · B) `user_id`/`metadata.userId` **null 익명화** (집계 보존) · C) 북마크만 삭제 | **B (익명화)** — Observe/funnel 왜곡 최소화 | ✅ **B** (2026-07-14) |
 | L3 | 완료 후 이동 | A) `/` · B) `/account-deleted` 전용 | **B** — 재가입·문의 카피 가능 | ✅ **B** (2026-07-14) |
 | L4 | 탈퇴 완료 메일 실패 | A) 탈퇴 롤백 · B) 탈퇴 진행 + log fallback (기존 메일 패턴) | **B** — 기존 `send_*_email` best-effort와 동일 | ✅ **B** (2026-07-14) |
@@ -96,7 +96,7 @@ Phase 0 LOCK → 1 API(재인증+삭제) → 2 연관데이터 → 3 FE 탈퇴 U
 
 | Success | Failure |
 |---------|---------|
-| 로그인 사용자가 비밀번호(또는 LOCK된 재인증) 후 계정이 사라지고 `/auth/me` = 401 | 비밀번호 없이·타 세션만으로 삭제 가능 |
+| 로그인 사용자가 비밀번호 **및** 이메일 인증코드 후 계정이 사라지고 `/auth/me` = 401 | 비밀번호만·코드만·타 세션만으로 삭제 가능 |
 | 탈퇴 후 아바타 파일·auth 보조행·본인 저장 빌드 노출 없음 | `users`만 지우고 `eval_events`에 PII/식별자가 남음 (L2=B 위반 시 null 미처리) |
 | Resend(또는 log fallback)로 완료 메일 경로가 동작 | 메일 실패로 탈퇴 자체가 막히거나, 반대로 메일만 가고 계정 잔존 |
 | Phase 단위 PR·테스트로 회귀 없이 쌓임 | 한 PR에 API+FE+메일+E2E 전부 |
@@ -210,19 +210,20 @@ pytest tests -k "account_delete or delete_account" -q
 
 ---
 
-# Phase 1b. (선택) 이메일 코드 재인증 · **1 PR**
+# Phase 1b. 이메일 코드 재인증 · **1 PR**
 
-> L1이 **A만**이면 **스킵**. L1=B일 때만.  
-> **Status:** ⏭ **스킵** (2026-07-14) — Owner LOCK L1=A
+> L1=**C** — 비밀번호 **그리고** 이메일 인증코드 모두 필수.  
+> **Status:** ✅ **완료** (2026-07-14) — `deletion-code/send|verify` · delete body에 `verification_token` 필수
 
 ## Cursor 실행
 
 ### Task 1b-1
 
-- `POST /auth/account/deletion-code/send` — 로그인 사용자 email로 코드 (기존 verification 패턴 재사용; **회원가입용 테이블과 네임스페이스 분리** 권장)
-- `POST /auth/account/delete` body: `{ "password"?: ..., "verification_token"?: ... }` — **둘 중 하나**
+- `POST /auth/account/deletion-code/send` — 로그인 사용자 email로 코드 (`auth_account_deletion_challenges`, 회원가입 verification과 분리)
+- `POST /auth/account/deletion-code/verify` — 코드 확인 → `verification_token`
+- `POST /auth/account/delete` body: `{ "password", "verification_token" }` — **둘 다 필수**
 
-**Gate:** 코드 만료·재사용·타인 세션 불가. 비밀번호 경로(Phase 1) 회귀 없음.
+**Gate:** 코드 만료·재사용·미검증 토큰으로 삭제 불가. 비밀번호 경로와 함께 동작.
 
 ---
 
@@ -446,7 +447,7 @@ REM 로그인으로 Set-Cookie 획득 후
 curl -s -o NUL -w "%%{http_code}" -X POST "http://127.0.0.1:8000/api/v1/auth/account/delete" ^
   -H "Content-Type: application/json" ^
   -H "Cookie: <session>" ^
-  -d "{\"password\":\"YourPass1!\"}"
+  -d "{\"password\":\"YourPass1!\",\"verification_token\":\"<from deletion-code/verify>\"}"
 REM 기대: 204
 ```
 
@@ -458,7 +459,7 @@ REM 기대: 204
 |-------|------|--------|
 | 0 LOCK | ✅ | 2026-07-14 |
 | 1 API | ✅ | 2026-07-14 |
-| 1b 이메일 재인증 | ⏭ 스킵 (L1=A) | 2026-07-14 |
+| 1b 이메일 재인증 | ✅ (L1=C password+code) | 2026-07-14 |
 | 2 연관 데이터 | ✅ | 2026-07-14 |
 | 3 FE UI | ✅ | 2026-07-14 |
 | 4 세션·쿠키 | ✅ (Phase 3 흡수 + /me 401) | 2026-07-14 |

@@ -136,7 +136,7 @@ keyboard-recommender/
 - [x] 비밀번호 변경, 보안 요약
 - [x] **쿠키 기반 세션** (`kr_session`) — API origin에 설정, `credentials: "include"`
 - [x] **프로필 아바타** — `POST/DELETE /api/v1/auth/avatar` · `users.avatar_url` · `data/avatars/` → `/media/avatars` (007)
-- [x] **회원탈퇴** — `POST /api/v1/auth/account/delete` · 비밀번호 재인증 · eval_events 익명화 · `/account-deleted` · Resend 완료 메일 (로드맵: `docs/account-deletion-roadmap.md` Phase 0–7 ✅ · Phase 8 Owner staging smoke)
+- [x] **회원탈퇴** — `POST /api/v1/auth/account/delete` · 비밀번호 **+** 이메일 인증코드 · eval_events 익명화 · `/account-deleted` · Resend 완료 메일 (로드맵: `docs/account-deletion-roadmap.md` Phase 0–7 ✅ · Phase 1b ✅ · Phase 8 Owner staging smoke)
 - [x] DB 마이그레이션: users, auth_sessions, email_verifications, password_resets, avatar_url (004–007)
 
 ### 4.3 마이페이지
@@ -842,7 +842,9 @@ API (FastAPI routes)
 | GET | `/display-name-availability` | |
 | POST | `/avatar` | |
 | DELETE | `/avatar` | |
-| POST | `/account/delete` | 비밀번호 재인증 → 연관 데이터 purge · users hard delete · cookie clear · 탈퇴 완료 메일(best-effort Resend/SMTP/log) |
+| POST | `/account/deletion-code/send` | 로그인 사용자 이메일로 탈퇴용 6자리 인증번호 발송 |
+| POST | `/account/deletion-code/verify` | 인증번호 확인 → `verification_token` |
+| POST | `/account/delete` | 비밀번호 + verification_token → 연관 데이터 purge · users hard delete · cookie clear · 탈퇴 완료 메일(best-effort Resend/SMTP/log) |
 
 #### Recommendations — `/api/v1/recommendations`
 | Method | Path | 설명 |
@@ -1597,7 +1599,7 @@ cd e2e && npm ci && npx playwright install chromium && npm test  # E2E (API 8000
 | Settings | `backend/src/keyboard_recommender/config/settings.py` |
 | **Avatar upload/storage** | `infrastructure/avatars.py` · `api/v1/auth.py` (`/avatar`) · `data/avatars/` |
 | **Avatar (FE)** | `frontend/src/lib/avatar.ts` · `mypage-account.tsx` |
-| **Account deletion** | `POST /auth/account/delete` · `account_purge.py` · `send_account_deleted_email` · `/account-deleted` · `docs/account-deletion-roadmap.md` |
+| **Account deletion** | `POST /auth/account/deletion-code/*` · `POST /auth/account/delete` · `account_purge.py` · `send_account_deleted_email` · `/account-deleted` · `docs/account-deletion-roadmap.md` |
 | 카탈로그 시드 | `backend/src/keyboard_recommender/catalog/swagkey_products.seed.json` |
 | **인벤토리 정제** | `backend/src/keyboard_recommender/catalog/swagkey_inventory.py` |
 | **인벤토리 분류** | `backend/src/keyboard_recommender/catalog/swagkey_inventory_classifier.py` |

@@ -24,7 +24,13 @@ from keyboard_recommender.infrastructure.notifications.email import (
     send_verification_code_email,
 )
 from keyboard_recommender.infrastructure.persistence.account_purge import purge_user_associated_data
-from keyboard_recommender.infrastructure.persistence.models.user_auth import AuthEmailVerification, AuthPasswordReset, AuthSession, User
+from keyboard_recommender.infrastructure.persistence.models.user_auth import (
+    AuthAccountDeletionChallenge,
+    AuthEmailVerification,
+    AuthPasswordReset,
+    AuthSession,
+    User,
+)
 from keyboard_recommender.schemas.auth import (
     AccountSecuritySummary,
     AuthEnvelope,
@@ -39,6 +45,7 @@ from keyboard_recommender.schemas.auth import (
     SignupRequest,
     UpdateDisplayNameRequest,
     UpdatePasswordRequest,
+    VerifyAccountDeletionCodeRequest,
     VerifyEmailCodeRequest,
     VerifyEmailCodeResponse,
 )
@@ -52,6 +59,15 @@ def _session_expires_at(settings: Settings, now: datetime) -> datetime:
     if settings.auth_session_ttl_minutes is not None:
         return now + timedelta(minutes=settings.auth_session_ttl_minutes)
     return now + timedelta(hours=settings.auth_session_ttl_hours)
+
+
+def _as_utc(dt: datetime) -> datetime:
+    """SQLite may return naive datetimes; normalize for comparison with aware `now`."""
+    if dt.tzinfo is None:
+        return dt.replace(tzinfo=timezone.utc)
+    return dt.astimezone(timezone.utc)
+
+
 _PASSWORD_ALLOWED = re.compile(r"^[\x21-\x7E]{8,12}$")
 _HAS_HANGUL = re.compile(r"[가-힣]")
 _HAS_LATIN = re.compile(r"[A-Za-z]")
@@ -566,6 +582,77 @@ def change_password(
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
+@router.post("/account/deletion-code/send", response_model=SendEmailVerificationResponse)
+def send_account_deletion_code(
+    settings: SettingsDep = None,  # type: ignore[assignment]
+    db: DbSession = None,  # type: ignore[assignment]
+    current_user: CurrentUserOptionalDep = None,
+) -> SendEmailVerificationResponse:
+    """Send a 6-digit code to the authenticated user's email (deletion re-auth)."""
+    assert settings is not None and db is not None
+    if current_user is None:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated.")
+    code = _new_six_digit_code()
+    now = datetime.now(timezone.utc)
+    expires_at = now + timedelta(minutes=settings.auth_email_code_ttl_minutes)
+    row = db.execute(
+        select(AuthAccountDeletionChallenge).where(AuthAccountDeletionChallenge.user_id == current_user.id),
+    ).scalar_one_or_none()
+    if row is None:
+        row = AuthAccountDeletionChallenge(
+            id=uuid.uuid4(),
+            user_id=current_user.id,
+            code_hash=hash_password(code),
+            verification_token=None,
+            expires_at=expires_at,
+            verified_at=None,
+            consumed_at=None,
+            created_at=now,
+            updated_at=now,
+        )
+        db.add(row)
+    else:
+        row.code_hash = hash_password(code)
+        row.verification_token = None
+        row.expires_at = expires_at
+        row.verified_at = None
+        row.consumed_at = None
+        row.updated_at = now
+    db.commit()
+    delivery = send_verification_code_email(settings, to_email=current_user.email, code=code)
+    return SendEmailVerificationResponse(
+        sent=True,
+        delivery=delivery,
+        debug_code=code if _allow_debug_email_code(settings) else None,
+        **_staging_email_ops_snapshot(settings),
+    )
+
+
+@router.post("/account/deletion-code/verify", response_model=VerifyEmailCodeResponse)
+def verify_account_deletion_code(
+    body: VerifyAccountDeletionCodeRequest = Body(...),
+    db: DbSession = None,  # type: ignore[assignment]
+    current_user: CurrentUserOptionalDep = None,
+) -> VerifyEmailCodeResponse:
+    assert db is not None
+    if current_user is None:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated.")
+    row = db.execute(
+        select(AuthAccountDeletionChallenge).where(AuthAccountDeletionChallenge.user_id == current_user.id),
+    ).scalar_one_or_none()
+    now = datetime.now(timezone.utc)
+    if row is None or _as_utc(row.expires_at) <= now or row.consumed_at is not None:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Verification code expired or missing.")
+    if not verify_password(body.code, row.code_hash):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid verification code.")
+    token = secrets.token_urlsafe(32)
+    row.verification_token = token
+    row.verified_at = now
+    row.updated_at = now
+    db.commit()
+    return VerifyEmailCodeResponse(verified=True, verification_token=token)
+
+
 @router.post("/account/delete", status_code=status.HTTP_204_NO_CONTENT)
 def delete_account(
     response: Response,
@@ -574,12 +661,32 @@ def delete_account(
     db: DbSession = None,  # type: ignore[assignment]
     current_user: CurrentUserOptionalDep = None,
 ) -> Response:
-    """Hard-delete the authenticated user after password re-auth; purge associated data."""
+    """Hard-delete after password + email-code verification_token (Phase 1b)."""
     assert settings is not None and db is not None
     if current_user is None:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated.")
     if not verify_password(body.password, current_user.password_hash):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Current password is invalid.")
+
+    now = datetime.now(timezone.utc)
+    challenge = db.execute(
+        select(AuthAccountDeletionChallenge).where(AuthAccountDeletionChallenge.user_id == current_user.id),
+    ).scalar_one_or_none()
+    if (
+        challenge is None
+        or challenge.verification_token is None
+        or challenge.verification_token != body.verification_token
+        or challenge.verified_at is None
+        or _as_utc(challenge.expires_at) <= now
+        or challenge.consumed_at is not None
+    ):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Email verification is required before deleting account.",
+        )
+    challenge.consumed_at = now
+    challenge.updated_at = now
+    db.flush()
 
     to_email = current_user.email
     purge_user_associated_data(db, settings, current_user)

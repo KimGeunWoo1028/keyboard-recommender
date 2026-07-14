@@ -1,4 +1,4 @@
-"""Phase 1–2 — POST /auth/account/delete (re-auth + purge / eval anonymize)."""
+"""Phase 1–2 / 1b — POST /auth/account/delete (password + email code + purge)."""
 
 from __future__ import annotations
 
@@ -18,6 +18,7 @@ from keyboard_recommender.app_factory import create_app
 from keyboard_recommender.config.settings import Settings
 from keyboard_recommender.infrastructure.persistence.base import Base
 from keyboard_recommender.infrastructure.persistence.models.user_auth import (
+    AuthAccountDeletionChallenge,
     AuthEmailVerification,
     AuthSession,
     User,
@@ -38,6 +39,7 @@ _AUTH_TABLES = (
     User.__table__,
     AuthSession.__table__,
     AuthEmailVerification.__table__,
+    AuthAccountDeletionChallenge.__table__,
     EvalRecommendationRun.__table__,
     EvalBenchmarkRun.__table__,
     EvalEvent.__table__,
@@ -138,24 +140,61 @@ def _seed_eval_event(session: Session, *, user_id: str | None, event_type: str =
     return row
 
 
+def _verify_deletion_code(client: TestClient, settings: Settings, token_id: str) -> str:
+    client.cookies.set(settings.auth_cookie_name, token_id)
+    send = client.post("/api/v1/auth/account/deletion-code/send")
+    assert send.status_code == 200
+    code = send.json().get("debug_code")
+    assert code
+    verify = client.post("/api/v1/auth/account/deletion-code/verify", json={"code": code})
+    assert verify.status_code == 200
+    token = verify.json().get("verification_token")
+    assert token
+    return str(token)
+
+
 def test_delete_account_unauthenticated(auth_env: tuple[TestClient, Session, Settings]) -> None:
     client, _session, settings = auth_env
-    res = client.post("/api/v1/auth/account/delete", json={"password": _PASSWORD})
+    res = client.post(
+        "/api/v1/auth/account/delete",
+        json={"password": _PASSWORD, "verification_token": "x" * 32},
+    )
     assert res.status_code == 401
     assert settings.auth_cookie_name not in (res.cookies or {})
+
+
+def test_delete_account_without_verification_token_rejected(
+    auth_env: tuple[TestClient, Session, Settings],
+) -> None:
+    client, session, settings = auth_env
+    user, token_id = _seed_user(session)
+    client.cookies.set(settings.auth_cookie_name, token_id)
+    res = client.post("/api/v1/auth/account/delete", json={"password": _PASSWORD})
+    assert res.status_code == 422
+    assert session.execute(select(User).where(User.id == user.id)).scalar_one_or_none() is not None
 
 
 def test_delete_account_wrong_password_keeps_user(auth_env: tuple[TestClient, Session, Settings]) -> None:
     client, session, settings = auth_env
     user, token_id = _seed_user(session)
-    client.cookies.set(settings.auth_cookie_name, token_id)
+    verification_token = _verify_deletion_code(client, settings, token_id)
     res = client.post(
         "/api/v1/auth/account/delete",
-        json={"password": _WRONG_PASSWORD},
+        json={"password": _WRONG_PASSWORD, "verification_token": verification_token},
     )
     assert res.status_code == 401
     assert session.execute(select(User).where(User.id == user.id)).scalar_one_or_none() is not None
     assert session.execute(select(AuthSession).where(AuthSession.user_id == user.id)).scalar_one_or_none() is not None
+
+
+def test_delete_account_wrong_code_rejected(auth_env: tuple[TestClient, Session, Settings]) -> None:
+    client, session, settings = auth_env
+    user, token_id = _seed_user(session)
+    client.cookies.set(settings.auth_cookie_name, token_id)
+    assert client.post("/api/v1/auth/account/deletion-code/send").status_code == 200
+    bad = client.post("/api/v1/auth/account/deletion-code/verify", json={"code": "000000"})
+    assert bad.status_code == 400
+    assert session.execute(select(User).where(User.id == user.id)).scalar_one_or_none() is not None
 
 
 def test_delete_account_success_clears_user_session_and_cookie(
@@ -167,10 +206,10 @@ def test_delete_account_success_clears_user_session_and_cookie(
     avatar.parent.mkdir(parents=True, exist_ok=True)
     avatar.write_bytes(b"\x89PNG\r\n\x1a\n" + b"0" * 16)
 
-    client.cookies.set(settings.auth_cookie_name, token_id)
+    verification_token = _verify_deletion_code(client, settings, token_id)
     res = client.post(
         "/api/v1/auth/account/delete",
-        json={"password": _PASSWORD},
+        json={"password": _PASSWORD, "verification_token": verification_token},
     )
     assert res.status_code == 204
     assert session.execute(select(User).where(User.id == user.id)).scalar_one_or_none() is None
@@ -207,8 +246,11 @@ def test_delete_account_anonymizes_eval_events_and_keeps_other_user(
     )
     session.commit()
 
-    client.cookies.set(settings.auth_cookie_name, token_id)
-    res = client.post("/api/v1/auth/account/delete", json={"password": _PASSWORD})
+    verification_token = _verify_deletion_code(client, settings, token_id)
+    res = client.post(
+        "/api/v1/auth/account/delete",
+        json={"password": _PASSWORD, "verification_token": verification_token},
+    )
     assert res.status_code == 204
 
     session.expire_all()
@@ -235,8 +277,14 @@ def test_delete_account_session_gone_cannot_list_saved(
     user, token_id = _seed_user(session)
     _seed_eval_event(session, user_id=str(user.id))
 
-    client.cookies.set(settings.auth_cookie_name, token_id)
-    assert client.post("/api/v1/auth/account/delete", json={"password": _PASSWORD}).status_code == 204
+    verification_token = _verify_deletion_code(client, settings, token_id)
+    assert (
+        client.post(
+            "/api/v1/auth/account/delete",
+            json={"password": _PASSWORD, "verification_token": verification_token},
+        ).status_code
+        == 204
+    )
 
     # Cookie cleared — saved listing without auth should not expose former user's builds.
     client.cookies.clear()
@@ -282,8 +330,11 @@ def test_delete_account_sends_completion_email_best_effort(
         "keyboard_recommender.api.v1.auth.send_account_deleted_email",
         _fake_send,
     )
-    client.cookies.set(settings.auth_cookie_name, token_id)
-    res = client.post("/api/v1/auth/account/delete", json={"password": _PASSWORD})
+    verification_token = _verify_deletion_code(client, settings, token_id)
+    res = client.post(
+        "/api/v1/auth/account/delete",
+        json={"password": _PASSWORD, "verification_token": verification_token},
+    )
     assert res.status_code == 204
     assert calls == ["delete-me@example.com"]
     assert session.execute(select(User).where(User.id == user.id)).scalar_one_or_none() is None

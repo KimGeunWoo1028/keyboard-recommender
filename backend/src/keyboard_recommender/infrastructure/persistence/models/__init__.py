@@ -22,6 +22,7 @@ from keyboard_recommender.infrastructure.persistence.models.plate import Plate, 
 from keyboard_recommender.infrastructure.persistence.models.recommendation_trait import RecommendationTrait
 from keyboard_recommender.infrastructure.persistence.models.switch import Switch, SwitchTraitScore
 from keyboard_recommender.infrastructure.persistence.models.user_auth import (
+    AuthAccountDeletionChallenge,
     AuthEmailVerification,
     AuthPasswordReset,
     AuthSession,
@@ -45,4 +46,5 @@ __all__ = [
     "AuthSession",
     "AuthEmailVerification",
     "AuthPasswordReset",
+    "AuthAccountDeletionChallenge",
 ]

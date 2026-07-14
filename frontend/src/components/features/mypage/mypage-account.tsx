@@ -13,10 +13,12 @@ import {
   deleteAccount,
   logout,
   logoutAllSessions,
+  sendAccountDeletionCode,
   type AccountSecuritySummary,
   type AuthUser,
   updateDisplayName,
   uploadAvatar,
+  verifyAccountDeletionCode,
 } from "@/lib/api/auth";
 import { ApiError } from "@/lib/api/client";
 import { resolveAvatarSrc } from "@/lib/avatar";
@@ -109,6 +111,12 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
   const [showDeletePassword, setShowDeletePassword] = useState(false);
   const [deleteMessage, setDeleteMessage] = useState<string | null>(null);
   const [deletingAccount, setDeletingAccount] = useState(false);
+  const [deleteCodeSent, setDeleteCodeSent] = useState(false);
+  const [deleteCode, setDeleteCode] = useState("");
+  const [sendingDeleteCode, setSendingDeleteCode] = useState(false);
+  const [verifyingDeleteCode, setVerifyingDeleteCode] = useState(false);
+  const [deleteVerified, setDeleteVerified] = useState(false);
+  const [deleteVerificationToken, setDeleteVerificationToken] = useState<string | null>(null);
 
   const passwordMatches = useMemo(
     () => confirmPassword.length > 0 && confirmPassword === newPassword,
@@ -449,6 +457,89 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
         </Button>
         {openDeletePanel ? (
           <div className="space-y-2 rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container/30 p-3">
+            <p className="text-xs text-ca-on-surface-variant">
+              가입 이메일(<span className="font-medium text-ca-on-surface">{user.email}</span>)로 인증번호를
+              받은 뒤, 비밀번호와 함께 탈퇴를 완료합니다.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                disabled={sendingDeleteCode || deleteVerified || securityActionBusy !== "none"}
+                onClick={() => {
+                  setDeleteMessage(null);
+                  setDeleteVerified(false);
+                  setDeleteVerificationToken(null);
+                  setDeleteCode("");
+                  setSendingDeleteCode(true);
+                  void sendAccountDeletionCode()
+                    .then((res) => {
+                      setDeleteCodeSent(true);
+                      if (res.delivery === "smtp" || res.delivery === "resend") {
+                        setDeleteMessage("인증번호를 이메일로 보냈습니다.");
+                      } else {
+                        setDeleteMessage("인증번호 요청이 접수되었습니다. 메일 도착까지 잠시 기다려 주세요.");
+                      }
+                    })
+                    .catch((e) => {
+                      setDeleteMessage(e instanceof Error ? e.message : "인증번호 발송에 실패했습니다.");
+                    })
+                    .finally(() => setSendingDeleteCode(false));
+                }}
+              >
+                {sendingDeleteCode ? "발송 중..." : deleteCodeSent ? "인증번호 재발송" : "인증번호 발송"}
+              </Button>
+              <Input
+                type="text"
+                inputMode="numeric"
+                maxLength={6}
+                value={deleteCode}
+                onChange={(e) => {
+                  setDeleteCode(e.target.value.replace(/\D/g, "").slice(0, 6));
+                  if (deleteVerified) {
+                    setDeleteVerified(false);
+                    setDeleteVerificationToken(null);
+                  }
+                }}
+                placeholder="인증번호 6자리"
+                className="min-w-[8rem] flex-1"
+                disabled={!deleteCodeSent || deleteVerified}
+                autoComplete="one-time-code"
+              />
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                disabled={
+                  !deleteCodeSent || deleteVerified || verifyingDeleteCode || securityActionBusy !== "none"
+                }
+                onClick={() => {
+                  setDeleteMessage(null);
+                  if (!/^\d{6}$/.test(deleteCode)) {
+                    setDeleteMessage("인증번호 6자리를 입력해 주세요.");
+                    return;
+                  }
+                  setVerifyingDeleteCode(true);
+                  void verifyAccountDeletionCode(deleteCode)
+                    .then((res) => {
+                      setDeleteVerified(true);
+                      setDeleteVerificationToken(res.verification_token);
+                      setDeleteMessage("이메일 인증이 완료되었습니다. 비밀번호를 입력해 탈퇴를 완료하세요.");
+                    })
+                    .catch((e) => {
+                      if (e instanceof ApiError && e.status === 400) {
+                        setDeleteMessage("인증번호가 올바르지 않거나 만료되었습니다.");
+                      } else {
+                        setDeleteMessage(e instanceof Error ? e.message : "인증 확인에 실패했습니다.");
+                      }
+                    })
+                    .finally(() => setVerifyingDeleteCode(false));
+                }}
+              >
+                {verifyingDeleteCode ? "확인 중..." : deleteVerified ? "인증 완료" : "인증 확인"}
+              </Button>
+            </div>
             <div className="relative">
               <Input
                 type={showDeletePassword ? "text" : "password"}
@@ -457,6 +548,7 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
                 placeholder="현재 비밀번호"
                 className="pr-10"
                 autoComplete="current-password"
+                disabled={!deleteVerified}
               />
               <PasswordVisibilityToggle
                 visible={showDeletePassword}
@@ -469,6 +561,7 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
               onChange={(e) => setDeleteConfirm(e.target.value)}
               placeholder={`확인을 위해 «${DELETE_CONFIRM_WORD}»를 입력하세요`}
               autoComplete="off"
+              disabled={!deleteVerified}
             />
             <p className="text-xs text-ca-on-surface-variant">
               <span className={deleteConfirm === DELETE_CONFIRM_WORD ? "text-green-500" : "text-red-500"}>
@@ -477,9 +570,13 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
               «{DELETE_CONFIRM_WORD}» 입력 확인
             </p>
             <Button
-              disabled={deletingAccount || securityActionBusy !== "none"}
+              disabled={deletingAccount || !deleteVerified || securityActionBusy !== "none"}
               onClick={() => {
                 setDeleteMessage(null);
+                if (!deleteVerificationToken) {
+                  setDeleteMessage("이메일 인증을 먼저 완료해 주세요.");
+                  return;
+                }
                 if (!deletePassword) {
                   setDeleteMessage("비밀번호를 입력해 주세요.");
                   return;
@@ -489,7 +586,10 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
                   return;
                 }
                 setDeletingAccount(true);
-                void deleteAccount({ password: deletePassword })
+                void deleteAccount({
+                  password: deletePassword,
+                  verification_token: deleteVerificationToken,
+                })
                   .then(() => {
                     // Hard navigation: avoid RequireAuth racing emitAuthChanged → /auth?next=…
                     window.location.assign("/account-deleted");
@@ -497,6 +597,10 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
                   .catch((e) => {
                     if (e instanceof ApiError && e.status === 401) {
                       setDeleteMessage("비밀번호가 올바르지 않습니다.");
+                    } else if (e instanceof ApiError && e.status === 400) {
+                      setDeleteMessage("이메일 인증이 만료되었거나 유효하지 않습니다. 인증번호를 다시 받아 주세요.");
+                      setDeleteVerified(false);
+                      setDeleteVerificationToken(null);
                     } else {
                       setDeleteMessage(e instanceof Error ? e.message : "회원탈퇴에 실패했습니다.");
                     }
