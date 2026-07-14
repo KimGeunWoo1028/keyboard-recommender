@@ -72,7 +72,8 @@ export function CatalogPartThumbnail({
     <div className={cn("flex w-full flex-col", className)}>
       <div
         className={cn(
-          "relative w-full overflow-hidden rounded-t-[inherit] bg-ca-surface-container/50",
+          "relative w-full overflow-hidden rounded-t-[inherit]",
+          isLayoutBlueprint ? "bg-ca-surface-container/50" : "bg-ca-surface",
           isLayoutBlueprint
             ? isFullSizeBlueprint
               ? "aspect-[2/1] min-h-[9.5rem]"
@@ -97,7 +98,7 @@ export function CatalogPartThumbnail({
             sizes={sizes}
             priority={priority}
             unoptimized={useUnoptimized}
-            className="object-contain p-2"
+            className="object-cover"
             onError={() => setFailed(true)}
           />
         ) : null}
