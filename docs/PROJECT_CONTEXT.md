@@ -2,9 +2,9 @@
 
 > **용도:** 새 AI Agent 세션을 열 때 이 파일 전체를 붙여넣으면, 지금까지의 작업·구조·규칙을 한 번에 전달할 수 있습니다.  
 > **경로:** `c:\Users\jeung\keyboard-recommender`  
-> **최종 정리일:** 2026-07-12 (KST)  
+> **최종 정리일:** 2026-07-14 (KST)  
 > **언어:** 한국어 UI (로그인, 마이페이지, 설문, 추천 근거, 카탈로그 등)  
-> **남은 일 Phase:** `docs/remaining-work-phases.md` — **A–F 구현 ✅** · B 표본 🔄 (배포 후) · **localhost 실행:** `docs/localhost-execution-roadmap.md` **Phase 0–2 ✅** (2026-07-12) · **배포:** `docs/deployment-roadmap.md` Phase 0–4 (staging→prod) · Phase 5 = observe·Unlock 후
+> **남은 일 Phase:** `docs/remaining-work-phases.md` — **A–F 구현 ✅** · B 표본 🔄 (staging live · Unlock 전) · **localhost 실행:** `docs/localhost-execution-roadmap.md` **Phase 0–2 ✅** (2026-07-12) · **배포:** `docs/deployment-roadmap.md` **Phase 0–2 ✅ · Phase 3 staging 🔄** (2026-07-14) · **Phase 4 production = 정식 공개 시** · Phase 5 = observe·Unlock 후
 
 ---
 
@@ -23,6 +23,7 @@
 | **Backend** | FastAPI 0.115 · SQLAlchemy 2.0 · PostgreSQL 16 · Alembic · Pydantic Settings · Ruff · pytest |
 | **E2E** | Playwright (TypeScript), Chromium |
 | **Infra (로컬)** | Docker Compose (PostgreSQL만) |
+| **Infra (staging, 2026-07-14)** | **DB:** Supabase Postgres (앱 Auth만 사용 · Supabase Auth 미사용) · **FE:** Vercel `frontend/` → `https://keyboard-recommender-rho.vercel.app` · **BE:** Railway `backend/` → `https://keyboard-recommender-production.up.railway.app` · **토폴로지:** 단일 Vercel 도메인 + `/api`·`/media` → Railway (`INTERNAL_API_PROXY_TARGET`) |
 | **CI** | GitHub Actions — 5개 병렬 job + catalog 1:1 coverage audit (warning) · **Python 3.12** · **Node 22** |
 | **Python** | 3.11–3.13 (`>=3.11,<3.14`; CI는 3.12 고정) |
 
@@ -522,7 +523,7 @@ keyboard-recommender/
 
 > **남은 일 Phase 마스터:** `docs/remaining-work-phases.md` (v1.6)  
 > **localhost 실행 로드맵:** `docs/localhost-execution-roadmap.md` (v1.0) — **Phase 0–2 ✅** (2026-07-12) · **Phase 2 상시 반복** · Phase 3–4 = 배포 후 · Phase 5 = Unlock 후  
-> **배포 로드맵:** `docs/deployment-roadmap.md` (v1.0) — Phase 0–4 = staging→prod · Phase 5 = observe (배포 후)  
+> **배포 로드맵:** `docs/deployment-roadmap.md` (v1.0) — **Phase 0–2 ✅ · Phase 3 staging 🔄** (2026-07-14) · Phase 4 = **정식 공개(prod 분리) 시** · Phase 5 = observe  
 > **구현 Task A–F:** ✅ 2026-07-10 완료. 아래는 **코딩 밖 잔여**만.
 
 #### Remaining-work Phase 구현 상태
@@ -530,7 +531,7 @@ keyboard-recommender/
 | Phase | 상태 | 비고 |
 |-------|------|------|
 | **A** Close-out | ✅ | Owner Top 3 재서명 · 375px QA (Vitest/E2E) |
-| **B** Observe | ✅ 인프라 · 🔄 표본 | Unlock 14일/≥50 `home.viewed` · guest+auth · `unlock_ready` 전 **제품 UI LOCK** |
+| **B** Observe | ✅ 인프라 · 🔄 표본 | Unlock 14일/≥50 `home.viewed` · guest+auth · `unlock_ready` 전 **제품 UI LOCK** · **staging에서 persistence on** (표본 적재 시작 가능) |
 | **C** Analytics | ✅ | funnel CLI/CSV · Compare 성공지표 제외 |
 | **D** Visual 375 | ✅ | `e2e/tests/results-visual-375.spec.ts` · `npm run test:visual` |
 | **E** Keycap | ✅ | curated 12→18 · survey/NL 축 · recommend keycap **18** (browse **62**) |
@@ -544,17 +545,47 @@ keyboard-recommender/
 | **1** | layout coverage gap **0** — mislinked `layout-new-*` 15건 `browse.listed: false` · `browse.listed` 정책 코드 반영 · merge 메타 동기화 (added 0) · switch/keycap 잔여 gap **문서화** (`phase1_coverage_exceptions.txt`) |
 | **2** | fixture recheck·ops·regression·Vitest·E2E smoke green · blocking 추이 `phase2_blocking_trend.txt` · **주 1회·PR 전 반복** |
 
-**로컬 지금 할 일:** Phase **2** 유지보수 리듬만 반복. **배포 착수 시** `docs/deployment-roadmap.md` Phase 0–4 (localhost만으로 Phase 5 Unlock 판정 금지).
+#### 배포 Phase (2026-07-13~14 · `docs/deployment-roadmap.md`)
+
+| Phase | 상태 | 핵심 |
+|-------|------|------|
+| **0** 로컬 게이트 | ✅ | blocking 0 · ops · regression (배포 직전마다 재실행) |
+| **1** 인프라 결정 | ✅ | Supabase DB · Vercel FE · Railway BE · **단일 도메인 + `/api`·`/media` 프록시** · Supabase Auth **미사용** |
+| **2** env·DB·미디어 | ✅ | Railway/Vercel env · `alembic` 001→007 · `ENABLE_EVALUATION_PERSISTENCE=true` · Swagkey mirror **293** (`/health` `swagkeyLocalImageCount`) · Resend **httpx** (Railway Cloudflare 1010 회피) · startup/entrypoint mirror |
+| **3** Staging + smoke | 🔄 | Staging **live** · API/TLS/CORS/catalog/media/`eval_events` bookmark ✅ · Owner 브라우저 잔여: 새로고침 로그인 유지 · `kr_session` Secure · 로그아웃 · 저장 빌드 UI |
+| **4** Production | ⏸ | **정식 공개 시에만** — staging과 **별도** DB·도메인·시크릿 · `APP_ENV=production`. 지금 live URL은 **staging** (Railway 서비스명 `production` ≠ `APP_ENV`) |
+| **5** Observe | ⏸ | Phase 4(또는 staging 표본 운영) 후 · Unlock 14일/≥50 |
+
+**Staging URL**
+
+| 레이어 | URL |
+|--------|-----|
+| Frontend | `https://keyboard-recommender-rho.vercel.app` |
+| Backend | `https://keyboard-recommender-production.up.railway.app` |
+| Health | `GET /health` ( **`/api/v1/health` 없음** → 404가 정상) |
+| FE env | `NEXT_PUBLIC_API_URL` = same-origin Vercel · `INTERNAL_API_PROXY_TARGET` = Railway |
+
+**배포 시 주의 (재발 방지)**
+
+- Railway Variables **따옴표(`"`) 금지** · `RESEND_FROM_EMAIL=onboarding@resend.dev` (테스트 모드 · 계정 메일만)
+- Git에 이미지 바이너리 없음 → Railway cold start 시 startup mirror 또는 `scripts/railway_entrypoint.sh`
+- 카탈로그 런타임은 seed JSON 유지 · DB 11테이블 미연결
+- Phase 4 Gate 전: Phase 3 Owner 브라우저 체크 완료 · **별도** prod 스택 없으면 Phase 4 착수 금지
+
+**지금 할 일:** (1) 로컬 Phase **2** 유지보수 리듬 · (2) staging에서 Owner 브라우저 4항목 → Phase 3 Gate 닫기 · (3) staging으로 테스트·표본 적재 · (4) **정식 공개할 때** Phase 4 · (5) localhost만으로 Phase 5 Unlock 판정 금지.
 
 #### 아직 남은 것 (이 섹션의 실질 잔여)
 
 - [x] **localhost 실행 Phase 0–2** — `docs/localhost-execution-roadmap.md` — ✅ 2026-07-12
+- [x] **배포 Phase 0–2** — `docs/deployment-roadmap.md` — ✅ 2026-07-14 (staging env·DB·미디어)
 - [ ] **Phase 2 상시** — fixture recheck · `verify_ops_quality_15.py` · (seed/UI 변경 시) regression·E2E
 - [ ] **switch/keycap coverage 잔여** — live recrawl·idx enrichment (`inv-0093`, `inv-0105`, `inv-0189`, `inv-0193`, `inv-0195`)
-- [ ] **Phase B 표본** — **배포 후** · `ENABLE_EVALUATION_PERSISTENCE=true` · `report_observe_aggregates` / Unlock (14일/≥50 `home.viewed`)
+- [ ] **배포 Phase 3 Owner** — staging 브라우저: 로그인 유지 · Secure 쿠키 · 로그아웃 · 저장 빌드 / «다시 보기»
+- [ ] **Phase B 표본** — staging persistence on ✅ · `report_observe_aggregates` / Unlock (14일/≥50 `home.viewed`) · localhost만으로 Unlock 금지
+- [ ] **배포 Phase 4** — **정식 공개 시** 별도 Postgres·도메인·시크릿 · `APP_ENV=production` · prod smoke
 - 🔒 **Home 제품 revisit** — Dashboard / Login redirect / dual Hero 등 · Unlock + Owner Why 필수 (`product-next-phase5-home-revisit.md`) · 본 로드맵에 UI Task 없음
 - [ ] **F-4 Git** — `keyboard-recommender` 단독 repo 커밋/원격 정리 — **사용자 요청 시에만**
-- [ ] **Feedback Learning 실 staging host** — 로컬 dry-run·기본 off ✅ · 운영자가 `--base-url http://…` + `ENABLE_FEEDBACK_LEARNING_MVP=true`로 선택 검증 (production 기본 off 유지)
+- [ ] **Feedback Learning 실 staging host** — 로컬 dry-run·기본 off ✅ · 운영자가 staging base-url + `ENABLE_FEEDBACK_LEARNING_MVP=true`로 선택 검증 (production 기본 off 유지)
 
 #### 완료로 종결 (체크만 유지)
 
@@ -1545,7 +1576,8 @@ cd e2e && npm ci && npx playwright install chromium && npm test  # E2E (API 8000
 40. **Split 60 (`layout-007`):** 스웨그키 실제 상품 없음 · 참조 배열 전용 · 케이스/키트 링크·`sourceUrl` 없음 · 다이어그램 행별 분리·5행 스페이스·TRRS 잭/케이블 — §4.10
 41. **Alice (`layout-006`):** 65% 기반 + 매크로열 · 행별 블록 회전·alignPx 상수 — 운영자 튜닝 반영(2026-07-12) · geometry 임의 변경 금지 — §4.10
 42. **Discovery API:** `/api/v1/builds/discovery` **없음** — 재도입 시 Home IA LOCK·Phase 0 Why 필요
-43. **Localhost 실행 (§4.9):** `docs/localhost-execution-roadmap.md` — Phase **0–2 ✅** · **지금** = Phase 2 반복(recheck·ops·E2E) · **배포** = `docs/deployment-roadmap.md` Phase 0–4 · observe = Phase 5 · `phase2_blocking_trend.txt`에 blocking 추이 기록 · E2E 연속 실행 시 `PW_REUSE_SERVER=1`
+43. **Localhost 실행 (§4.9):** `docs/localhost-execution-roadmap.md` — Phase **0–2 ✅** · **지금** = Phase 2 반복(recheck·ops·E2E) · `phase2_blocking_trend.txt`에 blocking 추이 기록 · E2E 연속 실행 시 `PW_REUSE_SERVER=1`
+44. **배포 (§4.9 · `deployment-roadmap.md`):** Phase **0–2 ✅** · Stage **3 🔄** (2026-07-14 staging live) · **Phase 4 = 정식 공개 시만** (별도 DB·도메인 · `APP_ENV=production`) · health = `/health` · Vercel Root = `frontend` · Railway Root = `backend` · 이미지 mirror는 서버 ephemeral + startup · Seed `--apply-to-seed` 자동 금지 · Gate 미충족 시 다음 Phase 착수 금지
 
 ---
 
@@ -1647,7 +1679,7 @@ cd e2e && npm ci && npx playwright install chromium && npm test  # E2E (API 8000
 
 - **Remaining Work Phases (남은 일 마스터):** `docs/remaining-work-phases.md` — A–F 구현 ✅ · B 표본 🔄 (배포 후) · Home revisit 🔒
 - **Localhost Execution Roadmap:** `docs/localhost-execution-roadmap.md` — **Phase 0–2 ✅** (2026-07-12) · Phase 2 상시 · Phase 3–6 deploy/observe/Home
-- **Deployment Roadmap:** `docs/deployment-roadmap.md` — Phase 0–4 staging→prod · Phase 5 observe · DB·env·smoke 체크리스트
+- **Deployment Roadmap:** `docs/deployment-roadmap.md` — Phase **0–2 ✅** · Phase **3 staging 🔄** (2026-07-14) · Phase **4 = 정식 공개 시** · Phase 5 observe · DB·env·smoke 체크리스트
 - **Product Next Phases (마스터):** `docs/product-next-phases.md` — Phase 0–4 ✅ · Phase 5 데이터 배선 ✅ · 제품 revisit 🔒 (표본 후)
 - **Phase 4 Launch 리포트:** `docs/product-next-phase4-launch.md`
 - **Phase 5 Home revisit:** `docs/product-next-phase5-home-revisit.md`
@@ -1685,6 +1717,6 @@ cd e2e && npm ci && npx playwright install chromium && npm test  # E2E (API 8000
 
 *이 문서는 keyboard-recommender 프로젝트의 전체 파일·구조·기능·설정을 AI Agent 컨텍스트용으로 정리한 것입니다. 코드 변경 시 이 파일도 함께 업데이트하세요.*
 
-**최종 갱신 (2026-07-12, 3차 감사):** localhost Phase 0–2 완료 반영 · browse **329** / recommend **150** / blocking **0** · layout seed **45** (browse **30**) · 이미지 **315/329** raw · listable **100%** · layout PCB **23**건(38 오기 수정) · `observe_aggregate` 경로 · §6.3 클라이언트 유틸 · 누락 테스트·catalog 모듈 · footer 수치 정리(구 331/164 제거).
+**최종 갱신 (2026-07-14):** 배포 staging live 반영 — Phase 0–2 ✅ · Phase 3 🔄 (TLS/API/CORS/catalog/media 293/`eval_events` bookmark ✅ · Owner 브라우저 잔여) · Phase 4는 정식 공개 시 · Infra: Supabase + Vercel + Railway · Resend httpx · Agent 규칙 #44.
 
-**이전 주요 마일스톤:** Swagkey 1:1 Phase 0–8 (2026-07-12) · 제품 이미지 Phase 0–8 (2026-07-11) · Product Next 0–4 · Results UX 0–7 · Evidence IA 0–4 (2026-07-10) · Curator 설문 · Stitch UI · 추천 엔진 단일화 · Swagkey ①~⑮.
+**이전 주요 마일스톤:** localhost Phase 0–2 (2026-07-12) · Swagkey 1:1 Phase 0–8 (2026-07-12) · 제품 이미지 Phase 0–8 (2026-07-11) · Product Next 0–4 · Results UX 0–7 · Evidence IA 0–4 (2026-07-10) · Curator 설문 · Stitch UI · 추천 엔진 단일화 · Swagkey ①~⑮.
