@@ -4,7 +4,7 @@
 > **경로:** `c:\Users\jeung\keyboard-recommender`  
 > **최종 정리일:** 2026-07-14 (KST)  
 > **언어:** 한국어 UI (로그인, 마이페이지, 설문, 추천 근거, 카탈로그 등)  
-> **남은 일 Phase:** `docs/remaining-work-phases.md` — **A–F 구현 ✅** · B 표본 🔄 (staging live · Unlock 전) · **localhost 실행:** `docs/localhost-execution-roadmap.md` **Phase 0–2 ✅** (2026-07-12) · **배포:** `docs/deployment-roadmap.md` **Phase 0–2 ✅ · Phase 3 staging 🔄** (2026-07-14) · **Phase 4 production = 정식 공개 시** · Phase 5 = observe·Unlock 후
+> **남은 일 Phase:** `docs/remaining-work-phases.md` — **A–F 구현 ✅** · B 표본 🔄 (staging live · Unlock 전) · **localhost 실행:** `docs/localhost-execution-roadmap.md` **Phase 0–2 ✅** (2026-07-12) · **배포:** `docs/deployment-roadmap.md` **Phase 0–2 ✅ · Phase 3 staging 🔄** (2026-07-14) · **Phase 4 production = 정식 공개 시** · Phase 5 = observe·Unlock 후 · **회원탈퇴:** `docs/account-deletion-roadmap.md` **Phase 0–8 ✅** (2026-07-14 · L1=C password+email code · staging smoke ✅)
 
 ---
 
@@ -45,7 +45,7 @@ keyboard-recommender/
 │   ├── remaining-work-phases.md       # 남은 일 Phase A–F · B 표본(배포 후) · Home revisit 🔒
 │   ├── localhost-execution-roadmap.md # localhost 실행 Phase 0–6 (catalog·deploy·observe·Home)
 │   ├── deployment-roadmap.md       # 배포 Phase 0–5 (인프라·env·staging·prod·observe)
-│   ├── account-deletion-roadmap.md # 회원탈퇴 Phase 0–8 (API·purge·FE·Resend·E2E)
+│   ├── account-deletion-roadmap.md # 회원탈퇴 Phase 0–8 ✅ (password+email code·purge·FE·Resend·E2E·staging)
 │   ├── product-next-phases.md    # Home IA LOCK 이후 Next Phases (0–5) 마스터
 │   ├── product-next-phase4-launch.md   # Phase 4 Launch·DoD·Observe
 │   ├── product-next-phase5-home-revisit.md  # Phase 5 데이터 전제 · 제품 LOCK
@@ -136,8 +136,15 @@ keyboard-recommender/
 - [x] 비밀번호 변경, 보안 요약
 - [x] **쿠키 기반 세션** (`kr_session`) — API origin에 설정, `credentials: "include"`
 - [x] **프로필 아바타** — `POST/DELETE /api/v1/auth/avatar` · `users.avatar_url` · `data/avatars/` → `/media/avatars` (007)
-- [x] **회원탈퇴** — `POST /api/v1/auth/account/delete` · 비밀번호 **+** 이메일 인증코드 · eval_events 익명화 · `/account-deleted` · Resend 완료 메일 (로드맵: `docs/account-deletion-roadmap.md` Phase 0–7 ✅ · Phase 1b ✅ · Phase 8 Owner staging smoke)
-- [x] DB 마이그레이션: users, auth_sessions, email_verifications, password_resets, avatar_url (004–007)
+- [x] **회원탈퇴 (Phase 0–8 ✅, 2026-07-14)** — L1=**C** (비밀번호 **and** 이메일 인증코드)
+  - 발송/확인: `POST /api/v1/auth/account/deletion-code/send` · `…/verify` → `verification_token`
+  - 삭제: `POST /api/v1/auth/account/delete` `{ password, verification_token }` → hard delete · cookie clear
+  - purge: 아바타 · `auth_email_verifications` · sessions · `eval_events` user_id/`metadata.userId` **null 익명화** (L2=B)
+  - 완료: Resend/SMTP/log best-effort 메일 (L4=B · 실패해도 탈퇴 롤백 없음) · `/account-deleted`
+  - FE: 마이페이지 계정 Danger zone (발송 → 6자리 확인 → 비밀번호+«탈퇴»)
+  - E2E: `e2e/tests/account-delete.spec.ts` (공유 e2e-ci 계정 **미사용** · disposable signup)
+  - 로드맵: `docs/account-deletion-roadmap.md` · **로컬·Supabase staging** alembic `008_deletion_challenges` 적용 · Owner staging smoke ✅
+- [x] DB 마이그레이션: users, auth_sessions, email_verifications, password_resets, avatar_url, **account_deletion_challenges** (004–**008**)
 
 ### 4.3 마이페이지
 
@@ -145,7 +152,7 @@ keyboard-recommender/
 - [x] 북마크 저장/목록/삭제 · master–detail · «추천 결과 다시 보기» (API + 게스트 localStorage 폴백)
 - [x] **활동 API** (`GET /activity`) — Results 탭은 제거됐으나 backend·`saved-recommendations.ts` merge용 **유지**
 - [x] 개요: 취향 6축 스냅샷 · 저장 허브 · 아바타
-- [x] 계정: 프로필 사진·닉네임·비밀번호·세션 로그아웃·**회원탈퇴**(Danger zone)
+- [x] 계정: 프로필 사진·닉네임·비밀번호·세션 로그아웃·**회원탈퇴**(Danger zone · 이메일 인증번호 + 비밀번호)
 - [x] Vitest smoke (hub/overview/saved/build-stack · account-deleted) · E2E critical-flows mypage · `account-delete` project
 - [x] `?section=activity` → `saved` 리다이렉트 (레거시 딥링크)
 - ~~비교 워크스페이스 / 활동 타임라인 탭~~ — **제거** (복원 금지 · product-next Phase 3)
@@ -177,7 +184,7 @@ keyboard-recommender/
 - [x] Swagkey HTML 스크래핑 파이프라인 (스위치 spec + plate/foam 호환)
 - [x] ~64개 HTML 캐시 (`backend/data/swagkey_html_cache/`)
 - [x] Catalog ingestion pipeline (detect → extract → normalize → validate → diff → ingest)
-- [x] Alembic 마이그레이션 001–007 (카탈로그 + eval + auth + avatar)
+- [x] Alembic 마이그레이션 001–**008** (카탈로그 + eval + auth + avatar + account deletion challenges)
 - [x] **Swagkey 크롤 인벤토리 파이프라인 ①~⑨** (2026-07-06) — 아래 §9 참고
 - [x] **Phase 2 ⑩~⑮** (2026-07-08) — 추천↔쇼핑 링크 · 품질 cleanup · case/keycap 축 · 카탈로그 UX · 운영·품질 — §4.10
 - [x] **카탈로그 브라우징 UI** (`/catalog`) — **탭 6개**: 스위치 · 플레이트 · 폼 · **레이아웃** · 케이스/키트 · 키캡 (§4.15)
@@ -553,7 +560,7 @@ keyboard-recommender/
 |-------|------|------|
 | **0** 로컬 게이트 | ✅ | blocking 0 · ops · regression (배포 직전마다 재실행) |
 | **1** 인프라 결정 | ✅ | Supabase DB · Vercel FE · Railway BE · **단일 도메인 + `/api`·`/media` 프록시** · Supabase Auth **미사용** |
-| **2** env·DB·미디어 | ✅ | Railway/Vercel env · `alembic` 001→007 · `ENABLE_EVALUATION_PERSISTENCE=true` · Swagkey mirror **293** (`/health` `swagkeyLocalImageCount`) · Resend **httpx** (Railway Cloudflare 1010 회피) · startup/entrypoint mirror |
+| **2** env·DB·미디어 | ✅ | Railway/Vercel env · `alembic` 001→**008** · `ENABLE_EVALUATION_PERSISTENCE=true` · Swagkey mirror **293** (`/health` `swagkeyLocalImageCount`) · Resend **httpx** (Railway Cloudflare 1010 회피) · startup/entrypoint mirror |
 | **3** Staging + smoke | 🔄 | Staging **live** · API/TLS/CORS/catalog/media/`eval_events` bookmark ✅ · Owner 브라우저 잔여: 새로고침 로그인 유지 · `kr_session` Secure · 로그아웃 · 저장 빌드 UI |
 | **4** Production | ⏸ | **정식 공개 시에만** — staging과 **별도** DB·도메인·시크릿 · `APP_ENV=production`. 지금 live URL은 **staging** (Railway 서비스명 `production` ≠ `APP_ENV`) |
 | **5** Observe | ⏸ | Phase 4(또는 staging 표본 운영) 후 · Unlock 14일/≥50 |
@@ -842,9 +849,9 @@ API (FastAPI routes)
 | GET | `/display-name-availability` | |
 | POST | `/avatar` | |
 | DELETE | `/avatar` | |
-| POST | `/account/deletion-code/send` | 로그인 사용자 이메일로 탈퇴용 6자리 인증번호 발송 |
-| POST | `/account/deletion-code/verify` | 인증번호 확인 → `verification_token` |
-| POST | `/account/delete` | 비밀번호 + verification_token → 연관 데이터 purge · users hard delete · cookie clear · 탈퇴 완료 메일(best-effort Resend/SMTP/log) |
+| POST | `/account/deletion-code/send` | 로그인 사용자 이메일로 탈퇴용 6자리 인증번호 (`auth_account_deletion_challenges`, 회원가입 verification과 분리) |
+| POST | `/account/deletion-code/verify` | 인증번호 확인 → `verification_token` (만료·오입력·consumed 거부) |
+| POST | `/account/delete` | **password + verification_token 모두 필수** → purge · users hard delete · cookie clear · 완료 메일(best-effort) |
 
 #### Recommendations — `/api/v1/recommendations`
 | Method | Path | 설명 |
@@ -908,12 +915,13 @@ Frontend: `/catalog` — **6탭** (`?family=switch|plate|foam|layout|case|keycap
 
 **인증:**
 - `users` (`avatar_url` nullable), `auth_sessions`, `auth_email_verifications`, `auth_password_resets`
+- `auth_account_deletion_challenges` (탈퇴용 이메일 코드 · user_id UNIQUE · CASCADE)
 
 **평가 영속:**
 - `eval_recommendation_runs`, `eval_snapshots`, `eval_metrics`, `eval_diagnostics`
-- `eval_confidence_samples`, `eval_benchmark_runs`, `eval_events`
+- `eval_confidence_samples`, `eval_benchmark_runs`, `eval_events` (탈퇴 시 payload `user_id` / `metadata.userId` 익명화)
 
-**마이그레이션:** `001` → `002` → `003` → `004` → `005` → `006` → `007` (`users.avatar_url`)
+**마이그레이션:** `001` → `002` → `003` → `004` → `005` → `006` → `007` (`users.avatar_url`) → `008_deletion_challenges` (`auth_account_deletion_challenges`)
 
 **정적 미디어 (런타임):** `/media/avatars` (`data/avatars/`) · `/media/swagkey-images` (`data/swagkey_images/`)
 
@@ -1584,6 +1592,7 @@ cd e2e && npm ci && npx playwright install chromium && npm test  # E2E (API 8000
 42. **Discovery API:** `/api/v1/builds/discovery` **없음** — 재도입 시 Home IA LOCK·Phase 0 Why 필요
 43. **Localhost 실행 (§4.9):** `docs/localhost-execution-roadmap.md` — Phase **0–2 ✅** · **지금** = Phase 2 반복(recheck·ops·E2E) · `phase2_blocking_trend.txt`에 blocking 추이 기록 · E2E 연속 실행 시 `PW_REUSE_SERVER=1`
 44. **배포 (§4.9 · `deployment-roadmap.md`):** Phase **0–2 ✅** · Stage **3 🔄** (2026-07-14 staging live) · **Phase 4 = 정식 공개 시만** (별도 DB·도메인 · `APP_ENV=production`) · health = `/health` · Vercel Root = `frontend` · Railway Root = `backend` · 이미지 mirror는 서버 ephemeral + startup · Seed `--apply-to-seed` 자동 금지 · Gate 미충족 시 다음 Phase 착수 금지
+45. **회원탈퇴 (§4.2 · `account-deletion-roadmap.md`):** Phase **0–8 ✅** (2026-07-14). L1=**C** — password **and** email code. 테이블 `auth_account_deletion_challenges` (`008_deletion_challenges`, revision id ≤32자). E2E는 `e2e-ci@keyboard.local` **삭제 금지** · disposable 유저만. entrypoint에 alembic 자동 없음 — staging/prod DB는 배포 후 `DATABASE_URL`로 `alembic upgrade head` 수동. Resend onboarding 발신 제한 시 실계정 탈퇴 smoke 주의.
 
 ---
 
@@ -1599,7 +1608,9 @@ cd e2e && npm ci && npx playwright install chromium && npm test  # E2E (API 8000
 | Settings | `backend/src/keyboard_recommender/config/settings.py` |
 | **Avatar upload/storage** | `infrastructure/avatars.py` · `api/v1/auth.py` (`/avatar`) · `data/avatars/` |
 | **Avatar (FE)** | `frontend/src/lib/avatar.ts` · `mypage-account.tsx` |
-| **Account deletion** | `POST /auth/account/deletion-code/*` · `POST /auth/account/delete` · `account_purge.py` · `send_account_deleted_email` · `/account-deleted` · `docs/account-deletion-roadmap.md` |
+| **Account deletion (BE)** | `api/v1/auth.py` (`deletion-code/send|verify`, `/account/delete`) · `models/user_auth.py` (`AuthAccountDeletionChallenge`) · `account_purge.py` · `send_account_deleted_email` · alembic `008_deletion_challenges.py` |
+| **Account deletion (FE)** | `mypage-account.tsx` · `lib/api/auth.ts` (`sendAccountDeletionCode` · `verifyAccountDeletionCode` · `deleteAccount`) · `/account-deleted` |
+| **Account deletion (E2E/docs)** | `e2e/tests/account-delete.spec.ts` · `docs/account-deletion-roadmap.md` (Phase 0–8 ✅) |
 | 카탈로그 시드 | `backend/src/keyboard_recommender/catalog/swagkey_products.seed.json` |
 | **인벤토리 정제** | `backend/src/keyboard_recommender/catalog/swagkey_inventory.py` |
 | **인벤토리 분류** | `backend/src/keyboard_recommender/catalog/swagkey_inventory_classifier.py` |
@@ -1687,6 +1698,7 @@ cd e2e && npm ci && npx playwright install chromium && npm test  # E2E (API 8000
 - **Remaining Work Phases (남은 일 마스터):** `docs/remaining-work-phases.md` — A–F 구현 ✅ · B 표본 🔄 (배포 후) · Home revisit 🔒
 - **Localhost Execution Roadmap:** `docs/localhost-execution-roadmap.md` — **Phase 0–2 ✅** (2026-07-12) · Phase 2 상시 · Phase 3–6 deploy/observe/Home
 - **Deployment Roadmap:** `docs/deployment-roadmap.md` — Phase **0–2 ✅** · Phase **3 staging 🔄** (2026-07-14) · Phase **4 = 정식 공개 시** · Phase 5 observe · DB·env·smoke 체크리스트
+- **Account Deletion Roadmap:** `docs/account-deletion-roadmap.md` — Phase **0–8 ✅** (2026-07-14) · L1=C password+email code · staging DB `008` · Owner smoke ✅
 - **Product Next Phases (마스터):** `docs/product-next-phases.md` — Phase 0–4 ✅ · Phase 5 데이터 배선 ✅ · 제품 revisit 🔒 (표본 후)
 - **Phase 4 Launch 리포트:** `docs/product-next-phase4-launch.md`
 - **Phase 5 Home revisit:** `docs/product-next-phase5-home-revisit.md`
@@ -1724,6 +1736,6 @@ cd e2e && npm ci && npx playwright install chromium && npm test  # E2E (API 8000
 
 *이 문서는 keyboard-recommender 프로젝트의 전체 파일·구조·기능·설정을 AI Agent 컨텍스트용으로 정리한 것입니다. 코드 변경 시 이 파일도 함께 업데이트하세요.*
 
-**최종 갱신 (2026-07-14):** 배포 staging live 반영 — Phase 0–2 ✅ · Phase 3 🔄 (TLS/API/CORS/catalog/media 293/`eval_events` bookmark ✅ · Owner 브라우저 잔여) · Phase 4는 정식 공개 시 · Infra: Supabase + Vercel + Railway · Resend httpx · Agent 규칙 #44.
+**최종 갱신 (2026-07-14):** **회원탈퇴 Phase 0–8 ✅** — L1=C (비밀번호+이메일 인증코드) · `008_deletion_challenges` 로컬·Supabase staging 적용 · FE Danger zone · Resend 완료 메일 · `/account-deleted` · E2E `account-delete` · Owner staging smoke ✅ · Agent 규칙 #45. (배포 Phase 3 staging 🔄 · Phase 4 = 정식 공개 시 · Infra: Supabase + Vercel + Railway.)
 
-**이전 주요 마일스톤:** localhost Phase 0–2 (2026-07-12) · Swagkey 1:1 Phase 0–8 (2026-07-12) · 제품 이미지 Phase 0–8 (2026-07-11) · Product Next 0–4 · Results UX 0–7 · Evidence IA 0–4 (2026-07-10) · Curator 설문 · Stitch UI · 추천 엔진 단일화 · Swagkey ①~⑮.
+**이전 주요 마일스톤:** 배포 staging live (2026-07-14) · localhost Phase 0–2 (2026-07-12) · Swagkey 1:1 Phase 0–8 (2026-07-12) · 제품 이미지 Phase 0–8 (2026-07-11) · Product Next 0–4 · Results UX 0–7 · Evidence IA 0–4 (2026-07-10) · Curator 설문 · Stitch UI · 추천 엔진 단일화 · Swagkey ①~⑮.
