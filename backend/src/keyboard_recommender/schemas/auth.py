@@ -102,6 +102,12 @@ class UpdatePasswordRequest(BaseModel):
     new_password: str = Field(min_length=8, max_length=12)
 
 
+class DeleteAccountRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    password: str = Field(min_length=8, max_length=200)
+
+
 class AccountSecuritySummary(BaseModel):
     model_config = ConfigDict(extra="forbid")
 

@@ -73,6 +73,7 @@ describe("MyPageHub smoke", () => {
     await user.click(screen.getByRole("button", { name: "계정" }));
     expect(screen.getByRole("heading", { name: "프로필" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "보안" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "회원탈퇴" })).toBeInTheDocument();
     expect(replace).toHaveBeenCalledWith("/mypage?section=account", { scroll: false });
   });
 

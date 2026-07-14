@@ -147,3 +147,31 @@ def send_password_reset_link_email(settings: Settings, *, to_email: str, reset_u
         logger.info("password_reset_link_fallback_log_url email=%s url=%s", to_email, reset_url)
     return delivery
 
+
+def send_account_deleted_email(settings: Settings, *, to_email: str) -> str:
+    """
+    Best-effort account-deletion confirmation email (Phase 5 · L4=B).
+
+    Returns delivery channel:
+    - "smtp"/"resend" when provider credentials are configured and send succeeds
+    - "log" when provider isn't configured or send fails (deletion is never rolled back)
+    """
+    text = (
+        "회원탈퇴가 완료되었습니다.\n"
+        "계정·프로필·저장한 빌드 접근 권한이 삭제되었습니다.\n"
+        "같은 이메일로 다시 가입하실 수 있습니다.\n\n"
+        "본인이 요청하지 않았다면 이 메일을 무시해 주시고, 서비스 관리자에게 문의해 주세요."
+    )
+    try:
+        return _deliver_email(
+            settings,
+            to_email=to_email,
+            subject="Keyboard Recommender 회원탈퇴 완료",
+            text_body=text,
+            fallback_log_key="account_deleted_fallback_log",
+        )
+    except Exception:
+        logger.exception("account_deleted_email_failed email=%s", to_email)
+        logger.info("account_deleted_fallback_log email=%s", to_email)
+        return "log"
+

@@ -18,12 +18,18 @@ from keyboard_recommender.infrastructure.avatars import (
     detect_image_extension,
     save_user_avatar,
 )
-from keyboard_recommender.infrastructure.notifications.email import send_password_reset_link_email, send_verification_code_email
+from keyboard_recommender.infrastructure.notifications.email import (
+    send_account_deleted_email,
+    send_password_reset_link_email,
+    send_verification_code_email,
+)
+from keyboard_recommender.infrastructure.persistence.account_purge import purge_user_associated_data
 from keyboard_recommender.infrastructure.persistence.models.user_auth import AuthEmailVerification, AuthPasswordReset, AuthSession, User
 from keyboard_recommender.schemas.auth import (
     AccountSecuritySummary,
     AuthEnvelope,
     AuthUser,
+    DeleteAccountRequest,
     LoginRequest,
     PasswordResetConfirmRequest,
     PasswordResetRequest,
@@ -558,6 +564,31 @@ def change_password(
     current_user.updated_at = datetime.now(timezone.utc)
     db.commit()
     return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+
+@router.post("/account/delete", status_code=status.HTTP_204_NO_CONTENT)
+def delete_account(
+    response: Response,
+    body: DeleteAccountRequest = Body(...),
+    settings: SettingsDep = None,  # type: ignore[assignment]
+    db: DbSession = None,  # type: ignore[assignment]
+    current_user: CurrentUserOptionalDep = None,
+) -> Response:
+    """Hard-delete the authenticated user after password re-auth; purge associated data."""
+    assert settings is not None and db is not None
+    if current_user is None:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated.")
+    if not verify_password(body.password, current_user.password_hash):
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Current password is invalid.")
+
+    to_email = current_user.email
+    purge_user_associated_data(db, settings, current_user)
+    # L4=B — best-effort; never rolls back the committed delete.
+    send_account_deleted_email(settings, to_email=to_email)
+
+    _clear_auth_cookie(response, settings)
+    response.status_code = status.HTTP_204_NO_CONTENT
+    return response
 
 
 @router.get("/display-name-availability")

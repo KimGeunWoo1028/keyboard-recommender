@@ -45,6 +45,7 @@ keyboard-recommender/
 │   ├── remaining-work-phases.md       # 남은 일 Phase A–F · B 표본(배포 후) · Home revisit 🔒
 │   ├── localhost-execution-roadmap.md # localhost 실행 Phase 0–6 (catalog·deploy·observe·Home)
 │   ├── deployment-roadmap.md       # 배포 Phase 0–5 (인프라·env·staging·prod·observe)
+│   ├── account-deletion-roadmap.md # 회원탈퇴 Phase 0–8 (API·purge·FE·Resend·E2E)
 │   ├── product-next-phases.md    # Home IA LOCK 이후 Next Phases (0–5) 마스터
 │   ├── product-next-phase4-launch.md   # Phase 4 Launch·DoD·Observe
 │   ├── product-next-phase5-home-revisit.md  # Phase 5 데이터 전제 · 제품 LOCK
@@ -135,6 +136,7 @@ keyboard-recommender/
 - [x] 비밀번호 변경, 보안 요약
 - [x] **쿠키 기반 세션** (`kr_session`) — API origin에 설정, `credentials: "include"`
 - [x] **프로필 아바타** — `POST/DELETE /api/v1/auth/avatar` · `users.avatar_url` · `data/avatars/` → `/media/avatars` (007)
+- [x] **회원탈퇴** — `POST /api/v1/auth/account/delete` · 비밀번호 재인증 · eval_events 익명화 · `/account-deleted` · Resend 완료 메일 (로드맵: `docs/account-deletion-roadmap.md` Phase 0–7 ✅ · Phase 8 Owner staging smoke)
 - [x] DB 마이그레이션: users, auth_sessions, email_verifications, password_resets, avatar_url (004–007)
 
 ### 4.3 마이페이지
@@ -143,8 +145,8 @@ keyboard-recommender/
 - [x] 북마크 저장/목록/삭제 · master–detail · «추천 결과 다시 보기» (API + 게스트 localStorage 폴백)
 - [x] **활동 API** (`GET /activity`) — Results 탭은 제거됐으나 backend·`saved-recommendations.ts` merge용 **유지**
 - [x] 개요: 취향 6축 스냅샷 · 저장 허브 · 아바타
-- [x] 계정: 프로필 사진·닉네임·비밀번호·세션 로그아웃
-- [x] Vitest smoke (hub/overview/saved/build-stack) · E2E critical-flows mypage
+- [x] 계정: 프로필 사진·닉네임·비밀번호·세션 로그아웃·**회원탈퇴**(Danger zone)
+- [x] Vitest smoke (hub/overview/saved/build-stack · account-deleted) · E2E critical-flows mypage · `account-delete` project
 - [x] `?section=activity` → `saved` 리다이렉트 (레거시 딥링크)
 - ~~비교 워크스페이스 / 활동 타임라인 탭~~ — **제거** (복원 금지 · product-next Phase 3)
 
@@ -823,23 +825,24 @@ API (FastAPI routes)
 | GET | `/health` | Liveness probe |
 
 #### Auth — `/api/v1/auth`
-| Method | Path |
-|--------|------|
-| POST | `/signup` |
-| POST | `/email-verification/send` |
-| POST | `/email-verification/verify` |
-| POST | `/password-reset/request` |
-| POST | `/password-reset/confirm` |
-| POST | `/login` |
-| POST | `/logout` |
-| POST | `/logout-all` |
-| GET | `/me` |
-| GET | `/security-summary` |
-| POST | `/display-name` |
-| POST | `/change-password` |
-| GET | `/display-name-availability` |
-| POST | `/avatar` |
-| DELETE | `/avatar` |
+| Method | Path | 설명 |
+|--------|------|------|
+| POST | `/signup` | |
+| POST | `/email-verification/send` | |
+| POST | `/email-verification/verify` | |
+| POST | `/password-reset/request` | |
+| POST | `/password-reset/confirm` | |
+| POST | `/login` | |
+| POST | `/logout` | |
+| POST | `/logout-all` | |
+| GET | `/me` | |
+| GET | `/security-summary` | |
+| POST | `/display-name` | |
+| POST | `/change-password` | |
+| GET | `/display-name-availability` | |
+| POST | `/avatar` | |
+| DELETE | `/avatar` | |
+| POST | `/account/delete` | 비밀번호 재인증 → 연관 데이터 purge · users hard delete · cookie clear · 탈퇴 완료 메일(best-effort Resend/SMTP/log) |
 
 #### Recommendations — `/api/v1/recommendations`
 | Method | Path | 설명 |
@@ -1025,6 +1028,7 @@ Frontend: `/catalog` — **6탭** (`?family=switch|plate|foam|layout|case|keycap
 | `/auth` | 공개 | 로그인/회원가입 |
 | `/auth/forgot-password` | 공개 | 비밀번호 재설정 요청 |
 | `/auth/reset-password` | 공개 | 비밀번호 재설정 확인 |
+| `/account-deleted` | 공개 | 회원탈퇴 완료 안내 |
 | `/recommend` | **필요** | 설문 — **Curator UI** (§4.12): 스타일 프리셋 3종 → 5단계(프리셋 스킵) · NL 항상 표시 · 뷰포트 고정 · Lucide 카드 아이콘 |
 | `/results` | **필요** | 추천 결과 — **§4.13–4.16** 탭 **2개** · 6축 First View · 저장 CTA · Evidence · Compare **없음** |
 | `/mypage` | **필요** | 개요 · 저장 빌드 · 계정 · `?section=` 딥링크 (`activity`→`saved`) |
@@ -1593,6 +1597,7 @@ cd e2e && npm ci && npx playwright install chromium && npm test  # E2E (API 8000
 | Settings | `backend/src/keyboard_recommender/config/settings.py` |
 | **Avatar upload/storage** | `infrastructure/avatars.py` · `api/v1/auth.py` (`/avatar`) · `data/avatars/` |
 | **Avatar (FE)** | `frontend/src/lib/avatar.ts` · `mypage-account.tsx` |
+| **Account deletion** | `POST /auth/account/delete` · `account_purge.py` · `send_account_deleted_email` · `/account-deleted` · `docs/account-deletion-roadmap.md` |
 | 카탈로그 시드 | `backend/src/keyboard_recommender/catalog/swagkey_products.seed.json` |
 | **인벤토리 정제** | `backend/src/keyboard_recommender/catalog/swagkey_inventory.py` |
 | **인벤토리 분류** | `backend/src/keyboard_recommender/catalog/swagkey_inventory_classifier.py` |

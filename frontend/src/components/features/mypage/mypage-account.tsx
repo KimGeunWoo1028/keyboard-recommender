@@ -10,6 +10,7 @@ import {
   checkDisplayNameAvailability,
   changePassword,
   clearAvatar,
+  deleteAccount,
   logout,
   logoutAllSessions,
   type AccountSecuritySummary,
@@ -25,6 +26,10 @@ type Props = {
   securitySummary: AccountSecuritySummary | null;
   onUserChanged: (user: AuthUser) => void;
 };
+
+const DELETE_CONFIRM_WORD = "탈퇴";
+const DELETE_WARNING =
+  "탈퇴하면 계정·프로필·저장한 빌드 접근 권한이 즉시 사라집니다. 탈퇴 후에는 같은 이메일로 다시 가입할 수 있습니다.";
 
 function validateDisplayName(value: string): string | null {
   const v = value.trim();
@@ -98,6 +103,12 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
   const [passwordMessage, setPasswordMessage] = useState<string | null>(null);
   const [updatingPassword, setUpdatingPassword] = useState(false);
   const [securityActionBusy, setSecurityActionBusy] = useState<"none" | "logout" | "logout_all">("none");
+  const [openDeletePanel, setOpenDeletePanel] = useState(false);
+  const [deletePassword, setDeletePassword] = useState("");
+  const [deleteConfirm, setDeleteConfirm] = useState("");
+  const [showDeletePassword, setShowDeletePassword] = useState(false);
+  const [deleteMessage, setDeleteMessage] = useState<string | null>(null);
+  const [deletingAccount, setDeletingAccount] = useState(false);
 
   const passwordMatches = useMemo(
     () => confirmPassword.length > 0 && confirmPassword === newPassword,
@@ -417,6 +428,87 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
             {securityActionBusy === "logout_all" ? "처리 중..." : "전체 세션 로그아웃"}
           </Button>
         </div>
+      </MyPageSectionCard>
+
+      <MyPageSectionCard
+        eyebrow="DANGER"
+        title="회원탈퇴"
+        description="계정을 영구적으로 삭제합니다. 이 작업은 되돌릴 수 없습니다."
+      >
+        <p className="text-sm text-ca-on-surface-variant">{DELETE_WARNING}</p>
+        <Button
+          variant={openDeletePanel ? "primary" : "outline"}
+          className="w-full justify-between"
+          onClick={() => {
+            setOpenDeletePanel((prev) => !prev);
+            setDeleteMessage(null);
+          }}
+        >
+          탈퇴하기
+          <span>{openDeletePanel ? "▲" : "▼"}</span>
+        </Button>
+        {openDeletePanel ? (
+          <div className="space-y-2 rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container/30 p-3">
+            <div className="relative">
+              <Input
+                type={showDeletePassword ? "text" : "password"}
+                value={deletePassword}
+                onChange={(e) => setDeletePassword(e.target.value)}
+                placeholder="현재 비밀번호"
+                className="pr-10"
+                autoComplete="current-password"
+              />
+              <PasswordVisibilityToggle
+                visible={showDeletePassword}
+                onToggle={() => setShowDeletePassword((v) => !v)}
+              />
+            </div>
+            <Input
+              type="text"
+              value={deleteConfirm}
+              onChange={(e) => setDeleteConfirm(e.target.value)}
+              placeholder={`확인을 위해 «${DELETE_CONFIRM_WORD}»를 입력하세요`}
+              autoComplete="off"
+            />
+            <p className="text-xs text-ca-on-surface-variant">
+              <span className={deleteConfirm === DELETE_CONFIRM_WORD ? "text-green-500" : "text-red-500"}>
+                {deleteConfirm === DELETE_CONFIRM_WORD ? "✓" : "✗"}
+              </span>{" "}
+              «{DELETE_CONFIRM_WORD}» 입력 확인
+            </p>
+            <Button
+              disabled={deletingAccount || securityActionBusy !== "none"}
+              onClick={() => {
+                setDeleteMessage(null);
+                if (!deletePassword) {
+                  setDeleteMessage("비밀번호를 입력해 주세요.");
+                  return;
+                }
+                if (deleteConfirm !== DELETE_CONFIRM_WORD) {
+                  setDeleteMessage(`확인 문구로 «${DELETE_CONFIRM_WORD}»를 입력해 주세요.`);
+                  return;
+                }
+                setDeletingAccount(true);
+                void deleteAccount({ password: deletePassword })
+                  .then(() => {
+                    // Hard navigation: avoid RequireAuth racing emitAuthChanged → /auth?next=…
+                    window.location.assign("/account-deleted");
+                  })
+                  .catch((e) => {
+                    if (e instanceof ApiError && e.status === 401) {
+                      setDeleteMessage("비밀번호가 올바르지 않습니다.");
+                    } else {
+                      setDeleteMessage(e instanceof Error ? e.message : "회원탈퇴에 실패했습니다.");
+                    }
+                  })
+                  .finally(() => setDeletingAccount(false));
+              }}
+            >
+              {deletingAccount ? "탈퇴 처리 중..." : "계정 영구 삭제"}
+            </Button>
+            {deleteMessage ? <p className="text-xs text-ca-on-surface-variant">{deleteMessage}</p> : null}
+          </div>
+        ) : null}
       </MyPageSectionCard>
     </div>
   );

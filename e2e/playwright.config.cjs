@@ -39,11 +39,22 @@ module.exports = {
     { name: "setup", testMatch: /auth\.setup\.ts/ },
     {
       name: "chromium",
-      testIgnore: [/auth\.setup\.ts/, /results-visual-375\.spec\.ts/],
+      testIgnore: [/auth\.setup\.ts/, /results-visual-375\.spec\.ts/, /account-delete\.spec\.ts/],
       dependencies: ["setup"],
       use: {
         ...devices["Desktop Chrome"],
         storageState: authFile,
+      },
+    },
+    {
+      /**
+       * Phase 7 account deletion — disposable signup (no e2e-ci storage).
+       * Does not depend on setup; never loads shared auth state.
+       */
+      name: "account-delete",
+      testMatch: /account-delete\.spec\.ts/,
+      use: {
+        ...devices["Desktop Chrome"],
       },
     },
     {

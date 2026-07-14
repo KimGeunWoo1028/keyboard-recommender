@@ -2,9 +2,10 @@
   "name": "keyboard-recommender-e2e",
   "private": true,
   "scripts": {
-    "test": "playwright test --project=chromium",
+    "test": "playwright test --project=chromium --project=account-delete",
     "test:visual": "playwright test --project=visual-375",
     "test:visual:update": "playwright test --project=visual-375 --update-snapshots",
+    "test:account-delete": "playwright test --project=account-delete",
     "test:all": "playwright test",
     "install:browsers": "playwright install chromium"
   },

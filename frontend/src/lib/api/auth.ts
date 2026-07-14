@@ -153,6 +153,21 @@ export async function changePassword(input: { current_password: string; new_pass
   if (!res.ok) throw new ApiError(res.status, await readErrorMessage(res));
 }
 
+export async function deleteAccount(input: { password: string }): Promise<void> {
+  const base = getPublicApiBase();
+  if (!base) throw new ApiError(0, "서비스 연결을 확인한 뒤 다시 시도해 주세요.");
+  const res = await fetch(`${base}/api/v1/auth/account/delete`, {
+    method: "POST",
+    headers: { Accept: "application/json", "Content-Type": "application/json" },
+    credentials: "include",
+    body: JSON.stringify(input),
+  });
+  if (!res.ok && res.status !== 204) throw new ApiError(res.status, await readErrorMessage(res));
+  // Phase 4: server cleared auth cookie; notify header to re-fetch /me → null.
+  // Do not wipe sessionStorage/localStorage (e.g. home.viewed) — unrelated to account.
+  emitAuthChanged();
+}
+
 export async function fetchAccountSecuritySummary(): Promise<AccountSecuritySummary | null> {
   const base = getPublicApiBase();
   if (!base) return null;
