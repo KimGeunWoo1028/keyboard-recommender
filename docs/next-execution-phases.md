@@ -486,3 +486,181 @@ Mark Phase 2 complete only if all are true:
 - `docs/remaining-work-phases.md`
 - `docs/product-next-phase5-home-revisit.md`
 - `docs/home-ia-locked.md`
+
+---
+
+## Production Release Phases
+
+> This section covers the additional phases required before real external users can sign up, receive verification emails, and use the app.
+> Current state is still staging-oriented. Do not treat the current live stack as public production until these phases are complete.
+
+### Overview
+
+| Phase | Goal | Why It Matters |
+|---|---|---|
+| PR-1 | staging / production 분리 | 테스트 환경과 실제 사용자 환경을 섞지 않기 위해 |
+| PR-2 | 운영 메일 발송 구성 | 다른 실제 사용자가 인증 메일을 받을 수 있게 하기 위해 |
+| PR-3 | production 도메인 연결 | 공개용 신뢰 가능한 URL과 same-origin 쿠키 전략을 만들기 위해 |
+| PR-4 | production env 주입 | 운영 안전성, 쿠키, CORS, DB, 메일 설정을 production 기준으로 분리하기 위해 |
+| PR-5 | production 배포 + DB migration + smoke | 실제 공개 전에 기능과 데이터 적재를 최종 검증하기 위해 |
+
+### PR-1. Staging / Production Separation
+
+> Goal: 현재 staging 스택과 별도로 public production 스택 기준을 확정한다.
+
+#### Required
+
+- [ ] production frontend domain 확정
+- [ ] production backend endpoint 확정
+- [ ] production DB를 staging DB와 별도로 생성
+- [ ] production secrets를 staging secrets와 분리
+- [ ] `APP_ENV=production` 으로 운영할 대상 스택 확정
+
+#### Notes
+
+- 현재 문서 기준 live URL은 staging이다.
+- Railway 서비스명이 `production` 이어도 `APP_ENV=production` 이 아니면 production으로 간주하지 않는다.
+- production DB를 staging과 공유하지 않는다.
+
+#### Exit Criteria
+
+- [ ] production용 도메인, DB, env 저장소가 모두 따로 준비됨
+
+### PR-2. Production Email Delivery
+
+> Goal: 본인 계정만이 아니라 실제 외부 사용자가 인증 메일과 탈퇴 메일을 받을 수 있게 한다.
+
+#### Required
+
+- [ ] Resend에 production 발신 도메인 추가
+- [ ] DNS 인증 완료
+  - [ ] SPF
+  - [ ] DKIM
+  - [ ] 필요시 DMARC
+- [ ] 실제 발신 주소 결정
+  - [ ] `noreply@your-domain`
+  - [ ] 또는 `onboarding@your-domain`
+- [ ] production `RESEND_API_KEY` 발급
+- [ ] production `RESEND_FROM_EMAIL` 확정
+
+#### Notes
+
+- `onboarding@resend.dev` 같은 테스트 발신 설정으로는 실제 공개 운영 기준이 아니다.
+- 운영 공개 전에는 production 발신 도메인 인증이 끝나 있어야 한다.
+
+#### Exit Criteria
+
+- [ ] 외부 일반 이메일 주소로 인증 메일 수신 테스트 성공
+
+### PR-3. Production Domain and Topology
+
+> Goal: 공개용 사용자 URL을 확정하고 same-origin 배포 구조를 production에 연결한다.
+
+#### Recommended Topology
+
+```text
+https://your-domain.com or https://app.your-domain.com  -> Vercel frontend
+/api/*                                                  -> Railway backend proxy
+/media/*                                                -> Railway backend proxy
+/health                                                 -> Railway backend proxy
+```
+
+#### Required
+
+- [ ] production 도메인 구매 또는 준비
+- [ ] Vercel에 production domain 연결
+- [ ] DNS 레코드 설정
+- [ ] production frontend URL 확정
+- [ ] `/api`, `/media`, `/health` 프록시 전략 유지 확인
+
+#### Notes
+
+- same-origin 전략을 유지하면 쿠키와 CORS가 단순해진다.
+- 공개용으로는 임시 preview URL보다 production domain이 우선이다.
+
+#### Exit Criteria
+
+- [ ] production URL에서 frontend 접속 가능
+- [ ] proxy 경로가 production에서도 동일하게 동작
+
+### PR-4. Production Environment Injection
+
+> Goal: production 전용 env를 staging과 분리해서 정확히 주입한다.
+
+#### Backend Required
+
+- [ ] `APP_ENV=production`
+- [ ] `DATABASE_URL=<production postgres>`
+- [ ] `CORS_ORIGINS=https://<production frontend domain>`
+- [ ] `PUBLIC_FRONTEND_BASE_URL=https://<production frontend domain>`
+- [ ] `AUTH_COOKIE_SECURE=true`
+- [ ] `ENABLE_EVALUATION_PERSISTENCE=true`
+- [ ] `EMAIL_PROVIDER=resend`
+- [ ] `RESEND_API_KEY=<production key>`
+- [ ] `RESEND_FROM_EMAIL=<production sender>`
+
+#### Frontend Required
+
+- [ ] `NEXT_PUBLIC_API_URL=https://<production frontend domain>`
+- [ ] `INTERNAL_API_PROXY_TARGET=https://<production railway domain>`
+
+#### Safety Checks
+
+- [ ] debug API가 production에서 차단되는지 확인
+- [ ] staging secrets가 production에 섞이지 않았는지 확인
+- [ ] `.env`, `.env.local` 을 git에 올리지 않았는지 확인
+
+#### Exit Criteria
+
+- [ ] production env 값이 frontend / backend 모두 분리 주입됨
+
+### PR-5. Production Deploy, Migration, and Smoke
+
+> Goal: production을 실제로 올리고, 공개 전에 마지막 smoke를 완료한다.
+
+#### Deploy Steps
+
+1. production env를 반영한 상태로 frontend 배포
+2. production env를 반영한 상태로 backend 배포
+3. production DB 대상 migration 실행
+
+```powershell
+cd backend
+alembic upgrade head
+```
+
+#### Production Smoke Checklist
+
+- [ ] `/health` OK
+- [ ] mixed content 없음
+- [ ] 회원가입 가능
+- [ ] 이메일 인증 메일 수신
+- [ ] 로그인 후 새로고침 유지
+- [ ] `kr_session` Secure 확인
+- [ ] 로그아웃 시 cookie 제거
+- [ ] 설문 → 결과 진입 성공
+- [ ] 저장 빌드 성공
+- [ ] 마이페이지 반영 성공
+- [ ] 회원탈퇴 성공
+- [ ] `/catalog` 이미지 / 링크 정상
+- [ ] `eval_events` 적재 확인
+
+#### DB Verification
+
+```sql
+SELECT event_type, COUNT(*)
+FROM eval_events
+GROUP BY event_type
+ORDER BY event_type;
+```
+
+#### Exit Criteria
+
+- [ ] production smoke 전체 통과
+- [ ] 실제 외부 사용자 공개 가능한 상태라고 설명 가능
+
+### Public Release Rule
+
+- [ ] PR-1 ~ PR-5 완료 전에는 현재 staging URL을 공개 운영 링크로 간주하지 않는다.
+- [ ] staging과 production의 DB, 도메인, secrets를 공유하지 않는다.
+- [ ] production smoke 통과 전에는 불특정 다수 사용자에게 링크를 배포하지 않는다.
