@@ -59,6 +59,10 @@ class Settings(BaseSettings):
 
     # PostgreSQL (SQLAlchemy URL — use psycopg v3 driver)
     database_url: str = "postgresql+psycopg://keyboard:keyboard@localhost:5432/keyboard_recommender"
+    database_pool_size: int = 4
+    database_max_overflow: int = 2
+    database_pool_timeout_seconds: int = 10
+    database_pool_recycle_seconds: int = 1800
 
     # CORS: comma-separated list. Prefer one dev origin to avoid session confusion (localhost vs 127.0.0.1).
     cors_origins: str = "http://localhost:3000"

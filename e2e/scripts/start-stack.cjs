@@ -10,6 +10,22 @@ const repoRoot = path.resolve(__dirname, "..", "..");
 const backendDir = path.join(repoRoot, "backend");
 const frontendDir = path.join(repoRoot, "frontend");
 
+function terminateChild(child) {
+  if (!child || child.killed || child.exitCode !== null) return;
+  try {
+    if (process.platform === "win32") {
+      spawnSync("taskkill", ["/pid", String(child.pid), "/t", "/f"], {
+        stdio: "ignore",
+        shell: false,
+      });
+      return;
+    }
+    child.kill("SIGTERM");
+  } catch {
+    /* ignore */
+  }
+}
+
 function waitForHealth(url, timeoutMs) {
   const started = Date.now();
   return new Promise((resolve, reject) => {
@@ -88,25 +104,26 @@ async function main() {
 
   fe.on("error", (err) => {
     console.error(err);
-    api.kill("SIGTERM");
+    terminateChild(api);
     process.exit(1);
   });
 
+  let shuttingDown = false;
   function shutdown() {
-    try {
-      api.kill("SIGTERM");
-    } catch {
-      /* ignore */
-    }
-    try {
-      fe.kill("SIGTERM");
-    } catch {
-      /* ignore */
-    }
+    if (shuttingDown) return;
+    shuttingDown = true;
+    terminateChild(api);
+    terminateChild(fe);
   }
 
-  process.on("SIGINT", shutdown);
-  process.on("SIGTERM", shutdown);
+  process.on("SIGINT", () => {
+    shutdown();
+    process.exit(130);
+  });
+  process.on("SIGTERM", () => {
+    shutdown();
+    process.exit(143);
+  });
 
   fe.on("exit", (code) => {
     shutdown();

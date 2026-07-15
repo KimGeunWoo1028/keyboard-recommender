@@ -246,7 +246,7 @@ python scripts/run_swagkey_inventory_recheck.py --mode fixture --check-image-url
 
 ```powershell
 python scripts/verify_ops_quality_15.py
-cd ..\frontend && npm test -- --run
+cd ..\frontend && npm run typecheck && npm test -- --run
 cd ..\e2e && npm test
 ```
 
@@ -291,6 +291,8 @@ python scripts\run_swagkey_catalog_regression.py
 REM 기대: 127 passed, 1 skipped
 
 cd ..\frontend
+npm run typecheck
+REM 기대: exit 0
 npm test -- --run
 REM 기대: 127 passed (31 files)
 

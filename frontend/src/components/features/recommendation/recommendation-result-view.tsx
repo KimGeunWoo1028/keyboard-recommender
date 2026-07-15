@@ -50,6 +50,7 @@ type Props = {
 
 export function RecommendationResultView({ submission, build, onApplyRefinement, refineError }: Props) {
   const { answers, traits } = submission;
+  const { sourceUrls } = build;
   const soundSummary = soundProfileSummary(answers);
   const typingSummary = typingFeelSummary(answers);
   const traitBadges = topTraitHighlights(traits, 6);
@@ -148,7 +149,7 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
         if (isCanonicalSwagkeyProductUrl(alt?.sourceUrl)) return true;
       }
       const primaryPick = apiPicks.find((row) => row.domain.toLowerCase() === domain);
-      const buildUrl = build.sourceUrls?.[domain as keyof typeof build.sourceUrls];
+      const buildUrl = sourceUrls?.[domain as keyof typeof sourceUrls];
       if (primaryPick?.itemId === itemId && isCanonicalSwagkeyProductUrl(buildUrl)) return true;
       return false;
     };
@@ -241,7 +242,7 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
     return () => {
       cancelled = true;
     };
-  }, [apiPicks, build.sourceUrls, enrichedImageUrls, enrichedLayoutSizes, enrichedSourceUrls]);
+  }, [apiPicks, enrichedImageUrls, enrichedLayoutSizes, enrichedSourceUrls, sourceUrls]);
 
   async function handleSaveBuild() {
     let authenticated = isAuthenticated;
