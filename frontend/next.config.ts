@@ -36,6 +36,7 @@ const nextConfig: NextConfig = {
       return [];
     }
     return [
+      { source: "/health", destination: `${target}/health` },
       { source: "/api/:path*", destination: `${target}/api/:path*` },
       { source: "/media/:path*", destination: `${target}/media/:path*` },
     ];
