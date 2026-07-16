@@ -539,4 +539,21 @@
   .survey-nl-panel textarea {
     min-height: 4.75rem;
   }
+
+  @media (max-width: 639px) {
+    .survey-curator-viewport {
+      height: auto;
+      overflow-x: hidden;
+      overflow-y: visible;
+    }
+
+    .survey-option-tile {
+      min-height: 8.75rem;
+      padding: 0.875rem;
+    }
+
+    .survey-option-tile span {
+      overflow-wrap: anywhere;
+    }
+  }
 }

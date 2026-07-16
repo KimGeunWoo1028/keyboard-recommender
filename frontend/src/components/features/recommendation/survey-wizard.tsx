@@ -516,7 +516,7 @@ export function SurveyWizard() {
         </div>
       ) : null}
 
-      <div className="mt-auto flex shrink-0 items-center gap-2 pb-1 pt-1 sm:gap-3">
+      <div className="mt-auto flex shrink-0 flex-wrap items-center justify-between gap-2 pb-1 pt-1 sm:flex-nowrap sm:gap-3">
         <button
           type="button"
           onClick={goBack}
@@ -527,7 +527,7 @@ export function SurveyWizard() {
           이전
         </button>
 
-        <div className="flex min-w-0 flex-1 items-center justify-center gap-1.5 sm:gap-2">
+        <div className="order-3 flex min-w-0 basis-full items-center justify-center gap-1.5 sm:order-none sm:basis-auto sm:flex-1 sm:gap-2">
           <button
             type="button"
             onClick={() => setPhase("entry")}

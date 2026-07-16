@@ -19,7 +19,7 @@ export function BackendResultTabBar({
   return (
     <div className="relative sm:static">
       <div
-        className="-mx-1 flex snap-x snap-mandatory gap-2.5 overflow-x-auto scroll-smooth pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:snap-none sm:pb-0 [&::-webkit-scrollbar]:hidden"
+        className="flex snap-x snap-mandatory gap-2.5 overflow-x-auto scroll-smooth px-1 pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] sm:px-0 sm:flex-wrap sm:overflow-visible sm:snap-none sm:pb-0 [&::-webkit-scrollbar]:hidden"
         data-testid="e2e-results-tab-bar"
       >
         {BACKEND_RESULT_TABS.map((tab) => (
