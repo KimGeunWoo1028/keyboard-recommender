@@ -6,6 +6,11 @@ import { PageShell } from "@/components/layout/page-shell";
 
 export const metadata: Metadata = {
   title: "추천 설문",
+  description: "타건감, 레이아웃, 조합 취향을 바탕으로 나에게 맞는 키보드 구성을 찾는 설문을 시작하세요.",
+  openGraph: {
+    title: "추천 설문 · Keyboard Recommender",
+    description: "타건감, 레이아웃, 조합 취향을 바탕으로 나에게 맞는 키보드 구성을 찾는 설문을 시작하세요.",
+  },
 };
 
 export default function RecommendPage() {

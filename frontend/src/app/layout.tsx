@@ -27,12 +27,41 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const sharedDescription =
+  "스위치, 플레이트, 폼, 레이아웃, 케이스, 키캡까지 고려해 나에게 맞는 키보드 구성을 추천합니다.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.keyboard-recommender.com"),
   title: {
     default: "Keyboard Recommender",
     template: "%s · Keyboard Recommender",
   },
-  description: "스위치, 플레이트, 폼 조합까지 고려한 맞춤 키보드 추천 서비스",
+  description: sharedDescription,
+  alternates: {
+    canonical: "https://www.keyboard-recommender.com",
+  },
+  openGraph: {
+    type: "website",
+    locale: "ko_KR",
+    url: "https://www.keyboard-recommender.com",
+    siteName: "Keyboard Recommender",
+    title: "Keyboard Recommender",
+    description: sharedDescription,
+    images: [
+      {
+        url: "/og/default.png",
+        width: 1200,
+        height: 630,
+        alt: "Keyboard Recommender",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Keyboard Recommender",
+    description: sharedDescription,
+    images: ["/og/default.png"],
+  },
 };
 
 export default function RootLayout({
