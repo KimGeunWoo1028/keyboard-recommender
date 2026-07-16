@@ -37,14 +37,14 @@ export function SiteHeader() {
         <div className="flex min-w-0 items-center gap-6 md:gap-8">
           <Link
             href="/"
-            className="inline-flex shrink-0 items-center gap-2 bg-gradient-to-r from-ca-primary to-ca-secondary bg-clip-text font-headline text-lg font-bold leading-none tracking-tight text-transparent md:text-xl"
+            className="inline-flex shrink-0 items-center gap-2.5 bg-gradient-to-r from-ca-primary to-ca-secondary bg-clip-text font-headline text-lg font-bold leading-none tracking-tight text-transparent md:text-[1.35rem]"
           >
             <Image
               src="/brand/logo-mark.png"
               alt=""
-              width={28}
-              height={28}
-              className="h-7 w-7 shrink-0 rounded-[0.6rem]"
+              width={32}
+              height={32}
+              className="h-8 w-8 shrink-0 rounded-[0.7rem]"
               aria-hidden
               priority
             />
