@@ -398,35 +398,37 @@ export function AuthPageClient() {
             </div>
             {mode === "signup" ? (
               <div className="space-y-1">
-                <div className="flex gap-2">
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
                   <Button
                     type="button"
                     variant="outline"
-                    className="shrink-0 rounded-full"
+                    className="w-full shrink-0 rounded-full sm:w-auto"
                     onClick={() => void onSendEmailCode()}
                     disabled={!canFillSignupEmail || sendingEmailCode}
                   >
                     {sendingEmailCode ? "발송 중..." : "인증번호 발송"}
                   </Button>
-                  <Input
-                    id="emailCode"
-                    className="ca-input min-w-[9.5rem] flex-1 text-center sm:min-w-[10.5rem]"
-                    inputMode="numeric"
-                    maxLength={6}
-                    placeholder="인증번호 6자리"
-                    value={emailCode}
-                    onChange={(e) => setEmailCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
-                    disabled={!emailCodeSent || emailVerified}
-                  />
-                  <Button
-                    type="button"
-                    variant="outline"
-                    className="shrink-0 rounded-full"
-                    onClick={() => void onVerifyEmailCode()}
-                    disabled={!emailCodeSent || emailVerified || verifyingEmailCode}
-                  >
-                    {verifyingEmailCode ? "확인 중..." : emailVerified ? "인증 완료" : "인증 확인"}
-                  </Button>
+                  <div className="flex min-w-0 flex-col gap-2 sm:flex-1 sm:flex-row sm:items-center">
+                    <Input
+                      id="emailCode"
+                      className="ca-input w-full min-w-0 flex-1 text-center sm:min-w-[10.5rem]"
+                      inputMode="numeric"
+                      maxLength={6}
+                      placeholder="인증번호 6자리"
+                      value={emailCode}
+                      onChange={(e) => setEmailCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                      disabled={!emailCodeSent || emailVerified}
+                    />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      className="w-full shrink-0 rounded-full sm:w-auto"
+                      onClick={() => void onVerifyEmailCode()}
+                      disabled={!emailCodeSent || emailVerified || verifyingEmailCode}
+                    >
+                      {verifyingEmailCode ? "확인 중..." : emailVerified ? "인증 완료" : "인증 확인"}
+                    </Button>
+                  </div>
                 </div>
                 {emailVerificationMessage ? (
                   <p className="text-xs text-ca-on-surface-variant">{emailVerificationMessage}</p>

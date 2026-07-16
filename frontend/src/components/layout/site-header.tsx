@@ -33,22 +33,22 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-ca-outline-variant/30 bg-ca-surface/80 shadow-sm backdrop-blur-xl dark:bg-ca-surface-dim/80">
-      <div className="mx-auto flex w-full max-w-ca items-center justify-between gap-4 px-ca-margin-mobile py-3 md:px-ca-margin md:py-4">
-        <div className="flex min-w-0 items-center gap-6 md:gap-8">
+      <div className="mx-auto flex w-full max-w-ca items-center justify-between gap-3 px-ca-margin-mobile py-3 md:gap-4 md:px-ca-margin md:py-4">
+        <div className="flex min-w-0 items-center gap-3 md:gap-8">
           <Link
             href="/"
-            className="inline-flex shrink-0 items-center gap-3 bg-gradient-to-r from-ca-primary to-ca-secondary bg-clip-text font-headline text-lg font-bold leading-none tracking-tight text-transparent md:text-[1.45rem]"
+            className="inline-flex min-w-0 shrink items-center gap-2 bg-gradient-to-r from-ca-primary to-ca-secondary bg-clip-text font-headline text-base font-bold leading-none tracking-tight text-transparent md:gap-3 md:text-[1.45rem]"
           >
             <Image
               src="/brand/logo-mark.png"
               alt=""
               width={48}
               height={48}
-              className="h-12 w-12 shrink-0 rounded-[0.9rem]"
+              className="h-9 w-9 shrink-0 rounded-[0.7rem] md:h-12 md:w-12 md:rounded-[0.9rem]"
               aria-hidden
               priority
             />
-            Keyboard Recommender
+            <span className="truncate">Keyboard Recommender</span>
           </Link>
 
           <nav className="hidden shrink-0 items-center gap-5 lg:flex xl:gap-6" aria-label="주요">
@@ -74,9 +74,11 @@ export function SiteHeader() {
           </nav>
         </div>
 
-        <div className="flex min-w-0 shrink-0 items-center gap-2 sm:gap-3">
+        <div className="flex min-w-0 shrink-0 items-center gap-1.5 sm:gap-3">
           <HeaderCatalogSearch className="hidden shrink-0 lg:block" />
-          <ThemeToggle />
+          <div className="hidden lg:block">
+            <ThemeToggle />
+          </div>
           <AuthNickname />
           <AuthSessionAction />
           <button
@@ -97,6 +99,10 @@ export function SiteHeader() {
           id="site-mobile-nav"
           className="border-t border-ca-outline-variant/30 bg-ca-surface-container-low/95 px-ca-margin-mobile py-3 backdrop-blur-xl lg:hidden"
         >
+          <div className="mb-3 flex items-center justify-between rounded-btn border border-ca-outline-variant/30 bg-ca-surface-container/50 px-3 py-2">
+            <span className="font-body text-sm font-medium text-ca-on-surface-variant">테마</span>
+            <ThemeToggle />
+          </div>
           <HeaderCatalogSearch className="mb-3 block lg:hidden" />
           <nav className="flex flex-col gap-1" aria-label="모바일">
             <Link

@@ -17,10 +17,10 @@ type Props<T extends SurveyStepId> = {
 function optionLayoutClass(optionCount: number): string {
   if (optionCount === 3) return "flex min-h-0 flex-1 flex-col gap-2 sm:flex-row sm:gap-3";
   if (optionCount === 4) {
-    return "grid h-full min-h-0 flex-1 auto-rows-fr grid-cols-2 gap-2 lg:grid-cols-4 lg:gap-3";
+    return "grid h-full min-h-0 flex-1 auto-rows-fr grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4 lg:gap-3";
   }
   if (optionCount >= 5) {
-    return "grid h-full min-h-0 flex-1 auto-rows-fr grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5 lg:gap-3";
+    return "grid h-full min-h-0 flex-1 auto-rows-fr grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-5 lg:gap-3";
   }
   return "grid h-full min-h-0 flex-1 auto-rows-fr grid-cols-1 gap-2";
 }
@@ -60,6 +60,7 @@ export function SurveyQuestion<T extends SurveyStepId>({ step, value, onChange, 
               className={cn(
                 "survey-option-tile group flex h-full min-h-0 w-full min-w-0 flex-col items-center justify-center gap-2.5 rounded-xl border p-4 text-center transition-all sm:gap-3 sm:p-5",
                 flexRow && "sm:flex-1",
+                !flexRow && "min-h-[10.5rem] sm:min-h-0",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-primary",
                 selected
                   ? "survey-option-card--selected border-ca-primary bg-ca-primary/5"

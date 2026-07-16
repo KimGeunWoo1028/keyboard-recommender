@@ -120,10 +120,9 @@ export function AuthSessionAction() {
       <Link
         href={`/auth?force=1&next=${encodeURIComponent(nextPath)}`}
         className={cn(
-          "shrink-0 whitespace-nowrap rounded-full bg-ca-primary-container px-4 py-2 font-headline text-sm font-bold text-ca-on-primary-container",
+          "shrink-0 whitespace-nowrap rounded-full bg-ca-primary-container px-3 py-2 font-headline text-xs font-bold text-ca-on-primary-container sm:px-5 sm:text-sm",
           "transition-transform hover:scale-[0.97] active:scale-95",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-primary",
-          "sm:px-5",
           !authChecked && "opacity-80",
         )}
         aria-busy={!authChecked}
@@ -137,10 +136,9 @@ export function AuthSessionAction() {
     <button
       type="button"
       className={cn(
-        "shrink-0 whitespace-nowrap rounded-full border border-ca-outline-variant px-3 py-1.5 font-headline text-xs font-semibold",
+        "shrink-0 whitespace-nowrap rounded-full border border-ca-outline-variant px-2.5 py-1.5 font-headline text-[11px] font-semibold sm:px-3.5 sm:text-xs",
         "text-ca-on-surface-variant transition-colors hover:border-ca-primary/50 hover:text-ca-on-surface",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-primary",
-        "sm:px-3.5",
       )}
       onClick={() => {
         void logout().finally(() => {
