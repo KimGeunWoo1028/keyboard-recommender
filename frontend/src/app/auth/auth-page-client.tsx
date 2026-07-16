@@ -291,7 +291,7 @@ export function AuthPageClient() {
   }
 
   return (
-    <div className="mx-auto max-w-md px-ca-margin-mobile py-10 sm:px-ca-margin">
+    <div className="mx-auto max-w-lg px-ca-margin-mobile py-10 sm:px-ca-margin">
       <Card className="ca-glass-panel border-ca-outline-variant/40">
         <CardHeader className="border-b-0">
           <p className="font-label text-ca-label-sm font-medium text-ca-secondary">AUTH</p>
@@ -410,7 +410,7 @@ export function AuthPageClient() {
                   </Button>
                   <Input
                     id="emailCode"
-                    className="ca-input"
+                    className="ca-input min-w-[9.5rem] flex-1 text-center sm:min-w-[10.5rem]"
                     inputMode="numeric"
                     maxLength={6}
                     placeholder="인증번호 6자리"
