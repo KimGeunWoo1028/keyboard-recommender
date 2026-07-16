@@ -34,7 +34,7 @@ export function SurveyQuestion<T extends SurveyStepId>({ step, value, onChange, 
   return (
     <div className={cn("flex h-full min-h-0 w-full flex-col gap-3", className)}>
       <div className="shrink-0 text-center">
-        <h2 className="break-keep font-headline text-xl font-bold tracking-tight text-ca-on-surface sm:text-2xl">
+        <h2 className="whitespace-pre-line break-keep font-headline text-xl font-bold tracking-tight text-ca-on-surface sm:text-2xl">
           {step.title}
         </h2>
         <p className="mx-auto mt-1 max-w-4xl break-keep text-sm leading-snug text-ca-on-surface-variant sm:text-base">

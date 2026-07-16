@@ -90,7 +90,7 @@ export const SURVEY_STEPS: readonly SurveyStepDefinition[] = [
   },
   {
     id: "switch_feel",
-    title: "구분감 있는 키감 vs 매끈한 키감 (Tactile vs Linear)",
+    title: "구분감 있는 키감 vs 매끈한 키감\n(Tactile vs Linear)",
     description: "누를 때 걸리는 느낌이 있길 원하나요, 아니면 처음부터 끝까지 부드럽게 내려가길 원하나요?",
     options: [
       {
