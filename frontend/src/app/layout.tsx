@@ -40,6 +40,14 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://www.keyboard-recommender.com",
   },
+  icons: {
+    icon: [
+      { url: "/icon.png", type: "image/png" },
+      { url: "/apple-icon.png", type: "image/png", sizes: "180x180" },
+    ],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+    shortcut: ["/icon.png"],
+  },
   openGraph: {
     type: "website",
     locale: "ko_KR",
