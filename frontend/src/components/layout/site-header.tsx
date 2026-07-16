@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -36,8 +37,17 @@ export function SiteHeader() {
         <div className="flex min-w-0 items-center gap-6 md:gap-8">
           <Link
             href="/"
-            className="shrink-0 bg-gradient-to-r from-ca-primary to-ca-secondary bg-clip-text font-headline text-lg font-bold leading-none tracking-tight text-transparent md:text-xl"
+            className="inline-flex shrink-0 items-center gap-2 bg-gradient-to-r from-ca-primary to-ca-secondary bg-clip-text font-headline text-lg font-bold leading-none tracking-tight text-transparent md:text-xl"
           >
+            <Image
+              src="/icon.png"
+              alt=""
+              width={28}
+              height={28}
+              className="h-7 w-7 shrink-0 rounded-[0.6rem]"
+              aria-hidden
+              priority
+            />
             Keyboard Recommender
           </Link>
 
