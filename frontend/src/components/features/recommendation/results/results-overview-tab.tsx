@@ -176,6 +176,7 @@ export function ResultsOverviewTab({
                   partId={pick?.itemId}
                   alt={parsed.name}
                   className="rounded-none"
+                  uniformCardMedia
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
                 <div className="px-3 py-3">

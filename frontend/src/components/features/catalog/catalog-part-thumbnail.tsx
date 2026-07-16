@@ -34,6 +34,7 @@ type Props = {
   priority?: boolean;
   /** Taller blueprint area for layout archetype cards */
   visualVariant?: "default" | "layout-blueprint";
+  uniformCardMedia?: boolean;
   showTraitChips?: boolean;
 };
 
@@ -47,6 +48,7 @@ export function CatalogPartThumbnail({
   sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
   priority = false,
   visualVariant = "default",
+  uniformCardMedia = false,
   showTraitChips = false,
 }: Props) {
   const [failed, setFailed] = useState(false);
@@ -61,6 +63,13 @@ export function CatalogPartThumbnail({
   const useUnoptimized = trimmed.includes("/media/swagkey-images/");
   const Icon = FAMILY_ICONS[family];
   const isLayoutBlueprint = visualVariant === "layout-blueprint" || (family === "layout" && showBlueprint);
+  const mediaClassName = uniformCardMedia
+    ? "aspect-[4/3]"
+    : isLayoutBlueprint
+      ? isFullSizeBlueprint
+        ? "aspect-[2/1] min-h-[9.5rem]"
+        : "aspect-[5/3] min-h-[9.5rem]"
+      : "aspect-[4/3]";
   const traitMetadata =
     metadata && Object.keys(metadata).length > 0
       ? metadata
@@ -72,13 +81,9 @@ export function CatalogPartThumbnail({
     <div className={cn("flex w-full flex-col", className)}>
       <div
         className={cn(
-          "relative w-full overflow-hidden rounded-t-[inherit]",
+          "relative w-full overflow-hidden rounded-t-[inherit] border-b border-ca-outline-variant/30",
           isLayoutBlueprint ? "bg-ca-surface-container/50" : "bg-ca-surface",
-          isLayoutBlueprint
-            ? isFullSizeBlueprint
-              ? "aspect-[2/1] min-h-[9.5rem]"
-              : "aspect-[5/3] min-h-[9.5rem]"
-            : "aspect-[4/3]",
+          mediaClassName,
         )}
       >
         {showBlueprint ? (
