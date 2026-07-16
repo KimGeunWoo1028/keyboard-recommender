@@ -34,10 +34,10 @@ export function SurveyQuestion<T extends SurveyStepId>({ step, value, onChange, 
   return (
     <div className={cn("flex h-full min-h-0 w-full flex-col gap-3", className)}>
       <div className="shrink-0 text-center">
-        <h2 className="font-headline text-xl font-bold tracking-tight text-ca-on-surface sm:text-2xl">
+        <h2 className="break-keep font-headline text-xl font-bold tracking-tight text-ca-on-surface sm:text-2xl">
           {step.title}
         </h2>
-        <p className="mx-auto mt-1 max-w-4xl text-sm leading-snug text-ca-on-surface-variant sm:text-base">
+        <p className="mx-auto mt-1 max-w-4xl break-keep text-sm leading-snug text-ca-on-surface-variant sm:text-base">
           {step.description}
         </p>
       </div>
@@ -69,10 +69,10 @@ export function SurveyQuestion<T extends SurveyStepId>({ step, value, onChange, 
             >
               <SurveyOptionIcon optionId={opt.id} selected={selected} className="h-8 w-8 shrink-0 sm:h-9 sm:w-9" />
               <div className="w-full space-y-1.5">
-                <span className="block font-headline text-sm font-semibold leading-tight text-ca-on-surface sm:text-base">
+                <span className="block break-keep font-headline text-sm font-semibold leading-tight text-ca-on-surface sm:text-base">
                   {opt.label}
                 </span>
-                <span className="block line-clamp-2 text-xs leading-snug text-ca-on-surface-variant sm:text-sm">
+                <span className="block line-clamp-2 break-keep text-xs leading-snug text-ca-on-surface-variant sm:text-sm">
                   {opt.description}
                 </span>
               </div>

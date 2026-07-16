@@ -552,8 +552,11 @@
       padding: 0.875rem;
     }
 
-    .survey-option-tile span {
-      overflow-wrap: anywhere;
+    .survey-option-tile span,
+    .survey-curator-shell h2,
+    .survey-curator-shell p {
+      overflow-wrap: normal;
+      word-break: keep-all;
     }
   }
 }
