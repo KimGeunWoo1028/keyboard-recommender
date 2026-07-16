@@ -40,7 +40,7 @@ export function SiteHeader() {
             className="inline-flex shrink-0 items-center gap-2 bg-gradient-to-r from-ca-primary to-ca-secondary bg-clip-text font-headline text-lg font-bold leading-none tracking-tight text-transparent md:text-xl"
           >
             <Image
-              src="/icon.png"
+              src="/brand/logo-mark.png"
               alt=""
               width={28}
               height={28}
