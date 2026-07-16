@@ -35,7 +35,7 @@ export function HomeHero() {
             </span>
           </h1>
 
-          <p className="max-w-xl break-keep text-ca-body-md text-ca-on-surface-variant sm:text-ca-body-lg lg:max-w-2xl">
+          <p className="max-w-xl break-keep text-ca-body-md text-ca-on-surface-variant sm:text-ca-body-lg lg:max-w-[35ch]">
             타건감·사운드 취향을 알려주시면 스위치부터 플레이트, 폼, 케이스, 키캡까지 한 번에
             조합해 드려요. 스웨그키 카탈로그와도 바로 연결됩니다.
           </p>
