@@ -47,15 +47,15 @@ def _render_email_html(
     brand_logo_url = _frontend_url(settings, "/brand/logo-mark.png")
     support_url = _frontend_url(settings, "/auth")
     brand_block = f"""
-      <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 28px auto;">
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="left" style="margin:0 0 28px 0;">
         <tr>
-          <td style="vertical-align:middle;padding:0 8px 0 0;">
+          <td style="vertical-align:middle;padding:0 12px 0 0;">
             <a href="{escape(brand_url, quote=True)}" style="text-decoration:none;">
               <img src="{escape(brand_logo_url, quote=True)}" alt="" width="32" height="32" style="display:block;border:0;outline:none;text-decoration:none;" />
             </a>
           </td>
           <td style="vertical-align:middle;">
-            <a href="{escape(brand_url, quote=True)}" style="color:#f8fafc;font-family:'Hanken Grotesk','Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:22px;font-weight:800;letter-spacing:-0.02em;line-height:1.15;white-space:nowrap;text-decoration:none;">
+            <a href="{escape(brand_url, quote=True)}" style="color:#f8fafc;font-family:'Hanken Grotesk','Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:20px;font-weight:800;letter-spacing:-0.03em;line-height:1.15;white-space:nowrap;text-decoration:none;">
               Keyboard Recommender
             </a>
           </td>
@@ -71,9 +71,9 @@ def _render_email_html(
             else ""
         )
         highlight_block = f"""
-          <div style="margin:0 0 24px;">
+          <div style="margin:0 0 26px;">
             <div style="color:#f8fafc;font-family:'Hanken Grotesk','Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:18px;font-weight:700;line-height:1.7;word-break:keep-all;">
-              {escape(label_prefix)}<span style="font-size:42px;font-weight:800;letter-spacing:0.12em;">{escape(highlight_value)}</span>
+              {escape(label_prefix)}<span style="font-size:44px;font-weight:800;letter-spacing:0.12em;">{escape(highlight_value)}</span>
             </div>
             {highlight_hint_html}
           </div>
@@ -82,7 +82,7 @@ def _render_email_html(
     if cta_label and cta_url:
         cta_block = f"""
           <div style="margin:28px 0 0;">
-            <a href="{escape(cta_url, quote=True)}" style="display:inline-block;padding:16px 28px;border-radius:999px;background:#6d86e7;color:#ffffff;font-family:'Hanken Grotesk','Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:16px;font-weight:800;letter-spacing:-0.01em;text-decoration:none;">
+            <a href="{escape(cta_url, quote=True)}" style="display:inline-block;padding:16px 30px;border-radius:999px;background:#6d86e7;color:#ffffff;font-family:'Hanken Grotesk','Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:16px;font-weight:800;letter-spacing:-0.01em;text-decoration:none;">
               {escape(cta_label)}
             </a>
           </div>
@@ -90,37 +90,37 @@ def _render_email_html(
     notice_block = ""
     if notice:
         notice_block = f"""
-          <p style="margin:26px 0 0;color:#cbd5e1;font-family:'Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:14px;line-height:1.8;word-break:keep-all;">{escape(notice)}</p>
+          <p style="margin:30px 0 0;color:#cbd5e1;font-family:'Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:14px;line-height:1.9;word-break:keep-all;">{escape(notice)}</p>
         """
     return f"""<!DOCTYPE html>
 <html lang="ko">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="color-scheme" content="dark" />
-    <meta name="supported-color-schemes" content="dark" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="supported-color-schemes" content="light dark" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body bgcolor="#16181b" style="margin:0;padding:0;background:#16181b !important;background-color:#16181b !important;color:#f8fafc !important;">
+  <body bgcolor="#17191d" style="margin:0;padding:0;background:#17191d;background-color:#17191d;color:#f8fafc;">
     <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">
       {escape(intro)}
     </div>
-    <table role="presentation" cellpadding="0" cellspacing="0" width="100%" bgcolor="#16181b" style="background:#16181b !important;background-color:#16181b !important;padding:28px 10px;font-family:Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;">
+    <table role="presentation" cellpadding="0" cellspacing="0" width="100%" bgcolor="#17191d" style="background:#17191d;background-color:#17191d;padding:28px 10px;font-family:Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;">
       <tr>
-        <td align="center" bgcolor="#16181b" style="background:#16181b !important;background-color:#16181b !important;">
-          <table role="presentation" cellpadding="0" cellspacing="0" width="100%" bgcolor="#20242a" style="max-width:640px;background:#20242a !important;background-color:#20242a !important;border:1px solid #2f3844;border-radius:28px;overflow:hidden;">
+        <td align="center" bgcolor="#17191d" style="background:#17191d;background-color:#17191d;">
+          <table role="presentation" cellpadding="0" cellspacing="0" width="100%" bgcolor="#22252b" style="max-width:640px;background:#22252b;background-color:#22252b;border:1px solid #313743;border-radius:28px;overflow:hidden;">
             <tr>
-              <td bgcolor="#20242a" style="padding:18px 24px;background:#20242a !important;background-color:#20242a !important;border-bottom:1px solid #2f3844;color:#f8fafc !important;font-family:'Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:13px;line-height:1.5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+              <td bgcolor="#22252b" style="padding:18px 24px;background:#22252b;background-color:#22252b;border-bottom:1px solid #313743;color:#f8fafc;font-family:'Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:13px;line-height:1.5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
                 <span style="color:#f8fafc;">본인이 요청하지 않았다면 메일 내 링크를 클릭하지 마세요</span>
               </td>
             </tr>
             <tr>
-              <td bgcolor="#20242a" style="padding:24px 32px 32px;background:#20242a !important;background-color:#20242a !important;">
+              <td bgcolor="#22252b" style="padding:24px 32px 32px;background:#22252b;background-color:#22252b;">
                 <div style="margin:0 0 22px;color:#9fb6dd;font-family:'Hanken Grotesk','Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:13px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;">
                   {escape(eyebrow)}
                 </div>
                 {brand_block}
                 {highlight_block}
-                <div style="color:#f8fafc !important;font-family:'Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:16px;line-height:1.85;word-break:keep-all;">
+                <div style="color:#f8fafc;font-family:'Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:16px;line-height:1.85;word-break:keep-all;">
                   {_format_lines_html([intro])}
                   {_format_lines_html(body_lines)}
                 </div>
@@ -129,7 +129,7 @@ def _render_email_html(
               </td>
             </tr>
             <tr>
-              <td bgcolor="#20242a" style="padding:28px 32px;border-top:1px solid #2f3844;background:#20242a !important;background-color:#20242a !important;">
+              <td bgcolor="#22252b" style="padding:28px 32px;border-top:1px solid #313743;background:#22252b;background-color:#22252b;">
                 <div style="margin:0 0 10px;color:#f8fafc;font-family:'Hanken Grotesk','Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:14px;font-weight:800;">Keyboard Recommender</div>
                 <div style="margin:0 0 12px;color:#cbd5e1;font-family:'Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:13px;line-height:1.8;word-break:keep-all;">
                   맞춤 키보드 추천과 계정 보안을 위한 안내 메일입니다.
