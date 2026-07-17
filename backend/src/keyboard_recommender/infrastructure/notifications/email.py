@@ -16,13 +16,15 @@ _RESEND_USER_AGENT = "keyboard-recommender-api/0.1.0"
 
 def _frontend_url(settings: Settings, path: str = "") -> str:
     base = settings.public_frontend_base_url.rstrip("/")
+    if base == "https://keyboard-recommender.com":
+        base = "https://www.keyboard-recommender.com"
     suffix = path if path.startswith("/") else f"/{path}" if path else ""
     return f"{base}{suffix}"
 
 
 def _format_lines_html(lines: list[str]) -> str:
     return "".join(
-        f"<p style=\"margin:0 0 16px;color:#e5ebf5;font-size:16px;line-height:1.8;word-break:keep-all;\">{escape(line)}</p>"
+        f"<p style=\"margin:0 0 16px;color:#f8fafc;font-family:'Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:16px;line-height:1.8;word-break:keep-all;\">{escape(line)}</p>"
         for line in lines
     )
 
@@ -47,8 +49,8 @@ def _render_email_html(
     brand_block = f"""
       <div style="padding:0 0 28px;text-align:center;">
         <a href="{escape(brand_url, quote=True)}" style="display:inline-block;text-decoration:none;">
-          <img src="{escape(brand_logo_url, quote=True)}" alt="Keyboard Recommender" width="44" height="44" style="display:block;margin:0 auto 14px;" />
-          <div style="color:#f8fafc;font-size:26px;font-weight:800;letter-spacing:0.08em;line-height:1.25;text-transform:uppercase;">
+          <img src="{escape(brand_logo_url, quote=True)}" alt="Keyboard Recommender" width="44" height="44" style="display:block;margin:0 auto 14px;border:0;outline:none;text-decoration:none;" />
+          <div style="color:#f8fafc;font-family:'Hanken Grotesk','Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:26px;font-weight:800;letter-spacing:-0.02em;line-height:1.2;white-space:nowrap;">
             Keyboard Recommender
           </div>
         </a>
@@ -58,13 +60,13 @@ def _render_email_html(
     if highlight_value:
         label_prefix = f"{highlight_label}: " if highlight_label else ""
         highlight_hint_html = (
-            f"<p style=\"margin:14px 0 0;color:#a8b5c7;font-size:15px;line-height:1.8;word-break:keep-all;\">{escape(highlight_hint)}</p>"
+            f"<p style=\"margin:14px 0 0;color:#cbd5e1;font-family:'Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:15px;line-height:1.8;word-break:keep-all;\">{escape(highlight_hint)}</p>"
             if highlight_hint
             else ""
         )
         highlight_block = f"""
           <div style="margin:0 0 24px;">
-            <div style="color:#f8fafc;font-size:18px;font-weight:700;line-height:1.7;word-break:keep-all;">
+            <div style="color:#f8fafc;font-family:'Hanken Grotesk','Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:18px;font-weight:700;line-height:1.7;word-break:keep-all;">
               {escape(label_prefix)}<span style="font-size:42px;font-weight:800;letter-spacing:0.12em;">{escape(highlight_value)}</span>
             </div>
             {highlight_hint_html}
@@ -74,7 +76,7 @@ def _render_email_html(
     if cta_label and cta_url:
         cta_block = f"""
           <div style="margin:28px 0 0;">
-            <a href="{escape(cta_url, quote=True)}" style="display:inline-block;padding:16px 28px;border-radius:999px;background:#6d86e7;color:#ffffff;font-size:16px;font-weight:800;letter-spacing:-0.01em;text-decoration:none;">
+            <a href="{escape(cta_url, quote=True)}" style="display:inline-block;padding:16px 28px;border-radius:999px;background:#6d86e7;color:#ffffff;font-family:'Hanken Grotesk','Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:16px;font-weight:800;letter-spacing:-0.01em;text-decoration:none;">
               {escape(cta_label)}
             </a>
           </div>
@@ -82,7 +84,7 @@ def _render_email_html(
     notice_block = ""
     if notice:
         notice_block = f"""
-          <p style="margin:26px 0 0;color:#94a3b8;font-size:14px;line-height:1.8;word-break:keep-all;">{escape(notice)}</p>
+          <p style="margin:26px 0 0;color:#cbd5e1;font-family:'Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:14px;line-height:1.8;word-break:keep-all;">{escape(notice)}</p>
         """
     return f"""<!DOCTYPE html>
 <html lang="ko">
@@ -95,18 +97,18 @@ def _render_email_html(
         <td align="center">
           <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:640px;background:#2a2d31;border:1px solid #313946;border-radius:28px;overflow:hidden;">
             <tr>
-              <td style="padding:18px 24px;background:#2a2d31;border-bottom:1px solid #313946;color:#d7deea;font-size:13px;line-height:1.5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+              <td style="padding:18px 24px;background:#2a2d31;border-bottom:1px solid #313946;color:#f8fafc;font-family:'Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:13px;line-height:1.5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
                 본인이 요청하지 않았다면 메일 내 링크를 클릭하지 마세요
               </td>
             </tr>
             <tr>
               <td style="padding:24px 32px 32px;background:#2a2d31;">
-                <div style="margin:0 0 22px;color:#8ea4c8;font-size:13px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;">
+                <div style="margin:0 0 22px;color:#9fb6dd;font-family:'Hanken Grotesk','Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:13px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;">
                   {escape(eyebrow)}
                 </div>
                 {brand_block}
                 {highlight_block}
-                <div style="color:#e5ebf5;font-size:16px;line-height:1.85;word-break:keep-all;">
+                <div style="color:#f8fafc;font-family:'Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:16px;line-height:1.85;word-break:keep-all;">
                   {_format_lines_html([intro])}
                   {_format_lines_html(body_lines)}
                 </div>
@@ -116,11 +118,11 @@ def _render_email_html(
             </tr>
             <tr>
               <td style="padding:28px 32px;border-top:1px solid #313946;background:#2a2d31;">
-                <div style="margin:0 0 10px;color:#f8fafc;font-size:14px;font-weight:800;">Keyboard Recommender</div>
-                <div style="margin:0 0 12px;color:#98a6ba;font-size:13px;line-height:1.8;word-break:keep-all;">
+                <div style="margin:0 0 10px;color:#f8fafc;font-family:'Hanken Grotesk','Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:14px;font-weight:800;">Keyboard Recommender</div>
+                <div style="margin:0 0 12px;color:#cbd5e1;font-family:'Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:13px;line-height:1.8;word-break:keep-all;">
                   맞춤 키보드 추천과 계정 보안을 위한 안내 메일입니다.
                 </div>
-                <div style="margin:0;color:#8794a8;font-size:12px;line-height:1.8;word-break:keep-all;">
+                <div style="margin:0;color:#cbd5e1;font-family:'Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:12px;line-height:1.8;word-break:keep-all;">
                   도움이 필요하면
                   <a href="{escape(support_url, quote=True)}" style="color:#9fb6dd;text-decoration:none;">서비스 페이지</a>
                   에서 다시 진행해 주세요.
