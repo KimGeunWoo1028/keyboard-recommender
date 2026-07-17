@@ -108,7 +108,7 @@ class Settings(BaseSettings):
         default=str(_BACKEND_ROOT / "data" / "avatars"),
         description="Directory for user-uploaded profile photos.",
     )
-    avatar_max_bytes: int = Field(default=2 * 1024 * 1024, ge=64 * 1024, description="Max avatar upload size in bytes.")
+    avatar_max_bytes: int = Field(default=5 * 1024 * 1024, ge=64 * 1024, description="Max avatar upload size in bytes.")
 
     # Swagkey catalog thumbnails mirrored from CDN (served from /media/swagkey-images)
     swagkey_images_dir: str = Field(

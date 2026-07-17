@@ -179,8 +179,8 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
                 e.target.value = "";
                 if (!file) return;
                 setAvatarMessage(null);
-                if (file.size > 2 * 1024 * 1024) {
-                  setAvatarMessage("이미지는 2MB 이하여야 합니다.");
+                if (file.size > 5 * 1024 * 1024) {
+                  setAvatarMessage("이미지는 5MB 이하여야 합니다.");
                   return;
                 }
                 setUpdatingAvatar(true);
@@ -196,7 +196,7 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
               }}
             />
             {avatarMessage ? <p className="text-xs text-ca-on-surface-variant">{avatarMessage}</p> : null}
-            <p className="text-xs text-ca-on-surface-variant">JPEG, PNG, WebP · 최대 2MB</p>
+            <p className="text-xs text-ca-on-surface-variant">JPEG, PNG, WebP · 최대 5MB</p>
           </div>
         </div>
 
