@@ -47,17 +47,23 @@ def _render_email_html(
     brand_logo_url = _frontend_url(settings, "/brand/logo-mark.png")
     support_url = _frontend_url(settings, "/auth")
     brand_block = f"""
-      <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="left" style="margin:0 0 28px 0;">
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 28px 0;">
         <tr>
-          <td style="vertical-align:middle;padding:0 12px 0 0;">
-            <a href="{escape(brand_url, quote=True)}" style="text-decoration:none;">
-              <img src="{escape(brand_logo_url, quote=True)}" alt="" width="32" height="32" style="display:block;border:0;outline:none;text-decoration:none;" />
-            </a>
-          </td>
           <td style="vertical-align:middle;">
-            <a href="{escape(brand_url, quote=True)}" style="color:#f8fafc;font-family:'Hanken Grotesk','Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:20px;font-weight:800;letter-spacing:-0.03em;line-height:1.15;white-space:nowrap;text-decoration:none;">
-              Keyboard Recommender
-            </a>
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td style="vertical-align:middle;padding:0 12px 0 0;">
+                  <a href="{escape(brand_url, quote=True)}" style="text-decoration:none;">
+                    <img src="{escape(brand_logo_url, quote=True)}" alt="KR" width="32" height="32" style="display:block;border:0;outline:none;text-decoration:none;" />
+                  </a>
+                </td>
+                <td style="vertical-align:middle;">
+                  <a href="{escape(brand_url, quote=True)}" style="color:#f8fafc;font-family:'Hanken Grotesk','Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:20px;font-weight:800;letter-spacing:-0.03em;line-height:1.15;white-space:nowrap;text-decoration:none;">
+                    Keyboard Recommender
+                  </a>
+                </td>
+              </tr>
+            </table>
           </td>
         </tr>
       </table>
@@ -71,12 +77,18 @@ def _render_email_html(
             else ""
         )
         highlight_block = f"""
-          <div style="margin:0 0 26px;">
-            <div style="color:#f8fafc;font-family:'Hanken Grotesk','Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:18px;font-weight:700;line-height:1.7;word-break:keep-all;">
-              {escape(label_prefix)}<span style="font-size:44px;font-weight:800;letter-spacing:0.12em;">{escape(highlight_value)}</span>
-            </div>
-            {highlight_hint_html}
-          </div>
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 26px 0;">
+            <tr>
+              <td style="color:#f8fafc;font-family:'Hanken Grotesk','Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:18px;font-weight:700;line-height:1.7;word-break:keep-all;">
+                {escape(label_prefix)}<span style="font-size:44px;font-weight:800;letter-spacing:0.12em;">{escape(highlight_value)}</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                {highlight_hint_html}
+              </td>
+            </tr>
+          </table>
         """
     cta_block = ""
     if cta_label and cta_url:
