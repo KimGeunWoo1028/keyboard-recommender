@@ -3,6 +3,7 @@ from __future__ import annotations
 from html import escape
 import logging
 import smtplib
+from email.utils import formataddr
 from email.message import EmailMessage
 
 import httpx
@@ -12,6 +13,10 @@ from keyboard_recommender.config.settings import Settings
 logger = logging.getLogger(__name__)
 
 _RESEND_USER_AGENT = "keyboard-recommender-api/0.1.0"
+
+
+def _formatted_from_address(display_name: str | None, email_address: str) -> str:
+    return formataddr((display_name or "", email_address))
 
 
 def _frontend_url(settings: Settings, path: str = "") -> str:
@@ -165,7 +170,7 @@ def _deliver_via_smtp(
         return "log"
     msg = EmailMessage()
     msg["Subject"] = subject
-    msg["From"] = settings.smtp_from_email
+    msg["From"] = _formatted_from_address(settings.email_from_name, settings.smtp_from_email)
     msg["To"] = to_email
     msg.set_content(text_body)
     if html_body:
@@ -197,7 +202,7 @@ def _deliver_via_resend(
         "User-Agent": _RESEND_USER_AGENT,
     }
     body = {
-        "from": settings.resend_from_email,
+        "from": _formatted_from_address(settings.email_from_name, settings.resend_from_email),
         "to": [to_email],
         "subject": subject,
         "text": text_body,
