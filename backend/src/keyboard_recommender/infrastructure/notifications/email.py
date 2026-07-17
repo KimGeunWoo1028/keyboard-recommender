@@ -48,23 +48,10 @@ def _render_email_html(
     brand_block = f"""
       <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 28px 0;">
         <tr>
-          <td style="vertical-align:middle;">
-            <table role="presentation" cellpadding="0" cellspacing="0" border="0">
-              <tr>
-                <td style="vertical-align:middle;padding:0 12px 0 0;">
-                  <a href="{escape(brand_url, quote=True)}" style="text-decoration:none;">
-                    <span style="display:inline-block;width:32px;height:32px;border-radius:9px;background:#6d86e7;color:#ffffff;font-family:'Hanken Grotesk','Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:13px;font-weight:800;line-height:32px;text-align:center;text-decoration:none;">
-                      KR
-                    </span>
-                  </a>
-                </td>
-                <td style="vertical-align:middle;">
-                  <a href="{escape(brand_url, quote=True)}" style="color:#f8fafc;font-family:'Hanken Grotesk','Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:20px;font-weight:800;letter-spacing:-0.03em;line-height:1.15;white-space:nowrap;text-decoration:none;">
-                    Keyboard Recommender
-                  </a>
-                </td>
-              </tr>
-            </table>
+          <td align="center" style="text-align:center;">
+            <a href="{escape(brand_url, quote=True)}" style="color:#f8fafc;font-family:Georgia,'Times New Roman',serif;font-size:30px;font-weight:700;letter-spacing:0.02em;line-height:1.2;text-decoration:none;white-space:nowrap;">
+              Keyboard Recommender
+            </a>
           </td>
         </tr>
       </table>
