@@ -22,7 +22,7 @@ def _frontend_url(settings: Settings, path: str = "") -> str:
 
 def _format_lines_html(lines: list[str]) -> str:
     return "".join(
-        f"<p style=\"margin:0 0 12px;color:#cbd5e1;font-size:15px;line-height:1.7;\">{escape(line)}</p>"
+        f"<p style=\"margin:0 0 16px;color:#334155;font-size:16px;line-height:1.8;word-break:keep-all;\">{escape(line)}</p>"
         for line in lines
     )
 
@@ -46,22 +46,22 @@ def _render_email_html(
     highlight_block = ""
     if highlight_label and highlight_value:
         highlight_hint_html = (
-            f"<div style=\"margin:10px 0 0;color:#93c5fd;font-size:13px;line-height:1.6;\">{escape(highlight_hint)}</div>"
+            f"<div style=\"margin:12px 0 0;color:#475569;font-size:14px;line-height:1.7;word-break:keep-all;\">{escape(highlight_hint)}</div>"
             if highlight_hint
             else ""
         )
         highlight_block = f"""
-          <div style="margin:0 0 28px;padding:20px 22px;border:1px solid #334155;border-radius:20px;background:linear-gradient(180deg,#111827 0%,#0f172a 100%);">
-            <div style="margin:0 0 8px;color:#94a3b8;font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;">{escape(highlight_label)}</div>
-            <div style="margin:0;color:#f8fafc;font-size:34px;font-weight:800;letter-spacing:0.08em;line-height:1.2;">{escape(highlight_value)}</div>
+          <div style="margin:28px 0 30px;padding:26px 24px;border:1px solid #c7d2fe;border-radius:24px;background:linear-gradient(180deg,#eef4ff 0%,#e5edff 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,0.72);">
+            <div style="margin:0 0 10px;color:#315f96;font-size:12px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;">{escape(highlight_label)}</div>
+            <div style="margin:0;color:#0f172a;font-size:42px;font-weight:800;letter-spacing:0.08em;line-height:1.1;">{escape(highlight_value)}</div>
             {highlight_hint_html}
           </div>
         """
     cta_block = ""
     if cta_label and cta_url:
         cta_block = f"""
-          <div style="margin:28px 0 0;">
-            <a href="{escape(cta_url, quote=True)}" style="display:inline-block;padding:14px 22px;border-radius:999px;background:#2563eb;color:#ffffff;font-size:14px;font-weight:700;letter-spacing:0.01em;text-decoration:none;">
+          <div style="margin:34px 0 0;">
+            <a href="{escape(cta_url, quote=True)}" style="display:inline-block;padding:16px 28px;border-radius:999px;background:#5d7eea;color:#ffffff;font-size:16px;font-weight:800;letter-spacing:-0.01em;text-decoration:none;">
               {escape(cta_label)}
             </a>
           </div>
@@ -69,45 +69,41 @@ def _render_email_html(
     notice_block = ""
     if notice:
         notice_block = f"""
-          <div style="margin:28px 0 0;padding:16px 18px;border-radius:16px;background:#0f172a;border:1px solid #1e293b;color:#94a3b8;font-size:13px;line-height:1.7;">
+          <div style="margin:30px 0 0;padding:18px 20px;border-radius:18px;background:#f8fafc;border:1px solid #dbe6f3;color:#64748b;font-size:13px;line-height:1.8;word-break:keep-all;">
             {escape(notice)}
           </div>
         """
     return f"""<!DOCTYPE html>
 <html lang="ko">
-  <body style="margin:0;padding:0;background:#020617;">
+  <body style="margin:0;padding:0;background:#eef2f7;">
     <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">
       {escape(intro)}
     </div>
-    <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background:#020617;padding:32px 12px;font-family:Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;">
+    <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background:#eef2f7;padding:28px 10px;font-family:Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;">
       <tr>
         <td align="center">
-          <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:640px;background:#0b1120;border:1px solid #1e293b;border-radius:28px;overflow:hidden;">
+          <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:640px;background:#f7f9fc;border:1px solid #d8e1ee;border-radius:28px;overflow:hidden;">
             <tr>
-              <td style="padding:18px 24px;background:#111827;border-bottom:1px solid #1f2937;color:#cbd5e1;font-size:13px;line-height:1.6;">
+              <td style="padding:18px 24px;background:#edf2fb;border-bottom:1px solid #d8e1ee;color:#475569;font-size:13px;line-height:1.7;word-break:keep-all;">
                 이 메일은 Keyboard Recommender 계정 보안 확인을 위해 발송되었습니다.
               </td>
             </tr>
             <tr>
-              <td style="padding:40px 32px 20px;background:radial-gradient(circle at top,#172554 0%,#0b1120 48%,#0b1120 100%);">
-                <a href="{escape(brand_url, quote=True)}" style="color:#f8fafc;text-decoration:none;">
-                  <div style="font-size:13px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#93c5fd;">Keyboard Recommender</div>
-                  <div style="margin:10px 0 0;color:#f8fafc;font-size:30px;font-weight:800;letter-spacing:-0.03em;line-height:1.2;">
+              <td style="padding:36px 32px 28px;background:linear-gradient(180deg,#f8fbff 0%,#eff4ff 100%);border-bottom:1px solid #dbe4f2;">
+                <a href="{escape(brand_url, quote=True)}" style="color:#0f172a;text-decoration:none;">
+                  <div style="font-size:13px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:#38689f;">Keyboard Recommender</div>
+                  <div style="margin:12px 0 0;color:#0f172a;font-size:34px;font-weight:800;letter-spacing:-0.03em;line-height:1.24;word-break:keep-all;">
                     {escape(title)}
                   </div>
                 </a>
-                <div style="margin:16px 0 0;color:#cbd5e1;font-size:16px;line-height:1.8;">
+                <div style="margin:18px 0 0;color:#475569;font-size:17px;line-height:1.85;word-break:keep-all;">
                   {escape(intro)}
                 </div>
+                <div style="margin:18px 0 0;color:#6b7a90;font-size:13px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;">{escape(eyebrow)}</div>
               </td>
             </tr>
             <tr>
-              <td style="padding:12px 32px 0;">
-                <div style="color:#93c5fd;font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;">{escape(eyebrow)}</div>
-              </td>
-            </tr>
-            <tr>
-              <td style="padding:14px 32px 12px;">
+              <td style="padding:32px 32px 22px;background:#f7f9fc;">
                 {highlight_block}
                 {_format_lines_html(body_lines)}
                 {cta_block}
@@ -115,14 +111,14 @@ def _render_email_html(
               </td>
             </tr>
             <tr>
-              <td style="padding:32px;border-top:1px solid #1e293b;background:#0f172a;">
-                <div style="margin:0 0 10px;color:#f8fafc;font-size:14px;font-weight:700;">Keyboard Recommender</div>
-                <div style="margin:0 0 12px;color:#94a3b8;font-size:13px;line-height:1.7;">
+              <td style="padding:28px 32px;border-top:1px solid #d8e1ee;background:#eef3f9;">
+                <div style="margin:0 0 10px;color:#0f172a;font-size:14px;font-weight:800;">Keyboard Recommender</div>
+                <div style="margin:0 0 12px;color:#64748b;font-size:13px;line-height:1.8;word-break:keep-all;">
                   맞춤 키보드 추천과 계정 보안을 위한 안내 메일입니다.
                 </div>
-                <div style="margin:0;color:#64748b;font-size:12px;line-height:1.7;">
+                <div style="margin:0;color:#7b8798;font-size:12px;line-height:1.8;word-break:keep-all;">
                   도움이 필요하면
-                  <a href="{escape(support_url, quote=True)}" style="color:#93c5fd;text-decoration:none;">서비스 페이지</a>
+                  <a href="{escape(support_url, quote=True)}" style="color:#38689f;text-decoration:none;">서비스 페이지</a>
                   에서 다시 진행해 주세요.
                 </div>
               </td>
