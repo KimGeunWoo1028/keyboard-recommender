@@ -12,7 +12,7 @@ import { confirmPasswordReset } from "@/lib/api/auth";
 import { ApiError } from "@/lib/api/client";
 
 function isPasswordPolicyValid(value: string): boolean {
-  if (!/^[\x21-\x7E]{8,12}$/.test(value)) return false;
+  if (!/^[\x21-\x7E]{8,20}$/.test(value)) return false;
   if (!/[A-Za-z]/.test(value)) return false;
   if (!/\d/.test(value)) return false;
   if (!/[^A-Za-z0-9]/.test(value)) return false;
@@ -45,7 +45,7 @@ export function ResetPasswordClient() {
         return;
       }
       if (!policyValid) {
-        setError("비밀번호는 8~12자, 영문/숫자/특수문자를 모두 포함해야 합니다.");
+        setError("비밀번호는 8~20자, 영문/숫자/특수문자를 모두 포함해야 합니다.");
         return;
       }
       if (!passwordMatches) {
@@ -104,7 +104,7 @@ export function ResetPasswordClient() {
                     onChange={(e) => setNewPassword(e.target.value)}
                     required
                     minLength={8}
-                    maxLength={12}
+                    maxLength={20}
                     className="ca-input pr-10"
                   />
                   <Button
@@ -143,7 +143,7 @@ export function ResetPasswordClient() {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
                     minLength={8}
-                    maxLength={12}
+                    maxLength={20}
                     className="ca-input pr-10"
                   />
                   <Button
@@ -172,7 +172,7 @@ export function ResetPasswordClient() {
               </div>
               <p className="text-xs text-ca-on-surface">
                 <span className={policyValid ? "text-ca-viz-emerald" : "text-destructive"}>{policyValid ? "✓" : "✗"}</span>{" "}
-                8~12자, 영문/숫자/특수기호 포함
+                8~20자, 영문/숫자/특수기호 포함
               </p>
               <p className="text-xs text-ca-on-surface">
                 <span className={passwordMatches ? "text-ca-viz-emerald" : "text-destructive"}>

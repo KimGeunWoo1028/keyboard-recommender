@@ -45,7 +45,7 @@ function validateDisplayName(value: string): string | null {
 }
 
 function isPasswordPolicyValid(value: string): boolean {
-  if (!/^[\x21-\x7E]{8,12}$/.test(value)) return false;
+  if (!/^[\x21-\x7E]{8,20}$/.test(value)) return false;
   if (!/[A-Za-z]/.test(value)) return false;
   if (!/\d/.test(value)) return false;
   if (!/[^A-Za-z0-9]/.test(value)) return false;
@@ -361,7 +361,7 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
                 <span className={isPasswordPolicyValid(newPassword) ? "text-green-500" : "text-red-500"}>
                   {isPasswordPolicyValid(newPassword) ? "✓" : "✗"}
                 </span>{" "}
-                8~12자, 영문/숫자/특수문자 포함
+                8~20자, 영문/숫자/특수문자 포함
               </p>
               <p className="text-ca-on-surface-variant">
                 <span className={passwordMatches ? "text-green-500" : "text-red-500"}>{passwordMatches ? "✓" : "✗"}</span>{" "}

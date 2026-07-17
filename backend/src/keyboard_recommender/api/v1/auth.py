@@ -143,14 +143,14 @@ def _assert_display_name_policy(display_name: str) -> None:
 def _assert_password_policy(password: str) -> None:
     """
     Password policy:
-    - length 8..12
+    - length 8..20
     - ASCII printable non-space chars only
     - contains at least one letter, one digit, one special character
     """
     if not _PASSWORD_ALLOWED.fullmatch(password):
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail="Password must be 8-12 chars and use only English letters, numbers, and special characters.",
+            detail="Password must be 8-20 chars and use only English letters, numbers, and special characters.",
         )
     if not re.search(r"[A-Za-z]", password):
         raise HTTPException(

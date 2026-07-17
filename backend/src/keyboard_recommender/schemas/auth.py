@@ -20,7 +20,7 @@ class SignupRequest(BaseModel):
 
     email: str = Field(min_length=3, max_length=320)
     verification_token: str = Field(min_length=16, max_length=128)
-    password: str = Field(min_length=8, max_length=12)
+    password: str = Field(min_length=8, max_length=20)
     display_name: str = Field(min_length=2, max_length=120)
 
 
@@ -86,7 +86,7 @@ class PasswordResetConfirmRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     token: str = Field(min_length=32, max_length=256)
-    new_password: str = Field(min_length=8, max_length=12)
+    new_password: str = Field(min_length=8, max_length=20)
 
 
 class UpdateDisplayNameRequest(BaseModel):
@@ -99,7 +99,7 @@ class UpdatePasswordRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     current_password: str = Field(min_length=8, max_length=200)
-    new_password: str = Field(min_length=8, max_length=12)
+    new_password: str = Field(min_length=8, max_length=20)
 
 
 class DeleteAccountRequest(BaseModel):

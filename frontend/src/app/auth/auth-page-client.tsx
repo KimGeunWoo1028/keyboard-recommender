@@ -30,7 +30,7 @@ function friendlyAuthErrorMessage(mode: "login" | "signup", err: unknown): strin
         return "인증번호를 다시 확인해 주세요.";
       }
     if (err.status === 422) {
-      if (raw.includes("password")) return "비밀번호는 8~12자, 영문/숫자/특수문자를 모두 포함해야 합니다.";
+      if (raw.includes("password")) return "비밀번호는 8~20자, 영문/숫자/특수문자를 모두 포함해야 합니다.";
       if (raw.includes("email")) return "이메일 형식을 확인해 주세요.";
       return "입력값을 다시 확인해 주세요.";
     }
@@ -129,7 +129,7 @@ export function AuthPageClient() {
   const canProceedSignup = mode !== "signup" || (canFillSignupCredentials && passwordMatches && isPasswordPolicyValid(password));
 
   function isPasswordPolicyValid(value: string): boolean {
-    if (!/^[\x21-\x7E]{8,12}$/.test(value)) return false;
+    if (!/^[\x21-\x7E]{8,20}$/.test(value)) return false;
     if (!/[A-Za-z]/.test(value)) return false;
     if (!/\d/.test(value)) return false;
     if (!/[^A-Za-z0-9]/.test(value)) return false;
@@ -137,7 +137,7 @@ export function AuthPageClient() {
   }
 
   const hasRequiredCharTypes = /[A-Za-z]/.test(password) && /\d/.test(password) && /[^A-Za-z0-9]/.test(password);
-  const hasValidPasswordLength = password.length >= 8 && password.length <= 12;
+  const hasValidPasswordLength = password.length >= 8 && password.length <= 20;
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
@@ -163,7 +163,7 @@ export function AuthPageClient() {
           return;
         }
         if (!isPasswordPolicyValid(password)) {
-          setError("비밀번호는 8~12자, 영문/숫자/특수문자를 모두 포함해야 합니다.");
+          setError("비밀번호는 8~20자, 영문/숫자/특수문자를 모두 포함해야 합니다.");
           return;
         }
         await signup({
@@ -305,7 +305,7 @@ export function AuthPageClient() {
           </CardDescription>
           {mode === "signup" ? (
             <p className="text-xs text-ca-on-surface-variant">
-              비밀번호는 8~12자, 영문/숫자/특수문자를 모두 포함해야 합니다.
+              비밀번호는 8~20자, 영문/숫자/특수문자를 모두 포함해야 합니다.
             </p>
           ) : null}
         </CardHeader>
@@ -451,7 +451,7 @@ export function AuthPageClient() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   minLength={8}
-                  maxLength={12}
+                  maxLength={20}
                   disabled={mode === "signup" && !canFillSignupCredentials}
                   className="ca-input pr-10"
                 />
@@ -490,7 +490,7 @@ export function AuthPageClient() {
                     <span className={hasValidPasswordLength ? "text-ca-viz-emerald" : "text-destructive"}>
                       {hasValidPasswordLength ? "✓" : "✗"}
                     </span>{" "}
-                    8~12자
+                    8~20자
                   </p>
                 </div>
               ) : null}
@@ -508,7 +508,7 @@ export function AuthPageClient() {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
                     minLength={8}
-                    maxLength={12}
+                    maxLength={20}
                     disabled={mode === "signup" && !canFillSignupCredentials}
                     className="ca-input pr-10"
                   />
