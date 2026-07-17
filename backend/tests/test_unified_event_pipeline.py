@@ -98,6 +98,19 @@ def test_normalize_raw_onboarding_event_type_is_accepted() -> None:
     assert ev.metadata["style"] == "balanced"
 
 
+def test_normalize_raw_prefilled_step_skipped_event_type_is_accepted() -> None:
+    ev = normalize_raw_unified_event(
+        {
+            "request_id": "r-onb-prefill-1",
+            "event_type": "onboarding.prefilled_step_skipped",
+            "metadata": {"stepId": "sound_profile", "auto": True},
+        },
+    )
+    assert ev.request_id == "r-onb-prefill-1"
+    assert ev.event_type == "onboarding.prefilled_step_skipped"
+    assert ev.metadata["auto"] is True
+
+
 def test_normalize_raw_home_viewed_event_type_is_accepted() -> None:
     ev = normalize_raw_unified_event(
         {

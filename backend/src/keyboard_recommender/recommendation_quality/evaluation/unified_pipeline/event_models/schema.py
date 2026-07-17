@@ -30,6 +30,7 @@ UnifiedEventType = Literal[
     "interaction.collection_tag",
     "onboarding.viewed",
     "onboarding.style_selected",
+    "onboarding.prefilled_step_skipped",
     "onboarding.step_completed",
     "onboarding.generate_started",
     "onboarding.completed",
