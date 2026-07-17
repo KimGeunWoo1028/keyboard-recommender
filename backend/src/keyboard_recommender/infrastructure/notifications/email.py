@@ -47,14 +47,20 @@ def _render_email_html(
     brand_logo_url = _frontend_url(settings, "/brand/logo-mark.png")
     support_url = _frontend_url(settings, "/auth")
     brand_block = f"""
-      <div style="padding:0 0 28px;text-align:center;">
-        <a href="{escape(brand_url, quote=True)}" style="display:inline-block;text-decoration:none;">
-          <img src="{escape(brand_logo_url, quote=True)}" alt="Keyboard Recommender" width="44" height="44" style="display:block;margin:0 auto 14px;border:0;outline:none;text-decoration:none;" />
-          <div style="color:#f8fafc;font-family:'Hanken Grotesk','Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:26px;font-weight:800;letter-spacing:-0.02em;line-height:1.2;white-space:nowrap;">
-            Keyboard Recommender
-          </div>
-        </a>
-      </div>
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 28px auto;">
+        <tr>
+          <td style="vertical-align:middle;padding:0 10px 0 0;">
+            <a href="{escape(brand_url, quote=True)}" style="text-decoration:none;">
+              <img src="{escape(brand_logo_url, quote=True)}" alt="" width="44" height="44" style="display:block;border:0;outline:none;text-decoration:none;" />
+            </a>
+          </td>
+          <td style="vertical-align:middle;">
+            <a href="{escape(brand_url, quote=True)}" style="color:#f8fafc;font-family:'Hanken Grotesk','Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:26px;font-weight:800;letter-spacing:-0.02em;line-height:1.2;white-space:nowrap;text-decoration:none;">
+              Keyboard Recommender
+            </a>
+          </td>
+        </tr>
+      </table>
     """
     highlight_block = ""
     if highlight_value:
@@ -88,21 +94,27 @@ def _render_email_html(
         """
     return f"""<!DOCTYPE html>
 <html lang="ko">
-  <body style="margin:0;padding:0;background:#222426;">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="supported-color-schemes" content="dark" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body bgcolor="#222426" style="margin:0;padding:0;background-color:#222426;color:#f8fafc;">
     <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">
       {escape(intro)}
     </div>
-    <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background:#222426;padding:28px 10px;font-family:Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;">
+    <table role="presentation" cellpadding="0" cellspacing="0" width="100%" bgcolor="#222426" style="background-color:#222426;padding:28px 10px;font-family:Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;">
       <tr>
-        <td align="center">
-          <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:640px;background:#2a2d31;border:1px solid #313946;border-radius:28px;overflow:hidden;">
+        <td align="center" bgcolor="#222426" style="background-color:#222426;">
+          <table role="presentation" cellpadding="0" cellspacing="0" width="100%" bgcolor="#2a2d31" style="max-width:640px;background-color:#2a2d31;border:1px solid #313946;border-radius:28px;overflow:hidden;">
             <tr>
-              <td style="padding:18px 24px;background:#2a2d31;border-bottom:1px solid #313946;color:#f8fafc;font-family:'Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:13px;line-height:1.5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
-                본인이 요청하지 않았다면 메일 내 링크를 클릭하지 마세요
+              <td bgcolor="#2a2d31" style="padding:18px 24px;background-color:#2a2d31;border-bottom:1px solid #313946;color:#f8fafc;font-family:'Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:13px;line-height:1.5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                <span style="color:#f8fafc;">본인이 요청하지 않았다면 메일 내 링크를 클릭하지 마세요</span>
               </td>
             </tr>
             <tr>
-              <td style="padding:24px 32px 32px;background:#2a2d31;">
+              <td bgcolor="#2a2d31" style="padding:24px 32px 32px;background-color:#2a2d31;">
                 <div style="margin:0 0 22px;color:#9fb6dd;font-family:'Hanken Grotesk','Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:13px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;">
                   {escape(eyebrow)}
                 </div>
@@ -117,7 +129,7 @@ def _render_email_html(
               </td>
             </tr>
             <tr>
-              <td style="padding:28px 32px;border-top:1px solid #313946;background:#2a2d31;">
+              <td bgcolor="#2a2d31" style="padding:28px 32px;border-top:1px solid #313946;background-color:#2a2d31;">
                 <div style="margin:0 0 10px;color:#f8fafc;font-family:'Hanken Grotesk','Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:14px;font-weight:800;">Keyboard Recommender</div>
                 <div style="margin:0 0 12px;color:#cbd5e1;font-family:'Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:13px;line-height:1.8;word-break:keep-all;">
                   맞춤 키보드 추천과 계정 보안을 위한 안내 메일입니다.
