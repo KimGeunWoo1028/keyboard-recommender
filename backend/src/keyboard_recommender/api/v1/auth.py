@@ -68,7 +68,7 @@ def _as_utc(dt: datetime) -> datetime:
     return dt.astimezone(timezone.utc)
 
 
-_PASSWORD_ALLOWED = re.compile(r"^[\x21-\x7E]{8,12}$")
+_PASSWORD_ALLOWED = re.compile(r"^[\x21-\x7E]{8,20}$")
 _HAS_HANGUL = re.compile(r"[가-힣]")
 _HAS_LATIN = re.compile(r"[A-Za-z]")
 
