@@ -101,25 +101,24 @@ def _render_email_html(
 <html lang="ko">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="color-scheme" content="light dark" />
-    <meta name="supported-color-schemes" content="light dark" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="x-apple-disable-message-reformatting" />
   </head>
-  <body bgcolor="#17191d" style="margin:0;padding:0;background:#17191d;background-color:#17191d;color:#f8fafc;">
+  <body bgcolor="#17191d" style="margin:0;padding:0;background:#17191d !important;background-color:#17191d !important;color:#f8fafc;">
     <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">
       {escape(intro)}
     </div>
-    <table role="presentation" cellpadding="0" cellspacing="0" width="100%" bgcolor="#17191d" style="background:#17191d;background-color:#17191d;padding:28px 10px;font-family:Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;">
+    <table role="presentation" cellpadding="0" cellspacing="0" width="100%" bgcolor="#17191d" style="width:100%;margin:0;padding:0;background:#17191d !important;background-color:#17191d !important;font-family:Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;">
       <tr>
-        <td align="center" bgcolor="#17191d" style="background:#17191d;background-color:#17191d;">
-          <table role="presentation" cellpadding="0" cellspacing="0" width="100%" bgcolor="#22252b" style="max-width:640px;background:#22252b;background-color:#22252b;border:1px solid #313743;border-radius:28px;overflow:hidden;">
+        <td align="center" valign="top" bgcolor="#17191d" style="padding:28px 10px;background:#17191d !important;background-color:#17191d !important;">
+          <table role="presentation" cellpadding="0" cellspacing="0" width="100%" bgcolor="#22252b" style="max-width:640px;background:#22252b !important;background-color:#22252b !important;border:1px solid #313743;border-radius:28px;overflow:hidden;">
             <tr>
-              <td bgcolor="#22252b" style="padding:18px 24px;background:#22252b;background-color:#22252b;border-bottom:1px solid #313743;color:#f8fafc;font-family:'Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:13px;line-height:1.5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+              <td bgcolor="#22252b" style="padding:18px 24px;background:#22252b !important;background-color:#22252b !important;border-bottom:1px solid #313743;color:#f8fafc;font-family:'Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:13px;line-height:1.5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
                 <span style="color:#f8fafc;">본인이 요청하지 않았다면 메일 내 링크를 클릭하지 마세요</span>
               </td>
             </tr>
             <tr>
-              <td bgcolor="#22252b" style="padding:24px 32px 32px;background:#22252b;background-color:#22252b;">
+              <td bgcolor="#22252b" style="padding:24px 32px 32px;background:#22252b !important;background-color:#22252b !important;">
                 <div style="margin:0 0 22px;color:#9fb6dd;font-family:'Hanken Grotesk','Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:13px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;">
                   {escape(eyebrow)}
                 </div>
@@ -134,7 +133,7 @@ def _render_email_html(
               </td>
             </tr>
             <tr>
-              <td bgcolor="#22252b" style="padding:28px 32px;border-top:1px solid #313743;background:#22252b;background-color:#22252b;">
+              <td bgcolor="#22252b" style="padding:28px 32px;border-top:1px solid #313743;background:#22252b !important;background-color:#22252b !important;">
                 <div style="margin:0 0 10px;color:#f8fafc;font-family:'Hanken Grotesk','Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:14px;font-weight:800;">Keyboard Recommender</div>
                 <div style="margin:0 0 12px;color:#cbd5e1;font-family:'Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:13px;line-height:1.8;word-break:keep-all;">
                   맞춤 키보드 추천과 계정 보안을 위한 안내 메일입니다.
