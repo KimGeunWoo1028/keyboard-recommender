@@ -1,12 +1,9 @@
 from __future__ import annotations
 
-import base64
 from html import escape
 import logging
-import mimetypes
 import smtplib
 from email.message import EmailMessage
-from pathlib import Path
 
 import httpx
 
@@ -15,9 +12,6 @@ from keyboard_recommender.config.settings import Settings
 logger = logging.getLogger(__name__)
 
 _RESEND_USER_AGENT = "keyboard-recommender-api/0.1.0"
-_REPO_ROOT = Path(__file__).resolve().parents[4]
-_LOGO_PATH = _REPO_ROOT / "frontend" / "public" / "brand" / "logo-mark.png"
-_LOGO_CID = "kr-logo-mark"
 
 
 def _frontend_url(settings: Settings, path: str = "") -> str:
@@ -26,13 +20,6 @@ def _frontend_url(settings: Settings, path: str = "") -> str:
         base = "https://www.keyboard-recommender.com"
     suffix = path if path.startswith("/") else f"/{path}" if path else ""
     return f"{base}{suffix}"
-
-
-def _load_inline_logo() -> tuple[bytes, str, str] | None:
-    if not _LOGO_PATH.is_file():
-        return None
-    content_type, _ = mimetypes.guess_type(_LOGO_PATH.name)
-    return (_LOGO_PATH.read_bytes(), _LOGO_PATH.name, content_type or "image/png")
 
 
 def _format_lines_html(lines: list[str]) -> str:
@@ -66,7 +53,9 @@ def _render_email_html(
               <tr>
                 <td style="vertical-align:middle;padding:0 12px 0 0;">
                   <a href="{escape(brand_url, quote=True)}" style="text-decoration:none;">
-                    <img src="cid:{_LOGO_CID}" alt="KR" width="32" height="32" style="display:block;border:0;outline:none;text-decoration:none;" />
+                    <span style="display:inline-block;width:32px;height:32px;border-radius:9px;background:#6d86e7;color:#ffffff;font-family:'Hanken Grotesk','Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:13px;font-weight:800;line-height:32px;text-align:center;text-decoration:none;">
+                      KR
+                    </span>
                   </a>
                 </td>
                 <td style="vertical-align:middle;">
@@ -195,18 +184,6 @@ def _deliver_via_smtp(
     msg.set_content(text_body)
     if html_body:
         msg.add_alternative(html_body, subtype="html")
-        logo = _load_inline_logo()
-        if logo:
-            content, filename, content_type = logo
-            maintype, subtype = content_type.split("/", 1)
-            msg.get_payload()[-1].add_related(
-                content,
-                maintype=maintype,
-                subtype=subtype,
-                cid=f"<{_LOGO_CID}>",
-                filename=filename,
-                disposition="inline",
-            )
 
     with smtplib.SMTP(settings.smtp_host, settings.smtp_port, timeout=15) as server:
         if settings.smtp_use_tls:
@@ -241,17 +218,6 @@ def _deliver_via_resend(
     }
     if html_body:
         body["html"] = html_body
-        logo = _load_inline_logo()
-        if logo:
-            content, filename, content_type = logo
-            body["attachments"] = [
-                {
-                    "content": base64.b64encode(content).decode("ascii"),
-                    "filename": filename,
-                    "contentId": _LOGO_CID,
-                    "contentType": content_type,
-                },
-            ]
     try:
         resp = httpx.post(
             "https://api.resend.com/emails",
