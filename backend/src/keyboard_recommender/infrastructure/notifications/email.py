@@ -44,7 +44,6 @@ def _render_email_html(
     notice: str | None = None,
 ) -> str:
     brand_url = _frontend_url(settings)
-    brand_logo_url = _frontend_url(settings, "/brand/logo-mark.png")
     support_url = _frontend_url(settings, "/auth")
     brand_block = f"""
       <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 28px 0;">
@@ -54,7 +53,9 @@ def _render_email_html(
               <tr>
                 <td style="vertical-align:middle;padding:0 12px 0 0;">
                   <a href="{escape(brand_url, quote=True)}" style="text-decoration:none;">
-                    <img src="{escape(brand_logo_url, quote=True)}" alt="KR" width="32" height="32" style="display:block;border:0;outline:none;text-decoration:none;" />
+                    <span style="display:inline-block;width:32px;height:32px;border-radius:9px;background:#6d86e7;color:#ffffff;font-family:'Hanken Grotesk','Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:13px;font-weight:800;line-height:32px;text-align:center;text-decoration:none;">
+                      KR
+                    </span>
                   </a>
                 </td>
                 <td style="vertical-align:middle;">
@@ -80,7 +81,12 @@ def _render_email_html(
           <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 26px 0;">
             <tr>
               <td style="color:#f8fafc;font-family:'Hanken Grotesk','Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:18px;font-weight:700;line-height:1.7;word-break:keep-all;">
-                {escape(label_prefix)}<span style="font-size:44px;font-weight:800;letter-spacing:0.12em;">{escape(highlight_value)}</span>
+                {escape(label_prefix)}
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:4px 0 0;color:#f8fafc;font-family:'Hanken Grotesk','Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:44px;font-weight:800;letter-spacing:0.12em;line-height:1.1;">
+                {escape(highlight_value)}
               </td>
             </tr>
             <tr>
