@@ -45,6 +45,10 @@ function friendlyAuthErrorMessage(mode: "login" | "signup", err: unknown): strin
   return err.message || "요청을 처리하지 못했습니다. 다시 시도해 주세요.";
 }
 
+function isRetryableDisplayNameCheckError(err: unknown): boolean {
+  return err instanceof ApiError && (err.status === 0 || err.status === 502 || err.status === 503 || err.status === 504);
+}
+
 export function AuthPageClient() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -218,7 +222,7 @@ export function AuthPageClient() {
         setDisplayNameCheckMessage("이미 사용중입니다.");
       }
     } catch (err) {
-      if (err instanceof ApiError && err.status === 404) {
+      if (isRetryableDisplayNameCheckError(err) || (err instanceof ApiError && err.status === 404)) {
         setDisplayNameCheckMessage("지금은 중복 확인이 어렵습니다. 잠시 후 다시 시도해 주세요.");
       } else if (err instanceof ApiError && err.status === 422) {
         setDisplayNameCheckMessage("닉네임 형식을 확인해 주세요.");

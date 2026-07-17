@@ -21,6 +21,14 @@ function emitAuthChanged(): void {
   window.dispatchEvent(new Event(AUTH_CHANGED_EVENT));
 }
 
+function isRetryableAuthResponseStatus(status: number): boolean {
+  return status === 502 || status === 503 || status === 504;
+}
+
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 async function postAuth(path: string, body: Record<string, unknown>): Promise<AuthUser> {
   const base = getPublicApiBase();
   if (!base) throw new ApiError(0, "서비스 연결을 확인한 뒤 다시 시도해 주세요.");
@@ -98,12 +106,34 @@ export async function checkDisplayNameAvailability(displayName: string): Promise
   const base = getPublicApiBase();
   if (!base) throw new ApiError(0, "서비스 연결을 확인한 뒤 다시 시도해 주세요.");
   const q = new URLSearchParams({ display_name: displayName });
-  const res = await fetch(`${base}/api/v1/auth/display-name-availability?${q.toString()}`, {
-    headers: { Accept: "application/json" },
-    credentials: "include",
-  });
-  if (!res.ok) throw new ApiError(res.status, await readErrorMessage(res));
-  return (await res.json()) as { display_name: string; available: boolean };
+  let lastError: ApiError | null = null;
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    try {
+      const res = await fetch(`${base}/api/v1/auth/display-name-availability?${q.toString()}`, {
+        headers: { Accept: "application/json" },
+        credentials: "include",
+      });
+      if (!res.ok) {
+        const err = new ApiError(res.status, await readErrorMessage(res));
+        if (attempt === 0 && isRetryableAuthResponseStatus(err.status)) {
+          lastError = err;
+          await sleep(700);
+          continue;
+        }
+        throw err;
+      }
+      return (await res.json()) as { display_name: string; available: boolean };
+    } catch (err) {
+      const apiError = err instanceof ApiError ? err : new ApiError(0, "Network request failed");
+      if (attempt === 0 && (apiError.status === 0 || isRetryableAuthResponseStatus(apiError.status))) {
+        lastError = apiError;
+        await sleep(700);
+        continue;
+      }
+      throw apiError;
+    }
+  }
+  throw lastError ?? new ApiError(0, "Network request failed");
 }
 
 export async function updateDisplayName(displayName: string): Promise<AuthUser> {

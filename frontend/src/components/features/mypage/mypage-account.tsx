@@ -52,6 +52,10 @@ function isPasswordPolicyValid(value: string): boolean {
   return true;
 }
 
+function isRetryableDisplayNameCheckError(err: unknown): boolean {
+  return err instanceof ApiError && (err.status === 0 || err.status === 502 || err.status === 503 || err.status === 504);
+}
+
 function PasswordVisibilityToggle({
   visible,
   onToggle,
@@ -256,6 +260,10 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
                     })
                     .catch((e) => {
                       setDisplayNameAvailable(false);
+                      if (isRetryableDisplayNameCheckError(e)) {
+                        setDisplayNameMessage("지금은 중복 확인이 어렵습니다. 잠시 후 다시 시도해 주세요.");
+                        return;
+                      }
                       setDisplayNameMessage(e instanceof Error ? e.message : "중복 확인에 실패했습니다.");
                     });
                 }}
