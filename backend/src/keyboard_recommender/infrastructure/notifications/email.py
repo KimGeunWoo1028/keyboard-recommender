@@ -49,7 +49,7 @@ def _render_email_html(
       <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 28px 0;">
         <tr>
           <td align="center" style="text-align:center;">
-            <a href="{escape(brand_url, quote=True)}" style="color:#f8fafc;font-family:Georgia,'Times New Roman',serif;font-size:30px;font-weight:700;letter-spacing:0.02em;line-height:1.2;text-decoration:none;white-space:nowrap;">
+            <a href="{escape(brand_url, quote=True)}" style="color:#8fb4ff;font-family:'Hanken Grotesk','Inter',Arial,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:28px;font-weight:800;letter-spacing:-0.02em;line-height:1.2;text-decoration:none;white-space:nowrap;">
               Keyboard Recommender
             </a>
           </td>
