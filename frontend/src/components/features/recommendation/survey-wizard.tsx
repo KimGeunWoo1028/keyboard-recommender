@@ -63,7 +63,7 @@ const ONBOARDING_STYLES: readonly OnboardingStyle[] = [
   {
     id: "crisp_expressive",
     label: "또렷하고 경쾌한 성향",
-    blurb: "고음 어택이 분명하고 단단한 피드백을 원할 때 좋아요.",
+    blurb: "또렷한 고음과 단단한 피드백을 원할 때 좋아요.",
     seedAnswers: { sound_profile: "clacky", switch_feel: "tactile_clear", bottom_out: "firm", volume: "loud" },
   },
   {

@@ -49,11 +49,11 @@ const CASE_SUBTYPES = [
 
 const SWITCH_SUBTYPES = [
   { id: "", label: "전체" },
-  { id: "linear", label: "Linear" },
-  { id: "tactile", label: "Tactile" },
-  { id: "silent", label: "Silent" },
-  { id: "click", label: "Click" },
-  { id: "magnetic", label: "Magnetic" },
+  { id: "linear", label: "매끈한" },
+  { id: "tactile", label: "구분감" },
+  { id: "silent", label: "저소음" },
+  { id: "click", label: "클릭" },
+  { id: "magnetic", label: "마그네틱" },
 ];
 
 const KEYCAP_SUBTYPES = [

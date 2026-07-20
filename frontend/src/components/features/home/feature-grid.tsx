@@ -6,19 +6,19 @@ import type { CatalogFamily } from "@/lib/api/catalog";
 const items: { title: string; description: string; catalogFamily: CatalogFamily; tag: string }[] = [
   {
     title: "스위치",
-    description: "Linear, Tactile, Silent 성향 중에서 사운드 취향과 사용 목적에 맞는 타입을 추천해요.",
+    description: "매끈한·구분감·저소음 타입 중에서 소리 취향과 사용 목적에 맞는 스위치를 추천해요.",
     catalogFamily: "switch",
     tag: "SWITCH",
   },
   {
     title: "플레이트",
-    description: "재질과 강성에 따라 Flex, 사운드 톤, 타건 피드백이 달라져요.",
+    description: "재질과 단단함에 따라 휘는 느낌, 소리, 타건 피드백이 달라져요.",
     catalogFamily: "plate",
     tag: "PLATE",
   },
   {
     title: "폼",
-    description: "케이스/플레이트 폼 구성으로 공진과 감쇠감을 조절해 취향에 맞게 세팅할 수 있어요.",
+    description: "케이스·플레이트 폼으로 울림을 줄이거나 살려, 취향에 맞게 세팅할 수 있어요.",
     catalogFamily: "foam",
     tag: "FOAM",
   },

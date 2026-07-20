@@ -22,9 +22,12 @@ function humanizeAlignmentBullet(line: string): string | null {
 
 const SECOND_BULLET_BY_AXIS: Record<string, string> = {
   "매끈한 타건감": "2순위보다 타이핑 감이 더 안정적이에요",
+  "차분한 소리": "2순위보다 소리 톤이 더 차분해요",
   "차분한 감쇠음": "2순위보다 소리 톤이 더 차분해요",
+  "부드러운 바닥감": "2순위보다 바닥감이 더 부드러워요",
   "푹신한 바닥감": "2순위보다 바닥감이 더 부드러워요",
   "가벼운 타건": "2순위보다 가볍게 쳐도 안정적이에요",
+  "가벼운 입력": "2순위보다 가볍게 쳐도 안정적이에요",
 };
 
 function secondRankingBullet(topAxis: string, secondAxis?: string): string {

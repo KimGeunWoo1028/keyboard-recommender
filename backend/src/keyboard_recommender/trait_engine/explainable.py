@@ -12,22 +12,22 @@ from keyboard_recommender.trait_engine.vectors import weighted_cosine_similarity
 TRAIT_LABELS: dict[str, str] = {
     "deep_sound": "묵직한 저음",
     "high_pitch": "또렷한 고음",
-    "muted": "차분한 감쇠음",
-    "poppy": "통통 튀는 반응감",
-    "marbly": "또각거리는 배음",
+    "muted": "차분한 소리",
+    "poppy": "통통 튀는 느낌",
+    "marbly": "또각거리는 소리",
     "smooth": "매끈한 타건감",
-    "scratchy": "서걱이는 마찰감",
-    "soft_bottom_out": "푹신한 바닥감",
+    "scratchy": "서걱이는 질감",
+    "soft_bottom_out": "부드러운 바닥감",
     "firm_bottom_out": "단단한 바닥감",
     "flexible": "유연한 키감",
     "stiff": "단단한 고정감",
-    "strong_tactile": "구분감 있는 키감",
-    "light_typing_force": "가벼운 입력 압력",
+    "strong_tactile": "뚜렷한 구분감",
+    "light_typing_force": "가벼운 입력",
 }
 
 
 def trait_label(axis_id: str) -> str:
-    return TRAIT_LABELS.get(axis_id, axis_id.replace("_", " "))
+    return TRAIT_LABELS.get(axis_id, "기타 성향")
 
 
 def confidence_from_weighted_cosine(raw_cosine: float) -> float:

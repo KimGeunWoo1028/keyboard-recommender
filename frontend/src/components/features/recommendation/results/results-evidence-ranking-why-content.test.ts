@@ -5,7 +5,7 @@ import { RANKING_WHY_FIXTURES } from "./results-ranking-thresholds";
 
 const STABLE_SWITCH_WHY_TRAITS = [
   "중간 무게의 스프링(44g) 설정입니다.",
-  "차분한 감쇠음 선호(+8.0)와 후보 특성(+10.0)이 같은 방향이라 정합 기여가 큽니다(+84.0).",
+  "차분한 소리 선호(+8.0)와 후보 특성(+10.0)이 같은 방향이라 정합 기여가 큽니다(+84.0).",
   "매끈한 타건감 선호(+5.0)와 후보 특성(+9.2)이 같은 방향이라 정합 기여가 큽니다(+55.2).",
 ];
 
@@ -46,7 +46,7 @@ describe("formatEvidenceRankingWhy", () => {
     expect(model.mode).toBe("concrete");
     expect(model.bullets.length).toBeGreaterThan(0);
     expect(model.bullets.length).toBeLessThanOrEqual(2);
-    expect(model.bullets[0]).toContain("차분한 감쇠음");
+    expect(model.bullets[0]).toContain("차분한 소리");
   });
 
   it("hides when runner-up missing", () => {

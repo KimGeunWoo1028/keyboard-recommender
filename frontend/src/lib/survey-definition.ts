@@ -31,20 +31,20 @@ export const SURVEY_STEPS: readonly SurveyStepDefinition[] = [
     options: [
       {
         id: "thocky",
-        label: "묵직한 저음 (Thocky)",
-        description: "저음 중심의 둥근 타건음으로, 날카로운 소리는 상대적으로 적은 편이에요.",
+        label: "묵직한 저음",
+        description: "낮은 소리가 둥글고 묵직하게 들리고, 날카로운 느낌은 적은 편이에요.",
         traitDelta: { soundThocky: 3, soundMuted: 1, soundBright: -1 },
       },
       {
         id: "clacky",
-        label: "또렷한 고음 (Clacky)",
-        description: "타건 어택이 선명하고 고음이 잘 들리는 성향입니다.",
+        label: "또렷한 고음",
+        description: "키를 눌렀을 때 소리가 또렷하고 가볍게 잘 들리는 편이에요.",
         traitDelta: { soundClacky: 3, soundBright: 2, soundMuted: -1 },
       },
       {
         id: "muted",
-        label: "차분한 감쇠음 (Muted)",
-        description: "링/핑이 줄고 차분한 톤입니다. 폼 세팅 전에도 상대적으로 조용한 편이에요.",
+        label: "차분한 소리",
+        description: "울림이 줄고 전체적으로 차분합니다. 기본적으로도 상대적으로 조용한 편이에요.",
         // Phase E: stronger muted signal for PBT / dye-sub keycap ranking alignment
         traitDelta: { soundMuted: 4, volumeQuiet: 2, soundBright: -2 },
       },
@@ -56,8 +56,8 @@ export const SURVEY_STEPS: readonly SurveyStepDefinition[] = [
       },
       {
         id: "bright",
-        label: "밝고 생동감 있는 고음 (Bright)",
-        description: "고음 디테일이 살아 있는 성향으로, 기본 세팅에서는 조금 더 크게 느껴질 수 있어요.",
+        label: "밝고 생동감 있는 고음",
+        description: "고음이 살아 있어 생동감 있게 들리고, 기본 세팅에서는 조금 더 크게 느껴질 수 있어요.",
         // Phase E: stronger bright/clacky for ABS doubleshot keycap ranking alignment
         traitDelta: { soundBright: 4, soundClacky: 2, soundMuted: -2 },
       },
@@ -90,25 +90,25 @@ export const SURVEY_STEPS: readonly SurveyStepDefinition[] = [
   },
   {
     id: "switch_feel",
-    title: "구분감 있는 키감 vs 매끈한 키감\n(Tactile vs Linear)",
+    title: "구분감 있는 키감 vs 매끈한 키감",
     description: "누를 때 걸리는 느낌이 있길 원하나요, 아니면 처음부터 끝까지 부드럽게 내려가길 원하나요?",
     options: [
       {
         id: "tactile_clear",
-        label: "구분감이 뚜렷함 (Strong tactile)",
-        description: "바닥감 전에 분명한 구분감(Tactile event)이 느껴졌으면 좋겠어요.",
+        label: "구분감이 뚜렷함",
+        description: "바닥까지 가기 전에, 중간에 턱이 분명하게 느껴졌으면 좋겠어요.",
         traitDelta: { tactileLean: 3, linearLean: -1 },
       },
       {
         id: "tactile_light",
-        label: "구분감이 은은함 (Light tactile)",
-        description: "가벼운 구분감은 좋지만 너무 강한 Tactile 느낌은 원하지 않아요.",
+        label: "구분감이 은은함",
+        description: "가벼운 걸림은 좋지만, 너무 강하게 걸리는 느낌은 원하지 않아요.",
         traitDelta: { tactileLean: 2, linearLean: 0 },
       },
       {
         id: "linear",
-        label: "매끈한 입력감 (Linear)",
-        description: "끝까지 매끈하게 내려가는 입력감(Linear). 게임/연속 입력에 잘 맞아요.",
+        label: "매끈한 입력감",
+        description: "처음부터 끝까지 매끈하게 내려가는 느낌입니다. 게임·연속 입력에 잘 맞아요.",
         traitDelta: { linearLean: 3, tactileLean: -1 },
       },
     ],

@@ -510,7 +510,7 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
 
           <CategorySection
             title="플레이트 추천"
-            description="플레이트는 강성, 유연성(Flex), 배음 성향에 영향을 줍니다. 사용자 성향에 맞는 상위 후보를 보여드려요."
+            description="플레이트는 보드의 단단함·휘는 느낌·소리 성향에 영향을 줍니다. 취향에 맞는 상위 후보를 보여드려요."
             categoryLabel="플레이트"
             rows={plates}
             userVector={userVector}

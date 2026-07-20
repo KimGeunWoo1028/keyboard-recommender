@@ -6,7 +6,7 @@ import { expect } from "@playwright/test";
  * ``e2e/fixtures/deterministic-survey.json`` / backend regression fixtures.
  */
 const DETERMINISTIC_STEP_OPTION_PATTERNS = [
-  /차분한 감쇠음/,
+  /차분한 소리/,
   /가볍게 누름/,
   /매끈한 입력감/,
   /부드러운.*쿠션/,

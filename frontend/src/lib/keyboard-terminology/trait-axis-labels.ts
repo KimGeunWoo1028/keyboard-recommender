@@ -1,6 +1,7 @@
 /**
  * UI-facing trait axis labels and HelpHint copy for /results Evidence.
  * Canonical ids align with catalog + trait_engine axes used in API responses.
+ * User-facing copy is Korean-only (no English parentheticals / jargon by default).
  */
 
 export type TraitAxisLabel = {
@@ -42,106 +43,106 @@ export type CanonicalTraitAxisId = (typeof CANONICAL_TRAIT_AXIS_IDS)[number];
 
 const TRAIT_AXIS_LABELS: Record<CanonicalTraitAxisId, TraitAxisLabel> = {
   deep_sound: {
-    label: "묵직한 저음 (Thocky)",
-    hint: "낮은 주파수·저음이 두툼하게 느껴지는 사운드 성향입니다.",
+    label: "묵직한 저음",
+    hint: "낮은 소리가 두툼하고 묵직하게 들립니다.",
   },
   high_pitch: {
-    label: "또렷한 고음 (Clacky)",
-    hint: "어택이 또렷하고 고음이 살아 있는 타건 성향입니다.",
+    label: "또렷한 고음",
+    hint: "소리가 가볍고 또렷하게 잘 들립니다.",
   },
   muted: {
-    label: "차분한 감쇠음 (Muted)",
-    hint: "고음이 눌리고 전체적으로 차분하게 들리는 성향입니다.",
+    label: "차분한 소리",
+    hint: "날카로운 느낌이 줄고 전체적으로 차분하게 들립니다.",
   },
   poppy: {
-    label: "통통 튀는 어택감 (Poppy)",
-    hint: "바닥 타건 시 에너지가 통통 튀는 느낌이 강한 성향입니다.",
+    label: "통통 튀는 느낌",
+    hint: "키를 눌렀을 때 에너지가 통통 되돌아오는 느낌이 납니다.",
   },
   marbly: {
-    label: "또각거리는 배음 (Marbly)",
-    hint: "돌·유리 구슬처럼 단단하고 또각거리는 배음이 느껴지는 성향입니다.",
+    label: "또각거리는 소리",
+    hint: "단단하고 또각거리는 소리가 또렷하게 납니다.",
   },
   smooth: {
-    label: "매끈한 타건감 (Smooth)",
-    hint: "구분감 없이 매끈하게 눌리는 리니어에 가까운 키감입니다.",
+    label: "매끈한 타건감",
+    hint: "중간에 걸리는 느낌 없이 처음부터 끝까지 매끈하게 눌립니다.",
   },
   scratchy: {
-    label: "서걱이는 질감 (Scratchy)",
-    hint: "스크래치·마찰감이 느껴지는 거친 타건 질감입니다.",
+    label: "서걱이는 질감",
+    hint: "키를 누를 때 살짝 거친 마찰감이 느껴집니다.",
   },
   soft_bottom_out: {
-    label: "부드러운 바닥감 (Soft bottom-out)",
-    hint: "키가 바닥에 닿을 때 쿠션감이 있고 부드럽게 멈추는 느낌입니다.",
+    label: "부드러운 바닥감",
+    hint: "키가 바닥에 닿을 때 쿠션처럼 부드럽게 멈춥니다.",
   },
   firm_bottom_out: {
-    label: "단단한 바닥감 (Firm bottom-out)",
-    hint: "바닥에서 딱 멈추는 단단하고 짧은 피드백입니다.",
+    label: "단단한 바닥감",
+    hint: "키가 바닥에서 짧고 단단하게 딱 멈춥니다.",
   },
   flexible: {
-    label: "유연한 키감 (Flex)",
-    hint: "플레이트·스택이 유연하게 휘는 느낌이 나는 성향입니다.",
+    label: "유연한 키감",
+    hint: "누르는 힘이 들어가며 보드가 살짝 휘는 느낌이 납니다.",
   },
   stiff: {
-    label: "단단한 고정감 (Stiff)",
-    hint: "휘지 않고 단단하게 받쳐 주는 느낌입니다.",
+    label: "단단한 고정감",
+    hint: "거의 휘지 않고 단단하게 받쳐 주는 느낌입니다.",
   },
   stiffness: {
-    label: "강성 (Stiffness)",
-    hint: "플레이트·케이스 스택이 얼마나 단단한지에 대한 상대 지표입니다.",
+    label: "보드 단단함",
+    hint: "플레이트·케이스가 얼마나 단단하게 받쳐 주는지를 나타냅니다.",
   },
   strong_tactile: {
-    label: "뚜렷한 구분감 (Strong tactile)",
-    hint: "탁타일 범프가 뚜렷하게 느껴지는 키감입니다.",
+    label: "뚜렷한 구분감",
+    hint: "키를 누르는 중간에 턱이 분명하게 느껴집니다.",
   },
   tactile_strength: {
-    label: "구분감 강도 (Tactile strength)",
-    hint: "탁타일 이벤트가 얼마나 강하게 느껴지는지 나타냅니다.",
+    label: "구분감 강도",
+    hint: "중간에 걸리는 느낌이 얼마나 강한지를 나타냅니다.",
   },
   light_typing_force: {
-    label: "가벼운 입력 압력 (Light force)",
-    hint: "가볍게 눌러도 안정적으로 입력되는 압력 성향입니다.",
+    label: "가벼운 입력",
+    hint: "가볍게 눌러도 편하게 입력이 됩니다.",
   },
   loudness: {
-    label: "체감 볼륨 (Loudness)",
-    hint: "일반적인 빌드에서 얼마나 크게 들리는지에 대한 상대 지표입니다.",
+    label: "체감 볼륨",
+    hint: "일반적인 사용에서 얼마나 크게 들리는지를 나타냅니다.",
   },
   bounce: {
-    label: "리바운드감 (Bounce)",
+    label: "되돌아오는 느낌",
     hint: "키가 올라올 때 에너지가 살아 있는 정도입니다.",
   },
   clacky: {
-    label: "또렷한 고음 (Clacky)",
-    hint: "6축 요약 지표 — 고음·어택이 또렷한 성향입니다.",
+    label: "또렷한 고음",
+    hint: "고음이 또렷하고 경쾌하게 들리는 성향입니다.",
   },
   soft: {
-    label: "부드러운 바닥감 (Soft)",
-    hint: "6축 요약 지표 — 부드럽고 쿠션 있는 바닥감입니다.",
+    label: "부드러운 바닥감",
+    hint: "부드럽고 쿠션 있는 바닥감입니다.",
   },
   firm: {
-    label: "단단한 바닥감 (Firm)",
-    hint: "6축 요약 지표 — 단단하고 짧게 멈추는 바닥감입니다.",
+    label: "단단한 바닥감",
+    hint: "단단하고 짧게 멈추는 바닥감입니다.",
   },
   warm: {
-    label: "따뜻한 저음 (Warm)",
-    hint: "레거시 6축 — 저음이 풍부하고 따뜻하게 들리는 성향입니다.",
+    label: "따뜻한 저음",
+    hint: "저음이 풍부하고 따뜻하게 들리는 성향입니다.",
   },
   bright: {
-    label: "밝은 고음 (Bright)",
-    hint: "레거시 6축 — 고음이 밝고 생동감 있게 들리는 성향입니다.",
+    label: "밝은 고음",
+    hint: "고음이 밝고 생동감 있게 들리는 성향입니다.",
   },
   tactile: {
-    label: "구분감 (Tactile)",
-    hint: "레거시 6축 — 탁타일 범프가 느껴지는 키감입니다.",
+    label: "구분감",
+    hint: "키를 누르는 중간에 걸리는 느낌이 있는 키감입니다.",
   },
   quiet: {
-    label: "조용한 타건 (Quiet)",
-    hint: "레거시 6축 — 상대적으로 조용한 타건 성향입니다.",
+    label: "조용한 타건",
+    hint: "상대적으로 조용하게 들리는 타건 성향입니다.",
   },
 };
 
 export function traitAxisDisplayLabel(axis: string): string {
   const key = axis as CanonicalTraitAxisId;
-  return TRAIT_AXIS_LABELS[key]?.label ?? axis.replaceAll("_", " ");
+  return TRAIT_AXIS_LABELS[key]?.label ?? "기타 성향";
 }
 
 export function traitAxisHelpHint(axis: string): string | undefined {
@@ -155,14 +156,14 @@ export function isCanonicalTraitAxis(axis: string): axis is CanonicalTraitAxisId
 
 /** Survey accumulator keys → Korean labels for Evidence badges */
 const SURVEY_TRAIT_LABELS: Record<string, string> = {
-  soundMuted: "차분한 감쇠음",
+  soundMuted: "차분한 소리",
   soundBright: "밝은 사운드",
   soundThocky: "묵직한 저음",
   soundClacky: "또렷한 고음",
   volumeQuiet: "조용한 볼륨",
   volumeLoud: "큰 볼륨",
-  linearLean: "리니어 성향",
-  tactileLean: "탁타일 성향",
+  linearLean: "매끈한 키감",
+  tactileLean: "구분감 있는 키감",
   softBottom: "부드러운 바닥감",
   firmBottom: "단단한 바닥감",
   lightPress: "가벼운 입력",
@@ -170,7 +171,7 @@ const SURVEY_TRAIT_LABELS: Record<string, string> = {
 };
 
 export function surveyTraitDisplayLabel(key: string): string {
-  return SURVEY_TRAIT_LABELS[key] ?? key;
+  return SURVEY_TRAIT_LABELS[key] ?? "기타 성향";
 }
 
 export const EVIDENCE_STORY_STEPS = [

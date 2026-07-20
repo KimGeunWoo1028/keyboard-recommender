@@ -7,7 +7,7 @@ import { ResultsEvidencePickCard } from "./results-evidence-pick-card";
 import { RANKING_WHY_FIXTURES } from "./results-ranking-thresholds";
 
 const ALIGNMENT_TRAITS = [
-  "차분한 감쇠음 선호(+8.0)와 후보 특성(+10.0)이 같은 방향이라 정합 기여가 큽니다(+84.0).",
+  "차분한 소리 선호(+8.0)와 후보 특성(+10.0)이 같은 방향이라 정합 기여가 큽니다(+84.0).",
   "매끈한 타건감 선호(+5.0)와 후보 특성(+9.2)이 같은 방향이라 정합 기여가 큽니다(+55.2).",
 ];
 
@@ -112,7 +112,7 @@ describe("ResultsEvidencePickCard", () => {
           whyTraits: [
             "중간 무게의 스프링(44g) 설정입니다.",
             "팩토리 윤활이 적용되어 마찰감을 줄인 세팅입니다.",
-            "차분한 감쇠음 선호(+8.0)와 후보 특성(+10.0)이 같은 방향이라 정합 기여가 큽니다(+84.0).",
+            "차분한 소리 선호(+8.0)와 후보 특성(+10.0)이 같은 방향이라 정합 기여가 큽니다(+84.0).",
           ],
         }}
         index={0}
@@ -141,7 +141,7 @@ describe("ResultsEvidencePickCard", () => {
           explanation: "가중 기여 축 요약: muted (+84.00).",
           summary: "Switch summary",
           whyTraits: [
-            "차분한 감쇠음 선호(+8.0)와 후보 특성(+10.0)이 같은 방향이라 정합 기여가 큽니다(+84.0).",
+            "차분한 소리 선호(+8.0)와 후보 특성(+10.0)이 같은 방향이라 정합 기여가 큽니다(+84.0).",
           ],
         }}
         index={0}
@@ -200,7 +200,7 @@ describe("ResultsEvidencePickCard", () => {
 
     expect(screen.getByTestId("e2e-pick-ranking-why")).toBeInTheDocument();
     expect(screen.getByText("1순위로 선택한 이유")).toBeInTheDocument();
-    expect(screen.getByText(/선호하는 차분한 감쇠음/)).toBeInTheDocument();
+    expect(screen.getByText(/선호하는 차분한 소리/)).toBeInTheDocument();
   });
 
   it("hides ranking-why UI on fallback gap (trust layer carries uncertainty)", () => {

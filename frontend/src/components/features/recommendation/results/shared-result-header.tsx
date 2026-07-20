@@ -24,11 +24,11 @@ export function SharedResultHeader({
   const { answers } = submission;
   const { head: taglineHead, tail: taglineTail } = splitTaglineBeforeParen(build.tagline);
   const soundLabelMap: Record<SurveySubmission["answers"]["sound_profile"], string> = {
-    thocky: "묵직한 저음 (Thocky)",
-    clacky: "또렷한 고음 (Clacky)",
-    muted: "차분한 감쇠음 (Muted)",
+    thocky: "묵직한 저음",
+    clacky: "또렷한 고음",
+    muted: "차분한 소리",
     balanced: "균형형 사운드",
-    bright: "밝고 생동감 있는 고음 (Bright)",
+    bright: "밝고 생동감 있는 고음",
   };
   const pressureLabelMap: Record<SurveySubmission["answers"]["typing_pressure"], string> = {
     light: "가벼운 입력",
@@ -36,9 +36,9 @@ export function SharedResultHeader({
     heavy: "묵직한 입력",
   };
   const switchFeelLabelMap: Record<SurveySubmission["answers"]["switch_feel"], string> = {
-    linear: "매끈한 키감 (Linear)",
-    tactile_light: "은은한 구분감 (Light tactile)",
-    tactile_clear: "뚜렷한 구분감 (Strong tactile)",
+    linear: "매끈한 키감",
+    tactile_light: "은은한 구분감",
+    tactile_clear: "뚜렷한 구분감",
   };
   const bottomOutLabelMap: Record<SurveySubmission["answers"]["bottom_out"], string> = {
     soft: "부드러운 바닥감",

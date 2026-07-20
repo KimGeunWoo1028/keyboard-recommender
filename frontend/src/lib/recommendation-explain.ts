@@ -8,12 +8,12 @@ import {
 import { normalizeL2 } from "@/recommendation-engine/vector-math";
 
 const AXIS_LABELS: Record<EngineTraitId, string> = {
-  deep_sound: "묵직한 저음 성향",
-  clacky: "경쾌하고 또렷한 고음 성향",
-  soft: "부드러운 바닥 타건감",
-  firm: "단단한 바닥 타건감 (Firm)",
-  smooth: "매끈한 키 이동 (Linear)",
-  tactile_strength: "구분감 강도 (Tactile)",
+  deep_sound: "묵직한 저음",
+  clacky: "또렷한 고음",
+  soft: "부드러운 바닥감",
+  firm: "단단한 바닥감",
+  smooth: "매끈한 타건감",
+  tactile_strength: "구분감",
 };
 
 /**
@@ -39,10 +39,10 @@ export function explainMatch(userPreference: EngineTraitVector, meta: TraitMetad
   const labels = contributions.map(({ k }) => AXIS_LABELS[k]);
   const [first, second, third] = labels;
   if (third) {
-    return `${first}, ${second}, ${third} 축에서 사용자 성향과 높은 일치도를 보여 추천 점수가 크게 올라갔습니다.`;
+    return `${first}, ${second}, ${third} 느낌이 취향과 잘 맞아 추천되었습니다.`;
   }
   if (second) {
-    return `${first}, ${second} 축이 사용자 타건/사운드 성향과 특히 잘 맞습니다.`;
+    return `${first}, ${second} 느낌이 취향과 특히 잘 맞습니다.`;
   }
-  return `${first} 축이 사용자 타건/사운드 성향과 특히 잘 맞습니다.`;
+  return `${first} 느낌이 취향과 특히 잘 맞습니다.`;
 }

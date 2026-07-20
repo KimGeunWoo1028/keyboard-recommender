@@ -3,7 +3,7 @@ import type { SurveyAnswers } from "@/types/survey";
 const SOUND_PROFILE_LABEL: Record<SurveyAnswers["sound_profile"], string> = {
   thocky: "묵직한 저음",
   clacky: "또렷한 고음",
-  muted: "차분한 감쇠음",
+  muted: "차분한 소리",
   balanced: "균형형 사운드",
   bright: "밝은 고음",
 };
@@ -21,9 +21,9 @@ const PRESSURE_LABEL: Record<SurveyAnswers["typing_pressure"], string> = {
 };
 
 const SWITCH_FEEL_LABEL: Record<SurveyAnswers["switch_feel"], string> = {
-  linear: "Linear",
-  tactile_light: "Light tactile",
-  tactile_clear: "Strong tactile",
+  linear: "매끈한 키감",
+  tactile_light: "은은한 구분감",
+  tactile_clear: "뚜렷한 구분감",
 };
 
 const BOTTOM_OUT_LABEL: Record<SurveyAnswers["bottom_out"], string> = {

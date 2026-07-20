@@ -27,7 +27,7 @@ describe("survey-step-navigation", () => {
   });
 
   it("selectedOptionLabel resolves option copy", () => {
-    expect(selectedOptionLabel("sound_profile", "muted")).toMatch(/차분한 감쇠음/);
+    expect(selectedOptionLabel("sound_profile", "muted")).toMatch(/차분한 소리/);
     expect(selectedOptionLabel("sound_profile", undefined)).toBeNull();
   });
 });
