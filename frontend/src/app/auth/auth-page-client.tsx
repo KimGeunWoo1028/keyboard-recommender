@@ -319,6 +319,7 @@ export function AuthPageClient() {
               variant={mode === "login" ? "primary" : "outline"}
               onClick={() => setMode("login")}
               className="flex-1 rounded-full"
+              disabled={busy || sendingEmailCode || verifyingEmailCode || checkingDisplayName}
             >
               로그인
             </Button>
@@ -337,11 +338,12 @@ export function AuthPageClient() {
                 setEmailVerificationMessage(null);
               }}
               className="flex-1 rounded-full"
+              disabled={busy || sendingEmailCode || verifyingEmailCode || checkingDisplayName}
             >
               회원가입
             </Button>
           </div>
-          <form className="space-y-3" onSubmit={onSubmit}>
+          <form className="space-y-3" onSubmit={onSubmit} aria-busy={busy || undefined}>
             {mode === "signup" ? (
               <div className="space-y-1">
                 <Label htmlFor="displayName" className="ca-label">
@@ -358,15 +360,17 @@ export function AuthPageClient() {
                       setDisplayNameVerified(false);
                     }}
                     required={mode === "signup"}
+                    disabled={busy || checkingDisplayName}
                   />
                   <Button
                     type="button"
                     variant="outline"
                     className="shrink-0 rounded-full"
                     onClick={() => void onCheckDisplayName()}
-                    disabled={checkingDisplayName}
+                    loading={checkingDisplayName}
+                    disabled={busy}
                   >
-                    {checkingDisplayName ? "확인 중..." : "중복 확인"}
+                    {checkingDisplayName ? "확인 중…" : "중복 확인"}
                   </Button>
                 </div>
                 {displayNameCheckMessage ? (
@@ -397,7 +401,7 @@ export function AuthPageClient() {
                   }
                 }}
                 required
-                disabled={mode === "signup" && !canFillSignupEmail}
+                disabled={busy || (mode === "signup" && !canFillSignupEmail)}
               />
             </div>
             {mode === "signup" ? (
@@ -408,9 +412,10 @@ export function AuthPageClient() {
                     variant="outline"
                     className="w-full shrink-0 rounded-full sm:w-auto"
                     onClick={() => void onSendEmailCode()}
-                    disabled={!canFillSignupEmail || sendingEmailCode}
+                    loading={sendingEmailCode}
+                    disabled={!canFillSignupEmail || busy || verifyingEmailCode}
                   >
-                    {sendingEmailCode ? "발송 중..." : "인증번호 발송"}
+                    {sendingEmailCode ? "발송 중…" : "인증번호 발송"}
                   </Button>
                   <div className="flex min-w-0 flex-col gap-2 sm:flex-1 sm:flex-row sm:items-center">
                     <Input
@@ -421,16 +426,17 @@ export function AuthPageClient() {
                       placeholder="인증번호 6자리"
                       value={emailCode}
                       onChange={(e) => setEmailCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
-                      disabled={!emailCodeSent || emailVerified}
+                      disabled={busy || !emailCodeSent || emailVerified || verifyingEmailCode}
                     />
                     <Button
                       type="button"
                       variant="outline"
                       className="w-full shrink-0 rounded-full sm:w-auto"
                       onClick={() => void onVerifyEmailCode()}
-                      disabled={!emailCodeSent || emailVerified || verifyingEmailCode}
+                      loading={verifyingEmailCode}
+                      disabled={!emailCodeSent || emailVerified || busy || sendingEmailCode}
                     >
-                      {verifyingEmailCode ? "확인 중..." : emailVerified ? "인증 완료" : "인증 확인"}
+                      {verifyingEmailCode ? "확인 중…" : emailVerified ? "인증 완료" : "인증 확인"}
                     </Button>
                   </div>
                 </div>
@@ -456,7 +462,7 @@ export function AuthPageClient() {
                   required
                   minLength={8}
                   maxLength={20}
-                  disabled={mode === "signup" && !canFillSignupCredentials}
+                  disabled={busy || (mode === "signup" && !canFillSignupCredentials)}
                   className="ca-input pr-10"
                 />
                 <Button
@@ -466,6 +472,7 @@ export function AuthPageClient() {
                   className="absolute right-1 top-1/2 h-8 w-8 -translate-y-1/2 text-ca-on-surface-variant hover:text-ca-on-surface"
                   onClick={() => setShowPassword((v) => !v)}
                   aria-label={showPassword ? "비밀번호 숨기기" : "비밀번호 보기"}
+                  disabled={busy}
                 >
                   {showPassword ? (
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4">
@@ -513,7 +520,7 @@ export function AuthPageClient() {
                     required
                     minLength={8}
                     maxLength={20}
-                    disabled={mode === "signup" && !canFillSignupCredentials}
+                    disabled={busy || (mode === "signup" && !canFillSignupCredentials)}
                     className="ca-input pr-10"
                   />
                   <Button
@@ -523,6 +530,7 @@ export function AuthPageClient() {
                     className="absolute right-1 top-1/2 h-8 w-8 -translate-y-1/2 text-ca-on-surface-variant hover:text-ca-on-surface"
                     onClick={() => setShowConfirmPassword((v) => !v)}
                     aria-label={showConfirmPassword ? "비밀번호 확인 숨기기" : "비밀번호 확인 보기"}
+                    disabled={busy}
                   >
                     {showConfirmPassword ? (
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4">
@@ -554,6 +562,7 @@ export function AuthPageClient() {
                     type="checkbox"
                     checked={rememberEmail}
                     onChange={(e) => setRememberEmail(e.target.checked)}
+                    disabled={busy}
                     className="h-4 w-4 rounded border-ca-outline-variant bg-ca-surface-container"
                   />
                   이메일 기억하기
@@ -561,6 +570,8 @@ export function AuthPageClient() {
                 <Link
                   href="/auth/forgot-password"
                   className="font-label text-ca-label-sm font-medium text-ca-primary underline-offset-2 hover:underline"
+                  aria-disabled={busy || undefined}
+                  tabIndex={busy ? -1 : undefined}
                 >
                   비밀번호 찾기
                 </Link>
@@ -568,8 +579,14 @@ export function AuthPageClient() {
             ) : null}
             {error ? <p className="text-xs text-destructive">{error}</p> : null}
             {info ? <p className="text-xs text-ca-viz-emerald">{info}</p> : null}
-            <Button type="submit" className="w-full rounded-full" disabled={busy || !canProceedSignup}>
-              {busy ? "처리 중..." : mode === "login" ? "로그인" : "계정 만들기"}
+            <Button type="submit" className="w-full rounded-full" loading={busy} disabled={!canProceedSignup}>
+              {busy
+                ? mode === "login"
+                  ? "로그인 중…"
+                  : "계정 만드는 중…"
+                : mode === "login"
+                  ? "로그인"
+                  : "계정 만들기"}
             </Button>
           </form>
         </CardContent>

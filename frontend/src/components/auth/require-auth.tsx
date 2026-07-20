@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { type ReactNode, useCallback, useEffect, useState } from "react";
 
 import { Button, buttonClassName } from "@/components/ui/button";
+import { Spinner } from "@/components/ui/spinner";
 import { ApiError, getPublicApiBase } from "@/lib/api/client";
 import { fetchCurrentUser, subscribeAuthChanged } from "@/lib/api/auth";
 
@@ -81,7 +82,12 @@ export function RequireAuth({ children }: Props) {
   }
 
   return (
-    <div className="flex min-h-[40vh] flex-col items-center justify-center gap-2 text-center">
+    <div
+      className="flex min-h-[40vh] flex-col items-center justify-center gap-3 text-center"
+      aria-busy="true"
+      aria-live="polite"
+    >
+      <Spinner className="text-2xl text-ca-primary" label="로그인 정보 확인 중" />
       <p className="text-sm text-muted-foreground">로그인 정보를 확인하는 중입니다…</p>
     </div>
   );

@@ -7,6 +7,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 import { fetchCurrentUser, logout, subscribeAuthChanged, type AuthUser } from "@/lib/api/auth";
 import { getPublicApiBase } from "@/lib/api/client";
 import { resolveAvatarSrc } from "@/lib/avatar";
+import { Spinner } from "@/components/ui/spinner";
 import { cn } from "@/lib/utils";
 
 const AUTH_CHECK_TIMEOUT_MS = 8_000;
@@ -113,6 +114,19 @@ export function AuthSessionAction() {
   const router = useRouter();
   const pathname = usePathname();
   const { user, authChecked, setUser } = useAuthHeader();
+  const [loggingOut, setLoggingOut] = useState(false);
+
+  if (!authChecked) {
+    return (
+      <span
+        className="inline-flex h-9 min-w-[4.75rem] items-center justify-center rounded-full bg-ca-surface-container/70 px-3"
+        aria-busy="true"
+        aria-live="polite"
+      >
+        <Spinner className="text-sm text-ca-on-surface-variant" label="로그인 상태 확인 중" />
+      </span>
+    );
+  }
 
   if (!user) {
     const nextPath = pathname && pathname !== "/auth" ? pathname : "/results";
@@ -123,9 +137,7 @@ export function AuthSessionAction() {
           "shrink-0 whitespace-nowrap rounded-full bg-ca-primary-container px-3 py-2 font-headline text-xs font-bold text-ca-on-primary-container sm:px-5 sm:text-sm",
           "transition-transform hover:scale-[0.97] active:scale-95",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-primary",
-          !authChecked && "opacity-80",
         )}
-        aria-busy={!authChecked}
       >
         로그인
       </Link>
@@ -136,19 +148,26 @@ export function AuthSessionAction() {
     <button
       type="button"
       className={cn(
-        "shrink-0 whitespace-nowrap rounded-full border border-ca-outline-variant px-2.5 py-1.5 font-headline text-[11px] font-semibold sm:px-3.5 sm:text-xs",
+        "inline-flex shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-ca-outline-variant px-2.5 py-1.5 font-headline text-[11px] font-semibold sm:px-3.5 sm:text-xs",
         "text-ca-on-surface-variant transition-colors hover:border-ca-primary/50 hover:text-ca-on-surface",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-primary",
+        "disabled:pointer-events-none disabled:opacity-50",
       )}
+      disabled={loggingOut}
+      aria-busy={loggingOut || undefined}
       onClick={() => {
-        void logout().finally(() => {
-          setUser(null);
-          router.push("/auth?force=1");
-          router.refresh();
-        });
+        setLoggingOut(true);
+        void logout()
+          .finally(() => {
+            setUser(null);
+            setLoggingOut(false);
+            router.push("/auth?force=1");
+            router.refresh();
+          });
       }}
     >
-      로그아웃
+      {loggingOut ? <Spinner className="text-[0.85rem]" /> : null}
+      {loggingOut ? "로그아웃 중…" : "로그아웃"}
     </button>
   );
 }

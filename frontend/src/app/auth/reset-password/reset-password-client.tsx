@@ -105,6 +105,7 @@ export function ResetPasswordClient() {
                     required
                     minLength={8}
                     maxLength={20}
+                    disabled={busy}
                     className="ca-input pr-10"
                   />
                   <Button
@@ -114,6 +115,7 @@ export function ResetPasswordClient() {
                     className="absolute right-1 top-1/2 h-8 w-8 -translate-y-1/2 text-ca-on-surface-variant hover:text-ca-on-surface"
                     onClick={() => setShowPassword((v) => !v)}
                     aria-label={showPassword ? "비밀번호 숨기기" : "비밀번호 보기"}
+                    disabled={busy}
                   >
                     {showPassword ? (
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4">
@@ -144,6 +146,7 @@ export function ResetPasswordClient() {
                     required
                     minLength={8}
                     maxLength={20}
+                    disabled={busy}
                     className="ca-input pr-10"
                   />
                   <Button
@@ -153,6 +156,7 @@ export function ResetPasswordClient() {
                     className="absolute right-1 top-1/2 h-8 w-8 -translate-y-1/2 text-ca-on-surface-variant hover:text-ca-on-surface"
                     onClick={() => setShowConfirmPassword((v) => !v)}
                     aria-label={showConfirmPassword ? "비밀번호 확인 숨기기" : "비밀번호 확인 보기"}
+                    disabled={busy}
                   >
                     {showConfirmPassword ? (
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4">
@@ -181,8 +185,8 @@ export function ResetPasswordClient() {
                 {passwordMatches ? "비밀번호가 일치합니다." : "비밀번호가 일치하지 않습니다."}
               </p>
               {error ? <p className="text-xs text-destructive">{error}</p> : null}
-              <Button type="submit" className="w-full rounded-full" disabled={busy}>
-                {busy ? "변경 중..." : "비밀번호 변경"}
+              <Button type="submit" className="w-full rounded-full" loading={busy}>
+                {busy ? "변경 중…" : "비밀번호 변경"}
               </Button>
             </form>
           )}
