@@ -349,10 +349,10 @@ export function AuthPageClient() {
                 <Label htmlFor="displayName" className="ca-label">
                   닉네임
                 </Label>
-                <div className="flex gap-2">
+                <div className="flex min-w-0 gap-2">
                   <Input
                     id="displayName"
-                    className="ca-input"
+                    className="ca-input min-w-0 flex-1"
                     value={displayName}
                     onChange={(e) => {
                       setDisplayName(e.target.value);
@@ -365,12 +365,12 @@ export function AuthPageClient() {
                   <Button
                     type="button"
                     variant="outline"
-                    className="shrink-0 rounded-full"
+                    className="min-w-[5.5rem] shrink-0 rounded-full"
                     onClick={() => void onCheckDisplayName()}
                     loading={checkingDisplayName}
                     disabled={busy}
                   >
-                    {checkingDisplayName ? "확인 중…" : "중복 확인"}
+                    중복 확인
                   </Button>
                 </div>
                 {displayNameCheckMessage ? (
@@ -406,21 +406,21 @@ export function AuthPageClient() {
             </div>
             {mode === "signup" ? (
               <div className="space-y-1">
-                <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+                <div className="flex flex-col gap-2">
                   <Button
                     type="button"
                     variant="outline"
-                    className="w-full shrink-0 rounded-full sm:w-auto"
+                    className="w-full rounded-full"
                     onClick={() => void onSendEmailCode()}
                     loading={sendingEmailCode}
                     disabled={!canFillSignupEmail || busy || verifyingEmailCode}
                   >
-                    {sendingEmailCode ? "발송 중…" : "인증번호 발송"}
+                    인증번호 발송
                   </Button>
-                  <div className="flex min-w-0 flex-col gap-2 sm:flex-1 sm:flex-row sm:items-center">
+                  <div className="flex min-w-0 items-center gap-2">
                     <Input
                       id="emailCode"
-                      className="ca-input w-full min-w-0 flex-1 text-center sm:min-w-[10.5rem]"
+                      className="ca-input min-w-0 flex-1 text-center"
                       inputMode="numeric"
                       maxLength={6}
                       placeholder="인증번호 6자리"
@@ -431,12 +431,12 @@ export function AuthPageClient() {
                     <Button
                       type="button"
                       variant="outline"
-                      className="w-full shrink-0 rounded-full sm:w-auto"
+                      className="min-w-[5.5rem] shrink-0 rounded-full"
                       onClick={() => void onVerifyEmailCode()}
                       loading={verifyingEmailCode}
                       disabled={!emailCodeSent || emailVerified || busy || sendingEmailCode}
                     >
-                      {verifyingEmailCode ? "확인 중…" : emailVerified ? "인증 완료" : "인증 확인"}
+                      {emailVerified ? "인증 완료" : "인증 확인"}
                     </Button>
                   </div>
                 </div>
@@ -580,13 +580,7 @@ export function AuthPageClient() {
             {error ? <p className="text-xs text-destructive">{error}</p> : null}
             {info ? <p className="text-xs text-ca-viz-emerald">{info}</p> : null}
             <Button type="submit" className="w-full rounded-full" loading={busy} disabled={!canProceedSignup}>
-              {busy
-                ? mode === "login"
-                  ? "로그인 중…"
-                  : "계정 만드는 중…"
-                : mode === "login"
-                  ? "로그인"
-                  : "계정 만들기"}
+              {mode === "login" ? "로그인" : "계정 만들기"}
             </Button>
           </form>
         </CardContent>

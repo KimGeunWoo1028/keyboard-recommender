@@ -68,7 +68,7 @@ export default function ForgotPasswordPage() {
               />
             </div>
             <Button type="submit" className="w-full rounded-full" loading={busy}>
-              {busy ? "요청 중…" : "재설정 안내 받기"}
+              재설정 안내 받기
             </Button>
           </form>
           {submitted && message ? <p className="text-xs text-ca-viz-emerald">{message}</p> : null}

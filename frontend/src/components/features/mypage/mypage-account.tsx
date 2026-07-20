@@ -469,12 +469,14 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
               가입 이메일(<span className="font-medium text-ca-on-surface">{user.email}</span>)로 인증번호를
               받은 뒤, 비밀번호와 함께 탈퇴를 완료합니다.
             </p>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
               <Button
                 type="button"
                 variant="outline"
                 size="sm"
-                disabled={sendingDeleteCode || deleteVerified || securityActionBusy !== "none"}
+                className="w-full shrink-0 sm:w-auto"
+                loading={sendingDeleteCode}
+                disabled={deleteVerified || securityActionBusy !== "none"}
                 onClick={() => {
                   setDeleteMessage(null);
                   setDeleteVerified(false);
@@ -496,57 +498,59 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
                     .finally(() => setSendingDeleteCode(false));
                 }}
               >
-                {sendingDeleteCode ? "발송 중..." : deleteCodeSent ? "인증번호 재발송" : "인증번호 발송"}
+                {deleteCodeSent ? "인증번호 재발송" : "인증번호 발송"}
               </Button>
-              <Input
-                type="text"
-                inputMode="numeric"
-                maxLength={6}
-                value={deleteCode}
-                onChange={(e) => {
-                  setDeleteCode(e.target.value.replace(/\D/g, "").slice(0, 6));
-                  if (deleteVerified) {
-                    setDeleteVerified(false);
-                    setDeleteVerificationToken(null);
-                  }
-                }}
-                placeholder="인증번호 6자리"
-                className="min-w-[8rem] flex-1"
-                disabled={!deleteCodeSent || deleteVerified}
-                autoComplete="one-time-code"
-              />
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                disabled={
-                  !deleteCodeSent || deleteVerified || verifyingDeleteCode || securityActionBusy !== "none"
-                }
-                onClick={() => {
-                  setDeleteMessage(null);
-                  if (!/^\d{6}$/.test(deleteCode)) {
-                    setDeleteMessage("인증번호 6자리를 입력해 주세요.");
-                    return;
-                  }
-                  setVerifyingDeleteCode(true);
-                  void verifyAccountDeletionCode(deleteCode)
-                    .then((res) => {
-                      setDeleteVerified(true);
-                      setDeleteVerificationToken(res.verification_token);
-                      setDeleteMessage("이메일 인증이 완료되었습니다. 비밀번호를 입력해 탈퇴를 완료하세요.");
-                    })
-                    .catch((e) => {
-                      if (e instanceof ApiError && e.status === 400) {
-                        setDeleteMessage("인증번호가 올바르지 않거나 만료되었습니다.");
-                      } else {
-                        setDeleteMessage(e instanceof Error ? e.message : "인증 확인에 실패했습니다.");
-                      }
-                    })
-                    .finally(() => setVerifyingDeleteCode(false));
-                }}
-              >
-                {verifyingDeleteCode ? "확인 중..." : deleteVerified ? "인증 완료" : "인증 확인"}
-              </Button>
+              <div className="flex min-w-0 flex-1 items-center gap-2">
+                <Input
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={6}
+                  value={deleteCode}
+                  onChange={(e) => {
+                    setDeleteCode(e.target.value.replace(/\D/g, "").slice(0, 6));
+                    if (deleteVerified) {
+                      setDeleteVerified(false);
+                      setDeleteVerificationToken(null);
+                    }
+                  }}
+                  placeholder="인증번호 6자리"
+                  className="min-w-0 flex-1"
+                  disabled={!deleteCodeSent || deleteVerified}
+                  autoComplete="one-time-code"
+                />
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  className="min-w-[5.5rem] shrink-0"
+                  loading={verifyingDeleteCode}
+                  disabled={!deleteCodeSent || deleteVerified || securityActionBusy !== "none"}
+                  onClick={() => {
+                    setDeleteMessage(null);
+                    if (!/^\d{6}$/.test(deleteCode)) {
+                      setDeleteMessage("인증번호 6자리를 입력해 주세요.");
+                      return;
+                    }
+                    setVerifyingDeleteCode(true);
+                    void verifyAccountDeletionCode(deleteCode)
+                      .then((res) => {
+                        setDeleteVerified(true);
+                        setDeleteVerificationToken(res.verification_token);
+                        setDeleteMessage("이메일 인증이 완료되었습니다. 비밀번호를 입력해 탈퇴를 완료하세요.");
+                      })
+                      .catch((e) => {
+                        if (e instanceof ApiError && e.status === 400) {
+                          setDeleteMessage("인증번호가 올바르지 않거나 만료되었습니다.");
+                        } else {
+                          setDeleteMessage(e instanceof Error ? e.message : "인증 확인에 실패했습니다.");
+                        }
+                      })
+                      .finally(() => setVerifyingDeleteCode(false));
+                  }}
+                >
+                  {deleteVerified ? "인증 완료" : "인증 확인"}
+                </Button>
+              </div>
             </div>
             <div className="relative">
               <Input

@@ -23,7 +23,7 @@ type Variant = keyof typeof variants;
 type Size = keyof typeof sizes;
 
 const baseClass =
-  "inline-flex items-center justify-center gap-2 rounded-lg text-sm font-medium transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50";
+  "relative inline-flex items-center justify-center gap-2 rounded-lg text-sm font-medium transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50";
 
 /** Use on `<Link>` when you need a styled anchor that looks like a button. */
 export function buttonClassName(options?: { variant?: Variant; size?: Size; className?: string }) {
@@ -35,7 +35,10 @@ export function buttonClassName(options?: { variant?: Variant; size?: Size; clas
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: Variant;
   size?: Size;
-  /** Shows an inline spinner and locks the button (aria-busy). */
+  /**
+   * Locks the button and shows a centered overlay spinner.
+   * Label width stays stable — keep idle label text (avoid swapping to longer “확인 중…” in tight rows).
+   */
   loading?: boolean;
 };
 
@@ -52,8 +55,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       aria-busy={loading || undefined}
       {...props}
     >
-      {loading ? <Spinner className="text-[1rem]" /> : null}
-      {children}
+      <span className={cn("inline-flex items-center justify-center gap-2", loading && "invisible")}>{children}</span>
+      {loading ? (
+        <span className="pointer-events-none absolute inset-0 inline-flex items-center justify-center" aria-hidden="true">
+          <Spinner className="text-[1rem]" />
+        </span>
+      ) : null}
     </button>
   );
 });

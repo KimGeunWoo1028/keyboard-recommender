@@ -13,15 +13,25 @@ describe("Spinner", () => {
 });
 
 describe("Button loading", () => {
-  it("locks the control and shows a spinner while loading", () => {
-    render(
-      <Button loading type="button">
-        로그인 중…
+  it("locks the control, keeps label width, and overlays a spinner", () => {
+    const { rerender } = render(
+      <Button type="button" data-testid="auth-btn">
+        인증 확인
       </Button>,
     );
-    const button = screen.getByRole("button", { name: /로그인 중/ });
-    expect(button).toBeDisabled();
-    expect(button).toHaveAttribute("aria-busy", "true");
-    expect(button.querySelector("svg.animate-spin")).toBeTruthy();
+    const idle = screen.getByTestId("auth-btn");
+    const idleWidth = idle.getBoundingClientRect().width;
+
+    rerender(
+      <Button loading type="button" data-testid="auth-btn">
+        인증 확인
+      </Button>,
+    );
+    const loading = screen.getByTestId("auth-btn");
+    expect(loading).toBeDisabled();
+    expect(loading).toHaveAttribute("aria-busy", "true");
+    expect(loading.querySelector("svg.animate-spin")).toBeTruthy();
+    expect(loading.getBoundingClientRect().width).toBe(idleWidth);
+    expect(screen.getByText("인증 확인")).toBeInTheDocument();
   });
 });

@@ -186,7 +186,7 @@ export function ResetPasswordClient() {
               </p>
               {error ? <p className="text-xs text-destructive">{error}</p> : null}
               <Button type="submit" className="w-full rounded-full" loading={busy}>
-                {busy ? "변경 중…" : "비밀번호 변경"}
+                비밀번호 변경
               </Button>
             </form>
           )}

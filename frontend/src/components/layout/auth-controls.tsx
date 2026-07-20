@@ -148,8 +148,8 @@ export function AuthSessionAction() {
     <button
       type="button"
       className={cn(
-        "inline-flex shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-ca-outline-variant px-2.5 py-1.5 font-headline text-[11px] font-semibold sm:px-3.5 sm:text-xs",
-        "text-ca-on-surface-variant transition-colors hover:border-ca-primary/50 hover:text-ca-on-surface",
+        "relative inline-flex shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-ca-outline-variant px-2.5 py-1.5 font-headline text-[11px] font-semibold sm:px-3.5 sm:text-xs",
+        "min-w-[4.75rem] text-ca-on-surface-variant transition-colors hover:border-ca-primary/50 hover:text-ca-on-surface",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-primary",
         "disabled:pointer-events-none disabled:opacity-50",
       )}
@@ -166,8 +166,12 @@ export function AuthSessionAction() {
           });
       }}
     >
-      {loggingOut ? <Spinner className="text-[0.85rem]" /> : null}
-      {loggingOut ? "로그아웃 중…" : "로그아웃"}
+      <span className={cn(loggingOut && "invisible")}>로그아웃</span>
+      {loggingOut ? (
+        <span className="pointer-events-none absolute inset-0 inline-flex items-center justify-center" aria-hidden="true">
+          <Spinner className="text-[0.85rem]" />
+        </span>
+      ) : null}
     </button>
   );
 }
