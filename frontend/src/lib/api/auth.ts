@@ -171,7 +171,11 @@ export async function clearAvatar(): Promise<AuthUser> {
   return json.user;
 }
 
-export async function changePassword(input: { current_password: string; new_password: string }): Promise<void> {
+export async function changePassword(input: {
+  current_password: string;
+  new_password: string;
+  verification_token: string;
+}): Promise<void> {
   const base = getPublicApiBase();
   if (!base) throw new ApiError(0, "서비스 연결을 확인한 뒤 다시 시도해 주세요.");
   const res = await fetch(`${base}/api/v1/auth/change-password`, {
@@ -181,6 +185,38 @@ export async function changePassword(input: { current_password: string; new_pass
     body: JSON.stringify(input),
   });
   if (!res.ok) throw new ApiError(res.status, await readErrorMessage(res));
+}
+
+export async function sendPasswordChangeCode(): Promise<{
+  sent: boolean;
+  delivery: string;
+  debug_code?: string | null;
+}> {
+  const base = getPublicApiBase();
+  if (!base) throw new ApiError(0, "서비스 연결을 확인한 뒤 다시 시도해 주세요.");
+  const res = await fetch(`${base}/api/v1/auth/change-password-code/send`, {
+    method: "POST",
+    headers: { Accept: "application/json" },
+    credentials: "include",
+  });
+  if (!res.ok) throw new ApiError(res.status, await readErrorMessage(res));
+  return (await res.json()) as { sent: boolean; delivery: string; debug_code?: string | null };
+}
+
+export async function verifyPasswordChangeCode(code: string): Promise<{
+  verified: boolean;
+  verification_token: string;
+}> {
+  const base = getPublicApiBase();
+  if (!base) throw new ApiError(0, "서비스 연결을 확인한 뒤 다시 시도해 주세요.");
+  const res = await fetch(`${base}/api/v1/auth/change-password-code/verify`, {
+    method: "POST",
+    headers: { Accept: "application/json", "Content-Type": "application/json" },
+    credentials: "include",
+    body: JSON.stringify({ code }),
+  });
+  if (!res.ok) throw new ApiError(res.status, await readErrorMessage(res));
+  return (await res.json()) as { verified: boolean; verification_token: string };
 }
 
 export async function sendAccountDeletionCode(): Promise<{

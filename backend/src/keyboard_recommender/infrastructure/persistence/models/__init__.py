@@ -24,6 +24,7 @@ from keyboard_recommender.infrastructure.persistence.models.switch import Switch
 from keyboard_recommender.infrastructure.persistence.models.user_auth import (
     AuthAccountDeletionChallenge,
     AuthEmailVerification,
+    AuthPasswordChangeChallenge,
     AuthPasswordReset,
     AuthSession,
     User,
@@ -47,4 +48,5 @@ __all__ = [
     "AuthEmailVerification",
     "AuthPasswordReset",
     "AuthAccountDeletionChallenge",
+    "AuthPasswordChangeChallenge",
 ]

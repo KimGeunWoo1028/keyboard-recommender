@@ -100,6 +100,7 @@ class UpdatePasswordRequest(BaseModel):
 
     current_password: str = Field(min_length=8, max_length=200)
     new_password: str = Field(min_length=8, max_length=20)
+    verification_token: str = Field(min_length=16, max_length=128)
 
 
 class DeleteAccountRequest(BaseModel):
@@ -110,6 +111,12 @@ class DeleteAccountRequest(BaseModel):
 
 
 class VerifyAccountDeletionCodeRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    code: str = Field(min_length=6, max_length=6)
+
+
+class VerifyPasswordChangeCodeRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     code: str = Field(min_length=6, max_length=6)

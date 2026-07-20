@@ -14,11 +14,13 @@ import {
   logout,
   logoutAllSessions,
   sendAccountDeletionCode,
+  sendPasswordChangeCode,
   type AccountSecuritySummary,
   type AuthUser,
   updateDisplayName,
   uploadAvatar,
   verifyAccountDeletionCode,
+  verifyPasswordChangeCode,
 } from "@/lib/api/auth";
 import { ApiError } from "@/lib/api/client";
 import { resolveAvatarSrc } from "@/lib/avatar";
@@ -108,6 +110,12 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [passwordMessage, setPasswordMessage] = useState<string | null>(null);
   const [updatingPassword, setUpdatingPassword] = useState(false);
+  const [passwordCodeSent, setPasswordCodeSent] = useState(false);
+  const [passwordCode, setPasswordCode] = useState("");
+  const [sendingPasswordCode, setSendingPasswordCode] = useState(false);
+  const [verifyingPasswordCode, setVerifyingPasswordCode] = useState(false);
+  const [passwordVerified, setPasswordVerified] = useState(false);
+  const [passwordVerificationToken, setPasswordVerificationToken] = useState<string | null>(null);
   const [securityActionBusy, setSecurityActionBusy] = useState<"none" | "logout" | "logout_all">("none");
   const [openDeletePanel, setOpenDeletePanel] = useState(false);
   const [deletePassword, setDeletePassword] = useState("");
@@ -321,13 +329,103 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
         <Button
           variant={openPasswordPanel ? "primary" : "outline"}
           className="w-full justify-between"
-          onClick={() => setOpenPasswordPanel((prev) => !prev)}
+          onClick={() => {
+            setOpenPasswordPanel((prev) => !prev);
+            setPasswordMessage(null);
+          }}
         >
           비밀번호 변경
           <span>{openPasswordPanel ? "▲" : "▼"}</span>
         </Button>
         {openPasswordPanel ? (
           <div className="space-y-2 rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container/30 p-3">
+            <p className="text-xs text-ca-on-surface-variant">
+              가입 이메일(<span className="font-medium text-ca-on-surface">{user.email}</span>)로 인증번호를
+              받은 뒤, 비밀번호를 변경할 수 있습니다.
+            </p>
+            <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                className="w-full shrink-0 sm:w-auto"
+                loading={sendingPasswordCode}
+                disabled={passwordVerified || securityActionBusy !== "none"}
+                onClick={() => {
+                  setPasswordMessage(null);
+                  setPasswordVerified(false);
+                  setPasswordVerificationToken(null);
+                  setPasswordCode("");
+                  setSendingPasswordCode(true);
+                  void sendPasswordChangeCode()
+                    .then((res) => {
+                      setPasswordCodeSent(true);
+                      if (res.delivery === "smtp" || res.delivery === "resend") {
+                        setPasswordMessage("인증번호를 이메일로 보냈습니다.");
+                      } else {
+                        setPasswordMessage("인증번호 요청이 접수되었습니다. 메일 도착까지 잠시 기다려 주세요.");
+                      }
+                    })
+                    .catch((e) => {
+                      setPasswordMessage(e instanceof Error ? e.message : "인증번호 발송에 실패했습니다.");
+                    })
+                    .finally(() => setSendingPasswordCode(false));
+                }}
+              >
+                {passwordCodeSent ? "인증번호 재발송" : "인증번호 발송"}
+              </Button>
+              <div className="flex min-w-0 flex-1 items-center gap-2">
+                <Input
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={6}
+                  value={passwordCode}
+                  onChange={(e) => {
+                    setPasswordCode(e.target.value.replace(/\D/g, "").slice(0, 6));
+                    if (passwordVerified) {
+                      setPasswordVerified(false);
+                      setPasswordVerificationToken(null);
+                    }
+                  }}
+                  placeholder="인증번호 6자리"
+                  className="min-w-0 flex-1"
+                  disabled={!passwordCodeSent || passwordVerified}
+                  autoComplete="one-time-code"
+                />
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  className="min-w-[5.5rem] shrink-0"
+                  loading={verifyingPasswordCode}
+                  disabled={!passwordCodeSent || passwordVerified || securityActionBusy !== "none"}
+                  onClick={() => {
+                    setPasswordMessage(null);
+                    if (!/^\d{6}$/.test(passwordCode)) {
+                      setPasswordMessage("인증번호 6자리를 입력해 주세요.");
+                      return;
+                    }
+                    setVerifyingPasswordCode(true);
+                    void verifyPasswordChangeCode(passwordCode)
+                      .then((res) => {
+                        setPasswordVerified(true);
+                        setPasswordVerificationToken(res.verification_token);
+                        setPasswordMessage("이메일 인증이 완료되었습니다. 새 비밀번호를 입력해 주세요.");
+                      })
+                      .catch((e) => {
+                        if (e instanceof ApiError && e.status === 400) {
+                          setPasswordMessage("인증번호가 올바르지 않거나 만료되었습니다.");
+                        } else {
+                          setPasswordMessage(e instanceof Error ? e.message : "인증 확인에 실패했습니다.");
+                        }
+                      })
+                      .finally(() => setVerifyingPasswordCode(false));
+                  }}
+                >
+                  {passwordVerified ? "인증 완료" : "인증 확인"}
+                </Button>
+              </div>
+            </div>
             <div className="relative">
               <Input
                 type={showCurrentPassword ? "text" : "password"}
@@ -335,6 +433,8 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
                 onChange={(e) => setCurrentPassword(e.target.value)}
                 placeholder="현재 비밀번호"
                 className="pr-10"
+                disabled={!passwordVerified}
+                autoComplete="current-password"
               />
               <PasswordVisibilityToggle
                 visible={showCurrentPassword}
@@ -348,6 +448,8 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
                 onChange={(e) => setNewPassword(e.target.value)}
                 placeholder="새 비밀번호"
                 className="pr-10"
+                disabled={!passwordVerified}
+                autoComplete="new-password"
               />
               <PasswordVisibilityToggle visible={showNewPassword} onToggle={() => setShowNewPassword((v) => !v)} />
             </div>
@@ -358,6 +460,8 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="새 비밀번호 확인란"
                 className="pr-10"
+                disabled={!passwordVerified}
+                autoComplete="new-password"
               />
               <PasswordVisibilityToggle
                 visible={showConfirmPassword}
@@ -377,9 +481,14 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
               </p>
             </div>
             <Button
-              disabled={updatingPassword}
+              loading={updatingPassword}
+              disabled={!passwordVerified || !passwordVerificationToken}
               onClick={() => {
                 setPasswordMessage(null);
+                if (!passwordVerificationToken) {
+                  setPasswordMessage("이메일 인증을 먼저 완료해 주세요.");
+                  return;
+                }
                 if (!currentPassword) {
                   setPasswordMessage("현재 비밀번호를 입력해 주세요.");
                   return;
@@ -393,16 +502,28 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
                   return;
                 }
                 setUpdatingPassword(true);
-                void changePassword({ current_password: currentPassword, new_password: newPassword })
+                void changePassword({
+                  current_password: currentPassword,
+                  new_password: newPassword,
+                  verification_token: passwordVerificationToken,
+                })
                   .then(() => {
                     setPasswordMessage("비밀번호가 변경되었습니다.");
                     setCurrentPassword("");
                     setNewPassword("");
                     setConfirmPassword("");
+                    setPasswordCode("");
+                    setPasswordCodeSent(false);
+                    setPasswordVerified(false);
+                    setPasswordVerificationToken(null);
                   })
                   .catch((e) => {
                     if (e instanceof ApiError && e.status === 401) {
                       setPasswordMessage("현재 비밀번호가 올바르지 않습니다.");
+                    } else if (e instanceof ApiError && e.status === 400) {
+                      setPasswordMessage("이메일 인증이 만료되었거나 유효하지 않습니다. 인증번호를 다시 받아 주세요.");
+                      setPasswordVerified(false);
+                      setPasswordVerificationToken(null);
                     } else {
                       setPasswordMessage(e instanceof Error ? e.message : "비밀번호 변경에 실패했습니다.");
                     }
@@ -410,7 +531,7 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
                   .finally(() => setUpdatingPassword(false));
               }}
             >
-              {updatingPassword ? "변경 중..." : "비밀번호 변경"}
+              비밀번호 변경
             </Button>
             {passwordMessage ? <p className="text-xs text-ca-on-surface-variant">{passwordMessage}</p> : null}
           </div>

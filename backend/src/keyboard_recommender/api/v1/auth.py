@@ -27,6 +27,7 @@ from keyboard_recommender.infrastructure.persistence.account_purge import purge_
 from keyboard_recommender.infrastructure.persistence.models.user_auth import (
     AuthAccountDeletionChallenge,
     AuthEmailVerification,
+    AuthPasswordChangeChallenge,
     AuthPasswordReset,
     AuthSession,
     User,
@@ -48,6 +49,7 @@ from keyboard_recommender.schemas.auth import (
     VerifyAccountDeletionCodeRequest,
     VerifyEmailCodeRequest,
     VerifyEmailCodeResponse,
+    VerifyPasswordChangeCodeRequest,
 )
 from keyboard_recommender.security.passwords import hash_password, verify_password
 from keyboard_recommender.security.sessions import new_session_token_id
@@ -564,6 +566,77 @@ def clear_avatar(
     return AuthEnvelope(user=_to_auth_user(current_user))
 
 
+@router.post("/change-password-code/send", response_model=SendEmailVerificationResponse)
+def send_password_change_code(
+    settings: SettingsDep = None,  # type: ignore[assignment]
+    db: DbSession = None,  # type: ignore[assignment]
+    current_user: CurrentUserOptionalDep = None,
+) -> SendEmailVerificationResponse:
+    """Send a 6-digit code to the authenticated user's email before password change."""
+    assert settings is not None and db is not None
+    if current_user is None:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated.")
+    code = _new_six_digit_code()
+    now = datetime.now(timezone.utc)
+    expires_at = now + timedelta(minutes=settings.auth_email_code_ttl_minutes)
+    row = db.execute(
+        select(AuthPasswordChangeChallenge).where(AuthPasswordChangeChallenge.user_id == current_user.id),
+    ).scalar_one_or_none()
+    if row is None:
+        row = AuthPasswordChangeChallenge(
+            id=uuid.uuid4(),
+            user_id=current_user.id,
+            code_hash=hash_password(code),
+            verification_token=None,
+            expires_at=expires_at,
+            verified_at=None,
+            consumed_at=None,
+            created_at=now,
+            updated_at=now,
+        )
+        db.add(row)
+    else:
+        row.code_hash = hash_password(code)
+        row.verification_token = None
+        row.expires_at = expires_at
+        row.verified_at = None
+        row.consumed_at = None
+        row.updated_at = now
+    db.commit()
+    delivery = send_verification_code_email(settings, to_email=current_user.email, code=code)
+    return SendEmailVerificationResponse(
+        sent=True,
+        delivery=delivery,
+        debug_code=code if _allow_debug_email_code(settings) else None,
+        **_staging_email_ops_snapshot(settings),
+    )
+
+
+@router.post("/change-password-code/verify", response_model=VerifyEmailCodeResponse)
+def verify_password_change_code(
+    body: VerifyPasswordChangeCodeRequest = Body(...),
+    db: DbSession = None,  # type: ignore[assignment]
+    current_user: CurrentUserOptionalDep = None,
+) -> VerifyEmailCodeResponse:
+    assert db is not None
+    if current_user is None:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated.")
+    row = db.execute(
+        select(AuthPasswordChangeChallenge).where(AuthPasswordChangeChallenge.user_id == current_user.id),
+    ).scalar_one_or_none()
+    now = datetime.now(timezone.utc)
+    if row is None or _as_utc(row.expires_at) <= now or row.consumed_at is not None:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Verification code expired or missing.")
+    if not verify_password(body.code, row.code_hash):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid verification code.")
+    token = secrets.token_urlsafe(32)
+    row.verification_token = token
+    row.verified_at = now
+    row.updated_at = now
+    db.commit()
+    return VerifyEmailCodeResponse(verified=True, verification_token=token)
+
+
 @router.post("/change-password", status_code=status.HTTP_204_NO_CONTENT)
 def change_password(
     body: UpdatePasswordRequest = Body(...),
@@ -576,8 +649,27 @@ def change_password(
     if not verify_password(body.current_password, current_user.password_hash):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Current password is invalid.")
     _assert_password_policy(body.new_password)
+
+    now = datetime.now(timezone.utc)
+    challenge = db.execute(
+        select(AuthPasswordChangeChallenge).where(AuthPasswordChangeChallenge.user_id == current_user.id),
+    ).scalar_one_or_none()
+    if (
+        challenge is None
+        or challenge.verification_token is None
+        or challenge.verification_token != body.verification_token
+        or challenge.verified_at is None
+        or _as_utc(challenge.expires_at) <= now
+        or challenge.consumed_at is not None
+    ):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Email verification is required before changing password.",
+        )
+    challenge.consumed_at = now
+    challenge.updated_at = now
     current_user.password_hash = hash_password(body.new_password)
-    current_user.updated_at = datetime.now(timezone.utc)
+    current_user.updated_at = now
     db.commit()
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
