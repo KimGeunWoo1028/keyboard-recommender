@@ -196,7 +196,7 @@ def _confidence_guidance(
     else:
         prompts.append("현재 바닥 타건감이 평소 사용 기준으로 너무 부드럽거나 너무 단단하지는 않나요?")
     if answers.get("sound_profile") == "balanced":
-        prompts.append("사운드는 묵직한 저음(Thocky) 쪽과 또렷한 고음(Clacky) 쪽 중 어디에 더 가깝길 원하시나요?")
+        prompts.append("사운드는 묵직한 저음 쪽과 또렷한 고음 쪽 중 어디에 더 가깝길 원하시나요?")
     else:
         prompts.append("현재 결과보다 더 조용한 방향이 좋은지, 더 또렷하고 존재감 있는 방향이 좋은지 선택해 주세요.")
     actions: list[dict[str, str]] = []
@@ -210,8 +210,8 @@ def _confidence_guidance(
     if answers.get("sound_profile") == "balanced":
         actions.extend(
             [
-                {"label": "묵직하고 차분한 소리 (Muted) 선호", "stepId": "sound_profile", "answerId": "muted"},
-                {"label": "또렷하고 경쾌한 소리 (Clacky) 선호", "stepId": "sound_profile", "answerId": "clacky"},
+                {"label": "묵직하고 차분한 소리 선호", "stepId": "sound_profile", "answerId": "muted"},
+                {"label": "또렷하고 경쾌한 소리 선호", "stepId": "sound_profile", "answerId": "clacky"},
             ],
         )
     if not actions:
@@ -337,13 +337,13 @@ def build_recommendation_computation(
 
     title_parts: list[str] = []
     if display_trait_scores["deep_sound"] >= display_trait_scores["high_pitch"] * 0.8:
-        title_parts.append("묵직한 저음 중심 (Thocky)")
+        title_parts.append("묵직한 저음 중심")
     else:
-        title_parts.append("또렷한 고음 중심 (Clacky)")
+        title_parts.append("또렷한 고음 중심")
     if display_trait_scores["strong_tactile"] > display_trait_scores["smooth"]:
-        title_parts.append("구분감 있는 키감 (Tactile)")
+        title_parts.append("구분감 있는 키감")
     else:
-        title_parts.append("매끈한 키감 (Linear)")
+        title_parts.append("매끈한 키감")
     title = f"추천 조합: {' · '.join(title_parts)}"
     tagline = (
         "다축 취향 프로필의 가중 유사도를 기반으로 추천된 조합입니다. "
