@@ -45,6 +45,18 @@ function mediaRemotePatternsFromEnv(): ImageRemotePattern[] {
 const nextConfig: NextConfig = {
   // Silence monorepo false-positive when a parent directory also has a lockfile.
   outputFileTracingRoot: path.join(__dirname),
+  /**
+   * When `/media` is rewritten via INTERNAL_API_PROXY_TARGET, expose a public
+   * flag so `resolveCatalogImageUrl` keeps relative `/media/...` on SSR and in
+   * the browser (INTERNAL_* is server-only and previously caused React #418).
+   * Explicit NEXT_PUBLIC_MEDIA_SAME_ORIGIN wins when already set.
+   */
+  env: {
+    ...(process.env.INTERNAL_API_PROXY_TARGET?.trim() &&
+    process.env.NEXT_PUBLIC_MEDIA_SAME_ORIGIN === undefined
+      ? { NEXT_PUBLIC_MEDIA_SAME_ORIGIN: "1" }
+      : {}),
+  },
   experimental: {
     optimizePackageImports: ["lucide-react"],
     // Inline Tailwind CSS into HTML to remove the render-blocking stylesheet round-trip.

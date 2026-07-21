@@ -159,9 +159,11 @@ describe("catalog API contract", () => {
 
   it("resolves API-relative mirror image paths with NEXT_PUBLIC_API_URL", () => {
     const prev = process.env.NEXT_PUBLIC_API_URL;
-    const prevProxy = process.env.INTERNAL_API_PROXY_TARGET;
+    const prevSame = process.env.NEXT_PUBLIC_MEDIA_SAME_ORIGIN;
+    const prevSite = process.env.NEXT_PUBLIC_SITE_URL;
     process.env.NEXT_PUBLIC_API_URL = "http://localhost:8010";
-    delete process.env.INTERNAL_API_PROXY_TARGET;
+    delete process.env.NEXT_PUBLIC_MEDIA_SAME_ORIGIN;
+    delete process.env.NEXT_PUBLIC_SITE_URL;
     expect(resolveCatalogImageUrl("/media/swagkey-images/1792.jpg")).toBe(
       "http://localhost:8010/media/swagkey-images/1792.jpg",
     );
@@ -170,20 +172,48 @@ describe("catalog API contract", () => {
     );
     expect(resolveCatalogImageUrl("/layout-diagrams/tkl.svg")).toBe("/layout-diagrams/tkl.svg");
     process.env.NEXT_PUBLIC_API_URL = prev;
+    if (prevSame === undefined) delete process.env.NEXT_PUBLIC_MEDIA_SAME_ORIGIN;
+    else process.env.NEXT_PUBLIC_MEDIA_SAME_ORIGIN = prevSame;
+    if (prevSite === undefined) delete process.env.NEXT_PUBLIC_SITE_URL;
+    else process.env.NEXT_PUBLIC_SITE_URL = prevSite;
+  });
+
+  it("keeps /media relative when NEXT_PUBLIC_MEDIA_SAME_ORIGIN=1 (SSR/client agree)", () => {
+    const prev = process.env.NEXT_PUBLIC_API_URL;
+    const prevSame = process.env.NEXT_PUBLIC_MEDIA_SAME_ORIGIN;
+    const prevProxy = process.env.INTERNAL_API_PROXY_TARGET;
+    process.env.NEXT_PUBLIC_API_URL = "https://api.example.com";
+    process.env.NEXT_PUBLIC_MEDIA_SAME_ORIGIN = "1";
+    // Server-only INTERNAL must not change the result (hydration safety).
+    process.env.INTERNAL_API_PROXY_TARGET = "https://api.example.com";
+    expect(resolveCatalogImageUrl("/media/swagkey-images/1792.jpg")).toBe(
+      "/media/swagkey-images/1792.jpg",
+    );
+    process.env.NEXT_PUBLIC_API_URL = prev;
+    if (prevSame === undefined) delete process.env.NEXT_PUBLIC_MEDIA_SAME_ORIGIN;
+    else process.env.NEXT_PUBLIC_MEDIA_SAME_ORIGIN = prevSame;
     if (prevProxy === undefined) delete process.env.INTERNAL_API_PROXY_TARGET;
     else process.env.INTERNAL_API_PROXY_TARGET = prevProxy;
   });
 
-  it("uses absolute /media URL in the browser when API origin differs from the page", () => {
+  it("uses absolute /media when API origin differs and same-origin media is not enabled", () => {
     const prev = process.env.NEXT_PUBLIC_API_URL;
+    const prevSame = process.env.NEXT_PUBLIC_MEDIA_SAME_ORIGIN;
+    const prevSite = process.env.NEXT_PUBLIC_SITE_URL;
     const prevProxy = process.env.INTERNAL_API_PROXY_TARGET;
-    process.env.NEXT_PUBLIC_API_URL = "https://www.example.com";
+    process.env.NEXT_PUBLIC_API_URL = "https://api.example.com";
+    delete process.env.NEXT_PUBLIC_MEDIA_SAME_ORIGIN;
+    delete process.env.NEXT_PUBLIC_SITE_URL;
+    // INTERNAL proxy alone must NOT force relative (that caused React #418).
     process.env.INTERNAL_API_PROXY_TARGET = "https://api.example.com";
-    // jsdom page origin is not www.example.com → absolute API URL for <img>.
     expect(resolveCatalogImageUrl("/media/swagkey-images/1792.jpg")).toBe(
-      "https://www.example.com/media/swagkey-images/1792.jpg",
+      "https://api.example.com/media/swagkey-images/1792.jpg",
     );
     process.env.NEXT_PUBLIC_API_URL = prev;
+    if (prevSame === undefined) delete process.env.NEXT_PUBLIC_MEDIA_SAME_ORIGIN;
+    else process.env.NEXT_PUBLIC_MEDIA_SAME_ORIGIN = prevSame;
+    if (prevSite === undefined) delete process.env.NEXT_PUBLIC_SITE_URL;
+    else process.env.NEXT_PUBLIC_SITE_URL = prevSite;
     if (prevProxy === undefined) delete process.env.INTERNAL_API_PROXY_TARGET;
     else process.env.INTERNAL_API_PROXY_TARGET = prevProxy;
   });

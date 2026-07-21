@@ -47,9 +47,26 @@ function isCatalogFamily(value: string): value is CatalogFamily {
 }
 
 /**
+ * True when `/media/...` should stay same-origin relative for next/image + rewrite.
+ * Uses only NEXT_PUBLIC_* so SSR and the browser resolve identically —
+ * branching on `window` / server-only `INTERNAL_*` caused React #418.
+ */
+function preferRelativeMediaUrl(publicApiBase: string): boolean {
+  // Explicit same-origin media proxy (Next rewrite /media → backend).
+  if (process.env.NEXT_PUBLIC_MEDIA_SAME_ORIGIN === "1") return true;
+  const site = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (!site) return false;
+  try {
+    return new URL(site).origin === new URL(publicApiBase).origin;
+  } catch {
+    return false;
+  }
+}
+
+/**
  * Resolve API-relative mirror paths for next/image.
- * Prefer same-origin `/media/...` when the public API origin matches the page
- * (production Vercel + rewrite) so the optimizer can resize to WebP/AVIF.
+ * Prefer same-origin `/media/...` when configured (site URL match or
+ * NEXT_PUBLIC_MEDIA_SAME_ORIGIN=1) so the optimizer can resize via rewrite.
  */
 export function resolveCatalogImageUrl(imageUrl: string): string {
   const trimmed = imageUrl.trim();
@@ -60,24 +77,8 @@ export function resolveCatalogImageUrl(imageUrl: string): string {
   if (trimmed.startsWith("/media/")) {
     const base = getPublicApiBase();
     if (!base) return trimmed;
-    // Prefer same-origin relative `/media` so next/image can resize via rewrite.
-    if (typeof window !== "undefined") {
-      try {
-        if (new URL(base).origin === window.location.origin) return trimmed;
-      } catch {
-        /* fall through to absolute */
-      }
-    } else if (process.env.INTERNAL_API_PROXY_TARGET?.trim()) {
-      // SSR on the frontend host: /media is rewritten to the backend.
-      return trimmed;
-    } else {
-      try {
-        const site = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null;
-        if (site && new URL(site).origin === new URL(base).origin) return trimmed;
-      } catch {
-        /* fall through */
-      }
-    }
+    // Same decision on server and client (no `window` / server-only INTERNAL_*).
+    if (preferRelativeMediaUrl(base)) return trimmed;
     return `${base}${trimmed.startsWith("/") ? trimmed : `/${trimmed}`}`;
   }
 

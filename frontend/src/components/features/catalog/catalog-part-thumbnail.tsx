@@ -100,8 +100,8 @@ export function CatalogPartThumbnail({
             alt={alt}
             fill
             sizes={sizes}
+            /* `priority` already sets fetchPriority=high; avoid explicit "auto" (SSR/client drift). */
             priority={priority}
-            fetchPriority={priority ? "high" : "auto"}
             unoptimized={useUnoptimized}
             className="object-cover"
             onError={() => setFailed(true)}
