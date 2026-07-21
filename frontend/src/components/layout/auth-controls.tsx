@@ -57,32 +57,34 @@ export function AuthHeaderProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     let mounted = true;
-    const sync = () =>
+    /** Bumped on login/logout so a stale in-flight /me cannot overwrite the new session. */
+    let syncGeneration = 0;
+
+    const syncFromServer = () => {
+      const generation = ++syncGeneration;
+      sharedAuthMePromise = null;
       void fetchCurrentUserShared()
         .then((u) => {
-          if (mounted) setUser(u);
+          if (mounted && generation === syncGeneration) setUser(u);
         })
         .finally(() => {
-          if (mounted) setAuthChecked(true);
+          if (mounted && generation === syncGeneration) setAuthChecked(true);
         });
-    sync();
+    };
+
+    syncFromServer();
     const unsub = subscribeAuthChanged((detail) => {
-      sharedAuthMePromise = null;
-      // Login/logout already know the session — apply immediately so RequireAuth
-      // cannot bounce to /auth while a slow /me is in flight.
+      // Login/logout already know the session — apply immediately and invalidate
+      // any older /me so RequireAuth cannot bounce back to /auth.
       if (detail && "user" in detail) {
+        syncGeneration += 1;
+        sharedAuthMePromise = null;
         setUser(detail.user ?? null);
         setAuthChecked(true);
         return;
       }
       setAuthChecked(false);
-      void fetchCurrentUserShared()
-        .then((u) => {
-          if (mounted) setUser(u);
-        })
-        .finally(() => {
-          if (mounted) setAuthChecked(true);
-        });
+      syncFromServer();
     });
     return () => {
       mounted = false;

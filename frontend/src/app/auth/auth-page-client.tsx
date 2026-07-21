@@ -200,14 +200,12 @@ export function AuthPageClient() {
         } else {
           window.localStorage.removeItem(REMEMBER_SIGNIN_KEY);
         }
-        // Apply session immediately so RequireAuth does not race a slow /auth/me
-        // and bounce back to /auth (common on mobile + cold API).
+        // Keep the login response in header state. A stale in-flight /me must not
+        // clear it (AuthHeaderProvider generation guard); soft nav keeps that state.
         setUser(loggedIn);
         const { next } = readAuthSearchParams();
         const target = next && next.startsWith("/") ? next : "/results";
-        // Hard navigation: same pattern as account-delete — soft router.push can
-        // land on /results before the header session settles.
-        window.location.assign(target);
+        router.replace(target);
         return;
       }
     } catch (err) {

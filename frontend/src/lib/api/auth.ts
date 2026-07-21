@@ -90,23 +90,39 @@ export async function logoutAllSessions(): Promise<void> {
 export async function fetchCurrentUser(): Promise<AuthUser | null> {
   const base = getPublicApiBase();
   if (!base) return null;
-  let res: Response;
-  try {
-    res = await fetch(`${base}/api/v1/auth/me`, {
-      headers: { Accept: "application/json" },
-      credentials: "include",
-    });
-  } catch {
-    throw new ApiError(
-      0,
-      "API 서버에 연결하지 못했습니다. 백엔드(uvicorn)가 켜져 있는지, frontend/.env.local의 NEXT_PUBLIC_API_URL이 실제 포트와 같은지(예: http://localhost:8010) 확인해 주세요.",
-    );
+  let lastError: ApiError | null = null;
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    let res: Response;
+    try {
+      res = await fetch(`${base}/api/v1/auth/me`, {
+        headers: { Accept: "application/json" },
+        credentials: "include",
+      });
+    } catch {
+      lastError = new ApiError(
+        0,
+        "API 서버에 연결하지 못했습니다. 백엔드(uvicorn)가 켜져 있는지, frontend/.env.local의 NEXT_PUBLIC_API_URL이 실제 포트와 같은지(예: http://localhost:8010) 확인해 주세요.",
+      );
+      if (attempt === 0) {
+        await sleep(400);
+        continue;
+      }
+      throw lastError;
+    }
+    // Legacy 401 + current 200/{user:null} both mean anonymous.
+    if (res.status === 401) return null;
+    if (!res.ok) {
+      lastError = new ApiError(res.status, await readErrorMessage(res));
+      if (attempt === 0 && isRetryableAuthResponseStatus(lastError.status)) {
+        await sleep(400);
+        continue;
+      }
+      throw lastError;
+    }
+    const json = (await res.json()) as MeEnvelope;
+    return json.user ?? null;
   }
-  // Legacy 401 + current 200/{user:null} both mean anonymous.
-  if (res.status === 401) return null;
-  if (!res.ok) throw new ApiError(res.status, await readErrorMessage(res));
-  const json = (await res.json()) as MeEnvelope;
-  return json.user ?? null;
+  throw lastError ?? new ApiError(0, "로그인 상태 확인에 실패했습니다.");
 }
 
 export async function checkDisplayNameAvailability(displayName: string): Promise<{ display_name: string; available: boolean }> {
