@@ -48,7 +48,7 @@ export function SiteHeader() {
     pathname.startsWith("/auth/");
 
   return (
-    <header className="sticky top-0 z-50 border-b border-ca-outline-variant/30 bg-ca-surface/80 shadow-sm backdrop-blur-xl dark:bg-ca-surface-dim/80">
+    <header className="sticky top-0 z-50 border-b border-ca-outline-variant/40 bg-ca-surface dark:bg-ca-surface-dim">
       <div className="mx-auto flex w-full max-w-ca items-center justify-between gap-3 px-ca-margin-mobile py-3 md:gap-4 md:px-ca-margin md:py-4">
         <div className="flex min-w-0 items-center gap-3 md:gap-8">
           <Link
@@ -117,7 +117,7 @@ export function SiteHeader() {
       {mobileOpen ? (
         <div
           id="site-mobile-nav"
-          className="border-t border-ca-outline-variant/30 bg-ca-surface-container-low/95 px-ca-margin-mobile py-3 backdrop-blur-xl lg:hidden"
+          className="border-t border-ca-outline-variant/40 bg-ca-surface-container-low px-ca-margin-mobile py-3 lg:hidden"
         >
           <div className="mb-3 flex items-center justify-between rounded-btn border border-ca-outline-variant/30 bg-ca-surface-container/50 px-3 py-2">
             <span className="font-body text-sm font-medium text-ca-on-surface-variant">테마</span>

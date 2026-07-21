@@ -142,9 +142,9 @@ function CatalogPartCard({
         }
       }}
       className={cn(
-        "ca-glass-panel-interactive flex h-full cursor-pointer flex-col overflow-hidden border-ca-outline-variant/40 transition hover:border-ca-primary/40",
+        "flex h-full cursor-pointer flex-col overflow-hidden rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest shadow-none transition hover:border-ca-on-surface/35",
         item.family === "layout" ? "min-h-[18rem]" : "min-h-[15rem]",
-        selected && "border-ca-primary/50 shadow-ca-glow",
+        selected && "border-ca-on-surface/50 bg-ca-surface-container-low",
       )}
     >
       <CatalogPartThumbnail
@@ -156,7 +156,7 @@ function CatalogPartCard({
         priority={priority}
         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 378px"
       />
-      <CardHeader className="space-y-2 border-b-0 pb-3 pt-3">
+      <CardHeader className="flex flex-1 flex-col space-y-2 border-b-0 pb-3 pt-3">
         <CardTitle className="line-clamp-1 font-headline text-base font-semibold leading-snug text-ca-on-surface">
           {item.name}
         </CardTitle>
@@ -178,24 +178,26 @@ function CatalogPartCard({
             className="pt-0.5"
           />
         ) : null}
-        {(() => {
-          if (isReferenceOnlyLayout) {
+        <div className="min-h-[2.5rem]">
+          {(() => {
+            if (isReferenceOnlyLayout) {
+              return (
+                <CardDescription className="line-clamp-2 text-xs leading-5 text-ca-on-surface-variant">
+                  스웨그키 판매 제품 없음 · 배열 참고용
+                </CardDescription>
+              );
+            }
+            const raw = (item.description || "").trim();
+            if (!raw || isGenericCatalogCardDescription(raw)) return null;
             return (
               <CardDescription className="line-clamp-2 text-xs leading-5 text-ca-on-surface-variant">
-                스웨그키 판매 제품 없음 · 배열 참고용
+                {raw}
               </CardDescription>
             );
-          }
-          const raw = (item.description || "").trim();
-          if (!raw || isGenericCatalogCardDescription(raw)) return null;
-          return (
-            <CardDescription className="line-clamp-2 text-xs leading-5 text-ca-on-surface-variant">
-              {raw}
-            </CardDescription>
-          );
-        })()}
+          })()}
+        </div>
       </CardHeader>
-      <CardContent className="mt-auto flex flex-wrap items-center gap-2 pt-0 text-xs text-ca-on-surface-variant">
+      <CardContent className="mt-auto flex min-h-[2rem] flex-wrap items-center gap-2 pt-0 text-xs text-ca-on-surface-variant">
         {item.subtype &&
         item.family !== "layout" &&
         item.subtype.trim().toLowerCase() !== "other" ? (
@@ -447,6 +449,16 @@ export function CatalogBrowseView({
           스위치·플레이트·폼·케이스/키트·키캡을 탐색할 수 있습니다. 카드를 누르면 스펙·취향 힌트·구매 링크를 볼 수
           있어요.
         </p>
+        <div className="pt-2 sm:max-w-sm">
+          <Input
+            type="search"
+            className="ca-input"
+            placeholder="카탈로그에서 부품 검색…"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            aria-label="카탈로그에서 부품 검색"
+          />
+        </div>
       </div>
 
       <div className="flex flex-wrap gap-2">
@@ -458,8 +470,8 @@ export function CatalogBrowseView({
               size="default"
               className={
                 family === tab.id
-                  ? "h-10 rounded-full px-4 font-headline text-sm font-semibold sm:px-5"
-                  : "h-10 rounded-full border-ca-outline-variant/60 px-4 font-headline text-sm font-semibold text-ca-on-surface-variant hover:border-ca-primary/40 hover:bg-ca-primary/10 sm:px-5"
+                  ? "h-10 rounded-lg px-4 font-headline text-sm font-semibold sm:px-5"
+                  : "h-10 rounded-lg border-ca-outline-variant/60 px-4 font-headline text-sm font-semibold text-ca-on-surface-variant hover:border-ca-on-surface/30 hover:bg-ca-surface-container/50 sm:px-5"
               }
               onClick={() => {
                 replaceCatalogParams({
@@ -577,16 +589,6 @@ export function CatalogBrowseView({
           {loading ? "불러오는 중…" : `총 ${total}개`}
           {!loading && total > 0 ? ` · ${pageStart}–${pageEnd} 표시` : null}
         </p>
-        <div className="w-full sm:max-w-xs sm:shrink-0">
-          <Input
-            type="search"
-            className="ca-input"
-            placeholder="이름·ID 검색"
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-            aria-label="카탈로그 검색"
-          />
-        </div>
       </div>
 
       {error ? <p className="text-sm text-destructive">{error}</p> : null}

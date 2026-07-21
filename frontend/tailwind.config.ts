@@ -106,9 +106,8 @@ const config: Config = {
         "ca-margin-mobile": "1rem",
       },
       boxShadow: {
-        "ca-glow": "0 0 24px rgb(var(--ca-primary) / 0.35)",
-        "ca-elevated":
-          "0 1px 2px rgb(0 0 0 / 0.45), 0 12px 40px rgb(var(--ca-primary) / 0.12)",
+        "ca-glow": "none",
+        "ca-elevated": "0 1px 2px rgb(0 0 0 / 0.45), 0 8px 24px rgb(0 0 0 / 0.35)",
       },
       backdropBlur: {
         ca: "20px",

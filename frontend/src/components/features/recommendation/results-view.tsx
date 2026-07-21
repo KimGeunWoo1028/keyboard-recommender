@@ -117,21 +117,26 @@ export function ResultsView() {
 
   if (!submission || !build) {
     return (
-      <div className="rounded-xl border border-dashed border-ca-outline-variant/50 bg-ca-surface-container-lowest p-8 text-center">
-        <p className="text-sm text-ca-on-surface-variant">
+      <div className="rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest p-6 sm:p-8">
+        <p className="max-w-xl text-sm leading-relaxed text-ca-on-surface-variant sm:text-base">
           아직 이 브라우저에 설문 결과가 없습니다. 결과는 이 기기에 잠시 보관되며, 다른 기기에서는 다시 설문이
           필요할 수 있어요. 저장한 빌드는 마이페이지에서 확인할 수 있습니다.
         </p>
-        <div className="mt-5 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+        <div className="mt-5 flex flex-col items-start gap-3">
           <Link href="/recommend" className={buttonClassName()}>
             설문 시작하기
           </Link>
-          <Link href="/mypage?section=saved" className={buttonClassName({ variant: "outline" })}>
-            저장한 빌드 보기
-          </Link>
-          <Link href="/catalog" className={buttonClassName({ variant: "ghost" })}>
-            부품 카탈로그 둘러보기
-          </Link>
+          <div className="flex flex-col gap-2 text-sm sm:flex-row sm:flex-wrap sm:gap-x-5">
+            <Link
+              href="/mypage?section=saved"
+              className="font-medium text-ca-on-surface underline-offset-4 hover:underline"
+            >
+              저장한 빌드 보기
+            </Link>
+            <Link href="/catalog" className="font-medium text-ca-on-surface underline-offset-4 hover:underline">
+              부품 카탈로그 둘러보기
+            </Link>
+          </div>
         </div>
       </div>
     );

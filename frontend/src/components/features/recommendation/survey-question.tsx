@@ -15,14 +15,14 @@ type Props<T extends SurveyStepId> = {
 };
 
 function optionLayoutClass(optionCount: number): string {
-  if (optionCount === 3) return "flex min-h-0 flex-1 flex-col gap-2 sm:flex-row sm:gap-3";
+  if (optionCount === 3) return "flex flex-col gap-2 sm:flex-row sm:gap-3";
   if (optionCount === 4) {
-    return "grid min-h-0 flex-1 auto-rows-auto grid-cols-1 gap-2 sm:h-full sm:auto-rows-fr sm:grid-cols-2 lg:grid-cols-4 lg:gap-3";
+    return "grid auto-rows-auto grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4 lg:gap-3";
   }
   if (optionCount >= 5) {
-    return "grid min-h-0 flex-1 auto-rows-auto grid-cols-1 gap-2 sm:h-full sm:auto-rows-fr sm:grid-cols-2 lg:grid-cols-5 lg:gap-3";
+    return "grid auto-rows-auto grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-5 lg:gap-3";
   }
-  return "grid min-h-0 flex-1 auto-rows-auto grid-cols-1 gap-2 sm:h-full sm:auto-rows-fr";
+  return "grid auto-rows-auto grid-cols-1 gap-2";
 }
 
 /** Survey option tiles — quiet selection (border/surface), no glow pulse. */
@@ -30,15 +30,15 @@ export function SurveyQuestion<T extends SurveyStepId>({ step, value, onChange, 
   const flexRow = step.options.length === 3;
 
   return (
-    <div className={cn("flex h-full min-h-0 w-full flex-col gap-4", className)}>
-      <div className="shrink-0 sm:text-center">
+    <div className={cn("flex w-full flex-col gap-4", className)}>
+      <div className="shrink-0 sm:max-w-2xl">
         <h2 className="whitespace-pre-line break-keep font-headline text-xl font-semibold tracking-tight text-ca-on-surface sm:text-2xl">
           {step.title}
         </h2>
-        <p className="mt-2 max-w-2xl break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:mx-auto sm:text-base">
+        <p className="mt-2 break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:text-base">
           {step.description}
         </p>
-        <p className="mt-1.5 max-w-2xl break-keep text-xs leading-relaxed text-ca-on-surface-variant/90 sm:mx-auto sm:text-sm">
+        <p className="mt-1.5 break-keep text-xs leading-relaxed text-ca-on-surface-variant/90 sm:text-sm">
           확신이 없어도 괜찮아요. 가장 가까운 쪽을 고르면 됩니다.
         </p>
       </div>
@@ -54,9 +54,8 @@ export function SurveyQuestion<T extends SurveyStepId>({ step, value, onChange, 
               aria-checked={selected}
               onClick={() => onChange(opt.id)}
               className={cn(
-                "group flex h-full min-h-0 w-full min-w-0 flex-col items-start justify-center gap-2 rounded-xl border p-4 text-left transition-colors sm:gap-3 sm:p-5",
+                "group flex w-full min-w-0 flex-col items-start justify-start gap-2 rounded-xl border p-4 text-left transition-colors sm:p-4",
                 flexRow && "sm:flex-1",
-                !flexRow && "min-h-[6.5rem] sm:min-h-0",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-primary",
                 selected
                   ? "border-ca-on-surface bg-ca-surface-container-lowest"
@@ -66,9 +65,9 @@ export function SurveyQuestion<T extends SurveyStepId>({ step, value, onChange, 
               <SurveyOptionIcon
                 optionId={opt.id}
                 selected={selected}
-                className="h-7 w-7 shrink-0 sm:h-8 sm:w-8"
+                className="h-6 w-6 shrink-0 sm:h-7 sm:w-7"
               />
-              <div className="w-full space-y-1.5">
+              <div className="w-full space-y-1">
                 <span className="block break-keep font-headline text-sm font-semibold leading-tight text-ca-on-surface sm:text-base">
                   {opt.label}
                 </span>

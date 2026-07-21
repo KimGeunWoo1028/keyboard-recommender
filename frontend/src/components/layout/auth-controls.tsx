@@ -143,7 +143,7 @@ export function AuthSessionAction() {
   if (!authChecked) {
     return (
       <span
-        className="inline-flex h-9 min-w-[4.75rem] items-center justify-center rounded-full bg-ca-surface-container/70 px-3"
+        className="inline-flex h-9 min-w-[4.75rem] items-center justify-center rounded-btn bg-ca-surface-container/70 px-3"
         aria-busy="true"
         aria-live="polite"
       >
@@ -159,7 +159,7 @@ export function AuthSessionAction() {
         href={`/auth?force=1&next=${encodeURIComponent(nextPath)}`}
         prefetch={false}
         className={cn(
-          "inline-flex h-9 min-w-[4.75rem] shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-ca-primary-container px-3 py-2 font-headline text-xs font-bold text-ca-on-primary-container sm:px-5 sm:text-sm",
+          "inline-flex h-9 min-w-[4.75rem] shrink-0 items-center justify-center whitespace-nowrap rounded-btn bg-ca-primary-container px-3 py-2 font-headline text-xs font-bold text-ca-on-primary-container sm:px-5 sm:text-sm",
           "transition-transform hover:scale-[0.97] active:scale-95",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-primary",
         )}
@@ -173,7 +173,7 @@ export function AuthSessionAction() {
     <button
       type="button"
       className={cn(
-        "relative inline-flex shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-ca-outline-variant px-2.5 py-1.5 font-headline text-[11px] font-semibold sm:px-3.5 sm:text-xs",
+        "relative inline-flex shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-btn border border-ca-outline-variant px-2.5 py-1.5 font-headline text-[11px] font-semibold sm:px-3.5 sm:text-xs",
         "min-w-[4.75rem] text-ca-on-surface-variant transition-colors hover:border-ca-primary/50 hover:text-ca-on-surface",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-primary",
         "disabled:pointer-events-none disabled:opacity-50",

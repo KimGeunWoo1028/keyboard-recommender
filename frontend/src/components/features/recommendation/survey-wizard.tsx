@@ -383,7 +383,7 @@ export function SurveyWizard() {
         className="mx-auto flex h-full w-full max-w-ca flex-col gap-6 sm:gap-8"
         data-testid="e2e-survey-wizard"
       >
-        <div className="shrink-0 sm:max-w-xl sm:self-center sm:text-center">
+        <div className="shrink-0 sm:max-w-xl">
           <h1 className="font-headline text-2xl font-semibold tracking-tight text-ca-on-surface sm:text-3xl">
             취향에 맞는 키보드 찾기
           </h1>
@@ -392,13 +392,13 @@ export function SurveyWizard() {
           </p>
         </div>
 
-        <div className="grid min-h-0 flex-1 auto-rows-fr grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
           {ONBOARDING_STYLES.map((style) => (
             <button
               key={style.id}
               type="button"
               onClick={() => chooseStyle(style)}
-              className="group flex h-full min-h-0 flex-col items-start justify-center gap-3 rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest p-5 text-left transition-colors hover:border-ca-on-surface/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-primary sm:gap-4 sm:p-6"
+              className="group flex flex-col items-start justify-start gap-3 rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest p-5 text-left transition-colors hover:border-ca-on-surface/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-primary sm:gap-3 sm:p-5"
             >
               <SurveyOnboardingStyleIcon
                 styleId={style.id}

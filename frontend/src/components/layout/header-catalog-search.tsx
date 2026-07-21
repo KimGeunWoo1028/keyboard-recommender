@@ -39,7 +39,7 @@ export function HeaderCatalogSearch({ className }: Props) {
         placeholder="카탈로그에서 부품 검색…"
         aria-label="카탈로그에서 부품 검색"
         className={cn(
-          "w-full rounded-full border border-transparent bg-ca-surface-container-highest/50 py-2 pl-10 pr-4",
+          "w-full rounded-btn border border-ca-outline-variant/40 bg-ca-surface-container-highest/50 py-2 pl-10 pr-4",
           "font-body text-sm text-ca-on-surface placeholder:text-ca-on-surface-variant/70",
           "transition-all focus:border-ca-primary/40 focus:outline-none focus:ring-2 focus:ring-ca-primary/40",
           "lg:w-56 xl:w-64",

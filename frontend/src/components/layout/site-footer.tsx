@@ -31,7 +31,7 @@ export function SiteFooter() {
             Keyboard Recommender
           </Link>
           <p className="font-label text-ca-label-sm font-medium text-ca-on-surface-variant">
-            © {year} Keyboard Recommender. Precision Crafted.
+            © {year} Keyboard Recommender
           </p>
         </div>
 

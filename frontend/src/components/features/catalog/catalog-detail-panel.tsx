@@ -11,6 +11,7 @@ import type { CatalogFamily, CatalogPartDetail } from "@/lib/api/catalog";
 import { catalogHref } from "@/lib/catalog-links";
 import { layoutSizeFilterLabel, resolveLayoutSizeFromMetadata } from "@/lib/layout-size";
 import { isReferenceOnlyLayoutArchetype, swagkeyProductLinkLabel } from "@/lib/layout-catalog-links";
+import { traitAxisDisplayLabel } from "@/lib/keyboard-terminology";
 import { normalizeSwagkeyProductUrl } from "@/lib/swagkey-source-links";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -108,7 +109,7 @@ function SwagkeyLink({ href, family, itemId }: { href?: string; family?: Catalog
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex h-9 items-center rounded-full border border-ca-primary/40 bg-ca-primary/10 px-3 font-label text-ca-label-sm font-medium text-ca-primary underline-offset-4 hover:bg-ca-primary/20 hover:underline"
+      className="inline-flex h-9 items-center rounded-btn border border-ca-outline-variant/50 bg-ca-surface-container px-3 font-label text-ca-label-sm font-medium text-ca-on-surface underline-offset-4 hover:border-ca-on-surface/40 hover:underline"
     >
       {swagkeyProductLinkLabel(family, itemId)}
     </a>
@@ -125,7 +126,7 @@ export function CatalogDetailPanel({ open, loading, error, family, partDetail, o
     ? Object.entries(partDetail.traits)
         .filter(([, v]) => Number.isFinite(v))
         .sort(([a], [b]) => a.localeCompare(b))
-        .map(([k, v]) => [k, v.toFixed(1)] as [string, string])
+        .map(([k, v]) => [traitAxisDisplayLabel(k), v.toFixed(1)] as [string, string])
     : [];
 
   const metadataEntries = partDetail
@@ -154,7 +155,7 @@ export function CatalogDetailPanel({ open, loading, error, family, partDetail, o
 
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-ca-base/70 p-0 backdrop-blur-sm sm:items-center sm:p-4">
-      <Card className={cn("ca-glass-elevated max-h-[90vh] w-full overflow-y-auto border-ca-outline-variant/40 sm:max-w-2xl")}>
+      <Card className={cn("max-h-[90vh] w-full overflow-y-auto border-ca-outline-variant/40 bg-ca-surface-container-lowest shadow-none sm:max-w-2xl")}>
         <CardHeader className="sticky top-0 z-10 border-b border-ca-outline-variant/40 bg-ca-surface-container/95 backdrop-blur">
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0 flex-1 space-y-1">
@@ -184,7 +185,7 @@ export function CatalogDetailPanel({ open, loading, error, family, partDetail, o
               type="button"
               variant="ghost"
               size="sm"
-              className="shrink-0 whitespace-nowrap rounded-full"
+              className="shrink-0 whitespace-nowrap rounded-btn"
               onClick={onClose}
             >
               닫기
@@ -234,12 +235,12 @@ export function CatalogDetailPanel({ open, loading, error, family, partDetail, o
                 />
               )}
               <div>
-                <p className="mb-2 font-label text-ca-label-sm font-medium text-ca-secondary">Traits</p>
+                <p className="mb-2 font-label text-ca-label-sm font-medium text-ca-on-surface-variant">취향 힌트</p>
                 <KeyValueGrid entries={traitEntries} />
               </div>
               {metadataEntries.length > 0 && !(family === "layout" && resolveLayoutDiagramId(partDetail.id, partDetail.imageUrl)) ? (
                 <div>
-                  <p className="mb-2 font-label text-ca-label-sm font-medium text-ca-secondary">Metadata</p>
+                  <p className="mb-2 font-label text-ca-label-sm font-medium text-ca-on-surface-variant">스펙</p>
                   <KeyValueGrid entries={metadataEntries} />
                 </div>
               ) : null}
@@ -259,7 +260,7 @@ export function CatalogDetailPanel({ open, loading, error, family, partDetail, o
                     <Link
                       href={caseCatalogHref}
                       onClick={onClose}
-                      className="inline-flex h-9 items-center rounded-full border border-ca-primary/40 bg-ca-primary/10 px-3 font-label text-ca-label-sm font-medium text-ca-primary underline-offset-4 hover:bg-ca-primary/20 hover:underline"
+                      className="inline-flex h-9 items-center rounded-btn border border-ca-outline-variant/50 bg-ca-surface-container px-3 font-label text-ca-label-sm font-medium text-ca-on-surface underline-offset-4 hover:border-ca-on-surface/40 hover:underline"
                     >
                       {layoutSizeForLink
                         ? `${layoutSizeFilterLabel(layoutSizeForLink)} 케이스/키트 보기`
