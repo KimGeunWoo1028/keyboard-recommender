@@ -98,11 +98,15 @@ export function MyPageHub() {
   const section = useMemo(() => {
     if (!user) {
       return (
-        <div className="ca-glass-panel border-ca-outline-variant/40 p-6">
-          <p className="font-label text-ca-label-sm font-medium text-ca-secondary">AUTH REQUIRED</p>
-          <h2 className="mt-1 font-headline text-lg font-semibold text-ca-on-surface">로그인이 필요합니다.</h2>
-          <p className="mt-1 text-sm text-ca-on-surface-variant">세션이 만료된 경우 다시 로그인해 주세요.</p>
-          <Link href="/auth?force=1" className={`${buttonClassName({ variant: "outline", className: "mt-4 rounded-full" })}`}>
+        <div className="rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest p-5 sm:p-6">
+          <h2 className="font-headline text-lg font-semibold text-ca-on-surface">로그인이 필요합니다.</h2>
+          <p className="mt-1 break-keep text-sm leading-relaxed text-ca-on-surface-variant">
+            세션이 만료된 경우 다시 로그인해 주세요.
+          </p>
+          <Link
+            href="/auth?force=1"
+            className={buttonClassName({ variant: "outline", className: "mt-4" })}
+          >
             로그인
           </Link>
         </div>
@@ -174,16 +178,16 @@ export function MyPageHub() {
 
   return (
     <div className="space-y-6" data-testid="e2e-mypage-hub">
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2" role="tablist" aria-label="마이페이지 섹션">
         {SECTIONS.map((tab) => (
           <Button
             key={tab.id}
             variant={tab.id === active ? "primary" : "outline"}
-            size="sm"
+            size="default"
             className={
               tab.id === active
-                ? "rounded-full"
-                : "rounded-full border-ca-outline-variant/60 bg-transparent text-ca-on-surface-variant hover:border-ca-primary/40 hover:bg-ca-primary/10 hover:text-ca-on-surface"
+                ? "h-10 rounded-lg px-4 sm:px-5"
+                : "h-10 rounded-lg border-ca-outline-variant/50 bg-transparent px-4 text-ca-on-surface-variant hover:border-ca-on-surface/30 hover:bg-ca-surface-container/50 hover:text-ca-on-surface sm:px-5"
             }
             onClick={() => selectSection(tab.id)}
           >
@@ -193,11 +197,10 @@ export function MyPageHub() {
       </div>
 
       {loadError ? (
-        <div className="ca-glass-panel border-ca-outline-variant/40 p-6">
-          <p className="font-label text-ca-label-sm font-medium text-ca-secondary">ERROR</p>
-          <h2 className="mt-1 font-headline text-lg font-semibold text-ca-on-surface">데이터를 불러오지 못했습니다.</h2>
-          <p className="mt-1 text-sm text-ca-on-surface-variant">{loadError}</p>
-          <Button variant="outline" className="mt-4 rounded-full" onClick={() => void loadExtras()}>
+        <div className="rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest p-5 sm:p-6">
+          <h2 className="font-headline text-lg font-semibold text-ca-on-surface">데이터를 불러오지 못했습니다.</h2>
+          <p className="mt-1 break-keep text-sm leading-relaxed text-ca-on-surface-variant">{loadError}</p>
+          <Button variant="outline" className="mt-4" onClick={() => void loadExtras()}>
             다시 시도
           </Button>
         </div>
@@ -207,7 +210,7 @@ export function MyPageHub() {
           {actionError}
           <button
             type="button"
-            className="ml-3 font-label text-ca-label-sm font-medium text-ca-primary hover:underline"
+            className="ml-3 text-sm font-medium text-ca-primary hover:underline"
             onClick={() => setActionError(null)}
           >
             닫기

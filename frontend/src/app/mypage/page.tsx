@@ -12,17 +12,16 @@ export const metadata: Metadata = {
 
 export default function MyPage() {
   return (
-    <PageShell className="max-w-ca space-y-6 px-ca-margin-mobile sm:px-ca-margin">
+    <PageShell className="max-w-ca space-y-8 px-ca-margin-mobile sm:px-ca-margin">
       {/* SSR chrome outside RequireAuth so title paints before /auth/me + hydration. */}
-      <div className="space-y-2">
-        <p className="font-label text-ca-label-sm font-medium text-ca-secondary">WORKSHOP</p>
-        <h1 className="font-headline text-2xl font-bold tracking-tight text-ca-on-surface sm:text-3xl">
+      <header className="space-y-2">
+        <h1 className="font-headline text-2xl font-semibold tracking-tight text-ca-on-surface sm:text-3xl">
           마이페이지
         </h1>
-        <p className="max-w-2xl text-sm text-ca-on-surface-variant">
-          취향 스냅샷, 저장한 빌드, 계정 설정을 한곳에서 관리하세요.
+        <p className="max-w-xl break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:text-base">
+          취향 스냅샷, 저장한 빌드, 계정 설정을 관리합니다.
         </p>
-      </div>
+      </header>
       <RequireAuth loadingFallback={<MyPageAuthLoadingShell />}>
         <Suspense fallback={<MyPageAuthLoadingShell />}>
           <MyPageHub />

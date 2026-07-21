@@ -139,7 +139,7 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
 
   return (
     <div className="space-y-4">
-      <MyPageSectionCard eyebrow="PROFILE" title="프로필" description="프로필 사진과 표시 이름을 확인·수정합니다.">
+      <MyPageSectionCard title="프로필" description="프로필 사진과 표시 이름을 확인·수정합니다.">
         <div className="flex items-center gap-4">
           <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full border border-ca-outline-variant/50 bg-ca-surface-container/60">
             {/* eslint-disable-next-line @next/next/no-img-element -- remote API avatar + local default */}
@@ -326,7 +326,7 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
         ) : null}
       </MyPageSectionCard>
 
-      <MyPageSectionCard eyebrow="SECURITY" title="보안" description="비밀번호를 바꾸고, 로그인 세션을 종료할 수 있어요.">
+      <MyPageSectionCard title="보안" description="비밀번호를 바꾸고, 로그인 세션을 종료할 수 있어요.">
         {securitySummary?.last_login_at ? (
           <p className="text-sm text-ca-on-surface-variant">
             최근 로그인 · {new Date(securitySummary.last_login_at).toLocaleString()}
@@ -575,7 +575,6 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
       </MyPageSectionCard>
 
       <MyPageSectionCard
-        eyebrow="DANGER"
         title="회원탈퇴"
         description="계정을 영구적으로 삭제합니다. 이 작업은 되돌릴 수 없습니다."
       >

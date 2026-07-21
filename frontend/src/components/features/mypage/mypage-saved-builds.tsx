@@ -130,7 +130,7 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
   const canRestore = mounted && selected ? canRestoreResults(selected) : false;
 
   return (
-    <MyPageSectionCard eyebrow="SAVED" title="저장한 빌드" description="왼쪽에서 빌드를 고르면 오른쪽에 상세가 표시됩니다.">
+    <MyPageSectionCard title="저장한 빌드" description="왼쪽에서 빌드를 고르면 오른쪽에 상세가 표시됩니다.">
       {showSearch ? (
         <Input
           value={query}
@@ -145,7 +145,7 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
           {restoreError}
           <button
             type="button"
-            className="ml-3 font-label text-ca-label-sm font-medium text-ca-primary hover:underline"
+            className="ml-3 text-sm font-medium text-ca-primary hover:underline"
             onClick={() => setRestoreError(null)}
           >
             닫기
@@ -154,9 +154,9 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
       ) : null}
 
       {filtered.length && selected ? (
-        <div className="grid items-stretch gap-3 lg:grid-cols-[minmax(12rem,16rem)_minmax(0,1fr)] lg:min-h-[28rem]">
+        <div className="grid items-stretch gap-4 lg:grid-cols-[minmax(12rem,16rem)_minmax(0,1fr)] lg:min-h-[28rem]">
           <div
-            className="ca-glass-panel flex max-h-[22rem] flex-col overflow-hidden border-ca-outline-variant/40 p-2 sm:p-2.5 lg:max-h-none lg:h-full"
+            className="flex max-h-[22rem] flex-col overflow-hidden rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container/20 p-2 sm:p-2.5 lg:max-h-none lg:h-full"
             role="listbox"
             aria-label="저장한 빌드 목록"
           >
@@ -176,10 +176,10 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
                       setRestoreError(null);
                     }}
                     className={cn(
-                      "flex h-[4.75rem] w-full flex-col justify-between rounded-lg border px-3 py-2.5 text-left transition",
+                      "flex h-[4.75rem] w-full flex-col justify-between rounded-lg border px-3 py-2.5 text-left transition-colors",
                       active
-                        ? "border-ca-primary/50 bg-ca-primary/10 shadow-[0_0_0_1px_rgba(124,58,237,0.25)]"
-                        : "border-ca-outline-variant/40 bg-ca-surface-container/30 hover:border-ca-primary/35 hover:bg-ca-surface-container/50",
+                        ? "border-ca-on-surface/40 bg-ca-surface-container/60"
+                        : "border-ca-outline-variant/40 bg-transparent hover:border-ca-outline-variant/70 hover:bg-ca-surface-container/40",
                     )}
                   >
                     <div className="min-h-[2.5rem]">
@@ -188,7 +188,7 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
                         {line2 ?? "\u00A0"}
                       </p>
                     </div>
-                    <p className="font-label text-[11px] text-ca-on-surface-variant">
+                    <p className="text-sm text-ca-on-surface-variant">
                       {new Date(item.saved_at).toLocaleDateString()}
                     </p>
                   </button>
@@ -197,11 +197,13 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
             </div>
           </div>
 
-          <div className="ca-glass-panel flex h-full min-h-[22rem] flex-col border-ca-outline-variant/40 p-4 sm:p-5 lg:min-h-0">
+          <div className="flex h-full min-h-[22rem] flex-col rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container/20 p-4 sm:p-5 lg:min-h-0">
             <div className="flex flex-wrap items-start justify-between gap-3 border-b border-ca-outline-variant/30 pb-4">
               <div className="min-w-0 space-y-1">
-                <p className="font-headline text-lg font-semibold text-ca-on-surface">{selected.title || selected.build_id}</p>
-                <p className="font-label text-[11px] text-ca-on-surface-variant">
+                <p className="font-headline text-lg font-semibold tracking-tight text-ca-on-surface">
+                  {selected.title || selected.build_id}
+                </p>
+                <p className="text-sm text-ca-on-surface-variant">
                   저장: {new Date(selected.saved_at).toLocaleString()}
                   {getUpdatedAt(selected) !== +new Date(selected.saved_at)
                     ? ` · 수정: ${new Date(getUpdatedAt(selected)).toLocaleString()}`
@@ -257,10 +259,12 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
                           isLastOdd && "sm:col-span-2",
                         )}
                       >
-                        <p className="font-label text-ca-label-sm font-medium text-ca-secondary">{part.label}</p>
+                        <p className="text-sm font-medium text-ca-on-surface-variant">{part.label}</p>
                         <p className="mt-0.5 text-sm font-medium text-ca-on-surface">{part.name}</p>
                         {part.detail ? (
-                          <p className="mt-1 text-sm leading-relaxed text-ca-on-surface-variant">{part.detail}</p>
+                          <p className="mt-1 break-keep text-sm leading-relaxed text-ca-on-surface-variant">
+                            {part.detail}
+                          </p>
                         ) : null}
                       </li>
                     );
@@ -273,7 +277,7 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
               )}
 
               {selected.summary && stackParts.length ? (
-                <p className="mt-4 border-t border-ca-outline-variant/25 pt-4 text-sm leading-relaxed text-ca-on-surface-variant">
+                <p className="mt-4 border-t border-ca-outline-variant/25 pt-4 break-keep text-sm leading-relaxed text-ca-on-surface-variant">
                   {selected.summary}
                 </p>
               ) : null}
@@ -291,10 +295,10 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
       )}
 
       {pendingDelete ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-ca-base/70 px-4 backdrop-blur-sm">
-          <div className="ca-glass-elevated w-full max-w-md p-5">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-ca-base/70 px-4">
+          <div className="w-full max-w-md rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest p-5 shadow-lg">
             <p className="font-headline text-base font-semibold text-ca-on-surface">저장한 빌드를 삭제할까요?</p>
-            <p className="mt-2 text-sm text-ca-on-surface-variant">
+            <p className="mt-2 break-keep text-sm leading-relaxed text-ca-on-surface-variant">
               &quot;{pendingDelete.title || pendingDelete.build_id}&quot; 항목을 삭제하면 되돌릴 수 없습니다.
             </p>
             <div className="mt-4 flex justify-end gap-2">

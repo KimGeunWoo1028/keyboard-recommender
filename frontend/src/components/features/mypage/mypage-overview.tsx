@@ -120,38 +120,39 @@ export function MyPageOverview({ user, savedItems }: Props) {
   const [titleLine1, titleLine2] = latestSaved ? shortTitleLines(latestSaved) : ["", undefined];
 
   return (
-    <div className="grid items-stretch gap-5 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
-      <article className="ca-glass-panel flex h-full min-h-[22rem] flex-col overflow-hidden border-ca-outline-variant/40 p-0 sm:min-h-[24rem]">
-        <div className="border-b border-ca-outline-variant/30 bg-gradient-to-br from-ca-primary/15 via-transparent to-ca-secondary/10 px-6 py-6 sm:px-7 sm:py-7">
+    <div className="grid items-stretch gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
+      <article className="flex h-full min-h-[22rem] flex-col overflow-hidden rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest sm:min-h-[24rem]">
+        <div className="border-b border-ca-outline-variant/30 px-5 py-5 sm:px-6 sm:py-6">
           <div className="flex items-center justify-between gap-5 sm:gap-8">
             <div className="min-w-0 flex-1">
-              <p className="font-label text-ca-label-sm font-medium text-ca-secondary">PROFILE</p>
-              <h2 className="mt-1.5 font-headline text-2xl font-bold text-ca-on-surface sm:text-3xl">{display}</h2>
+              <h2 className="font-headline text-xl font-semibold tracking-tight text-ca-on-surface sm:text-2xl">
+                {display}
+              </h2>
               {relative ? (
-                <p className="mt-2.5 text-sm text-ca-on-surface-variant">마지막 추천 · {relative}</p>
+                <p className="mt-2 text-sm text-ca-on-surface-variant">마지막 추천 · {relative}</p>
               ) : hasRecommendationHint ? (
-                <p className="mt-2.5 text-sm text-ca-on-surface-variant">마지막 추천 기록이 있습니다.</p>
+                <p className="mt-2 text-sm text-ca-on-surface-variant">마지막 추천 기록이 있습니다.</p>
               ) : (
-                <p className="mt-2.5 text-sm text-ca-on-surface-variant">아직 추천 기록이 없습니다.</p>
+                <p className="mt-2 text-sm text-ca-on-surface-variant">아직 추천 기록이 없습니다.</p>
               )}
               <Link
                 href="/recommend"
                 prefetch={false}
-                className={`${buttonClassName({ variant: "primary", size: "sm", className: "mt-5 rounded-full" })}`}
+                className={buttonClassName({ variant: "primary", size: "sm", className: "mt-5" })}
               >
                 다시 설문하기
               </Link>
             </div>
             <div
-              className="relative mr-3 h-28 w-28 shrink-0 overflow-hidden rounded-full border border-ca-outline-variant/50 bg-ca-surface-container/60 sm:mr-6 sm:h-32 sm:w-32"
+              className="relative h-24 w-24 shrink-0 overflow-hidden rounded-full border border-ca-outline-variant/50 bg-ca-surface-container/60 sm:h-28 sm:w-28"
               aria-label="프로필 사진"
             >
               {/* eslint-disable-next-line @next/next/no-img-element -- remote API avatar + local default; LCP on /mypage */}
               <img
                 src={avatarSrc}
                 alt=""
-                width={128}
-                height={128}
+                width={112}
+                height={112}
                 className="h-full w-full object-cover"
                 fetchPriority="high"
                 decoding="async"
@@ -160,16 +161,18 @@ export function MyPageOverview({ user, savedItems }: Props) {
           </div>
         </div>
 
-        <div className="flex flex-1 flex-col p-6 sm:p-7">
-          <p className="font-label text-ca-label-sm font-medium text-ca-secondary">취향 스냅샷</p>
-          <p className="mt-1.5 text-xs text-ca-on-surface-variant sm:text-sm">{TRAIT_MINI_PROFILE_MICROCOPY}</p>
+        <div className="flex flex-1 flex-col p-5 sm:p-6">
+          <h3 className="font-headline text-base font-semibold text-ca-on-surface">취향 스냅샷</h3>
+          <p className="mt-1 break-keep text-sm leading-relaxed text-ca-on-surface-variant">
+            {TRAIT_MINI_PROFILE_MICROCOPY}
+          </p>
           {bars.length ? (
             <div className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5 sm:grid-cols-3">
               {bars.map((bar) => (
                 <div key={bar.id} className="flex min-w-0 items-center gap-2 text-sm">
                   <span className="w-12 shrink-0 font-medium text-ca-on-surface">{bar.label}</span>
                   <span
-                    className="font-label text-xs leading-none tracking-tight text-ca-secondary"
+                    className="text-sm leading-none tracking-tight text-ca-on-surface-variant"
                     aria-label={`${bar.label} ${bar.filledSegments}/5`}
                   >
                     {fixedAxisBarGlyph(bar.filledSegments)}
@@ -183,7 +186,7 @@ export function MyPageOverview({ user, savedItems }: Props) {
               <Link
                 href="/recommend"
                 prefetch={false}
-                className="mt-2 block font-label text-ca-label-sm font-medium text-ca-primary hover:underline"
+                className="mt-2 block text-sm font-medium text-ca-primary hover:underline"
               >
                 설문으로 취향 만들기 →
               </Link>
@@ -192,15 +195,17 @@ export function MyPageOverview({ user, savedItems }: Props) {
         </div>
       </article>
 
-      <div className="ca-glass-panel flex h-full min-h-[22rem] flex-col border-ca-outline-variant/40 p-6 sm:min-h-[24rem] sm:p-7">
-        <p className="font-label text-ca-label-sm font-medium text-ca-secondary">SAVED BUILDS</p>
-        <p className="mt-2.5 font-headline text-4xl font-bold tabular-nums text-ca-on-surface sm:text-5xl">{savedItems.length}</p>
-        <p className="mt-1.5 text-sm text-ca-on-surface-variant">저장된 추천 빌드</p>
+      <div className="flex h-full min-h-[22rem] flex-col rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest p-5 sm:min-h-[24rem] sm:p-6">
+        <h3 className="font-headline text-base font-semibold text-ca-on-surface">저장한 빌드</h3>
+        <p className="mt-3 font-headline text-3xl font-semibold tabular-nums tracking-tight text-ca-on-surface">
+          {savedItems.length}
+        </p>
+        <p className="mt-1 text-sm text-ca-on-surface-variant">저장된 추천 빌드</p>
 
         <div className="mt-5 flex-1 border-t border-ca-outline-variant/30 pt-5">
           {latestSaved ? (
             <div className="space-y-2.5">
-              <p className="font-label text-ca-label-sm font-medium text-ca-secondary">최근 저장</p>
+              <p className="text-sm font-medium text-ca-on-surface-variant">최근 저장</p>
               <div>
                 <p className="font-headline text-base font-semibold leading-snug text-ca-on-surface">{titleLine1}</p>
                 {titleLine2 ? (
@@ -209,13 +214,13 @@ export function MyPageOverview({ user, savedItems }: Props) {
               </div>
               {switchPart ? (
                 <p className="text-sm text-ca-on-surface-variant">
-                  <span className="font-label text-ca-label-sm font-medium text-ca-secondary">스위치 · </span>
+                  <span className="font-medium text-ca-on-surface">스위치 · </span>
                   {switchPart.name}
                 </p>
               ) : null}
               {secondaryPart ? (
                 <p className="text-sm text-ca-on-surface-variant">
-                  <span className="font-label text-ca-label-sm font-medium text-ca-secondary">{secondaryPart.label} · </span>
+                  <span className="font-medium text-ca-on-surface">{secondaryPart.label} · </span>
                   {secondaryPart.name}
                 </p>
               ) : null}
@@ -226,7 +231,7 @@ export function MyPageOverview({ user, savedItems }: Props) {
               <Link
                 href="/recommend"
                 prefetch={false}
-                className="inline-block font-label text-ca-label-sm font-medium text-ca-primary hover:underline"
+                className="inline-block text-sm font-medium text-ca-primary hover:underline"
               >
                 설문 시작하기 →
               </Link>
@@ -236,7 +241,7 @@ export function MyPageOverview({ user, savedItems }: Props) {
 
         <Link
           href="/mypage?section=saved"
-          className="mt-5 self-start font-label text-ca-label-sm font-medium text-ca-primary hover:underline"
+          className="mt-5 self-start text-sm font-medium text-ca-primary hover:underline"
         >
           저장 목록 보기 →
         </Link>
