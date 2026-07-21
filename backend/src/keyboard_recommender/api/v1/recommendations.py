@@ -124,6 +124,33 @@ def post_unified_recommendation_events(
     return UnifiedEventsIngestResponse(stored=n, skipped=False)
 
 
+def _bookmark_owner_id(payload: dict, meta: dict) -> str:
+    row_user = payload.get("user_id")
+    meta_user = meta.get("userId")
+    return str(row_user or meta_user or "")
+
+
+def _saved_item_from_eval_row(row: EvalEvent) -> SavedRecommendationItem | None:
+    payload = row.payload if isinstance(row.payload, dict) else {}
+    meta = payload.get("metadata") if isinstance(payload.get("metadata"), dict) else {}
+    build_id = str(meta.get("buildId") or "")
+    if not build_id:
+        return None
+    row_session = payload.get("session_id")
+    row_scenario = payload.get("scenario_id")
+    return SavedRecommendationItem(
+        saved_at=row.created_at,
+        request_id=str(payload.get("request_id") or row.correlation_id or ""),
+        session_id=str(row_session) if row_session is not None else None,
+        scenario_id=str(row_scenario) if row_scenario is not None else None,
+        build_id=build_id,
+        title=str(meta.get("title") or ""),
+        summary=str(meta.get("summary") or ""),
+        components=meta.get("components") if isinstance(meta.get("components"), dict) else {},
+        metadata={k: v for k, v in meta.items() if k not in {"buildId", "title", "summary", "components"}},
+    )
+
+
 @router.post(
     "/saved",
     response_model=SaveRecommendationResponse,
@@ -138,12 +165,16 @@ def post_save_recommendation(
 ) -> SaveRecommendationResponse:
     if not settings.enable_evaluation_persistence or db_session is None:
         return SaveRecommendationResponse(saved=False, reason="evaluation_persistence_disabled")
+    # Account bookmarks must be owned; unauthenticated callers get saved=false so the
+    # client can fall back to local storage instead of a success toast with no mypage row.
+    if current_user is None:
+        return SaveRecommendationResponse(saved=False, reason="login_required")
     payload = {
         "event_type": "interaction.bookmark",
         "request_id": body.request_id,
         "session_id": body.session_id,
         "scenario_id": body.scenario_id,
-        "user_id": str(current_user.id) if current_user is not None else None,
+        "user_id": str(current_user.id),
         "metadata": {
             "buildId": body.build_id,
             "title": body.title,
@@ -180,41 +211,39 @@ def get_saved_recommendations(
 ) -> SavedRecommendationsResponse:
     if not settings.enable_evaluation_persistence or db_session is None:
         return SavedRecommendationsResponse(items=[])
+    # Do not leak other users' bookmarks to anonymous callers.
+    if current_user is None and not (session_id or "").strip():
+        return SavedRecommendationsResponse(items=[])
     lim = max(1, min(int(limit), 100))
+    # Oversample then filter: user_id lives in JSON payload, so a tight SQL limit
+    # before ownership filter can hide the caller's own recent saves.
+    scan_limit = min(400, max(lim * 20, 100))
     stmt = (
         select(EvalEvent)
         .where(EvalEvent.event_type == "interaction.bookmark")
         .order_by(EvalEvent.created_at.desc())
-        .limit(lim)
+        .limit(scan_limit)
     )
     rows = db_session.execute(stmt).scalars().all()
     out: list[SavedRecommendationItem] = []
+    owner_id = str(current_user.id) if current_user is not None else ""
     for row in rows:
         payload = row.payload if isinstance(row.payload, dict) else {}
         meta = payload.get("metadata") if isinstance(payload.get("metadata"), dict) else {}
         row_scenario = payload.get("scenario_id")
         row_session = payload.get("session_id")
-        row_user = payload.get("user_id")
-        meta_user = meta.get("userId")
-        if current_user is not None and str(row_user or meta_user or "") != str(current_user.id):
+        if owner_id and _bookmark_owner_id(payload, meta) != owner_id:
+            continue
+        if not owner_id and session_id and str(row_session or "") != session_id:
             continue
         if scenario_id and str(row_scenario or "") != scenario_id:
             continue
-        if session_id and str(row_session or "") != session_id:
+        item = _saved_item_from_eval_row(row)
+        if item is None:
             continue
-        out.append(
-            SavedRecommendationItem(
-                saved_at=row.created_at,
-                request_id=str(payload.get("request_id") or row.correlation_id or ""),
-                session_id=str(row_session) if row_session is not None else None,
-                scenario_id=str(row_scenario) if row_scenario is not None else None,
-                build_id=str(meta.get("buildId") or ""),
-                title=str(meta.get("title") or ""),
-                summary=str(meta.get("summary") or ""),
-                components=meta.get("components") if isinstance(meta.get("components"), dict) else {},
-                metadata={k: v for k, v in meta.items() if k not in {"buildId", "title", "summary", "components"}},
-            ),
-        )
+        out.append(item)
+        if len(out) >= lim:
+            break
     return SavedRecommendationsResponse(items=out)
 
 

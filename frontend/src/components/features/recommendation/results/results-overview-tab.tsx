@@ -120,6 +120,8 @@ export type ResultsOverviewTabProps = {
   refineError?: string | null;
   onApplyRefinement: (stepId: string, answerId: string, label: string) => void;
   isAuthenticated: boolean;
+  /** False while AuthHeaderProvider is still resolving /auth/me. */
+  authReady?: boolean;
   saveState: "idle" | "saving" | "saved" | "error";
   saveMessage: string;
   onSaveBuild: () => void;
@@ -132,6 +134,7 @@ export function ResultsOverviewTab({
   enrichedSourceUrls,
   enrichedLayoutSizes = {},
   isAuthenticated,
+  authReady = true,
   saveState,
   saveMessage,
   onSaveBuild,
@@ -196,10 +199,16 @@ export function ResultsOverviewTab({
             data-testid="e2e-save-build-primary"
             size="default"
             className="w-full sm:w-auto"
-            disabled={saveState === "saving"}
+            disabled={!authReady || saveState === "saving"}
             onClick={() => void onSaveBuild()}
           >
-            {saveState === "saving" ? "저장 중..." : isAuthenticated ? "이 빌드 저장" : "로컬에 저장"}
+            {!authReady
+              ? "로그인 확인 중..."
+              : saveState === "saving"
+                ? "저장 중..."
+                : isAuthenticated
+                  ? "이 빌드 저장"
+                  : "로컬에 저장"}
           </Button>
           {(() => {
             const switchPick = apiPicks.find((row) => row.domain.toLowerCase() === "switch");
@@ -321,10 +330,16 @@ export function ResultsOverviewTab({
               data-testid="e2e-save-build"
               size="default"
               className="w-full sm:min-w-[8.5rem] sm:w-auto"
-              disabled={saveState === "saving"}
+              disabled={!authReady || saveState === "saving"}
               onClick={() => void onSaveBuild()}
             >
-              {saveState === "saving" ? "저장 중..." : isAuthenticated ? "이 빌드 저장" : "로컬에 저장"}
+              {!authReady
+                ? "로그인 확인 중..."
+                : saveState === "saving"
+                  ? "저장 중..."
+                  : isAuthenticated
+                    ? "이 빌드 저장"
+                    : "로컬에 저장"}
             </Button>
             {saveMessage ? (
               <div className="space-y-1 text-sm text-ca-on-surface-variant sm:text-right" role="status" aria-live="polite">

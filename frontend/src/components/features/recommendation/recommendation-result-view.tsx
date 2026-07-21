@@ -99,8 +99,8 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
   const [applyingRefine, setApplyingRefine] = useState(false);
   const [saveCollection, setSaveCollection] = useState("일반");
   // Reuse AuthHeaderProvider session (single GET /auth/me) — avoid a second fetch.
-  const { user: authUser } = useAuthHeader();
-  const isAuthenticated = !!authUser;
+  const { user: authUser, authChecked } = useAuthHeader();
+  const isAuthenticated = authChecked && !!authUser;
   const sessionId = useMemo(() => getOrCreateClientSessionId(), []);
   const [activeBackendTab, setActiveBackendTab] = useState<BackendResultTabId>("overview");
   const [activeLiteTab, setActiveLiteTab] = useState<LiteResultTabId>("overview");
@@ -315,6 +315,11 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
   }, [apiPicks, sourceUrls]);
 
   async function handleSaveBuild() {
+    if (!authChecked) {
+      setSaveState("error");
+      setSaveMessage("로그인 상태를 확인하는 중입니다. 잠시 후 다시 시도해 주세요.");
+      return;
+    }
     const authenticated = isAuthenticated;
     if (!authenticated) {
       setSaveState("saving");
@@ -402,6 +407,13 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
       const result = await saveRecommendationBookmark(bookmarkInput);
       if (!result.saved) {
         saveLocalGuestBookmark(bookmarkInput);
+        if (result.reason === "login_required") {
+          setSaveState("error");
+          setSaveMessage(
+            "계정 저장에 실패했습니다. 세션이 만료되었을 수 있어요. 이 브라우저에는 임시 저장했고, 다시 로그인 후 저장하면 마이페이지에 남습니다.",
+          );
+          return;
+        }
         setSaveMessage(
           result.reason === "evaluation_persistence_disabled"
             ? "이 브라우저에 로컬 저장되었습니다. 마이페이지에서 확인할 수 있어요."
@@ -480,6 +492,7 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
             refineError={refineError}
             onApplyRefinement={(stepId, answerId, label) => void handleApplyRefinement(stepId, answerId, label)}
             isAuthenticated={isAuthenticated}
+            authReady={authChecked}
             saveState={saveState}
             saveMessage={saveMessage}
             onSaveBuild={() => void handleSaveBuild()}

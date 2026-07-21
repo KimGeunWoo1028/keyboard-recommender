@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import uuid
 from collections.abc import Generator
+from datetime import datetime, timedelta, timezone
+from types import SimpleNamespace
 
 import pytest
 from fastapi.testclient import TestClient
@@ -11,7 +13,7 @@ from sqlalchemy import create_engine, event, func, select
 from sqlalchemy.orm import Session, sessionmaker
 from sqlalchemy.pool import StaticPool
 
-from keyboard_recommender.api.deps import get_db_for_evaluation, get_settings_dep
+from keyboard_recommender.api.deps import get_current_user_optional, get_db_for_evaluation, get_settings_dep
 from keyboard_recommender.app_factory import create_app
 from keyboard_recommender.config.settings import Settings
 from keyboard_recommender.infrastructure.persistence.base import Base
@@ -253,6 +255,7 @@ def test_post_events_api_stores_when_persistence_on(sqlite_eval_session: Session
 
 def test_save_and_list_saved_recommendations(sqlite_eval_session: Session) -> None:
     app = create_app()
+    owner = SimpleNamespace(id=uuid.uuid4())
 
     def _settings() -> Settings:
         return Settings(
@@ -265,8 +268,37 @@ def test_save_and_list_saved_recommendations(sqlite_eval_session: Session) -> No
 
     app.dependency_overrides[get_settings_dep] = _settings
     app.dependency_overrides[get_db_for_evaluation] = _db
+    app.dependency_overrides[get_current_user_optional] = lambda: owner
     try:
         client = TestClient(app)
+        anonymous = create_app()
+        anonymous.dependency_overrides[get_settings_dep] = _settings
+        anonymous.dependency_overrides[get_db_for_evaluation] = _db
+        anonymous.dependency_overrides[get_current_user_optional] = lambda: None
+        try:
+            anon_client = TestClient(anonymous)
+            denied = anon_client.post(
+                "/api/v1/recommendations/saved",
+                json={
+                    "request_id": "req-anon",
+                    "session_id": "sess-anon",
+                    "scenario_id": "scen-1",
+                    "build_id": "build-anon",
+                    "title": "Anon build",
+                    "summary": "Should not account-save.",
+                    "components": {"switches": "Silent linear"},
+                    "metadata": {},
+                },
+            )
+            assert denied.status_code == 200
+            assert denied.json()["saved"] is False
+            assert denied.json()["reason"] == "login_required"
+            leaked = anon_client.get("/api/v1/recommendations/saved")
+            assert leaked.status_code == 200
+            assert leaked.json()["items"] == []
+        finally:
+            anonymous.dependency_overrides.clear()
+
         res = client.post(
             "/api/v1/recommendations/saved",
             json={
@@ -288,5 +320,75 @@ def test_save_and_list_saved_recommendations(sqlite_eval_session: Session) -> No
         assert len(items) == 1
         assert items[0]["build_id"] == "build-abc"
         assert items[0]["title"] == "Muted daily build"
+    finally:
+        app.dependency_overrides.clear()
+
+
+def test_list_saved_recommendations_finds_owner_past_recent_noise(
+    sqlite_eval_session: Session,
+) -> None:
+    """Owner rows must surface even when many other users' bookmarks are newer."""
+    app = create_app()
+    owner = SimpleNamespace(id=uuid.uuid4())
+    other = uuid.uuid4()
+
+    def _settings() -> Settings:
+        return Settings(
+            database_url="postgresql+psycopg://keyboard:keyboard@localhost:5432/keyboard_recommender",
+            enable_evaluation_persistence=True,
+        )
+
+    def _db() -> Generator[Session, None, None]:
+        yield sqlite_eval_session
+
+    older = datetime.now(timezone.utc) - timedelta(days=1)
+    sqlite_eval_session.add(
+        EvalEvent(
+            created_at=older,
+            event_type="interaction.bookmark",
+            correlation_id="req-owner-old",
+            payload={
+                "event_type": "interaction.bookmark",
+                "request_id": "req-owner-old",
+                "user_id": str(owner.id),
+                "metadata": {
+                    "buildId": "build-owner",
+                    "title": "Owner keep",
+                    "summary": "Should remain listable",
+                    "components": {"switches": "Linear"},
+                },
+            },
+        ),
+    )
+    for i in range(35):
+        sqlite_eval_session.add(
+            EvalEvent(
+                created_at=datetime.now(timezone.utc),
+                event_type="interaction.bookmark",
+                correlation_id=f"req-noise-{i}",
+                payload={
+                    "event_type": "interaction.bookmark",
+                    "request_id": f"req-noise-{i}",
+                    "user_id": str(other),
+                    "metadata": {
+                        "buildId": f"build-noise-{i}",
+                        "title": "Noise",
+                        "summary": "",
+                        "components": {},
+                    },
+                },
+            ),
+        )
+    sqlite_eval_session.commit()
+
+    app.dependency_overrides[get_settings_dep] = _settings
+    app.dependency_overrides[get_db_for_evaluation] = _db
+    app.dependency_overrides[get_current_user_optional] = lambda: owner
+    try:
+        client = TestClient(app)
+        res = client.get("/api/v1/recommendations/saved", params={"limit": 10})
+        assert res.status_code == 200
+        items = res.json()["items"]
+        assert any(it["build_id"] == "build-owner" for it in items)
     finally:
         app.dependency_overrides.clear()
