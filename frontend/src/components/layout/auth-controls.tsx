@@ -7,6 +7,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 import { fetchCurrentUser, logout, subscribeAuthChanged, type AuthUser } from "@/lib/api/auth";
 import { resolveAvatarSrc } from "@/lib/avatar";
 import { Spinner } from "@/components/ui/spinner";
+import { buttonClassName } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const AUTH_CHECK_TIMEOUT_MS = 12_000;
@@ -159,9 +160,8 @@ export function AuthSessionAction() {
         href={`/auth?force=1&next=${encodeURIComponent(nextPath)}`}
         prefetch={false}
         className={cn(
-          "inline-flex h-9 min-w-[4.75rem] shrink-0 items-center justify-center whitespace-nowrap rounded-btn bg-ca-primary-container px-3 py-2 font-headline text-xs font-bold text-ca-on-primary-container sm:px-5 sm:text-sm",
-          "transition-transform hover:scale-[0.97] active:scale-95",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-primary",
+          buttonClassName({ variant: "outline", size: "sm" }),
+          "h-9 min-w-[4.75rem] shrink-0 border-ca-outline-variant/50 px-3 font-headline text-xs font-bold sm:px-5 sm:text-sm",
         )}
       >
         로그인

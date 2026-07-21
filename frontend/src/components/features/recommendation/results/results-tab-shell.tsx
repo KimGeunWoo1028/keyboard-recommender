@@ -14,7 +14,7 @@ function tabClass(active: boolean): string {
   return cn(
     "h-10 shrink-0 snap-start rounded-lg px-4 text-sm font-medium sm:px-5",
     active
-      ? undefined
+      ? "border-ca-on-surface/35 bg-ca-surface-container/70 text-ca-on-surface"
       : "border-ca-outline-variant/50 bg-transparent text-ca-on-surface-variant hover:border-ca-on-surface/30 hover:bg-ca-surface-container/50 hover:text-ca-on-surface",
   );
 }
@@ -38,7 +38,7 @@ export function BackendResultTabBar({
           <Button
             key={tab.id}
             size="default"
-            variant={activeTab === tab.id ? "primary" : "outline"}
+            variant="outline"
             className={tabClass(activeTab === tab.id)}
             onClick={() => onTabChange(tab.id)}
           >
@@ -63,7 +63,7 @@ export function LiteResultTabBar({
         <Button
           key={tab.id}
           size="default"
-          variant={activeTab === tab.id ? "primary" : "outline"}
+          variant="outline"
           className={tabClass(activeTab === tab.id)}
           onClick={() => onTabChange(tab.id)}
         >
