@@ -1,41 +1,29 @@
 import { HomeHeroActions } from "@/components/features/home/home-hero-actions";
-import { HomeWorkshopPreviewGate } from "@/components/features/home/home-workshop-preview-gate";
 
+/**
+ * Home first viewport — one composition (Desk Craft).
+ * Preview lives below the fold; brand wordmark stays in the site header.
+ */
 export function HomeHero() {
   return (
-    <section className="relative overflow-hidden rounded-lg border border-ca-outline-variant/30 bg-ca-surface-container-low/60">
-      <div
-        className="pointer-events-none absolute inset-0 opacity-90"
-        aria-hidden
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 60% at 85% 20%, rgb(var(--ca-primary) / 0.18), transparent 55%), radial-gradient(ellipse 50% 40% at 10% 90%, rgb(var(--ca-secondary) / 0.12), transparent 50%), linear-gradient(135deg, rgb(var(--ca-surface-container) / 0.4), transparent)",
-        }}
-      />
-      <div className="relative grid items-center gap-8 p-6 sm:p-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:gap-12 lg:p-12">
-        <div className="space-y-6">
-          <p className="inline-flex items-center gap-2 rounded-full border border-ca-primary/30 bg-ca-primary/10 px-3 py-1 font-label text-ca-label-sm font-medium text-ca-primary">
-            <span className="h-1.5 w-1.5 rounded-full bg-ca-primary" aria-hidden />
-            맞춤 추천 · 6축 빌드
-          </p>
+    <section className="home-hero max-w-xl pt-2 sm:pt-4 md:max-w-2xl">
+      <p className="font-headline text-sm font-semibold tracking-tight text-ca-on-surface sm:text-base">
+        Keyboard Recommender
+      </p>
 
-          <h1 className="font-headline text-3xl font-bold tracking-tight text-ca-on-surface sm:text-4xl md:text-5xl md:leading-[1.1]">
-            정밀하게 맞춘
-            <br />
-            <span className="bg-gradient-to-r from-ca-primary to-ca-secondary bg-clip-text text-transparent">
-              기계식 마스터리
-            </span>
-          </h1>
+      <h1 className="mt-4 font-headline text-3xl font-semibold tracking-tight text-ca-on-surface sm:mt-5 sm:text-4xl sm:leading-[1.15] md:text-[2.75rem]">
+        취향에 맞는
+        <br />
+        키보드 조합
+      </h1>
 
-          <p className="max-w-xl break-keep text-ca-body-md text-ca-on-surface-variant sm:text-ca-body-lg lg:max-w-[35ch]">
-            타건감·사운드 취향을 알려주시면 스위치부터 플레이트, 폼, 케이스, 키캡까지 한 번에
-            조합해 드려요. 스웨그키 카탈로그와도 바로 연결됩니다.
-          </p>
+      <p className="mt-4 max-w-[36rem] break-keep text-base leading-relaxed text-ca-on-surface-variant sm:mt-5 sm:text-lg sm:leading-relaxed">
+        짧은 설문으로 소리·타건 취향을 알려주시면, 스위치부터 키캡까지 한 번에 맞춰 드려요. 스웨그키
+        판매 제품과도 바로 이어집니다.
+      </p>
 
-          <HomeHeroActions />
-        </div>
-
-        <HomeWorkshopPreviewGate />
+      <div className="mt-8 sm:mt-10">
+        <HomeHeroActions />
       </div>
     </section>
   );

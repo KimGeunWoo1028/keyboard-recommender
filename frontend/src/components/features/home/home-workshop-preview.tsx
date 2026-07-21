@@ -8,10 +8,7 @@ import {
   HomeWorkshopPreviewShell,
 } from "@/components/features/home/home-workshop-guest-preview";
 import { useAuthHeader } from "@/components/layout/auth-controls";
-import {
-  fixedAxisBarGlyph,
-  fixedAxisBars,
-} from "@/components/features/recommendation/results/results-trait-display";
+import { fixedAxisBars } from "@/components/features/recommendation/results/results-trait-display";
 import {
   listSavedBookmarksWithLocalFallback,
   type SavedRecommendationItem,
@@ -69,23 +66,25 @@ function shortTitle(item: SavedRecommendationItem): string {
 function EmptyLoggedInPreview({ recommendHref }: { recommendHref: string }) {
   return (
     <HomeWorkshopPreviewShell>
-      <p className="mt-3 font-headline text-ca-headline-md text-ca-on-surface">아직 추천 기록이 없어요</p>
-      <p className="mt-3 text-sm leading-relaxed text-ca-on-surface-variant">
-        설문으로 첫 추천을 받아보세요. 취향 스냅샷과 저장 빌드가 여기에 나타납니다.
+      <p className="font-headline text-base font-semibold text-ca-on-surface sm:text-lg">
+        아직 추천 기록이 없어요
+      </p>
+      <p className="mt-2 break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:text-base">
+        설문으로 첫 조합을 받아 보세요. 저장한 빌드는 마이페이지에서 관리합니다.
       </p>
       <Link
         href={recommendHref}
-        className="mt-5 inline-block font-label text-ca-label-sm font-medium text-ca-primary hover:underline"
+        className="mt-5 inline-block text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline"
       >
-        설문으로 첫 추천 받기 →
+        설문으로 첫 추천 받기
       </Link>
     </HomeWorkshopPreviewShell>
   );
 }
 
 /**
- * Hero right panel — personalized when logged in; honest static summary when guest.
- * Reuses the same local trait + saved-bookmark sources as mypage overview.
+ * Below-fold experience panel — personalized when logged in; honest static summary when guest.
+ * Data sources unchanged; presentation stays thin (Home IA: not a dashboard).
  */
 export function HomeWorkshopPreview() {
   const { user, authChecked } = useAuthHeader();
@@ -162,8 +161,8 @@ export function HomeWorkshopPreview() {
   if (dataPending) {
     return (
       <HomeWorkshopPreviewShell>
-        <p className="mt-3 font-headline text-ca-headline-md text-ca-on-surface">내 워크스페이스</p>
-        <p className="mt-3 text-sm text-ca-on-surface-variant">불러오는 중…</p>
+        <p className="font-headline text-base font-semibold text-ca-on-surface sm:text-lg">불러오는 중</p>
+        <p className="mt-2 text-sm text-ca-on-surface-variant">잠시만 기다려 주세요.</p>
       </HomeWorkshopPreviewShell>
     );
   }
@@ -174,30 +173,16 @@ export function HomeWorkshopPreview() {
 
   return (
     <HomeWorkshopPreviewShell>
-      <p className="mt-3 font-headline text-ca-headline-md text-ca-on-surface">내 워크스페이스</p>
+      <p className="font-headline text-base font-semibold text-ca-on-surface sm:text-lg">이어서 보기</p>
       {relative ? (
         <p className="mt-1.5 text-sm text-ca-on-surface-variant">마지막 추천 · {relative}</p>
-      ) : null}
-
-      {hasTraits ? (
-        <div className="mt-4 grid grid-cols-2 gap-x-3 gap-y-2">
-          {bars.map((bar) => (
-            <div key={bar.id} className="flex min-w-0 items-center gap-1.5 text-xs sm:text-sm">
-              <span className="w-10 shrink-0 font-medium text-ca-on-surface sm:w-12">{bar.label}</span>
-              <span
-                className="font-label text-[10px] leading-none tracking-tight text-ca-secondary sm:text-xs"
-                aria-label={`${bar.label} ${bar.filledSegments}/5`}
-              >
-                {fixedAxisBarGlyph(bar.filledSegments)}
-              </span>
-            </div>
-          ))}
-        </div>
+      ) : hasTraits ? (
+        <p className="mt-1.5 text-sm text-ca-on-surface-variant">취향 설문이 준비되어 있어요.</p>
       ) : null}
 
       {hasSaved && latestSaved ? (
-        <div className={`${hasTraits ? "mt-4 border-t border-ca-outline-variant/30 pt-4" : "mt-4"}`}>
-          <p className="font-label text-ca-label-sm font-medium text-ca-secondary">최근 저장</p>
+        <div className="mt-4 border-t border-ca-outline-variant/35 pt-4">
+          <p className="text-sm text-ca-on-surface-variant">최근 저장</p>
           <Link
             href="/mypage?section=saved"
             prefetch={false}
@@ -212,9 +197,19 @@ export function HomeWorkshopPreview() {
         <Link
           href={recommendHref}
           prefetch={user ? undefined : false}
-          className="mt-4 inline-block font-label text-ca-label-sm font-medium text-ca-primary hover:underline"
+          className="mt-4 inline-block text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline"
         >
-          설문으로 취향 스냅샷 만들기 →
+          설문으로 취향 잡기
+        </Link>
+      ) : null}
+
+      {hasTraits && !hasSaved ? (
+        <Link
+          href="/results"
+          prefetch={false}
+          className="mt-4 inline-block text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline"
+        >
+          최근 결과 열기
         </Link>
       ) : null}
     </HomeWorkshopPreviewShell>

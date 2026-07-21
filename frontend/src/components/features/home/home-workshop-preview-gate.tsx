@@ -17,8 +17,9 @@ const HomeWorkshopPreview = dynamic(
 );
 
 /**
- * Workshop preview is desktop-only (`lg:block`). Defer its JS (saved bookmarks + trait bars)
- * until the viewport is large enough so mobile home does not download that chunk.
+ * Below-fold preview gate. Guest panel is SSR-safe on all viewports.
+ * Personalized panel JS (bookmarks) still deferred until desktop width so mobile
+ * LCP stays light — mobile sees the experience summary only (Home IA).
  */
 export function HomeWorkshopPreviewGate() {
   const [desktop, setDesktop] = useState(false);
