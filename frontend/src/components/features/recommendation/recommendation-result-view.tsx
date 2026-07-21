@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import {
@@ -9,13 +10,13 @@ import {
   saveLocalGuestBookmark,
   saveRecommendationBookmark,
 } from "@/lib/api/saved-recommendations";
-import { fetchCurrentUser } from "@/lib/api/auth";
 import { fetchCatalogPart, type CatalogFamily } from "@/lib/api/catalog";
 import { emitResultsUxEventBestEffort } from "@/lib/api/onboarding-events";
 import { getPublicApiBase } from "@/lib/api/client";
 import { isCanonicalSwagkeyProductUrl, pickSourceUrlKey } from "@/lib/swagkey-source-links";
 import { resolveLayoutSizeFromMetadata } from "@/lib/layout-size";
 import { layoutArchetypeMetadata } from "@/components/features/catalog/layout-diagram/layout-archetype-metadata";
+import { useAuthHeader } from "@/components/layout/auth-controls";
 import { makeResultSnapshotId, saveResultSnapshot } from "@/lib/saved-result-snapshots";
 import { recommendKeyboardStack } from "@/recommendation-engine/recommend";
 import { buildPreferenceVectorFromSubmission } from "@/nl-preference/merge-submission";
@@ -31,12 +32,27 @@ import { MetricGuideCard } from "./results/metric-guide-card";
 import { CategorySection, RecommendationCompareCard } from "./results/results-lite-compare";
 import { catalogPickMetadata } from "./results/results-build-utils";
 import { DISPLAY_K } from "./results/results-constants";
-import { ResultsEvidenceTab } from "./results/results-evidence-tab";
 import { ResultsOverviewTab } from "./results/results-overview-tab";
 import { ResultsTrustLayer } from "./results/results-trust-layer";
 import { BackendResultTabBar, LiteResultTabBar } from "./results/results-tab-shell";
 import type { BackendResultTabId, LiteResultTabId } from "./results/results-types";
 import { SharedResultHeader } from "./results/shared-result-header";
+
+const ResultsEvidenceTab = dynamic(
+  () =>
+    import("./results/results-evidence-tab").then((m) => ({
+      default: m.ResultsEvidenceTab,
+    })),
+  {
+    loading: () => (
+      <div
+        className="min-h-[20rem] animate-pulse rounded-2xl border border-ca-outline-variant/30 bg-ca-surface-container/40"
+        aria-busy="true"
+        aria-label="근거 탭 불러오는 중"
+      />
+    ),
+  },
+);
 
 type Props = {
   submission: SurveySubmission;
@@ -82,26 +98,12 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
   const [saveMessage, setSaveMessage] = useState("");
   const [applyingRefine, setApplyingRefine] = useState(false);
   const [saveCollection, setSaveCollection] = useState("일반");
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // Reuse AuthHeaderProvider session (single GET /auth/me) — avoid a second fetch.
+  const { user: authUser } = useAuthHeader();
+  const isAuthenticated = !!authUser;
   const sessionId = useMemo(() => getOrCreateClientSessionId(), []);
   const [activeBackendTab, setActiveBackendTab] = useState<BackendResultTabId>("overview");
   const [activeLiteTab, setActiveLiteTab] = useState<LiteResultTabId>("overview");
-
-  useEffect(() => {
-    if (!useBackendScoring) return;
-    let mounted = true;
-    void fetchCurrentUser()
-      .then((user) => {
-        if (!mounted) return;
-        setIsAuthenticated(!!user);
-      })
-      .catch(() => {
-        if (mounted) setIsAuthenticated(false);
-      });
-    return () => {
-      mounted = false;
-    };
-  }, [useBackendScoring]);
 
   useEffect(() => {
     if (!useBackendScoring) return;
@@ -309,21 +311,11 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
     };
     // Deliberately omit enriched* maps: attempted-ref gates one fetch per key; re-running
     // on enrich updates caused cancel/retry storms (layout-007 + events in Lighthouse).
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- see comment above
   }, [apiPicks, sourceUrls]);
 
   async function handleSaveBuild() {
-    let authenticated = isAuthenticated;
-    if (!authenticated) {
-      try {
-        const user = await fetchCurrentUser();
-        authenticated = !!user;
-        if (authenticated) {
-          setIsAuthenticated(true);
-        }
-      } catch {
-        authenticated = false;
-      }
-    }
+    const authenticated = isAuthenticated;
     if (!authenticated) {
       setSaveState("saving");
       setSaveMessage("");

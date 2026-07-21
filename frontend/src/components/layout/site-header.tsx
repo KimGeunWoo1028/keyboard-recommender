@@ -31,15 +31,19 @@ export function SiteHeader() {
   const pathname = usePathname() ?? "/";
   const [mobileOpen, setMobileOpen] = useState(false);
   /**
-   * On home / recommend / catalog first paint, skip speculative RSC/JS prefetch of
-   * other tabs so Lighthouse unused-chunk noise stays down and LCP bandwidth is free.
+   * On primary surfaces first paint, skip speculative RSC/JS prefetch of other
+   * tabs so Lighthouse unused-chunk noise stays down and LCP bandwidth is free.
    */
   const deferNavPrefetch =
     pathname === "/" ||
     pathname === "/catalog" ||
     pathname.startsWith("/catalog/") ||
     pathname === "/recommend" ||
-    pathname.startsWith("/recommend/");
+    pathname.startsWith("/recommend/") ||
+    pathname === "/results" ||
+    pathname.startsWith("/results/") ||
+    pathname === "/mypage" ||
+    pathname.startsWith("/mypage/");
 
   return (
     <header className="sticky top-0 z-50 border-b border-ca-outline-variant/30 bg-ca-surface/80 shadow-sm backdrop-blur-xl dark:bg-ca-surface-dim/80">

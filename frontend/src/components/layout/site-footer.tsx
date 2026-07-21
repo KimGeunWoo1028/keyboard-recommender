@@ -11,7 +11,11 @@ export function SiteFooter() {
     pathname === "/catalog" ||
     pathname.startsWith("/catalog/") ||
     pathname === "/recommend" ||
-    pathname.startsWith("/recommend/");
+    pathname.startsWith("/recommend/") ||
+    pathname === "/results" ||
+    pathname.startsWith("/results/") ||
+    pathname === "/mypage" ||
+    pathname.startsWith("/mypage/");
 
   return (
     <footer className="mt-auto border-t border-ca-outline-variant/30 bg-ca-surface-container-lowest/80">

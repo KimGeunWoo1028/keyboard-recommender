@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import { ResultsAuthLoadingShell } from "@/components/auth/results-auth-loading-shell";
 import { RecommendationResultView } from "@/components/features/recommendation/recommendation-result-view";
 import { ApiError } from "@/lib/api/client";
 import { emitRefinementEventBestEffort } from "@/lib/api/onboarding-events";
@@ -110,11 +111,7 @@ export function ResultsView() {
   }, [hydrated, submission]);
 
   if (!hydrated) {
-    return (
-      <p className="font-label text-ca-label-sm font-medium text-ca-on-surface-variant" aria-live="polite">
-        불러오는 중…
-      </p>
-    );
+    return <ResultsAuthLoadingShell />;
   }
 
   if (!submission || !build) {
