@@ -88,9 +88,11 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
   const [pendingDelete, setPendingDelete] = useState<SavedRecommendationItem | null>(null);
   const [restoreError, setRestoreError] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
+  const [hasLocalResult, setHasLocalResult] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    setHasLocalResult(Boolean(loadLastKnownGoodSubmission()?.build));
   }, []);
 
   const showSearch = items.length >= SEARCH_VISIBLE_FROM;
@@ -292,12 +294,41 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
           </div>
         </div>
       ) : (
-        <div className="rounded-lg border border-dashed border-ca-outline-variant/50 p-5 text-sm text-ca-on-surface-variant">
-          {items.length
-            ? showSearch && activeQuery.trim()
-              ? "검색 결과가 없습니다."
-              : "조건에 맞는 저장 빌드가 없습니다."
-            : "아직 저장한 빌드가 없습니다. 결과 화면에서 '빌드 저장'을 눌러 보세요."}
+        <div className="space-y-3 rounded-lg border border-ca-outline-variant/50 p-5 text-sm text-ca-on-surface-variant">
+          {items.length ? (
+            showSearch && activeQuery.trim() ? (
+              <p>검색 결과가 없습니다.</p>
+            ) : (
+              <p>조건에 맞는 저장 빌드가 없습니다.</p>
+            )
+          ) : (
+            <>
+              <p className="break-keep leading-relaxed">
+                아직 저장한 빌드가 없습니다. 결과에서 「이 빌드 저장」을 누르면 여기에 모입니다.
+              </p>
+              <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+                <Button
+                  type="button"
+                  variant="primary"
+                  size="sm"
+                  onClick={() => {
+                    const last = loadLastKnownGoodSubmission();
+                    if (last) {
+                      saveSurveySubmission(last);
+                      router.push("/results");
+                      return;
+                    }
+                    router.push("/recommend");
+                  }}
+                >
+                  {mounted && hasLocalResult ? "이 브라우저의 최근 결과 열기" : "설문으로 추천 받기"}
+                </Button>
+                <Button type="button" variant="outline" size="sm" onClick={() => router.push("/recommend")}>
+                  다시 설문하기
+                </Button>
+              </div>
+            </>
+          )}
         </div>
       )}
 

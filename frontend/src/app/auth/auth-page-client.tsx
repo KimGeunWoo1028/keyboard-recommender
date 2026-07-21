@@ -612,6 +612,20 @@ export function AuthPageClient() {
             {error ? <p className="break-keep text-sm text-destructive">{error}</p> : null}
             {info ? <p className="break-keep text-sm text-ca-viz-emerald">{info}</p> : null}
 
+            {mode === "signup" ? (
+              <p className="break-keep text-center text-xs leading-relaxed text-ca-on-surface-variant">
+                계정을 만들면{" "}
+                <Link href="/terms" prefetch={false} className="underline underline-offset-2 hover:text-ca-on-surface">
+                  이용약관
+                </Link>
+                과{" "}
+                <Link href="/privacy" prefetch={false} className="underline underline-offset-2 hover:text-ca-on-surface">
+                  개인정보처리방침
+                </Link>
+                에 동의하는 것으로 간주합니다.
+              </p>
+            ) : null}
+
             <Button type="submit" className="w-full" loading={busy} disabled={!canProceedSignup}>
               {mode === "login" ? "로그인" : "계정 만들기"}
             </Button>

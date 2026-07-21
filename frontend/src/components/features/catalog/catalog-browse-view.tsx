@@ -11,7 +11,7 @@ import { layoutArchetypeMetadata } from "@/components/features/catalog/layout-di
 import { LayoutTraitChips } from "@/components/features/catalog/layout-diagram/layout-trait-chips";
 import { CatalogPagination } from "@/components/features/catalog/catalog-pagination";
 import { PageShell } from "@/components/layout/page-shell";
-import { Button } from "@/components/ui/button";
+import { Button, buttonClassName } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import {
@@ -29,6 +29,9 @@ import { catalogHref } from "@/lib/catalog-links";
 import { isReferenceOnlyLayoutArchetype } from "@/lib/layout-catalog-links";
 import { layoutSizeFilterLabel } from "@/lib/layout-size";
 import { cn } from "@/lib/utils";
+import { LinkHealthDisclosure } from "@/components/features/trust/link-health-disclosure";
+import { PriceExpectationDisclosure } from "@/components/features/trust/price-expectation-disclosure";
+import { RetailerDisclosure } from "@/components/features/trust/retailer-disclosure";
 
 const PAGE_SIZE = CATALOG_PAGE_SIZE;
 
@@ -449,6 +452,21 @@ export function CatalogBrowseView({
           스위치·플레이트·폼·케이스/키트·키캡을 탐색할 수 있습니다. 카드를 누르면 스펙·취향 힌트·구매 링크를 볼 수
           있어요.
         </p>
+        <RetailerDisclosure />
+        <PriceExpectationDisclosure />
+        <LinkHealthDisclosure />
+        <div className="flex flex-col gap-2 rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
+          <div className="space-y-1">
+            <p className="font-headline text-sm font-semibold text-ca-on-surface">취향에 맞는 조합이 필요하신가요?</p>
+            <p className="break-keep text-sm text-ca-on-surface-variant">
+              카탈로그는 부품을 둘러보는 곳입니다. 소리·키감 설문으로 스위치부터 키캡까지 한 번에 맞춰 보세요.
+              로그인 없이 시작할 수 있어요.
+            </p>
+          </div>
+          <Link href="/recommend" className={buttonClassName({ size: "default" })}>
+            추천 설문 시작
+          </Link>
+        </div>
         <div className="pt-2 sm:max-w-sm">
           <Input
             type="search"

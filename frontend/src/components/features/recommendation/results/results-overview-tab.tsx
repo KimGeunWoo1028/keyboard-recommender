@@ -4,17 +4,21 @@ import Link from "next/link";
 import { useEffect, useMemo, useState, type SyntheticEvent } from "react";
 
 import { catalogHref } from "@/lib/catalog-links";
-import { isReferenceOnlyLayoutArchetype } from "@/lib/layout-catalog-links";
+import { isReferenceOnlyLayoutArchetype, swagkeyProductLinkLabel } from "@/lib/layout-catalog-links";
 import { layoutSizeShortLabel } from "@/lib/layout-size";
 import { pickSourceUrlKey } from "@/lib/swagkey-source-links";
+import { cn } from "@/lib/utils";
 import { layoutArchetypeMetadata } from "@/components/features/catalog/layout-diagram/layout-archetype-metadata";
 import { CatalogPartThumbnail } from "@/components/features/catalog/catalog-part-thumbnail";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Button, buttonClassName } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import type { CatalogFamily } from "@/lib/api/catalog";
 import type { RecommendedBuild } from "@/types/recommendation";
 import type { SurveySubmission } from "@/types/survey";
+import { LinkHealthDisclosure } from "@/components/features/trust/link-health-disclosure";
+import { PriceExpectationDisclosure } from "@/components/features/trust/price-expectation-disclosure";
+import { RetailerDisclosure } from "@/components/features/trust/retailer-disclosure";
 
 import { HelpHint } from "./help-hint";
 import { DISPLAY_K } from "./results-constants";
@@ -178,7 +182,49 @@ export function ResultsOverviewTab({
 
   return (
     <>
-      <Card className="overflow-hidden rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest shadow-none" data-testid="e2e-server-ranked">
+      <div
+        className="sticky top-[4.25rem] z-20 rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest px-4 py-4 sm:static sm:z-auto sm:px-5"
+        data-testid="e2e-results-next-actions"
+      >
+        <p className="font-headline text-sm font-semibold text-ca-on-surface">다음에 할 일</p>
+        <p className="mt-1 break-keep text-sm text-ca-on-surface-variant">
+          조합이 맞으면 저장해 두고, 대표 부품은 매장에서 바로 확인해 보세요. 매장 링크는 새 탭에서
+          열리며, 돌아와 저장하면 이 결과를 다시 찾기 쉬워요.
+        </p>
+        <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
+          <Button
+            data-testid="e2e-save-build-primary"
+            size="default"
+            className="w-full sm:w-auto"
+            disabled={saveState === "saving"}
+            onClick={() => void onSaveBuild()}
+          >
+            {saveState === "saving" ? "저장 중..." : isAuthenticated ? "이 빌드 저장" : "로컬에 저장"}
+          </Button>
+          {(() => {
+            const switchPick = apiPicks.find((row) => row.domain.toLowerCase() === "switch");
+            const switchUrl = buildPartSourceUrl(build, "switch", apiPicks, enrichedSourceUrls);
+            if (!switchUrl) return null;
+            return (
+              <a
+                href={switchUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(buttonClassName({ variant: "outline", size: "default" }), "w-full justify-center sm:w-auto")}
+              >
+                {swagkeyProductLinkLabel("switch", switchPick?.itemId)}
+              </a>
+            );
+          })()}
+        </div>
+        {saveMessage ? (
+          <p className="mt-2 text-sm text-ca-on-surface-variant" role="status" aria-live="polite">
+            {saveMessage}
+          </p>
+        ) : null}
+      </div>
+
+      <Card className="mt-6 overflow-hidden rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest shadow-none" data-testid="e2e-server-ranked">
         <CardHeader className="border-b border-ca-outline-variant/35 pb-3 sm:pb-4">
           <CardTitle className="flex items-center gap-2 font-headline text-base font-semibold text-ca-on-surface">
             <span>추천 빌드 구성</span>
@@ -187,6 +233,11 @@ export function ResultsOverviewTab({
           <CardDescription className="hidden text-ca-on-surface-variant sm:block">
             스위치부터 키캡까지 여섯 축으로 구성된 조합입니다.
           </CardDescription>
+          <div className="mt-2 space-y-2">
+            <RetailerDisclosure />
+            <PriceExpectationDisclosure />
+            <LinkHealthDisclosure />
+          </div>
         </CardHeader>
         <CardContent className="grid grid-cols-1 gap-3 pt-4 sm:grid-cols-2 lg:grid-cols-3">
           {BUILD_DOMAIN_KEYS.map((key) => {
@@ -254,7 +305,9 @@ export function ResultsOverviewTab({
         <div className="flex flex-col gap-3 border-t border-ca-outline-variant/35 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <div className="space-y-1.5 sm:max-w-md">
             <p className="text-sm leading-relaxed text-ca-on-surface-variant">
-              마음에 드는 조합이면 저장해 두세요. 마이페이지의 저장한 빌드에서 다시 확인할 수 있어요.
+              {isAuthenticated
+                ? "계정에 저장하면 마이페이지의 저장한 빌드에서 다른 기기에서도 다시 볼 수 있어요. 설문 결과 화면 자체는 이 브라우저에 잠시 보관됩니다."
+                : "로그인 없이 「로컬에 저장」하면 이 브라우저에만 남습니다. 다른 기기에서도 보려면 로그인 후 「이 빌드 저장」을 사용하세요."}
             </p>
             <Link
               href="/mypage?section=saved"
@@ -291,8 +344,25 @@ export function ResultsOverviewTab({
       </Card>
 
       {overviewAlternatives.length > 0 ? (
+        <>
+          <div className="mt-6 flex flex-col gap-2 rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
+            <div className="space-y-1">
+              <p className="font-headline text-sm font-semibold text-ca-on-surface">비교가 필요하신가요?</p>
+              <p className="break-keep text-sm text-ca-on-surface-variant">
+                전용 비교 화면 대신, 추천과 비슷한 다른 부품 후보를 아래에서 나란히 볼 수 있어요.
+              </p>
+            </div>
+            <a
+              href="#compare-alternatives"
+              className={buttonClassName({ variant: "outline", size: "default" })}
+              onClick={() => setAltsOpen(true)}
+            >
+              다른 부품과 비교하기
+            </a>
+          </div>
         <details
-          className="group mt-8 [content-visibility:auto]"
+          id="compare-alternatives"
+          className="group mt-4 scroll-mt-24 [content-visibility:auto]"
           open={altsOpen}
           onToggle={onAltsToggle}
         >
@@ -355,6 +425,7 @@ export function ResultsOverviewTab({
             })}
           </div>
         </details>
+        </>
       ) : null}
 
       {submission.degradedReason ? (

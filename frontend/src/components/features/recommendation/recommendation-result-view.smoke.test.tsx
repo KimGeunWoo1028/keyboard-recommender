@@ -97,7 +97,7 @@ describe("RecommendationResultView", () => {
     expect(screen.getByTestId("e2e-server-ranked")).toBeInTheDocument();
     expect(screen.getByTestId("e2e-trust-layer")).toBeInTheDocument();
     expect(screen.getByTestId("e2e-confidence-story")).toBeInTheDocument();
-    expect(screen.getByText("설문 맞춤: 높은 편")).toBeInTheDocument();
+    expect(screen.getByText("설문 일치도: 높은 편")).toBeInTheDocument();
     expect(screen.queryByTestId("e2e-quality-status")).not.toBeInTheDocument();
     expect(screen.getByText("차분한 소리 · 매끈한 키감")).toBeInTheDocument();
     expect(screen.queryByText("Test combination")).not.toBeInTheDocument();
@@ -112,7 +112,7 @@ describe("RecommendationResultView", () => {
     render(<RecommendationResultView submission={sub} build={minimalBuild()} />);
 
     expect(screen.getByTestId("e2e-confidence-story")).toBeInTheDocument();
-    expect(screen.getByText("설문 맞춤: 보통")).toBeInTheDocument();
+    expect(screen.getByText("설문 일치도: 보통")).toBeInTheDocument();
     expect(screen.queryByTestId("e2e-quality-status")).not.toBeInTheDocument();
   });
 });

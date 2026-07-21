@@ -48,6 +48,15 @@ export function SiteFooter() {
           <Link href="/mypage" prefetch={deferNavPrefetch ? false : undefined} className="transition-colors hover:text-ca-on-surface">
             마이페이지
           </Link>
+          <Link href="/privacy" prefetch={false} className="transition-colors hover:text-ca-on-surface">
+            개인정보처리방침
+          </Link>
+          <Link href="/terms" prefetch={false} className="transition-colors hover:text-ca-on-surface">
+            이용약관
+          </Link>
+          <Link href="/contact" prefetch={false} className="transition-colors hover:text-ca-on-surface">
+            문의
+          </Link>
         </nav>
       </div>
     </footer>

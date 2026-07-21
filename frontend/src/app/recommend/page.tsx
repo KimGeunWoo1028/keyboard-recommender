@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 
-import { RequireAuth } from "@/components/auth/require-auth";
-import { SurveyAuthLoadingShell } from "@/components/auth/survey-auth-loading-shell";
 import { SurveyWizard } from "@/components/features/recommendation/survey-wizard";
 import { PageShell } from "@/components/layout/page-shell";
 
@@ -17,11 +15,9 @@ export const metadata: Metadata = {
 export default function RecommendPage() {
   return (
     <PageShell className="flex min-h-[calc(100dvh-4.25rem)] w-full max-w-ca flex-col overflow-y-auto overflow-x-hidden !px-ca-margin-mobile !py-4 sm:h-[calc(100dvh-4.25rem)] sm:max-h-[calc(100dvh-4.25rem)] sm:overflow-hidden sm:!px-ca-margin sm:!py-6">
-      <RequireAuth loadingFallback={<SurveyAuthLoadingShell />}>
-        <div className="flex min-h-0 flex-1 flex-col">
-          <SurveyWizard />
-        </div>
-      </RequireAuth>
+      <div className="flex min-h-0 flex-1 flex-col">
+        <SurveyWizard />
+      </div>
     </PageShell>
   );
 }

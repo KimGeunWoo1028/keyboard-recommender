@@ -81,7 +81,7 @@ export function deriveConfidenceStory(
     });
 
     return {
-      headline: "설문 맞춤: 보통",
+      headline: "설문 일치도: 보통",
       bullets: bullets.slice(0, 4),
       refineActions: (guidance.actions ?? []).slice(0, 2).map((action) => ({
         label: action.label,
@@ -91,16 +91,16 @@ export function deriveConfidenceStory(
     };
   }
 
-  let headline = "설문 맞춤: 높은 편";
+  let headline = "설문 일치도: 높은 편";
 
   if (submission.fallbackAudit?.recovered === true || label === "experimental") {
-    headline = "설문 맞춤: 참고용";
+    headline = "설문 일치도: 참고용";
     pushUniqueBullet(bullets, {
       kind: "dot",
       text: qualityStatus?.detail ?? "비슷한 후보가 많아 이번 결과는 참고용으로 보시면 좋아요",
     });
   } else if (label === "balanced" || (hasRunnerUp(apiPicks) && !gapSufficient)) {
-    headline = "설문 맞춤: 보통";
+    headline = "설문 일치도: 보통";
     pushUniqueBullet(bullets, { kind: "check", text: "일부 응답이 엇갈렸어요" });
     if (!gapSufficient) {
       pushUniqueBullet(bullets, {
@@ -116,6 +116,10 @@ export function deriveConfidenceStory(
       kind: "check",
       text: "비슷한 후보보다 설문과 더 잘 맞는 쪽이에요",
     });
+    pushUniqueBullet(bullets, {
+      kind: "dot",
+      text: "품질·구매 만족을 보장하는 점수가 아니라, 설문 응답과의 일치도예요",
+    });
   }
 
   if (qualityStatus?.detail) {
@@ -128,10 +132,10 @@ export function deriveConfidenceStory(
     }
   }
 
-  if (headline === "설문 맞춤: 높은 편") {
+  if (headline === "설문 일치도: 높은 편") {
     const hasWarning = bullets.some((row) => /호환|주의|완화|참고/.test(row.text));
     if (!hasWarning) {
-      pushUniqueBullet(bullets, { kind: "check", text: "큰 호환성 문제는 없어요" });
+      pushUniqueBullet(bullets, { kind: "check", text: "호환성 주의 신호는 크게 보이지 않아요" });
     }
   }
 

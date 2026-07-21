@@ -4,6 +4,7 @@ import { AuthPageClient } from "@/app/auth/auth-page-client";
 
 export const metadata: Metadata = {
   title: "로그인",
+  robots: { index: false, follow: false },
 };
 
 /**

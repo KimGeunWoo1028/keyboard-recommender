@@ -32,8 +32,8 @@ describe("MyPageOverview smoke", () => {
 
     expect(screen.getByText("테스트유저")).toBeInTheDocument();
     expect(screen.getByText("0")).toBeInTheDocument();
-    expect(screen.getByText("아직 저장한 빌드가 없습니다.")).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "다시 설문하기" })).toHaveAttribute("href", "/recommend");
+    expect(screen.getByText(/아직 저장한 빌드가 없습니다/)).toBeInTheDocument();
+    expect(screen.getByText(/별도 북마크·히스토리 페이지는 없습니다/)).toBeInTheDocument();    expect(screen.getByRole("link", { name: "다시 설문하기" })).toHaveAttribute("href", "/recommend");
     expect(screen.getByRole("presentation")).toHaveAttribute("fetchpriority", "high");
     expect(screen.getByRole("link", { name: /저장 목록 보기/ })).toHaveAttribute("href", "/mypage?section=saved");
   });

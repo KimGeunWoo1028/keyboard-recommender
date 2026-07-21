@@ -134,7 +134,7 @@ export function HomeWorkshopPreview() {
     };
   }, [authChecked, user]);
 
-  const recommendHref = user ? "/recommend" : "/auth?next=/recommend";
+  const recommendHref = "/recommend";
 
   // Auth still resolving — keep guest summary to avoid fake "active" flash.
   if (!authChecked) {

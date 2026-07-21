@@ -443,7 +443,11 @@ export function SurveyWizard() {
       <SurveySegmentedProgress
         currentStep={stepIndex + 1}
         totalSteps={totalSteps}
-        timeEstimate="약 1분"
+        timeEstimate={
+          totalSteps - stepIndex <= 1
+            ? "거의 끝 · 약 10초"
+            : `남은 약 ${totalSteps - stepIndex}단계 · 각 문항은 한 번만 고르면 됩니다`
+        }
       />
 
       {isPrefilledStep && prefilledLabel ? (

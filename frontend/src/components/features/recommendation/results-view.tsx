@@ -119,8 +119,9 @@ export function ResultsView() {
     return (
       <div className="rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest p-6 sm:p-8">
         <p className="max-w-xl text-sm leading-relaxed text-ca-on-surface-variant sm:text-base">
-          아직 이 브라우저에 설문 결과가 없습니다. 결과는 이 기기에 잠시 보관되며, 다른 기기에서는 다시 설문이
-          필요할 수 있어요. 저장한 빌드는 마이페이지에서 확인할 수 있습니다.
+          아직 이 브라우저에 설문 결과가 없습니다. 결과 화면은 기기(브라우저) 단위로 잠시 보관되며, 다른
+          기기·브라우저에서는 비어 보일 수 있어요. 계정에 저장한 빌드만 마이페이지에서 기기와 관계없이
+          확인할 수 있습니다.
         </p>
         <div className="mt-5 flex flex-col items-start gap-3">
           <Link href="/recommend" className={buttonClassName()}>

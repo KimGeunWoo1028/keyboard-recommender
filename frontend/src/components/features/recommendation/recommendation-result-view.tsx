@@ -368,7 +368,9 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
           },
         }).catch(() => undefined);
         setSaveState("saved");
-        setSaveMessage("게스트 세션에 로컬 저장되었습니다.");
+        setSaveMessage(
+          "이 브라우저(게스트)에만 저장되었습니다. 다른 기기에서 보려면 로그인 후 다시 저장해 주세요.",
+        );
       } catch (e) {
         setSaveState("error");
         setSaveMessage(e instanceof Error ? e.message : "로컬 저장에 실패했습니다.");
