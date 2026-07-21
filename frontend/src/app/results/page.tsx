@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
 import { ResultsView } from "@/components/features/recommendation/results-view";
-import { RecommendationDisclaimer } from "@/components/features/trust/recommendation-disclaimer";
 import { PageShell } from "@/components/layout/page-shell";
 
 export const metadata: Metadata = {
@@ -25,7 +24,6 @@ export default function ResultsPage() {
         <p className="break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:text-base">
           추천 조합을 확인하고, 마음에 들면 저장해 두세요. 계정 로그인 시 마이페이지에서 다시 볼 수 있어요.
         </p>
-        <RecommendationDisclaimer />
       </div>
       <ResultsView />
     </PageShell>

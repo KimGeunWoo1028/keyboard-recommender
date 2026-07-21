@@ -32,6 +32,7 @@ import { MetricGuideCard } from "./results/metric-guide-card";
 import { CategorySection, RecommendationCompareCard } from "./results/results-lite-compare";
 import { catalogPickMetadata } from "./results/results-build-utils";
 import { DISPLAY_K } from "./results/results-constants";
+import { ResultsNextActions } from "./results/results-next-actions";
 import { ResultsOverviewTab } from "./results/results-overview-tab";
 import { ResultsTrustLayer } from "./results/results-trust-layer";
 import { BackendResultTabBar, LiteResultTabBar } from "./results/results-tab-shell";
@@ -479,6 +480,17 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
           onApplyRefinement={(stepId, answerId, label) => void handleApplyRefinement(stepId, answerId, label)}
         />
 
+        <ResultsNextActions
+          build={build}
+          apiPicks={enrichedApiPicks}
+          enrichedSourceUrls={enrichedSourceUrls}
+          isAuthenticated={isAuthenticated}
+          authReady={authChecked}
+          saveState={saveState}
+          saveMessage={saveMessage}
+          onSaveBuild={() => void handleSaveBuild()}
+        />
+
         <BackendResultTabBar activeTab={activeBackendTab} onTabChange={handleBackendTabChange} />
 
         {activeBackendTab === "overview" ? (
@@ -494,7 +506,6 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
             isAuthenticated={isAuthenticated}
             authReady={authChecked}
             saveState={saveState}
-            saveMessage={saveMessage}
             onSaveBuild={() => void handleSaveBuild()}
           />
         ) : null}
@@ -522,6 +533,17 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
   return (
     <div className="space-y-8">
       <SharedResultHeader submission={submission} build={build} />
+
+      <ResultsNextActions
+        build={build}
+        apiPicks={[]}
+        enrichedSourceUrls={{}}
+        isAuthenticated={isAuthenticated}
+        authReady={authChecked}
+        saveState={saveState}
+        saveMessage={saveMessage}
+        onSaveBuild={() => void handleSaveBuild()}
+      />
 
       <LiteResultTabBar activeTab={activeLiteTab} onTabChange={setActiveLiteTab} />
 

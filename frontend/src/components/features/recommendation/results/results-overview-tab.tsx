@@ -4,10 +4,9 @@ import Link from "next/link";
 import { useEffect, useMemo, useState, type SyntheticEvent } from "react";
 
 import { catalogHref } from "@/lib/catalog-links";
-import { isReferenceOnlyLayoutArchetype, swagkeyProductLinkLabel } from "@/lib/layout-catalog-links";
+import { isReferenceOnlyLayoutArchetype } from "@/lib/layout-catalog-links";
 import { layoutSizeShortLabel } from "@/lib/layout-size";
 import { pickSourceUrlKey } from "@/lib/swagkey-source-links";
-import { cn } from "@/lib/utils";
 import { layoutArchetypeMetadata } from "@/components/features/catalog/layout-diagram/layout-archetype-metadata";
 import { CatalogPartThumbnail } from "@/components/features/catalog/catalog-part-thumbnail";
 import { Badge } from "@/components/ui/badge";
@@ -16,9 +15,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import type { CatalogFamily } from "@/lib/api/catalog";
 import type { RecommendedBuild } from "@/types/recommendation";
 import type { SurveySubmission } from "@/types/survey";
-import { LinkHealthDisclosure } from "@/components/features/trust/link-health-disclosure";
-import { PriceExpectationDisclosure } from "@/components/features/trust/price-expectation-disclosure";
-import { RetailerDisclosure } from "@/components/features/trust/retailer-disclosure";
+import { PurchaseTrustBlock } from "@/components/features/trust/purchase-trust-block";
 
 import { HelpHint } from "./help-hint";
 import { DISPLAY_K } from "./results-constants";
@@ -123,7 +120,6 @@ export type ResultsOverviewTabProps = {
   /** False while AuthHeaderProvider is still resolving /auth/me. */
   authReady?: boolean;
   saveState: "idle" | "saving" | "saved" | "error";
-  saveMessage: string;
   onSaveBuild: () => void;
 };
 
@@ -136,7 +132,6 @@ export function ResultsOverviewTab({
   isAuthenticated,
   authReady = true,
   saveState,
-  saveMessage,
   onSaveBuild,
 }: ResultsOverviewTabProps) {
   const overviewAlternatives = useMemo(
@@ -185,67 +180,7 @@ export function ResultsOverviewTab({
 
   return (
     <>
-      <div
-        className="sticky top-[4.25rem] z-20 rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest px-4 py-4 sm:static sm:z-auto sm:px-5"
-        data-testid="e2e-results-next-actions"
-      >
-        <p className="font-headline text-sm font-semibold text-ca-on-surface">다음에 할 일</p>
-        <p className="mt-1 break-keep text-sm text-ca-on-surface-variant">
-          조합이 맞으면 저장해 두고, 대표 부품은 매장에서 바로 확인해 보세요. 매장 링크는 새 탭에서
-          열리며, 돌아와 저장하면 이 결과를 다시 찾기 쉬워요.
-        </p>
-        <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
-          <Button
-            data-testid="e2e-save-build-primary"
-            size="default"
-            className="w-full sm:w-auto"
-            disabled={!authReady || saveState === "saving"}
-            onClick={() => void onSaveBuild()}
-          >
-            {!authReady
-              ? "로그인 확인 중..."
-              : saveState === "saving"
-                ? "저장 중..."
-                : isAuthenticated
-                  ? "이 빌드 저장"
-                  : "로컬에 저장"}
-          </Button>
-          {(() => {
-            const switchPick = apiPicks.find((row) => row.domain.toLowerCase() === "switch");
-            const switchUrl = buildPartSourceUrl(build, "switch", apiPicks, enrichedSourceUrls);
-            if (!switchUrl) return null;
-            return (
-              <a
-                href={switchUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={cn(buttonClassName({ variant: "outline", size: "default" }), "w-full justify-center sm:w-auto")}
-              >
-                {swagkeyProductLinkLabel("switch", switchPick?.itemId)}
-              </a>
-            );
-          })()}
-        </div>
-        {saveMessage ? (
-          <div
-            className="mt-2 space-y-1 text-sm text-ca-on-surface-variant"
-            role={saveState === "error" ? "alert" : "status"}
-            aria-live={saveState === "error" ? "assertive" : "polite"}
-          >
-            <p>{saveMessage}</p>
-            {saveState === "saved" ? (
-              <Link
-                href="/mypage?section=saved"
-                className="inline-block font-medium text-ca-primary underline-offset-4 hover:underline"
-              >
-                저장한 빌드로 이동
-              </Link>
-            ) : null}
-          </div>
-        ) : null}
-      </div>
-
-      <Card className="mt-6 overflow-hidden rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest shadow-none" data-testid="e2e-server-ranked">
+      <Card className="overflow-hidden rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest shadow-none" data-testid="e2e-server-ranked">
         <CardHeader className="border-b border-ca-outline-variant/35 pb-3 sm:pb-4">
           <CardTitle className="flex items-center gap-2 font-headline text-base font-semibold text-ca-on-surface">
             <span>추천 빌드 구성</span>
@@ -254,10 +189,8 @@ export function ResultsOverviewTab({
           <CardDescription className="hidden text-ca-on-surface-variant sm:block">
             스위치부터 키캡까지 여섯 축으로 구성된 조합입니다.
           </CardDescription>
-          <div className="mt-2 space-y-2">
-            <RetailerDisclosure />
-            <PriceExpectationDisclosure />
-            <LinkHealthDisclosure />
+          <div className="mt-2">
+            <PurchaseTrustBlock />
           </div>
         </CardHeader>
         <CardContent className="grid grid-cols-1 gap-3 pt-4 sm:grid-cols-2 lg:grid-cols-3">
