@@ -14,7 +14,7 @@ export function SurveySegmentedProgress({
   timeEstimate,
   className,
 }: Props) {
-  const stepLabel = `${currentStep} / ${totalSteps} 단계`;
+  const stepLabel = `${currentStep} / ${totalSteps} 문항`;
 
   return (
     <div className={cn("flex shrink-0 flex-col items-stretch", className)}>
@@ -28,6 +28,7 @@ export function SurveySegmentedProgress({
         aria-valuenow={currentStep}
         aria-valuemin={1}
         aria-valuemax={totalSteps}
+        aria-valuetext={`${stepLabel}${timeEstimate ? `, ${timeEstimate}` : ""}`}
         aria-label={`설문 ${stepLabel}`}
       >
         {Array.from({ length: totalSteps }, (_, i) => {

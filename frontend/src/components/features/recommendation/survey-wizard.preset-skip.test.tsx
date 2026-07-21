@@ -16,7 +16,7 @@ describe("SurveyWizard preset skip (Phase 3)", () => {
     await user.click(screen.getByRole("button", { name: /부드럽고 조용한 성향/ }));
 
     expect(screen.getByRole("heading", { name: "타건 압력" })).toBeInTheDocument();
-    expect(screen.getByText(/2 \/ 5 단계/)).toBeInTheDocument();
+    expect(screen.getByText(/2 \/ 5 문항/)).toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "선호 사운드 성향" })).not.toBeInTheDocument();
   });
 

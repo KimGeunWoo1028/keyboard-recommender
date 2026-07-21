@@ -444,9 +444,9 @@ export function SurveyWizard() {
         currentStep={stepIndex + 1}
         totalSteps={totalSteps}
         timeEstimate={
-          totalSteps - stepIndex <= 1
-            ? "거의 끝 · 약 10초"
-            : `남은 약 ${totalSteps - stepIndex}단계 · 각 문항은 한 번만 고르면 됩니다`
+          isLastStep
+            ? "마지막 문항"
+            : `남은 ${totalSteps - (stepIndex + 1)}문항 · 각 문항은 한 번만 고르면 됩니다`
         }
       />
 
