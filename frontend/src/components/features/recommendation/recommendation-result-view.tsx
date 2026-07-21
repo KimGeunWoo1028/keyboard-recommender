@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import {
   bookmarkPayloadFromBuild,
@@ -62,6 +62,8 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
   const [enrichedSourceUrls, setEnrichedSourceUrls] = useState<Record<string, string>>({});
   const [enrichedImageUrls, setEnrichedImageUrls] = useState<Record<string, string>>({});
   const [enrichedLayoutSizes, setEnrichedLayoutSizes] = useState<Record<string, string>>({});
+  const enrichmentAttemptedRef = useRef(new Set<string>());
+  const viewEventsSentRef = useRef<string | null>(null);
   const enrichedApiPicks = useMemo(
     () =>
       apiPicks.map((pick) => {
@@ -103,8 +105,14 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
 
   useEffect(() => {
     if (!useBackendScoring) return;
+    if (viewEventsSentRef.current === build.id) return;
+    viewEventsSentRef.current = build.id;
     const requestId = globalThis.crypto?.randomUUID?.() ?? `req-${Date.now()}`;
-    const meta = { buildId: build.id, source: "results_view", ...catalogPickMeta };
+    const meta = {
+      buildId: build.id,
+      source: "results_view",
+      ...catalogPickMetadata(apiPicks),
+    };
     void emitExplorationEvent({
       event_type: "interaction.click",
       request_id: requestId,
@@ -123,12 +131,37 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
       scenario_id: "results_view",
       metadata: meta,
     }).catch(() => undefined);
-  }, [build.id, catalogPickMeta, sessionId, useBackendScoring]);
+  }, [apiPicks, build.id, sessionId, useBackendScoring]);
+
+  // Seed layout sizes from archetype metadata (no network, stable setState).
+  useEffect(() => {
+    const layoutSizeUpdates: Record<string, string> = {};
+    for (const pick of apiPicks) {
+      if (pick.domain.toLowerCase() !== "layout") continue;
+      const archetypeSize = layoutArchetypeMetadata(pick.itemId).layout_size;
+      if (typeof archetypeSize !== "string" || !archetypeSize.trim()) continue;
+      layoutSizeUpdates[pickSourceUrlKey("layout", pick.itemId)] = archetypeSize.trim();
+    }
+    if (Object.keys(layoutSizeUpdates).length === 0) return;
+    setEnrichedLayoutSizes((prev) => {
+      let changed = false;
+      const next = { ...prev };
+      for (const [key, value] of Object.entries(layoutSizeUpdates)) {
+        if (prev[key] === value) continue;
+        next[key] = value;
+        changed = true;
+      }
+      return changed ? next : prev;
+    });
+  }, [apiPicks]);
+
+  useEffect(() => {
+    enrichmentAttemptedRef.current.clear();
+  }, [apiPicks]);
 
   useEffect(() => {
     if (!getPublicApiBase()) return;
     const targets = new Map<string, { family: CatalogFamily; itemId: string }>();
-    const layoutSizeUpdates: Record<string, string> = {};
 
     const catalogFamilyForDomain = (domain: string): CatalogFamily | null => {
       const d = domain.toLowerCase();
@@ -167,6 +200,11 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
       return false;
     };
 
+    const queueTarget = (key: string, family: CatalogFamily, itemId: string) => {
+      if (enrichmentAttemptedRef.current.has(key)) return;
+      targets.set(key, { family, itemId });
+    };
+
     for (const pick of apiPicks) {
       const domain = pick.domain.toLowerCase();
       const family = catalogFamilyForDomain(domain);
@@ -184,30 +222,31 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
         const needsSourceUrl = !hasResolved(domain, candidate.itemId, candidate.sourceUrl);
         const needsImageUrl = !hasImageUrl(domain, candidate.itemId, candidate.imageUrl);
         if (!needsSourceUrl && !needsImageUrl) continue;
-        targets.set(pickSourceUrlKey(domain, candidate.itemId), { family, itemId: candidate.itemId });
+        queueTarget(pickSourceUrlKey(domain, candidate.itemId), family, candidate.itemId);
       }
 
       if (domain === "layout" || domain === "case") {
         const key = pickSourceUrlKey(domain, pick.itemId);
+        if (enrichedLayoutSizes[key]) continue;
         if (domain === "layout") {
           const archetypeSize = layoutArchetypeMetadata(pick.itemId).layout_size;
-          if (typeof archetypeSize === "string" && archetypeSize.trim()) {
-            layoutSizeUpdates[key] = archetypeSize.trim();
-          } else {
-            targets.set(key, { family, itemId: pick.itemId });
-          }
-        } else if (!enrichedLayoutSizes[key]) {
-          targets.set(key, { family, itemId: pick.itemId });
+          if (typeof archetypeSize === "string" && archetypeSize.trim()) continue;
         }
+        queueTarget(key, family, pick.itemId);
       }
     }
 
-    if (targets.size === 0 && Object.keys(layoutSizeUpdates).length === 0) return;
+    if (targets.size === 0) return;
+
+    for (const key of targets.keys()) {
+      enrichmentAttemptedRef.current.add(key);
+    }
+
     let cancelled = false;
     void (async () => {
       const sourceUpdates: Record<string, string> = {};
       const imageUpdates: Record<string, string> = {};
-      const layoutUpdates: Record<string, string> = { ...layoutSizeUpdates };
+      const layoutUpdates: Record<string, string> = {};
       for (const [key, { family, itemId }] of targets) {
         try {
           const part = await fetchCatalogPart(family, itemId);
@@ -227,22 +266,50 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
           /* ignore per-part failures */
         }
       }
-      if (!cancelled) {
-        if (Object.keys(sourceUpdates).length > 0) {
-          setEnrichedSourceUrls((prev) => ({ ...prev, ...sourceUpdates }));
-        }
-        if (Object.keys(imageUpdates).length > 0) {
-          setEnrichedImageUrls((prev) => ({ ...prev, ...imageUpdates }));
-        }
-        if (Object.keys(layoutUpdates).length > 0) {
-          setEnrichedLayoutSizes((prev) => ({ ...prev, ...layoutUpdates }));
-        }
+      if (cancelled) return;
+      if (Object.keys(sourceUpdates).length > 0) {
+        setEnrichedSourceUrls((prev) => {
+          let changed = false;
+          const next = { ...prev };
+          for (const [key, value] of Object.entries(sourceUpdates)) {
+            if (prev[key] === value) continue;
+            next[key] = value;
+            changed = true;
+          }
+          return changed ? next : prev;
+        });
+      }
+      if (Object.keys(imageUpdates).length > 0) {
+        setEnrichedImageUrls((prev) => {
+          let changed = false;
+          const next = { ...prev };
+          for (const [key, value] of Object.entries(imageUpdates)) {
+            if (prev[key] === value) continue;
+            next[key] = value;
+            changed = true;
+          }
+          return changed ? next : prev;
+        });
+      }
+      if (Object.keys(layoutUpdates).length > 0) {
+        setEnrichedLayoutSizes((prev) => {
+          let changed = false;
+          const next = { ...prev };
+          for (const [key, value] of Object.entries(layoutUpdates)) {
+            if (prev[key] === value) continue;
+            next[key] = value;
+            changed = true;
+          }
+          return changed ? next : prev;
+        });
       }
     })();
     return () => {
       cancelled = true;
     };
-  }, [apiPicks, enrichedImageUrls, enrichedLayoutSizes, enrichedSourceUrls, sourceUrls]);
+    // Deliberately omit enriched* maps: attempted-ref gates one fetch per key; re-running
+    // on enrich updates caused cancel/retry storms (layout-007 + events in Lighthouse).
+  }, [apiPicks, sourceUrls]);
 
   async function handleSaveBuild() {
     let authenticated = isAuthenticated;
