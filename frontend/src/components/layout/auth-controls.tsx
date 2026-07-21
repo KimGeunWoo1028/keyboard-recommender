@@ -9,7 +9,8 @@ import { resolveAvatarSrc } from "@/lib/avatar";
 import { Spinner } from "@/components/ui/spinner";
 import { cn } from "@/lib/utils";
 
-const AUTH_CHECK_TIMEOUT_MS = 8_000;
+const AUTH_CHECK_TIMEOUT_MS = 12_000;
+const AUTH_ME_TIMEOUT = Symbol("auth-me-timeout");
 
 type AuthHeaderContextValue = {
   user: AuthUser | null;
@@ -29,11 +30,17 @@ let sharedAuthMePromise: Promise<AuthUser | null> | null = null;
 function fetchCurrentUserShared(): Promise<AuthUser | null> {
   if (!sharedAuthMePromise) {
     sharedAuthMePromise = (async () => {
-      const timeout = new Promise<AuthUser | null>((resolve) => {
-        window.setTimeout(() => resolve(null), AUTH_CHECK_TIMEOUT_MS);
-      });
       try {
-        return await Promise.race([fetchCurrentUser(), timeout]);
+        const timed = new Promise<typeof AUTH_ME_TIMEOUT>((resolve) => {
+          window.setTimeout(() => resolve(AUTH_ME_TIMEOUT), AUTH_CHECK_TIMEOUT_MS);
+        });
+        const first = await Promise.race([fetchCurrentUser(), timed]);
+        // Do not treat a slow /me as logged-out — that bounces RequireAuth back to /auth
+        // on mobile/cold-start. Retry once without the race.
+        if (first === AUTH_ME_TIMEOUT) {
+          return await fetchCurrentUser();
+        }
+        return first;
       } catch {
         return null;
       } finally {
@@ -59,9 +66,16 @@ export function AuthHeaderProvider({ children }: { children: ReactNode }) {
           if (mounted) setAuthChecked(true);
         });
     sync();
-    const unsub = subscribeAuthChanged(() => {
-      setAuthChecked(false);
+    const unsub = subscribeAuthChanged((detail) => {
       sharedAuthMePromise = null;
+      // Login/logout already know the session — apply immediately so RequireAuth
+      // cannot bounce to /auth while a slow /me is in flight.
+      if (detail && "user" in detail) {
+        setUser(detail.user ?? null);
+        setAuthChecked(true);
+        return;
+      }
+      setAuthChecked(false);
       void fetchCurrentUserShared()
         .then((u) => {
           if (mounted) setUser(u);

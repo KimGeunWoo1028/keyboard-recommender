@@ -17,9 +17,14 @@ type AuthEnvelope = { user: AuthUser };
 type MeEnvelope = { user: AuthUser | null };
 const AUTH_CHANGED_EVENT = "kr-auth-changed";
 
-function emitAuthChanged(): void {
+export type AuthChangedDetail = {
+  /** When set, header applies this immediately (avoids /me race after login/logout). */
+  user?: AuthUser | null;
+};
+
+function emitAuthChanged(detail?: AuthChangedDetail): void {
   if (typeof window === "undefined") return;
-  window.dispatchEvent(new Event(AUTH_CHANGED_EVENT));
+  window.dispatchEvent(new CustomEvent<AuthChangedDetail>(AUTH_CHANGED_EVENT, { detail: detail ?? {} }));
 }
 
 function isRetryableAuthResponseStatus(status: number): boolean {
@@ -41,7 +46,7 @@ async function postAuth(path: string, body: Record<string, unknown>): Promise<Au
   });
   if (!res.ok) throw new ApiError(res.status, await readErrorMessage(res));
   const json = (await res.json()) as AuthEnvelope;
-  emitAuthChanged();
+  emitAuthChanged({ user: json.user });
   return json.user;
 }
 
@@ -67,7 +72,7 @@ export async function logout(): Promise<void> {
     credentials: "include",
   });
   if (!res.ok && res.status !== 204) throw new ApiError(res.status, await readErrorMessage(res));
-  emitAuthChanged();
+  emitAuthChanged({ user: null });
 }
 
 export async function logoutAllSessions(): Promise<void> {
@@ -79,7 +84,7 @@ export async function logoutAllSessions(): Promise<void> {
     credentials: "include",
   });
   if (!res.ok && res.status !== 204) throw new ApiError(res.status, await readErrorMessage(res));
-  emitAuthChanged();
+  emitAuthChanged({ user: null });
 }
 
 export async function fetchCurrentUser(): Promise<AuthUser | null> {
@@ -263,9 +268,9 @@ export async function deleteAccount(input: { password: string; verification_toke
     body: JSON.stringify(input),
   });
   if (!res.ok && res.status !== 204) throw new ApiError(res.status, await readErrorMessage(res));
-  // Phase 4: server cleared auth cookie; notify header to re-fetch /me → null.
+  // Phase 4: server cleared auth cookie; notify header immediately.
   // Do not wipe sessionStorage/localStorage (e.g. home.viewed) — unrelated to account.
-  emitAuthChanged();
+  emitAuthChanged({ user: null });
 }
 
 export async function fetchAccountSecuritySummary(): Promise<AccountSecuritySummary | null> {
@@ -331,9 +336,13 @@ export async function confirmPasswordReset(input: { token: string; new_password:
   if (!res.ok) throw new ApiError(res.status, await readErrorMessage(res));
 }
 
-export function subscribeAuthChanged(listener: () => void): () => void {
+export function subscribeAuthChanged(listener: (detail?: AuthChangedDetail) => void): () => void {
   if (typeof window === "undefined") return () => undefined;
-  window.addEventListener(AUTH_CHANGED_EVENT, listener);
-  return () => window.removeEventListener(AUTH_CHANGED_EVENT, listener);
+  const handler = (event: Event) => {
+    const detail = (event as CustomEvent<AuthChangedDetail>).detail;
+    listener(detail);
+  };
+  window.addEventListener(AUTH_CHANGED_EVENT, handler);
+  return () => window.removeEventListener(AUTH_CHANGED_EVENT, handler);
 }
 

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { type FormEvent, useEffect, useState } from "react";
 
+import { useAuthHeader } from "@/components/layout/auth-controls";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -58,6 +59,7 @@ function readAuthSearchParams(): { force: boolean; next: string | null } {
 
 export function AuthPageClient() {
   const router = useRouter();
+  const { setUser } = useAuthHeader();
   const [mode, setMode] = useState<"login" | "signup">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -192,16 +194,21 @@ export function AuthPageClient() {
         setEmailVerificationMessage(null);
         return;
       } else {
-        await login({ email, password });
+        const loggedIn = await login({ email, password });
         if (rememberEmail) {
           window.localStorage.setItem(REMEMBER_SIGNIN_KEY, JSON.stringify({ email }));
         } else {
           window.localStorage.removeItem(REMEMBER_SIGNIN_KEY);
         }
+        // Apply session immediately so RequireAuth does not race a slow /auth/me
+        // and bounce back to /auth (common on mobile + cold API).
+        setUser(loggedIn);
         const { next } = readAuthSearchParams();
         const target = next && next.startsWith("/") ? next : "/results";
-        router.push(target);
-        router.refresh();
+        // Hard navigation: same pattern as account-delete — soft router.push can
+        // land on /results before the header session settles.
+        window.location.assign(target);
+        return;
       }
     } catch (err) {
       setError(friendlyAuthErrorMessage(mode, err));
