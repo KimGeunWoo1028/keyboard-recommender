@@ -122,10 +122,9 @@ export function AuthSessionAction() {
   const pathname = usePathname();
   const { user, authChecked, setUser } = useAuthHeader();
   const [loggingOut, setLoggingOut] = useState(false);
-  const onAuthSurface = Boolean(pathname?.startsWith("/auth"));
 
-  // On /auth, paint the login CTA immediately (same size as spinner) to avoid CLS + wait on /me.
-  if (!authChecked && !onAuthSurface) {
+  // Always wait for authChecked so SSR + first client paint match (avoids React #418).
+  if (!authChecked) {
     return (
       <span
         className="inline-flex h-9 min-w-[4.75rem] items-center justify-center rounded-full bg-ca-surface-container/70 px-3"
