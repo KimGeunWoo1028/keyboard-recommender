@@ -139,17 +139,17 @@ export function ResultsOverviewTab({
 
   return (
     <>
-      <Card className="ca-glass-panel border-ca-outline-variant/40" data-testid="e2e-server-ranked">
-        <CardHeader className="border-b border-ca-outline-variant/30 pb-2 sm:pb-3">
-          <CardTitle className="flex items-center gap-2 font-headline text-base text-ca-on-surface">
-            <span>추천 빌드 구성 (6축)</span>
+      <Card className="overflow-hidden rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest shadow-none" data-testid="e2e-server-ranked">
+        <CardHeader className="border-b border-ca-outline-variant/35 pb-3 sm:pb-4">
+          <CardTitle className="flex items-center gap-2 font-headline text-base font-semibold text-ca-on-surface">
+            <span>추천 빌드 구성</span>
             <HelpHint text="이번 결과에서 선택된 핵심 구성품(스위치, 플레이트, 폼, 레이아웃, 케이스/키트, 키캡) 요약입니다. 최종 조합의 뼈대를 한눈에 확인할 수 있어요." />
           </CardTitle>
           <CardDescription className="hidden text-ca-on-surface-variant sm:block">
-            스위치부터 키캡까지 6개 축으로 구성된 추천 조합입니다.
+            스위치부터 키캡까지 여섯 축으로 구성된 조합입니다.
           </CardDescription>
         </CardHeader>
-        <CardContent className="grid grid-cols-1 gap-2.5 pt-3 sm:grid-cols-2 sm:gap-3 sm:pt-4 lg:grid-cols-3">
+        <CardContent className="grid grid-cols-1 gap-3 pt-4 sm:grid-cols-2 lg:grid-cols-3">
           {BUILD_DOMAIN_KEYS.map((key) => {
             const parsed = splitBuildComponentText(buildComponentDisplayText(build, key, apiPicks));
             const sourceUrl = buildPartSourceUrl(build, key, apiPicks, enrichedSourceUrls);
@@ -168,7 +168,7 @@ export function ResultsOverviewTab({
             return (
               <div
                 key={key}
-                className="overflow-hidden rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container/45"
+                className="overflow-hidden rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container-lowest"
               >
                 <CatalogPartThumbnail
                   family={key as CatalogFamily}
@@ -181,14 +181,14 @@ export function ResultsOverviewTab({
                 />
                 <div className="px-3 py-3">
                 <div className="flex flex-wrap items-center gap-2">
-                  <p className="font-label text-ca-label-sm font-semibold text-ca-secondary">{BUILD_DOMAIN_LABELS[key]}</p>
+                  <p className="text-sm font-medium text-ca-on-surface-variant">{BUILD_DOMAIN_LABELS[key]}</p>
                   {layoutSize ? (
-                    <Badge className="border-ca-outline-variant/60 bg-ca-surface-container-highest/40 font-normal text-ca-on-surface-variant">
+                    <Badge className="border-ca-outline-variant/50 bg-transparent font-normal text-ca-on-surface-variant">
                       {layoutSizeShortLabel(layoutSize)}
                     </Badge>
                   ) : null}
                 </div>
-                <p className="mt-1 font-headline text-base font-bold text-ca-on-surface">{parsed.name}</p>
+                <p className="mt-1 font-headline text-base font-semibold text-ca-on-surface">{parsed.name}</p>
                 {blurb ? (
                   <p className="mt-1 line-clamp-3 break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:line-clamp-none">
                     {blurb}
@@ -201,7 +201,7 @@ export function ResultsOverviewTab({
                   <p className="mt-2">
                     <Link
                       href={catalogHref({ family: "case", layoutSize })}
-                      className="text-xs font-medium text-ca-primary underline-offset-2 hover:underline"
+                      className="text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline"
                     >
                       {layoutSizeShortLabel(layoutSize)} 케이스/키트 보기
                     </Link>
@@ -212,14 +212,14 @@ export function ResultsOverviewTab({
             );
           })}
         </CardContent>
-        <div className="flex flex-col gap-3 border-t border-ca-outline-variant/30 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+        <div className="flex flex-col gap-3 border-t border-ca-outline-variant/35 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <div className="space-y-1.5 sm:max-w-md">
-            <p className="text-xs leading-relaxed text-ca-on-surface-variant sm:text-sm">
+            <p className="text-sm leading-relaxed text-ca-on-surface-variant">
               마음에 드는 조합이면 저장해 두세요. 마이페이지의 저장한 빌드에서 다시 확인할 수 있어요.
             </p>
             <Link
               href="/mypage?section=saved"
-              className="inline-block text-xs font-medium text-ca-primary underline-offset-2 hover:underline sm:text-sm"
+              className="inline-block text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline"
             >
               마이페이지에서 저장한 빌드 보기
             </Link>
@@ -227,8 +227,8 @@ export function ResultsOverviewTab({
           <div className="flex w-full flex-col gap-2 sm:w-auto sm:items-end">
             <Button
               data-testid="e2e-save-build"
-              size="sm"
-              className="h-9 w-full rounded-full sm:h-8 sm:min-w-[7.5rem]"
+              size="default"
+              className="w-full sm:min-w-[8.5rem] sm:w-auto"
               disabled={saveState === "saving"}
               onClick={() => void onSaveBuild()}
             >
@@ -244,7 +244,7 @@ export function ResultsOverviewTab({
       </Card>
 
       {overviewAlternatives.length > 0 ? (
-        <section className="space-y-3 [content-visibility:auto]">
+        <section className="mt-8 space-y-4 [content-visibility:auto]">
           <div className="space-y-1">
             <h3 className="font-headline text-base font-semibold text-ca-on-surface">대안 구성</h3>
             <p className="text-sm text-ca-on-surface-variant">
@@ -257,20 +257,20 @@ export function ResultsOverviewTab({
               return (
               <Card
                 key={`${alt.domain}-${alt.itemId}`}
-                className="ca-glass-panel flex h-full flex-col border-ca-outline-variant/40 bg-ca-surface-container/20"
+                className="flex h-full flex-col rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest shadow-none"
               >
                 <CardHeader className="flex-1 space-y-2 border-b-0 pb-2">
                   <div className="flex items-start justify-between gap-2">
-                    <Badge className="shrink-0 border-ca-outline-variant/60 bg-ca-surface-container-highest/40 font-normal">
+                    <Badge className="shrink-0 border-ca-outline-variant/50 bg-transparent font-normal">
                       {domainDisplayLabel(alt.domain)}
                     </Badge>
-                    <span className="font-mono text-[11px] tabular-nums text-ca-on-surface-variant">
+                    <span className="font-mono text-xs tabular-nums text-ca-on-surface-variant">
                       {formatScore(alt.score)}
                     </span>
                   </div>
                   <div className="space-y-1.5">
-                    <p className="font-label text-ca-label-sm font-semibold text-ca-secondary">{alt.tagline}</p>
-                    <CardTitle className="font-headline text-base font-bold leading-snug text-ca-on-surface">
+                    <p className="text-sm text-ca-on-surface-variant">{alt.tagline}</p>
+                    <CardTitle className="font-headline text-base font-semibold leading-snug text-ca-on-surface">
                       {alt.itemName ?? alt.itemId}
                     </CardTitle>
                     {blurb ? (
@@ -280,7 +280,7 @@ export function ResultsOverviewTab({
                     ) : null}
                   </div>
                 </CardHeader>
-                <CardContent className="mt-auto border-t border-ca-outline-variant/30 pt-3">
+                <CardContent className="mt-auto border-t border-ca-outline-variant/35 pt-3">
                   <SwagkeyProductLink
                     href={pickRowSourceUrl(
                       { domain: alt.domain, itemId: alt.itemId, sourceUrl: alt.sourceUrl },
@@ -300,7 +300,7 @@ export function ResultsOverviewTab({
       ) : null}
 
       {submission.degradedReason ? (
-        <Card className="border-amber-500/40 bg-amber-500/10">
+        <Card className="mt-8 border-amber-500/40 bg-amber-500/10 shadow-none">
           <CardHeader className="pb-2">
             <CardTitle className="text-base text-amber-950 dark:text-amber-100">안정 모드로 추천했어요</CardTitle>
             <CardDescription className="text-amber-900/90 dark:text-amber-100/90">
@@ -310,31 +310,31 @@ export function ResultsOverviewTab({
         </Card>
       ) : null}
 
-      <Card className="ca-glass-panel border-ca-outline-variant/40 bg-ca-surface-container/20">
+      <Card className="mt-8 rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest shadow-none">
         <CardHeader className="border-b-0 pb-2">
-          <CardTitle className="font-headline text-base text-ca-on-surface">관련 부품 더 탐색하기</CardTitle>
+          <CardTitle className="font-headline text-base font-semibold text-ca-on-surface">관련 부품 더 탐색하기</CardTitle>
           <CardDescription className="text-ca-on-surface-variant">
             스위치·플레이트·폼·레이아웃·케이스/키트·키캡 카탈로그에서 직접 탐색해 보세요.
           </CardDescription>
         </CardHeader>
-        <CardContent className="flex flex-wrap gap-2">
-          <Link href={catalogHref({ family: "switch" })} className="ca-btn-ghost h-8 px-3 text-xs">
-            스위치 카탈로그
+        <CardContent className="flex flex-wrap gap-x-4 gap-y-2">
+          <Link href={catalogHref({ family: "switch" })} className="text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline">
+            스위치
           </Link>
-          <Link href={catalogHref({ family: "plate" })} className="ca-btn-ghost h-8 px-3 text-xs">
-            플레이트 카탈로그
+          <Link href={catalogHref({ family: "plate" })} className="text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline">
+            플레이트
           </Link>
-          <Link href={catalogHref({ family: "foam" })} className="ca-btn-ghost h-8 px-3 text-xs">
-            폼 카탈로그
+          <Link href={catalogHref({ family: "foam" })} className="text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline">
+            폼
           </Link>
-          <Link href={catalogHref({ family: "layout" })} className="ca-btn-ghost h-8 px-3 text-xs">
-            레이아웃 카탈로그
+          <Link href={catalogHref({ family: "layout" })} className="text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline">
+            레이아웃
           </Link>
-          <Link href={catalogHref({ family: "case" })} className="ca-btn-ghost h-8 px-3 text-xs">
-            케이스/키트 카탈로그
+          <Link href={catalogHref({ family: "case" })} className="text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline">
+            케이스/키트
           </Link>
-          <Link href={catalogHref({ family: "keycap" })} className="ca-btn-ghost h-8 px-3 text-xs">
-            키캡 카탈로그
+          <Link href={catalogHref({ family: "keycap" })} className="text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline">
+            키캡
           </Link>
         </CardContent>
       </Card>

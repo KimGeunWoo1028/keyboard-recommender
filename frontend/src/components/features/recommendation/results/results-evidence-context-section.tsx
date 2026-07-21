@@ -1,7 +1,6 @@
 "use client";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { EVIDENCE_STORY_STEPS } from "@/lib/keyboard-terminology";
 import type { SurveySubmission } from "@/types/survey";
 
 import { HelpHint } from "./help-hint";
@@ -18,8 +17,8 @@ export function ResultsEvidenceContextSection({ submission }: ResultsEvidenceCon
   return (
     <section className="space-y-4">
       <ResultsEvidenceStorySectionHeader
-        title={EVIDENCE_STORY_STEPS[1].title}
-        description={EVIDENCE_STORY_STEPS[1].description}
+        title="추천에 반영된 추가 맥락"
+        description="자유 입력·피드백 등 이번 추천에 함께 쓰인 내용입니다."
       />
 
       {submission.feedbackLearning ? (

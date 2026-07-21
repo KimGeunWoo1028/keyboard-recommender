@@ -25,26 +25,26 @@ export function ResultsConfidenceStory({
   return (
     <div
       data-testid="e2e-confidence-story"
-      className="rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container/35 px-3 py-3 sm:px-4"
+      className="rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest px-4 py-4 sm:px-5"
     >
-      <p className="font-headline text-sm font-semibold text-ca-on-surface sm:text-base">{story.headline}</p>
-      <ul className="mt-2 space-y-1.5">
+      <p className="font-headline text-base font-semibold text-ca-on-surface">{story.headline}</p>
+      <ul className="mt-3 space-y-2">
         {story.bullets.map((bullet) => (
           <li key={bullet.text} className="flex gap-2 text-sm leading-relaxed text-ca-on-surface-variant">
             <span className="shrink-0 text-ca-on-surface" aria-hidden>
-              {bullet.kind === "check" ? "✓" : "·"}
+              {bullet.kind === "check" ? "·" : "·"}
             </span>
             <span>{bullet.text}</span>
           </li>
         ))}
       </ul>
       {story.refineActions && story.refineActions.length > 0 ? (
-        <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1">
+        <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1">
           {story.refineActions.map((action) => (
             <button
               key={`${action.stepId}-${action.answerId}`}
               type="button"
-              className="text-sm font-medium text-ca-primary underline-offset-2 hover:underline disabled:opacity-60"
+              className="text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline disabled:opacity-60"
               disabled={applyingRefine || !onApplyRefinement}
               onClick={() => onApplyRefinement?.(action.stepId, action.answerId, action.label)}
             >

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 import { ResultsAuthLoadingShell } from "@/components/auth/results-auth-loading-shell";
 import { RecommendationResultView } from "@/components/features/recommendation/recommendation-result-view";
+import { buttonClassName } from "@/components/ui/button";
 import { ApiError } from "@/lib/api/client";
 import { emitRefinementEventBestEffort } from "@/lib/api/onboarding-events";
 import { postComputeRecommendation } from "@/lib/api/recommendations";
@@ -116,15 +117,15 @@ export function ResultsView() {
 
   if (!submission || !build) {
     return (
-      <div className="ca-glass-panel border-dashed border-ca-outline-variant/50 p-8 text-center">
+      <div className="rounded-xl border border-dashed border-ca-outline-variant/50 bg-ca-surface-container-lowest p-8 text-center">
         <p className="text-sm text-ca-on-surface-variant">
           아직 설문 결과가 없습니다. 설문을 완료하면 추천 결과를 확인할 수 있어요.
         </p>
-        <div className="mt-4 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-          <Link href="/recommend" className="ca-btn-primary">
+        <div className="mt-5 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+          <Link href="/recommend" className={buttonClassName()}>
             설문 시작하기
           </Link>
-          <Link href="/catalog" className="ca-btn-ghost">
+          <Link href="/catalog" className={buttonClassName({ variant: "outline" })}>
             부품 카탈로그 둘러보기
           </Link>
         </div>

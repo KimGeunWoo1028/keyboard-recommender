@@ -10,11 +10,11 @@ export function ResultsAuthLoadingShell() {
       aria-busy="true"
       aria-live="polite"
     >
-      <div className="h-20 animate-pulse rounded-2xl border border-ca-outline-variant/30 bg-ca-surface-container/50 sm:h-24" />
-      <div className="h-36 animate-pulse rounded-2xl border border-ca-outline-variant/30 bg-ca-surface-container/50 sm:h-44" />
+      <div className="h-24 animate-pulse rounded-xl border border-ca-outline-variant/35 bg-ca-surface-container/40 motion-reduce:animate-none sm:h-28" />
+      <div className="h-40 animate-pulse rounded-xl border border-ca-outline-variant/35 bg-ca-surface-container/40 motion-reduce:animate-none sm:h-48" />
       <div className="grid gap-3 sm:grid-cols-2">
-        <div className="h-28 animate-pulse rounded-2xl border border-ca-outline-variant/30 bg-ca-surface-container/50 sm:h-36" />
-        <div className="h-28 animate-pulse rounded-2xl border border-ca-outline-variant/30 bg-ca-surface-container/50 sm:h-36" />
+        <div className="h-28 animate-pulse rounded-xl border border-ca-outline-variant/35 bg-ca-surface-container/40 motion-reduce:animate-none" />
+        <div className="h-28 animate-pulse rounded-xl border border-ca-outline-variant/35 bg-ca-surface-container/40 motion-reduce:animate-none" />
       </div>
       <p className="sr-only">로그인 정보를 확인하는 중입니다…</p>
     </div>

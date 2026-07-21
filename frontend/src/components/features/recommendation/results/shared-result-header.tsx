@@ -51,75 +51,67 @@ export function SharedResultHeader({
     loud: "큰 편",
   };
 
-  return (
-    <div className="space-y-3 sm:space-y-5">
-      <div>
-        <p className="font-label text-[10px] font-semibold text-ca-secondary sm:text-ca-label-sm">RECOMMENDED BUILDS</p>
-        <h2 className="font-headline text-lg text-ca-on-surface sm:text-ca-headline-md lg:text-ca-headline-lg">
-          정밀 추천 빌드
-        </h2>
-        <p className="mt-0.5 hidden max-w-2xl text-sm text-ca-on-surface-variant sm:mt-1 sm:block">
-          설문·선호를 반영한 6축 조합입니다. 구성품별로 스웨그키에서 바로 확인할 수 있어요.
-        </p>
-      </div>
+  const preferenceRows = [
+    { label: "사운드", value: soundLabelMap[answers.sound_profile] },
+    { label: "입력 강도", value: pressureLabelMap[answers.typing_pressure] },
+    { label: "스위치 키감", value: switchFeelLabelMap[answers.switch_feel] },
+    { label: "바닥 타건감", value: bottomOutLabelMap[answers.bottom_out] },
+    { label: "볼륨", value: volumeLabelMap[answers.volume] },
+  ];
 
-      <details className="group rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container/30 sm:hidden">
+  return (
+    <div className="space-y-5 sm:space-y-6">
+      <article className="overflow-hidden rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest">
+        <div className="space-y-2 px-4 py-5 sm:px-6 sm:py-6">
+          <p className="text-sm text-ca-on-surface-variant">추천 조합</p>
+          <h2 className="flex flex-wrap items-center gap-2 font-headline text-xl font-semibold tracking-tight text-ca-on-surface sm:text-2xl">
+            <span>{build.title}</span>
+            <HelpHint text="추천 조합 제목은 이번 결과의 핵심 성향을 한 줄로 요약한 안내입니다. 앞쪽은 사운드 성향, 뒤쪽은 키감 성향을 뜻해요." />
+          </h2>
+          <p className="max-w-3xl break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:text-base">
+            {taglineHead}
+            {taglineTail ? (
+              <>
+                <br />
+                {taglineTail}
+              </>
+            ) : null}
+          </p>
+        </div>
+      </article>
+
+      <details className="group rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container-lowest sm:hidden">
         <summary className="cursor-pointer list-none px-3 py-2.5 [&::-webkit-details-marker]:hidden">
           <div className="flex items-center justify-between gap-2">
-            <span className="text-sm font-medium text-ca-on-surface">내 설문 취향 요약</span>
+            <span className="text-sm font-medium text-ca-on-surface">내 설문 취향</span>
             <span className="text-xs text-ca-on-surface-variant group-open:hidden">펼치기</span>
             <span className="hidden text-xs text-ca-on-surface-variant group-open:inline">접기</span>
           </div>
         </summary>
-        <div className="flex flex-wrap gap-2 border-t border-ca-outline-variant/30 p-3">
-          {[
-            { label: "사운드", value: soundLabelMap[answers.sound_profile] },
-            { label: "입력 강도", value: pressureLabelMap[answers.typing_pressure] },
-            { label: "스위치 키감", value: switchFeelLabelMap[answers.switch_feel] },
-            { label: "바닥 타건감", value: bottomOutLabelMap[answers.bottom_out] },
-            { label: "볼륨", value: volumeLabelMap[answers.volume] },
-          ].map((b) => (
-            <span key={b.label} className="ca-chip">
-              {b.label}: {b.value}
-            </span>
+        <ul className="space-y-2 border-t border-ca-outline-variant/35 px-3 py-3 text-sm">
+          {preferenceRows.map((b) => (
+            <li key={b.label} className="flex justify-between gap-3">
+              <span className="text-ca-on-surface-variant">{b.label}</span>
+              <span className="font-medium text-ca-on-surface">{b.value}</span>
+            </li>
           ))}
-        </div>
+        </ul>
       </details>
 
-      <div className="hidden flex-wrap gap-2 sm:flex">
-        {[
-          { label: "사운드", value: soundLabelMap[answers.sound_profile] },
-          { label: "입력 강도", value: pressureLabelMap[answers.typing_pressure] },
-          { label: "스위치 키감", value: switchFeelLabelMap[answers.switch_feel] },
-          { label: "바닥 타건감", value: bottomOutLabelMap[answers.bottom_out] },
-          { label: "볼륨", value: volumeLabelMap[answers.volume] },
-        ].map((b) => (
-          <span key={b.label} className="ca-chip">
-            {b.label}: {b.value}
-          </span>
-        ))}
+      <div className="hidden sm:block">
+        <p className="text-sm font-medium text-ca-on-surface">내 설문 취향</p>
+        <ul className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          {preferenceRows.map((b) => (
+            <li
+              key={b.label}
+              className="flex items-baseline justify-between gap-3 border-b border-ca-outline-variant/30 pb-2 text-sm"
+            >
+              <span className="text-ca-on-surface-variant">{b.label}</span>
+              <span className="font-medium text-ca-on-surface">{b.value}</span>
+            </li>
+          ))}
+        </ul>
       </div>
-
-      <article className="ca-glass-panel overflow-hidden border-ca-primary/20 p-0">
-        <div className="border-b border-ca-outline-variant/30 bg-gradient-to-br from-ca-primary/15 via-transparent to-ca-secondary/10 px-4 py-3 sm:px-6 sm:py-5">
-          <div className="min-w-0 space-y-1 sm:space-y-2">
-            <p className="font-label text-[10px] font-semibold text-ca-secondary sm:text-ca-label-sm">PRIMARY BUILD</p>
-            <h3 className="flex flex-wrap items-center gap-2 font-headline text-lg font-bold text-ca-on-surface sm:text-xl lg:text-2xl">
-              <span>{build.title}</span>
-              <HelpHint text="추천 조합 제목은 이번 결과의 핵심 성향을 한 줄로 요약한 안내입니다. 앞쪽은 사운드 성향, 뒤쪽은 키감 성향을 뜻해요." />
-            </h3>
-            <p className="line-clamp-2 max-w-3xl text-sm leading-relaxed text-ca-on-surface-variant sm:line-clamp-none sm:text-base">
-              {taglineHead}
-              {taglineTail ? (
-                <>
-                  <br />
-                  {taglineTail}
-                </>
-              ) : null}
-            </p>
-          </div>
-        </div>
-      </article>
     </div>
   );
 }

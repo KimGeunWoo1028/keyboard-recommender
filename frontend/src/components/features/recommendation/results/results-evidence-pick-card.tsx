@@ -50,16 +50,16 @@ export function ResultsEvidencePickCard({
   return (
     <Card
       className={cn(
-        "grid gap-3 px-5 pb-5 md:row-span-6 md:grid-rows-subgrid",
-        index === 0
-          ? "ca-glass-panel border-ca-primary/40 shadow-ca-glow"
-          : "ca-glass-panel border-ca-outline-variant/40",
+        "grid gap-3 rounded-xl border bg-ca-surface-container-lowest px-5 pb-5 shadow-none md:row-span-6 md:grid-rows-subgrid",
+        index === 0 ? "border-ca-on-surface/40" : "border-ca-outline-variant/40",
       )}
     >
       <CardHeader className="space-y-2 border-b-0 p-0 pt-5">
-        <p className="font-label text-ca-label-sm font-medium text-ca-secondary">{domainDisplayLabel(row.domain)}</p>
-        <CardTitle className="font-headline text-base leading-snug text-ca-on-surface">{pickDisplayName(row)}</CardTitle>
-        <p className="text-xs text-ca-on-surface-variant">
+        <p className="text-sm font-medium text-ca-on-surface-variant">{domainDisplayLabel(row.domain)}</p>
+        <CardTitle className="font-headline text-base font-semibold leading-snug text-ca-on-surface">
+          {pickDisplayName(row)}
+        </CardTitle>
+        <p className="text-sm text-ca-on-surface-variant">
           <SwagkeyProductLink
             href={pickRowSourceUrl(row, build, apiPicks, enrichedSourceUrls)}
             domain={row.domain}

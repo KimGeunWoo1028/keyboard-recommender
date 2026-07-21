@@ -5,6 +5,7 @@ import type { CatalogItem, ScoredComponent } from "@/recommendation-engine/model
 import type { EngineTraitVector } from "@/recommendation-engine/traits";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
 import { formatScore } from "./results-build-utils";
 
@@ -29,28 +30,31 @@ function RecommendationCompareCard({
 
   return (
     <Card
-      className={`ca-glass-panel flex h-full flex-col border-ca-outline-variant/40 transition-shadow ${
-        topPick ? "border-ca-primary/45 shadow-ca-glow" : ""
-      }`}
+      className={cn(
+        "flex h-full flex-col rounded-xl border bg-ca-surface-container-lowest shadow-none",
+        topPick ? "border-ca-on-surface/40" : "border-ca-outline-variant/40",
+      )}
     >
       <CardHeader className="space-y-3 border-b-0 pb-2">
         <div className="flex flex-wrap items-start justify-between gap-2">
           <div className="space-y-1">
-            <p className="font-label text-ca-label-sm font-medium text-ca-secondary">{categoryLabel}</p>
-            <CardTitle className="font-headline text-base leading-snug text-ca-on-surface sm:text-lg">{item.name}</CardTitle>
+            <p className="text-sm font-medium text-ca-on-surface-variant">{categoryLabel}</p>
+            <CardTitle className="font-headline text-base font-semibold leading-snug text-ca-on-surface sm:text-lg">
+              {item.name}
+            </CardTitle>
           </div>
           <div className="flex flex-col items-end gap-1">
             <Badge
               className={
                 topPick
-                  ? "shrink-0 border-ca-primary/40 bg-ca-primary/15 font-semibold text-ca-primary"
-                  : "shrink-0"
+                  ? "shrink-0 border-ca-on-surface/30 bg-transparent font-medium text-ca-on-surface"
+                  : "shrink-0 bg-transparent font-normal"
               }
             >
               #{rank}
-              {topPick ? " · 최상위 추천" : ""}
+              {topPick ? " · 최상위" : ""}
             </Badge>
-            <span className="font-mono text-[11px] font-medium tabular-nums text-ca-on-surface-variant">
+            <span className="font-mono text-xs font-medium tabular-nums text-ca-on-surface-variant">
               점수 {formatScore(score)}
             </span>
           </div>
@@ -58,18 +62,18 @@ function RecommendationCompareCard({
         <CardDescription className="text-sm leading-relaxed text-ca-on-surface-variant">{item.description}</CardDescription>
       </CardHeader>
       <CardContent className="mt-auto flex flex-1 flex-col gap-4 pt-0">
-        <div className="rounded-lg border border-ca-outline-variant/30 bg-ca-surface-container/50 px-3 py-2.5">
-          <p className="font-label text-ca-label-sm font-medium text-ca-secondary">추천 이유</p>
-          <p className="mt-1.5 text-sm leading-relaxed text-ca-on-surface">{explanation}</p>
+        <div className="rounded-lg border border-ca-outline-variant/35 bg-ca-surface-container-lowest px-3 py-2.5">
+          <p className="text-sm font-medium text-ca-on-surface">추천 이유</p>
+          <p className="mt-1.5 text-sm leading-relaxed text-ca-on-surface-variant">{explanation}</p>
         </div>
         <div className="grid gap-3 sm:grid-cols-2">
-          <div className="rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container-lowest/40 px-3 py-2.5">
-            <p className="font-label text-ca-label-sm font-medium text-ca-secondary">사운드 성향</p>
-            <p className="mt-1.5 text-xs leading-relaxed text-ca-on-surface-variant sm:text-sm">{soundSummary}</p>
+          <div className="rounded-lg border border-ca-outline-variant/35 px-3 py-2.5">
+            <p className="text-sm font-medium text-ca-on-surface">사운드 성향</p>
+            <p className="mt-1.5 text-sm leading-relaxed text-ca-on-surface-variant">{soundSummary}</p>
           </div>
-          <div className="rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container-lowest/40 px-3 py-2.5">
-            <p className="font-label text-ca-label-sm font-medium text-ca-secondary">타건감</p>
-            <p className="mt-1.5 text-xs leading-relaxed text-ca-on-surface-variant sm:text-sm">{typingSummary}</p>
+          <div className="rounded-lg border border-ca-outline-variant/35 px-3 py-2.5">
+            <p className="text-sm font-medium text-ca-on-surface">타건감</p>
+            <p className="mt-1.5 text-sm leading-relaxed text-ca-on-surface-variant">{typingSummary}</p>
           </div>
         </div>
       </CardContent>

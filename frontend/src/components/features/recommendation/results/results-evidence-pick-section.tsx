@@ -5,14 +5,14 @@ import { cn } from "@/lib/utils";
 type EvidencePickSectionVariant = "default" | "muted" | "warning";
 
 const SHELL: Record<EvidencePickSectionVariant, string> = {
-  default: "border-ca-outline-variant/40 bg-ca-surface-container/35",
-  muted: "border-ca-outline-variant/40 bg-ca-surface-container-lowest/40",
+  default: "border-ca-outline-variant/40 bg-ca-surface-container-lowest",
+  muted: "border-ca-outline-variant/40 bg-ca-surface-container-lowest",
   warning: "border-amber-500/25 bg-amber-500/5",
 };
 
 const LABEL: Record<EvidencePickSectionVariant, string> = {
-  default: "text-ca-secondary",
-  muted: "text-ca-secondary",
+  default: "text-ca-on-surface-variant",
+  muted: "text-ca-on-surface-variant",
   warning: "text-amber-900/80 dark:text-amber-100/90",
 };
 
@@ -48,7 +48,7 @@ export function ResultsEvidencePickSection({
       )}
       data-testid={testId}
     >
-      <p className={cn("font-label text-ca-label-sm font-semibold", LABEL[variant])}>{label}</p>
+      <p className={cn("text-sm font-medium", LABEL[variant])}>{label}</p>
       <div className={cn("mt-2", fillHeight && "flex-1", bodyClassName)}>{children}</div>
     </div>
   );

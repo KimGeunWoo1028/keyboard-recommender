@@ -1,5 +1,6 @@
 import { swagkeyProductLinkLabel } from "@/lib/layout-catalog-links";
 import { normalizeSwagkeyProductUrl } from "@/lib/swagkey-source-links";
+import { cn } from "@/lib/utils";
 
 export function SwagkeyProductLink({
   href,
@@ -22,10 +23,10 @@ export function SwagkeyProductLink({
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className={
-        className ??
-        "inline-flex h-8 items-center rounded-full border border-ca-primary/40 bg-ca-primary/10 px-3 font-label text-ca-label-sm font-medium text-ca-primary underline-offset-4 transition-colors hover:bg-ca-primary/20 hover:underline"
-      }
+      className={cn(
+        "text-sm font-medium text-ca-on-surface underline-offset-4 transition-colors hover:underline",
+        className,
+      )}
     >
       {text}
     </a>

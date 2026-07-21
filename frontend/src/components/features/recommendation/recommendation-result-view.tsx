@@ -46,7 +46,7 @@ const ResultsEvidenceTab = dynamic(
   {
     loading: () => (
       <div
-        className="min-h-[20rem] animate-pulse rounded-2xl border border-ca-outline-variant/30 bg-ca-surface-container/40"
+        className="min-h-[20rem] animate-pulse rounded-xl border border-ca-outline-variant/35 bg-ca-surface-container/40 motion-reduce:animate-none"
         aria-busy="true"
         aria-label="근거 탭 불러오는 중"
       />
@@ -454,7 +454,7 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
 
   if (useBackendScoring) {
     return (
-      <div className="space-y-5 overflow-x-hidden sm:space-y-8 lg:space-y-10">
+      <div className="space-y-6 overflow-x-hidden sm:space-y-8">
         <SharedResultHeader submission={submission} build={build} />
 
         <ResultsTrustLayer
@@ -505,13 +505,13 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
   const layouts = engine.ranked.layouts.slice(0, 3);
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-8">
       <SharedResultHeader submission={submission} build={build} />
 
       <LiteResultTabBar activeTab={activeLiteTab} onTabChange={setActiveLiteTab} />
 
       {activeLiteTab === "overview" && submission.apiUnreachableFallback ? (
-        <Card className="border-amber-500/40 bg-amber-500/10">
+        <Card className="border-amber-500/40 bg-amber-500/10 shadow-none">
           <CardHeader className="pb-2">
             <CardTitle className="text-base text-amber-950 dark:text-amber-100">연결이 불안정해요</CardTitle>
             <CardDescription className="text-amber-900/90 dark:text-amber-100/90">
@@ -522,15 +522,15 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
       ) : null}
 
       {activeLiteTab === "overview" && submission.nlPreferenceText?.trim() ? (
-        <Card className="border-border/70 bg-muted/15">
+        <Card className="rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest shadow-none">
           <CardHeader className="pb-2">
-            <CardTitle className="text-base">자유 입력 취향</CardTitle>
+            <CardTitle className="text-base font-semibold">자유 입력 취향</CardTitle>
             <CardDescription>
               입력한 문장을 바탕으로 취향을 분석해 추천에 함께 반영했습니다.
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <p className="rounded-md border border-dashed border-border/80 bg-background/50 p-3 text-sm text-muted-foreground">
+            <p className="rounded-lg border border-ca-outline-variant/35 p-3 text-sm text-ca-on-surface-variant">
               {submission.nlPreferenceText.trim()}
             </p>
           </CardContent>
@@ -539,13 +539,13 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
 
       {activeLiteTab === "overview" ? (
         <div className="space-y-2">
-          <p className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+          <p className="inline-flex items-center gap-1.5 text-sm font-medium text-ca-on-surface">
             설문 기반 핵심 성향
             <HelpHint text="설문 답변에서 특히 강하게 드러난 취향 축을 요약한 배지입니다. 점수가 클수록 해당 성향이 더 뚜렷합니다." />
           </p>
           <div className="flex flex-wrap gap-2">
             {traitBadges.map((t) => (
-              <Badge key={t.key} className="border-dashed border-border bg-transparent font-normal">
+              <Badge key={t.key} className="border-ca-outline-variant/50 bg-transparent font-normal">
                 {t.label} (+{t.score})
               </Badge>
             ))}
