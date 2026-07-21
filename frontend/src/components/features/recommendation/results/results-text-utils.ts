@@ -66,6 +66,11 @@ export function overviewAlternativeDescription(
 const GENERIC_BUILD_DESCRIPTION_PATTERNS = [
   /보강판 특성에 따라 타건 강성/,
   /사용 취향에 맞춰 조정하는 핵심 요소입니다\.?$/,
+  /폭넓게 선택할 수 있는 타입/,
+  /세팅 방향에 맞춰 유연하게 조합하기 좋습니다/,
+  /배열 크기와 키 배치 밀도에 따라/,
+  /키캡은 프로필·재질·각인 방식에 따라/,
+  /상판 파츠·하우징은 기존 빌드에 맞춰/,
 ];
 
 export function isGenericBuildPartDescription(description: string): boolean {

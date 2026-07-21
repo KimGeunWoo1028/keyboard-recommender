@@ -551,7 +551,7 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
             onClick={() => {
               setSecurityActionBusy("logout");
               void logout().finally(() => {
-                router.push("/auth?force=1");
+                router.push("/");
                 router.refresh();
               });
             }}
@@ -564,7 +564,7 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
             onClick={() => {
               setSecurityActionBusy("logout_all");
               void logoutAllSessions().finally(() => {
-                router.push("/auth?force=1");
+                router.push("/");
                 router.refresh();
               });
             }}

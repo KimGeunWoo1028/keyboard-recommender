@@ -186,7 +186,7 @@ export function AuthSessionAction() {
           .finally(() => {
             setUser(null);
             setLoggingOut(false);
-            router.push("/auth?force=1");
+            router.push("/");
             router.refresh();
           });
       }}

@@ -76,7 +76,7 @@ export const SURVEY_STEPS: readonly SurveyStepDefinition[] = [
       },
       {
         id: "medium",
-        label: "보통",
+        label: "보통 / 아직 고민 중",
         description: "가볍지도 무겁지도 않은 중간 정도 타건입니다.",
         traitDelta: { lightPress: 1, heavyPress: 1 },
       },
@@ -126,7 +126,7 @@ export const SURVEY_STEPS: readonly SurveyStepDefinition[] = [
       },
       {
         id: "medium",
-        label: "중간",
+        label: "중간 / 아직 고민 중",
         description: "너무 물렁하지도 너무 단단하지도 않은 중간 바닥감입니다.",
         traitDelta: { softBottom: 1, firmBottom: 1 },
       },
@@ -151,7 +151,7 @@ export const SURVEY_STEPS: readonly SurveyStepDefinition[] = [
       },
       {
         id: "moderate",
-        label: "보통",
+        label: "보통 / 아직 고민 중",
         description: "일반 기계식 키보드 수준의 소리는 괜찮아요.",
         traitDelta: { volumeQuiet: 1, volumeLoud: 1 },
       },

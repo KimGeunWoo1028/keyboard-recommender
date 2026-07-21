@@ -12,7 +12,7 @@ import { isInternalDebugUiEnabled } from "@/lib/internal-debug-flags";
 import { cn } from "@/lib/utils";
 
 const primaryNav: { href: string; label: string }[] = [
-  { href: "/recommend", label: "추천" },
+  { href: "/recommend", label: "설문" },
   { href: "/catalog", label: "카탈로그" },
   { href: "/results", label: "결과" },
   { href: "/mypage", label: "마이페이지" },
@@ -54,7 +54,8 @@ export function SiteHeader() {
           <Link
             href="/"
             prefetch={deferNavPrefetch ? false : undefined}
-            className="inline-flex min-w-0 shrink items-center gap-2 bg-gradient-to-r from-ca-primary to-ca-secondary bg-clip-text font-headline text-base font-bold leading-none tracking-tight text-transparent md:gap-3 md:text-[1.45rem]"
+            aria-label="Keyboard Recommender 홈"
+            className="inline-flex min-w-0 shrink items-center gap-2 rounded-btn font-headline text-base font-bold leading-none tracking-tight text-ca-on-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-primary md:gap-3 md:text-[1.45rem]"
           >
             <Image
               src="/brand/logo-mark.png"
@@ -122,7 +123,10 @@ export function SiteHeader() {
             <span className="font-body text-sm font-medium text-ca-on-surface-variant">테마</span>
             <ThemeToggle />
           </div>
-          <HeaderCatalogSearch className="mb-3 block lg:hidden" />
+          <div className="mb-3 space-y-1.5">
+            <p className="font-body text-xs font-medium text-ca-on-surface-variant">카탈로그 검색</p>
+            <HeaderCatalogSearch className="block lg:hidden" />
+          </div>
           <nav className="flex flex-col gap-1" aria-label="모바일">
             <Link
               href="/"

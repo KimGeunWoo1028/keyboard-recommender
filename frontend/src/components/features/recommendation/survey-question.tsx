@@ -38,6 +38,9 @@ export function SurveyQuestion<T extends SurveyStepId>({ step, value, onChange, 
         <p className="mt-2 max-w-2xl break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:mx-auto sm:text-base">
           {step.description}
         </p>
+        <p className="mt-1.5 max-w-2xl break-keep text-xs leading-relaxed text-ca-on-surface-variant/90 sm:mx-auto sm:text-sm">
+          확신이 없어도 괜찮아요. 가장 가까운 쪽을 고르면 됩니다.
+        </p>
       </div>
 
       <div className={optionLayoutClass(step.options.length)} role="radiogroup" aria-label={step.title}>
@@ -51,9 +54,9 @@ export function SurveyQuestion<T extends SurveyStepId>({ step, value, onChange, 
               aria-checked={selected}
               onClick={() => onChange(opt.id)}
               className={cn(
-                "group flex h-full min-h-0 w-full min-w-0 flex-col items-start justify-center gap-2.5 rounded-xl border p-4 text-left transition-colors sm:gap-3 sm:p-5",
+                "group flex h-full min-h-0 w-full min-w-0 flex-col items-start justify-center gap-2 rounded-xl border p-4 text-left transition-colors sm:gap-3 sm:p-5",
                 flexRow && "sm:flex-1",
-                !flexRow && "min-h-[8.5rem] sm:min-h-0",
+                !flexRow && "min-h-[6.5rem] sm:min-h-0",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-primary",
                 selected
                   ? "border-ca-on-surface bg-ca-surface-container-lowest"
@@ -69,7 +72,12 @@ export function SurveyQuestion<T extends SurveyStepId>({ step, value, onChange, 
                 <span className="block break-keep font-headline text-sm font-semibold leading-tight text-ca-on-surface sm:text-base">
                   {opt.label}
                 </span>
-                <span className="block line-clamp-3 break-keep text-xs leading-snug text-ca-on-surface-variant sm:text-sm">
+                <span
+                  className={cn(
+                    "block break-keep text-xs leading-snug text-ca-on-surface-variant sm:text-sm",
+                    selected ? "line-clamp-4 sm:line-clamp-none" : "line-clamp-1 sm:line-clamp-3",
+                  )}
+                >
                   {opt.description}
                 </span>
               </div>

@@ -97,9 +97,11 @@ describe("RecommendationResultView", () => {
     expect(screen.getByTestId("e2e-server-ranked")).toBeInTheDocument();
     expect(screen.getByTestId("e2e-trust-layer")).toBeInTheDocument();
     expect(screen.getByTestId("e2e-confidence-story")).toBeInTheDocument();
-    expect(screen.getByText("추천 신뢰도: 높음")).toBeInTheDocument();
+    expect(screen.getByText("설문 맞춤: 높은 편")).toBeInTheDocument();
     expect(screen.queryByTestId("e2e-quality-status")).not.toBeInTheDocument();
-    expect(screen.getByText("Test combination")).toBeInTheDocument();
+    expect(screen.getByText("차분한 소리 · 매끈한 키감")).toBeInTheDocument();
+    expect(screen.queryByText("Test combination")).not.toBeInTheDocument();
+    expect(screen.getByText(/설문에서 고른 소리·키감 성향/)).toBeInTheDocument();
   });
 
   it("shows one-line quality status when recommendation is not fully stable", () => {
@@ -110,7 +112,7 @@ describe("RecommendationResultView", () => {
     render(<RecommendationResultView submission={sub} build={minimalBuild()} />);
 
     expect(screen.getByTestId("e2e-confidence-story")).toBeInTheDocument();
-    expect(screen.getByText("추천 신뢰도: 보통")).toBeInTheDocument();
+    expect(screen.getByText("설문 맞춤: 보통")).toBeInTheDocument();
     expect(screen.queryByTestId("e2e-quality-status")).not.toBeInTheDocument();
   });
 });

@@ -15,7 +15,8 @@ export default function HomePage() {
           어떻게 맞춰 주나요
         </h2>
         <p className="mt-2 max-w-xl break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:text-base">
-          취향 여섯 가지와 부품 여섯 가지를 이어 하나의 조합을 만듭니다. 점수가 아니라, 설문이 고른 방향입니다.
+          소리·누르는 힘·키감처럼 체감하기 쉬운 취향을 고르면, 스위치부터 키캡까지 한 조합으로 이어 줍니다. 점수가
+          아니라 설문이 고른 방향입니다.
         </p>
         <div className="mt-6">
           <HomeWorkshopPreviewGate />

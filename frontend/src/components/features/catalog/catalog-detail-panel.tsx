@@ -33,6 +33,19 @@ const FAMILY_LABELS: Record<CatalogFamily, string> = {
   keycap: "키캡",
 };
 
+function isGenericCatalogCardDescription(description: string): boolean {
+  const text = description.trim();
+  if (!text) return true;
+  return (
+    /폭넓게 선택할 수 있는 타입/.test(text) ||
+    /세팅 방향에 맞춰 유연하게 조합하기 좋습니다/.test(text) ||
+    /보강판 특성에 따라 타건 강성/.test(text) ||
+    /배열 크기와 키 배치 밀도에 따라/.test(text) ||
+    /키캡은 프로필·재질·각인 방식에 따라/.test(text) ||
+    /상판 파츠·하우징은 기존 빌드에 맞춰/.test(text)
+  );
+}
+
 const METADATA_LABELS: Record<string, string> = {
   material: "재질",
   spring_weight_g: "스프링 (g)",
@@ -148,7 +161,7 @@ export function CatalogDetailPanel({ open, loading, error, family, partDetail, o
               <CardTitle className="font-headline text-lg leading-snug text-ca-on-surface">
                 {loading ? "불러오는 중…" : title || "상세 정보"}
               </CardTitle>
-              {description ? (
+              {description && !isGenericCatalogCardDescription(description) ? (
                 <CardDescription className="text-ca-on-surface-variant">{description}</CardDescription>
               ) : null}
               {family ? (

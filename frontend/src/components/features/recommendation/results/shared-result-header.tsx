@@ -5,24 +5,14 @@ import type { SurveySubmission } from "@/types/survey";
 
 import { HelpHint } from "./help-hint";
 
-function splitTaglineBeforeParen(tagline: string): { head: string; tail: string | null } {
-  const idx = tagline.indexOf(" (");
-  if (idx === -1) return { head: tagline, tail: null };
-  return {
-    head: tagline.slice(0, idx).trimEnd(),
-    tail: tagline.slice(idx + 1).trim(),
-  };
-}
-
 export function SharedResultHeader({
   submission,
-  build,
 }: {
   submission: SurveySubmission;
+  /** Kept for call-site compatibility; title is derived from survey answers. */
   build: RecommendedBuild;
 }) {
   const { answers } = submission;
-  const { head: taglineHead, tail: taglineTail } = splitTaglineBeforeParen(build.tagline);
   const soundLabelMap: Record<SurveySubmission["answers"]["sound_profile"], string> = {
     thocky: "묵직한 저음",
     clacky: "또렷한 고음",
@@ -59,23 +49,22 @@ export function SharedResultHeader({
     { label: "볼륨", value: volumeLabelMap[answers.volume] },
   ];
 
+  // Display title follows survey answers (UX trust) — engine build.title may differ.
+  const preferenceAlignedTitle = `${soundLabelMap[answers.sound_profile]} · ${switchFeelLabelMap[answers.switch_feel]}`;
+  const preferenceAlignedSubtitle =
+    "설문에서 고른 소리·키감 성향에 맞춰 스위치부터 키캡까지 골랐어요.";
+
   return (
     <div className="space-y-5 sm:space-y-6">
       <article className="overflow-hidden rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest">
         <div className="space-y-2 px-4 py-5 sm:px-6 sm:py-6">
           <p className="text-sm text-ca-on-surface-variant">추천 조합</p>
           <h2 className="flex flex-wrap items-center gap-2 font-headline text-xl font-semibold tracking-tight text-ca-on-surface sm:text-2xl">
-            <span>{build.title}</span>
-            <HelpHint text="추천 조합 제목은 이번 결과의 핵심 성향을 한 줄로 요약한 안내입니다. 앞쪽은 사운드 성향, 뒤쪽은 키감 성향을 뜻해요." />
+            <span>{preferenceAlignedTitle}</span>
+            <HelpHint text="제목은 이번 설문에서 고른 사운드·키감 성향을 그대로 보여 줍니다. 아래 ‘내 설문 취향’과 같아야 해요." />
           </h2>
           <p className="max-w-3xl break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:text-base">
-            {taglineHead}
-            {taglineTail ? (
-              <>
-                <br />
-                {taglineTail}
-              </>
-            ) : null}
+            {preferenceAlignedSubtitle}
           </p>
         </div>
       </article>

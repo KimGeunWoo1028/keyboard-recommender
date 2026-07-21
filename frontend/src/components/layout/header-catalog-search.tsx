@@ -36,8 +36,8 @@ export function HeaderCatalogSearch({ className }: Props) {
         name="q"
         value={query}
         onChange={(event) => setQuery(event.target.value)}
-        placeholder="부품 검색…"
-        aria-label="카탈로그 부품 검색"
+        placeholder="카탈로그에서 부품 검색…"
+        aria-label="카탈로그에서 부품 검색"
         className={cn(
           "w-full rounded-full border border-transparent bg-ca-surface-container-highest/50 py-2 pl-10 pr-4",
           "font-body text-sm text-ca-on-surface placeholder:text-ca-on-surface-variant/70",

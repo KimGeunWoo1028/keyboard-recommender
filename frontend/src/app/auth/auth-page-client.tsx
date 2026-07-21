@@ -80,9 +80,11 @@ export function AuthPageClient() {
   const [emailVerificationMessage, setEmailVerificationMessage] = useState<string | null>(null);
   const [sendingEmailCode, setSendingEmailCode] = useState(false);
   const [verifyingEmailCode, setVerifyingEmailCode] = useState(false);
+  const [authNextPath, setAuthNextPath] = useState<string | null>(null);
 
   useEffect(() => {
     const { force, next } = readAuthSearchParams();
+    setAuthNextPath(next);
     if (force) return;
     let cancelled = false;
     void fetchCurrentUser().then((user) => {
@@ -317,7 +319,11 @@ export function AuthPageClient() {
           </h1>
           <p className="break-keep text-sm leading-relaxed text-ca-on-surface-variant">
             {mode === "login"
-              ? "계정으로 로그인하고 저장한 빌드를 이어가세요."
+              ? authNextPath?.startsWith("/recommend")
+                ? "로그인하면 추천 설문을 바로 시작합니다."
+                : authNextPath?.startsWith("/results")
+                  ? "로그인하면 저장된 추천 결과를 확인할 수 있습니다."
+                  : "계정으로 로그인하고 저장한 빌드를 이어가세요."
               : "닉네임과 이메일 인증 후 계정을 만듭니다."}
           </p>
           {mode === "signup" ? (

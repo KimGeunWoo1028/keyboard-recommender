@@ -26,7 +26,7 @@ export function SiteFooter() {
           <Link
             href="/"
             prefetch={deferNavPrefetch ? false : undefined}
-            className="bg-gradient-to-r from-ca-primary to-ca-secondary bg-clip-text font-headline text-sm font-bold text-transparent"
+            className="font-headline text-sm font-bold text-ca-on-surface"
           >
             Keyboard Recommender
           </Link>
@@ -43,7 +43,7 @@ export function SiteFooter() {
             카탈로그
           </Link>
           <Link href="/recommend" prefetch={deferNavPrefetch ? false : undefined} className="transition-colors hover:text-ca-on-surface">
-            추천 설문
+            설문
           </Link>
           <Link href="/mypage" prefetch={deferNavPrefetch ? false : undefined} className="transition-colors hover:text-ca-on-surface">
             마이페이지

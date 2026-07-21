@@ -37,6 +37,15 @@ export function formatScore(n: number): string {
   return n.toFixed(2);
 }
 
+/** User-facing band instead of raw similarity decimals (UX). */
+export function formatScoreBand(n: number): string {
+  if (!Number.isFinite(n)) return "참고용";
+  if (n >= 0.7) return "매우 비슷함";
+  if (n >= 0.55) return "비슷함";
+  if (n >= 0.4) return "조금 다름";
+  return "다른 성향";
+}
+
 export function domainDisplayLabel(domain: string): string {
   const d = domain.toLowerCase();
   const map: Record<string, string> = {

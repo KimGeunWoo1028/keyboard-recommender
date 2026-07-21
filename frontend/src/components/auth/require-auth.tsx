@@ -78,10 +78,19 @@ export function RequireAuth({ children, loadingFallback }: Props) {
       <Spinner className="text-2xl text-ca-primary" label="로그인 정보 확인 중" />
       <p className="text-sm text-muted-foreground">로그인 정보를 확인하는 중입니다…</p>
       {authChecked && !user ? (
-        <p className="text-xs text-muted-foreground">로그인 페이지로 이동 중…</p>
+        <p className="max-w-sm break-keep text-sm text-muted-foreground">
+          이 화면은 로그인 후 이용할 수 있습니다. 카탈로그는 로그인 없이 둘러볼 수 있어요.
+        </p>
       ) : null}
       {authChecked && !user ? (
-        <Button type="button" variant="primary" onClick={() => router.replace("/auth")}>
+        <Button
+          type="button"
+          variant="primary"
+          onClick={() => {
+            const next = `${window.location.pathname}${window.location.search}`;
+            router.replace(`/auth?next=${encodeURIComponent(next)}`);
+          }}
+        >
           로그인하러 가기
         </Button>
       ) : null}

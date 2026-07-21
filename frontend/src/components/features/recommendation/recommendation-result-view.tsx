@@ -402,11 +402,11 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
         saveLocalGuestBookmark(bookmarkInput);
         setSaveMessage(
           result.reason === "evaluation_persistence_disabled"
-            ? "브라우저에 로컬 저장되었습니다."
-            : "로컬에 저장되었습니다.",
+            ? "이 브라우저에 로컬 저장되었습니다. 마이페이지에서 확인할 수 있어요."
+            : "로컬에 저장되었습니다. 마이페이지 → 저장한 빌드에서 확인하세요.",
         );
       } else {
-        setSaveMessage("북마크 목록에 저장되었습니다.");
+        setSaveMessage("저장되었습니다. 마이페이지 → 저장한 빌드에서 다시 볼 수 있어요.");
       }
       setSaveState("saved");
       void emitExplorationEvent({

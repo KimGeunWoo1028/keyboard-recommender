@@ -13,7 +13,7 @@ describe("deriveConfidenceStory", () => {
       },
       [{ domain: "switch", itemId: "sw-1", score: 0.8, explanation: "" }],
     );
-    expect(story?.headline).toBe("추천 신뢰도: 높음");
+    expect(story?.headline).toBe("설문 맞춤: 높은 편");
     expect(story?.bullets.some((b) => b.text.includes("일관"))).toBe(true);
     expect(story?.bullets.some((b) => b.text.includes("더 잘 맞는"))).toBe(true);
   });
@@ -35,7 +35,7 @@ describe("deriveConfidenceStory", () => {
         },
       ],
     );
-    expect(story?.headline).toBe("추천 신뢰도: 보통");
+    expect(story?.headline).toBe("설문 맞춤: 보통");
     expect(story?.bullets.some((b) => b.text.includes("비슷"))).toBe(true);
   });
 
@@ -52,7 +52,7 @@ describe("deriveConfidenceStory", () => {
       },
       [],
     );
-    expect(story?.headline).toBe("추천 신뢰도: 보통");
+    expect(story?.headline).toBe("설문 맞춤: 보통");
     expect(story?.refineActions).toHaveLength(1);
   });
 
@@ -65,7 +65,7 @@ describe("deriveConfidenceStory", () => {
       },
       [{ domain: "switch", itemId: "sw-1", score: 0.8, explanation: "" }],
     );
-    expect(story?.headline).toBe("추천 신뢰도: 참고용");
+    expect(story?.headline).toBe("설문 맞춤: 참고용");
     expect(story?.bullets.some((b) => /참고|비슷/.test(b.text))).toBe(true);
   });
 
@@ -86,7 +86,7 @@ describe("deriveConfidenceStory", () => {
         },
       ],
     );
-    expect(story?.headline).toBe("추천 신뢰도: 보통");
+    expect(story?.headline).toBe("설문 맞춤: 보통");
     expect(story?.bullets.some((b) => b.text.includes("엇갈렸"))).toBe(true);
   });
 });

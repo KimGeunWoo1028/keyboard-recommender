@@ -130,7 +130,14 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
   const canRestore = mounted && selected ? canRestoreResults(selected) : false;
 
   return (
-    <MyPageSectionCard title="저장한 빌드" description="왼쪽에서 빌드를 고르면 오른쪽에 상세가 표시됩니다.">
+    <MyPageSectionCard
+      title="저장한 빌드"
+      description={
+        items.length
+          ? "왼쪽에서 빌드를 고르면 오른쪽에 상세가 표시됩니다."
+          : "결과 화면에서 빌드를 저장하면 이 목록에 쌓입니다."
+      }
+    >
       {showSearch ? (
         <Input
           value={query}

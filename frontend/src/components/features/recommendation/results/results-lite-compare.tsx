@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
-import { formatScore } from "./results-build-utils";
+import { formatScoreBand } from "./results-build-utils";
 
 function RecommendationCompareCard({
   rank,
@@ -54,8 +54,8 @@ function RecommendationCompareCard({
               #{rank}
               {topPick ? " · 최상위" : ""}
             </Badge>
-            <span className="font-mono text-xs font-medium tabular-nums text-ca-on-surface-variant">
-              점수 {formatScore(score)}
+            <span className="text-xs font-medium text-ca-on-surface-variant">
+              {formatScoreBand(score)}
             </span>
           </div>
         </div>

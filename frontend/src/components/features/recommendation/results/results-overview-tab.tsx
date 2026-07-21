@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState, type SyntheticEvent } from "react";
 
 import { catalogHref } from "@/lib/catalog-links";
 import { isReferenceOnlyLayoutArchetype } from "@/lib/layout-catalog-links";
@@ -24,7 +24,7 @@ import {
   buildComponentDisplayText,
   buildPartSourceUrl,
   domainDisplayLabel,
-  formatScore,
+  formatScoreBand,
   pickRowSourceUrl,
   splitBuildComponentText,
 } from "./results-build-utils";
@@ -136,6 +136,45 @@ export function ResultsOverviewTab({
     () => collectOverviewAlternatives(apiPicks, DISPLAY_K),
     [apiPicks],
   );
+  /** Desktop: keep secondary blocks open; mobile: collapsed by default (P18). */
+  const [altsOpen, setAltsOpen] = useState(false);
+  const [exploreOpen, setExploreOpen] = useState(false);
+  useEffect(() => {
+    if (typeof window.matchMedia !== "function") {
+      setAltsOpen(true);
+      setExploreOpen(true);
+      return;
+    }
+    const mq = window.matchMedia("(min-width: 640px)");
+    const sync = () => {
+      const desktop = mq.matches;
+      setAltsOpen(desktop);
+      setExploreOpen(desktop);
+    };
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  function onAltsToggle(event: SyntheticEvent<HTMLDetailsElement>) {
+    const el = event.currentTarget;
+    if (typeof window.matchMedia === "function" && window.matchMedia("(min-width: 640px)").matches) {
+      el.open = true;
+      setAltsOpen(true);
+      return;
+    }
+    setAltsOpen(el.open);
+  }
+
+  function onExploreToggle(event: SyntheticEvent<HTMLDetailsElement>) {
+    const el = event.currentTarget;
+    if (typeof window.matchMedia === "function" && window.matchMedia("(min-width: 640px)").matches) {
+      el.open = true;
+      setExploreOpen(true);
+      return;
+    }
+    setExploreOpen(el.open);
+  }
 
   return (
     <>
@@ -190,7 +229,7 @@ export function ResultsOverviewTab({
                 </div>
                 <p className="mt-1 font-headline text-base font-semibold text-ca-on-surface">{parsed.name}</p>
                 {blurb ? (
-                  <p className="mt-1 line-clamp-3 break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:line-clamp-none">
+                  <p className="mt-1 line-clamp-2 break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:line-clamp-none">
                     {blurb}
                   </p>
                 ) : null}
@@ -235,23 +274,42 @@ export function ResultsOverviewTab({
               {saveState === "saving" ? "저장 중..." : isAuthenticated ? "이 빌드 저장" : "로컬에 저장"}
             </Button>
             {saveMessage ? (
-              <p className="text-xs text-ca-on-surface-variant sm:text-right" role="status" aria-live="polite">
-                {saveMessage}
-              </p>
+              <div className="space-y-1 text-sm text-ca-on-surface-variant sm:text-right" role="status" aria-live="polite">
+                <p>{saveMessage}</p>
+                {saveState === "saved" ? (
+                  <Link
+                    href="/mypage?section=saved"
+                    className="inline-block font-medium text-ca-primary underline-offset-4 hover:underline"
+                  >
+                    저장한 빌드로 이동
+                  </Link>
+                ) : null}
+              </div>
             ) : null}
           </div>
         </div>
       </Card>
 
       {overviewAlternatives.length > 0 ? (
-        <section className="mt-8 space-y-4 [content-visibility:auto]">
-          <div className="space-y-1">
-            <h3 className="font-headline text-base font-semibold text-ca-on-surface">대안 구성</h3>
-            <p className="text-sm text-ca-on-surface-variant">
-              현재 추천과 비슷하지만 성향이 조금 다른 후보입니다. 추천 근거 탭에서 자세히 확인할 수 있어요.
-            </p>
-          </div>
-          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        <details
+          className="group mt-8 [content-visibility:auto]"
+          open={altsOpen}
+          onToggle={onAltsToggle}
+        >
+          <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden sm:pointer-events-none sm:cursor-default">
+            <div className="space-y-1">
+              <div className="flex items-center justify-between gap-2">
+                <h3 className="font-headline text-base font-semibold text-ca-on-surface">다른 부품과 비교</h3>
+                <span className="text-xs text-ca-on-surface-variant sm:hidden group-open:hidden">펼치기</span>
+                <span className="hidden text-xs text-ca-on-surface-variant group-open:inline sm:hidden">접기</span>
+              </div>
+              <p className="text-sm text-ca-on-surface-variant">
+                지금 추천과 비슷한 대안입니다. 성향 차이(비슷함/조금 다름)를 보고 고른 뒤, 추천 근거 탭에서 자세히 비교할 수
+                있어요.
+              </p>
+            </div>
+          </summary>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
             {overviewAlternatives.map((alt) => {
               const blurb = overviewAlternativeDescription(alt.description, alt.summary, alt.itemName);
               return (
@@ -264,8 +322,8 @@ export function ResultsOverviewTab({
                     <Badge className="shrink-0 border-ca-outline-variant/50 bg-transparent font-normal">
                       {domainDisplayLabel(alt.domain)}
                     </Badge>
-                    <span className="font-mono text-xs tabular-nums text-ca-on-surface-variant">
-                      {formatScore(alt.score)}
+                    <span className="text-xs font-medium text-ca-on-surface-variant">
+                      {formatScoreBand(alt.score)}
                     </span>
                   </div>
                   <div className="space-y-1.5">
@@ -296,7 +354,7 @@ export function ResultsOverviewTab({
             );
             })}
           </div>
-        </section>
+        </details>
       ) : null}
 
       {submission.degradedReason ? (
@@ -310,14 +368,24 @@ export function ResultsOverviewTab({
         </Card>
       ) : null}
 
-      <Card className="mt-8 rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest shadow-none">
-        <CardHeader className="border-b-0 pb-2">
-          <CardTitle className="font-headline text-base font-semibold text-ca-on-surface">관련 부품 더 탐색하기</CardTitle>
-          <CardDescription className="text-ca-on-surface-variant">
-            스위치·플레이트·폼·레이아웃·케이스/키트·키캡 카탈로그에서 직접 탐색해 보세요.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="flex flex-wrap gap-x-4 gap-y-2">
+      <details
+        className="group mt-8 rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest"
+        open={exploreOpen}
+        onToggle={onExploreToggle}
+      >
+        <summary className="cursor-pointer list-none px-4 py-4 [&::-webkit-details-marker]:hidden sm:cursor-default sm:pointer-events-none sm:px-6">
+          <div className="flex items-start justify-between gap-2">
+            <div className="space-y-1">
+              <h3 className="font-headline text-base font-semibold text-ca-on-surface">관련 부품 더 탐색하기</h3>
+              <p className="text-sm text-ca-on-surface-variant">
+                스위치·플레이트·폼·레이아웃·케이스/키트·키캡 카탈로그에서 직접 탐색해 보세요.
+              </p>
+            </div>
+            <span className="shrink-0 pt-0.5 text-xs text-ca-on-surface-variant sm:hidden group-open:hidden">펼치기</span>
+            <span className="hidden shrink-0 pt-0.5 text-xs text-ca-on-surface-variant group-open:inline sm:hidden">접기</span>
+          </div>
+        </summary>
+        <div className="flex flex-wrap gap-x-4 gap-y-2 border-t border-ca-outline-variant/35 px-4 py-4 sm:px-6">
           <Link href={catalogHref({ family: "switch" })} className="text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline">
             스위치
           </Link>
@@ -336,8 +404,8 @@ export function ResultsOverviewTab({
           <Link href={catalogHref({ family: "keycap" })} className="text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline">
             키캡
           </Link>
-        </CardContent>
-      </Card>
+        </div>
+      </details>
     </>
   );
 }

@@ -51,27 +51,27 @@ const CATALOG_TABS: { id: CatalogFamily; label: string }[] = [
 
 const CASE_SUBTYPES = [
   { id: "", label: "전체" },
-  { id: "kit", label: "Kit" },
-  { id: "barebone", label: "Barebone" },
-  { id: "complete", label: "Complete" },
-  { id: "parts", label: "Parts" },
-  { id: "he_kit", label: "HE Kit" },
+  { id: "kit", label: "키트" },
+  { id: "barebone", label: "베어본" },
+  { id: "complete", label: "완제품" },
+  { id: "parts", label: "파츠" },
+  { id: "he_kit", label: "HE 키트" },
 ];
 
 const SWITCH_SUBTYPES = [
   { id: "", label: "전체" },
-  { id: "linear", label: "Linear" },
-  { id: "tactile", label: "Tactile" },
-  { id: "silent", label: "Silent" },
-  { id: "click", label: "Click" },
-  { id: "magnetic", label: "Magnetic" },
+  { id: "linear", label: "리니어" },
+  { id: "tactile", label: "텍타일" },
+  { id: "silent", label: "무소음" },
+  { id: "click", label: "클릭" },
+  { id: "magnetic", label: "마그네틱" },
 ];
 
 const KEYCAP_SUBTYPES = [
-  { id: "", label: "Full/Base" },
-  { id: "full", label: "Full" },
-  { id: "base", label: "Base" },
-  { id: "addon", label: "Addon" },
+  { id: "", label: "풀/베이스" },
+  { id: "full", label: "풀세트" },
+  { id: "base", label: "베이스" },
+  { id: "addon", label: "애드온" },
   { id: "all", label: "전체" },
 ];
 
@@ -95,6 +95,20 @@ function parseFamily(raw: string | null): CatalogFamily {
 function parsePage(raw: string | null): number {
   const n = Number(raw ?? "1");
   return Number.isFinite(n) && n >= 1 ? Math.floor(n) : 1;
+}
+
+/** Hide templated blurbs that repeat across many SKUs (P24). */
+function isGenericCatalogCardDescription(description: string): boolean {
+  const text = description.trim();
+  if (!text) return true;
+  return (
+    /폭넓게 선택할 수 있는 타입/.test(text) ||
+    /세팅 방향에 맞춰 유연하게 조합하기 좋습니다/.test(text) ||
+    /보강판 특성에 따라 타건 강성/.test(text) ||
+    /배열 크기와 키 배치 밀도에 따라/.test(text) ||
+    /키캡은 프로필·재질·각인 방식에 따라/.test(text) ||
+    /상판 파츠·하우징은 기존 빌드에 맞춰/.test(text)
+  );
 }
 
 function CatalogPartCard({
@@ -164,14 +178,29 @@ function CatalogPartCard({
             className="pt-0.5"
           />
         ) : null}
-        <CardDescription className="line-clamp-2 text-xs leading-5 text-ca-on-surface-variant">
-          {isReferenceOnlyLayout
-            ? "스웨그키 판매 제품 없음 · 배열 참고용"
-            : item.description || item.id}
-        </CardDescription>
+        {(() => {
+          if (isReferenceOnlyLayout) {
+            return (
+              <CardDescription className="line-clamp-2 text-xs leading-5 text-ca-on-surface-variant">
+                스웨그키 판매 제품 없음 · 배열 참고용
+              </CardDescription>
+            );
+          }
+          const raw = (item.description || "").trim();
+          if (!raw || isGenericCatalogCardDescription(raw)) return null;
+          return (
+            <CardDescription className="line-clamp-2 text-xs leading-5 text-ca-on-surface-variant">
+              {raw}
+            </CardDescription>
+          );
+        })()}
       </CardHeader>
       <CardContent className="mt-auto flex flex-wrap items-center gap-2 pt-0 text-xs text-ca-on-surface-variant">
-        {item.subtype && item.family !== "layout" ? <span className="ca-chip">{item.subtype}</span> : null}
+        {item.subtype &&
+        item.family !== "layout" &&
+        item.subtype.trim().toLowerCase() !== "other" ? (
+          <span className="ca-chip">{item.subtype}</span>
+        ) : null}
         {isReferenceOnlyLayout ? (
           <span className="font-label text-ca-label-sm font-medium text-ca-on-surface-variant">상세 보기</span>
         ) : caseCatalogHref ? (
@@ -413,11 +442,10 @@ export function CatalogBrowseView({
   return (
     <PageShell className="max-w-ca space-y-6 px-ca-margin-mobile sm:px-ca-margin">
       <div ref={catalogTopRef} className="scroll-mt-24 space-y-2">
-        <p className="font-label text-ca-label-sm font-medium text-ca-secondary">CATALOG</p>
         <h1 className="font-headline text-2xl font-semibold tracking-tight text-ca-on-surface">부품 카탈로그</h1>
         <p className="text-sm text-ca-on-surface-variant">
-          스위치·플레이트·폼·케이스/키트·키캡을 탐색할 수 있습니다. 카드를 클릭하면 traits·metadata·스웨그키
-          링크를 볼 수 있어요.
+          스위치·플레이트·폼·케이스/키트·키캡을 탐색할 수 있습니다. 카드를 누르면 스펙·취향 힌트·구매 링크를 볼 수
+          있어요.
         </p>
       </div>
 
@@ -564,7 +592,28 @@ export function CatalogBrowseView({
       {error ? <p className="text-sm text-destructive">{error}</p> : null}
 
       {!loading && !error && items.length === 0 ? (
-        <p className="text-sm text-ca-on-surface-variant">표시할 항목이 없습니다.</p>
+        <div className="space-y-3 rounded-xl border border-dashed border-ca-outline-variant/50 bg-ca-surface-container-lowest p-5">
+          <p className="text-sm text-ca-on-surface-variant">
+            {searchQuery.trim()
+              ? `「${searchQuery.trim()}」검색 결과가 없습니다. 다른 이름·브랜드로 시도하거나 아래 키워드를 눌러 보세요.`
+              : "표시할 항목이 없습니다. 필터를 바꾸거나 다른 부품 탭을 골라 보세요."}
+          </p>
+          {searchQuery.trim() ? (
+            <div className="flex flex-wrap gap-2">
+              {["체리", "HMX", "Gateron", "포론", "PBT"].map((hint) => (
+                <Button
+                  key={hint}
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setSearchInput(hint)}
+                >
+                  {hint}
+                </Button>
+              ))}
+            </div>
+          ) : null}
+        </div>
       ) : null}
 
       <section

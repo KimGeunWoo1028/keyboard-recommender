@@ -88,7 +88,7 @@ export function deriveQualityStatus(submission: QualityStatusSubmission): Qualit
       tone: "warning",
       detail:
         firstKoreanSummaryLine(compat) ??
-        "조건을 조금 완화해 추천했어요. 대안 구성도 함께 확인해 보세요.",
+        "조건을 조금 완화해 추천했어요. 다른 부품과 비교 목록도 함께 확인해 보세요.",
     };
   }
 

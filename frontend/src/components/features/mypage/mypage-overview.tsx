@@ -245,6 +245,13 @@ export function MyPageOverview({ user, savedItems }: Props) {
         >
           저장 목록 보기 →
         </Link>
+        <Link
+          href="/results"
+          prefetch={false}
+          className="mt-2 self-start text-sm font-medium text-ca-on-surface-variant underline-offset-4 hover:text-ca-on-surface hover:underline"
+        >
+          이 브라우저의 최근 결과 보기 →
+        </Link>
       </div>
     </div>
   );

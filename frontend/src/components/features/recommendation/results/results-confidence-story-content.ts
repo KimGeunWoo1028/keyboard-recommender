@@ -81,7 +81,7 @@ export function deriveConfidenceStory(
     });
 
     return {
-      headline: "추천 신뢰도: 보통",
+      headline: "설문 맞춤: 보통",
       bullets: bullets.slice(0, 4),
       refineActions: (guidance.actions ?? []).slice(0, 2).map((action) => ({
         label: action.label,
@@ -91,16 +91,16 @@ export function deriveConfidenceStory(
     };
   }
 
-  let headline = "추천 신뢰도: 높음";
+  let headline = "설문 맞춤: 높은 편";
 
   if (submission.fallbackAudit?.recovered === true || label === "experimental") {
-    headline = "추천 신뢰도: 참고용";
+    headline = "설문 맞춤: 참고용";
     pushUniqueBullet(bullets, {
       kind: "dot",
       text: qualityStatus?.detail ?? "비슷한 후보가 많아 이번 결과는 참고용으로 보시면 좋아요",
     });
   } else if (label === "balanced" || (hasRunnerUp(apiPicks) && !gapSufficient)) {
-    headline = "추천 신뢰도: 보통";
+    headline = "설문 맞춤: 보통";
     pushUniqueBullet(bullets, { kind: "check", text: "일부 응답이 엇갈렸어요" });
     if (!gapSufficient) {
       pushUniqueBullet(bullets, {
@@ -114,7 +114,7 @@ export function deriveConfidenceStory(
     pushUniqueBullet(bullets, { kind: "check", text: "선호가 일관되게 나타났어요" });
     pushUniqueBullet(bullets, {
       kind: "check",
-      text: "비슷한 후보보다 더 잘 맞는 조합이 확인됐어요",
+      text: "비슷한 후보보다 설문과 더 잘 맞는 쪽이에요",
     });
   }
 
@@ -128,7 +128,7 @@ export function deriveConfidenceStory(
     }
   }
 
-  if (headline === "추천 신뢰도: 높음") {
+  if (headline === "설문 맞춤: 높은 편") {
     const hasWarning = bullets.some((row) => /호환|주의|완화|참고/.test(row.text));
     if (!hasWarning) {
       pushUniqueBullet(bullets, { kind: "check", text: "큰 호환성 문제는 없어요" });

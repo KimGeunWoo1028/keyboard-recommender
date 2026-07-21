@@ -29,13 +29,13 @@ export function HomeWorkshopGuestPreview() {
         취향 여섯 · 부품 여섯
       </p>
       <p className="mt-2 break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:text-base">
-        설문으로 소음·무게감·구분감·탄성·반발감·선명도를 잡고, 스위치부터 키캡까지 이어 붙입니다.
+        설문으로 소리·누르는 힘·걸리는 느낌·되튐·또렷함을 고르면, 스위치부터 키캡까지 이어 붙입니다.
       </p>
       <dl className="mt-5 grid gap-3 text-sm sm:grid-cols-2">
         <div>
-          <dt className="font-medium text-ca-on-surface">취향</dt>
+          <dt className="font-medium text-ca-on-surface">취향 (쉬운 말)</dt>
           <dd className="mt-1 break-keep text-ca-on-surface-variant">
-            소음 · 무게감 · 구분감 · 탄성 · 반발감 · 선명도
+            소리 크기 · 누르는 힘 · 걸리는 느낌 · 되튐 · 또렷함 · 선명함
           </dd>
         </div>
         <div>
