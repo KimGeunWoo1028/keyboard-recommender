@@ -430,6 +430,8 @@ export function CatalogBrowseView({
                   family: tab.id,
                   subtype: tab.id === "layout" ? "pcb" : "",
                   layoutSize: tab.id === "case" ? layoutSize : null,
+                  // Clear search when moving between top-level catalog families.
+                  ...(tab.id !== family ? { q: null } : {}),
                   page: 1,
                 });
               }}
