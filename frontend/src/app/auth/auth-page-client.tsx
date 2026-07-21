@@ -6,7 +6,6 @@ import { type FormEvent, useEffect, useState } from "react";
 
 import { useAuthHeader } from "@/components/layout/auth-controls";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { checkDisplayNameAvailability, fetchCurrentUser, login, sendSignupEmailCode, signup, verifySignupEmailCode } from "@/lib/api/auth";
@@ -305,32 +304,38 @@ export function AuthPageClient() {
     }
   }
 
+  const tabIdleClass =
+    "h-10 flex-1 rounded-lg border-ca-outline-variant/50 bg-transparent text-ca-on-surface-variant hover:border-ca-on-surface/30 hover:bg-ca-surface-container/50 hover:text-ca-on-surface";
+  const tabActiveClass = "h-10 flex-1 rounded-lg";
+
   return (
-    <div className="mx-auto max-w-lg px-ca-margin-mobile py-10 sm:px-ca-margin">
-      <Card className="ca-glass-panel border-ca-outline-variant/40">
-        <CardHeader className="border-b-0">
-          <p className="font-label text-ca-label-sm font-medium text-ca-secondary">AUTH</p>
-          <CardTitle className="font-headline text-ca-on-surface">
+    <div className="mx-auto w-full max-w-md px-ca-margin-mobile py-10 sm:px-ca-margin sm:py-12">
+      <section className="overflow-hidden rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest">
+        <header className="space-y-2 border-b border-ca-outline-variant/30 px-5 py-5 sm:px-6 sm:py-6">
+          <h1 className="font-headline text-2xl font-semibold tracking-tight text-ca-on-surface">
             {mode === "login" ? "로그인" : "회원가입"}
-          </CardTitle>
-          <CardDescription className="text-ca-on-surface-variant">
+          </h1>
+          <p className="break-keep text-sm leading-relaxed text-ca-on-surface-variant">
             {mode === "login"
-              ? "계정으로 로그인하고 저장·비교 기능을 이용하세요."
-              : "닉네임·이메일 인증 후 계정을 만들 수 있습니다."}
-          </CardDescription>
+              ? "계정으로 로그인하고 저장한 빌드를 이어가세요."
+              : "닉네임과 이메일 인증 후 계정을 만듭니다."}
+          </p>
           {mode === "signup" ? (
-            <p className="text-xs text-ca-on-surface-variant">
-              비밀번호는 8~20자, 영문/숫자/특수문자를 모두 포함해야 합니다.
+            <p className="break-keep text-sm leading-relaxed text-ca-on-surface-variant">
+              비밀번호는 8~20자, 영문·숫자·특수문자를 모두 포함해야 합니다.
             </p>
           ) : null}
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="flex gap-2">
+        </header>
+
+        <div className="space-y-5 p-5 sm:p-6">
+          <div className="flex gap-2" role="tablist" aria-label="로그인 또는 회원가입">
             <Button
               variant={mode === "login" ? "primary" : "outline"}
               onClick={() => setMode("login")}
-              className="flex-1 rounded-full"
+              className={mode === "login" ? tabActiveClass : tabIdleClass}
               disabled={busy || sendingEmailCode || verifyingEmailCode || checkingDisplayName}
+              role="tab"
+              aria-selected={mode === "login"}
             >
               로그인
             </Button>
@@ -348,15 +353,18 @@ export function AuthPageClient() {
                 setEmailVerificationToken(null);
                 setEmailVerificationMessage(null);
               }}
-              className="flex-1 rounded-full"
+              className={mode === "signup" ? tabActiveClass : tabIdleClass}
               disabled={busy || sendingEmailCode || verifyingEmailCode || checkingDisplayName}
+              role="tab"
+              aria-selected={mode === "signup"}
             >
               회원가입
             </Button>
           </div>
-          <form className="space-y-3" onSubmit={onSubmit} aria-busy={busy || undefined}>
+
+          <form className="space-y-4" onSubmit={onSubmit} aria-busy={busy || undefined}>
             {mode === "signup" ? (
-              <div className="space-y-1">
+              <div className="space-y-2">
                 <Label htmlFor="displayName" className="ca-label">
                   닉네임
                 </Label>
@@ -376,7 +384,7 @@ export function AuthPageClient() {
                   <Button
                     type="button"
                     variant="outline"
-                    className="min-w-[5.5rem] shrink-0 rounded-full"
+                    className="min-w-[5.5rem] shrink-0"
                     onClick={() => void onCheckDisplayName()}
                     loading={checkingDisplayName}
                     disabled={busy}
@@ -385,14 +393,15 @@ export function AuthPageClient() {
                   </Button>
                 </div>
                 {displayNameCheckMessage ? (
-                  <p className="text-xs text-ca-on-surface-variant">
+                  <p className="text-sm text-ca-on-surface-variant">
                     {displayNameCheckMessage}
                     {displayNameVerified ? " (중복 확인 완료)" : ""}
                   </p>
                 ) : null}
               </div>
             ) : null}
-            <div className="space-y-1">
+
+            <div className="space-y-2">
               <Label htmlFor="email" className="ca-label">
                 이메일
               </Label>
@@ -415,13 +424,14 @@ export function AuthPageClient() {
                 disabled={busy || (mode === "signup" && !canFillSignupEmail)}
               />
             </div>
+
             {mode === "signup" ? (
-              <div className="space-y-1">
+              <div className="space-y-2">
                 <div className="flex flex-col gap-2">
                   <Button
                     type="button"
                     variant="outline"
-                    className="w-full rounded-full"
+                    className="w-full"
                     onClick={() => void onSendEmailCode()}
                     loading={sendingEmailCode}
                     disabled={!canFillSignupEmail || busy || verifyingEmailCode}
@@ -442,7 +452,7 @@ export function AuthPageClient() {
                     <Button
                       type="button"
                       variant="outline"
-                      className="min-w-[5.5rem] shrink-0 rounded-full"
+                      className="min-w-[5.5rem] shrink-0"
                       onClick={() => void onVerifyEmailCode()}
                       loading={verifyingEmailCode}
                       disabled={!emailCodeSent || emailVerified || busy || sendingEmailCode}
@@ -452,15 +462,16 @@ export function AuthPageClient() {
                   </div>
                 </div>
                 {emailVerificationMessage ? (
-                  <p className="text-xs text-ca-on-surface-variant">{emailVerificationMessage}</p>
+                  <p className="text-sm text-ca-on-surface-variant">{emailVerificationMessage}</p>
                 ) : (
-                  <p className="text-xs text-ca-on-surface-variant">
+                  <p className="break-keep text-sm text-ca-on-surface-variant">
                     인증번호가 확인되어야 비밀번호 입력이 가능합니다.
                   </p>
                 )}
               </div>
             ) : null}
-            <div className="space-y-1">
+
+            <div className="space-y-2">
               <Label htmlFor="password" className="ca-label">
                 비밀번호
               </Label>
@@ -501,7 +512,7 @@ export function AuthPageClient() {
                 </Button>
               </div>
               {mode === "signup" ? (
-                <div className="space-y-1 pt-1 text-xs text-ca-on-surface">
+                <div className="space-y-1 pt-1 text-sm text-ca-on-surface-variant">
                   <p>
                     <span className={hasRequiredCharTypes ? "text-ca-viz-emerald" : "text-destructive"}>
                       {hasRequiredCharTypes ? "✓" : "✗"}
@@ -517,8 +528,9 @@ export function AuthPageClient() {
                 </div>
               ) : null}
             </div>
+
             {mode === "signup" ? (
-              <div className="space-y-1">
+              <div className="space-y-2">
                 <Label htmlFor="confirmPassword" className="ca-label">
                   비밀번호 확인
                 </Label>
@@ -558,7 +570,7 @@ export function AuthPageClient() {
                     )}
                   </Button>
                 </div>
-                <p className="text-xs text-ca-on-surface">
+                <p className="text-sm text-ca-on-surface-variant">
                   <span className={passwordMatches ? "text-ca-viz-emerald" : "text-destructive"}>
                     {passwordMatches ? "✓" : "✗"}
                   </span>{" "}
@@ -566,9 +578,10 @@ export function AuthPageClient() {
                 </p>
               </div>
             ) : null}
+
             {mode === "login" ? (
-              <div className="flex items-center justify-between">
-                <label className="inline-flex items-center gap-2 text-xs text-ca-on-surface-variant">
+              <div className="flex items-center justify-between gap-3">
+                <label className="inline-flex items-center gap-2 text-sm text-ca-on-surface-variant">
                   <input
                     type="checkbox"
                     checked={rememberEmail}
@@ -581,7 +594,7 @@ export function AuthPageClient() {
                 <Link
                   href="/auth/forgot-password"
                   prefetch={false}
-                  className="font-label text-ca-label-sm font-medium text-ca-primary underline-offset-2 hover:underline"
+                  className="text-sm font-medium text-ca-primary underline-offset-2 hover:underline"
                   aria-disabled={busy || undefined}
                   tabIndex={busy ? -1 : undefined}
                 >
@@ -589,14 +602,16 @@ export function AuthPageClient() {
                 </Link>
               </div>
             ) : null}
-            {error ? <p className="text-xs text-destructive">{error}</p> : null}
-            {info ? <p className="text-xs text-ca-viz-emerald">{info}</p> : null}
-            <Button type="submit" className="w-full rounded-full" loading={busy} disabled={!canProceedSignup}>
+
+            {error ? <p className="break-keep text-sm text-destructive">{error}</p> : null}
+            {info ? <p className="break-keep text-sm text-ca-viz-emerald">{info}</p> : null}
+
+            <Button type="submit" className="w-full" loading={busy} disabled={!canProceedSignup}>
               {mode === "login" ? "로그인" : "계정 만들기"}
             </Button>
           </form>
-        </CardContent>
-      </Card>
+        </div>
+      </section>
     </div>
   );
 }
