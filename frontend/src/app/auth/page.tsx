@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 
 import { AuthPageClient } from "@/app/auth/auth-page-client";
 
@@ -7,16 +6,11 @@ export const metadata: Metadata = {
   title: "로그인",
 };
 
+/**
+ * No Suspense gate around the form: ``useSearchParams`` forced a client-only
+ * fallback ("불러오는 중…") and delayed the LCP description until hydration.
+ * Query params are read from ``window.location`` inside effects instead.
+ */
 export default function AuthPage() {
-  return (
-    <Suspense
-      fallback={
-        <div className="mx-auto max-w-md px-ca-margin-mobile py-10 text-sm text-ca-on-surface-variant sm:px-ca-margin">
-          불러오는 중…
-        </div>
-      }
-    >
-      <AuthPageClient />
-    </Suspense>
-  );
+  return <AuthPageClient />;
 }

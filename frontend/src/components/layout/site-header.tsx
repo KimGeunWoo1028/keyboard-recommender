@@ -43,7 +43,9 @@ export function SiteHeader() {
     pathname === "/results" ||
     pathname.startsWith("/results/") ||
     pathname === "/mypage" ||
-    pathname.startsWith("/mypage/");
+    pathname.startsWith("/mypage/") ||
+    pathname === "/auth" ||
+    pathname.startsWith("/auth/");
 
   return (
     <header className="sticky top-0 z-50 border-b border-ca-outline-variant/30 bg-ca-surface/80 shadow-sm backdrop-blur-xl dark:bg-ca-surface-dim/80">

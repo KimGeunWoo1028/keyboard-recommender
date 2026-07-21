@@ -36,6 +36,7 @@ from keyboard_recommender.schemas.auth import (
     AccountSecuritySummary,
     AuthEnvelope,
     AuthUser,
+    MeEnvelope,
     DeleteAccountRequest,
     LoginRequest,
     PasswordResetConfirmRequest,
@@ -464,11 +465,12 @@ def logout_all(
     return response
 
 
-@router.get("/me", response_model=AuthEnvelope)
-def me(current_user: CurrentUserOptionalDep = None) -> AuthEnvelope:
+@router.get("/me", response_model=MeEnvelope)
+def me(current_user: CurrentUserOptionalDep = None) -> MeEnvelope:
+    # Return 200 + null user (not 401) so anonymous session probes do not log as console errors.
     if current_user is None:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated.")
-    return AuthEnvelope(user=_to_auth_user(current_user))
+        return MeEnvelope(user=None)
+    return MeEnvelope(user=_to_auth_user(current_user))
 
 
 @router.get("/security-summary", response_model=AccountSecuritySummary)

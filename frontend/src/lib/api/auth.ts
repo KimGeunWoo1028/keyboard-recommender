@@ -14,6 +14,7 @@ export type AccountSecuritySummary = {
 };
 
 type AuthEnvelope = { user: AuthUser };
+type MeEnvelope = { user: AuthUser | null };
 const AUTH_CHANGED_EVENT = "kr-auth-changed";
 
 function emitAuthChanged(): void {
@@ -96,10 +97,11 @@ export async function fetchCurrentUser(): Promise<AuthUser | null> {
       "API 서버에 연결하지 못했습니다. 백엔드(uvicorn)가 켜져 있는지, frontend/.env.local의 NEXT_PUBLIC_API_URL이 실제 포트와 같은지(예: http://localhost:8010) 확인해 주세요.",
     );
   }
+  // Legacy 401 + current 200/{user:null} both mean anonymous.
   if (res.status === 401) return null;
   if (!res.ok) throw new ApiError(res.status, await readErrorMessage(res));
-  const json = (await res.json()) as AuthEnvelope;
-  return json.user;
+  const json = (await res.json()) as MeEnvelope;
+  return json.user ?? null;
 }
 
 export async function checkDisplayNameAvailability(displayName: string): Promise<{ display_name: string; available: boolean }> {

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { type FormEvent, useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -49,9 +49,15 @@ function isRetryableDisplayNameCheckError(err: unknown): boolean {
   return err instanceof ApiError && (err.status === 0 || err.status === 502 || err.status === 503 || err.status === 504);
 }
 
+/** Read auth query params without ``useSearchParams`` (avoids Suspense SSR fallback). */
+function readAuthSearchParams(): { force: boolean; next: string | null } {
+  if (typeof window === "undefined") return { force: false, next: null };
+  const params = new URLSearchParams(window.location.search);
+  return { force: params.get("force") === "1", next: params.get("next") };
+}
+
 export function AuthPageClient() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [mode, setMode] = useState<"login" | "signup">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -75,18 +81,18 @@ export function AuthPageClient() {
   const [verifyingEmailCode, setVerifyingEmailCode] = useState(false);
 
   useEffect(() => {
-    if (searchParams.get("force") === "1") return;
+    const { force, next } = readAuthSearchParams();
+    if (force) return;
     let cancelled = false;
     void fetchCurrentUser().then((user) => {
       if (cancelled || !user) return;
-      const nextPath = searchParams.get("next");
-      const target = nextPath && nextPath.startsWith("/") ? nextPath : "/results";
+      const target = next && next.startsWith("/") ? next : "/results";
       router.replace(target);
     });
     return () => {
       cancelled = true;
     };
-  }, [router, searchParams]);
+  }, [router]);
 
   useEffect(() => {
     const raw = window.localStorage.getItem(REMEMBER_SIGNIN_KEY);
@@ -192,8 +198,8 @@ export function AuthPageClient() {
         } else {
           window.localStorage.removeItem(REMEMBER_SIGNIN_KEY);
         }
-        const nextPath = searchParams.get("next");
-        const target = nextPath && nextPath.startsWith("/") ? nextPath : "/results";
+        const { next } = readAuthSearchParams();
+        const target = next && next.startsWith("/") ? next : "/results";
         router.push(target);
         router.refresh();
       }
@@ -569,6 +575,7 @@ export function AuthPageClient() {
                 </label>
                 <Link
                   href="/auth/forgot-password"
+                  prefetch={false}
                   className="font-label text-ca-label-sm font-medium text-ca-primary underline-offset-2 hover:underline"
                   aria-disabled={busy || undefined}
                   tabIndex={busy ? -1 : undefined}

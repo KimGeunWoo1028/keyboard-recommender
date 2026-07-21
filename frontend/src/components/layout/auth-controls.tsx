@@ -122,8 +122,10 @@ export function AuthSessionAction() {
   const pathname = usePathname();
   const { user, authChecked, setUser } = useAuthHeader();
   const [loggingOut, setLoggingOut] = useState(false);
+  const onAuthSurface = Boolean(pathname?.startsWith("/auth"));
 
-  if (!authChecked) {
+  // On /auth, paint the login CTA immediately (same size as spinner) to avoid CLS + wait on /me.
+  if (!authChecked && !onAuthSurface) {
     return (
       <span
         className="inline-flex h-9 min-w-[4.75rem] items-center justify-center rounded-full bg-ca-surface-container/70 px-3"
@@ -136,12 +138,13 @@ export function AuthSessionAction() {
   }
 
   if (!user) {
-    const nextPath = pathname && pathname !== "/auth" ? pathname : "/results";
+    const nextPath = pathname && !pathname.startsWith("/auth") ? pathname : "/results";
     return (
       <Link
         href={`/auth?force=1&next=${encodeURIComponent(nextPath)}`}
+        prefetch={false}
         className={cn(
-          "shrink-0 whitespace-nowrap rounded-full bg-ca-primary-container px-3 py-2 font-headline text-xs font-bold text-ca-on-primary-container sm:px-5 sm:text-sm",
+          "inline-flex h-9 min-w-[4.75rem] shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-ca-primary-container px-3 py-2 font-headline text-xs font-bold text-ca-on-primary-container sm:px-5 sm:text-sm",
           "transition-transform hover:scale-[0.97] active:scale-95",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-primary",
         )}

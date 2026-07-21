@@ -15,7 +15,9 @@ export function SiteFooter() {
     pathname === "/results" ||
     pathname.startsWith("/results/") ||
     pathname === "/mypage" ||
-    pathname.startsWith("/mypage/");
+    pathname.startsWith("/mypage/") ||
+    pathname === "/auth" ||
+    pathname.startsWith("/auth/");
 
   return (
     <footer className="mt-auto border-t border-ca-outline-variant/30 bg-ca-surface-container-lowest/80">

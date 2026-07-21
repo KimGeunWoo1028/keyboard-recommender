@@ -37,6 +37,14 @@ class AuthEnvelope(BaseModel):
     user: AuthUser
 
 
+class MeEnvelope(BaseModel):
+    """Session probe: 200 with ``user: null`` when unauthenticated (avoids browser console 401 noise)."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    user: AuthUser | None = None
+
+
 class SendEmailVerificationRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
 

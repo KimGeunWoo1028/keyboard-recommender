@@ -221,7 +221,8 @@ def test_delete_account_success_clears_user_session_and_cookie(
 
     # Phase 4 — cookie cleared: subsequent /me is unauthenticated (hard-refresh equivalent).
     me = client.get("/api/v1/auth/me")
-    assert me.status_code == 401
+    assert me.status_code == 200
+    assert me.json().get("user") is None
 
 
 def test_delete_account_anonymizes_eval_events_and_keeps_other_user(
