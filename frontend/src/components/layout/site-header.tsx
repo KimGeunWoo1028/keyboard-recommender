@@ -30,6 +30,8 @@ function navActive(pathname: string, href: string): boolean {
 export function SiteHeader() {
   const pathname = usePathname() ?? "/";
   const [mobileOpen, setMobileOpen] = useState(false);
+  /** On /recommend, skip speculative RSC prefetch of other tabs (catalog/mypage/…). */
+  const deferNavPrefetch = pathname === "/recommend" || pathname.startsWith("/recommend/");
 
   return (
     <header className="sticky top-0 z-50 border-b border-ca-outline-variant/30 bg-ca-surface/80 shadow-sm backdrop-blur-xl dark:bg-ca-surface-dim/80">
@@ -37,6 +39,7 @@ export function SiteHeader() {
         <div className="flex min-w-0 items-center gap-3 md:gap-8">
           <Link
             href="/"
+            prefetch={deferNavPrefetch ? false : undefined}
             className="inline-flex min-w-0 shrink items-center gap-2 bg-gradient-to-r from-ca-primary to-ca-secondary bg-clip-text font-headline text-base font-bold leading-none tracking-tight text-transparent md:gap-3 md:text-[1.45rem]"
           >
             <Image
@@ -58,6 +61,7 @@ export function SiteHeader() {
                 <Link
                   key={item.href}
                   href={item.href}
+                  prefetch={deferNavPrefetch && item.href !== "/recommend" ? false : undefined}
                   className={cn(
                     "relative inline-flex shrink-0 items-center whitespace-nowrap font-body text-sm font-medium leading-none tracking-normal transition-colors",
                     /* underline sits outside the line box so it doesn't pull the label up */
@@ -107,6 +111,7 @@ export function SiteHeader() {
           <nav className="flex flex-col gap-1" aria-label="모바일">
             <Link
               href="/"
+              prefetch={deferNavPrefetch ? false : undefined}
               onClick={() => setMobileOpen(false)}
               className={cn(
                 "rounded-btn px-3 py-2 font-body text-sm font-medium",
@@ -121,6 +126,7 @@ export function SiteHeader() {
               <Link
                 key={item.href}
                 href={item.href}
+                prefetch={deferNavPrefetch && item.href !== "/recommend" ? false : undefined}
                 onClick={() => setMobileOpen(false)}
                 className={cn(
                   "rounded-btn px-3 py-2 font-body text-sm font-medium",

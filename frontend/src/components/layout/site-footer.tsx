@@ -1,7 +1,12 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
+  const pathname = usePathname() ?? "/";
+  const deferNavPrefetch = pathname === "/recommend" || pathname.startsWith("/recommend/");
 
   return (
     <footer className="mt-auto border-t border-ca-outline-variant/30 bg-ca-surface-container-lowest/80">
@@ -9,6 +14,7 @@ export function SiteFooter() {
         <div className="flex flex-col items-center gap-1 md:items-start">
           <Link
             href="/"
+            prefetch={deferNavPrefetch ? false : undefined}
             className="bg-gradient-to-r from-ca-primary to-ca-secondary bg-clip-text font-headline text-sm font-bold text-transparent"
           >
             Keyboard Recommender
@@ -22,13 +28,13 @@ export function SiteFooter() {
           className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 font-label text-ca-label-sm font-medium text-ca-on-surface-variant"
           aria-label="푸터"
         >
-          <Link href="/catalog" className="transition-colors hover:text-ca-on-surface">
+          <Link href="/catalog" prefetch={deferNavPrefetch ? false : undefined} className="transition-colors hover:text-ca-on-surface">
             카탈로그
           </Link>
           <Link href="/recommend" className="transition-colors hover:text-ca-on-surface">
             추천 설문
           </Link>
-          <Link href="/mypage" className="transition-colors hover:text-ca-on-surface">
+          <Link href="/mypage" prefetch={deferNavPrefetch ? false : undefined} className="transition-colors hover:text-ca-on-surface">
             마이페이지
           </Link>
         </nav>

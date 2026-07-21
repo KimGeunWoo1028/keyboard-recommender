@@ -2,83 +2,71 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { type ReactNode, useCallback, useEffect, useState } from "react";
+import { type ReactNode, useEffect, useRef, useState } from "react";
 
+import { useAuthHeader } from "@/components/layout/auth-controls";
 import { Button, buttonClassName } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
-import { ApiError, getPublicApiBase } from "@/lib/api/client";
-import { fetchCurrentUser, subscribeAuthChanged } from "@/lib/api/auth";
+import { getPublicApiBase } from "@/lib/api/client";
 
-type Props = { children: ReactNode };
+type Props = {
+  children: ReactNode;
+  /** Shown while session is resolving. Prefer survey-shaped shell on /recommend for LCP. */
+  loadingFallback?: ReactNode;
+};
 
 /**
- * Ensures the visitor has a valid API session (cookie on the backend origin) before rendering children.
+ * Ensures the visitor has a valid API session before rendering children.
  *
- * Next.js middleware only sees cookies on the **page** host; when the API runs on another origin/port the
- * session cookie is invisible to middleware. This gate calls ``GET /auth/me`` with credentials instead.
+ * Reuses ``AuthHeaderProvider`` session state (single ``GET /auth/me``) instead of
+ * issuing a second request. Next.js middleware cannot see cross-origin API cookies.
  */
-export function RequireAuth({ children }: Props) {
+export function RequireAuth({ children, loadingFallback }: Props) {
   const router = useRouter();
-  const [status, setStatus] = useState<"loading" | "ok" | "error">("loading");
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const { user, authChecked } = useAuthHeader();
+  const [configError, setConfigError] = useState<string | null>(null);
+  const redirectedRef = useRef(false);
 
-  const verify = useCallback(async () => {
-    setStatus("loading");
-    setErrorMessage(null);
-
+  useEffect(() => {
     if (!getPublicApiBase()) {
-      setStatus("error");
-      setErrorMessage(
+      setConfigError(
         "NEXT_PUBLIC_API_URL이 비어 있습니다. frontend/.env.local에 API 주소를 넣고 개발 서버(npm run dev)를 다시 시작해 주세요. (예: NEXT_PUBLIC_API_URL=http://localhost:8010)",
       );
       return;
     }
-
-    try {
-      const user = await fetchCurrentUser();
-      if (!user) {
-        const next = `${window.location.pathname}${window.location.search}`;
-        router.replace(`/auth?next=${encodeURIComponent(next)}`);
-        return;
-      }
-      setStatus("ok");
-    } catch (e) {
-      const msg =
-        e instanceof ApiError && e.status === 0
-          ? e.message
-          : e instanceof Error
-            ? e.message
-            : "인증을 확인하지 못했습니다.";
-      setErrorMessage(msg);
-      setStatus("error");
-    }
-  }, [router]);
+    setConfigError(null);
+  }, []);
 
   useEffect(() => {
-    void verify();
-    return subscribeAuthChanged(() => {
-      void verify();
-    });
-  }, [verify]);
+    if (!authChecked || configError || user) {
+      redirectedRef.current = false;
+      return;
+    }
+    if (redirectedRef.current) return;
+    redirectedRef.current = true;
+    const next = `${window.location.pathname}${window.location.search}`;
+    router.replace(`/auth?next=${encodeURIComponent(next)}`);
+  }, [authChecked, configError, user, router]);
 
-  if (status === "ok") {
-    return <>{children}</>;
-  }
-
-  if (status === "error" && errorMessage) {
+  if (configError) {
     return (
       <div className="mx-auto flex max-w-md flex-col gap-4 rounded-xl border border-border/80 bg-card/40 p-6 text-center">
-        <p className="text-sm text-foreground">{errorMessage}</p>
+        <p className="text-sm text-foreground">{configError}</p>
         <div className="flex flex-wrap items-center justify-center gap-2">
-          <Button type="button" variant="primary" onClick={() => void verify()}>
-            다시 시도
-          </Button>
           <Link href="/" className={buttonClassName({ variant: "outline", size: "default" })}>
             홈으로
           </Link>
         </div>
       </div>
     );
+  }
+
+  if (authChecked && user) {
+    return <>{children}</>;
+  }
+
+  if (loadingFallback) {
+    return <>{loadingFallback}</>;
   }
 
   return (
@@ -89,6 +77,14 @@ export function RequireAuth({ children }: Props) {
     >
       <Spinner className="text-2xl text-ca-primary" label="로그인 정보 확인 중" />
       <p className="text-sm text-muted-foreground">로그인 정보를 확인하는 중입니다…</p>
+      {authChecked && !user ? (
+        <p className="text-xs text-muted-foreground">로그인 페이지로 이동 중…</p>
+      ) : null}
+      {authChecked && !user ? (
+        <Button type="button" variant="primary" onClick={() => router.replace("/auth")}>
+          로그인하러 가기
+        </Button>
+      ) : null}
     </div>
   );
 }

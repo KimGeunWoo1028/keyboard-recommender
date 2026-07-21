@@ -1,6 +1,6 @@
 import { getPublicApiBase } from "@/lib/api/client";
 
-export const DEFAULT_AVATAR_SRC = "/avatars/default-profile.png";
+export const DEFAULT_AVATAR_SRC = "/avatars/default-profile.webp";
 
 /** Resolve a user avatar URL for <img src>. Falls back to the default profile image. */
 export function resolveAvatarSrc(avatarUrl?: string | null): string {

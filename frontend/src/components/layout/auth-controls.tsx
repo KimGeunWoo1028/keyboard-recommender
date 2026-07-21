@@ -5,7 +5,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
 import { fetchCurrentUser, logout, subscribeAuthChanged, type AuthUser } from "@/lib/api/auth";
-import { getPublicApiBase } from "@/lib/api/client";
 import { resolveAvatarSrc } from "@/lib/avatar";
 import { Spinner } from "@/components/ui/spinner";
 import { cn } from "@/lib/utils";
@@ -24,37 +23,35 @@ const AuthHeaderContext = createContext<AuthHeaderContextValue>({
   setUser: () => undefined,
 });
 
-async function fetchCurrentUserWithTimeout(): Promise<AuthUser | null> {
-  const base = getPublicApiBase();
-  if (!base) return null;
-  const controller = new AbortController();
-  const timeoutId = window.setTimeout(() => controller.abort(), AUTH_CHECK_TIMEOUT_MS);
-  try {
-    const res = await fetch(`${base}/api/v1/auth/me`, {
-      headers: { Accept: "application/json" },
-      credentials: "include",
-      signal: controller.signal,
-    });
-    if (res.status === 401) return null;
-    if (!res.ok) return null;
-    const json = (await res.json()) as { user: AuthUser };
-    return json.user;
-  } catch {
-    return null;
-  } finally {
-    window.clearTimeout(timeoutId);
+/** Single in-flight /auth/me shared by header + RequireAuth consumers. */
+let sharedAuthMePromise: Promise<AuthUser | null> | null = null;
+
+function fetchCurrentUserShared(): Promise<AuthUser | null> {
+  if (!sharedAuthMePromise) {
+    sharedAuthMePromise = (async () => {
+      const timeout = new Promise<AuthUser | null>((resolve) => {
+        window.setTimeout(() => resolve(null), AUTH_CHECK_TIMEOUT_MS);
+      });
+      try {
+        return await Promise.race([fetchCurrentUser(), timeout]);
+      } catch {
+        return null;
+      } finally {
+        sharedAuthMePromise = null;
+      }
+    })();
   }
+  return sharedAuthMePromise;
 }
 
 export function AuthHeaderProvider({ children }: { children: ReactNode }) {
-  const pathname = usePathname();
   const [user, setUser] = useState<AuthUser | null>(null);
   const [authChecked, setAuthChecked] = useState(false);
 
   useEffect(() => {
     let mounted = true;
     const sync = () =>
-      void fetchCurrentUserWithTimeout()
+      void fetchCurrentUserShared()
         .then((u) => {
           if (mounted) setUser(u);
         })
@@ -64,12 +61,10 @@ export function AuthHeaderProvider({ children }: { children: ReactNode }) {
     sync();
     const unsub = subscribeAuthChanged(() => {
       setAuthChecked(false);
-      void fetchCurrentUser()
+      sharedAuthMePromise = null;
+      void fetchCurrentUserShared()
         .then((u) => {
           if (mounted) setUser(u);
-        })
-        .catch(() => {
-          if (mounted) setUser(null);
         })
         .finally(() => {
           if (mounted) setAuthChecked(true);
@@ -79,7 +74,7 @@ export function AuthHeaderProvider({ children }: { children: ReactNode }) {
       mounted = false;
       unsub();
     };
-  }, [pathname]);
+  }, []);
 
   return <AuthHeaderContext.Provider value={{ user, authChecked, setUser }}>{children}</AuthHeaderContext.Provider>;
 }
@@ -90,7 +85,18 @@ export function useAuthHeader() {
 
 export function AuthNickname() {
   const { user } = useAuthHeader();
-  if (!user) return null;
+  const [desktopNav, setDesktopNav] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const sync = () => setDesktopNav(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  // Avoid mounting the avatar <img> on mobile (CSS `hidden` still downloads the file).
+  if (!user || !desktopNav) return null;
 
   const label = user.display_name || user.email;
   const avatarSrc = resolveAvatarSrc(user.avatar_url);
@@ -98,12 +104,13 @@ export function AuthNickname() {
   return (
     <Link
       href="/mypage"
-      className="hidden max-w-[14rem] shrink-0 items-center gap-2.5 font-body text-base font-medium text-ca-on-surface-variant transition-colors hover:text-ca-on-surface lg:inline-flex"
+      prefetch={false}
+      className="inline-flex max-w-[14rem] shrink-0 items-center gap-2.5 font-body text-base font-medium text-ca-on-surface-variant transition-colors hover:text-ca-on-surface"
       title={label}
     >
       <span className="relative h-8 w-8 shrink-0 overflow-hidden rounded-full border border-ca-outline-variant/50 bg-ca-surface-container/60">
         {/* eslint-disable-next-line @next/next/no-img-element -- remote API avatar + local default */}
-        <img src={avatarSrc} alt="" className="h-full w-full object-cover" />
+        <img src={avatarSrc} alt="" width={32} height={32} className="h-full w-full object-cover" loading="lazy" decoding="async" />
       </span>
       <span className="min-w-0 truncate">{label}</span>
     </Link>
