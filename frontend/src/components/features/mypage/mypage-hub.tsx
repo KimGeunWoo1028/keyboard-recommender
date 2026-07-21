@@ -7,8 +7,9 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { MyPageAccount } from "@/components/features/mypage/mypage-account";
 import { MyPageOverview } from "@/components/features/mypage/mypage-overview";
 import { MyPageSavedBuilds } from "@/components/features/mypage/mypage-saved-builds";
+import { useAuthHeader } from "@/components/layout/auth-controls";
 import { Button, buttonClassName } from "@/components/ui/button";
-import { fetchAccountSecuritySummary, fetchCurrentUser, type AccountSecuritySummary, type AuthUser } from "@/lib/api/auth";
+import { fetchAccountSecuritySummary, type AccountSecuritySummary } from "@/lib/api/auth";
 import {
   listSavedBookmarksWithLocalFallback,
   mergeSavedBookmarkLists,
@@ -37,52 +38,40 @@ function savedItemKey(item: SavedRecommendationItem): string {
   return `${item.request_id}:${item.build_id}:${item.saved_at}`;
 }
 
-function LoadingSkeleton() {
-  return (
-    <div className="space-y-4">
-      <div className="h-10 w-full animate-pulse rounded-lg bg-ca-surface-container/60 sm:w-96" />
-      <div className="h-48 animate-pulse rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container/40" />
-      <div className="h-48 animate-pulse rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container/40" />
-    </div>
-  );
-}
-
 export function MyPageHub() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { user, setUser } = useAuthHeader();
   const sectionFromUrl = parseSection(searchParams.get("section"));
   const [active, setActive] = useState<SectionId>(sectionFromUrl ?? "overview");
-  const [loading, setLoading] = useState(true);
+  const [extrasLoading, setExtrasLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
-  const [user, setUser] = useState<AuthUser | null>(null);
   const [savedItems, setSavedItems] = useState<SavedRecommendationItem[]>([]);
   const [securitySummary, setSecuritySummary] = useState<AccountSecuritySummary | null>(null);
   const [removingKeys, setRemovingKeys] = useState<Set<string>>(new Set());
 
-  const load = useCallback(async () => {
-    setLoading(true);
+  const loadExtras = useCallback(async () => {
+    setExtrasLoading(true);
     setLoadError(null);
     setActionError(null);
     try {
-      const [u, saved, security] = await Promise.all([
-        fetchCurrentUser(),
+      const [saved, security] = await Promise.all([
         listSavedBookmarksWithLocalFallback({ limit: 100 }),
         fetchAccountSecuritySummary(),
       ]);
-      setUser(u);
       setSavedItems(saved);
       setSecuritySummary(security);
     } catch (e) {
       setLoadError(e instanceof Error ? e.message : "마이페이지를 불러오지 못했습니다.");
     } finally {
-      setLoading(false);
+      setExtrasLoading(false);
     }
   }, []);
 
   useEffect(() => {
-    void load();
-  }, [load]);
+    void loadExtras();
+  }, [loadExtras]);
 
   useEffect(() => {
     if (sectionFromUrl) setActive(sectionFromUrl);
@@ -123,6 +112,20 @@ export function MyPageHub() {
       return <MyPageOverview user={user} savedItems={savedItems} />;
     }
     if (active === "saved") {
+      if (extrasLoading && !loadError) {
+        return (
+          <div
+            className="min-h-[22rem] space-y-3"
+            aria-busy="true"
+            aria-live="polite"
+            data-testid="e2e-mypage-saved-loading"
+          >
+            <div className="h-10 w-48 animate-pulse rounded-lg bg-ca-surface-container/60" />
+            <div className="h-40 animate-pulse rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container/40" />
+            <div className="h-40 animate-pulse rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container/40" />
+          </div>
+        );
+      }
       return (
         <MyPageSavedBuilds
           items={savedItems}
@@ -167,18 +170,10 @@ export function MyPageHub() {
       );
     }
     return <MyPageAccount user={user} securitySummary={securitySummary} onUserChanged={setUser} />;
-  }, [active, removingKeys, savedItems, securitySummary, user]);
+  }, [active, extrasLoading, loadError, removingKeys, savedItems, securitySummary, setUser, user]);
 
   return (
     <div className="space-y-6" data-testid="e2e-mypage-hub">
-      <div className="space-y-2">
-        <p className="font-label text-ca-label-sm font-medium text-ca-secondary">WORKSHOP</p>
-        <h1 className="font-headline text-2xl font-bold tracking-tight text-ca-on-surface sm:text-3xl">마이페이지</h1>
-        <p className="max-w-2xl text-sm text-ca-on-surface-variant">
-          취향 스냅샷, 저장한 빌드, 계정 설정을 한곳에서 관리하세요.
-        </p>
-      </div>
-
       <div className="flex flex-wrap gap-2">
         {SECTIONS.map((tab) => (
           <Button
@@ -197,18 +192,17 @@ export function MyPageHub() {
         ))}
       </div>
 
-      {loading ? <LoadingSkeleton /> : null}
-      {!loading && loadError ? (
+      {loadError ? (
         <div className="ca-glass-panel border-ca-outline-variant/40 p-6">
           <p className="font-label text-ca-label-sm font-medium text-ca-secondary">ERROR</p>
           <h2 className="mt-1 font-headline text-lg font-semibold text-ca-on-surface">데이터를 불러오지 못했습니다.</h2>
           <p className="mt-1 text-sm text-ca-on-surface-variant">{loadError}</p>
-          <Button variant="outline" className="mt-4 rounded-full" onClick={() => void load()}>
+          <Button variant="outline" className="mt-4 rounded-full" onClick={() => void loadExtras()}>
             다시 시도
           </Button>
         </div>
       ) : null}
-      {!loading && !loadError && actionError ? (
+      {!loadError && actionError ? (
         <div className="rounded-lg border border-ca-outline-variant/50 bg-ca-surface-container/40 px-4 py-3 text-sm text-ca-on-surface-variant">
           {actionError}
           <button
@@ -220,7 +214,7 @@ export function MyPageHub() {
           </button>
         </div>
       ) : null}
-      {!loading && !loadError ? section : null}
+      {!loadError ? section : null}
     </div>
   );
 }

@@ -7,6 +7,23 @@ import { MyPageHub } from "./mypage-hub";
 const replace = vi.fn();
 let sectionParam: string | null = null;
 
+const setUser = vi.fn();
+const authHeaderState = {
+  user: {
+    id: "u1",
+    email: "user@example.com",
+    display_name: "허브유저",
+    created_at: "2026-01-01T00:00:00.000Z",
+  } as {
+    id: string;
+    email: string;
+    display_name: string;
+    created_at: string;
+  } | null,
+  authChecked: true,
+  setUser,
+};
+
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ replace, push: vi.fn(), refresh: vi.fn() }),
   useSearchParams: () => ({
@@ -15,8 +32,11 @@ vi.mock("next/navigation", () => ({
   }),
 }));
 
+vi.mock("@/components/layout/auth-controls", () => ({
+  useAuthHeader: () => authHeaderState,
+}));
+
 vi.mock("@/lib/api/auth", () => ({
-  fetchCurrentUser: vi.fn(),
   fetchAccountSecuritySummary: vi.fn(),
 }));
 
@@ -26,19 +46,21 @@ vi.mock("@/lib/api/saved-recommendations", () => ({
   removeSavedRecommendationBookmark: vi.fn(),
 }));
 
-import { fetchAccountSecuritySummary, fetchCurrentUser } from "@/lib/api/auth";
+import { fetchAccountSecuritySummary } from "@/lib/api/auth";
 import { listSavedBookmarksWithLocalFallback } from "@/lib/api/saved-recommendations";
 
 describe("MyPageHub smoke", () => {
   beforeEach(() => {
     sectionParam = null;
     replace.mockReset();
-    vi.mocked(fetchCurrentUser).mockResolvedValue({
+    setUser.mockReset();
+    authHeaderState.user = {
       id: "u1",
       email: "user@example.com",
       display_name: "허브유저",
       created_at: "2026-01-01T00:00:00.000Z",
-    });
+    };
+    authHeaderState.authChecked = true;
     vi.mocked(fetchAccountSecuritySummary).mockResolvedValue({
       active_session_count: 1,
       last_login_at: "2026-07-01T00:00:00.000Z",
@@ -46,7 +68,7 @@ describe("MyPageHub smoke", () => {
     vi.mocked(listSavedBookmarksWithLocalFallback).mockResolvedValue([]);
   });
 
-  it("loads overview with only overview/saved/account tabs", async () => {
+  it("loads overview from shared auth session without blocking on extras", async () => {
     render(<MyPageHub />);
 
     await waitFor(() => {
@@ -59,6 +81,8 @@ describe("MyPageHub smoke", () => {
     expect(screen.getByRole("button", { name: "계정" })).toBeInTheDocument();
     expect(screen.queryByRole("button", { name: "활동" })).not.toBeInTheDocument();
     expect(screen.queryByRole("button", { name: "비교 기록" })).not.toBeInTheDocument();
+    expect(listSavedBookmarksWithLocalFallback).toHaveBeenCalled();
+    expect(fetchAccountSecuritySummary).toHaveBeenCalled();
   });
 
   it("switches to saved and account sections", async () => {
@@ -67,7 +91,9 @@ describe("MyPageHub smoke", () => {
     await waitFor(() => expect(screen.getByText("허브유저")).toBeInTheDocument());
 
     await user.click(screen.getByRole("button", { name: "저장한 빌드" }));
-    expect(screen.getByRole("heading", { name: "저장한 빌드" })).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByRole("heading", { name: "저장한 빌드" })).toBeInTheDocument();
+    });
     expect(replace).toHaveBeenCalledWith("/mypage?section=saved", { scroll: false });
 
     await user.click(screen.getByRole("button", { name: "계정" }));
@@ -87,8 +113,7 @@ describe("MyPageHub smoke", () => {
     expect(replace).toHaveBeenCalledWith("/mypage?section=saved", { scroll: false });
   });
 
-  it("shows retry panel when load fails", async () => {
-    vi.mocked(fetchCurrentUser).mockRejectedValue(new Error("unauthorized"));
+  it("shows retry panel when extras load fails", async () => {
     vi.mocked(fetchAccountSecuritySummary).mockRejectedValue(new Error("unauthorized"));
     vi.mocked(listSavedBookmarksWithLocalFallback).mockRejectedValue(new Error("unauthorized"));
 
@@ -100,8 +125,8 @@ describe("MyPageHub smoke", () => {
     expect(screen.getByRole("button", { name: "다시 시도" })).toBeInTheDocument();
   });
 
-  it("shows login gate when user payload is missing", async () => {
-    vi.mocked(fetchCurrentUser).mockResolvedValue(null as never);
+  it("shows login gate when shared auth user is missing", async () => {
+    authHeaderState.user = null;
 
     render(<MyPageHub />);
 

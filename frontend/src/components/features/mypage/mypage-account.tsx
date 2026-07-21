@@ -143,7 +143,14 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
         <div className="flex items-center gap-4">
           <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full border border-ca-outline-variant/50 bg-ca-surface-container/60">
             {/* eslint-disable-next-line @next/next/no-img-element -- remote API avatar + local default */}
-            <img src={avatarSrc} alt="" className="h-full w-full object-cover" />
+            <img
+              src={avatarSrc}
+              alt=""
+              width={96}
+              height={96}
+              className="h-full w-full object-cover"
+              decoding="async"
+            />
           </div>
           <div className="min-w-0 flex-1 space-y-2">
             <p className="font-label text-ca-label-sm font-medium text-ca-secondary">프로필 사진</p>

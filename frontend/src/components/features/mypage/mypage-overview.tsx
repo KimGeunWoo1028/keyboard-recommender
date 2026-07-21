@@ -136,6 +136,7 @@ export function MyPageOverview({ user, savedItems }: Props) {
               )}
               <Link
                 href="/recommend"
+                prefetch={false}
                 className={`${buttonClassName({ variant: "primary", size: "sm", className: "mt-5 rounded-full" })}`}
               >
                 다시 설문하기
@@ -145,8 +146,16 @@ export function MyPageOverview({ user, savedItems }: Props) {
               className="relative mr-3 h-28 w-28 shrink-0 overflow-hidden rounded-full border border-ca-outline-variant/50 bg-ca-surface-container/60 sm:mr-6 sm:h-32 sm:w-32"
               aria-label="프로필 사진"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element -- remote API avatar + local default */}
-              <img src={avatarSrc} alt="" className="h-full w-full object-cover" />
+              {/* eslint-disable-next-line @next/next/no-img-element -- remote API avatar + local default; LCP on /mypage */}
+              <img
+                src={avatarSrc}
+                alt=""
+                width={128}
+                height={128}
+                className="h-full w-full object-cover"
+                fetchPriority="high"
+                decoding="async"
+              />
             </div>
           </div>
         </div>
@@ -171,7 +180,11 @@ export function MyPageOverview({ user, savedItems }: Props) {
           ) : (
             <div className="mt-4 rounded-lg border border-dashed border-ca-outline-variant/50 p-4 text-sm text-ca-on-surface-variant">
               설문으로 취향을 만들면 여기에 6축 스냅샷이 표시됩니다.
-              <Link href="/recommend" className="mt-2 block font-label text-ca-label-sm font-medium text-ca-primary hover:underline">
+              <Link
+                href="/recommend"
+                prefetch={false}
+                className="mt-2 block font-label text-ca-label-sm font-medium text-ca-primary hover:underline"
+              >
                 설문으로 취향 만들기 →
               </Link>
             </div>
@@ -210,7 +223,11 @@ export function MyPageOverview({ user, savedItems }: Props) {
           ) : (
             <div className="space-y-2">
               <p className="text-sm text-ca-on-surface-variant">아직 저장한 빌드가 없습니다.</p>
-              <Link href="/recommend" className="inline-block font-label text-ca-label-sm font-medium text-ca-primary hover:underline">
+              <Link
+                href="/recommend"
+                prefetch={false}
+                className="inline-block font-label text-ca-label-sm font-medium text-ca-primary hover:underline"
+              >
                 설문 시작하기 →
               </Link>
             </div>
