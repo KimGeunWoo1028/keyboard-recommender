@@ -323,7 +323,7 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
     const authenticated = isAuthenticated;
     if (!authenticated) {
       setSaveState("saving");
-      setSaveMessage("");
+      setSaveMessage("저장하는 중…");
       try {
         const base = bookmarkPayloadFromBuild(build);
         const requestId = globalThis.crypto?.randomUUID?.() ?? `req-${Date.now()}`;
@@ -383,7 +383,7 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
       return;
     }
     setSaveState("saving");
-    setSaveMessage("");
+    setSaveMessage("저장하는 중…");
     try {
       const base = bookmarkPayloadFromBuild(build);
       const requestId = globalThis.crypto?.randomUUID?.() ?? `req-${Date.now()}`;

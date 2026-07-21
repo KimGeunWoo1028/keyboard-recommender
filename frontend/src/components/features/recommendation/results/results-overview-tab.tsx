@@ -227,9 +227,21 @@ export function ResultsOverviewTab({
           })()}
         </div>
         {saveMessage ? (
-          <p className="mt-2 text-sm text-ca-on-surface-variant" role="status" aria-live="polite">
-            {saveMessage}
-          </p>
+          <div
+            className="mt-2 space-y-1 text-sm text-ca-on-surface-variant"
+            role={saveState === "error" ? "alert" : "status"}
+            aria-live={saveState === "error" ? "assertive" : "polite"}
+          >
+            <p>{saveMessage}</p>
+            {saveState === "saved" ? (
+              <Link
+                href="/mypage?section=saved"
+                className="inline-block font-medium text-ca-primary underline-offset-4 hover:underline"
+              >
+                저장한 빌드로 이동
+              </Link>
+            ) : null}
+          </div>
         ) : null}
       </div>
 
@@ -328,6 +340,7 @@ export function ResultsOverviewTab({
           <div className="flex w-full flex-col gap-2 sm:w-auto sm:items-end">
             <Button
               data-testid="e2e-save-build"
+              variant="outline"
               size="default"
               className="w-full sm:min-w-[8.5rem] sm:w-auto"
               disabled={!authReady || saveState === "saving"}
@@ -341,19 +354,6 @@ export function ResultsOverviewTab({
                     ? "이 빌드 저장"
                     : "로컬에 저장"}
             </Button>
-            {saveMessage ? (
-              <div className="space-y-1 text-sm text-ca-on-surface-variant sm:text-right" role="status" aria-live="polite">
-                <p>{saveMessage}</p>
-                {saveState === "saved" ? (
-                  <Link
-                    href="/mypage?section=saved"
-                    className="inline-block font-medium text-ca-primary underline-offset-4 hover:underline"
-                  >
-                    저장한 빌드로 이동
-                  </Link>
-                ) : null}
-              </div>
-            ) : null}
           </div>
         </div>
       </Card>
