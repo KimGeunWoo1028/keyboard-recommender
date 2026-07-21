@@ -42,6 +42,8 @@ export function SiteHeader() {
     () => primaryNav.filter((item) => item.href !== "/results" || showResultsNav),
     [showResultsNav],
   );
+  // L08: catalog page already has in-body search — hide header duplicate there.
+  const isCatalogRoute = pathname === "/catalog" || pathname.startsWith("/catalog/");
   /**
    * On primary surfaces first paint, skip speculative RSC/JS prefetch of other
    * tabs so Lighthouse unused-chunk noise stays down and LCP bandwidth is free.
@@ -108,7 +110,7 @@ export function SiteHeader() {
         </div>
 
         <div className="flex min-w-0 shrink-0 items-center gap-1.5 sm:gap-3">
-          <HeaderCatalogSearch className="hidden shrink-0 lg:block" />
+          {!isCatalogRoute ? <HeaderCatalogSearch className="hidden shrink-0 lg:block" /> : null}
           <div className="hidden lg:block">
             <ThemeToggle />
           </div>
@@ -136,10 +138,12 @@ export function SiteHeader() {
             <span className="font-body text-sm font-medium text-ca-on-surface-variant">테마</span>
             <ThemeToggle />
           </div>
-          <div className="mb-3 space-y-1.5">
-            <p className="font-body text-xs font-medium text-ca-on-surface-variant">카탈로그 검색</p>
-            <HeaderCatalogSearch className="block lg:hidden" />
-          </div>
+          {!isCatalogRoute ? (
+            <div className="mb-3 space-y-1.5">
+              <p className="font-body text-xs font-medium text-ca-on-surface-variant">카탈로그 검색</p>
+              <HeaderCatalogSearch className="block lg:hidden" />
+            </div>
+          ) : null}
           <nav className="flex flex-col gap-1" aria-label="모바일">
             <Link
               href="/"
