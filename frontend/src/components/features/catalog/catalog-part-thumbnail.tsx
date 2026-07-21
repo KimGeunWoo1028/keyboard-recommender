@@ -100,8 +100,9 @@ export function CatalogPartThumbnail({
             alt={alt}
             fill
             sizes={sizes}
-            /* `priority` already sets fetchPriority=high; avoid explicit "auto" (SSR/client drift). */
+            /* Next `priority` preloads but does not set fetchPriority; Lighthouse needs high on the preload. */
             priority={priority}
+            fetchPriority={priority ? "high" : undefined}
             unoptimized={useUnoptimized}
             className="object-cover"
             onError={() => setFailed(true)}
