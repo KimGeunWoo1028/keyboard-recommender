@@ -24,13 +24,21 @@ import {
   type CatalogPartDetail,
   type CatalogPartSummary,
 } from "@/lib/api/catalog";
-import { getPublicApiBase } from "@/lib/api/client";
+import { getPublicApiBase, ApiError } from "@/lib/api/client";
 import { catalogHref } from "@/lib/catalog-links";
 import { isReferenceOnlyLayoutArchetype } from "@/lib/layout-catalog-links";
 import { layoutSizeFilterLabel } from "@/lib/layout-size";
 import { cn } from "@/lib/utils";
 
 const PAGE_SIZE = CATALOG_PAGE_SIZE;
+
+function catalogLoadErrorMessage(err: unknown): string {
+  if (err instanceof ApiError && (err.status === 502 || err.status === 503 || err.status === 504 || err.status === 0)) {
+    return "서버가 일시적으로 응답하지 않습니다. 잠시 후 다시 검색해 주세요.";
+  }
+  if (err instanceof Error && err.message.trim()) return err.message;
+  return "카탈로그를 불러오지 못했습니다.";
+}
 
 const CATALOG_TABS: { id: CatalogFamily; label: string }[] = [
   { id: "switch", label: "스위치" },
@@ -358,7 +366,7 @@ export function CatalogBrowseView({
     } catch (e) {
       setItems([]);
       setTotal(0);
-      setError(e instanceof Error ? e.message : "카탈로그를 불러오지 못했습니다.");
+      setError(catalogLoadErrorMessage(e));
     } finally {
       setLoading(false);
     }

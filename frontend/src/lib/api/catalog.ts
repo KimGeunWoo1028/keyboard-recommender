@@ -2,6 +2,14 @@ import { ApiError, getApiBaseForFetch, getPublicApiBase, readErrorMessage } from
 
 export type CatalogFamily = "switch" | "plate" | "foam" | "layout" | "case" | "keycap";
 
+function isRetryableCatalogStatus(status: number): boolean {
+  return status === 0 || status === 502 || status === 503 || status === 504;
+}
+
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 export type CatalogPartSummary = {
   id: string;
   name: string;
@@ -247,11 +255,38 @@ export async function fetchCatalogList(
   if (typeof window === "undefined" && options?.next) {
     init.next = options.next;
   }
-  const res = await fetch(url, init);
-  if (!res.ok) {
-    throw new ApiError(res.status, await readErrorMessage(res));
+
+  let lastError: ApiError | null = null;
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    try {
+      const res = await fetch(url, init);
+      if (!res.ok) {
+        lastError = new ApiError(res.status, await readErrorMessage(res));
+        if (attempt < 2 && isRetryableCatalogStatus(lastError.status)) {
+          await sleep(400 * (attempt + 1));
+          continue;
+        }
+        throw lastError;
+      }
+      return parseCatalogListResponse(await res.json());
+    } catch (err) {
+      if (err instanceof ApiError) {
+        lastError = err;
+        if (attempt < 2 && isRetryableCatalogStatus(err.status)) {
+          await sleep(400 * (attempt + 1));
+          continue;
+        }
+        throw err;
+      }
+      lastError = new ApiError(0, "카탈로그 서버에 연결하지 못했습니다.");
+      if (attempt < 2) {
+        await sleep(400 * (attempt + 1));
+        continue;
+      }
+      throw lastError;
+    }
   }
-  return parseCatalogListResponse(await res.json());
+  throw lastError ?? new ApiError(0, "카탈로그를 불러오지 못했습니다.");
 }
 
 export async function fetchCatalogPart(family: CatalogFamily, partId: string): Promise<CatalogPartDetail> {
