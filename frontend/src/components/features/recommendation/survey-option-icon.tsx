@@ -72,8 +72,8 @@ function lucideIconClass(selected: boolean | undefined, className?: string, fall
   return cn(
     "transition-colors",
     selected
-      ? "text-ca-primary"
-      : "text-ca-on-surface-variant group-hover:text-ca-primary",
+      ? "text-ca-on-surface"
+      : "text-ca-on-surface-variant group-hover:text-ca-on-surface",
     className ?? fallback,
   );
 }

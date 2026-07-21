@@ -35,7 +35,7 @@ describe("RequireAuth", () => {
       </RequireAuth>,
     );
 
-    expect(screen.getByText("스타일을 고른 뒤 약 1분 설문으로 추천을 받을 수 있어요.")).toBeInTheDocument();
+    expect(screen.getByText(/가까운 성향을 고르면 일부 문항이 채워집니다/)).toBeInTheDocument();
     expect(screen.queryByText("survey-ready")).not.toBeInTheDocument();
   });
 

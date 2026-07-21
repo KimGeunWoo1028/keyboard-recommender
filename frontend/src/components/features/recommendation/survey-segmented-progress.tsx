@@ -7,7 +7,7 @@ type Props = {
   className?: string;
 };
 
-/** Segmented step bar — Stitch Keyboard Curator survey mock. */
+/** Quiet segmented progress — fill without glow. */
 export function SurveySegmentedProgress({
   currentStep,
   totalSteps,
@@ -18,16 +18,12 @@ export function SurveySegmentedProgress({
 
   return (
     <div className={cn("flex shrink-0 flex-col items-stretch", className)}>
-      <div className="mb-2 flex w-full items-baseline justify-between gap-3 px-0.5">
-        <span className="font-label text-[10px] font-bold uppercase tracking-[0.15em] text-ca-primary sm:text-xs">
-          {stepLabel}
-        </span>
-        {timeEstimate ? (
-          <span className="text-[10px] text-ca-on-surface-variant sm:text-xs">{timeEstimate}</span>
-        ) : null}
+      <div className="mb-2 flex w-full items-baseline justify-between gap-3">
+        <span className="text-sm font-medium text-ca-on-surface">{stepLabel}</span>
+        {timeEstimate ? <span className="text-sm text-ca-on-surface-variant">{timeEstimate}</span> : null}
       </div>
       <div
-        className="flex h-1 w-full overflow-hidden rounded-full bg-ca-outline-variant/40"
+        className="flex h-1 w-full overflow-hidden rounded bg-ca-outline-variant/35"
         role="progressbar"
         aria-valuenow={currentStep}
         aria-valuemin={1}
@@ -36,18 +32,13 @@ export function SurveySegmentedProgress({
       >
         {Array.from({ length: totalSteps }, (_, i) => {
           const filled = i < currentStep;
-          const active = i === currentStep - 1;
           return (
             <div
               key={i}
               className={cn(
-                "h-full flex-1 transition-colors duration-300",
-                i > 0 && "border-l border-ca-surface-container-lowest/80",
-                filled
-                  ? active
-                    ? "bg-ca-primary shadow-[0_0_8px_rgb(var(--ca-primary)/0.6)]"
-                    : "bg-ca-on-surface-variant/50"
-                  : "bg-transparent",
+                "h-full flex-1 transition-colors duration-200 motion-reduce:transition-none",
+                i > 0 && "border-l border-ca-surface/80",
+                filled ? "bg-ca-on-surface" : "bg-transparent",
               )}
             />
           );
