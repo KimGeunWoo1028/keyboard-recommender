@@ -3,12 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { AuthNickname, AuthSessionAction } from "@/components/layout/auth-controls";
 import { HeaderCatalogSearch } from "@/components/layout/header-catalog-search";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { isInternalDebugUiEnabled } from "@/lib/internal-debug-flags";
+import { hasUsableRecentRecommendationResult } from "@/lib/survey-storage";
 import { cn } from "@/lib/utils";
 
 const primaryNav: { href: string; label: string }[] = [
@@ -30,6 +31,17 @@ function navActive(pathname: string, href: string): boolean {
 export function SiteHeader() {
   const pathname = usePathname() ?? "/";
   const [mobileOpen, setMobileOpen] = useState(false);
+  // Hide until client mount + storage check to avoid SSR/hydration flicker (L04).
+  const [showResultsNav, setShowResultsNav] = useState(false);
+
+  useEffect(() => {
+    setShowResultsNav(hasUsableRecentRecommendationResult());
+  }, [pathname]);
+
+  const navItems = useMemo(
+    () => primaryNav.filter((item) => item.href !== "/results" || showResultsNav),
+    [showResultsNav],
+  );
   /**
    * On primary surfaces first paint, skip speculative RSC/JS prefetch of other
    * tabs so Lighthouse unused-chunk noise stays down and LCP bandwidth is free.
@@ -55,7 +67,7 @@ export function SiteHeader() {
             href="/"
             prefetch={deferNavPrefetch ? false : undefined}
             aria-label="Keyboard Recommender 홈"
-            className="inline-flex min-w-0 shrink items-center gap-2 rounded-btn font-headline text-base font-bold leading-none tracking-tight text-ca-on-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-primary md:gap-3 md:text-[1.45rem]"
+            className="inline-flex min-w-0 shrink items-center gap-2 rounded-btn font-headline text-base font-bold leading-none tracking-tight text-ca-on-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))] md:gap-3 md:text-[1.45rem]"
           >
             <Image
               src="/brand/logo-mark.png"
@@ -71,7 +83,7 @@ export function SiteHeader() {
           </Link>
 
           <nav className="hidden shrink-0 items-center gap-5 lg:flex xl:gap-6" aria-label="주요">
-            {primaryNav.map((item) => {
+            {navItems.map((item) => {
               const active = navActive(pathname, item.href);
               return (
                 <Link
@@ -82,6 +94,7 @@ export function SiteHeader() {
                     "relative inline-flex shrink-0 items-center whitespace-nowrap font-body text-sm font-medium leading-none tracking-normal transition-colors",
                     /* underline sits outside the line box so it doesn't pull the label up */
                     "after:pointer-events-none after:absolute after:inset-x-0 after:-bottom-1.5 after:h-0.5 after:rounded-full after:content-['']",
+                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))] focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                     active
                       ? "font-semibold text-ca-primary after:bg-ca-primary"
                       : "text-ca-on-surface-variant after:bg-transparent hover:text-ca-on-surface",
@@ -103,7 +116,7 @@ export function SiteHeader() {
           <AuthSessionAction />
           <button
             type="button"
-            className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-btn text-ca-on-surface-variant transition-colors hover:bg-ca-surface-variant/50 lg:hidden"
+            className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-btn text-ca-on-surface-variant transition-colors hover:bg-ca-surface-variant/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))] lg:hidden"
             aria-expanded={mobileOpen}
             aria-controls="site-mobile-nav"
             aria-label={mobileOpen ? "메뉴 닫기" : "메뉴 열기"}
@@ -134,6 +147,7 @@ export function SiteHeader() {
               onClick={() => setMobileOpen(false)}
               className={cn(
                 "rounded-btn px-3 py-2 font-body text-sm font-medium",
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))]",
                 navActive(pathname, "/")
                   ? "bg-ca-primary/15 text-ca-primary"
                   : "text-ca-on-surface-variant hover:bg-ca-surface-variant/40 hover:text-ca-on-surface",
@@ -141,7 +155,7 @@ export function SiteHeader() {
             >
               홈
             </Link>
-            {primaryNav.map((item) => (
+            {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -149,6 +163,7 @@ export function SiteHeader() {
                 onClick={() => setMobileOpen(false)}
                 className={cn(
                   "rounded-btn px-3 py-2 font-body text-sm font-medium",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))]",
                   navActive(pathname, item.href)
                     ? "bg-ca-primary/15 text-ca-primary"
                     : "text-ca-on-surface-variant hover:bg-ca-surface-variant/40 hover:text-ca-on-surface",

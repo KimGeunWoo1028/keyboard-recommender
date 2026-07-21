@@ -23,7 +23,7 @@ type Variant = keyof typeof variants;
 type Size = keyof typeof sizes;
 
 const baseClass =
-  "relative inline-flex items-center justify-center gap-2 rounded-lg text-sm font-medium transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50";
+  "relative inline-flex items-center justify-center gap-2 rounded-lg text-sm font-medium transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))] focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50";
 
 /** Use on `<Link>` when you need a styled anchor that looks like a button. */
 export function buttonClassName(options?: { variant?: Variant; size?: Size; className?: string }) {

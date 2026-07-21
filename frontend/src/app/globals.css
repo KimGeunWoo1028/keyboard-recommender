@@ -82,6 +82,9 @@
       0 4px 12px rgb(15 23 42 / 0.03);
     --ca-btn-glow: none;
     --ca-focus-glow: none;
+    /* Keyboard focus — prefer contrast over brand tint on dark surfaces */
+    --focus-ring: 99 14 212;
+    --focus-ring-offset: 3px;
 
     color-scheme: light;
   }
@@ -151,6 +154,8 @@
       0 8px 24px rgb(0 0 0 / 0.35);
     --ca-btn-glow: none;
     --ca-focus-glow: none;
+    --focus-ring: 137 206 255;
+    --focus-ring-offset: 3px;
     --radius-btn: 0.5rem;
 
     color-scheme: dark;
@@ -165,6 +170,16 @@
   ::selection {
     background-color: rgb(var(--ca-primary) / 0.35);
     color: rgb(var(--ca-on-surface));
+  }
+
+  /* Global keyboard focus — visible on dark purple and light cards (L05). */
+  :focus-visible {
+    outline: 2px solid rgb(var(--focus-ring));
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  :focus:not(:focus-visible) {
+    outline: none;
   }
 
   /* Secondary-blue minimal scrollbars (DESIGN.md) */
@@ -291,8 +306,8 @@
   }
 
   .ca-btn-primary:focus-visible {
-    outline: 2px solid rgb(var(--ca-primary));
-    outline-offset: 2px;
+    outline: 2px solid rgb(var(--focus-ring));
+    outline-offset: var(--focus-ring-offset);
   }
 
   .ca-btn-ghost {
@@ -321,8 +336,8 @@
   }
 
   .ca-btn-ghost:focus-visible {
-    outline: 2px solid rgb(var(--ca-secondary));
-    outline-offset: 2px;
+    outline: 2px solid rgb(var(--focus-ring));
+    outline-offset: var(--focus-ring-offset);
   }
 
   .ca-chip {
@@ -377,7 +392,14 @@
     color: rgb(var(--ca-on-surface-variant) / 0.7);
   }
 
-  .ca-input:focus {
+  .ca-input:focus-visible {
+    border-color: rgb(var(--focus-ring));
+    outline: 2px solid rgb(var(--focus-ring));
+    outline-offset: var(--focus-ring-offset);
+    box-shadow: none;
+  }
+
+  .ca-input:focus:not(:focus-visible) {
     border-color: rgb(var(--ca-primary-container));
     outline: none;
     box-shadow: 0 0 0 3px rgb(var(--ca-primary-container) / 0.2);
@@ -393,8 +415,8 @@
   }
 
   .ca-focus-glow:focus-visible {
-    outline: 2px solid rgb(var(--ca-primary));
-    outline-offset: 2px;
+    outline: 2px solid rgb(var(--focus-ring));
+    outline-offset: var(--focus-ring-offset);
     box-shadow: var(--ca-focus-glow);
   }
 
