@@ -1,5 +1,5 @@
 import { ApiError, getPublicApiBase } from "@/lib/api/client";
-import { getOrCreateClientSessionId } from "@/lib/api/saved-recommendations";
+import { getOrCreateClientSessionId } from "@/lib/client-session-id";
 import { getOrCreateExperimentAssignments } from "@/lib/experiments";
 
 type OnboardingEventName =

@@ -1,8 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState } from "react";
 
+import {
+  HomeWorkshopGuestPreview,
+  HomeWorkshopPreviewShell,
+} from "@/components/features/home/home-workshop-guest-preview";
 import { useAuthHeader } from "@/components/layout/auth-controls";
 import {
   fixedAxisBarGlyph,
@@ -62,37 +66,9 @@ function shortTitle(item: SavedRecommendationItem): string {
   return title || item.build_id;
 }
 
-function PreviewShell({ children }: { children: ReactNode }) {
-  return (
-    <div className="ca-glass-panel relative hidden min-h-[220px] overflow-hidden p-5 lg:block">
-      <p className="font-label text-ca-label-sm font-medium text-ca-secondary">WORKSHOP PREVIEW</p>
-      {children}
-      <div
-        className="pointer-events-none absolute -right-8 -top-8 h-40 w-40 rounded-full bg-ca-primary/20 blur-3xl"
-        aria-hidden
-      />
-    </div>
-  );
-}
-
-function GuestPreview() {
-  return (
-    <PreviewShell>
-      <p className="mt-3 font-headline text-ca-headline-md text-ca-on-surface">취향 6축 · 부품 6축</p>
-      <p className="mt-3 text-sm leading-relaxed text-ca-on-surface-variant">
-        설문으로 소음·무게감·구분감·탄성·반발감·선명도를 잡고, 스위치부터 키캡까지 조합합니다.
-      </p>
-      <ul className="mt-4 space-y-1.5 font-label text-ca-label-sm text-ca-on-surface-variant">
-        <li>추천 축 · 소음 · 무게감 · 구분감 · 탄성 · 반발감 · 선명도</li>
-        <li>부품 축 · 스위치 · 플레이트 · 폼 · 레이아웃 · 케이스 · 키캡</li>
-      </ul>
-    </PreviewShell>
-  );
-}
-
 function EmptyLoggedInPreview({ recommendHref }: { recommendHref: string }) {
   return (
-    <PreviewShell>
+    <HomeWorkshopPreviewShell>
       <p className="mt-3 font-headline text-ca-headline-md text-ca-on-surface">아직 추천 기록이 없어요</p>
       <p className="mt-3 text-sm leading-relaxed text-ca-on-surface-variant">
         설문으로 첫 추천을 받아보세요. 취향 스냅샷과 저장 빌드가 여기에 나타납니다.
@@ -103,7 +79,7 @@ function EmptyLoggedInPreview({ recommendHref }: { recommendHref: string }) {
       >
         설문으로 첫 추천 받기 →
       </Link>
-    </PreviewShell>
+    </HomeWorkshopPreviewShell>
   );
 }
 
@@ -163,11 +139,11 @@ export function HomeWorkshopPreview() {
 
   // Auth still resolving — keep guest summary to avoid fake "active" flash.
   if (!authChecked) {
-    return <GuestPreview />;
+    return <HomeWorkshopGuestPreview />;
   }
 
   if (!user) {
-    return <GuestPreview />;
+    return <HomeWorkshopGuestPreview />;
   }
 
   const fromSavedScores = latestSaved ? readTraitScoresFromMetadata(latestSaved.metadata) : null;
@@ -185,10 +161,10 @@ export function HomeWorkshopPreview() {
 
   if (dataPending) {
     return (
-      <PreviewShell>
+      <HomeWorkshopPreviewShell>
         <p className="mt-3 font-headline text-ca-headline-md text-ca-on-surface">내 워크스페이스</p>
         <p className="mt-3 text-sm text-ca-on-surface-variant">불러오는 중…</p>
-      </PreviewShell>
+      </HomeWorkshopPreviewShell>
     );
   }
 
@@ -197,7 +173,7 @@ export function HomeWorkshopPreview() {
   }
 
   return (
-    <PreviewShell>
+    <HomeWorkshopPreviewShell>
       <p className="mt-3 font-headline text-ca-headline-md text-ca-on-surface">내 워크스페이스</p>
       {relative ? (
         <p className="mt-1.5 text-sm text-ca-on-surface-variant">마지막 추천 · {relative}</p>
@@ -239,6 +215,6 @@ export function HomeWorkshopPreview() {
           설문으로 취향 스냅샷 만들기 →
         </Link>
       ) : null}
-    </PreviewShell>
+    </HomeWorkshopPreviewShell>
   );
 }

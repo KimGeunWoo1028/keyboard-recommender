@@ -1,4 +1,4 @@
-import { getOrCreateClientSessionId } from "@/lib/api/saved-recommendations";
+import { getOrCreateClientSessionId } from "@/lib/client-session-id";
 
 export type ExperimentId =
   | "onboarding_wording_v1"

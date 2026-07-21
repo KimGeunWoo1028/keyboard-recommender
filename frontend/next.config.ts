@@ -5,6 +5,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   // Silence monorepo false-positive when a parent directory also has a lockfile.
   outputFileTracingRoot: path.join(__dirname),
+  experimental: {
+    optimizePackageImports: ["lucide-react"],
+  },
   images: {
     remotePatterns: [
       {

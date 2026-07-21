@@ -11,6 +11,10 @@
 
 @layer base {
   :root {
+    /* System mono — avoid loading a third webfont on every route */
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+
     /* Legacy semantic — Luminous Artisan light */
     --background: 250 248 255;
     --foreground: 19 27 46;

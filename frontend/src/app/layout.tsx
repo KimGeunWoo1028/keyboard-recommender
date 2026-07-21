@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Hanken_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
+import { Hanken_Grotesk, Inter } from "next/font/google";
 
 import "./globals.css";
 
@@ -11,19 +11,15 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 
 const hankenGrotesk = Hanken_Grotesk({
   subsets: ["latin"],
+  weight: ["500", "600", "700"],
   variable: "--font-headline",
   display: "swap",
 });
 
 const inter = Inter({
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
   variable: "--font-body",
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
   display: "swap",
 });
 
@@ -82,7 +78,7 @@ export default function RootLayout({
     <html
       lang="ko"
       suppressHydrationWarning
-      className={`${hankenGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+      className={`${hankenGrotesk.variable} ${inter.variable}`}
     >
       <body className="min-h-screen font-body antialiased">
         <ThemeProvider>

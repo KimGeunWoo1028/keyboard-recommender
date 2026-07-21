@@ -1,6 +1,9 @@
 import { ApiError, getPublicApiBase, readErrorMessage } from "@/lib/api/client";
+import { getOrCreateClientSessionId } from "@/lib/client-session-id";
 import type { RecommendedBuild } from "@/types/recommendation";
 import { getOrCreateExperimentAssignments } from "@/lib/experiments";
+
+export { getOrCreateClientSessionId };
 
 export type SavedRecommendationItem = {
   saved_at: string;
@@ -29,16 +32,6 @@ type SaveRecommendationRequest = {
 
 const SAVED_PATH = "/api/v1/recommendations/saved";
 const ACTIVITY_PATH = "/api/v1/recommendations/activity";
-
-export function getOrCreateClientSessionId(): string {
-  if (typeof window === "undefined") return "server";
-  const key = "kr_session_id";
-  const existing = window.localStorage.getItem(key)?.trim();
-  if (existing) return existing;
-  const created = globalThis.crypto?.randomUUID?.() ?? `sess-${Date.now()}`;
-  window.localStorage.setItem(key, created);
-  return created;
-}
 
 export function saveLocalGuestBookmark(input: SaveRecommendationRequest): SavedRecommendationItem {
   const item: SavedRecommendationItem = {
