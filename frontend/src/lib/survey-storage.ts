@@ -36,3 +36,9 @@ export function loadLastKnownGoodSubmission(): SurveySubmission | null {
     return null;
   }
 }
+
+/** True when this browser has a restorable recommendation result (session or last-known-good). */
+export function hasUsableRecentRecommendationResult(): boolean {
+  const submission = loadSurveySubmission() ?? loadLastKnownGoodSubmission();
+  return Boolean(submission?.build?.id);
+}
