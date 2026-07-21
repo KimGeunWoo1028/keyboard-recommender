@@ -2,11 +2,33 @@ import path from "node:path";
 
 import type { NextConfig } from "next";
 
+const emptyModule = path.join(__dirname, "src/lib/empty-module.js");
+const nextPolyfillModule = path.join(
+  __dirname,
+  "node_modules/next/dist/build/polyfills/polyfill-module.js",
+);
+
 const nextConfig: NextConfig = {
   // Silence monorepo false-positive when a parent directory also has a lockfile.
   outputFileTracingRoot: path.join(__dirname),
   experimental: {
     optimizePackageImports: ["lucide-react"],
+    // Inline Tailwind CSS into HTML to remove the render-blocking stylesheet round-trip.
+    inlineCss: true,
+  },
+  /**
+   * Next injects ~11 KiB of legacy polyfills (flat/at/fromEntries/…) even for modern
+   * browsers. Alias that module away — targets match Next's supported browsers
+   * (Chrome/Edge/Firefox 111+, Safari 16.4+).
+   */
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      [nextPolyfillModule]: emptyModule,
+      "next/dist/build/polyfills/polyfill-module": emptyModule,
+      "next/dist/build/polyfills/polyfill-module.js": emptyModule,
+    };
+    return config;
   },
   images: {
     remotePatterns: [

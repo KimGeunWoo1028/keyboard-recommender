@@ -57,6 +57,7 @@ export function FeatureGrid() {
           </p>
           <Link
             href={catalogHref({ family: item.catalogFamily })}
+            prefetch={false}
             className="mt-auto inline-block pt-4 font-label text-ca-label-sm font-medium text-ca-primary underline-offset-4 hover:underline"
           >
             카탈로그에서 보기 →

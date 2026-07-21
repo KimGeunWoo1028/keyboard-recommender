@@ -30,8 +30,12 @@ function navActive(pathname: string, href: string): boolean {
 export function SiteHeader() {
   const pathname = usePathname() ?? "/";
   const [mobileOpen, setMobileOpen] = useState(false);
-  /** On /recommend, skip speculative RSC prefetch of other tabs (catalog/mypage/…). */
-  const deferNavPrefetch = pathname === "/recommend" || pathname.startsWith("/recommend/");
+  /**
+   * On home + /recommend first paint, skip speculative RSC/JS prefetch of other tabs
+   * (catalog / results / mypage / …) so Lighthouse unused-chunk noise stays down.
+   */
+  const deferNavPrefetch =
+    pathname === "/" || pathname === "/recommend" || pathname.startsWith("/recommend/");
 
   return (
     <header className="sticky top-0 z-50 border-b border-ca-outline-variant/30 bg-ca-surface/80 shadow-sm backdrop-blur-xl dark:bg-ca-surface-dim/80">
@@ -61,7 +65,7 @@ export function SiteHeader() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  prefetch={deferNavPrefetch && item.href !== "/recommend" ? false : undefined}
+                  prefetch={deferNavPrefetch ? false : undefined}
                   className={cn(
                     "relative inline-flex shrink-0 items-center whitespace-nowrap font-body text-sm font-medium leading-none tracking-normal transition-colors",
                     /* underline sits outside the line box so it doesn't pull the label up */
@@ -126,7 +130,7 @@ export function SiteHeader() {
               <Link
                 key={item.href}
                 href={item.href}
-                prefetch={deferNavPrefetch && item.href !== "/recommend" ? false : undefined}
+                prefetch={deferNavPrefetch ? false : undefined}
                 onClick={() => setMobileOpen(false)}
                 className={cn(
                   "rounded-btn px-3 py-2 font-body text-sm font-medium",

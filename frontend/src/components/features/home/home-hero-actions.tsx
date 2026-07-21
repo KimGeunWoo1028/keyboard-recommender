@@ -22,19 +22,22 @@ export function HomeHeroActions() {
 
   return (
     <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+      {/* Keep primary CTA warm; defer catalog/results/auth speculative RSC. */}
       <Link
         href={recommendHref}
+        prefetch={user ? undefined : false}
         className="ca-btn-primary w-full justify-center sm:w-auto"
         aria-busy={!authChecked}
       >
         <WrenchIcon className="h-4 w-4" />
         추천 설문 시작
       </Link>
-      <Link href="/catalog" className="ca-btn-ghost w-full justify-center sm:w-auto">
+      <Link href="/catalog" prefetch={false} className="ca-btn-ghost w-full justify-center sm:w-auto">
         카탈로그 둘러보기
       </Link>
       <Link
         href={resultsHref}
+        prefetch={false}
         className="text-center font-label text-ca-label-sm font-medium text-ca-on-surface-variant underline-offset-4 transition-colors hover:text-ca-on-surface hover:underline sm:text-left"
       >
         최근 결과 보기

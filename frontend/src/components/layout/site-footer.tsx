@@ -6,7 +6,8 @@ import { usePathname } from "next/navigation";
 export function SiteFooter() {
   const year = new Date().getFullYear();
   const pathname = usePathname() ?? "/";
-  const deferNavPrefetch = pathname === "/recommend" || pathname.startsWith("/recommend/");
+  const deferNavPrefetch =
+    pathname === "/" || pathname === "/recommend" || pathname.startsWith("/recommend/");
 
   return (
     <footer className="mt-auto border-t border-ca-outline-variant/30 bg-ca-surface-container-lowest/80">
@@ -31,7 +32,7 @@ export function SiteFooter() {
           <Link href="/catalog" prefetch={deferNavPrefetch ? false : undefined} className="transition-colors hover:text-ca-on-surface">
             카탈로그
           </Link>
-          <Link href="/recommend" className="transition-colors hover:text-ca-on-surface">
+          <Link href="/recommend" prefetch={deferNavPrefetch ? false : undefined} className="transition-colors hover:text-ca-on-surface">
             추천 설문
           </Link>
           <Link href="/mypage" prefetch={deferNavPrefetch ? false : undefined} className="transition-colors hover:text-ca-on-surface">

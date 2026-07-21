@@ -200,6 +200,7 @@ export function HomeWorkshopPreview() {
           <p className="font-label text-ca-label-sm font-medium text-ca-secondary">최근 저장</p>
           <Link
             href="/mypage?section=saved"
+            prefetch={false}
             className="mt-1.5 block line-clamp-2 font-headline text-sm font-semibold leading-snug text-ca-on-surface underline-offset-4 hover:underline"
           >
             {shortTitle(latestSaved)}
@@ -210,6 +211,7 @@ export function HomeWorkshopPreview() {
       {!hasTraits && hasSaved ? (
         <Link
           href={recommendHref}
+          prefetch={user ? undefined : false}
           className="mt-4 inline-block font-label text-ca-label-sm font-medium text-ca-primary hover:underline"
         >
           설문으로 취향 스냅샷 만들기 →
