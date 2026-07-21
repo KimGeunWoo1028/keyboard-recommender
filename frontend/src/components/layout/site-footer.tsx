@@ -7,7 +7,11 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
   const pathname = usePathname() ?? "/";
   const deferNavPrefetch =
-    pathname === "/" || pathname === "/recommend" || pathname.startsWith("/recommend/");
+    pathname === "/" ||
+    pathname === "/catalog" ||
+    pathname.startsWith("/catalog/") ||
+    pathname === "/recommend" ||
+    pathname.startsWith("/recommend/");
 
   return (
     <footer className="mt-auto border-t border-ca-outline-variant/30 bg-ca-surface-container-lowest/80">

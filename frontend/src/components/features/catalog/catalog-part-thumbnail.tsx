@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 import type { CatalogFamily } from "@/lib/api/catalog";
-import { resolveCatalogImageUrl } from "@/lib/api/catalog";
+import { resolveCatalogImageUrl, shouldSkipCatalogImageOptimization } from "@/lib/api/catalog";
 import { cn } from "@/lib/utils";
 
 import { LayoutDiagram } from "./layout-diagram/layout-diagram";
@@ -57,10 +57,9 @@ export function CatalogPartThumbnail({
   const showBlueprint = diagramId !== null;
   const isFullSizeBlueprint = diagramId === "full-size";
   const showImage = Boolean(trimmed) && !failed && !showBlueprint;
-  // Local mirrors are served from the API host (often Railway). next/image's
-  // optimizer only allowlists localhost + cdn.imweb.me — skip optimization for
-  // all /media/swagkey-images/ URLs so absolute API origins still render.
-  const useUnoptimized = trimmed.includes("/media/swagkey-images/");
+  // Optimize /media mirrors via next/image (resize + WebP/AVIF) when the host is
+  // allowlisted; unknown remotes stay unoptimized so they still render.
+  const useUnoptimized = shouldSkipCatalogImageOptimization(trimmed);
   const Icon = FAMILY_ICONS[family];
   const isLayoutBlueprint = visualVariant === "layout-blueprint" || (family === "layout" && showBlueprint);
   const mediaClassName = uniformCardMedia
@@ -102,6 +101,7 @@ export function CatalogPartThumbnail({
             fill
             sizes={sizes}
             priority={priority}
+            fetchPriority={priority ? "high" : "auto"}
             unoptimized={useUnoptimized}
             className="object-cover"
             onError={() => setFailed(true)}

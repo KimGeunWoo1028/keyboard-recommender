@@ -23,6 +23,22 @@ export function getPublicApiBase(): string | null {
 }
 
 /**
+ * Server-side fetch origin: prefer direct backend proxy target to avoid a
+ * self-hop through the public frontend rewrite during SSR.
+ */
+export function getServerApiBase(): string | null {
+  const internal = process.env.INTERNAL_API_PROXY_TARGET?.trim().replace(/\/$/, "");
+  if (internal) return internal;
+  return getPublicApiBase();
+}
+
+/** Browser uses public URL; RSC/SSR prefers the internal proxy target when set. */
+export function getApiBaseForFetch(): string | null {
+  if (typeof window === "undefined") return getServerApiBase();
+  return getPublicApiBase();
+}
+
+/**
  * Warn once if the document is HTTPS but the configured API base is HTTP (mixed content / blocked requests).
  * Safe for local dev (HTTP page) and same-origin proxy setups (null base).
  */

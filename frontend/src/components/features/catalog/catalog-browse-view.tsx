@@ -15,9 +15,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import {
+  CATALOG_PAGE_SIZE,
+  catalogListQueryKey,
   fetchCatalogList,
   fetchCatalogPart,
   type CatalogFamily,
+  type CatalogListResponse,
   type CatalogPartDetail,
   type CatalogPartSummary,
 } from "@/lib/api/catalog";
@@ -27,7 +30,7 @@ import { isReferenceOnlyLayoutArchetype } from "@/lib/layout-catalog-links";
 import { layoutSizeFilterLabel } from "@/lib/layout-size";
 import { cn } from "@/lib/utils";
 
-const PAGE_SIZE = 24;
+const PAGE_SIZE = CATALOG_PAGE_SIZE;
 
 const CATALOG_TABS: { id: CatalogFamily; label: string }[] = [
   { id: "switch", label: "스위치" },
@@ -90,10 +93,12 @@ function CatalogPartCard({
   item,
   selected,
   onSelect,
+  priority = false,
 }: {
   item: CatalogPartSummary;
   selected: boolean;
   onSelect: () => void;
+  priority?: boolean;
 }) {
   const layoutMeta = item.family === "layout" && item.referenceLayout ? layoutArchetypeMetadata(item.id) : null;
   const isReferenceLayout = item.family === "layout" && item.referenceLayout === true;
@@ -126,6 +131,8 @@ function CatalogPartCard({
         partId={item.id}
         alt={item.name}
         visualVariant={isReferenceLayout ? "layout-blueprint" : "default"}
+        priority={priority}
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 378px"
       />
       <CardHeader className="space-y-2 border-b-0 pb-3 pt-3">
         <CardTitle className="line-clamp-1 font-headline text-base font-semibold leading-snug text-ca-on-surface">
@@ -176,7 +183,34 @@ function CatalogPartCard({
   );
 }
 
-export function CatalogBrowseView() {
+function CatalogGridSkeleton({ count = 6 }: { count?: number }) {
+  return (
+    <>
+      {Array.from({ length: count }, (_, i) => (
+        <div
+          key={`catalog-skel-${i}`}
+          className="flex min-h-[15rem] flex-col overflow-hidden rounded-[inherit] border border-ca-outline-variant/30 bg-ca-surface-container-lowest/40"
+          aria-hidden
+        >
+          <div className="aspect-[4/3] w-full animate-pulse bg-ca-surface-container" />
+          <div className="space-y-2 p-4">
+            <div className="h-4 w-3/4 animate-pulse rounded bg-ca-surface-container" />
+            <div className="h-3 w-full animate-pulse rounded bg-ca-surface-container/80" />
+            <div className="h-3 w-2/3 animate-pulse rounded bg-ca-surface-container/80" />
+          </div>
+        </div>
+      ))}
+    </>
+  );
+}
+
+export function CatalogBrowseView({
+  initialList = null,
+  initialQueryKey = null,
+}: {
+  initialList?: CatalogListResponse | null;
+  initialQueryKey?: string | null;
+}) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -189,13 +223,29 @@ export function CatalogBrowseView() {
   const searchQuery = searchParams.get("q") ?? "";
   const page = parsePage(searchParams.get("page"));
 
+  const queryKey = catalogListQueryKey({
+    family,
+    subtype: family === "layout" ? layoutBrowseSubtype : subtype,
+    layoutSize: family === "case" ? layoutSize : "",
+    q: searchQuery,
+    page,
+  });
+  const hasMatchingInitial = Boolean(initialList && initialQueryKey && initialQueryKey === queryKey);
+
   const [searchInput, setSearchInput] = useState(searchQuery);
   const searchDebouncedRef = useRef(false);
-  const [items, setItems] = useState<CatalogPartSummary[]>([]);
-  const [total, setTotal] = useState(0);
-  const [limit, setLimit] = useState(PAGE_SIZE);
-  const [offset, setOffset] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const skippedInitialFetchRef = useRef(hasMatchingInitial);
+  const [items, setItems] = useState<CatalogPartSummary[]>(() =>
+    hasMatchingInitial && initialList ? initialList.items : [],
+  );
+  const [total, setTotal] = useState(() => (hasMatchingInitial && initialList ? initialList.total : 0));
+  const [limit, setLimit] = useState(() =>
+    hasMatchingInitial && initialList ? initialList.limit : PAGE_SIZE,
+  );
+  const [offset, setOffset] = useState(() =>
+    hasMatchingInitial && initialList ? initialList.offset : 0,
+  );
+  const [loading, setLoading] = useState(!hasMatchingInitial);
   const [error, setError] = useState<string | null>(null);
 
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -315,6 +365,10 @@ export function CatalogBrowseView() {
   }, [family, layoutSize, subtype, layoutBrowseSubtype, searchQuery, page]);
 
   useEffect(() => {
+    if (skippedInitialFetchRef.current) {
+      skippedInitialFetchRef.current = false;
+      return;
+    }
     void load();
   }, [load]);
 
@@ -503,13 +557,18 @@ export function CatalogBrowseView() {
         <p className="text-sm text-ca-on-surface-variant">표시할 항목이 없습니다.</p>
       ) : null}
 
-      <section className="grid items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {items.map((item) => (
+      <section
+        className="grid min-h-[32rem] items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3"
+        aria-busy={loading}
+      >
+        {loading && items.length === 0 ? <CatalogGridSkeleton count={6} /> : null}
+        {items.map((item, index) => (
           <CatalogPartCard
             key={item.id}
             item={item}
             selected={selectedId === item.id}
             onSelect={() => setSelectedId(item.id)}
+            priority={index === 0 && page === 1 && !loading}
           />
         ))}
       </section>

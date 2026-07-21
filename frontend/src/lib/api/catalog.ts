@@ -1,4 +1,4 @@
-import { ApiError, getPublicApiBase, readErrorMessage } from "@/lib/api/client";
+import { ApiError, getApiBaseForFetch, getPublicApiBase, readErrorMessage } from "@/lib/api/client";
 
 export type CatalogFamily = "switch" | "plate" | "foam" | "layout" | "case" | "keycap";
 
@@ -46,15 +46,79 @@ function isCatalogFamily(value: string): value is CatalogFamily {
   );
 }
 
-/** Resolve API-relative mirror paths (e.g. /media/swagkey-images/1792.jpg) for next/image. */
+/**
+ * Resolve API-relative mirror paths for next/image.
+ * Prefer same-origin `/media/...` when the public API origin matches the page
+ * (production Vercel + rewrite) so the optimizer can resize to WebP/AVIF.
+ */
 export function resolveCatalogImageUrl(imageUrl: string): string {
   const trimmed = imageUrl.trim();
   if (!trimmed) return "";
   if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) return trimmed;
   if (trimmed.startsWith("/layout-diagrams/")) return trimmed;
+
+  if (trimmed.startsWith("/media/")) {
+    const base = getPublicApiBase();
+    if (!base) return trimmed;
+    // Prefer same-origin relative `/media` so next/image can resize via rewrite.
+    if (typeof window !== "undefined") {
+      try {
+        if (new URL(base).origin === window.location.origin) return trimmed;
+      } catch {
+        /* fall through to absolute */
+      }
+    } else if (process.env.INTERNAL_API_PROXY_TARGET?.trim()) {
+      // SSR on the frontend host: /media is rewritten to the backend.
+      return trimmed;
+    } else {
+      try {
+        const site = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null;
+        if (site && new URL(site).origin === new URL(base).origin) return trimmed;
+      } catch {
+        /* fall through */
+      }
+    }
+    return `${base}${trimmed.startsWith("/") ? trimmed : `/${trimmed}`}`;
+  }
+
   const base = getPublicApiBase();
   if (!base) return trimmed;
   return `${base}${trimmed.startsWith("/") ? trimmed : `/${trimmed}`}`;
+}
+
+/**
+ * Whether next/image should skip the optimizer for this resolved URL.
+ * Relative `/media/...` and allowlisted absolute hosts are optimized.
+ */
+export function shouldSkipCatalogImageOptimization(resolvedSrc: string): boolean {
+  if (!resolvedSrc) return true;
+  if (resolvedSrc.startsWith("/media/")) return false;
+  if (resolvedSrc.startsWith("/layout-diagrams/")) return false;
+  try {
+    const u = new URL(resolvedSrc);
+    if (u.hostname === "cdn.imweb.me") return false;
+    if (u.hostname === "localhost" || u.hostname === "127.0.0.1") return false;
+    const publicBase = getPublicApiBase();
+    if (publicBase) {
+      try {
+        if (new URL(publicBase).hostname === u.hostname) return false;
+      } catch {
+        /* ignore */
+      }
+    }
+    const internal = process.env.INTERNAL_API_PROXY_TARGET?.trim();
+    if (internal) {
+      try {
+        if (new URL(internal).hostname === u.hostname) return false;
+      } catch {
+        /* ignore */
+      }
+    }
+  } catch {
+    return true;
+  }
+  // Unknown remote host (e.g. unexpected CDN) — keep rendering without optimizer.
+  return true;
 }
 
 function parseSummary(raw: unknown): CatalogPartSummary | null {
@@ -125,11 +189,38 @@ const ENDPOINTS: Record<CatalogFamily, string> = {
   keycap: "/api/v1/keycaps",
 };
 
+export const CATALOG_PAGE_SIZE = 24;
+
+export function catalogListQueryKey(parts: {
+  family: CatalogFamily;
+  subtype?: string;
+  layoutSize?: string;
+  q?: string;
+  page?: number;
+}): string {
+  const page = Math.max(1, parts.page ?? 1);
+  return [
+    parts.family,
+    parts.subtype ?? "",
+    (parts.layoutSize ?? "").trim(),
+    (parts.q ?? "").trim(),
+    String(page),
+  ].join("|");
+}
+
 export async function fetchCatalogList(
   family: CatalogFamily,
-  options?: { subtype?: string; layoutSize?: string; q?: string; limit?: number; offset?: number },
+  options?: {
+    subtype?: string;
+    layoutSize?: string;
+    q?: string;
+    limit?: number;
+    offset?: number;
+    /** Next.js fetch cache hint (SSR). Ignored in the browser. */
+    next?: { revalidate?: number | false; tags?: string[] };
+  },
 ): Promise<CatalogListResponse> {
-  const base = getPublicApiBase();
+  const base = getApiBaseForFetch();
   if (!base) {
     return {
       family,
@@ -149,7 +240,13 @@ export async function fetchCatalogList(
   if (options?.offset != null) params.set("offset", String(options.offset));
   const qs = params.toString();
   const url = `${base}${ENDPOINTS[family]}${qs ? `?${qs}` : ""}`;
-  const res = await fetch(url, { headers: { Accept: "application/json" } });
+  const init: RequestInit & { next?: { revalidate?: number | false; tags?: string[] } } = {
+    headers: { Accept: "application/json" },
+  };
+  if (typeof window === "undefined" && options?.next) {
+    init.next = options.next;
+  }
+  const res = await fetch(url, init);
   if (!res.ok) {
     throw new ApiError(res.status, await readErrorMessage(res));
   }
@@ -157,7 +254,7 @@ export async function fetchCatalogList(
 }
 
 export async function fetchCatalogPart(family: CatalogFamily, partId: string): Promise<CatalogPartDetail> {
-  const base = getPublicApiBase();
+  const base = getApiBaseForFetch();
   if (!base) {
     throw new ApiError(503, "API base URL is not configured");
   }

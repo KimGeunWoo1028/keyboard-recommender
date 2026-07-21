@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import { parseCatalogListResponse, parseCatalogPartDetail, resolveCatalogImageUrl } from "@/lib/api/catalog";
+import {
+  parseCatalogListResponse,
+  parseCatalogPartDetail,
+  resolveCatalogImageUrl,
+  shouldSkipCatalogImageOptimization,
+} from "@/lib/api/catalog";
 import { catalogHref } from "@/lib/catalog-links";
 
 describe("catalog API contract", () => {
@@ -154,7 +159,9 @@ describe("catalog API contract", () => {
 
   it("resolves API-relative mirror image paths with NEXT_PUBLIC_API_URL", () => {
     const prev = process.env.NEXT_PUBLIC_API_URL;
+    const prevProxy = process.env.INTERNAL_API_PROXY_TARGET;
     process.env.NEXT_PUBLIC_API_URL = "http://localhost:8010";
+    delete process.env.INTERNAL_API_PROXY_TARGET;
     expect(resolveCatalogImageUrl("/media/swagkey-images/1792.jpg")).toBe(
       "http://localhost:8010/media/swagkey-images/1792.jpg",
     );
@@ -163,5 +170,27 @@ describe("catalog API contract", () => {
     );
     expect(resolveCatalogImageUrl("/layout-diagrams/tkl.svg")).toBe("/layout-diagrams/tkl.svg");
     process.env.NEXT_PUBLIC_API_URL = prev;
+    if (prevProxy === undefined) delete process.env.INTERNAL_API_PROXY_TARGET;
+    else process.env.INTERNAL_API_PROXY_TARGET = prevProxy;
+  });
+
+  it("uses absolute /media URL in the browser when API origin differs from the page", () => {
+    const prev = process.env.NEXT_PUBLIC_API_URL;
+    const prevProxy = process.env.INTERNAL_API_PROXY_TARGET;
+    process.env.NEXT_PUBLIC_API_URL = "https://www.example.com";
+    process.env.INTERNAL_API_PROXY_TARGET = "https://api.example.com";
+    // jsdom page origin is not www.example.com → absolute API URL for <img>.
+    expect(resolveCatalogImageUrl("/media/swagkey-images/1792.jpg")).toBe(
+      "https://www.example.com/media/swagkey-images/1792.jpg",
+    );
+    process.env.NEXT_PUBLIC_API_URL = prev;
+    if (prevProxy === undefined) delete process.env.INTERNAL_API_PROXY_TARGET;
+    else process.env.INTERNAL_API_PROXY_TARGET = prevProxy;
+  });
+
+  it("skips optimization only for unknown remote hosts", () => {
+    expect(shouldSkipCatalogImageOptimization("/media/swagkey-images/1.jpg")).toBe(false);
+    expect(shouldSkipCatalogImageOptimization("https://cdn.imweb.me/thumbnail/x.jpg")).toBe(false);
+    expect(shouldSkipCatalogImageOptimization("https://evil.example/x.jpg")).toBe(true);
   });
 });

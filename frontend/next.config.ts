@@ -8,6 +8,40 @@ const nextPolyfillModule = path.join(
   "node_modules/next/dist/build/polyfills/polyfill-module.js",
 );
 
+type ImageRemotePattern = {
+  protocol?: "http" | "https";
+  hostname: string;
+  port?: string;
+  pathname?: string;
+};
+
+/** Allow next/image to optimize /media/swagkey-images from API / proxy hosts. */
+function mediaRemotePatternsFromEnv(): ImageRemotePattern[] {
+  const patterns: ImageRemotePattern[] = [];
+  const seen = new Set<string>();
+  for (const raw of [process.env.NEXT_PUBLIC_API_URL, process.env.INTERNAL_API_PROXY_TARGET]) {
+    const trimmed = raw?.trim();
+    if (!trimmed) continue;
+    try {
+      const u = new URL(trimmed);
+      const protocol = u.protocol === "http:" || u.protocol === "https:" ? u.protocol.slice(0, -1) : null;
+      if (protocol !== "http" && protocol !== "https") continue;
+      const key = `${protocol}|${u.hostname}|${u.port}|/media/swagkey-images/**`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      patterns.push({
+        protocol,
+        hostname: u.hostname,
+        ...(u.port ? { port: u.port } : {}),
+        pathname: "/media/swagkey-images/**",
+      });
+    } catch {
+      /* ignore invalid env URL */
+    }
+  }
+  return patterns;
+}
+
 const nextConfig: NextConfig = {
   // Silence monorepo false-positive when a parent directory also has a lockfile.
   outputFileTracingRoot: path.join(__dirname),
@@ -31,6 +65,7 @@ const nextConfig: NextConfig = {
     return config;
   },
   images: {
+    formats: ["image/avif", "image/webp"],
     remotePatterns: [
       {
         protocol: "https",
@@ -49,6 +84,19 @@ const nextConfig: NextConfig = {
         port: "8010",
         pathname: "/media/swagkey-images/**",
       },
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "8000",
+        pathname: "/media/swagkey-images/**",
+      },
+      {
+        protocol: "http",
+        hostname: "127.0.0.1",
+        port: "8000",
+        pathname: "/media/swagkey-images/**",
+      },
+      ...mediaRemotePatternsFromEnv(),
     ],
   },
   /**

@@ -31,11 +31,15 @@ export function SiteHeader() {
   const pathname = usePathname() ?? "/";
   const [mobileOpen, setMobileOpen] = useState(false);
   /**
-   * On home + /recommend first paint, skip speculative RSC/JS prefetch of other tabs
-   * (catalog / results / mypage / …) so Lighthouse unused-chunk noise stays down.
+   * On home / recommend / catalog first paint, skip speculative RSC/JS prefetch of
+   * other tabs so Lighthouse unused-chunk noise stays down and LCP bandwidth is free.
    */
   const deferNavPrefetch =
-    pathname === "/" || pathname === "/recommend" || pathname.startsWith("/recommend/");
+    pathname === "/" ||
+    pathname === "/catalog" ||
+    pathname.startsWith("/catalog/") ||
+    pathname === "/recommend" ||
+    pathname.startsWith("/recommend/");
 
   return (
     <header className="sticky top-0 z-50 border-b border-ca-outline-variant/30 bg-ca-surface/80 shadow-sm backdrop-blur-xl dark:bg-ca-surface-dim/80">
@@ -53,7 +57,8 @@ export function SiteHeader() {
               height={48}
               className="h-9 w-9 shrink-0 rounded-[0.7rem] md:h-12 md:w-12 md:rounded-[0.9rem]"
               aria-hidden
-              priority
+              /* Avoid competing with catalog/home LCP candidates when nav prefetch is deferred */
+              priority={!deferNavPrefetch}
             />
             <span className="truncate">Keyboard Recommender</span>
           </Link>
