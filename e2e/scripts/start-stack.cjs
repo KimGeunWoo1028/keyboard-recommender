@@ -71,7 +71,10 @@ async function main() {
       env: {
         ...process.env,
         CORS_ORIGINS: "http://127.0.0.1:3000",
-        ENABLE_EVALUATION_PERSISTENCE: "false",
+        // Account save/mypage bookmarks are stored in eval_events — must be on for
+        // critical-flows + save-reliability. Override with ENABLE_EVALUATION_PERSISTENCE=false
+        // only when intentionally testing the disabled path.
+        ENABLE_EVALUATION_PERSISTENCE: process.env.ENABLE_EVALUATION_PERSISTENCE ?? "true",
         // Force local+debug so disposable signup returns debug_code even when the parent
         // shell / backend/.env is deploy-shaped (APP_ENV=production strips debug flags).
         DEBUG: "true",

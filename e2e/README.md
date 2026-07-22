@@ -19,7 +19,7 @@ npx playwright install chromium
 npm test
 ```
 
-The Playwright `webServer` runs `scripts/start-stack.cjs` (local: pip install backend → uvicorn :8000 → `next dev` :3000 with `NEXT_PUBLIC_API_URL`). In **CI**, `pip install` is skipped because the workflow already installed the package.
+The Playwright `webServer` runs `scripts/start-stack.cjs` (local: pip install backend → uvicorn :8000 → `next dev` :3000 with `NEXT_PUBLIC_API_URL`). Account save tests need **`ENABLE_EVALUATION_PERSISTENCE=true`** (default in `start-stack` / Quality E2E). In **CI**, `pip install` is skipped because the workflow already installed the package.
 
 If ports 3000/8000 are already in use, stop those servers or set `PW_REUSE_SERVER=1` after a manual stack start.
 
