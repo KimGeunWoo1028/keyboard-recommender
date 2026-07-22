@@ -5,7 +5,11 @@ import * as path from "node:path";
 const authDir = path.join(__dirname, "..", "playwright", ".auth");
 const authFile = path.join(authDir, "user.json");
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8010";
+// Match start-stack / CI (127.0.0.1:8000). Local Pass1 can override via NEXT_PUBLIC_API_URL.
+const API_BASE = (process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000").replace(/\/$/, "");
+const PAGE_ORIGIN = process.env.PW_BASE_URL ?? "http://127.0.0.1:3000";
+const cookieDomain = new URL(PAGE_ORIGIN).hostname;
+
 const email = process.env.E2E_USER_EMAIL ?? "e2e-ci@keyboard.local";
 const password = process.env.E2E_USER_PASSWORD ?? "E2e_test!9";
 
@@ -28,7 +32,7 @@ setup("authenticate", async ({ page, request }) => {
     {
       name: "kr_session",
       value: tokenMatch![1],
-      domain: "localhost",
+      domain: cookieDomain,
       path: "/",
       httpOnly: true,
       sameSite: "Lax",

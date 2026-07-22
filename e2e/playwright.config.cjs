@@ -5,6 +5,10 @@ const { devices } = require("@playwright/test");
 const authFile = path.join(__dirname, "playwright", ".auth", "user.json");
 const reuseExistingServer = process.env.PW_REUSE_SERVER === "1";
 const baseURL = process.env.PW_BASE_URL || "http://127.0.0.1:3000";
+// Ensure test workers (auth.setup, specs) share the same API origin as start-stack / CI.
+if (!process.env.NEXT_PUBLIC_API_URL) {
+  process.env.NEXT_PUBLIC_API_URL = "http://127.0.0.1:8000";
+}
 
 /** @type {import('@playwright/test').PlaywrightTestConfig} */
 module.exports = {

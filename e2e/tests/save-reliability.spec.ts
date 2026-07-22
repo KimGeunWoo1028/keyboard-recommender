@@ -2,7 +2,7 @@ import { expect, test, type Page } from "@playwright/test";
 
 const TEST_EMAIL = process.env.E2E_USER_EMAIL ?? "keyboardrecommendertest@gmail.com";
 const TEST_PASSWORD = process.env.E2E_USER_PASSWORD ?? "testtest123!";
-const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8010";
+const API_BASE = (process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000").replace(/\/$/, "");
 const DETERMINISTIC_ANSWERS = {
   sound_profile: "muted",
   typing_pressure: "light",
@@ -21,11 +21,12 @@ async function login(page: Page, next = "/recommend"): Promise<void> {
   const setCookie = response.headers()["set-cookie"] ?? "";
   const tokenMatch = /kr_session=([^;]+)/.exec(setCookie);
   expect(tokenMatch).not.toBeNull();
+  const cookieDomain = new URL(process.env.PW_BASE_URL ?? "http://127.0.0.1:3000").hostname;
   await page.context().addCookies([
     {
       name: "kr_session",
       value: tokenMatch![1],
-      domain: "localhost",
+      domain: cookieDomain,
       path: "/",
       httpOnly: true,
       sameSite: "Lax",
