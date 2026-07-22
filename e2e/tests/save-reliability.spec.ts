@@ -1,7 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
 
-const TEST_EMAIL = process.env.E2E_USER_EMAIL ?? "keyboardrecommendertest@gmail.com";
-const TEST_PASSWORD = process.env.E2E_USER_PASSWORD ?? "testtest123!";
+const TEST_EMAIL = process.env.E2E_USER_EMAIL ?? "e2e-ci@keyboard.local";
+const TEST_PASSWORD = process.env.E2E_USER_PASSWORD ?? "E2e_test!9";
 const API_BASE = (process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000").replace(/\/$/, "");
 const DETERMINISTIC_ANSWERS = {
   sound_profile: "muted",

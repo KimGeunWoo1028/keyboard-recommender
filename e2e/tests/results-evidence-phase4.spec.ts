@@ -16,6 +16,8 @@ test.describe("Results Evidence IA — Phase 4", () => {
     await expect(trustLayer).not.toContainText("추천 엔진 v2");
     await expect(trustLayer).not.toContainText("주요 성향 축:");
     if ((await traitMiniProfile.count()) > 0) {
+      // Mini-profile lives inside a collapsed <details>; expand before visibility check.
+      await trustLayer.getByText("취향 스냅샷").click();
       await expect(traitMiniProfile).toBeVisible();
     }
   });

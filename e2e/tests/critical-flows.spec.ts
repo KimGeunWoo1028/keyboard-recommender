@@ -36,8 +36,13 @@ test.describe("Critical product flows", () => {
     await expect(page.getByTestId("e2e-save-build")).toBeVisible();
     await page.getByTestId("e2e-save-build").click();
     await expect(
-      page.getByText(/북마크 목록에 저장되었습니다|브라우저에 로컬 저장되었습니다|이 브라우저\(게스트\)에만 저장되었습니다|게스트 세션에 로컬 저장되었습니다/),
+      page.getByText(
+        /마이페이지에 저장했습니다|이미 마이페이지에 저장된 빌드입니다|이 기기에 저장했습니다|이미 이 기기에 저장된 빌드입니다|북마크 목록에 저장되었습니다|브라우저에 로컬 저장되었습니다|이 브라우저\(게스트\)에만 저장되었습니다|게스트 세션에 로컬 저장되었습니다/,
+      ),
     ).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByTestId("e2e-save-build")).toHaveText(/마이페이지에 저장됨|이 기기에 저장됨/, {
+      timeout: 30_000,
+    });
   });
 
   test("mobile 375px: ranked picks and save CTA", async ({ page }) => {
