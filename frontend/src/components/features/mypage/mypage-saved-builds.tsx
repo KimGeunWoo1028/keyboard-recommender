@@ -12,6 +12,7 @@ import {
   loadResultSnapshot,
   makeResultSnapshotId,
 } from "@/lib/saved-result-snapshots";
+import { formatAbsoluteDate, formatAbsoluteDateTime, toEpochMs } from "@/lib/date-time";
 import { loadLastKnownGoodSubmission, saveSurveySubmission } from "@/lib/survey-storage";
 import { cn } from "@/lib/utils";
 
@@ -27,10 +28,10 @@ const SEARCH_VISIBLE_FROM = 16;
 function getUpdatedAt(item: SavedRecommendationItem): number {
   const raw = item.metadata?.updatedAt;
   if (typeof raw === "string") {
-    const parsed = +new Date(raw);
-    if (!Number.isNaN(parsed)) return parsed;
+    const parsed = toEpochMs(raw);
+    if (parsed > 0) return parsed;
   }
-  return +new Date(item.saved_at);
+  return toEpochMs(item.saved_at);
 }
 
 function normalizeText(item: SavedRecommendationItem): string {
@@ -103,7 +104,7 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
     const matched = q
       ? items.filter((item) => normalizeText(item).includes(q) || shortTitle(item).toLowerCase().includes(q))
       : [...items];
-    matched.sort((a, b) => +new Date(b.saved_at) - +new Date(a.saved_at));
+    matched.sort((a, b) => toEpochMs(b.saved_at) - toEpochMs(a.saved_at));
     return matched;
   }, [activeQuery, items]);
 
@@ -198,7 +199,7 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
                       </p>
                     </div>
                     <p className="text-sm text-ca-on-surface-variant">
-                      {new Date(item.saved_at).toLocaleDateString()}
+                      {formatAbsoluteDate(item.saved_at)}
                     </p>
                   </button>
                 );
@@ -213,9 +214,9 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
                   {selected.title || selected.build_id}
                 </p>
                 <p className="text-sm text-ca-on-surface-variant">
-                  저장: {new Date(selected.saved_at).toLocaleString()}
-                  {getUpdatedAt(selected) !== +new Date(selected.saved_at)
-                    ? ` · 수정: ${new Date(getUpdatedAt(selected)).toLocaleString()}`
+                  저장: {formatAbsoluteDateTime(selected.saved_at)}
+                  {getUpdatedAt(selected) !== toEpochMs(selected.saved_at)
+                    ? ` · 수정: ${formatAbsoluteDateTime(getUpdatedAt(selected))}`
                     : ""}
                 </p>
               </div>

@@ -3,6 +3,8 @@ const path = require("path");
 const { devices } = require("@playwright/test");
 
 const authFile = path.join(__dirname, "playwright", ".auth", "user.json");
+const reuseExistingServer = process.env.PW_REUSE_SERVER === "1";
+const baseURL = process.env.PW_BASE_URL || "http://127.0.0.1:3000";
 
 /** @type {import('@playwright/test').PlaywrightTestConfig} */
 module.exports = {
@@ -21,20 +23,22 @@ module.exports = {
     },
   },
   use: {
-    baseURL: "http://127.0.0.1:3000",
+    baseURL,
     trace: "on-first-retry",
   },
-  webServer: {
-    command: `node "${path.join(__dirname, "scripts", "start-stack.cjs")}"`,
-    url: "http://127.0.0.1:3000",
-    /** Avoid attaching to a hand-run Next dev missing NEXT_PUBLIC_API_URL; opt in via PW_REUSE_SERVER=1. */
-    reuseExistingServer: process.env.PW_REUSE_SERVER === "1",
-    timeout: 300_000,
-    env: {
-      ...process.env,
-      NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000",
-    },
-  },
+  ...(reuseExistingServer
+    ? {}
+    : {
+        webServer: {
+          command: `node "${path.join(__dirname, "scripts", "start-stack.cjs")}"`,
+          url: "http://127.0.0.1:3000",
+          timeout: 300_000,
+          env: {
+            ...process.env,
+            NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000",
+          },
+        },
+      }),
   projects: [
     { name: "setup", testMatch: /auth\.setup\.ts/ },
     {

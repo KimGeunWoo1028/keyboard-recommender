@@ -55,4 +55,12 @@ describe("saved bookmark activity merge", () => {
     const merged = mergeSavedBookmarkLists(remote, local);
     expect(merged).toHaveLength(2);
   });
+
+  it("dedupes duplicate builds across remote and local lists", () => {
+    const remote = [saved({ request_id: "req-remote", build_id: "build-same", saved_at: "2026-07-21T01:00:00.000Z" })];
+    const local = [saved({ request_id: "req-local", build_id: "build-same", saved_at: "2026-07-21T00:00:00.000Z" })];
+    const merged = mergeSavedBookmarkLists(remote, local);
+    expect(merged).toHaveLength(1);
+    expect(merged[0]?.request_id).toBe("req-remote");
+  });
 });

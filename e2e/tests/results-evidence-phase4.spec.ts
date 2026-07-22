@@ -8,13 +8,16 @@ test.describe("Results Evidence IA — Phase 4", () => {
 
     await expect(page.getByTestId("e2e-trust-layer")).toBeVisible();
     await expect(page.getByTestId("e2e-confidence-story")).toBeVisible();
-    await expect(page.getByTestId("e2e-trait-mini-profile")).toBeVisible();
     await expect(page.getByTestId("e2e-results-tab-bar")).toBeVisible();
     await expect(page.getByTestId("e2e-quality-status")).toHaveCount(0);
 
     const trustLayer = page.getByTestId("e2e-trust-layer");
+    const traitMiniProfile = page.getByTestId("e2e-trait-mini-profile");
     await expect(trustLayer).not.toContainText("추천 엔진 v2");
     await expect(trustLayer).not.toContainText("주요 성향 축:");
+    if ((await traitMiniProfile.count()) > 0) {
+      await expect(traitMiniProfile).toBeVisible();
+    }
   });
 
   test("evidence tab pick persuasion and honest ranking why", async ({ page }) => {

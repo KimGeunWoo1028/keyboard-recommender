@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-07-12T07:32:44.083408+00:00",
+  "generatedAt": "2026-07-21T16:19:33.928017+00:00",
   "sources": {
     "seedPath": "C:\\Users\\jeung\\keyboard-recommender\\backend\\src\\keyboard_recommender\\catalog\\swagkey_products.seed.json",
     "inventoryPath": "C:\\Users\\jeung\\keyboard-recommender\\backend\\data\\swagkey_inventory\\swagkey_inventory.v4.json",

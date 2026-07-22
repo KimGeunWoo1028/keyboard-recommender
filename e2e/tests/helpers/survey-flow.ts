@@ -23,13 +23,17 @@ async function ensureSurveyQuestionsPhase(page: Page) {
   }
 
   await wizard.getByRole("button", { name: /부드럽고 조용한 성향/ }).click();
-  await expect(progress).toBeVisible({ timeout: 15_000 });
+  await expect(wizard.getByRole("radio", { name: DETERMINISTIC_STEP_OPTION_PATTERNS[1] })).toBeVisible({
+    timeout: 15_000,
+  });
   return page.getByTestId("e2e-survey-wizard");
 }
 
 /** Fixed answers aligned with ``e2e/fixtures/deterministic-survey.json`` and backend regression fixtures. */
 export async function completeDeterministicSurvey(page: Page): Promise<void> {
   await page.goto("/recommend");
+  await page.waitForLoadState("networkidle");
+  await page.waitForTimeout(750);
   const wizard = await ensureSurveyQuestionsPhase(page);
 
   // Preset seeds 4/5 answers and lands on typing_pressure (first unanswered step).

@@ -120,8 +120,25 @@ export type ResultsOverviewTabProps = {
   /** False while AuthHeaderProvider is still resolving /auth/me. */
   authReady?: boolean;
   saveState: "idle" | "saving" | "saved" | "error";
+  saveScope?: "account" | "local" | null;
+  saveMessage?: string;
   onSaveBuild: () => void;
 };
+
+function saveButtonLabel(params: {
+  authReady: boolean;
+  isAuthenticated: boolean;
+  saveState: "idle" | "saving" | "saved" | "error";
+  saveScope?: "account" | "local" | null;
+}): string {
+  const { authReady, isAuthenticated, saveState, saveScope } = params;
+  if (!authReady) return "로그인 확인 중…";
+  if (saveState === "saving") return "저장 중…";
+  if (saveState === "saved") {
+    return saveScope === "account" ? "마이페이지에 저장됨" : "이 기기에 저장됨";
+  }
+  return isAuthenticated ? "이 빌드 저장" : "로컬에 저장";
+}
 
 export function ResultsOverviewTab({
   submission,
@@ -132,6 +149,8 @@ export function ResultsOverviewTab({
   isAuthenticated,
   authReady = true,
   saveState,
+  saveScope,
+  saveMessage = "",
   onSaveBuild,
 }: ResultsOverviewTabProps) {
   const overviewAlternatives = useMemo(
@@ -276,17 +295,29 @@ export function ResultsOverviewTab({
               variant="outline"
               size="default"
               className="w-full sm:min-w-[8.5rem] sm:w-auto"
-              disabled={!authReady || saveState === "saving"}
+              disabled={!authReady || saveState === "saving" || saveState === "saved"}
+              aria-busy={saveState === "saving" || undefined}
               onClick={() => void onSaveBuild()}
             >
-              {!authReady
-                ? "로그인 확인 중..."
-                : saveState === "saving"
-                  ? "저장 중..."
-                  : isAuthenticated
-                    ? "이 빌드 저장"
-                    : "로컬에 저장"}
+              {saveButtonLabel({ authReady, isAuthenticated, saveState, saveScope })}
             </Button>
+            {saveMessage ? (
+              <div
+                className="space-y-1 text-sm text-ca-on-surface-variant sm:text-right"
+                role={saveState === "error" ? "alert" : "status"}
+                aria-live={saveState === "error" ? "assertive" : "polite"}
+              >
+                <p>{saveMessage}</p>
+                {saveState === "saved" ? (
+                  <Link
+                    href="/mypage?section=saved"
+                    className="inline-block font-medium text-ca-primary underline-offset-4 hover:underline"
+                  >
+                    저장한 빌드로 이동
+                  </Link>
+                ) : null}
+              </div>
+            ) : null}
           </div>
         </div>
       </Card>

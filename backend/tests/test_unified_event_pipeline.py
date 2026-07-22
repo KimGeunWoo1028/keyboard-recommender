@@ -324,6 +324,77 @@ def test_save_and_list_saved_recommendations(sqlite_eval_session: Session) -> No
         app.dependency_overrides.clear()
 
 
+def test_duplicate_save_returns_existing_item_and_single_list_row(sqlite_eval_session: Session) -> None:
+    app = create_app()
+    owner = SimpleNamespace(id=uuid.uuid4())
+
+    def _settings() -> Settings:
+        return Settings(
+            database_url="postgresql+psycopg://keyboard:keyboard@localhost:5432/keyboard_recommender",
+            enable_evaluation_persistence=True,
+        )
+
+    def _db() -> Generator[Session, None, None]:
+        yield sqlite_eval_session
+
+    app.dependency_overrides[get_settings_dep] = _settings
+    app.dependency_overrides[get_db_for_evaluation] = _db
+    app.dependency_overrides[get_current_user_optional] = lambda: owner
+    try:
+        client = TestClient(app)
+        first = client.post(
+            "/api/v1/recommendations/saved",
+            json={
+                "request_id": "req-save-first",
+                "session_id": "sess-1",
+                "scenario_id": "scen-1",
+                "build_id": "build-dedupe",
+                "title": "Office build",
+                "summary": "Quiet and stable.",
+                "components": {"switches": "Silent tactile"},
+                "metadata": {"origin": "results_page"},
+            },
+        )
+        assert first.status_code == 200
+        assert first.json()["saved"] is True
+        first_item = first.json()["item"]
+        assert first_item["build_id"] == "build-dedupe"
+
+        duplicate = client.post(
+            "/api/v1/recommendations/saved",
+            json={
+                "request_id": "req-save-second",
+                "session_id": "sess-2",
+                "scenario_id": "scen-2",
+                "build_id": "build-dedupe",
+                "title": "Office build newer request",
+                "summary": "Should resolve to existing save.",
+                "components": {"switches": "Silent tactile"},
+                "metadata": {"origin": "results_page"},
+            },
+        )
+        assert duplicate.status_code == 200
+        body = duplicate.json()
+        assert body["saved"] is True
+        assert body["reason"] == "already_saved"
+        assert body["item"]["build_id"] == "build-dedupe"
+        assert body["item"]["request_id"] == first_item["request_id"]
+        assert body["item"]["saved_at"] == first_item["saved_at"]
+
+        listed = client.get("/api/v1/recommendations/saved", params={"limit": 10})
+        assert listed.status_code == 200
+        items = listed.json()["items"]
+        assert len(items) == 1
+        assert items[0]["build_id"] == "build-dedupe"
+
+        count = sqlite_eval_session.execute(
+            select(func.count()).select_from(EvalEvent).where(EvalEvent.event_type == "interaction.bookmark"),
+        ).scalar_one()
+        assert int(count) == 1
+    finally:
+        app.dependency_overrides.clear()
+
+
 def test_list_saved_recommendations_finds_owner_past_recent_noise(
     sqlite_eval_session: Session,
 ) -> None:

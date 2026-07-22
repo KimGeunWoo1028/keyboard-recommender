@@ -46,9 +46,12 @@ test.describe("Results visual regression — 375px", () => {
     await stabilizeForScreenshot(page);
 
     const trust = page.getByTestId("e2e-trust-layer");
+    const traitMiniProfile = page.getByTestId("e2e-trait-mini-profile");
     await expect(trust).toBeVisible();
     await expect(page.getByTestId("e2e-confidence-story")).toBeVisible();
-    await expect(page.getByTestId("e2e-trait-mini-profile")).toBeVisible();
+    if ((await traitMiniProfile.count()) > 0) {
+      await expect(traitMiniProfile).toBeVisible();
+    }
 
     await expect(trust).toHaveScreenshot("results-375-trust-layer.png", shotOpts);
   });

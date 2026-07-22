@@ -6,10 +6,15 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   bookmarkPayloadFromBuild,
   emitExplorationEvent,
+  findSavedBookmarkByBuildId,
   getOrCreateClientSessionId,
+  listLocalGuestBookmarks,
+  listSavedRecommendationBookmarks,
   saveLocalGuestBookmark,
   saveRecommendationBookmark,
+  type SavedRecommendationItem,
 } from "@/lib/api/saved-recommendations";
+import { ApiError } from "@/lib/api/client";
 import { fetchCatalogPart, type CatalogFamily } from "@/lib/api/catalog";
 import { emitResultsUxEventBestEffort } from "@/lib/api/onboarding-events";
 import { getPublicApiBase } from "@/lib/api/client";
@@ -66,6 +71,7 @@ type Props = {
 };
 
 export function RecommendationResultView({ submission, build, onApplyRefinement, refineError }: Props) {
+  const SAVE_FEEDBACK_MIN_MS = 350;
   const { answers, traits } = submission;
   const { sourceUrls } = build;
   const soundSummary = soundProfileSummary(answers);
@@ -97,14 +103,56 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
 
   const [saveState, setSaveState] = useState<"idle" | "saving" | "saved" | "error">("idle");
   const [saveMessage, setSaveMessage] = useState("");
+  const [saveScope, setSaveScope] = useState<"account" | "local" | null>(null);
   const [applyingRefine, setApplyingRefine] = useState(false);
   const [saveCollection, setSaveCollection] = useState("일반");
   // Reuse AuthHeaderProvider session (single GET /auth/me) — avoid a second fetch.
   const { user: authUser, authChecked } = useAuthHeader();
   const isAuthenticated = authChecked && !!authUser;
   const sessionId = useMemo(() => getOrCreateClientSessionId(), []);
+  const saveInFlightRef = useRef(false);
   const [activeBackendTab, setActiveBackendTab] = useState<BackendResultTabId>("overview");
   const [activeLiteTab, setActiveLiteTab] = useState<LiteResultTabId>("overview");
+
+  const applySavedState = useCallback((scope: "account" | "local", message = "") => {
+    setSaveScope(scope);
+    setSaveState("saved");
+    setSaveMessage(message);
+  }, []);
+
+  const applySaveErrorState = useCallback((message: string) => {
+    setSaveScope(null);
+    setSaveState("error");
+    setSaveMessage(message);
+  }, []);
+
+  const mapSaveErrorMessage = useCallback((error: unknown): string => {
+    const networkHint = "저장하지 못했습니다. 네트워크 연결을 확인한 뒤 다시 시도해 주세요.";
+    const genericHint = "저장하지 못했습니다. 잠시 후 다시 시도해 주세요.";
+    const looksLikeNetworkFailure = (message: string) =>
+      /failed to fetch|networkerror|network request failed|load failed/i.test(message);
+
+    if (error instanceof ApiError) {
+      if (error.status === 401) return "저장하지 못했습니다. 로그인 상태를 다시 확인해 주세요.";
+      if (error.status === 409) return "이미 저장된 빌드입니다.";
+      if (error.status === 0 || looksLikeNetworkFailure(error.message)) return networkHint;
+      if (error.status >= 500) return genericHint;
+      // Prefer Korean copy over raw English API/detail strings.
+      if (!/[가-힣]/.test(error.message)) return genericHint;
+      return error.message || genericHint;
+    }
+    if (error instanceof Error) {
+      if (looksLikeNetworkFailure(error.message)) return networkHint;
+      return genericHint;
+    }
+    return genericHint;
+  }, []);
+
+  const ensureMinimumSavingFeedback = useCallback(async (startedAt: number) => {
+    const elapsed = Date.now() - startedAt;
+    if (elapsed >= SAVE_FEEDBACK_MIN_MS) return;
+    await new Promise((resolve) => window.setTimeout(resolve, SAVE_FEEDBACK_MIN_MS - elapsed));
+  }, [SAVE_FEEDBACK_MIN_MS]);
 
   useEffect(() => {
     if (!useBackendScoring) return;
@@ -135,6 +183,38 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
       metadata: meta,
     }).catch(() => undefined);
   }, [apiPicks, build.id, sessionId, useBackendScoring]);
+
+  useEffect(() => {
+    setSaveState("idle");
+    setSaveScope(null);
+    setSaveMessage("");
+  }, [build.id, isAuthenticated]);
+
+  useEffect(() => {
+    if (!authChecked) return;
+    let cancelled = false;
+    const buildId = build.id;
+    if (isAuthenticated) {
+      void listSavedRecommendationBookmarks({ limit: 100 })
+        .then((items) => {
+          if (cancelled) return;
+          if (findSavedBookmarkByBuildId(items, buildId)) {
+            applySavedState("account");
+          }
+        })
+        .catch(() => undefined);
+      return () => {
+        cancelled = true;
+      };
+    }
+    const local = listLocalGuestBookmarks({ limit: 100 });
+    if (findSavedBookmarkByBuildId(local, buildId)) {
+      applySavedState("local");
+    }
+    return () => {
+      cancelled = true;
+    };
+  }, [authChecked, applySavedState, build.id, isAuthenticated]);
 
   // Seed layout sizes from archetype metadata (no network, stable setState).
   useEffect(() => {
@@ -316,21 +396,24 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
   }, [apiPicks, sourceUrls]);
 
   async function handleSaveBuild() {
+    if (saveInFlightRef.current || saveState === "saved") return;
     if (!authChecked) {
-      setSaveState("error");
-      setSaveMessage("로그인 상태를 확인하는 중입니다. 잠시 후 다시 시도해 주세요.");
+      applySaveErrorState("로그인 상태를 확인하는 중입니다. 잠시 후 다시 시도해 주세요.");
       return;
     }
+    saveInFlightRef.current = true;
     const authenticated = isAuthenticated;
     if (!authenticated) {
+      const saveStartedAt = Date.now();
       setSaveState("saving");
+      setSaveScope(null);
       setSaveMessage("저장하는 중…");
       try {
         const base = bookmarkPayloadFromBuild(build);
         const requestId = globalThis.crypto?.randomUUID?.() ?? `req-${Date.now()}`;
         const snapshotId = makeResultSnapshotId(requestId, base.build_id);
         saveResultSnapshot(snapshotId, submission);
-        saveLocalGuestBookmark({
+        const savedItem = saveLocalGuestBookmark({
           request_id: requestId,
           session_id: sessionId,
           scenario_id: "results_ui",
@@ -373,17 +456,22 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
             ...catalogPickMeta,
           },
         }).catch(() => undefined);
-        setSaveState("saved");
-        setSaveMessage(
-          "이 브라우저(게스트)에만 저장되었습니다. 다른 기기에서 보려면 로그인 후 다시 저장해 주세요.",
+        await ensureMinimumSavingFeedback(saveStartedAt);
+        applySavedState(
+          "local",
+          savedItem.request_id !== requestId ? "이미 이 기기에 저장된 빌드입니다." : "이 기기에 저장했습니다.",
         );
       } catch (e) {
-        setSaveState("error");
-        setSaveMessage(e instanceof Error ? e.message : "로컬 저장에 실패했습니다.");
+        await ensureMinimumSavingFeedback(saveStartedAt);
+        applySaveErrorState(mapSaveErrorMessage(e));
+      } finally {
+        saveInFlightRef.current = false;
       }
       return;
     }
+    const saveStartedAt = Date.now();
     setSaveState("saving");
+    setSaveScope(null);
     setSaveMessage("저장하는 중…");
     try {
       const base = bookmarkPayloadFromBuild(build);
@@ -409,21 +497,25 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
       if (!result.saved) {
         saveLocalGuestBookmark(bookmarkInput);
         if (result.reason === "login_required") {
-          setSaveState("error");
-          setSaveMessage(
-            "계정 저장에 실패했습니다. 세션이 만료되었을 수 있어요. 이 브라우저에는 임시 저장했고, 다시 로그인 후 저장하면 마이페이지에 남습니다.",
+          await ensureMinimumSavingFeedback(saveStartedAt);
+          applySaveErrorState(
+            "마이페이지에 저장하지 못했습니다. 로그인 상태가 만료되었을 수 있어요. 이 브라우저에는 임시로 보관했으니 다시 로그인 후 저장해 주세요.",
           );
           return;
         }
-        setSaveMessage(
+        await ensureMinimumSavingFeedback(saveStartedAt);
+        applySaveErrorState(
           result.reason === "evaluation_persistence_disabled"
-            ? "이 브라우저에 로컬 저장되었습니다. 마이페이지에서 확인할 수 있어요."
-            : "로컬에 저장되었습니다. 마이페이지 → 저장한 빌드에서 확인하세요.",
+            ? "마이페이지 저장을 사용할 수 없습니다. 잠시 후 다시 시도해 주세요."
+            : "저장하지 못했습니다. 잠시 후 다시 시도해 주세요.",
         );
-      } else {
-        setSaveMessage("저장되었습니다. 마이페이지 → 저장한 빌드에서 다시 볼 수 있어요.");
+        return;
       }
-      setSaveState("saved");
+      const savedItem = result.item as SavedRecommendationItem | null;
+      const alreadySaved =
+        result.reason === "already_saved" || (savedItem ? savedItem.request_id !== requestId : false);
+      await ensureMinimumSavingFeedback(saveStartedAt);
+      applySavedState("account", alreadySaved ? "이미 마이페이지에 저장된 빌드입니다." : "마이페이지에 저장했습니다.");
       void emitExplorationEvent({
         event_type: "interaction.collection_tag",
         request_id: globalThis.crypto?.randomUUID?.() ?? `req-${Date.now()}-col`,
@@ -437,8 +529,10 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
         },
       }).catch(() => undefined);
     } catch (e) {
-      setSaveState("error");
-      setSaveMessage(e instanceof Error ? e.message : "저장에 실패했습니다.");
+      await ensureMinimumSavingFeedback(saveStartedAt);
+      applySaveErrorState(mapSaveErrorMessage(e));
+    } finally {
+      saveInFlightRef.current = false;
     }
   }
 
@@ -487,7 +581,7 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
           isAuthenticated={isAuthenticated}
           authReady={authChecked}
           saveState={saveState}
-          saveMessage={saveMessage}
+          saveScope={saveScope}
           onSaveBuild={() => void handleSaveBuild()}
         />
 
@@ -506,6 +600,8 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
             isAuthenticated={isAuthenticated}
             authReady={authChecked}
             saveState={saveState}
+            saveScope={saveScope}
+            saveMessage={saveMessage}
             onSaveBuild={() => void handleSaveBuild()}
           />
         ) : null}
@@ -541,7 +637,7 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
         isAuthenticated={isAuthenticated}
         authReady={authChecked}
         saveState={saveState}
-        saveMessage={saveMessage}
+        saveScope={saveScope}
         onSaveBuild={() => void handleSaveBuild()}
       />
 

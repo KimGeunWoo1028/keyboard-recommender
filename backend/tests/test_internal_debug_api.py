@@ -19,6 +19,8 @@ _VALID_SURVEY = {
     "volume": "quiet",
 }
 
+_PG = "postgresql+psycopg://keyboard:keyboard@localhost:5432/keyboard_recommender"
+
 
 def _client_with_settings(s: Settings) -> TestClient:
     app = create_app(settings=s)
@@ -26,9 +28,13 @@ def _client_with_settings(s: Settings) -> TestClient:
     return TestClient(app)
 
 
+def _debug_settings(**kwargs: object) -> Settings:
+    """Build Settings for debug API tests; always pin local tier (deploy-shaped .env safe)."""
+    return Settings(database_url=_PG, app_environment="local", **kwargs)  # type: ignore[arg-type]
+
+
 def test_debug_inspect_disabled_returns_404() -> None:
-    s = Settings(
-        database_url="postgresql+psycopg://keyboard:keyboard@localhost:5432/keyboard_recommender",
+    s = _debug_settings(
         internal_debug_api_enabled=False,
         debug=True,
     )
@@ -38,8 +44,7 @@ def test_debug_inspect_disabled_returns_404() -> None:
 
 
 def test_debug_inspect_enabled_without_token_requires_debug_mode() -> None:
-    s = Settings(
-        database_url="postgresql+psycopg://keyboard:keyboard@localhost:5432/keyboard_recommender",
+    s = _debug_settings(
         internal_debug_api_enabled=True,
         internal_debug_token=None,
         debug=False,
@@ -50,8 +55,7 @@ def test_debug_inspect_enabled_without_token_requires_debug_mode() -> None:
 
 
 def test_debug_inspect_ok_when_debug_and_flag() -> None:
-    s = Settings(
-        database_url="postgresql+psycopg://keyboard:keyboard@localhost:5432/keyboard_recommender",
+    s = _debug_settings(
         internal_debug_api_enabled=True,
         internal_debug_token=None,
         debug=True,
@@ -66,8 +70,7 @@ def test_debug_inspect_ok_when_debug_and_flag() -> None:
 
 
 def test_debug_inspect_requires_token_when_configured() -> None:
-    s = Settings(
-        database_url="postgresql+psycopg://keyboard:keyboard@localhost:5432/keyboard_recommender",
+    s = _debug_settings(
         internal_debug_api_enabled=True,
         internal_debug_token="unit-test-secret-debug-token",
         debug=False,
@@ -84,8 +87,7 @@ def test_debug_inspect_requires_token_when_configured() -> None:
 
 
 def test_debug_compare_surveys_returns_benchmark() -> None:
-    s = Settings(
-        database_url="postgresql+psycopg://keyboard:keyboard@localhost:5432/keyboard_recommender",
+    s = _debug_settings(
         internal_debug_api_enabled=True,
         debug=True,
     )
@@ -99,8 +101,7 @@ def test_debug_compare_surveys_returns_benchmark() -> None:
 
 
 def test_debug_analyze_snapshot() -> None:
-    s = Settings(
-        database_url="postgresql+psycopg://keyboard:keyboard@localhost:5432/keyboard_recommender",
+    s = _debug_settings(
         internal_debug_api_enabled=True,
         debug=True,
     )
@@ -114,8 +115,7 @@ def test_debug_analyze_snapshot() -> None:
 
 
 def test_debug_compare_snapshots() -> None:
-    s = Settings(
-        database_url="postgresql+psycopg://keyboard:keyboard@localhost:5432/keyboard_recommender",
+    s = _debug_settings(
         internal_debug_api_enabled=True,
         debug=True,
     )
@@ -148,8 +148,7 @@ def test_debug_drift_summary(monkeypatch: pytest.MonkeyPatch) -> None:
     # the ``router.py`` module. Patch the submodule loaded from ``router.py``.
     dbg_router_mod = importlib.import_module("keyboard_recommender.api.v1.debug.router")
     monkeypatch.setattr(dbg_router_mod, "build_operational_drift_bundle", _fake_bundle)
-    s = Settings(
-        database_url="postgresql+psycopg://keyboard:keyboard@localhost:5432/keyboard_recommender",
+    s = _debug_settings(
         internal_debug_api_enabled=True,
         debug=True,
     )
@@ -162,8 +161,7 @@ def test_debug_drift_summary(monkeypatch: pytest.MonkeyPatch) -> None:
 
 
 def test_debug_index() -> None:
-    s = Settings(
-        database_url="postgresql+psycopg://keyboard:keyboard@localhost:5432/keyboard_recommender",
+    s = _debug_settings(
         internal_debug_api_enabled=True,
         debug=True,
     )

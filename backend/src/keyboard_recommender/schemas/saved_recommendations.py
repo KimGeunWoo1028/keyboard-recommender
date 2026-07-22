@@ -42,6 +42,7 @@ class SaveRecommendationResponse(BaseModel):
 
     saved: bool = True
     reason: str | None = None
+    item: SavedRecommendationItem | None = None
 
 
 class RemoveSavedRecommendationRequest(BaseModel):
@@ -117,4 +118,3 @@ class RemoveRecommendationActivityResponse(BaseModel):
 
     removed: bool = True
     reason: str | None = None
-

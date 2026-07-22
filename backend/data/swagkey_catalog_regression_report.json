@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-07-12T16:31:21.091106+00:00",
+  "generatedAt": "2026-07-21T16:19:15.938775+00:00",
   "seedPath": "C:/Users/jeung/keyboard-recommender/backend/src/keyboard_recommender/catalog/swagkey_products.seed.json",
   "manifestPath": "C:/Users/jeung/keyboard-recommender/backend/data/catalog_ingestion_manifest.json",
   "seedCounts": {

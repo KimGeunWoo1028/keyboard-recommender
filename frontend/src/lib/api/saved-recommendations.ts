@@ -1,5 +1,6 @@
 import { ApiError, getPublicApiBase, readErrorMessage } from "@/lib/api/client";
 import { getOrCreateClientSessionId } from "@/lib/client-session-id";
+import { toEpochMs } from "@/lib/date-time";
 import type { RecommendedBuild } from "@/types/recommendation";
 import { getOrCreateExperimentAssignments } from "@/lib/experiments";
 
@@ -18,6 +19,7 @@ export type SavedRecommendationItem = {
 };
 
 const LOCAL_BOOKMARKS_KEY = "kr_guest_saved_bookmarks";
+const SAVED_BOOKMARKS_CHANGED_EVENT = "kr-saved-bookmarks-changed";
 
 type SaveRecommendationRequest = {
   request_id: string;
@@ -32,6 +34,39 @@ type SaveRecommendationRequest = {
 
 const SAVED_PATH = "/api/v1/recommendations/saved";
 const ACTIVITY_PATH = "/api/v1/recommendations/activity";
+
+export type SavedBookmarksChangedDetail =
+  | { type: "upsert"; item: SavedRecommendationItem }
+  | { type: "remove"; build_id: string };
+
+function emitSavedBookmarksChanged(detail: SavedBookmarksChangedDetail): void {
+  if (typeof window === "undefined") return;
+  window.dispatchEvent(new CustomEvent<SavedBookmarksChangedDetail>(SAVED_BOOKMARKS_CHANGED_EVENT, { detail }));
+}
+
+export function subscribeSavedBookmarksChanged(
+  listener: (detail: SavedBookmarksChangedDetail) => void,
+): () => void {
+  if (typeof window === "undefined") return () => undefined;
+  const handler = (event: Event) => {
+    const detail = (event as CustomEvent<SavedBookmarksChangedDetail>).detail;
+    if (detail) listener(detail);
+  };
+  window.addEventListener(SAVED_BOOKMARKS_CHANGED_EVENT, handler);
+  return () => window.removeEventListener(SAVED_BOOKMARKS_CHANGED_EVENT, handler);
+}
+
+function savedBookmarkIdentityKey(item: Pick<SavedRecommendationItem, "build_id">): string {
+  return item.build_id.trim().toLowerCase();
+}
+
+export function findSavedBookmarkByBuildId(
+  items: SavedRecommendationItem[],
+  buildId: string,
+): SavedRecommendationItem | null {
+  const key = buildId.trim().toLowerCase();
+  return items.find((item) => savedBookmarkIdentityKey(item) === key) ?? null;
+}
 
 export function saveLocalGuestBookmark(input: SaveRecommendationRequest): SavedRecommendationItem {
   const item: SavedRecommendationItem = {
@@ -48,9 +83,23 @@ export function saveLocalGuestBookmark(input: SaveRecommendationRequest): SavedR
   if (typeof window === "undefined") return item;
   const raw = window.localStorage.getItem(LOCAL_BOOKMARKS_KEY);
   const list = raw ? ((JSON.parse(raw) as SavedRecommendationItem[]) ?? []) : [];
-  list.unshift(item);
-  window.localStorage.setItem(LOCAL_BOOKMARKS_KEY, JSON.stringify(list.slice(0, 100)));
-  return item;
+  const existing = findSavedBookmarkByBuildId(list, item.build_id);
+  const nextItem = existing
+    ? {
+        ...existing,
+        session_id: item.session_id,
+        scenario_id: item.scenario_id,
+        title: item.title,
+        summary: item.summary,
+        components: item.components,
+        metadata: { ...(existing.metadata ?? {}), ...(item.metadata ?? {}) },
+      }
+    : item;
+  const deduped = list.filter((entry) => savedBookmarkIdentityKey(entry) !== savedBookmarkIdentityKey(item));
+  const next = [nextItem, ...deduped].slice(0, 100);
+  window.localStorage.setItem(LOCAL_BOOKMARKS_KEY, JSON.stringify(next));
+  emitSavedBookmarksChanged({ type: "upsert", item: nextItem });
+  return nextItem;
 }
 
 export function listLocalGuestBookmarks(params?: {
@@ -61,7 +110,7 @@ export function listLocalGuestBookmarks(params?: {
   if (typeof window === "undefined") return [];
   const raw = window.localStorage.getItem(LOCAL_BOOKMARKS_KEY);
   const list = raw ? ((JSON.parse(raw) as SavedRecommendationItem[]) ?? []) : [];
-  const filtered = list.filter((item) => {
+  const filtered = mergeSavedBookmarkLists([], list).filter((item) => {
     if (params?.session_id && item.session_id !== params.session_id) return false;
     if (params?.scenario_id && item.scenario_id !== params.scenario_id) return false;
     return true;
@@ -79,19 +128,18 @@ export function removeLocalGuestBookmark(input: {
   const raw = window.localStorage.getItem(LOCAL_BOOKMARKS_KEY);
   const list = raw ? ((JSON.parse(raw) as SavedRecommendationItem[]) ?? []) : [];
   const next = list.filter((item) => {
-    if (item.request_id !== input.request_id) return true;
-    if (item.build_id !== input.build_id) return true;
-    if (input.saved_at && item.saved_at !== input.saved_at) return true;
-    return false;
+    return savedBookmarkIdentityKey(item) !== input.build_id.trim().toLowerCase();
   });
   if (next.length === list.length) return false;
   window.localStorage.setItem(LOCAL_BOOKMARKS_KEY, JSON.stringify(next));
+  emitSavedBookmarksChanged({ type: "remove", build_id: input.build_id });
   return true;
 }
 
 export type SaveRecommendationResult = {
   saved: boolean;
   reason?: string | null;
+  item?: SavedRecommendationItem | null;
 };
 
 export function bookmarkActivityFromSaved(item: SavedRecommendationItem): RecommendationActivityItem {
@@ -112,7 +160,7 @@ export function bookmarkActivityFromSaved(item: SavedRecommendationItem): Recomm
 }
 
 function savedBookmarkKey(item: SavedRecommendationItem): string {
-  return `${item.request_id}:${item.build_id}:${item.saved_at}`;
+  return savedBookmarkIdentityKey(item);
 }
 
 export function mergeSavedBookmarkLists(
@@ -127,7 +175,7 @@ export function mergeSavedBookmarkLists(
     seen.add(key);
     merged.push(item);
   }
-  return merged.sort((a, b) => +new Date(b.saved_at) - +new Date(a.saved_at));
+  return merged.sort((a, b) => toEpochMs(b.saved_at) - toEpochMs(a.saved_at));
 }
 
 export function mergeBookmarkActivity(
@@ -152,7 +200,7 @@ export function mergeBookmarkActivity(
       seenPair.add(pair);
       return true;
     });
-  return [...bookmarks, ...extra].sort((a, b) => +new Date(b.occurred_at) - +new Date(a.occurred_at));
+  return [...bookmarks, ...extra].sort((a, b) => toEpochMs(b.occurred_at) - toEpochMs(a.occurred_at));
 }
 
 export async function listSavedBookmarksWithLocalFallback(params?: {
@@ -187,7 +235,8 @@ export async function saveRecommendationBookmark(
     throw new ApiError(res.status, await readErrorMessage(res));
   }
   const json = (await res.json()) as SaveRecommendationResult;
-  return { saved: Boolean(json.saved), reason: json.reason ?? null };
+  if (json.item) emitSavedBookmarksChanged({ type: "upsert", item: json.item });
+  return { saved: Boolean(json.saved), reason: json.reason ?? null, item: json.item ?? null };
 }
 
 export async function listSavedRecommendationBookmarks(params?: {
@@ -205,7 +254,7 @@ export async function listSavedRecommendationBookmarks(params?: {
   const res = await fetch(url, { headers: { Accept: "application/json" }, credentials: "include" });
   if (!res.ok) throw new ApiError(res.status, await readErrorMessage(res));
   const json = (await res.json()) as { items?: SavedRecommendationItem[] };
-  return Array.isArray(json.items) ? json.items : [];
+  return Array.isArray(json.items) ? mergeSavedBookmarkLists(json.items, []) : [];
 }
 
 export async function removeSavedRecommendationBookmark(input: {
@@ -241,6 +290,7 @@ export async function removeSavedRecommendationBookmark(input: {
     }
   }
   const localRemoved = removeLocalGuestBookmark(input);
+  if (remoteRemoved || localRemoved) emitSavedBookmarksChanged({ type: "remove", build_id: input.build_id });
   return remoteRemoved || localRemoved;
 }
 
@@ -365,4 +415,3 @@ export function bookmarkPayloadFromBuild(build: RecommendedBuild): {
     },
   };
 }
-

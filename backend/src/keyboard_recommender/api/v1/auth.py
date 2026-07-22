@@ -178,7 +178,7 @@ def _to_auth_user(user: User) -> AuthUser:
         email=user.email,
         display_name=user.display_name,
         avatar_url=user.avatar_url,
-        created_at=user.created_at,
+        created_at=_as_utc(user.created_at),
     )
 
 
@@ -487,7 +487,7 @@ def security_summary(
         .where(AuthSession.user_id == current_user.id, AuthSession.expires_at > now)
         .order_by(AuthSession.created_at.desc()),
     ).scalars().all()
-    last_login_at = sessions[0].created_at if sessions else None
+    last_login_at = _as_utc(sessions[0].created_at) if sessions else None
     return AccountSecuritySummary(
         active_session_count=len(sessions),
         last_login_at=last_login_at,

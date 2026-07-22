@@ -130,6 +130,13 @@ def _bookmark_owner_id(payload: dict, meta: dict) -> str:
     return str(row_user or meta_user or "")
 
 
+def _as_utc_datetime(dt: datetime) -> datetime:
+    """SQLite can round-trip timezone-aware columns as naive datetimes; normalize before serialization."""
+    if dt.tzinfo is None:
+        return dt.replace(tzinfo=timezone.utc)
+    return dt.astimezone(timezone.utc)
+
+
 def _saved_item_from_eval_row(row: EvalEvent) -> SavedRecommendationItem | None:
     payload = row.payload if isinstance(row.payload, dict) else {}
     meta = payload.get("metadata") if isinstance(payload.get("metadata"), dict) else {}
@@ -139,7 +146,7 @@ def _saved_item_from_eval_row(row: EvalEvent) -> SavedRecommendationItem | None:
     row_session = payload.get("session_id")
     row_scenario = payload.get("scenario_id")
     return SavedRecommendationItem(
-        saved_at=row.created_at,
+        saved_at=_as_utc_datetime(row.created_at),
         request_id=str(payload.get("request_id") or row.correlation_id or ""),
         session_id=str(row_session) if row_session is not None else None,
         scenario_id=str(row_scenario) if row_scenario is not None else None,
@@ -149,6 +156,10 @@ def _saved_item_from_eval_row(row: EvalEvent) -> SavedRecommendationItem | None:
         components=meta.get("components") if isinstance(meta.get("components"), dict) else {},
         metadata={k: v for k, v in meta.items() if k not in {"buildId", "title", "summary", "components"}},
     )
+
+
+def _saved_build_key(build_id: str) -> str:
+    return build_id.strip().lower()
 
 
 @router.post(
@@ -169,12 +180,29 @@ def post_save_recommendation(
     # client can fall back to local storage instead of a success toast with no mypage row.
     if current_user is None:
         return SaveRecommendationResponse(saved=False, reason="login_required")
+    owner_id = str(current_user.id)
+    existing_rows = db_session.execute(
+        select(EvalEvent)
+        .where(EvalEvent.event_type == "interaction.bookmark")
+        .order_by(EvalEvent.created_at.desc())
+        .limit(400),
+    ).scalars().all()
+    for row in existing_rows:
+        payload = row.payload if isinstance(row.payload, dict) else {}
+        meta = payload.get("metadata") if isinstance(payload.get("metadata"), dict) else {}
+        if _bookmark_owner_id(payload, meta) != owner_id:
+            continue
+        if _saved_build_key(str(meta.get("buildId") or "")) != _saved_build_key(body.build_id):
+            continue
+        existing_item = _saved_item_from_eval_row(row)
+        if existing_item is not None:
+            return SaveRecommendationResponse(saved=True, reason="already_saved", item=existing_item)
     payload = {
         "event_type": "interaction.bookmark",
         "request_id": body.request_id,
         "session_id": body.session_id,
         "scenario_id": body.scenario_id,
-        "user_id": str(current_user.id),
+        "user_id": owner_id,
         "metadata": {
             "buildId": body.build_id,
             "title": body.title,
@@ -183,16 +211,30 @@ def post_save_recommendation(
             **dict(body.metadata),
         },
     }
+    created_at = datetime.now(timezone.utc)
     db_session.add(
         EvalEvent(
-            created_at=datetime.now(timezone.utc),
+            created_at=created_at,
             event_type="interaction.bookmark",
             correlation_id=body.request_id,
             payload=payload,
         ),
     )
     db_session.commit()
-    return SaveRecommendationResponse(saved=True)
+    return SaveRecommendationResponse(
+        saved=True,
+        item=SavedRecommendationItem(
+            saved_at=created_at,
+            request_id=body.request_id,
+            session_id=body.session_id,
+            scenario_id=body.scenario_id,
+            build_id=body.build_id,
+            title=body.title,
+            summary=body.summary,
+            components=dict(body.components),
+            metadata=dict(body.metadata),
+        ),
+    )
 
 
 @router.get(
@@ -227,6 +269,7 @@ def get_saved_recommendations(
     rows = db_session.execute(stmt).scalars().all()
     out: list[SavedRecommendationItem] = []
     owner_id = str(current_user.id) if current_user is not None else ""
+    seen_builds: set[str] = set()
     for row in rows:
         payload = row.payload if isinstance(row.payload, dict) else {}
         meta = payload.get("metadata") if isinstance(payload.get("metadata"), dict) else {}
@@ -241,6 +284,10 @@ def get_saved_recommendations(
         item = _saved_item_from_eval_row(row)
         if item is None:
             continue
+        build_key = _saved_build_key(item.build_id)
+        if build_key in seen_builds:
+            continue
+        seen_builds.add(build_key)
         out.append(item)
         if len(out) >= lim:
             break
@@ -268,7 +315,7 @@ def post_remove_saved_recommendation(
         .limit(400)
     )
     rows = db_session.execute(stmt).scalars().all()
-    target: EvalEvent | None = None
+    targets: list[EvalEvent] = []
     for row in rows:
         payload = row.payload if isinstance(row.payload, dict) else {}
         meta = payload.get("metadata") if isinstance(payload.get("metadata"), dict) else {}
@@ -276,17 +323,13 @@ def post_remove_saved_recommendation(
         meta_user = meta.get("userId")
         if current_user is not None and str(row_user or meta_user or "") != str(current_user.id):
             continue
-        if str(payload.get("request_id") or row.correlation_id or "") != body.request_id:
+        if _saved_build_key(str(meta.get("buildId") or "")) != _saved_build_key(body.build_id):
             continue
-        if str(meta.get("buildId") or "") != body.build_id:
-            continue
-        if body.saved_at is not None and row.created_at != body.saved_at:
-            continue
-        target = row
-        break
-    if target is None:
+        targets.append(row)
+    if not targets:
         return RemoveSavedRecommendationResponse(removed=False, reason="not_found")
-    db_session.delete(target)
+    for target in targets:
+        db_session.delete(target)
     db_session.commit()
     return RemoveSavedRecommendationResponse(removed=True)
 
@@ -389,7 +432,7 @@ def get_recommendation_activity(
             continue
         out.append(
             RecommendationActivityItem(
-                occurred_at=row.created_at,
+                occurred_at=_as_utc_datetime(row.created_at),
                 event_type=str(payload.get("event_type") or row.event_type),
                 request_id=str(payload.get("request_id")) if payload.get("request_id") is not None else None,
                 session_id=str(row_session) if row_session is not None else None,

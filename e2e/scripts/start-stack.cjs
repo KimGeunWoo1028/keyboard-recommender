@@ -72,9 +72,11 @@ async function main() {
         ...process.env,
         CORS_ORIGINS: "http://127.0.0.1:3000",
         ENABLE_EVALUATION_PERSISTENCE: "false",
-        // Allow email-verification debug_code so E2E can signup disposable delete users.
-        DEBUG: process.env.DEBUG ?? "true",
-        APP_ENVIRONMENT: process.env.APP_ENVIRONMENT ?? "local",
+        // Force local+debug so disposable signup returns debug_code even when the parent
+        // shell / backend/.env is deploy-shaped (APP_ENV=production strips debug flags).
+        DEBUG: "true",
+        APP_ENV: "local",
+        APP_ENVIRONMENT: "local",
         ...(process.env.DATABASE_URL ? { DATABASE_URL: process.env.DATABASE_URL } : {}),
       },
       shell: false,

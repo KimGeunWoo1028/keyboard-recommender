@@ -45,6 +45,9 @@ function mediaRemotePatternsFromEnv(): ImageRemotePattern[] {
 const nextConfig: NextConfig = {
   // Silence monorepo false-positive when a parent directory also has a lockfile.
   outputFileTracingRoot: path.join(__dirname),
+  // Local Playwright/dev verification can hit Next 15 devtools manifest issues.
+  // Disable the dev indicator overlay so segment explorer/devtools are not injected.
+  devIndicators: false,
   /**
    * When `/media` is rewritten via INTERNAL_API_PROXY_TARGET, expose a public
    * flag so `resolveCatalogImageUrl` keeps relative `/media/...` on SSR and in

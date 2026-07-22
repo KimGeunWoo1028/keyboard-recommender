@@ -17,7 +17,7 @@ test.describe("Critical product flows", () => {
     await wizard.getByRole("button", { name: /부드럽고 조용한 성향/ }).click();
 
     await expect(page.getByRole("heading", { name: "타건 압력" })).toBeVisible({ timeout: 15_000 });
-    await expect(page.getByText(/2 \/ 5 단계/)).toBeVisible();
+    await expect(page.getByText(/2 \/ 5 문항/)).toBeVisible();
     await expect(page.getByRole("heading", { name: "선호 사운드 성향" })).not.toBeVisible();
   });
 

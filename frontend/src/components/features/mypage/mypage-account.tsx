@@ -23,6 +23,7 @@ import {
   verifyPasswordChangeCode,
 } from "@/lib/api/auth";
 import { ApiError } from "@/lib/api/client";
+import { formatAbsoluteDateTime } from "@/lib/date-time";
 import { resolveAvatarSrc } from "@/lib/avatar";
 
 type Props = {
@@ -329,7 +330,7 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
       <MyPageSectionCard title="보안" description="비밀번호를 바꾸고, 로그인 세션을 종료할 수 있어요.">
         {securitySummary?.last_login_at ? (
           <p className="text-sm text-ca-on-surface-variant">
-            최근 로그인 · {new Date(securitySummary.last_login_at).toLocaleString()}
+            최근 로그인 · {formatAbsoluteDateTime(securitySummary.last_login_at, { includeSeconds: true })}
           </p>
         ) : null}
 

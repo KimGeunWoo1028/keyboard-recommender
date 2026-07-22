@@ -14,6 +14,7 @@ import {
   listSavedBookmarksWithLocalFallback,
   mergeSavedBookmarkLists,
   removeSavedRecommendationBookmark,
+  subscribeSavedBookmarksChanged,
   type SavedRecommendationItem,
 } from "@/lib/api/saved-recommendations";
 import { makeResultSnapshotId, removeResultSnapshot } from "@/lib/saved-result-snapshots";
@@ -51,27 +52,53 @@ export function MyPageHub() {
   const [securitySummary, setSecuritySummary] = useState<AccountSecuritySummary | null>(null);
   const [removingKeys, setRemovingKeys] = useState<Set<string>>(new Set());
 
+  const mapLoadErrorMessage = useCallback((error: unknown): string => {
+    if (error instanceof Error) {
+      if (/failed to fetch|networkerror|network request failed|load failed/i.test(error.message)) {
+        return "저장한 빌드를 불러오지 못했습니다. 네트워크 연결을 확인한 뒤 다시 시도해 주세요.";
+      }
+      if (/[가-힣]/.test(error.message)) return error.message;
+    }
+    return "마이페이지를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.";
+  }, []);
+
   const loadExtras = useCallback(async () => {
     setExtrasLoading(true);
     setLoadError(null);
     setActionError(null);
     try {
-      const [saved, security] = await Promise.all([
-        listSavedBookmarksWithLocalFallback({ limit: 100 }),
-        fetchAccountSecuritySummary(),
-      ]);
+      // Saved builds are the critical path — do not fail the whole hub if
+      // security-summary is slow/unreachable (common on local SQLite stacks).
+      const saved = await listSavedBookmarksWithLocalFallback({ limit: 100 });
       setSavedItems(saved);
-      setSecuritySummary(security);
+      try {
+        setSecuritySummary(await fetchAccountSecuritySummary());
+      } catch {
+        setSecuritySummary(null);
+      }
     } catch (e) {
-      setLoadError(e instanceof Error ? e.message : "마이페이지를 불러오지 못했습니다.");
+      setLoadError(mapLoadErrorMessage(e));
     } finally {
       setExtrasLoading(false);
     }
-  }, []);
+  }, [mapLoadErrorMessage]);
 
   useEffect(() => {
+    if (!user?.id) return;
     void loadExtras();
-  }, [loadExtras]);
+  }, [loadExtras, user?.id]);
+
+  useEffect(() => {
+    return subscribeSavedBookmarksChanged((detail) => {
+      if (detail.type === "upsert") {
+        setSavedItems((prev) => mergeSavedBookmarkLists([detail.item], prev));
+        return;
+      }
+      setSavedItems((prev) =>
+        prev.filter((item) => item.build_id.trim().toLowerCase() !== detail.build_id.trim().toLowerCase()),
+      );
+    });
+  }, []);
 
   useEffect(() => {
     if (sectionFromUrl) setActive(sectionFromUrl);

@@ -44,6 +44,7 @@ vi.mock("@/lib/api/saved-recommendations", () => ({
   listSavedBookmarksWithLocalFallback: vi.fn(),
   mergeSavedBookmarkLists: vi.fn((a: unknown) => a),
   removeSavedRecommendationBookmark: vi.fn(),
+  subscribeSavedBookmarksChanged: vi.fn(() => () => undefined),
 }));
 
 import { fetchAccountSecuritySummary } from "@/lib/api/auth";
@@ -111,6 +112,30 @@ describe("MyPageHub smoke", () => {
       expect(screen.getByRole("heading", { name: "저장한 빌드" })).toBeInTheDocument();
     });
     expect(replace).toHaveBeenCalledWith("/mypage?section=saved", { scroll: false });
+  });
+
+  it("keeps saved builds when only security-summary fails", async () => {
+    const user = userEvent.setup();
+    vi.mocked(fetchAccountSecuritySummary).mockRejectedValue(new Error("Failed to fetch"));
+    vi.mocked(listSavedBookmarksWithLocalFallback).mockResolvedValue([
+      {
+        saved_at: "2026-07-22T01:00:00.000Z",
+        request_id: "req-1",
+        build_id: "build-1",
+        title: "테스트 빌드",
+        summary: "요약",
+        components: {},
+        metadata: {},
+      },
+    ]);
+
+    render(<MyPageHub />);
+
+    await user.click(screen.getByRole("button", { name: "저장한 빌드" }));
+    await waitFor(() => {
+      expect(screen.getByRole("listbox", { name: "저장한 빌드 목록" })).toBeInTheDocument();
+    });
+    expect(screen.queryByText("데이터를 불러오지 못했습니다.")).not.toBeInTheDocument();
   });
 
   it("shows retry panel when extras load fails", async () => {

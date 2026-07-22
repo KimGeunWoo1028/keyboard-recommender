@@ -57,7 +57,7 @@ def test_explanation_is_consistent_for_same_inputs() -> None:
 def test_debug_trace_includes_metadata_and_trait_evidence() -> None:
     payload, _engine, _user, _answers = build_recommendation_computation(
         dict(_SURVEY),
-        app_settings=Settings(debug=True),
+        app_settings=Settings(app_environment="local", debug=True),
         include_explanation_debug=True,
     )
     recs = payload["recommendations"]
@@ -93,7 +93,7 @@ def test_explanation_sources_cover_tradeoff_and_compatibility() -> None:
 def test_debug_trace_is_hidden_without_header_gate_flag() -> None:
     payload, _engine, _user, _answers = build_recommendation_computation(
         dict(_SURVEY),
-        app_settings=Settings(debug=True),
+        app_settings=Settings(app_environment="local", debug=True),
         include_explanation_debug=False,
     )
     model = RecommendationResponse.model_validate(payload)
