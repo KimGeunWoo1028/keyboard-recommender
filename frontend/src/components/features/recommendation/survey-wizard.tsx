@@ -25,9 +25,9 @@ import type { SurveyAnswers, SurveyStepId } from "@/types/survey";
 
 const initialAnswers: Partial<SurveyAnswers> = {};
 const LOADING_MESSAGES = [
-  "설문 응답을 반영하는 중…",
-  "호환되는 부품을 맞추는 중…",
-  "추천 조합을 준비하는 중…",
+  "설문에서 고른 소리·타건 취향을 반영하는 중…",
+  "스위치부터 키캡까지 맞는 부품을 고르는 중…",
+  "곧 추천 조합과 이유를 보여 드립니다…",
 ] as const;
 
 function NavArrowBack({ className }: { className?: string }) {
@@ -50,6 +50,8 @@ type OnboardingStyle = {
   id: "creamy_quiet" | "crisp_expressive" | "balanced";
   label: string;
   blurb: string;
+  audience: string;
+  tags: readonly string[];
   seedAnswers: Partial<SurveyAnswers>;
 };
 
@@ -57,19 +59,25 @@ const ONBOARDING_STYLES: readonly OnboardingStyle[] = [
   {
     id: "creamy_quiet",
     label: "부드럽고 조용한 성향",
-    blurb: "저소음 세팅과 장시간 편안한 타이핑에 잘 맞아요.",
+    blurb: "소음이 적고 편안한 타건을 선호할 때",
+    audience: "장시간 타이핑·사무실에 잘 맞아요.",
+    tags: ["조용함", "부드러움"],
     seedAnswers: { sound_profile: "muted", switch_feel: "linear", bottom_out: "soft", volume: "quiet" },
   },
   {
     id: "crisp_expressive",
     label: "또렷하고 경쾌한 성향",
-    blurb: "또렷한 고음과 단단한 피드백을 원할 때 좋아요.",
+    blurb: "또렷한 고음과 단단한 피드백을 원할 때",
+    audience: "타건 피드백을 분명하게 느끼고 싶을 때 좋아요.",
+    tags: ["또렷함", "경쾌함"],
     seedAnswers: { sound_profile: "clacky", switch_feel: "tactile_clear", bottom_out: "firm", volume: "loud" },
   },
   {
     id: "balanced",
     label: "균형형 타건감",
-    blurb: "아직 취향을 탐색 중이라면 무난한 시작점이에요.",
+    blurb: "아직 취향을 탐색 중이라면",
+    audience: "한쪽으로 치우치지 않은 무난한 시작점이에요.",
+    tags: ["균형", "탐색"],
     seedAnswers: { sound_profile: "balanced", typing_pressure: "medium", bottom_out: "medium", volume: "moderate" },
   },
 ];
@@ -87,6 +95,7 @@ export function SurveyWizard() {
   const [hasPreviousSession, setHasPreviousSession] = useState(false);
   const [lastKnownGoodAvailable, setLastKnownGoodAvailable] = useState(false);
   const [seededStepIds, setSeededStepIds] = useState<ReadonlySet<SurveyStepId>>(() => new Set());
+  const [showResetActions, setShowResetActions] = useState(false);
   const viewedRef = useRef(false);
   const completedRef = useRef(false);
   const phaseRef = useRef(phase);
@@ -325,6 +334,25 @@ export function SurveyWizard() {
     setSeededStepIds(new Set());
     setNlPreferenceText("");
     setSubmitError(null);
+    setShowResetActions(false);
+  }
+
+  function startFullSurvey() {
+    setSelectedStyle(null);
+    setSeededStepIds(new Set());
+    setAnswers(initialAnswers);
+    setNlPreferenceText("");
+    setSubmitError(null);
+    setShowResetActions(false);
+    setStepIndex(0);
+    setPhase("questions");
+  }
+
+  function confirmReset() {
+    if (typeof window !== "undefined" && !window.confirm("설문 답변을 모두 지우고 처음부터 다시 시작할까요?")) {
+      return;
+    }
+    reset();
   }
 
   function chooseStyle(style: OnboardingStyle) {
@@ -363,7 +391,9 @@ export function SurveyWizard() {
           <h2 className="font-headline text-xl font-semibold tracking-tight text-ca-on-surface sm:text-2xl">
             추천 조합을 준비하는 중
           </h2>
-          <p className="mt-2 text-sm text-ca-on-surface-variant">잠시만 기다려 주세요.</p>
+          <p className="mt-2 break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:text-base">
+            곧 여섯 부품 조합과 취향 요약이 나옵니다.
+          </p>
         </div>
         <p className="mt-8 text-center text-sm text-ca-on-surface">{loadingMessage}</p>
         <div
@@ -373,6 +403,10 @@ export function SurveyWizard() {
         >
           <div className="h-full w-2/3 motion-safe:animate-pulse bg-ca-on-surface/40" />
         </div>
+        <p className="mx-auto mt-8 max-w-sm break-keep text-center text-xs leading-relaxed text-ca-on-surface-variant sm:text-sm">
+          네트워크가 느려도 잠시만 기다려 주세요. 실패하면 다시 시도할 수 있어요
+          {lastKnownGoodAvailable ? " · 이전에 성공한 결과도 열 수 있습니다" : ""}.
+        </p>
       </div>
     );
   }
@@ -388,7 +422,8 @@ export function SurveyWizard() {
             취향에 맞는 키보드 찾기
           </h1>
           <p className="mt-3 break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:text-base">
-            가까운 성향을 고르면 일부 문항이 채워집니다. 이어서 약 1분 설문으로 조합을 맞춥니다.
+            가까운 성향을 고르면 몇 가지 답을 미리 채워 더 빠르게 시작할 수 있어요. 언제든 직접 바꿀 수
+            있습니다.
           </p>
         </div>
 
@@ -411,12 +446,26 @@ export function SurveyWizard() {
                 <p className="break-keep text-sm leading-snug text-ca-on-surface-variant sm:text-base">
                   {style.blurb}
                 </p>
+                <p className="break-keep text-xs leading-snug text-ca-on-surface-variant sm:text-sm">
+                  {style.audience}
+                </p>
+                <ul className="flex flex-wrap gap-1.5" aria-label={`${style.label} 키워드`}>
+                  {style.tags.map((tag) => (
+                    <li
+                      key={tag}
+                      className="rounded-md border border-ca-outline-variant/40 px-2 py-0.5 text-xs text-ca-on-surface-variant"
+                    >
+                      {tag}
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-xs font-medium text-ca-on-surface sm:text-sm">일부 답변을 먼저 채워드려요</p>
               </div>
             </button>
           ))}
         </div>
 
-        <div className="mt-auto flex shrink-0 flex-col items-stretch gap-2 sm:items-center">
+        <div className="mt-auto flex shrink-0 flex-col items-stretch gap-3 sm:items-center">
           {hasPreviousSession ? (
             <Button
               type="button"
@@ -430,6 +479,13 @@ export function SurveyWizard() {
               이어서 설정하기
             </Button>
           ) : null}
+          <button
+            type="button"
+            onClick={startFullSurvey}
+            className="text-sm text-ca-on-surface-variant underline-offset-2 hover:text-ca-on-surface hover:underline"
+          >
+            성향 없이 전체 설문으로 시작
+          </button>
         </div>
       </div>
     );
@@ -455,10 +511,11 @@ export function SurveyWizard() {
           data-testid="e2e-prefilled-step-banner"
           className="flex shrink-0 flex-col justify-center rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container-lowest px-4 py-3 sm:py-3.5"
         >
-          <p className="text-xs text-ca-on-surface-variant sm:text-sm">스타일에서 이미 선택된 항목</p>
+          <p className="text-xs font-medium text-ca-on-surface sm:text-sm">스타일에서 자동 반영됨</p>
           <p className="mt-1 text-sm font-semibold text-ca-on-surface sm:text-base">
             {prefilledLabel.replace(/\s*\([^)]*\)\s*$/, "").trim()}
           </p>
+          <p className="mt-1 text-xs text-ca-on-surface-variant sm:text-sm">직접 다른 답을 골라도 됩니다.</p>
         </div>
       ) : null}
 
@@ -472,25 +529,34 @@ export function SurveyWizard() {
         />
       </div>
 
-      <div className="flex min-h-0 flex-1 flex-col border-t border-ca-outline-variant/35 pt-3">
-        <label htmlFor="nl-preference" className="mb-2 block shrink-0 text-sm font-medium text-ca-on-surface">
-          추가 취향 (선택)
-        </label>
-        <textarea
-          id="nl-preference"
-          data-testid="e2e-nl-preference"
-          value={nlPreferenceText}
-          onChange={(e) => setNlPreferenceText(e.target.value)}
-          disabled={submitting}
-          placeholder="예: 조용하고 부드러운 타건감을 원해요"
-          className={cn(
-            "min-h-[4.5rem] w-full flex-1 resize-none rounded-lg border border-ca-outline-variant/50 bg-ca-surface-container-lowest px-3 py-2.5 text-sm text-ca-on-surface",
-            "placeholder:text-ca-on-surface-variant/70",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-primary",
-            "disabled:cursor-not-allowed disabled:opacity-50",
-          )}
-        />
-      </div>
+      {isLastStep ? (
+        <div className="flex min-h-0 flex-1 flex-col border-t border-ca-outline-variant/35 pt-3">
+          <details className="group">
+            <summary className="cursor-pointer list-none text-sm font-medium text-ca-on-surface marker:content-none [&::-webkit-details-marker]:hidden">
+              <span className="underline-offset-2 group-open:underline">추가로 알려주기 (선택)</span>
+            </summary>
+            <div className="mt-2">
+              <label htmlFor="nl-preference" className="sr-only">
+                추가 취향
+              </label>
+              <textarea
+                id="nl-preference"
+                data-testid="e2e-nl-preference"
+                value={nlPreferenceText}
+                onChange={(e) => setNlPreferenceText(e.target.value)}
+                disabled={submitting}
+                placeholder="예: 조용하고 부드러운 타건감을 원해요"
+                className={cn(
+                  "min-h-[4.5rem] w-full resize-none rounded-lg border border-ca-outline-variant/50 bg-ca-surface-container-lowest px-3 py-2.5 text-sm text-ca-on-surface",
+                  "placeholder:text-ca-on-surface-variant/70",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-primary",
+                  "disabled:cursor-not-allowed disabled:opacity-50",
+                )}
+              />
+            </div>
+          </details>
+        </div>
+      ) : null}
 
       {submitError ? (
         <div className="shrink-0 space-y-2" role="alert">
@@ -518,46 +584,74 @@ export function SurveyWizard() {
         </div>
       ) : null}
 
-      <div className="mt-auto flex shrink-0 flex-wrap items-center justify-between gap-2 border-t border-ca-outline-variant/35 pb-1 pt-3 sm:flex-nowrap sm:gap-3">
-        <Button
-          type="button"
-          variant="ghost"
-          size="default"
-          onClick={goBack}
-          disabled={stepIndex === 0 || submitting}
-          className="gap-1.5 px-2 sm:px-3"
-        >
-          <NavArrowBack className="h-4 w-4" />
-          이전
-        </Button>
-
-        <div className="order-3 flex min-w-0 basis-full items-center justify-center gap-2 sm:order-none sm:basis-auto sm:flex-1">
-          <Button type="button" variant="outline" size="sm" onClick={() => setPhase("entry")} disabled={submitting}>
-            스타일 선택으로
-          </Button>
-          <Button type="button" variant="outline" size="sm" onClick={reset} disabled={submitting}>
-            처음부터 다시
-          </Button>
-        </div>
-
-        {!isLastStep ? (
-          <Button type="button" size="default" onClick={goNext} disabled={!canGoNext || submitting} className="gap-1.5">
-            다음
-            <NavArrowForward className="h-4 w-4" />
-          </Button>
-        ) : (
+      <div className="mt-auto shrink-0 space-y-2 border-t border-ca-outline-variant/35 pb-1 pt-3">
+        <div className="flex items-center justify-between gap-2 sm:gap-3">
           <Button
             type="button"
-            data-testid="e2e-submit-survey"
+            variant="ghost"
             size="default"
-            onClick={() => void finish()}
-            disabled={!surveyComplete || submitting}
-            className="gap-1.5"
+            onClick={goBack}
+            disabled={stepIndex === 0 || submitting}
+            className="gap-1.5 px-2 sm:px-3"
           >
-            결과 보기
-            <NavArrowForward className="h-4 w-4" />
+            <NavArrowBack className="h-4 w-4" />
+            이전
           </Button>
-        )}
+
+          {!isLastStep ? (
+            <Button type="button" size="default" onClick={goNext} disabled={!canGoNext || submitting} className="gap-1.5">
+              다음
+              <NavArrowForward className="h-4 w-4" />
+            </Button>
+          ) : (
+            <div className="flex max-w-[14rem] flex-col items-end gap-1 sm:max-w-xs">
+              <Button
+                type="button"
+                data-testid="e2e-submit-survey"
+                size="default"
+                onClick={() => void finish()}
+                disabled={!surveyComplete || submitting}
+                className="gap-1.5"
+              >
+                결과 보기
+                <NavArrowForward className="h-4 w-4" />
+              </Button>
+              <p className="break-keep text-right text-xs leading-snug text-ca-on-surface-variant">
+                취향 요약, 추천 조합, 실제 제품을 확인할 수 있어요.
+              </p>
+            </div>
+          )}
+        </div>
+
+        <div className="space-y-2">
+          <button
+            type="button"
+            className="text-sm text-ca-on-surface-variant underline-offset-2 hover:text-ca-on-surface hover:underline"
+            aria-expanded={showResetActions}
+            onClick={() => setShowResetActions((open) => !open)}
+          >
+            설정 다시 고르기
+          </button>
+          {showResetActions ? (
+            <div className="flex flex-wrap gap-2">
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={() => {
+                  setShowResetActions(false);
+                  setPhase("entry");
+                }}
+                disabled={submitting}
+              >
+                스타일 선택으로
+              </Button>
+              <Button type="button" variant="ghost" size="sm" onClick={confirmReset} disabled={submitting}>
+                처음부터 다시
+              </Button>
+            </div>
+          ) : null}
+        </div>
       </div>
     </div>
   );

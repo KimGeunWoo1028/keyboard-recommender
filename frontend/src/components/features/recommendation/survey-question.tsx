@@ -54,20 +54,30 @@ export function SurveyQuestion<T extends SurveyStepId>({ step, value, onChange, 
               aria-checked={selected}
               onClick={() => onChange(opt.id)}
               className={cn(
-                "group flex w-full min-w-0 flex-col items-start justify-start gap-2 rounded-xl border p-4 text-left transition-colors sm:p-4",
+                "group relative flex w-full min-w-0 flex-col items-start justify-start gap-2 rounded-xl border p-4 text-left transition-colors sm:p-4",
                 flexRow && "sm:flex-1",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-primary",
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                 selected
                   ? "border-ca-on-surface bg-ca-surface-container-lowest"
                   : "border-ca-outline-variant/40 bg-ca-surface-container-lowest/60 hover:border-ca-on-surface/30",
               )}
             >
+              {selected ? (
+                <span
+                  className="absolute right-3 top-3 flex h-5 w-5 items-center justify-center rounded-full border border-ca-on-surface text-ca-on-surface"
+                  aria-hidden
+                >
+                  <svg className="h-3 w-3" viewBox="0 0 12 12" fill="none" stroke="currentColor">
+                    <path d="M2.5 6.5L5 9l4.5-5.5" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
+              ) : null}
               <SurveyOptionIcon
                 optionId={opt.id}
                 selected={selected}
                 className="h-6 w-6 shrink-0 sm:h-7 sm:w-7"
               />
-              <div className="w-full space-y-1">
+              <div className="w-full space-y-1 pr-6">
                 <span className="block break-keep font-headline text-sm font-semibold leading-tight text-ca-on-surface sm:text-base">
                   {opt.label}
                 </span>

@@ -6,6 +6,10 @@ test.describe("NLP preference path", () => {
   test("parses NL on server and shows highlights / reranking context", async ({ page }) => {
     await completeDeterministicSurvey(page);
 
+    const nlDisclosure = page.getByText("추가로 알려주기 (선택)");
+    await expect(nlDisclosure).toBeVisible();
+    await nlDisclosure.click();
+
     const nlField = page.getByTestId("e2e-nl-preference");
     await expect(nlField).toBeVisible();
     await nlField.fill("thocky linear quiet");
