@@ -42,7 +42,7 @@ import { ResultsOverviewTab } from "./results/results-overview-tab";
 import { ResultsTrustLayer } from "./results/results-trust-layer";
 import { BackendResultTabBar, LiteResultTabBar } from "./results/results-tab-shell";
 import type { BackendResultTabId, LiteResultTabId } from "./results/results-types";
-import { SharedResultHeader } from "./results/shared-result-header";
+import { SharedResultHeader, ResultsPreferenceSummary } from "./results/shared-result-header";
 
 const ResultsEvidenceTab = dynamic(
   () =>
@@ -582,8 +582,11 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
           authReady={authChecked}
           saveState={saveState}
           saveScope={saveScope}
+          saveMessage={saveMessage}
           onSaveBuild={() => void handleSaveBuild()}
         />
+
+        <ResultsPreferenceSummary answers={submission.answers} />
 
         <BackendResultTabBar activeTab={activeBackendTab} onTabChange={handleBackendTabChange} />
 
@@ -598,11 +601,6 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
             refineError={refineError}
             onApplyRefinement={(stepId, answerId, label) => void handleApplyRefinement(stepId, answerId, label)}
             isAuthenticated={isAuthenticated}
-            authReady={authChecked}
-            saveState={saveState}
-            saveScope={saveScope}
-            saveMessage={saveMessage}
-            onSaveBuild={() => void handleSaveBuild()}
           />
         ) : null}
 
@@ -638,8 +636,11 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
         authReady={authChecked}
         saveState={saveState}
         saveScope={saveScope}
+        saveMessage={saveMessage}
         onSaveBuild={() => void handleSaveBuild()}
       />
+
+      <ResultsPreferenceSummary answers={submission.answers} />
 
       <LiteResultTabBar activeTab={activeLiteTab} onTabChange={setActiveLiteTab} />
 

@@ -17,6 +17,10 @@ export type ResultsTrustLayerProps = {
   onApplyRefinement?: (stepId: string, answerId: string, label: string) => void;
 };
 
+/**
+ * Trust signals after title/tags: why (highlights) → fit → optional trait snapshot.
+ * CTA stays outside this layer so primary actions stay clear.
+ */
 export function ResultsTrustLayer({
   submission,
   build,
@@ -33,6 +37,7 @@ export function ResultsTrustLayer({
 
   return (
     <section data-testid="e2e-trust-layer" className="space-y-3">
+      {hasHighlights ? <ResultsBuildHighlights build={build} /> : null}
       {story ? (
         <ResultsConfidenceStory
           submission={submission}
@@ -41,7 +46,6 @@ export function ResultsTrustLayer({
           onApplyRefinement={onApplyRefinement}
         />
       ) : null}
-      {hasHighlights ? <ResultsBuildHighlights build={build} /> : null}
       {hasMiniProfile ? (
         <details className="group rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container-lowest">
           <summary className="cursor-pointer list-none px-3 py-2.5 text-sm font-medium text-ca-on-surface [&::-webkit-details-marker]:hidden sm:px-4">

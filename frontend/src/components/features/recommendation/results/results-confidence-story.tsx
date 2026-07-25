@@ -28,14 +28,15 @@ export function ResultsConfidenceStory({
       className="rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest px-4 py-4 sm:px-5"
     >
       <p className="font-headline text-base font-semibold text-ca-on-surface">{story.headline}</p>
-      <p className="mt-1 text-xs leading-relaxed text-ca-on-surface-variant">
+      <p className="mt-1 break-keep text-sm leading-relaxed text-ca-on-surface-variant">{story.support}</p>
+      <p className="mt-1.5 text-xs leading-relaxed text-ca-on-surface-variant">
         측정값이 아니라, 설문 응답이 얼마나 일관됐는지를 바탕으로 한 안내입니다.
       </p>
       <ul className="mt-3 space-y-2">
         {story.bullets.map((bullet) => (
           <li key={bullet.text} className="flex gap-2 text-sm leading-relaxed text-ca-on-surface-variant">
             <span className="shrink-0 text-ca-on-surface" aria-hidden>
-              {bullet.kind === "check" ? "·" : "·"}
+              ·
             </span>
             <span>{bullet.text}</span>
           </li>

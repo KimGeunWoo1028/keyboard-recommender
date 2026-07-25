@@ -6,7 +6,7 @@ export function MetricGuideCard({ embedded = false }: { embedded?: boolean }) {
         대체로 -1~1이며, 높을수록 취향에 가깝습니다.
       </p>
       <p>
-        <span className="font-medium text-ca-on-surface">설문 일치도:</span> 설문 답이 서로 얼마나 일관되는지,
+        <span className="font-medium text-ca-on-surface">취향 반영도:</span> 설문 답이 서로 얼마나 일관되는지,
         그리고 추천이 그에 얼마나 잘 맞는지를 보여 줍니다. 「높은 편·보통·참고용」으로 읽으면 됩니다.
         품질·구매 만족 보증이나 실험실 측정·정확도 %가 아닙니다.
       </p>

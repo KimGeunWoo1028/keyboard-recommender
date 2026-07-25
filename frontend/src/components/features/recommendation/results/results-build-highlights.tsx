@@ -17,7 +17,7 @@ export function ResultsBuildHighlights({ build }: ResultsBuildHighlightsProps) {
       data-testid="e2e-build-highlights"
       className="rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest px-4 py-3 sm:px-5"
     >
-      <p className="text-sm font-medium text-ca-on-surface">이 조합의 포인트</p>
+      <p className="text-sm font-medium text-ca-on-surface">왜 잘 맞나요</p>
       <ul className="mt-2 space-y-1.5">
         {bullets.map((line) => (
           <li key={line} className="flex gap-2 text-sm leading-relaxed text-ca-on-surface-variant">

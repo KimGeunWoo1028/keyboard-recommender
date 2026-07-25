@@ -10,7 +10,7 @@ import { pickSourceUrlKey } from "@/lib/swagkey-source-links";
 import { layoutArchetypeMetadata } from "@/components/features/catalog/layout-diagram/layout-archetype-metadata";
 import { CatalogPartThumbnail } from "@/components/features/catalog/catalog-part-thumbnail";
 import { Badge } from "@/components/ui/badge";
-import { Button, buttonClassName } from "@/components/ui/button";
+import { buttonClassName } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import type { CatalogFamily } from "@/lib/api/catalog";
 import type { RecommendedBuild } from "@/types/recommendation";
@@ -117,28 +117,7 @@ export type ResultsOverviewTabProps = {
   refineError?: string | null;
   onApplyRefinement: (stepId: string, answerId: string, label: string) => void;
   isAuthenticated: boolean;
-  /** False while AuthHeaderProvider is still resolving /auth/me. */
-  authReady?: boolean;
-  saveState: "idle" | "saving" | "saved" | "error";
-  saveScope?: "account" | "local" | null;
-  saveMessage?: string;
-  onSaveBuild: () => void;
 };
-
-function saveButtonLabel(params: {
-  authReady: boolean;
-  isAuthenticated: boolean;
-  saveState: "idle" | "saving" | "saved" | "error";
-  saveScope?: "account" | "local" | null;
-}): string {
-  const { authReady, isAuthenticated, saveState, saveScope } = params;
-  if (!authReady) return "로그인 확인 중…";
-  if (saveState === "saving") return "저장 중…";
-  if (saveState === "saved") {
-    return saveScope === "account" ? "마이페이지에 저장됨" : "이 기기에 저장됨";
-  }
-  return isAuthenticated ? "이 빌드 저장" : "로컬에 저장";
-}
 
 export function ResultsOverviewTab({
   submission,
@@ -147,11 +126,6 @@ export function ResultsOverviewTab({
   enrichedSourceUrls,
   enrichedLayoutSizes = {},
   isAuthenticated,
-  authReady = true,
-  saveState,
-  saveScope,
-  saveMessage = "",
-  onSaveBuild,
 }: ResultsOverviewTabProps) {
   const overviewAlternatives = useMemo(
     () => collectOverviewAlternatives(apiPicks, DISPLAY_K),
@@ -203,14 +177,11 @@ export function ResultsOverviewTab({
         <CardHeader className="border-b border-ca-outline-variant/35 pb-3 sm:pb-4">
           <CardTitle className="flex items-center gap-2 font-headline text-base font-semibold text-ca-on-surface">
             <span>추천 빌드 구성</span>
-            <HelpHint text="이번 결과에서 선택된 핵심 구성품(스위치, 플레이트, 폼, 레이아웃, 케이스/키트, 키캡) 요약입니다. 최종 조합의 뼈대를 한눈에 확인할 수 있어요." />
+            <HelpHint text="이번 결과에서 선택된 핵심 구성품(스위치, 플레이트, 폼, 레이아웃, 케이스/키트, 키캡) 요약입니다." />
           </CardTitle>
-          <CardDescription className="hidden text-ca-on-surface-variant sm:block">
-            스위치부터 키캡까지 여섯 축으로 구성된 조합입니다.
+          <CardDescription className="text-ca-on-surface-variant">
+            스위치부터 키캡까지 여섯 축 · 상세는 카드에서 확인하세요.
           </CardDescription>
-          <div className="mt-2">
-            <PurchaseTrustBlock />
-          </div>
         </CardHeader>
         <CardContent className="grid grid-cols-1 gap-3 pt-4 sm:grid-cols-2 lg:grid-cols-3">
           {BUILD_DOMAIN_KEYS.map((key) => {
@@ -231,7 +202,7 @@ export function ResultsOverviewTab({
             return (
               <div
                 key={key}
-                className="overflow-hidden rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container-lowest"
+                className="flex h-full flex-col overflow-hidden rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container-lowest"
               >
                 <CatalogPartThumbnail
                   family={key as CatalogFamily}
@@ -242,102 +213,90 @@ export function ResultsOverviewTab({
                   uniformCardMedia
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
-                <div className="px-3 py-3">
-                <div className="flex flex-wrap items-center gap-2">
-                  <p className="text-sm font-medium text-ca-on-surface-variant">{BUILD_DOMAIN_LABELS[key]}</p>
-                  {layoutSize ? (
-                    <Badge className="border-ca-outline-variant/50 bg-transparent font-normal text-ca-on-surface-variant">
-                      {layoutSizeShortLabel(layoutSize)}
-                    </Badge>
+                <div className="flex flex-1 flex-col px-3 py-3">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <p className="text-sm font-medium text-ca-on-surface-variant">{BUILD_DOMAIN_LABELS[key]}</p>
+                    {layoutSize ? (
+                      <Badge className="border-ca-outline-variant/50 bg-transparent font-normal text-ca-on-surface-variant">
+                        {layoutSizeShortLabel(layoutSize)}
+                      </Badge>
+                    ) : null}
+                  </div>
+                  <p className="mt-1 font-headline text-base font-semibold text-ca-on-surface">{parsed.name}</p>
+                  {blurb ? (
+                    <p className="mt-1 line-clamp-2 break-keep text-sm leading-relaxed text-ca-on-surface-variant">
+                      {blurb}
+                    </p>
                   ) : null}
-                </div>
-                <p className="mt-1 font-headline text-base font-semibold text-ca-on-surface">{parsed.name}</p>
-                {blurb ? (
-                  <p className="mt-1 line-clamp-2 break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:line-clamp-none">
-                    {blurb}
+                  <p className="mt-auto pt-2">
+                    <SwagkeyProductLink href={sourceUrl} domain={key} itemId={pick?.itemId} />
                   </p>
-                ) : null}
-                <p className="mt-2">
-                  <SwagkeyProductLink href={sourceUrl} domain={key} itemId={pick?.itemId} />
-                </p>
-                {key === "layout" && layoutSize && !isReferenceOnlyLayoutArchetype(pick?.itemId) ? (
-                  <p className="mt-2">
-                    <Link
-                      href={catalogHref({ family: "case", layoutSize })}
-                      className="text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline"
-                    >
-                      {layoutSizeShortLabel(layoutSize)} 케이스/키트 보기
-                    </Link>
-                  </p>
-                ) : null}
+                  {key === "layout" && layoutSize && !isReferenceOnlyLayoutArchetype(pick?.itemId) ? (
+                    <p className="mt-2">
+                      <Link
+                        href={catalogHref({ family: "case", layoutSize })}
+                        className="text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline"
+                      >
+                        {layoutSizeShortLabel(layoutSize)} 케이스/키트 보기
+                      </Link>
+                    </p>
+                  ) : null}
                 </div>
               </div>
             );
           })}
         </CardContent>
-        <div className="flex flex-col gap-3 border-t border-ca-outline-variant/35 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <div className="space-y-1.5 sm:max-w-md">
-            <p className="text-sm leading-relaxed text-ca-on-surface-variant">
-              {isAuthenticated
-                ? "계정에 저장하면 마이페이지의 저장한 빌드에서 다른 기기에서도 다시 볼 수 있어요. 설문 결과 화면 자체는 이 브라우저에 잠시 보관됩니다."
-                : "로그인 없이 「로컬에 저장」하면 이 브라우저에만 남습니다. 다른 기기에서도 보려면 로그인 후 「이 빌드 저장」을 사용하세요."}
-            </p>
-            <Link
-              href="/mypage?section=saved"
-              className="inline-block text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline"
-            >
-              마이페이지에서 저장한 빌드 보기
-            </Link>
-          </div>
-          <div className="flex w-full flex-col gap-2 sm:w-auto sm:items-end">
-            <Button
-              data-testid="e2e-save-build"
-              variant="outline"
-              size="default"
-              className="w-full sm:min-w-[8.5rem] sm:w-auto"
-              disabled={!authReady || saveState === "saving" || saveState === "saved"}
-              aria-busy={saveState === "saving" || undefined}
-              onClick={() => void onSaveBuild()}
-            >
-              {saveButtonLabel({ authReady, isAuthenticated, saveState, saveScope })}
-            </Button>
-            {saveMessage ? (
-              <div
-                className="space-y-1 text-sm text-ca-on-surface-variant sm:text-right"
-                role={saveState === "error" ? "alert" : "status"}
-                aria-live={saveState === "error" ? "assertive" : "polite"}
-              >
-                <p>{saveMessage}</p>
-                {saveState === "saved" ? (
-                  <Link
-                    href="/mypage?section=saved"
-                    className="inline-block font-medium text-ca-primary underline-offset-4 hover:underline"
-                  >
-                    저장한 빌드로 이동
-                  </Link>
-                ) : null}
-              </div>
-            ) : null}
-          </div>
+        <div className="border-t border-ca-outline-variant/35 px-4 py-3 sm:px-6">
+          <details className="group">
+            <summary className="cursor-pointer list-none text-sm font-medium text-ca-on-surface marker:content-none [&::-webkit-details-marker]:hidden">
+              <span className="underline-offset-2 group-open:underline">구매·재고 안내</span>
+            </summary>
+            <div className="mt-2">
+              <PurchaseTrustBlock />
+            </div>
+          </details>
+          <p className="mt-3 break-keep text-sm text-ca-on-surface-variant">
+            {isAuthenticated
+              ? "계정 저장은 상단 「이 빌드 저장」으로 할 수 있어요. 마이페이지에서 다시 확인할 수 있습니다."
+              : "상단 「로컬에 저장」은 이 브라우저에만 남습니다. 다른 기기에서도 보려면 로그인 후 저장하세요."}
+          </p>
+          <Link
+            href="/mypage?section=saved"
+            className="mt-2 inline-block text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline"
+          >
+            마이페이지에서 저장한 빌드 보기
+          </Link>
         </div>
       </Card>
 
       {overviewAlternatives.length > 0 ? (
         <>
-          <div className="mt-6 flex flex-col gap-2 rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
-            <div className="space-y-1">
-              <p className="font-headline text-sm font-semibold text-ca-on-surface">비교가 필요하신가요?</p>
-              <p className="break-keep text-sm text-ca-on-surface-variant">
-                전용 비교 화면 대신, 추천과 비슷한 다른 부품 후보를 아래에서 나란히 볼 수 있어요.
-              </p>
+          <div className="mt-6 flex flex-col gap-2 rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest px-4 py-4 sm:px-5">
+            <p className="font-headline text-sm font-semibold text-ca-on-surface">다른 선택지도 보고 싶나요?</p>
+            <p className="break-keep text-sm text-ca-on-surface-variant">
+              전용 비교 화면 없이, 추천과 비슷한 부품·카탈로그·설문으로 이어갈 수 있어요.
+            </p>
+            <div className="mt-1 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+              <a
+                href="#compare-alternatives"
+                className={buttonClassName({ variant: "outline", size: "default" })}
+                onClick={() => setAltsOpen(true)}
+              >
+                비슷한 부품 비교
+              </a>
+              <Link
+                href={catalogHref({ family: "switch" })}
+                className={buttonClassName({ variant: "outline", size: "default" })}
+              >
+                카탈로그에서 더 보기
+              </Link>
+              <Link
+                href="/recommend"
+                className={buttonClassName({ variant: "ghost", size: "default" })}
+              >
+                설문 다시 하기
+              </Link>
             </div>
-            <a
-              href="#compare-alternatives"
-              className={buttonClassName({ variant: "outline", size: "default" })}
-              onClick={() => setAltsOpen(true)}
-            >
-              다른 부품과 비교하기
-            </a>
           </div>
         <details
           id="compare-alternatives"
@@ -348,13 +307,12 @@ export function ResultsOverviewTab({
           <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden sm:pointer-events-none sm:cursor-default">
             <div className="space-y-1">
               <div className="flex items-center justify-between gap-2">
-                <h3 className="font-headline text-base font-semibold text-ca-on-surface">다른 부품과 비교</h3>
+                <h3 className="font-headline text-base font-semibold text-ca-on-surface">비슷한 부품 비교</h3>
                 <span className="text-xs text-ca-on-surface-variant sm:hidden group-open:hidden">펼치기</span>
                 <span className="hidden text-xs text-ca-on-surface-variant group-open:inline sm:hidden">접기</span>
               </div>
               <p className="text-sm text-ca-on-surface-variant">
-                지금 추천과 비슷한 대안입니다. 성향 차이(비슷함/조금 다름)를 보고 고른 뒤, 추천 근거 탭에서 자세히 비교할 수
-                있어요.
+                지금 추천과 비슷한 대안입니다. 성향 차이를 본 뒤, 추천 근거 탭에서 자세히 볼 수 있어요.
               </p>
             </div>
           </summary>

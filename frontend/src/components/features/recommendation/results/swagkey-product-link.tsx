@@ -30,6 +30,7 @@ export function SwagkeyProductLink({
       )}
     >
       {text}
+      <span className="sr-only"> (새 탭)</span>
     </a>
   );
 }

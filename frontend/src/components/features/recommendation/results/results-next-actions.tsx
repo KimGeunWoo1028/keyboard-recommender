@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import { swagkeyProductLinkLabel } from "@/lib/layout-catalog-links";
 import { cn } from "@/lib/utils";
 import { Button, buttonClassName } from "@/components/ui/button";
@@ -23,6 +25,7 @@ export type ResultsNextActionsProps = {
   authReady?: boolean;
   saveState: "idle" | "saving" | "saved" | "error";
   saveScope?: "account" | "local" | null;
+  saveMessage?: string;
   onSaveBuild: () => void;
 };
 
@@ -42,8 +45,8 @@ function saveButtonLabel(params: {
 }
 
 /**
- * Primary result actions after summary + short reasons, before long detail tabs.
- * Intentionally non-sticky so mobile scroll is not competed by a pinned bar.
+ * Sole primary save CTA on results (Pass 3 RESULT-03).
+ * Non-sticky so mobile scroll is not competed by a pinned bar.
  */
 export function ResultsNextActions({
   build,
@@ -53,6 +56,7 @@ export function ResultsNextActions({
   authReady = true,
   saveState,
   saveScope,
+  saveMessage = "",
   onSaveBuild,
 }: ResultsNextActionsProps) {
   const switchPick = apiPicks.find((row) => row.domain.toLowerCase() === "switch");
@@ -65,12 +69,12 @@ export function ResultsNextActions({
     >
       <p className="font-headline text-sm font-semibold text-ca-on-surface">다음에 할 일</p>
       <p className="mt-1 break-keep text-sm text-ca-on-surface-variant">
-        조합이 맞으면 저장해 두고, 대표 부품은 매장에서 바로 확인해 보세요. 매장 링크는 새 탭에서
-        열리며, 돌아와 저장하면 이 결과를 다시 찾기 쉬워요.
+        조합이 맞으면 저장해 두고, 대표 부품은 매장에서 가격·재고를 확인해 보세요. 매장 링크는 새
+        탭에서 열리며, 돌아와 저장하면 이 결과를 다시 찾기 쉬워요.
       </p>
       <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
         <Button
-          data-testid="e2e-save-build-primary"
+          data-testid="e2e-save-build"
           size="default"
           className="w-full sm:w-auto"
           disabled={!authReady || saveState === "saving" || saveState === "saved"}
@@ -84,15 +88,43 @@ export function ResultsNextActions({
             href={switchUrl}
             target="_blank"
             rel="noopener noreferrer"
+            title="새 탭에서 스웨그키 매장이 열립니다"
             className={cn(
               buttonClassName({ variant: "outline", size: "default" }),
               "w-full justify-center sm:w-auto",
             )}
           >
             {swagkeyProductLinkLabel("switch", switchPick?.itemId)}
+            <span className="sr-only"> (새 탭)</span>
           </a>
         ) : null}
+        <Link
+          href="/recommend"
+          className={cn(
+            buttonClassName({ variant: "ghost", size: "default" }),
+            "w-full justify-center sm:w-auto",
+          )}
+        >
+          설문 다시 하기
+        </Link>
       </div>
+      {saveMessage ? (
+        <div
+          className="mt-3 space-y-1 text-sm text-ca-on-surface-variant"
+          role={saveState === "error" ? "alert" : "status"}
+          aria-live={saveState === "error" ? "assertive" : "polite"}
+        >
+          <p>{saveMessage}</p>
+          {saveState === "saved" ? (
+            <Link
+              href="/mypage?section=saved"
+              className="inline-block font-medium text-ca-primary underline-offset-4 hover:underline"
+            >
+              저장한 빌드로 이동
+            </Link>
+          ) : null}
+        </div>
+      ) : null}
     </div>
   );
 }

@@ -25,9 +25,9 @@ import type { SurveyAnswers, SurveyStepId } from "@/types/survey";
 
 const initialAnswers: Partial<SurveyAnswers> = {};
 const LOADING_MESSAGES = [
-  "설문에서 고른 소리·타건 취향을 반영하는 중…",
-  "스위치부터 키캡까지 맞는 부품을 고르는 중…",
-  "곧 추천 조합과 이유를 보여 드립니다…",
+  "취향을 조합해 가장 잘 맞는 구성을 찾고 있어요…",
+  "추천 이유와 실제 제품을 준비하는 중…",
+  "잠시 후 조합과 이유를 확인할 수 있어요…",
 ] as const;
 
 function NavArrowBack({ className }: { className?: string }) {
@@ -392,7 +392,8 @@ export function SurveyWizard() {
             추천 조합을 준비하는 중
           </h2>
           <p className="mt-2 break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:text-base">
-            곧 여섯 부품 조합과 취향 요약이 나옵니다.
+            취향을 조합해 가장 잘 맞는 구성을 찾고 있어요. 잠시 후 추천 이유와 실제 제품을 확인할 수
+            있습니다.
           </p>
         </div>
         <p className="mt-8 text-center text-sm text-ca-on-surface">{loadingMessage}</p>

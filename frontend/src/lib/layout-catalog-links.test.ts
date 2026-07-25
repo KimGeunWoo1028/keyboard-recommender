@@ -13,8 +13,8 @@ describe("layout catalog link labels", () => {
     expect(isReferenceOnlyLayoutArchetype("layout-006")).toBe(false);
   });
 
-  it("keeps default copy for kit-named layouts and other domains", () => {
-    expect(swagkeyProductLinkLabel("layout", "layout-new-004-neo65-cu-기판")).toBe("스웨그키에서 보기");
-    expect(swagkeyProductLinkLabel("switch", "layout-001")).toBe("스웨그키에서 보기");
+  it("uses contextual store labels for kit-named layouts and other domains", () => {
+    expect(swagkeyProductLinkLabel("layout", "layout-new-004-neo65-cu-기판")).toBe("스웨그키에서 키트 보기");
+    expect(swagkeyProductLinkLabel("switch", "layout-001")).toBe("스웨그키에서 스위치 보기");
   });
 });

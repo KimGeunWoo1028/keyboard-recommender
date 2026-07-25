@@ -2,6 +2,7 @@ import type { SurveySubmission } from "@/types/survey";
 
 import { pickRunnerUpScoreGap, rankingThresholdsForDomain } from "./results-ranking-thresholds";
 import { deriveQualityStatus, type QualityStatusSubmission } from "./results-quality-status";
+import { PREFERENCE_FIT_LABEL } from "./results-preference-fit";
 
 type ApiPick = NonNullable<SurveySubmission["recommendations"]>[number];
 
@@ -18,6 +19,8 @@ export type ConfidenceStoryRefineAction = {
 
 export type ConfidenceStoryModel = {
   headline: string;
+  /** Short supporting line under the headline (why this tier). */
+  support: string;
   bullets: ConfidenceStoryBullet[];
   refineActions?: ConfidenceStoryRefineAction[];
 };
@@ -57,6 +60,10 @@ function pushUniqueBullet(bullets: ConfidenceStoryBullet[], bullet: ConfidenceSt
   bullets.push(bullet);
 }
 
+function fitHeadline(tier: "high" | "balanced" | "exploratory"): string {
+  return `취향 반영도 · ${PREFERENCE_FIT_LABEL[tier]}`;
+}
+
 export function deriveConfidenceStory(
   submission: ConfidenceStoryInput,
   apiPicks: ApiPick[],
@@ -81,7 +88,8 @@ export function deriveConfidenceStory(
     });
 
     return {
-      headline: "설문 일치도: 보통",
+      headline: fitHeadline("balanced"),
+      support: "일부 선호가 서로 달라 가장 잘 맞는 균형형 조합을 추천했어요.",
       bullets: bullets.slice(0, 4),
       refineActions: (guidance.actions ?? []).slice(0, 2).map((action) => ({
         label: action.label,
@@ -91,16 +99,19 @@ export function deriveConfidenceStory(
     };
   }
 
-  let headline = "설문 일치도: 높은 편";
+  let tier: "high" | "balanced" | "exploratory" = "high";
+  let support = "설문에서 고른 방향이 고르게 반영됐어요.";
 
   if (submission.fallbackAudit?.recovered === true || label === "experimental") {
-    headline = "설문 일치도: 참고용";
+    tier = "exploratory";
+    support = "비슷한 후보가 많아 이번 결과는 탐색·참고용으로 보시면 좋아요.";
     pushUniqueBullet(bullets, {
       kind: "dot",
       text: qualityStatus?.detail ?? "비슷한 후보가 많아 이번 결과는 참고용으로 보시면 좋아요",
     });
   } else if (label === "balanced" || (hasRunnerUp(apiPicks) && !gapSufficient)) {
-    headline = "설문 일치도: 보통";
+    tier = "balanced";
+    support = "일부 선호가 서로 달라 가장 잘 맞는 균형형 조합을 추천했어요.";
     pushUniqueBullet(bullets, { kind: "check", text: "일부 응답이 엇갈렸어요" });
     if (!gapSufficient) {
       pushUniqueBullet(bullets, {
@@ -118,7 +129,7 @@ export function deriveConfidenceStory(
     });
     pushUniqueBullet(bullets, {
       kind: "dot",
-      text: "품질·구매 만족을 보장하는 점수가 아니라, 설문 응답과의 일치도예요",
+      text: "품질·구매 만족을 보장하는 점수가 아니라, 설문 응답과의 반영도예요",
     });
   }
 
@@ -132,7 +143,7 @@ export function deriveConfidenceStory(
     }
   }
 
-  if (headline === "설문 일치도: 높은 편") {
+  if (tier === "high") {
     const hasWarning = bullets.some((row) => /호환|주의|완화|참고/.test(row.text));
     if (!hasWarning) {
       pushUniqueBullet(bullets, { kind: "check", text: "호환성 주의 신호는 크게 보이지 않아요" });
@@ -140,7 +151,8 @@ export function deriveConfidenceStory(
   }
 
   return {
-    headline,
+    headline: fitHeadline(tier),
+    support,
     bullets: bullets.slice(0, 4),
   };
 }
