@@ -11,6 +11,10 @@ import { loadLastKnownGoodSubmission } from "@/lib/survey-storage";
 import { buttonClassName } from "@/components/ui/button";
 import { buildStackParts } from "@/components/features/mypage/mypage-build-stack";
 import {
+  savedPreferenceTags,
+  shortSavedTitleLines,
+} from "@/components/features/mypage/mypage-saved-identity";
+import {
   fixedAxisBarGlyph,
   fixedAxisBars,
   TRAIT_MINI_PROFILE_MICROCOPY,
@@ -41,24 +45,7 @@ function pickLatestSaved(items: SavedRecommendationItem[]): SavedRecommendationI
   return [...items].sort((a, b) => toEpochMs(b.saved_at) - toEpochMs(a.saved_at))[0] ?? null;
 }
 
-/** Short list-style title: drop "추천 조합:" and English parentheticals. */
-function shortTitle(item: SavedRecommendationItem): string {
-  let title = (item.title || item.build_id).trim();
-  title = title.replace(/^추천\s*조합\s*:\s*/i, "");
-  title = title.replace(/\s*\([^)]*\)/g, "");
-  title = title.replace(/\s{2,}/g, " ").replace(/\s·\s/g, " · ").trim();
-  return title || item.build_id;
-}
-
-function shortTitleLines(item: SavedRecommendationItem): [string, string?] {
-  const title = shortTitle(item);
-  const parts = title
-    .split("·")
-    .map((part) => part.trim())
-    .filter(Boolean);
-  if (parts.length >= 2) return [parts[0], parts.slice(1).join(" · ")];
-  return [title];
-}
+/** Short list-style title helpers live in mypage-saved-identity. */
 
 export function MyPageOverview({ user, savedItems }: Props) {
   const display = user.display_name?.trim() || user.email;
@@ -98,7 +85,8 @@ export function MyPageOverview({ user, savedItems }: Props) {
   const switchPart = stackParts.find((part) => part.key === "switches" || part.key === "switch");
   const secondaryPart = stackParts.find((part) => part.key === "plate") ?? stackParts.find((part) => part.key === "layout");
   const hasRecommendationHint = Boolean(recommendedAt) || Boolean(scores);
-  const [titleLine1, titleLine2] = latestSaved ? shortTitleLines(latestSaved) : ["", undefined];
+  const [titleLine1, titleLine2] = latestSaved ? shortSavedTitleLines(latestSaved) : ["", undefined];
+  const latestTags = latestSaved ? savedPreferenceTags(latestSaved) : [];
 
   return (
     <div className="grid items-stretch gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
@@ -193,6 +181,9 @@ export function MyPageOverview({ user, savedItems }: Props) {
                   <p className="font-headline text-base font-semibold leading-snug text-ca-on-surface">{titleLine2}</p>
                 ) : null}
               </div>
+              {latestTags.length ? (
+                <p className="text-sm text-ca-on-surface-variant">{latestTags.join(" · ")}</p>
+              ) : null}
               {switchPart ? (
                 <p className="text-sm text-ca-on-surface-variant">
                   <span className="font-medium text-ca-on-surface">스위치 · </span>

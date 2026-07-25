@@ -8,6 +8,7 @@ import { useAuthHeader } from "@/components/layout/auth-controls";
 import { Button, buttonClassName } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { getPublicApiBase } from "@/lib/api/client";
+import { safeAuthNextPath } from "@/lib/auth-next";
 
 type Props = {
   children: ReactNode;
@@ -44,7 +45,7 @@ export function RequireAuth({ children, loadingFallback }: Props) {
     }
     if (redirectedRef.current) return;
     redirectedRef.current = true;
-    const next = `${window.location.pathname}${window.location.search}`;
+    const next = safeAuthNextPath(`${window.location.pathname}${window.location.search}`);
     router.replace(`/auth?next=${encodeURIComponent(next)}`);
   }, [authChecked, configError, user, router]);
 
@@ -87,7 +88,7 @@ export function RequireAuth({ children, loadingFallback }: Props) {
           type="button"
           variant="primary"
           onClick={() => {
-            const next = `${window.location.pathname}${window.location.search}`;
+            const next = safeAuthNextPath(`${window.location.pathname}${window.location.search}`);
             router.replace(`/auth?next=${encodeURIComponent(next)}`);
           }}
         >

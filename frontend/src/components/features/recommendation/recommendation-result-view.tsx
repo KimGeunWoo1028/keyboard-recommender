@@ -42,7 +42,7 @@ import { ResultsOverviewTab } from "./results/results-overview-tab";
 import { ResultsTrustLayer } from "./results/results-trust-layer";
 import { BackendResultTabBar, LiteResultTabBar } from "./results/results-tab-shell";
 import type { BackendResultTabId, LiteResultTabId } from "./results/results-types";
-import { SharedResultHeader, ResultsPreferenceSummary } from "./results/shared-result-header";
+import { SharedResultHeader, ResultsPreferenceSummary, preferenceTagsFromAnswers } from "./results/shared-result-header";
 
 const ResultsEvidenceTab = dynamic(
   () =>
@@ -423,6 +423,7 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
             recommendationCount: apiPicks.length,
             collection: saveCollection,
             resultSnapshotId: snapshotId,
+            preferenceTags: preferenceTagsFromAnswers(submission.answers).slice(0, 3),
             ...(submission.userTraitScores ? { userTraitScores: submission.userTraitScores } : {}),
             ...(submission.completedAtIso ? { recommendedAt: submission.completedAtIso } : {}),
             ...catalogPickMeta,
@@ -488,6 +489,7 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
           recommendationCount: apiPicks.length,
           collection: saveCollection,
           resultSnapshotId: snapshotId,
+          preferenceTags: preferenceTagsFromAnswers(submission.answers).slice(0, 3),
           ...(submission.userTraitScores ? { userTraitScores: submission.userTraitScores } : {}),
           ...(submission.completedAtIso ? { recommendedAt: submission.completedAtIso } : {}),
           ...catalogPickMeta,

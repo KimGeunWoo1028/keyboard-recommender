@@ -32,19 +32,33 @@ function saved(partial: Partial<SavedRecommendationItem> = {}): SavedRecommendat
 describe("MyPageSavedBuilds smoke", () => {
   it("shows empty state when no bookmarks", () => {
     render(<MyPageSavedBuilds items={[]} removingKeys={new Set()} onRemove={vi.fn()} />);
-    expect(screen.getByText(/아직 저장한 빌드가 없습니다/)).toBeInTheDocument();
+    expect(screen.getByText(/아직 저장한 추천이 없어요/)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "추천 설문 시작" })).toBeInTheDocument();
   });
 
   it("renders master–detail with restore and delete actions", async () => {
     const user = userEvent.setup();
     const onRemove = vi.fn().mockResolvedValue(undefined);
-    render(<MyPageSavedBuilds items={[saved()]} removingKeys={new Set()} onRemove={onRemove} />);
+    render(
+      <MyPageSavedBuilds
+        items={[
+          saved({
+            metadata: { preferenceTags: ["조용한 편", "차분한 소리"] },
+          }),
+        ]}
+        removingKeys={new Set()}
+        onRemove={onRemove}
+      />,
+    );
 
     expect(screen.getByRole("listbox", { name: "저장한 빌드 목록" })).toBeInTheDocument();
+    expect(screen.getAllByText(/조용한 편/).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByText(/스위치 Oil King/)).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "추천 결과 다시 보기" })).toBeInTheDocument();
     expect(screen.getByText("스위치")).toBeInTheDocument();
-    expect(screen.getByText("Oil King")).toBeInTheDocument();
+    expect(screen.getAllByText("Oil King").length).toBeGreaterThanOrEqual(1);
 
+    await user.click(screen.getByRole("option"));
     await user.click(screen.getByRole("button", { name: "삭제" }));
     expect(screen.getByText("저장한 빌드를 삭제할까요?")).toBeInTheDocument();
     await user.click(screen.getByRole("button", { name: "삭제하기" }));

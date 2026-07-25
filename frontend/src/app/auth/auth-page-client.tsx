@@ -10,6 +10,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { checkDisplayNameAvailability, fetchCurrentUser, login, sendSignupEmailCode, signup, verifySignupEmailCode } from "@/lib/api/auth";
 import { ApiError } from "@/lib/api/client";
+import {
+  authEntryContext,
+  authLoginContextCopy,
+  safeAuthNextPath,
+} from "@/lib/auth-next";
 
 /** Legacy key stored `{ email, password }`; we only persist `{ email }` now. */
 const REMEMBER_SIGNIN_KEY = "kr_saved_signin_credentials_v1";
@@ -89,8 +94,7 @@ export function AuthPageClient() {
     let cancelled = false;
     void fetchCurrentUser().then((user) => {
       if (cancelled || !user) return;
-      const target = next && next.startsWith("/") ? next : "/results";
-      router.replace(target);
+      router.replace(safeAuthNextPath(next));
     });
     return () => {
       cancelled = true;
@@ -205,8 +209,7 @@ export function AuthPageClient() {
         // clear it (AuthHeaderProvider generation guard); soft nav keeps that state.
         setUser(loggedIn);
         const { next } = readAuthSearchParams();
-        const target = next && next.startsWith("/") ? next : "/results";
-        router.replace(target);
+        router.replace(safeAuthNextPath(next));
         return;
       }
     } catch (err) {
@@ -306,6 +309,8 @@ export function AuthPageClient() {
     }
   }
 
+  const loginCtx = authEntryContext(authNextPath);
+  const loginCopy = authLoginContextCopy(loginCtx);
   const tabIdleClass =
     "h-10 flex-1 rounded-lg border-ca-outline-variant/50 bg-transparent text-ca-on-surface-variant hover:border-ca-on-surface/30 hover:bg-ca-surface-container/50 hover:text-ca-on-surface";
   const tabActiveClass = "h-10 flex-1 rounded-lg";
@@ -314,18 +319,25 @@ export function AuthPageClient() {
     <div className="mx-auto w-full max-w-md px-ca-margin-mobile py-10 sm:px-ca-margin sm:py-12">
       <section className="overflow-hidden rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest">
         <header className="space-y-2 border-b border-ca-outline-variant/30 px-5 py-5 sm:px-6 sm:py-6">
+          <p className="font-headline text-sm font-semibold tracking-tight text-ca-on-surface">Keyboard Recommender</p>
           <h1 className="font-headline text-2xl font-semibold tracking-tight text-ca-on-surface">
-            {mode === "login" ? "로그인" : "회원가입"}
+            {mode === "login" ? loginCopy.title : "회원가입"}
           </h1>
           <p className="break-keep text-sm leading-relaxed text-ca-on-surface-variant">
             {mode === "login"
-              ? authNextPath?.startsWith("/recommend")
-                ? "로그인하면 추천 설문을 바로 시작합니다."
-                : authNextPath?.startsWith("/results")
-                  ? "로그인하면 저장된 추천 결과를 확인할 수 있습니다."
-                  : "계정으로 로그인하고 저장한 빌드를 이어가세요."
+              ? loginCopy.body
               : "닉네임과 이메일 인증 후 계정을 만듭니다."}
           </p>
+          {mode === "login" && loginCopy.benefits?.length ? (
+            <ul className="mt-2 space-y-1 text-sm text-ca-on-surface-variant">
+              {loginCopy.benefits.map((line) => (
+                <li key={line} className="flex gap-2">
+                  <span aria-hidden>·</span>
+                  <span className="break-keep">{line}</span>
+                </li>
+              ))}
+            </ul>
+          ) : null}
           {mode === "signup" ? (
             <p className="break-keep text-sm leading-relaxed text-ca-on-surface-variant">
               비밀번호는 8~20자, 영문·숫자·특수문자를 모두 포함해야 합니다.
@@ -414,6 +426,8 @@ export function AuthPageClient() {
               <Input
                 id="email"
                 type="email"
+                name="email"
+                autoComplete="email"
                 className="ca-input"
                 value={email}
                 onChange={(e) => {
@@ -484,7 +498,9 @@ export function AuthPageClient() {
               <div className="relative">
                 <Input
                   id="password"
+                  name="password"
                   type={showPassword ? "text" : "password"}
+                  autoComplete={mode === "login" ? "current-password" : "new-password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -543,7 +559,9 @@ export function AuthPageClient() {
                 <div className="relative">
                   <Input
                     id="confirmPassword"
+                    name="confirmPassword"
                     type={showConfirmPassword ? "text" : "password"}
+                    autoComplete="new-password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required

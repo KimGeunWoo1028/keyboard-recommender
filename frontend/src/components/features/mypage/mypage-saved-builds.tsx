@@ -4,6 +4,14 @@ import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
 import { buildStackParts, savedItemKey } from "@/components/features/mypage/mypage-build-stack";
+import {
+  savedLayoutName,
+  savedOneLineSummary,
+  savedPreferenceTags,
+  savedSwitchName,
+  shortSavedTitle,
+  shortSavedTitleLines,
+} from "@/components/features/mypage/mypage-saved-identity";
 import { MyPageSectionCard } from "@/components/features/mypage/mypage-section-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -40,26 +48,6 @@ function normalizeText(item: SavedRecommendationItem): string {
     .toLowerCase();
 }
 
-/** List-row title: drop "추천 조합:" prefix and English parentheticals like (Thocky). */
-function shortTitle(item: SavedRecommendationItem): string {
-  let title = (item.title || item.build_id).trim();
-  title = title.replace(/^추천\s*조합\s*:\s*/i, "");
-  title = title.replace(/\s*\([^)]*\)/g, "");
-  title = title.replace(/\s{2,}/g, " ").replace(/\s·\s/g, " · ").trim();
-  return title || item.build_id;
-}
-
-/** Split short title on "·" into up to two display lines. */
-function shortTitleLines(item: SavedRecommendationItem): [string, string?] {
-  const title = shortTitle(item);
-  const parts = title
-    .split("·")
-    .map((part) => part.trim())
-    .filter(Boolean);
-  if (parts.length >= 2) return [parts[0], parts.slice(1).join(" · ")];
-  return [title];
-}
-
 function snapshotIdFor(item: SavedRecommendationItem): string {
   if (typeof item.metadata?.resultSnapshotId === "string" && item.metadata.resultSnapshotId.trim()) {
     return item.metadata.resultSnapshotId;
@@ -82,10 +70,31 @@ function restoreSubmissionFor(item: SavedRecommendationItem) {
   return null;
 }
 
+function ListIdentityMeta({ item }: { item: SavedRecommendationItem }) {
+  const tags = savedPreferenceTags(item);
+  const switchName = savedSwitchName(item);
+  const layoutName = savedLayoutName(item);
+  return (
+    <div className="mt-1 space-y-0.5">
+      {tags.length ? (
+        <p className="truncate text-xs text-ca-on-surface-variant">{tags.join(" · ")}</p>
+      ) : null}
+      {switchName || layoutName ? (
+        <p className="truncate text-xs text-ca-on-surface-variant">
+          {[switchName ? `스위치 ${switchName}` : null, layoutName ? `배열 ${layoutName}` : null]
+            .filter(Boolean)
+            .join(" · ")}
+        </p>
+      ) : null}
+    </div>
+  );
+}
+
 export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
+  const [mobileDetailOpen, setMobileDetailOpen] = useState(false);
   const [pendingDelete, setPendingDelete] = useState<SavedRecommendationItem | null>(null);
   const [restoreError, setRestoreError] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
@@ -94,6 +103,9 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
   useEffect(() => {
     setMounted(true);
     setHasLocalResult(Boolean(loadLastKnownGoodSubmission()?.build));
+    if (typeof window.matchMedia === "function" && window.matchMedia("(min-width: 1024px)").matches) {
+      setMobileDetailOpen(true);
+    }
   }, []);
 
   const showSearch = items.length >= SEARCH_VISIBLE_FROM;
@@ -102,7 +114,7 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
   const filtered = useMemo(() => {
     const q = activeQuery.trim().toLowerCase();
     const matched = q
-      ? items.filter((item) => normalizeText(item).includes(q) || shortTitle(item).toLowerCase().includes(q))
+      ? items.filter((item) => normalizeText(item).includes(q) || shortSavedTitle(item).toLowerCase().includes(q))
       : [...items];
     matched.sort((a, b) => toEpochMs(b.saved_at) - toEpochMs(a.saved_at));
     return matched;
@@ -115,6 +127,7 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
   useEffect(() => {
     if (!filtered.length) {
       setSelectedKey(null);
+      setMobileDetailOpen(false);
       return;
     }
     if (!selectedKey || !filtered.some((item) => savedItemKey(item) === selectedKey)) {
@@ -131,13 +144,16 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
   const selectedKeySafe = selected ? savedItemKey(selected) : null;
   const isRemoving = selectedKeySafe ? removingKeys.has(selectedKeySafe) : false;
   const canRestore = mounted && selected ? canRestoreResults(selected) : false;
+  const selectedTags = selected ? savedPreferenceTags(selected) : [];
+  const selectedSummary = selected ? savedOneLineSummary(selected) : null;
+  const selectedSwitch = selected ? savedSwitchName(selected) : null;
 
   return (
     <MyPageSectionCard
       title="저장한 빌드"
       description={
         items.length
-          ? "왼쪽에서 빌드를 고르면 오른쪽에 상세가 표시됩니다."
+          ? "목록에서 빌드를 고르면 상세와 다시 보기·삭제 행동을 확인할 수 있습니다."
           : "결과 화면에서 빌드를 저장하면 이 목록에 쌓입니다."
       }
     >
@@ -164,9 +180,12 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
       ) : null}
 
       {filtered.length && selected ? (
-        <div className="grid items-stretch gap-4 lg:grid-cols-[minmax(12rem,16rem)_minmax(0,1fr)] lg:min-h-[28rem]">
+        <div className="grid items-stretch gap-4 lg:grid-cols-[minmax(14rem,18rem)_minmax(0,1fr)] lg:min-h-[28rem]">
           <div
-            className="flex max-h-[22rem] flex-col overflow-hidden rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container/20 p-2 sm:p-2.5 lg:max-h-none lg:h-full"
+            className={cn(
+              "flex max-h-[22rem] flex-col overflow-hidden rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container/20 p-2 sm:p-2.5 lg:max-h-none lg:h-full",
+              mobileDetailOpen && "hidden lg:flex",
+            )}
             role="listbox"
             aria-label="저장한 빌드 목록"
           >
@@ -174,7 +193,7 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
               {filtered.map((item) => {
                 const key = savedItemKey(item);
                 const active = key === selectedKey;
-                const [line1, line2] = shortTitleLines(item);
+                const [line1, line2] = shortSavedTitleLines(item);
                 return (
                   <button
                     key={key}
@@ -183,36 +202,54 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
                     aria-selected={active}
                     onClick={() => {
                       setSelectedKey(key);
+                      setMobileDetailOpen(true);
                       setRestoreError(null);
                     }}
                     className={cn(
-                      "flex h-[4.75rem] w-full flex-col justify-between rounded-lg border px-3 py-2.5 text-left transition-colors",
+                      "flex min-h-[5.5rem] w-full flex-col justify-between rounded-lg border px-3 py-2.5 text-left transition-colors",
                       active
                         ? "border-ca-on-surface/40 bg-ca-surface-container/60"
                         : "border-ca-outline-variant/40 bg-transparent hover:border-ca-outline-variant/70 hover:bg-ca-surface-container/40",
                     )}
                   >
-                    <div className="min-h-[2.5rem]">
+                    <div className="min-w-0">
                       <p className="truncate font-headline text-sm font-semibold leading-snug text-ca-on-surface">{line1}</p>
-                      <p className="truncate font-headline text-sm font-semibold leading-snug text-ca-on-surface">
-                        {line2 ?? "\u00A0"}
-                      </p>
+                      {line2 ? (
+                        <p className="truncate font-headline text-sm font-semibold leading-snug text-ca-on-surface">
+                          {line2}
+                        </p>
+                      ) : null}
+                      <ListIdentityMeta item={item} />
                     </div>
-                    <p className="text-sm text-ca-on-surface-variant">
-                      {formatAbsoluteDate(item.saved_at)}
-                    </p>
+                    <p className="mt-1.5 text-xs text-ca-on-surface-variant">{formatAbsoluteDate(item.saved_at)} 저장</p>
                   </button>
                 );
               })}
             </div>
           </div>
 
-          <div className="flex h-full min-h-[22rem] flex-col rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container/20 p-4 sm:p-5 lg:min-h-0">
+          <div
+            className={cn(
+              "flex h-full min-h-[22rem] flex-col rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container/20 p-4 sm:p-5 lg:min-h-0",
+              !mobileDetailOpen && "hidden lg:flex",
+            )}
+          >
+            <div className="mb-3 lg:hidden">
+              <Button type="button" variant="ghost" size="sm" onClick={() => setMobileDetailOpen(false)}>
+                ← 목록으로
+              </Button>
+            </div>
             <div className="flex flex-wrap items-start justify-between gap-3 border-b border-ca-outline-variant/30 pb-4">
-              <div className="min-w-0 space-y-1">
+              <div className="min-w-0 space-y-1.5">
                 <p className="font-headline text-lg font-semibold tracking-tight text-ca-on-surface">
-                  {selected.title || selected.build_id}
+                  {shortSavedTitle(selected)}
                 </p>
+                {selectedTags.length ? (
+                  <p className="text-sm text-ca-on-surface-variant">{selectedTags.join(" · ")}</p>
+                ) : null}
+                {selectedSwitch ? (
+                  <p className="text-sm text-ca-on-surface-variant">대표 스위치 · {selectedSwitch}</p>
+                ) : null}
                 <p className="text-sm text-ca-on-surface-variant">
                   저장: {formatAbsoluteDateTime(selected.saved_at)}
                   {getUpdatedAt(selected) !== toEpochMs(selected.saved_at)
@@ -220,35 +257,52 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
                     : ""}
                 </p>
               </div>
-              <div className="flex shrink-0 flex-wrap items-center gap-2">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  disabled={!canRestore}
-                  title={
-                    canRestore
-                      ? undefined
-                      : "이 저장본에서는 결과 복원이 어렵습니다. 같은 브라우저에서 저장한 빌드만 가능합니다."
-                  }
-                  onClick={() => {
-                    const submission = restoreSubmissionFor(selected);
-                    if (!submission) {
-                      setRestoreError(
-                        "이 저장본에서는 추천 결과를 다시 열 수 없습니다. 같은 브라우저에서 저장한 빌드만 복원할 수 있어요.",
-                      );
-                      return;
-                    }
-                    saveSurveySubmission(submission);
-                    router.push("/results");
-                  }}
-                >
-                  추천 결과 다시 보기
-                </Button>
-                <Button variant="ghost" size="sm" disabled={isRemoving} onClick={() => setPendingDelete(selected)}>
-                  {isRemoving ? "삭제 중..." : "삭제"}
-                </Button>
-              </div>
             </div>
+
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              <Button
+                variant="primary"
+                size="sm"
+                disabled={!canRestore}
+                title={
+                  canRestore
+                    ? undefined
+                    : "같은 브라우저에서 저장한 빌드만 결과 화면으로 다시 열 수 있습니다."
+                }
+                onClick={() => {
+                  const submission = restoreSubmissionFor(selected);
+                  if (!submission) {
+                    setRestoreError(
+                      "이 저장본에서는 추천 결과를 다시 열 수 없습니다. 같은 브라우저에서 저장한 빌드만 복원할 수 있어요. 대신 설문을 다시 하거나 구성 상세를 확인해 주세요.",
+                    );
+                    return;
+                  }
+                  saveSurveySubmission(submission);
+                  router.push("/results");
+                }}
+              >
+                추천 결과 다시 보기
+              </Button>
+              <Button type="button" variant="outline" size="sm" onClick={() => router.push("/recommend")}>
+                다시 설문
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                className="border-destructive/40 text-destructive hover:bg-destructive/10"
+                disabled={isRemoving}
+                onClick={() => setPendingDelete(selected)}
+              >
+                {isRemoving ? "삭제 중…" : "삭제"}
+              </Button>
+            </div>
+            {!canRestore ? (
+              <p className="mt-2 break-keep text-xs leading-relaxed text-ca-on-surface-variant">
+                결과 다시 보기는 이 브라우저에 스냅샷이 있을 때만 가능합니다. 구성 확인·다시 설문은 계속 사용할 수
+                있어요.
+              </p>
+            ) : null}
 
             <div className="mypage-pane-scroll min-h-0 flex-1 overscroll-contain">
               {stackParts.length ? (
@@ -272,7 +326,7 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
                         <p className="text-sm font-medium text-ca-on-surface-variant">{part.label}</p>
                         <p className="mt-0.5 text-sm font-medium text-ca-on-surface">{part.name}</p>
                         {part.detail ? (
-                          <p className="mt-1 break-keep text-sm leading-relaxed text-ca-on-surface-variant">
+                          <p className="mt-1 line-clamp-2 break-keep text-sm leading-relaxed text-ca-on-surface-variant">
                             {part.detail}
                           </p>
                         ) : null}
@@ -282,13 +336,13 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
                 </ul>
               ) : (
                 <p className="mt-4 text-sm text-ca-on-surface-variant">
-                  {selected.summary || "부품 구성 정보가 아직 없습니다."}
+                  {selectedSummary || "부품 구성 정보가 아직 없습니다."}
                 </p>
               )}
 
-              {selected.summary && stackParts.length ? (
+              {selectedSummary && stackParts.length ? (
                 <p className="mt-4 border-t border-ca-outline-variant/25 pt-4 break-keep text-sm leading-relaxed text-ca-on-surface-variant">
-                  {selected.summary}
+                  {selectedSummary}
                 </p>
               ) : null}
             </div>
@@ -304,29 +358,30 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
             )
           ) : (
             <>
+              <p className="font-headline text-base font-semibold text-ca-on-surface">아직 저장한 추천이 없어요.</p>
               <p className="break-keep leading-relaxed">
-                아직 저장한 빌드가 없습니다. 결과에서 「이 빌드 저장」을 누르면 여기에 모입니다.
+                설문 결과에서 마음에 드는 조합을 저장하면 여기서 다시 볼 수 있습니다.
               </p>
               <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
-                <Button
-                  type="button"
-                  variant="primary"
-                  size="sm"
-                  onClick={() => {
-                    const last = loadLastKnownGoodSubmission();
-                    if (last) {
-                      saveSurveySubmission(last);
-                      router.push("/results");
-                      return;
-                    }
-                    router.push("/recommend");
-                  }}
-                >
-                  {mounted && hasLocalResult ? "이 브라우저의 최근 결과 열기" : "설문으로 추천 받기"}
+                <Button type="button" variant="primary" size="sm" onClick={() => router.push("/recommend")}>
+                  추천 설문 시작
                 </Button>
-                <Button type="button" variant="outline" size="sm" onClick={() => router.push("/recommend")}>
-                  다시 설문하기
-                </Button>
+                {mounted && hasLocalResult ? (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {
+                      const last = loadLastKnownGoodSubmission();
+                      if (last) {
+                        saveSurveySubmission(last);
+                        router.push("/results");
+                      }
+                    }}
+                  >
+                    최근 결과로 돌아가기
+                  </Button>
+                ) : null}
               </div>
             </>
           )}
@@ -335,17 +390,25 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
 
       {pendingDelete ? (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-ca-base/70 px-4">
-          <div className="w-full max-w-md rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest p-5 shadow-lg">
-            <p className="font-headline text-base font-semibold text-ca-on-surface">저장한 빌드를 삭제할까요?</p>
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="mypage-delete-title"
+            className="w-full max-w-md rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest p-5 shadow-lg"
+          >
+            <p id="mypage-delete-title" className="font-headline text-base font-semibold text-ca-on-surface">
+              저장한 빌드를 삭제할까요?
+            </p>
             <p className="mt-2 break-keep text-sm leading-relaxed text-ca-on-surface-variant">
-              &quot;{pendingDelete.title || pendingDelete.build_id}&quot; 항목을 삭제하면 되돌릴 수 없습니다.
+              &quot;{shortSavedTitle(pendingDelete)}&quot; 항목을 삭제하면 되돌릴 수 없습니다.
             </p>
             <div className="mt-4 flex justify-end gap-2">
               <Button variant="outline" onClick={() => setPendingDelete(null)}>
                 취소
               </Button>
               <Button
-                variant="primary"
+                variant="outline"
+                className="border-destructive/50 text-destructive hover:bg-destructive/10"
                 disabled={removingKeys.has(savedItemKey(pendingDelete))}
                 onClick={() => {
                   const target = pendingDelete;
