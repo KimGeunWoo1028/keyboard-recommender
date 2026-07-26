@@ -134,23 +134,13 @@ export function SiteHeader() {
           id="site-mobile-nav"
           className="border-t border-ca-outline-variant/40 bg-ca-surface-container-low px-ca-margin-mobile py-3 lg:hidden"
         >
-          <div className="mb-3 flex items-center justify-between rounded-btn border border-ca-outline-variant/30 bg-ca-surface-container/50 px-3 py-2">
-            <span className="font-body text-sm font-medium text-ca-on-surface-variant">테마</span>
-            <ThemeToggle />
-          </div>
-          {!isCatalogRoute ? (
-            <div className="mb-3 space-y-1.5">
-              <p className="font-body text-xs font-medium text-ca-on-surface-variant">카탈로그 검색</p>
-              <HeaderCatalogSearch className="block lg:hidden" />
-            </div>
-          ) : null}
           <nav className="flex flex-col gap-1" aria-label="모바일">
             <Link
               href="/"
               prefetch={deferNavPrefetch ? false : undefined}
               onClick={() => setMobileOpen(false)}
               className={cn(
-                "rounded-btn px-3 py-2 font-body text-sm font-medium",
+                "rounded-btn px-3 py-2.5 font-body text-sm font-medium",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))]",
                 navActive(pathname, "/")
                   ? "bg-ca-primary/15 text-ca-primary"
@@ -166,7 +156,7 @@ export function SiteHeader() {
                 prefetch={deferNavPrefetch ? false : undefined}
                 onClick={() => setMobileOpen(false)}
                 className={cn(
-                  "rounded-btn px-3 py-2 font-body text-sm font-medium",
+                  "rounded-btn px-3 py-2.5 font-body text-sm font-medium",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))]",
                   navActive(pathname, item.href)
                     ? "bg-ca-primary/15 text-ca-primary"
@@ -177,6 +167,27 @@ export function SiteHeader() {
               </Link>
             ))}
           </nav>
+          <details className="group mt-3 rounded-btn border border-ca-outline-variant/30 bg-ca-surface-container/40">
+            <summary className="cursor-pointer list-none px-3 py-2.5 font-body text-sm font-medium text-ca-on-surface-variant [&::-webkit-details-marker]:hidden">
+              <span className="flex items-center justify-between gap-2">
+                <span>더보기</span>
+                <span className="text-xs font-normal group-open:hidden">테마{!isCatalogRoute ? " · 검색" : ""}</span>
+                <span className="hidden text-xs font-normal group-open:inline">접기</span>
+              </span>
+            </summary>
+            <div className="space-y-3 border-t border-ca-outline-variant/30 px-3 py-3">
+              <div className="flex items-center justify-between gap-2">
+                <span className="font-body text-sm text-ca-on-surface-variant">테마</span>
+                <ThemeToggle />
+              </div>
+              {!isCatalogRoute ? (
+                <div className="space-y-1.5">
+                  <p className="font-body text-xs font-medium text-ca-on-surface-variant">카탈로그 검색</p>
+                  <HeaderCatalogSearch className="block lg:hidden" />
+                </div>
+              ) : null}
+            </div>
+          </details>
         </div>
       ) : null}
     </header>

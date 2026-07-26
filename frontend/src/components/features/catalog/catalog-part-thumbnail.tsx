@@ -23,6 +23,15 @@ const FAMILY_ICONS: Record<CatalogFamily, LucideIcon> = {
   keycap: Keyboard,
 };
 
+const FAMILY_FALLBACK_LABELS: Record<CatalogFamily, string> = {
+  switch: "스위치",
+  plate: "플레이트",
+  foam: "폼",
+  layout: "레이아웃",
+  case: "케이스/키트",
+  keycap: "키캡",
+};
+
 type Props = {
   family: CatalogFamily;
   imageUrl?: string;
@@ -110,10 +119,19 @@ export function CatalogPartThumbnail({
         ) : null}
         {!showBlueprint && !showImage ? (
           <div
-            className="flex h-full w-full items-center justify-center text-ca-on-surface-variant/60"
-            aria-hidden={!alt}
+            className="flex h-full w-full flex-col items-center justify-center gap-1.5 bg-ca-surface-container/40 px-4 text-center text-ca-on-surface-variant"
+            role="img"
+            aria-label={alt ? `${FAMILY_FALLBACK_LABELS[family]} · ${alt}` : FAMILY_FALLBACK_LABELS[family]}
           >
-            <Icon className="h-10 w-10 stroke-[1.25]" />
+            <Icon className="h-8 w-8 shrink-0 stroke-[1.25] opacity-70" aria-hidden />
+            <span className="font-label text-[0.65rem] font-medium uppercase tracking-wide opacity-80">
+              {FAMILY_FALLBACK_LABELS[family]}
+            </span>
+            {alt ? (
+              <span className="line-clamp-2 font-body text-xs font-medium leading-snug text-ca-on-surface/80">
+                {alt}
+              </span>
+            ) : null}
           </div>
         ) : null}
       </div>

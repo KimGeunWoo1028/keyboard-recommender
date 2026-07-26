@@ -7,6 +7,7 @@ import { ResultsAuthLoadingShell } from "@/components/auth/results-auth-loading-
 import { RecommendationResultView } from "@/components/features/recommendation/recommendation-result-view";
 import { buttonClassName } from "@/components/ui/button";
 import { ApiError } from "@/lib/api/client";
+import { catalogHref } from "@/lib/catalog-links";
 import { emitRefinementEventBestEffort } from "@/lib/api/onboarding-events";
 import { postComputeRecommendation } from "@/lib/api/recommendations";
 import { legacyTraitsFromApi } from "@/lib/recommendation-api-map";
@@ -134,7 +135,7 @@ export function ResultsView() {
             >
               저장한 빌드 보기
             </Link>
-            <Link href="/catalog" className="font-medium text-ca-on-surface underline-offset-4 hover:underline">
+            <Link href={catalogHref({ from: "results" })} className="font-medium text-ca-on-surface underline-offset-4 hover:underline">
               부품 카탈로그 둘러보기
             </Link>
           </div>

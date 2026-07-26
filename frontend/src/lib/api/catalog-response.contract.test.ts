@@ -127,6 +127,10 @@ describe("catalog API contract", () => {
     );
     expect(catalogHref({ family: "keycap", q: "gmk" })).toBe("/catalog?family=keycap&q=gmk");
     expect(catalogHref({ family: "case", layoutSize: "65" })).toBe("/catalog?family=case&layoutSize=65");
+    expect(catalogHref({ family: "switch", from: "results" })).toBe(
+      "/catalog?family=switch&from=results",
+    );
+    expect(catalogHref({ from: "evil" })).toBe("/catalog");
   });
 
   it("parses case layout tags on list items", () => {

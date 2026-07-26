@@ -234,7 +234,7 @@ export function ResultsOverviewTab({
                   {key === "layout" && layoutSize && !isReferenceOnlyLayoutArchetype(pick?.itemId) ? (
                     <p className="mt-2">
                       <Link
-                        href={catalogHref({ family: "case", layoutSize })}
+                        href={catalogHref({ family: "case", layoutSize, from: "results" })}
                         className="text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline"
                       >
                         {layoutSizeShortLabel(layoutSize)} 케이스/키트 보기
@@ -285,7 +285,7 @@ export function ResultsOverviewTab({
                 비슷한 부품 비교
               </a>
               <Link
-                href={catalogHref({ family: "switch" })}
+                href={catalogHref({ family: "switch", from: "results" })}
                 className={buttonClassName({ variant: "outline", size: "default" })}
               >
                 카탈로그에서 더 보기
@@ -394,22 +394,22 @@ export function ResultsOverviewTab({
           </div>
         </summary>
         <div className="flex flex-wrap gap-x-4 gap-y-2 border-t border-ca-outline-variant/35 px-4 py-4 sm:px-6">
-          <Link href={catalogHref({ family: "switch" })} className="text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline">
+          <Link href={catalogHref({ family: "switch", from: "results" })} className="text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline">
             스위치
           </Link>
-          <Link href={catalogHref({ family: "plate" })} className="text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline">
+          <Link href={catalogHref({ family: "plate", from: "results" })} className="text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline">
             플레이트
           </Link>
-          <Link href={catalogHref({ family: "foam" })} className="text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline">
+          <Link href={catalogHref({ family: "foam", from: "results" })} className="text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline">
             폼
           </Link>
-          <Link href={catalogHref({ family: "layout" })} className="text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline">
+          <Link href={catalogHref({ family: "layout", from: "results" })} className="text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline">
             레이아웃
           </Link>
-          <Link href={catalogHref({ family: "case" })} className="text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline">
+          <Link href={catalogHref({ family: "case", from: "results" })} className="text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline">
             케이스/키트
           </Link>
-          <Link href={catalogHref({ family: "keycap" })} className="text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline">
+          <Link href={catalogHref({ family: "keycap", from: "results" })} className="text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline">
             키캡
           </Link>
         </div>

@@ -11,11 +11,11 @@ import {
 } from "@/lib/api/catalog";
 
 export const metadata: Metadata = {
-  title: "부품 카탈로그",
-  description: "스위치, 플레이트, 폼, 레이아웃, 케이스, 키캡을 탐색하며 원하는 조합 후보를 비교해 보세요.",
+  title: "키보드 부품 둘러보기",
+  description: "스위치·플레이트·폼·레이아웃·케이스/키트·키캡을 직접 탐색하세요. 취향 조합이 필요하면 추천 설문을 이용하세요.",
   openGraph: {
-    title: "부품 카탈로그 · Keyboard Recommender",
-    description: "스위치, 플레이트, 폼, 레이아웃, 케이스, 키캡을 탐색하며 원하는 조합 후보를 비교해 보세요.",
+    title: "키보드 부품 둘러보기 · Keyboard Recommender",
+    description: "스위치·플레이트·폼·레이아웃·케이스/키트·키캡을 직접 탐색하세요. 취향 조합이 필요하면 추천 설문을 이용하세요.",
   },
 };
 
