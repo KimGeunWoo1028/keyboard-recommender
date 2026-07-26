@@ -2,16 +2,19 @@
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
+import { MyPageDataLoadingShell } from "@/components/auth/mypage-auth-loading-shell";
 import { MyPageAccount } from "@/components/features/mypage/mypage-account";
 import { MyPageOverview } from "@/components/features/mypage/mypage-overview";
 import { MyPageSavedBuilds } from "@/components/features/mypage/mypage-saved-builds";
 import { useAuthHeader } from "@/components/layout/auth-controls";
 import { Button, buttonClassName } from "@/components/ui/button";
 import { fetchAccountSecuritySummary, type AccountSecuritySummary } from "@/lib/api/auth";
+import { getPublicApiBase } from "@/lib/api/client";
 import {
-  listSavedBookmarksWithLocalFallback,
+  listLocalGuestBookmarks,
+  listSavedRecommendationBookmarks,
   mergeSavedBookmarkLists,
   removeSavedRecommendationBookmark,
   subscribeSavedBookmarksChanged,
@@ -20,6 +23,7 @@ import {
 import { makeResultSnapshotId, removeResultSnapshot } from "@/lib/saved-result-snapshots";
 
 type SectionId = "overview" | "saved" | "account";
+type SavedLoadState = "idle" | "loading" | "success" | "error";
 
 const SECTIONS: { id: SectionId; label: string }[] = [
   { id: "overview", label: "개요" },
@@ -28,6 +32,9 @@ const SECTIONS: { id: SectionId; label: string }[] = [
 ];
 
 const SECTION_IDS = new Set<SectionId>(SECTIONS.map((s) => s.id));
+
+const SAVED_LOAD_ERROR_TITLE = "저장한 결과를 불러오지 못했어요.";
+const SAVED_LOAD_ERROR_HINT = "잠시 후 다시 시도해 주세요.";
 
 function parseSection(raw: string | null): SectionId | null {
   if (!raw) return null;
@@ -39,57 +46,102 @@ function savedItemKey(item: SavedRecommendationItem): string {
   return `${item.request_id}:${item.build_id}:${item.saved_at}`;
 }
 
+function SavedListLoadingShell() {
+  return (
+    <div
+      className="min-h-[22rem] space-y-3"
+      aria-busy="true"
+      aria-live="polite"
+      data-testid="e2e-mypage-saved-loading"
+    >
+      <div className="h-10 w-48 animate-pulse rounded-lg bg-ca-surface-container/60" />
+      <div className="h-40 animate-pulse rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container/40" />
+      <div className="h-40 animate-pulse rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container/40" />
+      <p className="sr-only">저장한 빌드를 불러오는 중입니다…</p>
+    </div>
+  );
+}
+
 export function MyPageHub() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { user, setUser } = useAuthHeader();
   const sectionFromUrl = parseSection(searchParams.get("section"));
   const [active, setActive] = useState<SectionId>(sectionFromUrl ?? "overview");
-  const [extrasLoading, setExtrasLoading] = useState(true);
+  const [savedLoadState, setSavedLoadState] = useState<SavedLoadState>("idle");
   const [loadError, setLoadError] = useState<string | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
   const [savedItems, setSavedItems] = useState<SavedRecommendationItem[]>([]);
   const [securitySummary, setSecuritySummary] = useState<AccountSecuritySummary | null>(null);
   const [removingKeys, setRemovingKeys] = useState<Set<string>>(new Set());
+  const loadSeqRef = useRef(0);
+  const loadedForUserIdRef = useRef<string | null>(null);
 
-  const mapLoadErrorMessage = useCallback((error: unknown): string => {
-    if (error instanceof Error) {
-      if (/failed to fetch|networkerror|network request failed|load failed/i.test(error.message)) {
-        return "저장한 빌드를 불러오지 못했습니다. 네트워크 연결을 확인한 뒤 다시 시도해 주세요.";
-      }
-      if (/[가-힣]/.test(error.message)) return error.message;
-    }
-    return "마이페이지를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.";
-  }, []);
-
-  const loadExtras = useCallback(async () => {
-    setExtrasLoading(true);
+  const resetSavedData = useCallback(() => {
+    setSavedItems([]);
+    setSecuritySummary(null);
     setLoadError(null);
     setActionError(null);
-    try {
-      // Saved builds are the critical path — do not fail the whole hub if
-      // security-summary is slow/unreachable (common on local SQLite stacks).
-      const saved = await listSavedBookmarksWithLocalFallback({ limit: 100 });
-      setSavedItems(saved);
+  }, []);
+
+  const loadExtras = useCallback(
+    async (forUserId: string) => {
+      const seq = ++loadSeqRef.current;
+      setSavedLoadState("loading");
+      setLoadError(null);
+      setActionError(null);
+
       try {
-        setSecuritySummary(await fetchAccountSecuritySummary());
-      } catch {
-        setSecuritySummary(null);
+        if (!getPublicApiBase()) {
+          throw new Error("서비스 연결을 확인한 뒤 다시 시도해 주세요.");
+        }
+        // Do not use listSavedBookmarksWithLocalFallback here — it swallows API
+        // failures into a local-only list and looks like a successful empty state.
+        const remote = await listSavedRecommendationBookmarks({ limit: 100 });
+        if (seq !== loadSeqRef.current || loadedForUserIdRef.current !== forUserId) return;
+
+        const local = listLocalGuestBookmarks({ limit: 100 });
+        setSavedItems(mergeSavedBookmarkLists(remote, local));
+
+        try {
+          const summary = await fetchAccountSecuritySummary();
+          if (seq !== loadSeqRef.current || loadedForUserIdRef.current !== forUserId) return;
+          setSecuritySummary(summary);
+        } catch {
+          if (seq !== loadSeqRef.current || loadedForUserIdRef.current !== forUserId) return;
+          setSecuritySummary(null);
+        }
+
+        setSavedLoadState("success");
+      } catch (e) {
+        if (seq !== loadSeqRef.current || loadedForUserIdRef.current !== forUserId) return;
+        // Keep previous items only if still same user; never treat failure as [].
+        setLoadError(e instanceof Error && e.message.trim() ? e.message : SAVED_LOAD_ERROR_HINT);
+        setSavedLoadState("error");
       }
-    } catch (e) {
-      setLoadError(mapLoadErrorMessage(e));
-    } finally {
-      setExtrasLoading(false);
-    }
-  }, [mapLoadErrorMessage]);
+    },
+    [],
+  );
 
   useEffect(() => {
-    if (!user?.id) return;
-    void loadExtras();
-  }, [loadExtras, user?.id]);
+    const userId = user?.id ?? null;
+    if (!userId) {
+      loadSeqRef.current += 1;
+      loadedForUserIdRef.current = null;
+      resetSavedData();
+      setSavedLoadState("idle");
+      return;
+    }
+
+    // User changed or hub remounted — clear prior account data before fetch.
+    loadedForUserIdRef.current = userId;
+    resetSavedData();
+    void loadExtras(userId);
+  }, [loadExtras, resetSavedData, user?.id]);
 
   useEffect(() => {
     return subscribeSavedBookmarksChanged((detail) => {
+      if (savedLoadState !== "success") return;
       if (detail.type === "upsert") {
         setSavedItems((prev) => mergeSavedBookmarkLists([detail.item], prev));
         return;
@@ -98,7 +150,7 @@ export function MyPageHub() {
         prev.filter((item) => item.build_id.trim().toLowerCase() !== detail.build_id.trim().toLowerCase()),
       );
     });
-  }, []);
+  }, [savedLoadState]);
 
   useEffect(() => {
     if (sectionFromUrl) setActive(sectionFromUrl);
@@ -122,6 +174,12 @@ export function MyPageHub() {
     [router, searchParams],
   );
 
+  const retryLoad = useCallback(() => {
+    const userId = user?.id;
+    if (!userId) return;
+    void loadExtras(userId);
+  }, [loadExtras, user?.id]);
+
   const section = useMemo(() => {
     if (!user) {
       return (
@@ -139,24 +197,16 @@ export function MyPageHub() {
         </div>
       );
     }
+
+    const dataPending = savedLoadState === "idle" || savedLoadState === "loading";
+
     if (active === "overview") {
+      if (dataPending) return <MyPageDataLoadingShell />;
       return <MyPageOverview user={user} savedItems={savedItems} />;
     }
+
     if (active === "saved") {
-      if (extrasLoading && !loadError) {
-        return (
-          <div
-            className="min-h-[22rem] space-y-3"
-            aria-busy="true"
-            aria-live="polite"
-            data-testid="e2e-mypage-saved-loading"
-          >
-            <div className="h-10 w-48 animate-pulse rounded-lg bg-ca-surface-container/60" />
-            <div className="h-40 animate-pulse rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container/40" />
-            <div className="h-40 animate-pulse rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container/40" />
-          </div>
-        );
-      }
+      if (dataPending) return <SavedListLoadingShell />;
       return (
         <MyPageSavedBuilds
           items={savedItems}
@@ -200,8 +250,9 @@ export function MyPageHub() {
         />
       );
     }
+
     return <MyPageAccount user={user} securitySummary={securitySummary} onUserChanged={setUser} />;
-  }, [active, extrasLoading, loadError, removingKeys, savedItems, securitySummary, setUser, user]);
+  }, [active, removingKeys, savedItems, savedLoadState, securitySummary, setUser, user]);
 
   return (
     <div className="space-y-6" data-testid="e2e-mypage-hub">
@@ -223,16 +274,30 @@ export function MyPageHub() {
         ))}
       </div>
 
-      {loadError ? (
-        <div className="rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest p-5 sm:p-6">
-          <h2 className="font-headline text-lg font-semibold text-ca-on-surface">데이터를 불러오지 못했습니다.</h2>
-          <p className="mt-1 break-keep text-sm leading-relaxed text-ca-on-surface-variant">{loadError}</p>
-          <Button variant="outline" className="mt-4" onClick={() => void loadExtras()}>
-            다시 시도
-          </Button>
+      {savedLoadState === "error" ? (
+        <div
+          className="rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest p-5 sm:p-6"
+          data-testid="e2e-mypage-load-error"
+        >
+          <h2 className="font-headline text-lg font-semibold text-ca-on-surface">{SAVED_LOAD_ERROR_TITLE}</h2>
+          <p className="mt-1 break-keep text-sm leading-relaxed text-ca-on-surface-variant">
+            {SAVED_LOAD_ERROR_HINT}
+          </p>
+          {loadError && loadError !== SAVED_LOAD_ERROR_HINT ? (
+            <p className="mt-2 break-keep text-xs text-ca-on-surface-variant">{loadError}</p>
+          ) : null}
+          <div className="mt-4 flex flex-wrap gap-2">
+            <Button variant="primary" onClick={retryLoad}>
+              다시 불러오기
+            </Button>
+            <Link href="/auth?force=1" className={buttonClassName({ variant: "outline" })}>
+              계정 전환
+            </Link>
+          </div>
         </div>
       ) : null}
-      {!loadError && actionError ? (
+
+      {savedLoadState !== "error" && actionError ? (
         <div className="rounded-lg border border-ca-outline-variant/50 bg-ca-surface-container/40 px-4 py-3 text-sm text-ca-on-surface-variant">
           {actionError}
           <button
@@ -244,7 +309,8 @@ export function MyPageHub() {
           </button>
         </div>
       ) : null}
-      {!loadError ? section : null}
+
+      {savedLoadState !== "error" ? section : null}
     </div>
   );
 }
