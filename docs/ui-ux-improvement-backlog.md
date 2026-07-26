@@ -163,6 +163,13 @@
 - Docs: `docs/ui-ux-system-guidelines.md` · `DESIGN_SYSTEM.md` / `DESIGN.md` 동기화
 - Keep: 내비·목록 제목 「저장한 빌드」(대규모 리네임 없음)
 
+### Final verification (Pass 1–6)
+
+- Status: **CONDITIONAL PASS** (2026-07-26) — `docs/ui-ux-final-verification.md`
+- Auto: lint / typecheck / unit 144 / build / e2e **18/18**
+- Regression fixes: survey NL click overlap · save-failure e2e selector
+- Conditions: Flow 3 manual smoke · keyboard Tab once
+
 ## 5. 하지 말아야 할 개선
 
 - 실제 문제로 재현되지 않은 항목을 체크리스트 문장만으로 확정해 바로 수정하지 말 것

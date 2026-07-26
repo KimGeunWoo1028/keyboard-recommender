@@ -209,7 +209,7 @@ test.describe("Save reliability", () => {
     console.log("assert:save-response");
 
     await expect(saveButton).toHaveText("마이페이지에 저장됨", { timeout: 30_000 });
-    await expect(page.getByText(/마이페이지에 저장했습니다|이미 마이페이지에 저장된 빌드입니다/)).toBeVisible({
+    await expect(page.getByText(/마이페이지에 저장했습니다|이미 마이페이지에 저장된 조합입니다/)).toBeVisible({
       timeout: 30_000,
     });
     console.log("assert:save-ui-complete");
@@ -296,7 +296,7 @@ test.describe("Save reliability", () => {
     });
 
     await saveButton.click();
-    const errorAlert = page.getByTestId("e2e-server-ranked").getByRole("alert");
+    const errorAlert = page.getByTestId("e2e-results-next-actions").getByRole("alert");
     await expect(errorAlert).toBeVisible({ timeout: 30_000 });
     await expect(errorAlert).toContainText("네트워크 연결을 확인한 뒤 다시 시도해 주세요");
     await expect(errorAlert).not.toContainText(/Failed to fetch/i);
@@ -310,7 +310,7 @@ test.describe("Save reliability", () => {
     await saveButton.click();
     await retryResponsePromise;
     await expect(saveButton).toHaveText("마이페이지에 저장됨", { timeout: 30_000 });
-    await expect(page.getByText(/마이페이지에 저장했습니다|이미 마이페이지에 저장된 빌드입니다/)).toBeVisible({
+    await expect(page.getByText(/마이페이지에 저장했습니다|이미 마이페이지에 저장된 조합입니다/)).toBeVisible({
       timeout: 30_000,
     });
   });

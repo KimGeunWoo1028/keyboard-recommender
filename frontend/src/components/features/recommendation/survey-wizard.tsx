@@ -520,7 +520,7 @@ export function SurveyWizard() {
         </div>
       ) : null}
 
-      <div className="flex min-h-0 flex-[2] flex-col">
+      <div className="flex min-h-0 flex-[2] flex-col overflow-auto">
         <SurveyQuestion
           key={currentStep.id}
           step={currentStep}
@@ -531,7 +531,7 @@ export function SurveyWizard() {
       </div>
 
       {isLastStep ? (
-        <div className="flex min-h-0 flex-1 flex-col border-t border-ca-outline-variant/35 pt-3">
+        <div className="relative z-10 shrink-0 border-t border-ca-outline-variant/35 pt-3">
           <details className="group">
             <summary className="cursor-pointer list-none text-sm font-medium text-ca-on-surface marker:content-none [&::-webkit-details-marker]:hidden">
               <span className="underline-offset-2 group-open:underline">추가로 알려주기 (선택)</span>
