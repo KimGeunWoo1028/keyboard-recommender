@@ -1,24 +1,23 @@
 # Project Progress
 
 > **Updated:** 2026-07-26 (KST) · **branch:** `main`  
-> **Sources:** git · launch SEO Phase 1–2 · `ui-ux-final-verification.md`  
+> **Sources:** git · launch SEO Phase 1–3 · `ui-ux-final-verification.md`  
 > **관련:** `docs/ui-ux-final-verification.md` · `docs/small-group-test-checklist.md`
 
 ## Now
 
-출시 심사 후속 중. SEO Phase 1(canonical)에 이어 **Phase 2**로 마이페이지 저장 데이터 로딩/빈상태/오류를 분리해, 로딩 중 0건 오표시를 제거함.
+출시 심사 후속 Phase 1–3 반영. canonical·마이페이지 로딩 분리에 이어 **한국어 다크 404**로 Next 기본 영문 페이지를 교체함.
 
 ## Done (최근)
 
-- Phase 2: 마이페이지 `SavedLoadState` · 데이터 스켈레톤 · 원격 API 오류≠빈목록 · 계정 전환 stale 가드
-- SEO Phase 1: 페이지별 self-canonical · 개인 noindex · forgot-password metadata
-- 라이브 전문가 감사 · 제한적 베타 판정
-- UI/UX Pass 1–6 + final CONDITIONAL PASS
-- Pass 6~1 UI/UX (용어·카탈로그·auth·결과·홈·저장 신뢰성)
+- Phase 3: `not-found.tsx` 한국어 다크 404 · 홈/설문 CTA · HTTP 404 유지 · 레거시 URL 검증
+- Phase 2: 마이페이지 로딩≠빈상태 · 원격 API 오류 분리 · 계정 전환 stale 가드
+- Phase 1: 페이지별 self-canonical · 개인 noindex
+- 라이브 전문가 감사 · UI/UX Pass 1–6 CONDITIONAL PASS
 
 ## Next (1–3)
 
-1. **출시 후속 Phase** (커스텀 404 · 결과 CTA 위계 등 잔여 P1)
+1. **출시 후속 Phase** (결과 CTA 위계 등 잔여 P1)
 2. CONDITIONAL: **Flow 3** 수동 + **키보드 Tab** 1회
 3. 재배포 후 라이브 smoke + `small-group-test-checklist.md`
 
@@ -27,7 +26,7 @@
 | Track | Status | Note |
 |-------|--------|------|
 | ui-ux backlog | Pass 1–6 ✅ · final CONDITIONAL | Flow 3·Tab 잔여 |
-| launch SEO fix | Phase 1–2 ✅ · Phase 3+ 대기 | canonical + mypage load |
+| launch SEO fix | Phase 1–3 ✅ · Phase 4+ 대기 | canonical · mypage · 404 |
 | launch-readiness | Pass 1–3 ✅ · 배포 smoke 대기 | L12–L14 |
 | remaining-work A–F | ✅ / B 표본 대기 | Home revisit 🔒 |
 | deployment | Phase 3 대기 · Phase 4 보류 | |
