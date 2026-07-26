@@ -1,51 +1,49 @@
 # Project Progress
 
-> **Updated:** 2026-07-24 (KST) · **branch:** `main`  
-> **Sources:** this session (Pass 2) · `ui-ux-improvement-backlog.md` · git (`87a10f4` + uncommitted Pass 2)  
-> **관련:** `docs/ui-ux-improvement-backlog.md` · `docs/launch-readiness-roadmap.md` · `docs/small-group-test-checklist.md`
+> **Updated:** 2026-07-26 (KST) · **branch:** `main`  
+> **Sources:** git · live expert audit · Phase 0–1 SEO session · `ui-ux-final-verification.md`  
+> **관련:** `docs/ui-ux-final-verification.md` · `docs/small-group-test-checklist.md`
 
 ## Now
 
-UI/UX backlog **Pass 2 구현 완료** (홈·설문 전환율 + 상세 스펙 gap-fill).  
-lint / tsc / unit / build 통과. **아직 커밋·푸시 안 됨** (`main` working tree dirty).  
-브라우저 1440/768/390/360 육안 smoke는 owner 확인 권장.
+UI/UX Pass 1–6는 완료·조건부 출시 상태. 라이브 전문가 감사 후 **SEO Phase 1**로 전역 홈 canonical을 제거하고 페이지별 self-canonical·개인 페이지 noindex를 적용함.
 
 ## Done (최근)
 
-- Pass 2: HOME-01/02 · SURVEY-01/02 · LOADING-01 + gap-fill (3단계 프로세스 · 예시 배지 결과 프리뷰 · 성향 카드 키워드 · 전체 설문 대안 · 선택 체크 · 리셋 확인 · NL disclosure · 마지막 CTA 예고)
-- Pass 2 Gate: frontend lint/tsc/unit(9)/build green
-- Pass 1 Gate CLOSED + `save-reliability` E2E · CI 핫픽스 (`87a10f4`까지 push됨)
-- Asia/Seoul 시간 · 저장 CTA/실패 메시지 · Launch Readiness Pass 1–3 · 회원탈퇴 ✅
+- SEO Phase 1: `page-metadata` 헬퍼 · 루트 홈 canonical 제거 · 공개/개인 페이지 meta · forgot-password 서버 래퍼 · sitemap slash 정합
+- 라이브 전문가 감사(게스트 설문→결과·뷰포트·문의 도메인화 확인) · 출시 판정「제한적 베타」
+- UI/UX Pass 1–6 + final CONDITIONAL PASS (`4ab213f`)
+- Pass 6 용어/`destructive`/guidelines · Pass 5 카탈로그·모바일 메뉴
+- Pass 4 auth·마이페이지 · Pass 3 결과 위계 · Pass 2 홈·설문 · Pass 1 저장 신뢰성
 
 ## Next (1–3)
 
-1. Pass 2 **커밋·푸시** (`git-sync`) 후 CI 확인
-2. UI/UX backlog **Pass 3**: `RESULT-03` · `RESULT-04` (결과 CTA 중복·정보 밀도)
-3. Vercel/Railway **재배포 후 라이브 smoke** + 소수 인원 테스트 (`small-group-test-checklist.md`)
+1. **SEO/출시 후속 Phase** (마이페이지 빈상태 오표시 · 커스텀 404 · 결과 CTA 위계 등 P1)
+2. CONDITIONAL: **Flow 3** 수동 + **키보드 Tab** 1회 → 충족 시 PASS 격상
+3. 재배포 후 라이브 smoke (`canonical` 포함) + `small-group-test-checklist.md`
 
 ## Roadmaps
 
 | Track | Status | Note |
 |-------|--------|------|
-| ui-ux backlog | Pass 1–2 ✅ · Pass 3 대기 | Pass 2 uncommitted |
-| launch-readiness | Pass 1–3 ✅ · 배포 smoke 대기 | L12–L14 출시 후 |
+| ui-ux backlog | Pass 1–6 ✅ · final CONDITIONAL | Flow 3·Tab 잔여 |
+| launch SEO fix | Phase 1 ✅ · Phase 2+ 대기 | canonical 수정됨 |
+| launch-readiness | Pass 1–3 ✅ · 배포 smoke 대기 | L12–L14 |
 | remaining-work A–F | ✅ / B 표본 대기 | Home revisit 🔒 |
-| deployment | Phase 3 🔄 · Phase 4 보류 | prod 분리는 테스트·표본 후 |
-| catalog 1:1 | 운영 유지 | coverage 잔여만 |
+| deployment | Phase 3 대기 · Phase 4 보류 | |
+| catalog 1:1 | Phase 8 ✅ · 운영 유지 | |
 | account-deletion | ✅ | — |
 | Home revisit | 🔒 | Observe 표본 전 금지 |
 
 ## Blocked / Do-not
 
-- L01으로 **전면 UI 리디자인 / Desk Craft 전환** 금지
+- 전면 UI 리디자인 / Desk Craft 전환 금지
 - Home Dashboard · Login redirect · dual Hero · Compare 복원
 - 표본 없이 Home revisit 제품 변경
-- seed `merge_*` / `promote_*`에 `--apply-to-seed` 자동 적용 금지
-- layout diagram geometry 무단 수정 금지
-- Pass 1 Gate 재오픈 금지 (CLOSED · CI green)
-- 가짜 Match % / 추천 알고리즘·질문 수 변경 금지 (Pass 2 범위)
+- seed `--apply-to-seed` 자동 적용 금지 · layout diagram geometry 무단 수정 금지
+- 가짜 Match % / 추천 알고리즘·질문 수 변경 금지
 
 ## Open questions
 
-- 공개 URL을 staging 성격으로 둘지, production 분리할지 (테스트·표본 후)
-- Pass 2 프리뷰에 실제 Swagkey seed SKU를 붙일지 (지금은 샘플·설문 어휘)
+- 공개 URL을 staging 성격으로 둘지, production 분리할지
+- CONDITIONAL 조건 충족 후 final verdict PASS 격상 여부 (owner)

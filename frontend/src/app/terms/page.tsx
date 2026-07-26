@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 
 import { PageShell } from "@/components/layout/page-shell";
+import { publicPageMetadata } from "@/lib/seo/page-metadata";
 
 type LegalSectionProps = {
   title: string;
@@ -18,10 +19,11 @@ function LegalSection({ title, children }: LegalSectionProps) {
   );
 }
 
-export const metadata: Metadata = {
+export const metadata: Metadata = publicPageMetadata({
+  path: "/terms",
   title: "이용약관",
   description: "Keyboard Recommender 서비스 이용에 관한 약관입니다.",
-};
+});
 
 export default function TermsPage() {
   return (

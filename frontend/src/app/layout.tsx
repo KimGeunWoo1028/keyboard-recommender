@@ -28,14 +28,13 @@ const sharedDescription =
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.keyboard-recommender.com"),
+  applicationName: "Keyboard Recommender",
   title: {
     default: "Keyboard Recommender",
     template: "%s · Keyboard Recommender",
   },
   description: sharedDescription,
-  alternates: {
-    canonical: "https://www.keyboard-recommender.com",
-  },
+  // Page-level `alternates.canonical` only — do not pin every route to `/`.
   icons: {
     icon: [
       { url: "/favicon.ico" },
@@ -48,7 +47,6 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "ko_KR",
-    url: "https://www.keyboard-recommender.com",
     siteName: "Keyboard Recommender",
     title: "Keyboard Recommender",
     description: sharedDescription,

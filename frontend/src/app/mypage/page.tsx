@@ -5,11 +5,12 @@ import { MyPageAuthLoadingShell } from "@/components/auth/mypage-auth-loading-sh
 import { RequireAuth } from "@/components/auth/require-auth";
 import { MyPageHub } from "@/components/features/mypage/mypage-hub";
 import { PageShell } from "@/components/layout/page-shell";
+import { privatePageMetadata } from "@/lib/seo/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = privatePageMetadata({
+  path: "/mypage",
   title: "마이페이지",
-  robots: { index: false, follow: false },
-};
+});
 
 export default function MyPage() {
   return (

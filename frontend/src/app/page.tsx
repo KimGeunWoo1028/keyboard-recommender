@@ -1,9 +1,22 @@
+import type { Metadata } from "next";
+
 import { FeatureGrid } from "@/components/features/home/feature-grid";
 import { HomeHero } from "@/components/features/home/hero";
 import { HomeLandingObserve } from "@/components/features/home/home-landing-observe";
 import { HomeProcessSteps } from "@/components/features/home/home-process-steps";
 import { HomeWorkshopPreviewGate } from "@/components/features/home/home-workshop-preview-gate";
 import { PageShell } from "@/components/layout/page-shell";
+import { publicPageMetadata } from "@/lib/seo/page-metadata";
+
+const homeDescription =
+  "스위치, 플레이트, 폼, 레이아웃, 케이스, 키캡까지 고려해 나에게 맞는 키보드 구성을 추천합니다.";
+
+export const metadata: Metadata = publicPageMetadata({
+  path: "/",
+  title: { absolute: "Keyboard Recommender" },
+  description: homeDescription,
+  openGraphTitle: "Keyboard Recommender",
+});
 
 export default function HomePage() {
   return (

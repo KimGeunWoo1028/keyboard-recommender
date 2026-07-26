@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 
 import { ResetPasswordClient } from "@/app/auth/reset-password/reset-password-client";
+import { privatePageMetadata } from "@/lib/seo/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = privatePageMetadata({
+  path: "/auth/reset-password",
   title: "비밀번호 재설정",
-};
+});
 
 export default function ResetPasswordPage() {
   return (

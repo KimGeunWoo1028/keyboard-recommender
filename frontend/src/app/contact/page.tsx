@@ -3,11 +3,13 @@ import Link from "next/link";
 
 import { PageShell } from "@/components/layout/page-shell";
 import { buttonClassName } from "@/components/ui/button";
+import { publicPageMetadata } from "@/lib/seo/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = publicPageMetadata({
+  path: "/contact",
   title: "문의",
   description: "Keyboard Recommender 이용·오류·개인정보 관련 문의 안내입니다.",
-};
+});
 
 function resolveContactEmail(): string | null {
   const raw = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() ?? "";

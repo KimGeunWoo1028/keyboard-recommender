@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 
 import { AuthPageClient } from "@/app/auth/auth-page-client";
+import { privatePageMetadata } from "@/lib/seo/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = privatePageMetadata({
+  path: "/auth",
   title: "로그인",
-  robots: { index: false, follow: false },
-};
+});
 
 /**
  * No Suspense gate around the form: ``useSearchParams`` forced a client-only

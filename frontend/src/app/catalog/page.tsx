@@ -9,15 +9,14 @@ import {
   type CatalogFamily,
   type CatalogListResponse,
 } from "@/lib/api/catalog";
+import { publicPageMetadata } from "@/lib/seo/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = publicPageMetadata({
+  path: "/catalog",
   title: "키보드 부품 둘러보기",
-  description: "스위치·플레이트·폼·레이아웃·케이스/키트·키캡을 직접 탐색하세요. 취향 조합이 필요하면 추천 설문을 이용하세요.",
-  openGraph: {
-    title: "키보드 부품 둘러보기 · Keyboard Recommender",
-    description: "스위치·플레이트·폼·레이아웃·케이스/키트·키캡을 직접 탐색하세요. 취향 조합이 필요하면 추천 설문을 이용하세요.",
-  },
-};
+  description:
+    "스위치·플레이트·폼·레이아웃·케이스/키트·키캡을 직접 탐색하세요. 취향 조합이 필요하면 추천 설문을 이용하세요.",
+});
 
 function parseFamily(raw: string | undefined): CatalogFamily {
   if (raw === "plate" || raw === "foam" || raw === "layout" || raw === "case" || raw === "keycap") {

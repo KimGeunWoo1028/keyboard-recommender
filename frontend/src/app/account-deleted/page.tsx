@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { buttonClassName } from "@/components/ui/button";
+import { privatePageMetadata } from "@/lib/seo/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = privatePageMetadata({
+  path: "/account-deleted",
   title: "회원탈퇴 완료",
-};
+});
 
 /** Public confirmation after account deletion (Phase 6). No auth required. */
 export default function AccountDeletedPage() {
