@@ -39,9 +39,9 @@ function saveButtonLabel(params: {
   if (!authReady) return "로그인 확인 중…";
   if (saveState === "saving") return "저장 중…";
   if (saveState === "saved") {
-    return saveScope === "account" ? "마이페이지에 저장됨" : "이 기기에 저장됨";
+    return saveScope === "account" ? "마이페이지에 저장됨" : "이 브라우저에 저장됨";
   }
-  return isAuthenticated ? "이 빌드 저장" : "로컬에 저장";
+  return isAuthenticated ? "이 조합 저장" : "이 브라우저에 저장";
 }
 
 /**

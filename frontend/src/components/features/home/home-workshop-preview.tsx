@@ -190,7 +190,7 @@ export function HomeWorkshopPreview() {
           prefetch={false}
           className="mt-4 inline-block text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline"
         >
-          최근 결과 열기
+          최근 추천 결과 열기
         </Link>
       ) : null}
     </HomeWorkshopPreviewShell>

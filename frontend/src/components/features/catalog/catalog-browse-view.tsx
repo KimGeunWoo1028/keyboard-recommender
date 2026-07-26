@@ -756,6 +756,17 @@ export function CatalogBrowseView({
           </p>
           {searchQuery.trim() ? (
             <div className="flex flex-wrap gap-2">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  setSearchInput("");
+                  replaceCatalogParams({ q: null, page: 1 });
+                }}
+              >
+                검색 지우기
+              </Button>
               {["체리", "HMX", "Gateron", "포론", "PBT"].map((hint) => (
                 <Button
                   key={hint}
@@ -768,7 +779,15 @@ export function CatalogBrowseView({
                 </Button>
               ))}
             </div>
-          ) : null}
+          ) : activeFilterChips.length > 0 ? (
+            <Button type="button" variant="outline" size="sm" onClick={clearAllSecondaryFilters}>
+              필터 초기화
+            </Button>
+          ) : (
+            <Button type="button" variant="outline" size="sm" onClick={() => replaceCatalogParams({ family: "switch", subtype: "", page: 1 })}>
+              스위치 탭으로 돌아가기
+            </Button>
+          )}
         </div>
       ) : null}
 

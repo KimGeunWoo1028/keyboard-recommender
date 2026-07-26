@@ -288,9 +288,8 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
               </Button>
               <Button
                 type="button"
-                variant="outline"
+                variant="destructive"
                 size="sm"
-                className="border-destructive/40 text-destructive hover:bg-destructive/10"
                 disabled={isRemoving}
                 onClick={() => setPendingDelete(selected)}
               >
@@ -352,7 +351,12 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
         <div className="space-y-3 rounded-lg border border-ca-outline-variant/50 p-5 text-sm text-ca-on-surface-variant">
           {items.length ? (
             showSearch && activeQuery.trim() ? (
-              <p>검색 결과가 없습니다.</p>
+              <>
+                <p>검색 결과가 없습니다.</p>
+                <Button type="button" variant="outline" size="sm" onClick={() => setQuery("")}>
+                  검색 지우기
+                </Button>
+              </>
             ) : (
               <p>조건에 맞는 저장 빌드가 없습니다.</p>
             )
@@ -379,7 +383,7 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
                       }
                     }}
                   >
-                    최근 결과로 돌아가기
+                    최근 추천 결과로 돌아가기
                   </Button>
                 ) : null}
               </div>
@@ -407,8 +411,7 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
                 취소
               </Button>
               <Button
-                variant="outline"
-                className="border-destructive/50 text-destructive hover:bg-destructive/10"
+                variant="destructive"
                 disabled={removingKeys.has(savedItemKey(pendingDelete))}
                 onClick={() => {
                   const target = pendingDelete;

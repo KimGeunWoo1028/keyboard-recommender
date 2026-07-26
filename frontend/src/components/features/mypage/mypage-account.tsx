@@ -581,7 +581,7 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
       >
         <p className="text-sm text-ca-on-surface-variant">{DELETE_WARNING}</p>
         <Button
-          variant={openDeletePanel ? "primary" : "outline"}
+          variant={openDeletePanel ? "destructive" : "outline"}
           className="w-full justify-between"
           onClick={() => {
             setOpenDeletePanel((prev) => !prev);
@@ -710,6 +710,7 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
               «{DELETE_CONFIRM_WORD}» 입력 확인
             </p>
             <Button
+              variant="destructive"
               disabled={deletingAccount || !deleteVerified || securityActionBusy !== "none"}
               onClick={() => {
                 setDeleteMessage(null);

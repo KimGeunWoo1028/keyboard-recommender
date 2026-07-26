@@ -115,6 +115,7 @@ Records remain under .design-ref/ and older doc revisions for history.
 5. **Accessibility is craft** — contrast, focus-visible, reduced motion, skip links.
 6. **Motion explains change** — open/submit/tab; do not animate to look alive.
 7. **System over local cleverness** — prefer shared tokens and `components/ui`.
+8. **Shared copy & state** — follow [`docs/ui-ux-system-guidelines.md`](./docs/ui-ux-system-guidelines.md) for terminology, empty/error recovery, and Asia/Seoul time display.
 
 ---
 
@@ -122,5 +123,6 @@ Records remain under .design-ref/ and older doc revisions for history.
 
 | Date | Change |
 |------|--------|
+| 2026-07-26 | Pass 6: pointer to UI/UX system guidelines (copy, status, time, a11y). |
 | 2026-07-22 | Launch readiness L01: live purple-dark UI confirmed as canonical; Desk Craft reclassified as prior exploration / future option; docs aligned to implementation without a full UI redesign. |
 | (earlier) | Desk Craft synthesis drafted as a proposed direction (not applied to production pages). |

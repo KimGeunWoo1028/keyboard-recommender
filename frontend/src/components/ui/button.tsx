@@ -10,6 +10,9 @@ const variants = {
   outline: "border border-border bg-transparent hover:bg-muted",
   ghost: "hover:bg-muted",
   link: "text-primary underline-offset-4 hover:underline",
+  /** Danger actions — never reuse primary purple fill. */
+  destructive:
+    "border border-destructive/50 bg-transparent text-destructive hover:bg-destructive/10 active:bg-destructive/15",
 } as const;
 
 const sizes = {

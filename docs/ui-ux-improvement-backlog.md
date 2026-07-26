@@ -115,7 +115,7 @@
 | MYPAGE-02 | 저장한 빌드 | 저장본 재활용 가치 | `추천 결과 다시 보기`가 비활성인 저장본이 있고, 설명은 있지만 왜 지금 행동할 수 없는지 체감 가치는 낮음 | 상세 패널에서 "같은 브라우저에서 저장한 빌드만 가능" 안내와 함께 버튼 비활성 확인 | 비활성 사유를 더 분명히 설명하고, 가능한 대체 행동(상세 확인, 다시 설문 등)을 더 가깝게 배치 | `P2` | `frontend/src/components/features/mypage/mypage-saved-builds.tsx` | 저장본 유형별로 사용자가 다음 행동을 이해하는지 인터뷰/QA 확인 |
 | CATALOG-01 | 카탈로그 | 상단 안내 밀도 | 카탈로그 진입 직후 설명과 보조 문구가 많아 탐색 전 인지 부하가 있다 | 1280/1440 기준 상단 설명 블록과 컨트롤 주변 텍스트 밀도 높음 | 핵심 안내 1줄만 남기고 보조 설명은 접거나 하단으로 이동 | `P2` · Pass 5 완료 | `frontend/src/components/features/catalog/catalog-browse-view.tsx` | 첫 검색/필터 사용까지 걸리는 시간 비교 |
 | MOBILE-01 | 모바일 헤더 / 메뉴 | 모바일 메뉴 밀도 | 모바일 메뉴 안에 검색, 테마, 내비게이션, 로그아웃이 한 번에 들어와 초점이 분산됨 | 390px, 360px에서 실제 메뉴 확인 | 모바일 메뉴를 작업 중심으로 재정렬하고 보조 기능은 접기/하단 분리 | `P2` · Pass 5 완료 | `frontend/src/components/layout/*`, `frontend/src/components/navigation/*` | 360px에서 주요 목적지 이동 시간과 오탭 여부 확인 |
-| SYSTEM-02 | 공통 UI / 카피 | 저장 관련 용어 일관성 | `이 빌드 저장`, `로컬에 저장`, `저장한 빌드`, `이 브라우저의 최근 결과 보기` 등 표현이 화면마다 달라 저장 모델 학습 비용이 생김 | 결과/마이페이지/홈에서 서로 다른 용어가 공존 | 로그인 저장, 로컬 저장, 최근 결과의 용어 체계를 문서화하고 전 화면에 통일 적용 | `P3` | `frontend/src/components/features/recommendation/*`, `frontend/src/components/features/mypage/*`, `frontend/src/components/features/home/*` | 첫 이용자에게 저장 종류 차이를 설명 없이 이해시키는지 확인 |
+| SYSTEM-02 | 공통 UI / 카피 | 저장 관련 용어 일관성 | `이 빌드 저장`, `로컬에 저장`, `저장한 빌드`, `이 브라우저의 최근 결과 보기` 등 표현이 화면마다 달라 저장 모델 학습 비용이 생김 | 결과/마이페이지/홈에서 서로 다른 용어가 공존 | 로그인 저장, 로컬 저장, 최근 결과의 용어 체계를 문서화하고 전 화면에 통일 적용 | `P3` · Pass 6 완료 | `frontend/src/components/features/recommendation/*`, `frontend/src/components/features/mypage/*`, `frontend/src/components/features/home/*` | 첫 이용자에게 저장 종류 차이를 설명 없이 이해시키는지 확인 |
 
 ## 4. 구현 Pass 제안
 
@@ -158,7 +158,10 @@
 
 ### Pass 6: 공통 UI·카피
 
-- `SYSTEM-02` 저장/로컬 저장/최근 결과 용어 통일
+- Status: **구현 완료** (2026-07-26) — Gate: lint/tsc/unit/build
+- `SYSTEM-02` 저장·최근 결과 용어 통일 + `destructive` 버튼 + 빈 상태 회복 CTA
+- Docs: `docs/ui-ux-system-guidelines.md` · `DESIGN_SYSTEM.md` / `DESIGN.md` 동기화
+- Keep: 내비·목록 제목 「저장한 빌드」(대규모 리네임 없음)
 
 ## 5. 하지 말아야 할 개선
 

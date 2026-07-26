@@ -460,7 +460,7 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
         await ensureMinimumSavingFeedback(saveStartedAt);
         applySavedState(
           "local",
-          savedItem.request_id !== requestId ? "이미 이 기기에 저장된 빌드입니다." : "이 기기에 저장했습니다.",
+          savedItem.request_id !== requestId ? "이미 이 브라우저에 저장된 조합입니다." : "이 브라우저에 저장했습니다.",
         );
       } catch (e) {
         await ensureMinimumSavingFeedback(saveStartedAt);
@@ -517,7 +517,7 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
       const alreadySaved =
         result.reason === "already_saved" || (savedItem ? savedItem.request_id !== requestId : false);
       await ensureMinimumSavingFeedback(saveStartedAt);
-      applySavedState("account", alreadySaved ? "이미 마이페이지에 저장된 빌드입니다." : "마이페이지에 저장했습니다.");
+      applySavedState("account", alreadySaved ? "이미 마이페이지에 저장된 조합입니다." : "마이페이지에 저장했습니다.");
       void emitExplorationEvent({
         event_type: "interaction.collection_tag",
         request_id: globalThis.crypto?.randomUUID?.() ?? `req-${Date.now()}-col`,

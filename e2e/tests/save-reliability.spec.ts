@@ -190,7 +190,7 @@ test.describe("Save reliability", () => {
 
     const saveButton = page.getByTestId("e2e-save-build");
     console.log("assert:save-button-idle");
-    await expect(saveButton).toHaveText("이 빌드 저장", { timeout: 30_000 });
+    await expect(saveButton).toHaveText("이 조합 저장", { timeout: 30_000 });
 
     const saveResponsePromise = page.waitForResponse(
       (response) =>
@@ -278,7 +278,7 @@ test.describe("Save reliability", () => {
     await openDeterministicResults(page);
 
     const saveButton = page.getByTestId("e2e-save-build");
-    await expect(saveButton).toHaveText("이 빌드 저장", { timeout: 30_000 });
+    await expect(saveButton).toHaveText("이 조합 저장", { timeout: 30_000 });
 
     let failOnce = true;
     await page.route("**/api/v1/recommendations/saved", async (route) => {
@@ -301,7 +301,7 @@ test.describe("Save reliability", () => {
     await expect(errorAlert).toContainText("네트워크 연결을 확인한 뒤 다시 시도해 주세요");
     await expect(errorAlert).not.toContainText(/Failed to fetch/i);
     await expect(saveButton).toBeEnabled();
-    await expect(saveButton).toHaveText("이 빌드 저장");
+    await expect(saveButton).toHaveText("이 조합 저장");
 
     const retryResponsePromise = page.waitForResponse(
       (response) =>
@@ -323,7 +323,7 @@ test.describe("Save reliability", () => {
     await openDeterministicResults(page);
 
     const saveButton = page.getByTestId("e2e-save-build");
-    await expect(saveButton).toHaveText("이 빌드 저장", { timeout: 30_000 });
+    await expect(saveButton).toHaveText("이 조합 저장", { timeout: 30_000 });
 
     let postCount = 0;
     await page.route("**/api/v1/recommendations/saved", async (route) => {

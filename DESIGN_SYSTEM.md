@@ -111,12 +111,12 @@ Implemented in `components/ui/button.tsx` (`variant`):
 
 | Role | Variant | When |
 |------|---------|------|
-| **Primary** | `primary` (default) | One main action per moment (e.g. results「이 빌드 저장」, survey start) |
-| **Secondary** | `outline` | Parallel but quieter (e.g. Swagkey link, header「로그인」, results tabs selected surface) |
+| **Primary** | `primary` (default) | One main action per moment (e.g. results「이 조합 저장」, survey start) |
+| **Secondary** | `outline` | Parallel but quieter (e.g. Swagkey link, header「로그인」, selected tab surface) |
 | **Tertiary** | `ghost` / `link` | Low emphasis navigation |
-| **Destructive** | Prefer error tokens + confirm patterns; do not reuse primary purple for danger |
+| **Destructive** | `destructive` | Delete / account deletion — confirm required; never purple fill |
 
-Pass 2 policy: avoid two competing filled primaries in the same viewport. Results bottom save uses `outline` after the primary next-actions block.
+Pass policy: avoid two competing filled primaries in the same viewport. Results save lives once in `ResultsNextActions` (Pass 3). Full glossary + status rules: [`docs/ui-ux-system-guidelines.md`](./docs/ui-ux-system-guidelines.md).
 
 ---
 
@@ -127,9 +127,16 @@ Pass 2 policy: avoid two competing filled primaries in the same viewport. Result
 | Token | `--focus-ring`, `--focus-ring-offset` |
 | Global | `:focus-visible { outline: 2px solid rgb(var(--focus-ring)); outline-offset: var(--focus-ring-offset); }` |
 | Controls | Button / Input / Select also use `focus-visible:ring-2` with `--focus-ring` |
+| Skip link | Root layout → `#main-content`; ring uses `--focus-ring` |
 | Mouse | `:focus:not(:focus-visible) { outline: none }` |
 
 Do not remove focus styles for aesthetics.
+
+---
+
+## Date & time
+
+Display helpers live in `frontend/src/lib/date-time.ts` (`Asia/Seoul`). See Pass 6 guidelines §7. Do not call bare `toLocaleDateString()` / `toLocaleString()` in UI.
 
 ---
 
@@ -197,5 +204,6 @@ Older revisions of this file described a material “Desk Craft” system (anti-
 
 | Date | Change |
 |------|--------|
+| 2026-07-26 | Pass 6: `destructive` button variant; save glossary; date/time + guidelines pointer. |
 | 2026-07-22 | L01: rewritten against live tokens/components; purple-dark default documented; Desk Craft demoted; focus, button hierarchy, and results IA from Pass 1–3 recorded. |
 | (earlier) | Desk Craft aspirational spec drafted (status noted as not yet applied to pages). |

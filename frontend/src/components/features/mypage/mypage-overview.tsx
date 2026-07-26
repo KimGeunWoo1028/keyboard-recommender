@@ -169,7 +169,7 @@ export function MyPageOverview({ user, savedItems }: Props) {
         <p className="mt-3 font-headline text-3xl font-semibold tabular-nums tracking-tight text-ca-on-surface">
           {savedItems.length}
         </p>
-        <p className="mt-1 text-sm text-ca-on-surface-variant">저장된 추천 빌드</p>
+        <p className="mt-1 text-sm text-ca-on-surface-variant">저장된 추천 조합</p>
 
         <div className="mt-5 flex-1 border-t border-ca-outline-variant/30 pt-5">
           {latestSaved ? (
@@ -199,24 +199,24 @@ export function MyPageOverview({ user, savedItems }: Props) {
             </div>
           ) : hasRecommendationHint ? (
             <div className="space-y-2">
-              <p className="text-sm font-medium text-ca-on-surface-variant">최근 결과 (이 브라우저)</p>
+              <p className="text-sm font-medium text-ca-on-surface-variant">최근 추천 결과</p>
               <p className="break-keep text-sm leading-relaxed text-ca-on-surface-variant">
                 {relative
-                  ? `이 기기에 ${relative} 설문 결과가 있습니다. 계정 저장 목록에는 아직 없습니다.`
-                  : "이 기기에 설문 결과가 있습니다. 계정 저장 목록에는 아직 없습니다."}
+                  ? `이 브라우저에 ${relative} 설문 결과가 있습니다. 계정 저장 목록에는 아직 없습니다.`
+                  : "이 브라우저에 설문 결과가 있습니다. 계정 저장 목록에는 아직 없습니다."}
               </p>
               <Link
                 href="/results"
                 prefetch={false}
                 className="inline-block text-sm font-medium text-ca-primary hover:underline"
               >
-                최근 결과 열기 →
+                최근 추천 결과 열기 →
               </Link>
             </div>
           ) : (
             <div className="space-y-2">
               <p className="text-sm text-ca-on-surface-variant">
-                아직 저장한 빌드가 없습니다. 결과에서 「이 빌드 저장」을 누르면 여기에 모입니다.
+                아직 저장한 빌드가 없습니다. 결과에서 「이 조합 저장」을 누르면 여기에 모입니다.
               </p>
               <Link
                 href="/recommend"
@@ -240,10 +240,10 @@ export function MyPageOverview({ user, savedItems }: Props) {
           prefetch={false}
           className="mt-2 self-start text-sm font-medium text-ca-on-surface-variant underline-offset-4 hover:text-ca-on-surface hover:underline"
         >
-          이 브라우저의 최근 결과 보기 →
+          최근 추천 결과 보기 →
         </Link>
         <p className="mt-3 break-keep text-xs leading-relaxed text-ca-on-surface-variant">
-          별도 북마크·히스토리 페이지는 없습니다. 저장한 빌드와 이 브라우저의 최근 결과가 재방문 기록입니다.
+          별도 북마크·히스토리 페이지는 없습니다. 저장한 빌드와 최근 추천 결과가 재방문 기록입니다.
         </p>
       </div>
     </div>

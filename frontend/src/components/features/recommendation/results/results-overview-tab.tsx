@@ -176,7 +176,7 @@ export function ResultsOverviewTab({
       <Card className="overflow-hidden rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest shadow-none" data-testid="e2e-server-ranked">
         <CardHeader className="border-b border-ca-outline-variant/35 pb-3 sm:pb-4">
           <CardTitle className="flex items-center gap-2 font-headline text-base font-semibold text-ca-on-surface">
-            <span>추천 빌드 구성</span>
+            <span>추천 조합 구성</span>
             <HelpHint text="이번 결과에서 선택된 핵심 구성품(스위치, 플레이트, 폼, 레이아웃, 케이스/키트, 키캡) 요약입니다." />
           </CardTitle>
           <CardDescription className="text-ca-on-surface-variant">
@@ -257,8 +257,8 @@ export function ResultsOverviewTab({
           </details>
           <p className="mt-3 break-keep text-sm text-ca-on-surface-variant">
             {isAuthenticated
-              ? "계정 저장은 상단 「이 빌드 저장」으로 할 수 있어요. 마이페이지에서 다시 확인할 수 있습니다."
-              : "상단 「로컬에 저장」은 이 브라우저에만 남습니다. 다른 기기에서도 보려면 로그인 후 저장하세요."}
+              ? "계정 저장은 상단 「이 조합 저장」으로 할 수 있어요. 마이페이지에서 다시 확인할 수 있습니다."
+              : "상단 「이 브라우저에 저장」은 이 브라우저에만 남습니다. 다른 기기에서도 보려면 로그인 후 저장하세요."}
           </p>
           <Link
             href="/mypage?section=saved"
