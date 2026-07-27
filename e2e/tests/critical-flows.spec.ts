@@ -5,7 +5,8 @@ import { completeDeterministicSurvey } from "./helpers/survey-flow";
 test.describe("Critical product flows", () => {
   test("onboarding: authenticated user reaches survey wizard", async ({ page }) => {
     await page.goto("/");
-    await page.getByRole("link", { name: /추천 설문 시작/i }).click();
+    // HOME-01 unified CTA label; page has multiple identical links — use hero primary.
+    await page.getByTestId("e2e-home-start-survey").click();
     await expect(page).toHaveURL((u) => new URL(u).pathname === "/recommend");
     await expect(page.getByTestId("e2e-survey-wizard")).toBeVisible({ timeout: 30_000 });
   });
