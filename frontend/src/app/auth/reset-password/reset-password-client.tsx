@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { type FormEvent, useMemo, useState } from "react";
+import { type FormEvent, useMemo, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,6 +10,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { confirmPasswordReset } from "@/lib/api/auth";
 import { ApiError } from "@/lib/api/client";
+import { syncPasswordMatchValidity } from "@/lib/form-validation-ko";
+import { FieldValidationError, useKoreanFieldValidation } from "@/lib/use-korean-field-validation";
 
 function isPasswordPolicyValid(value: string): boolean {
   if (!/^[\x21-\x7E]{8,20}$/.test(value)) return false;
@@ -31,12 +33,21 @@ export function ResetPasswordClient() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState(false);
+  const passwordField = useKoreanFieldValidation("password");
+  const confirmPasswordField = useKoreanFieldValidation("confirmPassword");
+  const passwordInputRef = useRef<HTMLInputElement | null>(null);
+  const confirmPasswordInputRef = useRef<HTMLInputElement | null>(null);
 
   const passwordMatches = confirmPassword.length > 0 && newPassword === confirmPassword;
   const policyValid = isPasswordPolicyValid(newPassword);
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
+    syncPasswordMatchValidity(passwordInputRef.current, confirmPasswordInputRef.current);
+    if (confirmPasswordInputRef.current && !confirmPasswordInputRef.current.checkValidity()) {
+      confirmPasswordInputRef.current.reportValidity();
+      return;
+    }
     setBusy(true);
     setError(null);
     try {
@@ -49,7 +60,7 @@ export function ResetPasswordClient() {
         return;
       }
       if (!passwordMatches) {
-        setError("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+        setError("비밀번호가 일치하지 않습니다.");
         return;
       }
       await confirmPasswordReset({ token, new_password: newPassword });
@@ -98,15 +109,20 @@ export function ResetPasswordClient() {
                 </Label>
                 <div className="relative">
                   <Input
+                    ref={passwordInputRef}
                     id="newPassword"
                     type={showPassword ? "text" : "password"}
                     value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
+                    onChange={(e) => {
+                      setNewPassword(e.target.value);
+                      syncPasswordMatchValidity(e.currentTarget, confirmPasswordInputRef.current);
+                    }}
                     required
                     minLength={8}
                     maxLength={20}
                     disabled={busy}
                     className="ca-input pr-10"
+                    {...passwordField.inputProps}
                   />
                   <Button
                     type="button"
@@ -132,6 +148,7 @@ export function ResetPasswordClient() {
                     )}
                   </Button>
                 </div>
+                <FieldValidationError id={passwordField.errorId} message={passwordField.error} />
               </div>
               <div className="space-y-1">
                 <Label htmlFor="confirmPassword" className="ca-label">
@@ -139,15 +156,20 @@ export function ResetPasswordClient() {
                 </Label>
                 <div className="relative">
                   <Input
+                    ref={confirmPasswordInputRef}
                     id="confirmPassword"
                     type={showConfirmPassword ? "text" : "password"}
                     value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    onChange={(e) => {
+                      setConfirmPassword(e.target.value);
+                      syncPasswordMatchValidity(passwordInputRef.current, e.currentTarget);
+                    }}
                     required
                     minLength={8}
                     maxLength={20}
                     disabled={busy}
                     className="ca-input pr-10"
+                    {...confirmPasswordField.inputProps}
                   />
                   <Button
                     type="button"
@@ -173,6 +195,7 @@ export function ResetPasswordClient() {
                     )}
                   </Button>
                 </div>
+                <FieldValidationError id={confirmPasswordField.errorId} message={confirmPasswordField.error} />
               </div>
               <p className="text-xs text-ca-on-surface">
                 <span className={policyValid ? "text-ca-viz-emerald" : "text-destructive"}>{policyValid ? "✓" : "✗"}</span>{" "}
@@ -184,7 +207,11 @@ export function ResetPasswordClient() {
                 </span>{" "}
                 {passwordMatches ? "비밀번호가 일치합니다." : "비밀번호가 일치하지 않습니다."}
               </p>
-              {error ? <p className="text-xs text-destructive">{error}</p> : null}
+              {error ? (
+                <p className="text-xs text-destructive" role="alert">
+                  {error}
+                </p>
+              ) : null}
               <Button type="submit" className="w-full rounded-full" loading={busy}>
                 비밀번호 변경
               </Button>

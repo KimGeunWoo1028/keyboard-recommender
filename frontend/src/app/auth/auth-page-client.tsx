@@ -15,7 +15,8 @@ import {
   authLoginContextCopy,
   safeAuthNextPath,
 } from "@/lib/auth-next";
-
+import { syncPasswordMatchValidity } from "@/lib/form-validation-ko";
+import { FieldValidationError, useKoreanFieldValidation } from "@/lib/use-korean-field-validation";
 /** Legacy key stored `{ email, password }`; we only persist `{ email }` now. */
 const REMEMBER_SIGNIN_KEY = "kr_saved_signin_credentials_v1";
 
@@ -97,6 +98,13 @@ export function AuthPageClient() {
   const [verifyingEmailCode, setVerifyingEmailCode] = useState(false);
   const [authNextPath, setAuthNextPath] = useState<string | null>(null);
 
+  const displayNameField = useKoreanFieldValidation("displayName");
+  const emailField = useKoreanFieldValidation("email");
+  const passwordField = useKoreanFieldValidation("password");
+  const confirmPasswordField = useKoreanFieldValidation("confirmPassword");
+  const passwordInputRef = useRef<HTMLInputElement | null>(null);
+  const confirmPasswordInputRef = useRef<HTMLInputElement | null>(null);
+
   const formBusy = mode === "login" ? loginBusy : signupBusy;
   const activeError = mode === "login" ? loginError : signupError;
 
@@ -174,6 +182,10 @@ export function AuthPageClient() {
     setMode("login");
     setSignupError(null);
     setSignupBusy(false);
+    displayNameField.setError(null);
+    emailField.setError(null);
+    passwordField.setError(null);
+    confirmPasswordField.setError(null);
     // Keep loginNotice (e.g. after successful signup).
   }
 
@@ -183,6 +195,10 @@ export function AuthPageClient() {
     setLoginError(null);
     setLoginNotice(null);
     setLoginBusy(false);
+    displayNameField.setError(null);
+    emailField.setError(null);
+    passwordField.setError(null);
+    confirmPasswordField.setError(null);
     // Existing policy: clear credentials when entering signup from login.
     setEmail("");
     setPassword("");
@@ -199,6 +215,14 @@ export function AuthPageClient() {
     e.preventDefault();
     const submitMode = mode;
     const requestId = ++authRequestGen.current;
+
+    if (submitMode === "signup") {
+      syncPasswordMatchValidity(passwordInputRef.current, confirmPasswordInputRef.current);
+      if (confirmPasswordInputRef.current && !confirmPasswordInputRef.current.checkValidity()) {
+        confirmPasswordInputRef.current.reportValidity();
+        return;
+      }
+    }
 
     if (submitMode === "login") {
       setLoginBusy(true);
@@ -447,6 +471,7 @@ export function AuthPageClient() {
                     }}
                     required={mode === "signup"}
                     disabled={formBusy || checkingDisplayName}
+                    {...displayNameField.inputProps}
                   />
                   <Button
                     type="button"
@@ -459,6 +484,7 @@ export function AuthPageClient() {
                     중복 확인
                   </Button>
                 </div>
+                <FieldValidationError id={displayNameField.errorId} message={displayNameField.error} />
                 {displayNameCheckMessage ? (
                   <p className="text-sm text-ca-on-surface-variant">
                     {displayNameCheckMessage}
@@ -491,7 +517,9 @@ export function AuthPageClient() {
                 }}
                 required
                 disabled={formBusy || (mode === "signup" && !canFillSignupEmail)}
+                {...emailField.inputProps}
               />
+              <FieldValidationError id={emailField.errorId} message={emailField.error} />
             </div>
 
             {mode === "signup" ? (
@@ -546,17 +574,22 @@ export function AuthPageClient() {
               </Label>
               <div className="relative">
                 <Input
+                  ref={passwordInputRef}
                   id="password"
                   name="password"
                   type={showPassword ? "text" : "password"}
                   autoComplete={mode === "login" ? "current-password" : "new-password"}
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    syncPasswordMatchValidity(e.currentTarget, confirmPasswordInputRef.current);
+                  }}
                   required
                   minLength={8}
                   maxLength={20}
                   disabled={formBusy || (mode === "signup" && !canFillSignupCredentials)}
                   className="ca-input pr-10"
+                  {...passwordField.inputProps}
                 />
                 <Button
                   type="button"
@@ -582,6 +615,7 @@ export function AuthPageClient() {
                   )}
                 </Button>
               </div>
+              <FieldValidationError id={passwordField.errorId} message={passwordField.error} />
               {mode === "signup" ? (
                 <div className="space-y-1 pt-1 text-sm text-ca-on-surface-variant">
                   <p>
@@ -607,17 +641,22 @@ export function AuthPageClient() {
                 </Label>
                 <div className="relative">
                   <Input
+                    ref={confirmPasswordInputRef}
                     id="confirmPassword"
                     name="confirmPassword"
                     type={showConfirmPassword ? "text" : "password"}
                     autoComplete="new-password"
                     value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    onChange={(e) => {
+                      setConfirmPassword(e.target.value);
+                      syncPasswordMatchValidity(passwordInputRef.current, e.currentTarget);
+                    }}
                     required
                     minLength={8}
                     maxLength={20}
                     disabled={formBusy || (mode === "signup" && !canFillSignupCredentials)}
                     className="ca-input pr-10"
+                    {...confirmPasswordField.inputProps}
                   />
                   <Button
                     type="button"
@@ -643,6 +682,7 @@ export function AuthPageClient() {
                     )}
                   </Button>
                 </div>
+                <FieldValidationError id={confirmPasswordField.errorId} message={confirmPasswordField.error} />
                 <p className="text-sm text-ca-on-surface-variant">
                   <span className={passwordMatches ? "text-ca-viz-emerald" : "text-destructive"}>
                     {passwordMatches ? "✓" : "✗"}

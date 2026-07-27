@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { requestPasswordReset } from "@/lib/api/auth";
 import { ApiError } from "@/lib/api/client";
+import { FieldValidationError, useKoreanFieldValidation } from "@/lib/use-korean-field-validation";
 
 export function ForgotPasswordClient() {
   const [email, setEmail] = useState("");
@@ -16,6 +17,7 @@ export function ForgotPasswordClient() {
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const emailField = useKoreanFieldValidation("email");
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
@@ -65,14 +67,20 @@ export function ForgotPasswordClient() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 disabled={busy}
+                {...emailField.inputProps}
               />
+              <FieldValidationError id={emailField.errorId} message={emailField.error} />
             </div>
             <Button type="submit" className="w-full rounded-full" loading={busy}>
               재설정 안내 받기
             </Button>
           </form>
           {submitted && message ? <p className="text-xs text-ca-viz-emerald">{message}</p> : null}
-          {error ? <p className="text-xs text-destructive">{error}</p> : null}
+          {error ? (
+            <p className="text-xs text-destructive" role="alert">
+              {error}
+            </p>
+          ) : null}
           <Link
             href="/auth?force=1"
             className="font-label text-ca-label-sm font-medium text-ca-primary underline-offset-2 hover:underline"
