@@ -32,7 +32,7 @@ export function SurveyQuestion<T extends SurveyStepId>({ step, value, onChange, 
   return (
     <div className={cn("flex w-full flex-col gap-4", className)}>
       <div className="shrink-0 sm:max-w-2xl">
-        <h2 className="whitespace-pre-line break-keep font-headline text-xl font-semibold tracking-tight text-ca-on-surface sm:text-2xl">
+        <h2 className="whitespace-pre-line break-keep font-headline text-xl font-extrabold tracking-tight text-ca-on-surface sm:text-2xl">
           {step.title}
         </h2>
         <p className="mt-2 break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:text-base">
@@ -54,17 +54,17 @@ export function SurveyQuestion<T extends SurveyStepId>({ step, value, onChange, 
               aria-checked={selected}
               onClick={() => onChange(opt.id)}
               className={cn(
-                "group relative flex w-full min-w-0 flex-col items-start justify-start gap-2 rounded-xl border p-4 text-left transition-colors sm:p-4",
+                "group relative flex w-full min-w-0 flex-col items-start justify-start gap-2 rounded-xl border-2 bg-white p-4 text-left transition-colors dark:bg-ca-surface-container sm:p-4",
                 flexRow && "sm:flex-1",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                 selected
-                  ? "border-ca-on-surface bg-ca-surface-container-lowest"
-                  : "border-ca-outline-variant/40 bg-ca-surface-container-lowest/60 hover:border-ca-on-surface/30",
+                  ? "border-primary bg-ca-primary-container/10"
+                  : "border-border hover:border-primary/50",
               )}
             >
               {selected ? (
                 <span
-                  className="absolute right-3 top-3 flex h-5 w-5 items-center justify-center rounded-full border border-ca-on-surface text-ca-on-surface"
+                  className="absolute right-3 top-3 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-primary-foreground"
                   aria-hidden
                 >
                   <svg className="h-3 w-3" viewBox="0 0 12 12" fill="none" stroke="currentColor">

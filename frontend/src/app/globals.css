@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 /*
-  Design tokens:
-  - Light (:root) → Luminous Artisan (DESIGN.md)
-  - Dark (.dark) → Cyber-Artisan (Stitch)
+  Design tokens — Precision Editorial (Manus demo-final)
+  - Light (:root) → deep indigo brand (default)
+  - Dark (.dark) → deep surfaces + soft indigo (theme toggle)
   Existing semantic names (background/primary/…) stay so current UI keeps working.
 */
 
@@ -15,146 +15,142 @@
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
 
-    /* Legacy semantic — Luminous Artisan light */
-    --background: 250 248 255;
-    --foreground: 19 27 46;
+    /* Precision Editorial light — Manus deep indigo #3730A3 */
+    --background: 255 255 255;
+    --foreground: 15 15 25;
     --card: 255 255 255;
-    --card-foreground: 19 27 46;
-    --primary: 124 58 237;
+    --card-foreground: 15 15 25;
+    --primary: 55 48 163;
     --primary-foreground: 255 255 255;
-    --secondary: 0 108 73;
-    --secondary-foreground: 255 255 255;
-    --muted: 242 243 255;
-    --muted-foreground: 74 68 85;
-    --border: 226 232 240;
-    --ring: 124 58 237;
-    --radius: 1rem;
+    --secondary: 245 158 11;
+    --secondary-foreground: 15 15 25;
+    --muted: 245 245 252;
+    --muted-foreground: 90 90 120;
+    --border: 220 220 235;
+    --ring: 55 48 163;
+    --radius: 0.75rem;
     --radius-btn: 0.5rem;
 
-    /* Luminous Artisan (light DESIGN.md) */
-    --ca-surface: 250 248 255;
-    --ca-surface-dim: 210 217 244;
-    --ca-surface-bright: 250 248 255;
+    --ca-surface: 255 255 255;
+    --ca-surface-dim: 238 238 248;
+    --ca-surface-bright: 255 255 255;
     --ca-surface-container-lowest: 255 255 255;
-    --ca-surface-container-low: 242 243 255;
-    --ca-surface-container: 234 237 255;
-    --ca-surface-container-high: 226 231 255;
-    --ca-surface-container-highest: 218 226 253;
-    --ca-on-surface: 19 27 46;
-    --ca-on-surface-variant: 74 68 85;
-    --ca-inverse-surface: 40 48 68;
-    --ca-inverse-on-surface: 238 240 255;
-    --ca-outline: 123 116 135;
-    --ca-outline-variant: 204 195 216;
-    --ca-surface-tint: 115 46 228;
-    --ca-primary: 99 14 212;
+    --ca-surface-container-low: 248 248 252;
+    --ca-surface-container: 243 243 252;
+    --ca-surface-container-high: 235 235 250;
+    --ca-surface-container-highest: 225 225 245;
+    --ca-on-surface: 15 15 25;
+    --ca-on-surface-variant: 80 80 110;
+    --ca-inverse-surface: 20 20 40;
+    --ca-inverse-on-surface: 245 245 255;
+    --ca-outline: 140 140 170;
+    --ca-outline-variant: 210 210 230;
+    --ca-surface-tint: 55 48 163;
+    --ca-primary: 55 48 163;
     --ca-on-primary: 255 255 255;
-    --ca-primary-container: 124 58 237;
-    --ca-on-primary-container: 237 224 255;
-    --ca-inverse-primary: 210 187 255;
-    --ca-secondary: 0 108 73;
-    --ca-on-secondary: 255 255 255;
-    --ca-secondary-container: 108 248 187;
-    --ca-on-secondary-container: 0 113 77;
-    --ca-tertiary: 160 0 47;
+    --ca-primary-container: 79 70 229;
+    --ca-on-primary-container: 238 235 255;
+    --ca-inverse-primary: 165 180 252;
+    --ca-secondary: 245 158 11;
+    --ca-on-secondary: 15 15 25;
+    --ca-secondary-container: 253 230 138;
+    --ca-on-secondary-container: 120 70 0;
+    --ca-tertiary: 16 185 129;
     --ca-on-tertiary: 255 255 255;
-    --ca-tertiary-container: 200 26 66;
-    --ca-on-tertiary-container: 255 222 223;
-    --ca-error: 186 26 26;
+    --ca-tertiary-container: 167 243 208;
+    --ca-on-tertiary-container: 0 80 50;
+    --ca-error: 220 38 38;
     --ca-on-error: 255 255 255;
-    --ca-error-container: 255 218 214;
-    --ca-on-error-container: 147 0 10;
-    --ca-background: 250 248 255;
-    --ca-on-background: 19 27 46;
-    --ca-surface-variant: 218 226 253;
+    --ca-error-container: 254 226 226;
+    --ca-on-error-container: 153 27 27;
+    --ca-background: 255 255 255;
+    --ca-on-background: 15 15 25;
+    --ca-surface-variant: 238 238 248;
     --ca-viz-emerald: 16 185 129;
     --ca-viz-gold: 245 158 11;
-    --ca-base: 15 23 42;
+    --ca-base: 15 15 25;
 
-    /* Paper / ambient — not cyber glow */
-    --ca-ghost-border: 226 232 240;
-    --ca-ghost-border-opacity: 1;
+    --ca-ghost-border: 15 15 25;
+    --ca-ghost-border-opacity: 0.1;
     --ca-glass-fill: 255 255 255;
     --ca-glass-fill-opacity: 0.92;
     --ca-input-fill: 255 255 255;
     --ca-elevated-shadow:
-      0 1px 3px rgb(15 23 42 / 0.08),
-      0 4px 12px rgb(15 23 42 / 0.03);
-    --ca-btn-glow: none;
-    --ca-focus-glow: none;
-    /* Keyboard focus — prefer contrast over brand tint on dark surfaces */
-    --focus-ring: 99 14 212;
+      0 1px 3px rgb(15 15 25 / 0.08),
+      0 8px 24px rgb(55 48 163 / 0.08);
+    --ca-btn-glow: 0 8px 24px rgb(55 48 163 / 0.25);
+    --ca-focus-glow: 0 0 0 3px rgb(55 48 163 / 0.2);
+    --focus-ring: 55 48 163;
     --focus-ring-offset: 3px;
 
     color-scheme: light;
   }
 
   .dark {
-    /* Legacy semantic → Cyber-Artisan dark (existing bg-primary etc. pick up stitch) */
-    --background: 13 13 21;
-    --foreground: 231 224 237;
-    --card: 33 30 39;
-    --card-foreground: 231 224 237;
-    --primary: 208 188 255;
-    --primary-foreground: 60 0 145;
-    --secondary: 137 206 255;
-    --secondary-foreground: 0 52 77;
-    --muted: 44 40 50;
-    --muted-foreground: 203 195 215;
-    --border: 73 68 84;
-    --ring: 208 188 255;
+    /* Precision Editorial dark — deep indigo surfaces */
+    --background: 13 13 28;
+    --foreground: 240 240 255;
+    --card: 22 22 40;
+    --card-foreground: 240 240 255;
+    --primary: 129 140 248;
+    --primary-foreground: 15 15 35;
+    --secondary: 245 158 11;
+    --secondary-foreground: 15 15 25;
+    --muted: 28 28 48;
+    --muted-foreground: 170 170 200;
+    --border: 50 50 78;
+    --ring: 129 140 248;
 
-    /* Cyber-Artisan dark (DESIGN.md) */
-    --ca-surface: 21 18 27;
-    --ca-surface-dim: 21 18 27;
-    --ca-surface-bright: 59 55 66;
-    --ca-surface-container-lowest: 15 13 21;
-    --ca-surface-container-low: 29 26 35;
-    --ca-surface-container: 33 30 39;
-    --ca-surface-container-high: 44 40 50;
-    --ca-surface-container-highest: 55 51 61;
-    --ca-on-surface: 231 224 237;
-    --ca-on-surface-variant: 203 195 215;
-    --ca-inverse-surface: 231 224 237;
-    --ca-inverse-on-surface: 50 47 57;
-    --ca-outline: 149 142 160;
-    --ca-outline-variant: 73 68 84;
-    --ca-surface-tint: 208 188 255;
-    --ca-primary: 208 188 255;
-    --ca-on-primary: 60 0 145;
-    --ca-primary-container: 160 120 255;
-    --ca-on-primary-container: 52 0 128;
-    --ca-inverse-primary: 109 59 215;
-    --ca-secondary: 137 206 255;
-    --ca-on-secondary: 0 52 77;
-    --ca-secondary-container: 0 162 230;
-    --ca-on-secondary-container: 0 52 78;
-    --ca-tertiary: 78 222 163;
-    --ca-on-tertiary: 0 56 36;
-    --ca-tertiary-container: 0 165 114;
-    --ca-on-tertiary-container: 0 49 31;
-    --ca-error: 255 180 171;
-    --ca-on-error: 105 0 5;
-    --ca-error-container: 147 0 10;
-    --ca-on-error-container: 255 218 214;
-    --ca-background: 21 18 27;
-    --ca-on-background: 231 224 237;
-    --ca-surface-variant: 55 51 61;
-    --ca-viz-emerald: 16 185 129;
-    --ca-viz-gold: 245 158 11;
-    --ca-base: 13 13 21;
+    --ca-surface: 13 13 28;
+    --ca-surface-dim: 10 10 22;
+    --ca-surface-bright: 28 28 48;
+    --ca-surface-container-lowest: 10 10 20;
+    --ca-surface-container-low: 18 18 34;
+    --ca-surface-container: 24 24 42;
+    --ca-surface-container-high: 32 32 52;
+    --ca-surface-container-highest: 40 40 62;
+    --ca-on-surface: 240 240 255;
+    --ca-on-surface-variant: 170 170 200;
+    --ca-inverse-surface: 240 240 255;
+    --ca-inverse-on-surface: 20 20 40;
+    --ca-outline: 140 140 175;
+    --ca-outline-variant: 55 55 85;
+    --ca-surface-tint: 129 140 248;
+    --ca-primary: 165 180 252;
+    --ca-on-primary: 15 15 35;
+    --ca-primary-container: 67 56 202;
+    --ca-on-primary-container: 238 235 255;
+    --ca-inverse-primary: 55 48 163;
+    --ca-secondary: 251 191 36;
+    --ca-on-secondary: 15 15 25;
+    --ca-secondary-container: 120 70 0;
+    --ca-on-secondary-container: 253 230 138;
+    --ca-tertiary: 52 211 153;
+    --ca-on-tertiary: 0 40 25;
+    --ca-tertiary-container: 5 120 85;
+    --ca-on-tertiary-container: 167 243 208;
+    --ca-error: 252 165 165;
+    --ca-on-error: 80 0 0;
+    --ca-error-container: 153 27 27;
+    --ca-on-error-container: 254 226 226;
+    --ca-background: 13 13 28;
+    --ca-on-background: 240 240 255;
+    --ca-surface-variant: 32 32 52;
+    --ca-viz-emerald: 52 211 153;
+    --ca-viz-gold: 251 191 36;
+    --ca-base: 240 240 255;
 
-    --ca-ghost-border: 255 255 255;
-    --ca-ghost-border-opacity: 0.1;
-    --ca-glass-fill: 255 255 255;
-    --ca-glass-fill-opacity: 0.03;
-    --ca-input-fill: 0 0 0;
+    --ca-ghost-border: 240 240 255;
+    --ca-ghost-border-opacity: 0.12;
+    --ca-glass-fill: 22 22 40;
+    --ca-glass-fill-opacity: 0.88;
+    --ca-input-fill: 24 24 42;
     --ca-elevated-shadow:
       0 1px 2px rgb(0 0 0 / 0.45),
       0 8px 24px rgb(0 0 0 / 0.35);
-    --ca-btn-glow: none;
-    --ca-focus-glow: none;
-    --focus-ring: 137 206 255;
+    --ca-btn-glow: 0 4px 24px rgb(99 102 241 / 0.35);
+    --ca-focus-glow: 0 0 0 3px rgb(129 140 248 / 0.35);
+    --focus-ring: 165 180 252;
     --focus-ring-offset: 3px;
     --radius-btn: 0.5rem;
 
@@ -164,7 +160,7 @@
   body {
     /* Do not @apply font-body here — custom font utils are unavailable inside @layer base. */
     @apply min-h-screen bg-background text-foreground antialiased;
-    font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-body), var(--font-korean), "Noto Sans KR", ui-sans-serif, system-ui, sans-serif;
   }
 
   ::selection {
@@ -564,6 +560,93 @@
 
   .survey-nl-panel textarea {
     min-height: 4.75rem;
+  }
+
+  /* Manus Precision Editorial utilities */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-headline), ui-sans-serif, system-ui, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgb(var(--ca-primary));
+  }
+  .section-label::before {
+    content: "";
+    display: block;
+    width: 2rem;
+    height: 2px;
+    background: rgb(var(--ca-primary));
+  }
+
+  .ca-keycap-badge,
+  .keycap-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    border: 1.5px solid rgb(var(--ca-outline-variant) / 0.9);
+    background-color: rgb(var(--ca-surface-container-low));
+    color: rgb(var(--ca-primary));
+    font-family: var(--font-headline), ui-sans-serif, system-ui, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 0.15rem 0.625rem;
+    box-shadow: 0 2px 0 rgb(var(--ca-outline-variant) / 0.55);
+  }
+
+  .card-lift {
+    transition:
+      transform 150ms cubic-bezier(0.23, 1, 0.32, 1),
+      box-shadow 150ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .card-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px -8px rgb(var(--ca-primary) / 0.18);
+  }
+
+  @keyframes pe-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-fade-up,
+  .ca-fade-in-up {
+    animation: pe-fade-up 0.5s cubic-bezier(0.23, 1, 0.32, 1) both;
+  }
+  .animate-fade-up-delay-1,
+  .ca-fade-in-up-delay-1 {
+    animation-delay: 80ms;
+  }
+  .animate-fade-up-delay-2,
+  .ca-fade-in-up-delay-2 {
+    animation-delay: 160ms;
+  }
+  .animate-fade-up-delay-3,
+  .ca-fade-in-up-delay-3 {
+    animation-delay: 240ms;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-up,
+    .animate-fade-up-delay-1,
+    .animate-fade-up-delay-2,
+    .animate-fade-up-delay-3,
+    .ca-fade-in-up,
+    .ca-fade-in-up-delay-1,
+    .ca-fade-in-up-delay-2,
+    .ca-fade-in-up-delay-3 {
+      animation: none;
+    }
   }
 
   @media (max-width: 639px) {

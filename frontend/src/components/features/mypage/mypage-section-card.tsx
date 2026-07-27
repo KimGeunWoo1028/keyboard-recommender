@@ -22,12 +22,12 @@ export function MyPageSectionCard({
   return (
     <section
       className={cn(
-        "overflow-hidden rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest",
+        "overflow-hidden rounded-2xl border border-border bg-white shadow-sm shadow-indigo-100/40 dark:bg-ca-surface-container dark:shadow-none",
         className,
       )}
     >
-      <header className={cn("border-b border-ca-outline-variant/30 px-5 py-4 sm:px-6", headerClassName)}>
-        <h2 className="font-headline text-lg font-semibold tracking-tight text-ca-on-surface">{title}</h2>
+      <header className={cn("border-b border-border px-5 py-4 sm:px-6", headerClassName)}>
+        <h2 className="font-headline text-lg font-extrabold tracking-tight text-ca-on-surface">{title}</h2>
         {description ? (
           <p className="mt-1 break-keep text-sm leading-relaxed text-ca-on-surface-variant">{description}</p>
         ) : null}

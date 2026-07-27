@@ -5,8 +5,8 @@ import { cn } from "@/lib/utils";
 type EvidencePickSectionVariant = "default" | "muted" | "warning";
 
 const SHELL: Record<EvidencePickSectionVariant, string> = {
-  default: "border-ca-outline-variant/40 bg-ca-surface-container-lowest",
-  muted: "border-ca-outline-variant/40 bg-ca-surface-container-lowest",
+  default: "border-border bg-white dark:bg-ca-surface-container",
+  muted: "border-border bg-white dark:bg-ca-surface-container",
   warning: "border-amber-500/25 bg-amber-500/5",
 };
 

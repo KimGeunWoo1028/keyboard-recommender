@@ -182,9 +182,9 @@ export function ResultsOverviewTab({
   return (
     <>
       {showParts ? (
-      <Card className="overflow-hidden rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest shadow-none" data-testid="e2e-server-ranked">
-        <CardHeader className="border-b border-ca-outline-variant/35 pb-3 sm:pb-4">
-          <CardTitle className="flex items-center gap-2 font-headline text-base font-semibold text-ca-on-surface">
+      <Card className="overflow-hidden rounded-2xl border border-border bg-white shadow-sm dark:bg-ca-surface-container" data-testid="e2e-server-ranked">
+        <CardHeader className="border-b border-border pb-3 sm:pb-4">
+          <CardTitle className="flex items-center gap-2 font-headline text-base font-bold text-ca-on-surface">
             <span>추천 조합 구성</span>
             <HelpHint text="이번 결과에서 선택된 핵심 구성품(스위치, 플레이트, 폼, 레이아웃, 케이스/키트, 키캡) 요약입니다." />
           </CardTitle>
@@ -211,7 +211,7 @@ export function ResultsOverviewTab({
             return (
               <div
                 key={key}
-                className="flex h-full flex-col overflow-hidden rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container-lowest"
+                className="card-lift flex h-full flex-col overflow-hidden rounded-xl border-2 border-border bg-white transition-colors hover:border-primary/40 dark:bg-ca-surface-container"
               >
                 <CatalogPartThumbnail
                   family={key as CatalogFamily}
@@ -255,7 +255,7 @@ export function ResultsOverviewTab({
             );
           })}
         </CardContent>
-        <div className="border-t border-ca-outline-variant/35 px-4 py-3 sm:px-6">
+        <div className="border-t border-border px-4 py-3 sm:px-6">
           <details className="group">
             <summary className="cursor-pointer list-none text-sm font-medium text-ca-on-surface marker:content-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))] focus-visible:ring-offset-2 [&::-webkit-details-marker]:hidden">
               <span className="underline-offset-2 group-open:underline">구매·재고 안내</span>
@@ -281,7 +281,7 @@ export function ResultsOverviewTab({
 
       {showSecondary && overviewAlternatives.length > 0 ? (
         <>
-          <div className="mt-6 flex flex-col gap-2 rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest px-4 py-4 sm:px-5">
+          <div className="mt-6 flex flex-col gap-2 rounded-xl border border-border bg-white dark:bg-ca-surface-container px-4 py-4 sm:px-5">
             <p className="font-headline text-sm font-semibold text-ca-on-surface">다른 선택지도 보고 싶나요?</p>
             <p className="break-keep text-sm text-ca-on-surface-variant">
               전용 비교 화면 없이, 추천과 비슷한 부품·카탈로그·설문으로 이어갈 수 있어요.
@@ -332,7 +332,7 @@ export function ResultsOverviewTab({
               return (
               <Card
                 key={`${alt.domain}-${alt.itemId}`}
-                className="flex h-full flex-col rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest shadow-none"
+                className="flex h-full flex-col rounded-xl border border-border bg-white dark:bg-ca-surface-container shadow-none"
               >
                 <CardHeader className="flex-1 space-y-2 border-b-0 pb-2">
                   <div className="flex items-start justify-between gap-2">
@@ -355,7 +355,7 @@ export function ResultsOverviewTab({
                     ) : null}
                   </div>
                 </CardHeader>
-                <CardContent className="mt-auto border-t border-ca-outline-variant/35 pt-3">
+                <CardContent className="mt-auto border-t border-border pt-3">
                   <SwagkeyProductLink
                     href={pickRowSourceUrl(
                       { domain: alt.domain, itemId: alt.itemId, sourceUrl: alt.sourceUrl },
@@ -388,7 +388,7 @@ export function ResultsOverviewTab({
 
       {showSecondary ? (
       <details
-        className="group mt-8 rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest"
+        className="group mt-8 rounded-xl border border-border bg-white dark:bg-ca-surface-container"
         open={exploreOpen}
         onToggle={onExploreToggle}
       >
@@ -404,7 +404,7 @@ export function ResultsOverviewTab({
             <span className="hidden shrink-0 pt-0.5 text-xs text-ca-on-surface-variant group-open:inline sm:hidden">접기</span>
           </div>
         </summary>
-        <div className="flex flex-wrap gap-x-4 gap-y-2 border-t border-ca-outline-variant/35 px-4 py-4 sm:px-6">
+        <div className="flex flex-wrap gap-x-4 gap-y-2 border-t border-border px-4 py-4 sm:px-6">
           <Link href={catalogHref({ family: "switch", from: "results" })} className="text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline">
             스위치
           </Link>

@@ -183,7 +183,7 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
         <div className="grid items-stretch gap-4 lg:grid-cols-[minmax(14rem,18rem)_minmax(0,1fr)] lg:min-h-[28rem]">
           <div
             className={cn(
-              "flex max-h-[22rem] flex-col overflow-hidden rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container/20 p-2 sm:p-2.5 lg:max-h-none lg:h-full",
+              "flex max-h-[22rem] flex-col overflow-hidden rounded-xl border border-border bg-white/80 dark:bg-ca-surface-container/40 p-2 sm:p-2.5 lg:max-h-none lg:h-full",
               mobileDetailOpen && "hidden lg:flex",
             )}
             role="listbox"
@@ -230,7 +230,7 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
 
           <div
             className={cn(
-              "flex h-full min-h-[22rem] flex-col rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container/20 p-4 sm:p-5 lg:min-h-0",
+              "flex h-full min-h-[22rem] flex-col rounded-xl border border-border bg-white/80 dark:bg-ca-surface-container/40 p-4 sm:p-5 lg:min-h-0",
               !mobileDetailOpen && "hidden lg:flex",
             )}
           >
@@ -398,7 +398,7 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
             role="dialog"
             aria-modal="true"
             aria-labelledby="mypage-delete-title"
-            className="w-full max-w-md rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest p-5 shadow-lg"
+            className="w-full max-w-md rounded-xl border border-border bg-white dark:bg-ca-surface-container p-5 shadow-lg"
           >
             <p id="mypage-delete-title" className="font-headline text-base font-semibold text-ca-on-surface">
               저장한 결과를 삭제할까요?

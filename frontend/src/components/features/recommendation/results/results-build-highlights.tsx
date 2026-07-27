@@ -23,7 +23,7 @@ export function ResultsBuildHighlights({ build }: ResultsBuildHighlightsProps) {
   return (
     <div
       data-testid="e2e-build-highlights"
-      className="rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest px-4 py-3 sm:px-5"
+      className="rounded-xl border border-border bg-white dark:bg-ca-surface-container px-4 py-3 sm:px-5"
     >
       <p className="text-sm font-medium text-ca-on-surface">추천 이유</p>
       <p className="mt-1 break-keep text-sm leading-relaxed text-ca-on-surface-variant">{summary}</p>

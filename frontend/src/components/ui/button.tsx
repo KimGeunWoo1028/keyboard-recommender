@@ -5,12 +5,12 @@ import { cn } from "@/lib/utils";
 
 const variants = {
   primary:
-    "bg-primary text-primary-foreground shadow-sm hover:opacity-90 active:opacity-100",
+    "bg-primary text-primary-foreground shadow-sm hover:opacity-90 active:scale-[0.97] transition-all duration-150",
   secondary: "bg-muted text-foreground hover:bg-muted/80",
-  outline: "border border-border bg-transparent hover:bg-muted",
-  ghost: "hover:bg-muted",
+  outline: "border border-border bg-transparent hover:bg-muted text-foreground",
+  ghost: "hover:bg-muted text-foreground",
   link: "text-primary underline-offset-4 hover:underline",
-  /** Danger actions — never reuse primary purple fill. */
+  /** Danger actions — never reuse primary fill. */
   destructive:
     "border border-destructive/50 bg-transparent text-destructive hover:bg-destructive/10 active:bg-destructive/15",
 } as const;
@@ -26,7 +26,7 @@ type Variant = keyof typeof variants;
 type Size = keyof typeof sizes;
 
 const baseClass =
-  "relative inline-flex items-center justify-center gap-2 rounded-lg text-sm font-medium transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))] focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50";
+  "relative inline-flex items-center justify-center gap-2 rounded-lg text-sm font-semibold transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))] focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50";
 
 /** Use on `<Link>` when you need a styled anchor that looks like a button. */
 export function buttonClassName(options?: { variant?: Variant; size?: Size; className?: string }) {

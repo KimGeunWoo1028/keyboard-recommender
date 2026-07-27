@@ -155,28 +155,25 @@ export function CatalogDetailPanel({ open, loading, error, family, partDetail, o
 
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-ca-base/70 p-0 backdrop-blur-sm sm:items-center sm:p-4">
-      <Card className={cn("max-h-[90vh] w-full overflow-y-auto border-ca-outline-variant/40 bg-ca-surface-container-lowest shadow-none sm:max-w-2xl")}>
-        <CardHeader className="sticky top-0 z-10 border-b border-ca-outline-variant/40 bg-ca-surface-container/95 backdrop-blur">
+      <Card className={cn("max-h-[90vh] w-full overflow-y-auto rounded-t-2xl border-border bg-white shadow-xl shadow-indigo-100/40 dark:bg-ca-surface-container dark:shadow-none sm:max-w-2xl sm:rounded-2xl")}>
+        <CardHeader className="sticky top-0 z-10 border-b border-border bg-white/95 backdrop-blur dark:bg-ca-surface-container/95">
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0 flex-1 space-y-1">
-              <CardTitle className="font-headline text-lg leading-snug text-ca-on-surface">
+              <p className="section-label">Catalog</p>
+              <CardTitle className="font-headline text-lg font-extrabold leading-snug text-ca-on-surface">
                 {loading ? "불러오는 중…" : title || "상세 정보"}
               </CardTitle>
               {description && !isGenericCatalogCardDescription(description) ? (
                 <CardDescription className="text-ca-on-surface-variant">{description}</CardDescription>
               ) : null}
               {family ? (
-                <p className="font-label text-ca-label-sm font-medium text-ca-on-surface-variant">
+                <p className="text-xs font-semibold uppercase tracking-wider text-ca-on-surface-variant">
                   {FAMILY_LABELS[family]}
                   {partDetail?.referenceLayout ? (
-                    <span className="ml-2 rounded-full border border-ca-outline-variant/50 px-2 py-0.5 text-ca-on-surface-variant">
-                      참조 배열
-                    </span>
+                    <span className="ca-keycap-badge ml-2 normal-case tracking-normal">참조 배열</span>
                   ) : null}
                   {family === "layout" && partDetail && !partDetail.referenceLayout ? (
-                    <span className="ml-2 rounded-full border border-ca-outline-variant/50 px-2 py-0.5 text-ca-on-surface-variant">
-                      기판 상품
-                    </span>
+                    <span className="ca-keycap-badge ml-2 normal-case tracking-normal">기판 상품</span>
                   ) : null}
                 </p>
               ) : null}

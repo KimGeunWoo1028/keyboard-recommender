@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { type FormEvent, useState } from "react";
 
+import { ManusPageHeader } from "@/components/layout/manus-page-header";
+import { ManusSurfaceCard } from "@/components/layout/manus-surface-card";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { requestPasswordReset } from "@/lib/api/auth";
@@ -47,21 +48,22 @@ export function ForgotPasswordClient() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-md overflow-x-hidden px-ca-margin-mobile py-10 sm:px-ca-margin">
-      <Card className="ca-glass-panel border-ca-outline-variant/40">
-        <CardHeader className="border-b-0 space-y-2">
-          <p className="font-label text-ca-label-sm font-medium text-ca-secondary">AUTH</p>
-          <h1 className="font-headline text-lg font-semibold tracking-tight text-ca-on-surface sm:text-xl">
-            비밀번호 재설정
-          </h1>
-          <CardDescription className="text-ca-on-surface-variant">
-            가입한 이메일을 입력하면 비밀번호 재설정 링크를 보내드려요.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <form className="space-y-3" onSubmit={onSubmit} aria-busy={busy || undefined}>
-            <div className="space-y-1">
-              <Label htmlFor="forgot-password-email" className="ca-label">
+    <div className="mx-auto flex min-h-[calc(100dvh-8rem)] w-full max-w-md flex-col justify-center overflow-x-hidden px-ca-margin-mobile py-10 sm:px-ca-margin sm:py-16">
+      <ManusSurfaceCard className="animate-fade-up" padding="none">
+        <div className="space-y-6 border-b border-border px-6 py-7 sm:px-8">
+          <ManusPageHeader
+            eyebrow="Auth"
+            title="비밀번호 재설정"
+            description="가입한 이메일을 입력하면 비밀번호 재설정 링크를 보내드려요."
+          />
+        </div>
+        <div className="space-y-4 px-6 py-6 sm:px-8 sm:py-7">
+          <form className="space-y-4" onSubmit={onSubmit} aria-busy={busy || undefined}>
+            <div className="space-y-1.5">
+              <Label
+                htmlFor="forgot-password-email"
+                className="text-xs font-semibold uppercase tracking-wider text-ca-on-surface-variant"
+              >
                 이메일
               </Label>
               <Input
@@ -69,7 +71,7 @@ export function ForgotPasswordClient() {
                 type="email"
                 name="email"
                 autoComplete="email"
-                className="ca-input"
+                className="ca-input h-11 border-border focus-visible:border-primary"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -78,12 +80,16 @@ export function ForgotPasswordClient() {
               />
               <FieldValidationError id={emailField.errorId} message={emailField.error} />
             </div>
-            <Button type="submit" className="w-full" loading={busy} disabled={busy}>
+            <Button type="submit" className="h-11 w-full font-semibold" loading={busy} disabled={busy}>
               재설정 링크 받기
             </Button>
           </form>
           {submitted && message ? (
-            <p className="break-keep text-sm text-ca-viz-emerald" role="status" data-testid="e2e-forgot-password-success">
+            <p
+              className="break-keep rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2.5 text-sm text-emerald-800 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-100"
+              role="status"
+              data-testid="e2e-forgot-password-success"
+            >
               {message}
             </p>
           ) : null}
@@ -94,12 +100,12 @@ export function ForgotPasswordClient() {
           ) : null}
           <Link
             href="/auth?force=1"
-            className="inline-block text-sm font-medium text-ca-primary underline-offset-2 hover:underline"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-primary underline-offset-2 hover:underline"
           >
             로그인으로 돌아가기
           </Link>
-        </CardContent>
-      </Card>
+        </div>
+      </ManusSurfaceCard>
     </div>
   );
 }

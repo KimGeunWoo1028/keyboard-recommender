@@ -50,8 +50,8 @@ export function ResultsEvidencePickCard({
   return (
     <Card
       className={cn(
-        "grid gap-3 rounded-xl border bg-ca-surface-container-lowest px-5 pb-5 shadow-none md:row-span-6 md:grid-rows-subgrid",
-        index === 0 ? "border-ca-on-surface/40" : "border-ca-outline-variant/40",
+        "grid gap-3 rounded-2xl border-2 bg-white px-5 pb-5 shadow-sm dark:bg-ca-surface-container md:row-span-6 md:grid-rows-subgrid",
+        index === 0 ? "border-primary/40" : "border-border",
       )}
     >
       <CardHeader className="space-y-2 border-b-0 p-0 pt-5">

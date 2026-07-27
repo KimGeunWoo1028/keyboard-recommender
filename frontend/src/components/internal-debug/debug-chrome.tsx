@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { getDebugApiBaseUrl } from "@/lib/debug-api";
 
 export function DebugChrome() {
@@ -24,29 +26,45 @@ export function DebugChrome() {
   const base = getDebugApiBaseUrl();
 
   return (
-    <div className="space-y-3 rounded-lg border border-amber-500/40 bg-amber-500/10 p-4 text-sm">
+    <div className="space-y-4 rounded-2xl border border-amber-500/35 bg-amber-50/80 p-5 text-sm dark:bg-amber-500/10">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <p className="font-semibold text-amber-950 dark:text-amber-100">Internal debug (not public)</p>
-        <Link href="/" className="text-xs underline">
+        <div>
+          <p className="section-label !text-amber-800 dark:!text-amber-200">Debug token</p>
+          <p className="mt-1 font-headline text-base font-bold text-amber-950 dark:text-amber-100">
+            Internal debug (not public)
+          </p>
+        </div>
+        <Link href="/" className="text-xs font-medium text-primary underline-offset-2 hover:underline">
           ← Back to site
         </Link>
       </div>
-      <p className="text-muted-foreground">
+      <p className="break-keep text-ca-on-surface-variant">
         API:{" "}
-        <code className="rounded bg-muted px-1">
+        <code className="rounded-md border border-border bg-white px-1.5 py-0.5 font-mono text-xs dark:bg-ca-surface-container">
           {base || "same-origin /api (use NEXT_PUBLIC_API_URL or INTERNAL_API_PROXY_TARGET in next.config)"}
         </code>
         {" · "}
         Enable backend:{" "}
-        <code className="rounded bg-muted px-1">INTERNAL_DEBUG_API_ENABLED=true</code> and either{" "}
-        <code className="rounded bg-muted px-1">DEBUG=true</code> or set a shared{" "}
-        <code className="rounded bg-muted px-1">INTERNAL_DEBUG_TOKEN</code> and paste it below.
+        <code className="rounded-md border border-border bg-white px-1.5 py-0.5 font-mono text-xs dark:bg-ca-surface-container">
+          INTERNAL_DEBUG_API_ENABLED=true
+        </code>{" "}
+        and either{" "}
+        <code className="rounded-md border border-border bg-white px-1.5 py-0.5 font-mono text-xs dark:bg-ca-surface-container">
+          DEBUG=true
+        </code>{" "}
+        or set a shared{" "}
+        <code className="rounded-md border border-border bg-white px-1.5 py-0.5 font-mono text-xs dark:bg-ca-surface-container">
+          INTERNAL_DEBUG_TOKEN
+        </code>{" "}
+        and paste it below.
       </p>
       <div className="flex flex-col gap-2 sm:flex-row sm:items-end">
-        <label className="flex flex-1 flex-col gap-1 text-xs">
-          <span className="text-muted-foreground">X-Internal-Debug-Token (optional if API runs with DEBUG=true)</span>
-          <input
-            className="rounded-md border border-input bg-background px-2 py-1.5 font-mono text-xs"
+        <label className="flex flex-1 flex-col gap-1.5 text-xs">
+          <span className="font-semibold uppercase tracking-wider text-ca-on-surface-variant">
+            X-Internal-Debug-Token (optional if API runs with DEBUG=true)
+          </span>
+          <Input
+            className="h-10 border-border font-mono text-xs"
             type="password"
             autoComplete="off"
             value={token}
@@ -54,13 +72,9 @@ export function DebugChrome() {
             placeholder="paste token"
           />
         </label>
-        <button
-          type="button"
-          className="rounded-md bg-foreground px-3 py-1.5 text-xs font-medium text-background"
-          onClick={save}
-        >
+        <Button type="button" className="h-10 font-semibold" onClick={save}>
           Save token
-        </button>
+        </Button>
       </div>
     </div>
   );

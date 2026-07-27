@@ -183,7 +183,7 @@ export function MyPageHub() {
   const section = useMemo(() => {
     if (!user) {
       return (
-        <div className="rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest p-5 sm:p-6">
+        <div className="rounded-2xl border border-border bg-white p-5 shadow-sm dark:bg-ca-surface-container sm:p-6">
           <h2 className="font-headline text-lg font-semibold text-ca-on-surface">로그인이 필요합니다.</h2>
           <p className="mt-1 break-keep text-sm leading-relaxed text-ca-on-surface-variant">
             세션이 만료된 경우 다시 로그인해 주세요.
@@ -256,27 +256,30 @@ export function MyPageHub() {
 
   return (
     <div className="space-y-6" data-testid="e2e-mypage-hub">
-      <div className="flex flex-wrap gap-2" role="tablist" aria-label="마이페이지 섹션">
-        {SECTIONS.map((tab) => (
-          <Button
-            key={tab.id}
-            variant={tab.id === active ? "primary" : "outline"}
-            size="default"
-            className={
-              tab.id === active
-                ? "h-10 rounded-lg px-4 sm:px-5"
-                : "h-10 rounded-lg border-ca-outline-variant/50 bg-transparent px-4 text-ca-on-surface-variant hover:border-ca-on-surface/30 hover:bg-ca-surface-container/50 hover:text-ca-on-surface sm:px-5"
-            }
-            onClick={() => selectSection(tab.id)}
-          >
-            {tab.label}
-          </Button>
-        ))}
+      <div className="border-b border-border" role="tablist" aria-label="마이페이지 섹션">
+        <div className="flex flex-wrap gap-1">
+          {SECTIONS.map((tab) => (
+            <button
+              key={tab.id}
+              type="button"
+              role="tab"
+              aria-selected={tab.id === active}
+              className={
+                tab.id === active
+                  ? "inline-flex h-11 items-center border-b-2 border-primary px-4 text-sm font-semibold text-primary sm:px-5"
+                  : "inline-flex h-11 items-center border-b-2 border-transparent px-4 text-sm font-semibold text-ca-on-surface-variant transition-colors hover:text-primary sm:px-5"
+              }
+              onClick={() => selectSection(tab.id)}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       {savedLoadState === "error" ? (
         <div
-          className="rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest p-5 sm:p-6"
+          className="rounded-2xl border border-border bg-white p-5 shadow-sm dark:bg-ca-surface-container sm:p-6"
           data-testid="e2e-mypage-load-error"
         >
           <h2 className="font-headline text-lg font-semibold text-ca-on-surface">{SAVED_LOAD_ERROR_TITLE}</h2>

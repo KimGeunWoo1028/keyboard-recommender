@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
+import { ManusPageHeader } from "@/components/layout/manus-page-header";
+import { ManusSurfaceCard } from "@/components/layout/manus-surface-card";
 import { PageShell } from "@/components/layout/page-shell";
 import { publicPageMetadata } from "@/lib/seo/page-metadata";
 
@@ -12,8 +14,8 @@ type LegalSectionProps = {
 
 function LegalSection({ title, children }: LegalSectionProps) {
   return (
-    <section className="space-y-2">
-      <h2 className="font-headline text-lg font-semibold text-ca-on-surface">{title}</h2>
+    <section className="space-y-2 border-b border-border pb-6 last:border-b-0 last:pb-0">
+      <h2 className="font-headline text-lg font-bold tracking-tight text-ca-on-surface">{title}</h2>
       <div className="space-y-2 text-sm leading-relaxed text-ca-on-surface-variant">{children}</div>
     </section>
   );
@@ -28,15 +30,13 @@ export const metadata: Metadata = publicPageMetadata({
 export default function PrivacyPage() {
   return (
     <PageShell className="max-w-3xl space-y-8 px-ca-margin-mobile pb-16 pt-8 sm:px-ca-margin sm:pb-20">
-      <header className="space-y-2">
-        <p className="font-label text-ca-label-sm font-medium text-ca-secondary">LEGAL</p>
-        <h1 className="font-headline text-2xl font-semibold tracking-tight text-ca-on-surface sm:text-3xl">
-          개인정보처리방침
-        </h1>
-        <p className="text-sm text-ca-on-surface-variant">최종 업데이트: 2026-07-22</p>
-      </header>
+      <ManusPageHeader
+        eyebrow="Legal"
+        title="개인정보처리방침"
+        description={<p>최종 업데이트: 2026-07-22</p>}
+      />
 
-      <div className="space-y-8">
+      <ManusSurfaceCard className="animate-fade-up space-y-6" padding="lg">
         <LegalSection title="1. 운영 주체">
           <p>
             Keyboard Recommender(이하 &quot;서비스&quot;)는 맞춤 키보드 조합 추천을 제공하는 웹 서비스입니다.
@@ -82,7 +82,7 @@ export default function PrivacyPage() {
           <p>
             계정 정보 확인·수정, 저장한 결과 관리, 회원 탈퇴는 마이페이지에서 진행할 수 있습니다.
             개인정보 관련 문의는{" "}
-            <Link href="/contact" className="underline underline-offset-2 hover:text-ca-on-surface">
+            <Link href="/contact" className="font-medium text-primary underline-offset-2 hover:underline">
               문의
             </Link>{" "}
             페이지를 이용해 주세요.
@@ -95,15 +95,15 @@ export default function PrivacyPage() {
             내 고지를 검토합니다.
           </p>
         </LegalSection>
-      </div>
+      </ManusSurfaceCard>
 
       <p className="text-sm text-ca-on-surface-variant">
         관련:{" "}
-        <Link href="/terms" className="underline underline-offset-2 hover:text-ca-on-surface">
+        <Link href="/terms" className="font-medium text-primary underline-offset-2 hover:underline">
           이용약관
         </Link>
         {" · "}
-        <Link href="/contact" className="underline underline-offset-2 hover:text-ca-on-surface">
+        <Link href="/contact" className="font-medium text-primary underline-offset-2 hover:underline">
           문의
         </Link>
       </p>

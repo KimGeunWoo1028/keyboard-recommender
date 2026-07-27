@@ -90,11 +90,12 @@ export function MyPageOverview({ user, savedItems }: Props) {
 
   return (
     <div className="grid items-stretch gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
-      <article className="flex h-full min-h-[22rem] flex-col overflow-hidden rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest sm:min-h-[24rem]">
-        <div className="border-b border-ca-outline-variant/30 px-5 py-5 sm:px-6 sm:py-6">
+      <article className="flex h-full min-h-[22rem] flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-sm dark:bg-ca-surface-container sm:min-h-[24rem]">
+        <div className="border-b border-border px-5 py-5 sm:px-6 sm:py-6">
           <div className="flex items-center justify-between gap-5 sm:gap-8">
             <div className="min-w-0 flex-1">
-              <h2 className="font-headline text-xl font-semibold tracking-tight text-ca-on-surface sm:text-2xl">
+              <p className="section-label mb-2">Profile</p>
+              <h2 className="font-headline text-xl font-extrabold tracking-tight text-ca-on-surface sm:text-2xl">
                 {display}
               </h2>
               {relative ? (
@@ -164,14 +165,15 @@ export function MyPageOverview({ user, savedItems }: Props) {
         </div>
       </article>
 
-      <div className="flex h-full min-h-[22rem] flex-col rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest p-5 sm:min-h-[24rem] sm:p-6">
-        <h3 className="font-headline text-base font-semibold text-ca-on-surface">저장한 결과</h3>
-        <p className="mt-3 font-headline text-3xl font-semibold tabular-nums tracking-tight text-ca-on-surface">
+      <div className="flex h-full min-h-[22rem] flex-col rounded-2xl border border-border bg-white p-5 shadow-sm dark:bg-ca-surface-container sm:min-h-[24rem] sm:p-6">
+        <p className="section-label mb-2">Saved</p>
+        <h3 className="font-headline text-base font-bold text-ca-on-surface">저장한 결과</h3>
+        <p className="mt-3 font-headline text-3xl font-extrabold tabular-nums tracking-tight text-primary">
           {savedItems.length}
         </p>
         <p className="mt-1 text-sm text-ca-on-surface-variant">저장된 추천 결과</p>
 
-        <div className="mt-5 flex-1 border-t border-ca-outline-variant/30 pt-5">
+        <div className="mt-5 flex-1 border-t border-border pt-5">
           {latestSaved ? (
             <div className="space-y-2.5">
               <p className="text-sm font-medium text-ca-on-surface-variant">최근 저장</p>

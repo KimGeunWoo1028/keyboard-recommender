@@ -418,8 +418,9 @@ export function SurveyWizard() {
         className="mx-auto flex h-full w-full max-w-ca flex-col gap-6 sm:gap-8"
         data-testid="e2e-survey-wizard"
       >
-        <div className="shrink-0 sm:max-w-xl">
-          <h1 className="font-headline text-2xl font-semibold tracking-tight text-ca-on-surface sm:text-3xl">
+        <div className="shrink-0 animate-fade-up sm:max-w-xl">
+          <p className="section-label mb-3">Survey</p>
+          <h1 className="font-headline text-2xl font-extrabold tracking-tight text-ca-on-surface sm:text-4xl">
             취향에 맞는 키보드 찾기
           </h1>
           <p className="mt-3 break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:text-base">
@@ -428,42 +429,58 @@ export function SurveyWizard() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
-          {ONBOARDING_STYLES.map((style) => (
-            <button
-              key={style.id}
-              type="button"
-              onClick={() => chooseStyle(style)}
-              className="group flex flex-col items-start justify-start gap-3 rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest p-5 text-left transition-colors hover:border-ca-on-surface/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-primary sm:gap-3 sm:p-5"
-            >
-              <SurveyOnboardingStyleIcon
-                styleId={style.id}
-                className="h-8 w-8 shrink-0 text-ca-on-surface-variant sm:h-9 sm:w-9"
-              />
-              <div className="w-full space-y-2">
-                <p className="font-headline text-base font-semibold leading-tight text-ca-on-surface sm:text-lg">
-                  {style.label}
-                </p>
-                <p className="break-keep text-sm leading-snug text-ca-on-surface-variant sm:text-base">
-                  {style.blurb}
-                </p>
-                <p className="break-keep text-xs leading-snug text-ca-on-surface-variant sm:text-sm">
-                  {style.audience}
-                </p>
-                <ul className="flex flex-wrap gap-1.5" aria-label={`${style.label} 키워드`}>
-                  {style.tags.map((tag) => (
-                    <li
-                      key={tag}
-                      className="rounded-md border border-ca-outline-variant/40 px-2 py-0.5 text-xs text-ca-on-surface-variant"
-                    >
-                      {tag}
-                    </li>
-                  ))}
-                </ul>
-                <p className="text-xs font-medium text-ca-on-surface sm:text-sm">일부 답변을 먼저 채워드려요</p>
-              </div>
-            </button>
-          ))}
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-5">
+          {ONBOARDING_STYLES.map((style, index) => {
+            const selected = selectedStyle === style.id;
+            return (
+              <button
+                key={style.id}
+                type="button"
+                onClick={() => chooseStyle(style)}
+                className={cn(
+                  "card-lift group flex flex-col items-start justify-start gap-3 rounded-xl border-2 bg-white p-5 text-left dark:bg-ca-surface-container sm:gap-3 sm:p-6",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-primary",
+                  selected
+                    ? "border-primary bg-ca-primary-container/10"
+                    : "border-border hover:border-primary/50",
+                  "animate-fade-up",
+                  index === 1 && "animate-fade-up-delay-1",
+                  index === 2 && "animate-fade-up-delay-2",
+                )}
+              >
+                <div
+                  className={cn(
+                    "flex h-10 w-10 items-center justify-center rounded-xl",
+                    selected ? "bg-primary text-primary-foreground" : "bg-ca-surface-container-low text-primary",
+                  )}
+                >
+                  <SurveyOnboardingStyleIcon styleId={style.id} className="h-5 w-5 shrink-0" />
+                </div>
+                <div className="w-full space-y-2">
+                  <div className="h-px bg-border" />
+                  <p className="font-headline text-base font-black leading-tight text-ca-on-surface sm:text-lg">
+                    {style.label}
+                  </p>
+                  <p className="break-keep text-sm leading-snug text-ca-on-surface-variant sm:text-base">
+                    {style.blurb}
+                  </p>
+                  <p className="break-keep text-xs leading-snug text-ca-on-surface-variant sm:text-sm">
+                    {style.audience}
+                  </p>
+                  <ul className="flex flex-wrap gap-1.5" aria-label={`${style.label} 키워드`}>
+                    {style.tags.map((tag) => (
+                      <li key={tag} className="ca-keycap-badge">
+                        {tag}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="text-xs font-medium text-ca-on-surface-variant sm:text-sm">
+                    일부 답변을 먼저 채워드려요
+                  </p>
+                </div>
+              </button>
+            );
+          })}
         </div>
 
         <div className="mt-auto flex shrink-0 flex-col items-stretch gap-3 sm:items-center">
@@ -472,6 +489,7 @@ export function SurveyWizard() {
               type="button"
               variant="outline"
               size="default"
+              className="h-11 border-border font-semibold"
               onClick={() => {
                 setStepIndex(firstUnansweredStepIndex(answers));
                 setPhase("questions");
@@ -483,7 +501,7 @@ export function SurveyWizard() {
           <button
             type="button"
             onClick={startFullSurvey}
-            className="text-sm text-ca-on-surface-variant underline-offset-2 hover:text-ca-on-surface hover:underline"
+            className="text-sm text-ca-on-surface-variant underline-offset-2 hover:text-primary hover:underline"
           >
             성향 없이 전체 설문으로 시작
           </button>
@@ -510,9 +528,11 @@ export function SurveyWizard() {
       {isPrefilledStep && prefilledLabel ? (
         <div
           data-testid="e2e-prefilled-step-banner"
-          className="flex shrink-0 flex-col justify-center rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container-lowest px-4 py-3 sm:py-3.5"
+          className="flex shrink-0 flex-col justify-center rounded-xl border border-primary/20 bg-ca-primary-container/10 px-4 py-3 sm:py-3.5"
         >
-          <p className="text-xs font-medium text-ca-on-surface sm:text-sm">스타일에서 자동 반영됨</p>
+          <p className="text-xs font-semibold uppercase tracking-wider text-primary sm:text-sm">
+            스타일에서 자동 반영됨
+          </p>
           <p className="mt-1 text-sm font-semibold text-ca-on-surface sm:text-base">
             {prefilledLabel.replace(/\s*\([^)]*\)\s*$/, "").trim()}
           </p>
@@ -585,7 +605,7 @@ export function SurveyWizard() {
         </div>
       ) : null}
 
-      <div className="mt-auto shrink-0 space-y-2 border-t border-ca-outline-variant/35 pb-1 pt-3">
+      <div className="mt-auto shrink-0 space-y-2 border-t border-border pb-1 pt-3">
         <div className="flex items-center justify-between gap-2 sm:gap-3">
           <Button
             type="button"
@@ -593,14 +613,20 @@ export function SurveyWizard() {
             size="default"
             onClick={goBack}
             disabled={stepIndex === 0 || submitting}
-            className="gap-1.5 px-2 sm:px-3"
+            className="gap-1.5 px-2 text-ca-on-surface-variant hover:text-primary sm:px-3"
           >
             <NavArrowBack className="h-4 w-4" />
             이전
           </Button>
 
           {!isLastStep ? (
-            <Button type="button" size="default" onClick={goNext} disabled={!canGoNext || submitting} className="gap-1.5">
+            <Button
+              type="button"
+              size="default"
+              onClick={goNext}
+              disabled={!canGoNext || submitting}
+              className="h-11 gap-1.5 px-5 font-semibold"
+            >
               다음
               <NavArrowForward className="h-4 w-4" />
             </Button>
@@ -612,7 +638,7 @@ export function SurveyWizard() {
                 size="default"
                 onClick={() => void finish()}
                 disabled={!surveyComplete || submitting}
-                className="gap-1.5"
+                className="h-11 gap-1.5 px-5 font-semibold"
               >
                 결과 보기
                 <NavArrowForward className="h-4 w-4" />

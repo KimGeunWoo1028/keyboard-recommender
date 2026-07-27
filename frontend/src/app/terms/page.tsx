@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
+import { ManusPageHeader } from "@/components/layout/manus-page-header";
+import { ManusSurfaceCard } from "@/components/layout/manus-surface-card";
 import { PageShell } from "@/components/layout/page-shell";
 import { publicPageMetadata } from "@/lib/seo/page-metadata";
 
@@ -12,8 +14,8 @@ type LegalSectionProps = {
 
 function LegalSection({ title, children }: LegalSectionProps) {
   return (
-    <section className="space-y-2">
-      <h2 className="font-headline text-lg font-semibold text-ca-on-surface">{title}</h2>
+    <section className="space-y-2 border-b border-border pb-6 last:border-b-0 last:pb-0">
+      <h2 className="font-headline text-lg font-bold tracking-tight text-ca-on-surface">{title}</h2>
       <div className="space-y-2 text-sm leading-relaxed text-ca-on-surface-variant">{children}</div>
     </section>
   );
@@ -28,15 +30,13 @@ export const metadata: Metadata = publicPageMetadata({
 export default function TermsPage() {
   return (
     <PageShell className="max-w-3xl space-y-8 px-ca-margin-mobile pb-16 pt-8 sm:px-ca-margin sm:pb-20">
-      <header className="space-y-2">
-        <p className="font-label text-ca-label-sm font-medium text-ca-secondary">LEGAL</p>
-        <h1 className="font-headline text-2xl font-semibold tracking-tight text-ca-on-surface sm:text-3xl">
-          이용약관
-        </h1>
-        <p className="text-sm text-ca-on-surface-variant">최종 업데이트: 2026-07-22</p>
-      </header>
+      <ManusPageHeader
+        eyebrow="Legal"
+        title="이용약관"
+        description={<p>최종 업데이트: 2026-07-22</p>}
+      />
 
-      <div className="space-y-8">
+      <ManusSurfaceCard className="animate-fade-up space-y-6" padding="lg">
         <LegalSection title="1. 서비스 소개">
           <p>
             Keyboard Recommender는 설문 기반 취향 정보를 바탕으로 커스텀 키보드 부품 조합을
@@ -74,7 +74,7 @@ export default function TermsPage() {
           <p>
             서비스는 스웨그키 판매 상품과의 탐색·추천 연결을 제공합니다. 제휴·광고 관계가
             변경될 수 있으며, 관련 고지는 서비스 화면 및{" "}
-            <Link href="/privacy" className="underline underline-offset-2 hover:text-ca-on-surface">
+            <Link href="/privacy" className="font-medium text-primary underline-offset-2 hover:underline">
               개인정보처리방침
             </Link>
             과 함께 확인할 수 있습니다.
@@ -100,21 +100,21 @@ export default function TermsPage() {
         <LegalSection title="7. 문의">
           <p>
             약관·서비스 관련 문의는{" "}
-            <Link href="/contact" className="underline underline-offset-2 hover:text-ca-on-surface">
+            <Link href="/contact" className="font-medium text-primary underline-offset-2 hover:underline">
               문의
             </Link>{" "}
             페이지를 이용해 주세요.
           </p>
         </LegalSection>
-      </div>
+      </ManusSurfaceCard>
 
       <p className="text-sm text-ca-on-surface-variant">
         관련:{" "}
-        <Link href="/privacy" className="underline underline-offset-2 hover:text-ca-on-surface">
+        <Link href="/privacy" className="font-medium text-primary underline-offset-2 hover:underline">
           개인정보처리방침
         </Link>
         {" · "}
-        <Link href="/contact" className="underline underline-offset-2 hover:text-ca-on-surface">
+        <Link href="/contact" className="font-medium text-primary underline-offset-2 hover:underline">
           문의
         </Link>
       </p>
