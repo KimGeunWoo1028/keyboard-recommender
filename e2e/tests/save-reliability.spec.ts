@@ -304,7 +304,7 @@ test.describe("Save reliability", () => {
     await expect(errorAlert).toContainText("네트워크 연결을 확인한 뒤 다시 시도해 주세요");
     await expect(errorAlert).not.toContainText(/Failed to fetch/i);
     await expect(saveButton).toBeEnabled();
-    await expect(saveButton).toHaveText("이 결과 저장");
+    await expect(saveButton).toHaveText("다시 저장");
 
     const retryResponsePromise = page.waitForResponse(
       (response) =>
