@@ -224,7 +224,7 @@ test.describe("Save reliability", () => {
     if (await retryLoad.isVisible().catch(() => false)) {
       await retryLoad.click();
     }
-    await page.getByRole("button", { name: "저장한 결과" }).click();
+    await page.getByRole("tab", { name: "저장한 결과" }).click();
     await expect(page.getByRole("listbox", { name: "저장한 결과 목록" })).toBeVisible({ timeout: 30_000 });
     console.log("assert:mypage-visible");
 
@@ -252,7 +252,7 @@ test.describe("Save reliability", () => {
     await expect(page).toHaveURL(/\/mypage\?section=saved/, { timeout: 30_000 });
     // Full navigation after cookie login can race the first extras fetch; ensure
     // the saved section is selected and data is present before asserting.
-    await page.getByRole("button", { name: "저장한 결과" }).click();
+    await page.getByRole("tab", { name: "저장한 결과" }).click();
     const savedList = page.getByRole("listbox", { name: "저장한 결과 목록" });
     if (!(await savedList.isVisible().catch(() => false))) {
       await Promise.all([
@@ -265,7 +265,7 @@ test.describe("Save reliability", () => {
         ).catch(() => null),
         page.reload(),
       ]);
-      await page.getByRole("button", { name: "저장한 결과" }).click();
+      await page.getByRole("tab", { name: "저장한 결과" }).click();
     }
     await expect(savedList).toBeVisible({ timeout: 30_000 });
     await expect(firstItem).toBeVisible();

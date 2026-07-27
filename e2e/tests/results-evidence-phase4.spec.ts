@@ -25,7 +25,7 @@ test.describe("Results Evidence IA — Phase 4", () => {
   test("evidence tab pick persuasion and honest ranking why", async ({ page }) => {
     await gotoDeterministicResults(page);
 
-    await page.getByRole("button", { name: "추천 근거" }).click();
+    await page.getByRole("tab", { name: "추천 근거" }).click();
     await expect(page.getByTestId("e2e-pick-explanations")).toBeVisible();
     await expect(page.getByRole("heading", { name: "후보별 추천 근거" })).toBeVisible();
 
@@ -45,8 +45,8 @@ test.describe("Results Evidence IA — Phase 4", () => {
     await gotoDeterministicResults(page);
 
     await expect(page.getByTestId("e2e-results-tab-bar")).toBeVisible();
-    await expect(page.getByRole("button", { name: "추천 요약" })).toBeVisible();
-    await expect(page.getByRole("button", { name: "추천 근거" })).toBeVisible();
+    await expect(page.getByRole("tab", { name: "추천 요약" })).toBeVisible();
+    await expect(page.getByRole("tab", { name: "추천 근거" })).toBeVisible();
     await expect(page.getByTestId("e2e-trust-layer")).toBeVisible();
   });
 });
