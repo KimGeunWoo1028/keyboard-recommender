@@ -19,7 +19,9 @@ export function HomeHeroActions() {
         >
           추천 설문 시작
         </Link>
-        {!user ? (
+        {!authChecked ? (
+          <div className="min-h-[2.75rem] sm:min-h-0" aria-hidden />
+        ) : !user ? (
           <p className="break-keep text-sm text-ca-on-surface-variant">
             로그인 없이 설문과 추천 결과를 볼 수 있어요. 계정에 저장하려면 나중에 로그인하세요.
           </p>

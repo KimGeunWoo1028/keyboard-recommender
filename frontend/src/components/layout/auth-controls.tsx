@@ -101,7 +101,7 @@ export function useAuthHeader() {
 }
 
 export function AuthNickname() {
-  const { user } = useAuthHeader();
+  const { user, authChecked } = useAuthHeader();
   const [desktopNav, setDesktopNav] = useState(false);
 
   useEffect(() => {
@@ -112,8 +112,19 @@ export function AuthNickname() {
     return () => mq.removeEventListener("change", sync);
   }, []);
 
-  // Avoid mounting the avatar <img> on mobile (CSS `hidden` still downloads the file).
-  if (!user || !desktopNav) return null;
+  if (!desktopNav) return null;
+
+  // Reserve desktop identity width while /auth/me resolves so logout/login CTAs do not jump.
+  if (!authChecked) {
+    return (
+      <span
+        className="hidden h-8 max-w-[14rem] shrink-0 lg:inline-flex lg:min-w-[8rem]"
+        aria-hidden
+      />
+    );
+  }
+
+  if (!user) return null;
 
   const label = user.display_name || user.email;
   const avatarSrc = resolveAvatarSrc(user.avatar_url);

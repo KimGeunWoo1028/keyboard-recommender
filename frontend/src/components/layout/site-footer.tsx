@@ -3,8 +3,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { getCopyrightYear } from "@/lib/date-time";
+
 export function SiteFooter() {
-  const year = new Date().getFullYear();
+  const year = getCopyrightYear();
   const pathname = usePathname() ?? "/";
   const deferNavPrefetch =
     pathname === "/" ||

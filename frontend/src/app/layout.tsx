@@ -75,8 +75,9 @@ export default function RootLayout({
   return (
     <html
       lang="ko"
+      // next-themes may adjust class/color-scheme on <html> before hydration.
       suppressHydrationWarning
-      className={`${hankenGrotesk.variable} ${inter.variable}`}
+      className={`dark ${hankenGrotesk.variable} ${inter.variable}`}
     >
       <body className="min-h-screen font-body antialiased">
         <ThemeProvider>

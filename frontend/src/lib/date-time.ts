@@ -67,6 +67,17 @@ export function formatAbsoluteDateTime(
   );
 }
 
+/** Calendar year in the app display timezone — safe for SSR + client footer copy. */
+export function getCopyrightYear(now?: string | number | Date | null): number {
+  const parsed = parseDateTime(now) ?? new Date();
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: APP_TIME_ZONE,
+    year: "numeric",
+  }).formatToParts(parsed);
+  const year = Number(parts.find((part) => part.type === "year")?.value);
+  return Number.isFinite(year) ? year : parsed.getUTCFullYear();
+}
+
 export function formatRelativeKo(
   value?: string | number | Date | null,
   options?: { now?: string | number | Date | null },

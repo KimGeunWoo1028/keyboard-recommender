@@ -7,13 +7,18 @@ type Props = {
   children: ReactNode;
 };
 
-/** Wraps the app so `next-themes` can toggle `class="dark"` on `<html>`. */
+/**
+ * Wraps the app so `next-themes` can toggle `class="dark"` on `<html>`.
+ * `enableSystem` stays off so SSR and the pre-hydration script agree on the default
+ * dark launch theme without reading `prefers-color-scheme` (React #418 / html class).
+ */
 export function ThemeProvider({ children }: Props) {
   return (
     <NextThemesProvider
       attribute="class"
       defaultTheme="dark"
-      enableSystem
+      storageKey="kr-theme"
+      enableSystem={false}
       disableTransitionOnChange
     >
       {children}
