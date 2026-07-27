@@ -28,12 +28,16 @@ describe("page metadata helpers", () => {
 
   it("sets noindex and self-canonical for private pages", () => {
     const meta = privatePageMetadata({
-      path: "/results",
-      title: "추천 결과",
-      description: "개인 결과",
+      path: "/auth/forgot-password",
+      title: "비밀번호 재설정",
+      description: "Keyboard Recommender 계정의 비밀번호 재설정 링크를 요청합니다.",
     });
+    expect(meta.title).toBe("비밀번호 재설정");
+    expect(meta.description).toBe(
+      "Keyboard Recommender 계정의 비밀번호 재설정 링크를 요청합니다.",
+    );
     expect(meta.robots).toEqual({ index: false, follow: false });
-    expect(meta.alternates).toEqual({ canonical: "/results" });
-    expect(meta.openGraph?.url).toBe("/results");
+    expect(meta.alternates).toEqual({ canonical: "/auth/forgot-password" });
+    expect(meta.openGraph?.url).toBe("/auth/forgot-password");
   });
 });

@@ -4,12 +4,16 @@ import Link from "next/link";
 import { type FormEvent, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { requestPasswordReset } from "@/lib/api/auth";
 import { ApiError } from "@/lib/api/client";
 import { FieldValidationError, useKoreanFieldValidation } from "@/lib/use-korean-field-validation";
+
+/** Same copy for smtp / masked / log — never reveal whether the account exists. */
+export const PASSWORD_RESET_REQUEST_SUCCESS =
+  "입력한 이메일로 가입된 계정이 있다면 재설정 링크를 보내드렸어요.";
 
 export function ForgotPasswordClient() {
   const [email, setEmail] = useState("");
@@ -21,20 +25,19 @@ export function ForgotPasswordClient() {
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
+    if (busy) return;
     setBusy(true);
     setError(null);
     setMessage(null);
     try {
-      const res = await requestPasswordReset(email);
+      await requestPasswordReset(email);
       setSubmitted(true);
-      if (res.delivery === "smtp") {
-        setMessage("입력한 이메일로 비밀번호 재설정 안내 메일을 보냈습니다.");
-      } else {
-        setMessage("요청이 접수되었습니다. 메일 설정 후 재요청하면 실제 메일을 받을 수 있습니다.");
-      }
+      setMessage(PASSWORD_RESET_REQUEST_SUCCESS);
     } catch (err) {
       if (err instanceof ApiError && err.status === 422) {
-        setError("이메일 형식을 확인해 주세요.");
+        setError("올바른 이메일 주소를 입력해 주세요.");
+      } else if (err instanceof ApiError && !/[가-힣]/.test(err.message)) {
+        setError("요청을 처리하지 못했습니다. 잠시 후 다시 시도해 주세요.");
       } else {
         setError(err instanceof Error ? err.message : "요청을 처리하지 못했습니다. 다시 시도해 주세요.");
       }
@@ -44,24 +47,28 @@ export function ForgotPasswordClient() {
   }
 
   return (
-    <div className="mx-auto max-w-md px-ca-margin-mobile py-10 sm:px-ca-margin">
+    <div className="mx-auto w-full max-w-md overflow-x-hidden px-ca-margin-mobile py-10 sm:px-ca-margin">
       <Card className="ca-glass-panel border-ca-outline-variant/40">
-        <CardHeader className="border-b-0">
+        <CardHeader className="border-b-0 space-y-2">
           <p className="font-label text-ca-label-sm font-medium text-ca-secondary">AUTH</p>
-          <CardTitle className="font-headline text-ca-on-surface">비밀번호 찾기</CardTitle>
+          <h1 className="font-headline text-lg font-semibold tracking-tight text-ca-on-surface sm:text-xl">
+            비밀번호 재설정
+          </h1>
           <CardDescription className="text-ca-on-surface-variant">
-            가입한 이메일을 입력하면 비밀번호 재설정 안내를 받을 수 있습니다.
+            가입한 이메일을 입력하면 비밀번호 재설정 링크를 보내드려요.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <form className="space-y-3" onSubmit={onSubmit}>
+          <form className="space-y-3" onSubmit={onSubmit} aria-busy={busy || undefined}>
             <div className="space-y-1">
-              <Label htmlFor="email" className="ca-label">
+              <Label htmlFor="forgot-password-email" className="ca-label">
                 이메일
               </Label>
               <Input
-                id="email"
+                id="forgot-password-email"
                 type="email"
+                name="email"
+                autoComplete="email"
                 className="ca-input"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -71,21 +78,25 @@ export function ForgotPasswordClient() {
               />
               <FieldValidationError id={emailField.errorId} message={emailField.error} />
             </div>
-            <Button type="submit" className="w-full rounded-full" loading={busy}>
-              재설정 안내 받기
+            <Button type="submit" className="w-full" loading={busy} disabled={busy}>
+              재설정 링크 받기
             </Button>
           </form>
-          {submitted && message ? <p className="text-xs text-ca-viz-emerald">{message}</p> : null}
+          {submitted && message ? (
+            <p className="break-keep text-sm text-ca-viz-emerald" role="status" data-testid="e2e-forgot-password-success">
+              {message}
+            </p>
+          ) : null}
           {error ? (
-            <p className="text-xs text-destructive" role="alert">
+            <p className="break-keep text-sm text-destructive" role="alert" data-testid="e2e-forgot-password-error">
               {error}
             </p>
           ) : null}
           <Link
             href="/auth?force=1"
-            className="font-label text-ca-label-sm font-medium text-ca-primary underline-offset-2 hover:underline"
+            className="inline-block text-sm font-medium text-ca-primary underline-offset-2 hover:underline"
           >
-            로그인 화면으로 돌아가기
+            로그인으로 돌아가기
           </Link>
         </CardContent>
       </Card>
