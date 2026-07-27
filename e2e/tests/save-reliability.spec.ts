@@ -214,7 +214,10 @@ test.describe("Save reliability", () => {
     });
     console.log("assert:save-ui-complete");
 
-    await page.getByRole("link", { name: "저장한 결과 보기" }).click();
+    await page
+      .getByTestId("e2e-results-next-actions")
+      .getByRole("link", { name: "저장한 결과 보기" })
+      .click();
     await expect(page).toHaveURL(/\/mypage\?section=saved/, { timeout: 30_000 });
     // Hub may land on a recoverable load error; retry then assert the saved list.
     const retryLoad = page.getByRole("button", { name: "다시 시도" });
