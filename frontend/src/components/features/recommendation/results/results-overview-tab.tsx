@@ -117,6 +117,11 @@ export type ResultsOverviewTabProps = {
   refineError?: string | null;
   onApplyRefinement: (stepId: string, answerId: string, label: string) => void;
   isAuthenticated: boolean;
+  /**
+   * Phase 5: `parts` = product cards (above CTA); `secondary` = alternatives/explore
+   * (below trust); `all` = legacy single block.
+   */
+  sections?: "parts" | "secondary" | "all";
 };
 
 export function ResultsOverviewTab({
@@ -126,7 +131,10 @@ export function ResultsOverviewTab({
   enrichedSourceUrls,
   enrichedLayoutSizes = {},
   isAuthenticated,
+  sections = "all",
 }: ResultsOverviewTabProps) {
+  const showParts = sections === "parts" || sections === "all";
+  const showSecondary = sections === "secondary" || sections === "all";
   const overviewAlternatives = useMemo(
     () => collectOverviewAlternatives(apiPicks, DISPLAY_K),
     [apiPicks],
@@ -173,6 +181,7 @@ export function ResultsOverviewTab({
 
   return (
     <>
+      {showParts ? (
       <Card className="overflow-hidden rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest shadow-none" data-testid="e2e-server-ranked">
         <CardHeader className="border-b border-ca-outline-variant/35 pb-3 sm:pb-4">
           <CardTitle className="flex items-center gap-2 font-headline text-base font-semibold text-ca-on-surface">
@@ -248,7 +257,7 @@ export function ResultsOverviewTab({
         </CardContent>
         <div className="border-t border-ca-outline-variant/35 px-4 py-3 sm:px-6">
           <details className="group">
-            <summary className="cursor-pointer list-none text-sm font-medium text-ca-on-surface marker:content-none [&::-webkit-details-marker]:hidden">
+            <summary className="cursor-pointer list-none text-sm font-medium text-ca-on-surface marker:content-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))] focus-visible:ring-offset-2 [&::-webkit-details-marker]:hidden">
               <span className="underline-offset-2 group-open:underline">구매·재고 안내</span>
             </summary>
             <div className="mt-2">
@@ -257,8 +266,8 @@ export function ResultsOverviewTab({
           </details>
           <p className="mt-3 break-keep text-sm text-ca-on-surface-variant">
             {isAuthenticated
-              ? "계정 저장은 상단 「이 결과 저장」으로 할 수 있어요. 마이페이지에서 다시 확인할 수 있습니다."
-              : "상단 「이 브라우저에 저장」은 이 브라우저에만 남습니다. 다른 기기에서도 보려면 로그인 후 저장하세요."}
+              ? "계정 저장은 「이 결과 저장」으로 할 수 있어요. 마이페이지에서 다시 확인할 수 있습니다."
+              : "「이 브라우저에 저장」은 이 브라우저에만 남습니다. 다른 기기에서도 보려면 로그인 후 저장하세요."}
           </p>
           <Link
             href="/mypage?section=saved"
@@ -268,8 +277,9 @@ export function ResultsOverviewTab({
           </Link>
         </div>
       </Card>
+      ) : null}
 
-      {overviewAlternatives.length > 0 ? (
+      {showSecondary && overviewAlternatives.length > 0 ? (
         <>
           <div className="mt-6 flex flex-col gap-2 rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest px-4 py-4 sm:px-5">
             <p className="font-headline text-sm font-semibold text-ca-on-surface">다른 선택지도 보고 싶나요?</p>
@@ -365,7 +375,7 @@ export function ResultsOverviewTab({
         </>
       ) : null}
 
-      {submission.degradedReason ? (
+      {showSecondary && submission.degradedReason ? (
         <Card className="mt-8 border-amber-500/40 bg-amber-500/10 shadow-none">
           <CardHeader className="pb-2">
             <CardTitle className="text-base text-amber-950 dark:text-amber-100">안정 모드로 추천했어요</CardTitle>
@@ -376,12 +386,13 @@ export function ResultsOverviewTab({
         </Card>
       ) : null}
 
+      {showSecondary ? (
       <details
         className="group mt-8 rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest"
         open={exploreOpen}
         onToggle={onExploreToggle}
       >
-        <summary className="cursor-pointer list-none px-4 py-4 [&::-webkit-details-marker]:hidden sm:cursor-default sm:pointer-events-none sm:px-6">
+        <summary className="cursor-pointer list-none px-4 py-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))] focus-visible:ring-offset-2 [&::-webkit-details-marker]:hidden sm:cursor-default sm:pointer-events-none sm:px-6">
           <div className="flex items-start justify-between gap-2">
             <div className="space-y-1">
               <h3 className="font-headline text-base font-semibold text-ca-on-surface">관련 부품 더 탐색하기</h3>
@@ -414,6 +425,7 @@ export function ResultsOverviewTab({
           </Link>
         </div>
       </details>
+      ) : null}
     </>
   );
 }

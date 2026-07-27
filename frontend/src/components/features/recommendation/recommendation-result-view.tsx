@@ -568,12 +568,17 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
       <div className="space-y-6 overflow-x-hidden sm:space-y-8">
         <SharedResultHeader submission={submission} build={build} />
 
-        <ResultsTrustLayer
+        <ResultsOverviewTab
           submission={submission}
           build={build}
           apiPicks={enrichedApiPicks}
+          enrichedSourceUrls={enrichedSourceUrls}
+          enrichedLayoutSizes={enrichedLayoutSizes}
           applyingRefine={applyingRefine}
+          refineError={refineError}
           onApplyRefinement={(stepId, answerId, label) => void handleApplyRefinement(stepId, answerId, label)}
+          isAuthenticated={isAuthenticated}
+          sections="parts"
         />
 
         <ResultsNextActions
@@ -586,6 +591,14 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
           saveScope={saveScope}
           saveMessage={saveMessage}
           onSaveBuild={() => void handleSaveBuild()}
+        />
+
+        <ResultsTrustLayer
+          submission={submission}
+          build={build}
+          apiPicks={enrichedApiPicks}
+          applyingRefine={applyingRefine}
+          onApplyRefinement={(stepId, answerId, label) => void handleApplyRefinement(stepId, answerId, label)}
         />
 
         <ResultsPreferenceSummary answers={submission.answers} />
@@ -603,6 +616,7 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
             refineError={refineError}
             onApplyRefinement={(stepId, answerId, label) => void handleApplyRefinement(stepId, answerId, label)}
             isAuthenticated={isAuthenticated}
+            sections="secondary"
           />
         ) : null}
 

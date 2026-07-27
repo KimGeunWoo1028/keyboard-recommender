@@ -18,8 +18,8 @@ export type ResultsTrustLayerProps = {
 };
 
 /**
- * Trust signals after title/tags: why (highlights) → fit → optional trait snapshot.
- * CTA stays outside this layer so primary actions stay clear.
+ * Phase 5: trust after products + save CTA — reason → fit (collapsed) → trait snapshot.
+ * Keeps long explanations below the recommended parts.
  */
 export function ResultsTrustLayer({
   submission,
@@ -48,7 +48,7 @@ export function ResultsTrustLayer({
       ) : null}
       {hasMiniProfile ? (
         <details className="group rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container-lowest">
-          <summary className="cursor-pointer list-none px-3 py-2.5 text-sm font-medium text-ca-on-surface [&::-webkit-details-marker]:hidden sm:px-4">
+          <summary className="cursor-pointer list-none px-3 py-2.5 text-sm font-medium text-ca-on-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))] focus-visible:ring-offset-2 [&::-webkit-details-marker]:hidden sm:px-4">
             <span className="flex items-center justify-between gap-2">
               <span>취향 스냅샷</span>
               <span className="text-xs font-normal text-ca-on-surface-variant group-open:hidden">펼치기</span>
