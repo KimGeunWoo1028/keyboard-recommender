@@ -134,7 +134,7 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
 
     if (error instanceof ApiError) {
       if (error.status === 401) return "저장하지 못했습니다. 로그인 상태를 다시 확인해 주세요.";
-      if (error.status === 409) return "이미 저장된 빌드입니다.";
+      if (error.status === 409) return "이미 저장된 결과입니다.";
       if (error.status === 0 || looksLikeNetworkFailure(error.message)) return networkHint;
       if (error.status >= 500) return genericHint;
       // Prefer Korean copy over raw English API/detail strings.
@@ -460,7 +460,7 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
         await ensureMinimumSavingFeedback(saveStartedAt);
         applySavedState(
           "local",
-          savedItem.request_id !== requestId ? "이미 이 브라우저에 저장된 조합입니다." : "이 브라우저에 저장했습니다.",
+          savedItem.request_id !== requestId ? "이미 이 브라우저에 저장된 결과입니다." : "이 브라우저에 저장했습니다.",
         );
       } catch (e) {
         await ensureMinimumSavingFeedback(saveStartedAt);
@@ -501,14 +501,14 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
         if (result.reason === "login_required") {
           await ensureMinimumSavingFeedback(saveStartedAt);
           applySaveErrorState(
-            "마이페이지에 저장하지 못했습니다. 로그인 상태가 만료되었을 수 있어요. 이 브라우저에는 임시로 보관했으니 다시 로그인 후 저장해 주세요.",
+            "계정에 저장하지 못했습니다. 로그인 상태가 만료되었을 수 있어요. 이 브라우저에는 임시로 보관했으니 다시 로그인 후 저장해 주세요.",
           );
           return;
         }
         await ensureMinimumSavingFeedback(saveStartedAt);
         applySaveErrorState(
           result.reason === "evaluation_persistence_disabled"
-            ? "마이페이지 저장을 사용할 수 없습니다. 잠시 후 다시 시도해 주세요."
+            ? "계정 저장을 사용할 수 없습니다. 잠시 후 다시 시도해 주세요."
             : "저장하지 못했습니다. 잠시 후 다시 시도해 주세요.",
         );
         return;
@@ -517,7 +517,7 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
       const alreadySaved =
         result.reason === "already_saved" || (savedItem ? savedItem.request_id !== requestId : false);
       await ensureMinimumSavingFeedback(saveStartedAt);
-      applySavedState("account", alreadySaved ? "이미 마이페이지에 저장된 조합입니다." : "마이페이지에 저장했습니다.");
+      applySavedState("account", alreadySaved ? "이미 계정에 저장된 결과입니다." : "계정에 저장했습니다.");
       void emitExplorationEvent({
         event_type: "interaction.collection_tag",
         request_id: globalThis.crypto?.randomUUID?.() ?? `req-${Date.now()}-col`,

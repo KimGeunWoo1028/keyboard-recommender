@@ -21,7 +21,7 @@ export default function AccountDeletedPage() {
         회원탈퇴가 완료되었습니다
       </h1>
       <p className="mt-3 text-sm leading-relaxed text-ca-on-surface-variant sm:text-base">
-        이용해 주셔서 감사합니다. 계정·프로필·저장한 빌드 접근 권한이 삭제되었습니다. 같은 이메일로 다시
+        이용해 주셔서 감사합니다. 계정·프로필·저장한 결과 접근 권한이 삭제되었습니다. 같은 이메일로 다시
         가입하실 수 있습니다.
       </p>
       <div className="mt-8">

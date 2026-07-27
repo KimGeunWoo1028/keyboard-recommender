@@ -121,7 +121,7 @@ export function ResultsView() {
       <div className="rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest p-6 sm:p-8">
         <p className="max-w-xl text-sm leading-relaxed text-ca-on-surface-variant sm:text-base">
           아직 이 브라우저에 설문 결과가 없습니다. 결과 화면은 기기(브라우저) 단위로 잠시 보관되며, 다른
-          기기·브라우저에서는 비어 보일 수 있어요. 계정에 저장한 빌드만 마이페이지에서 기기와 관계없이
+          기기·브라우저에서는 비어 보일 수 있어요. 계정에 저장한 결과만 마이페이지에서 기기와 관계없이
           확인할 수 있습니다.
         </p>
         <div className="mt-5 flex flex-col items-start gap-3">
@@ -133,7 +133,7 @@ export function ResultsView() {
               href="/mypage?section=saved"
               className="font-medium text-ca-on-surface underline-offset-4 hover:underline"
             >
-              저장한 빌드 보기
+              저장한 결과 보기
             </Link>
             <Link href={catalogHref({ from: "results" })} className="font-medium text-ca-on-surface underline-offset-4 hover:underline">
               부품 카탈로그 둘러보기

@@ -51,7 +51,7 @@ describe("MyPageSavedBuilds smoke", () => {
       />,
     );
 
-    expect(screen.getByRole("listbox", { name: "저장한 빌드 목록" })).toBeInTheDocument();
+    expect(screen.getByRole("listbox", { name: "저장한 결과 목록" })).toBeInTheDocument();
     expect(screen.getAllByText(/조용한 편/).length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText(/스위치 Oil King/)).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "추천 결과 다시 보기" })).toBeInTheDocument();
@@ -60,7 +60,7 @@ describe("MyPageSavedBuilds smoke", () => {
 
     await user.click(screen.getByRole("option"));
     await user.click(screen.getByRole("button", { name: "삭제" }));
-    expect(screen.getByText("저장한 빌드를 삭제할까요?")).toBeInTheDocument();
+    expect(screen.getByText("저장한 결과를 삭제할까요?")).toBeInTheDocument();
     await user.click(screen.getByRole("button", { name: "삭제하기" }));
     expect(onRemove).toHaveBeenCalledTimes(1);
   });

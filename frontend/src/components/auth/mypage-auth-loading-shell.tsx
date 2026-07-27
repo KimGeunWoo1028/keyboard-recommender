@@ -39,7 +39,7 @@ export function MyPageDataLoadingShell({
           <div className="mt-4 h-24 flex-1 animate-pulse rounded-lg bg-ca-surface-container/40" />
         </div>
       </div>
-      <p className="sr-only">저장한 빌드를 불러오는 중입니다…</p>
+      <p className="sr-only">저장한 결과를 불러오는 중입니다…</p>
     </div>
   );
 }

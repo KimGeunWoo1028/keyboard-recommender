@@ -27,7 +27,7 @@ type SavedLoadState = "idle" | "loading" | "success" | "error";
 
 const SECTIONS: { id: SectionId; label: string }[] = [
   { id: "overview", label: "개요" },
-  { id: "saved", label: "저장한 빌드" },
+  { id: "saved", label: "저장한 결과" },
   { id: "account", label: "계정" },
 ];
 
@@ -57,7 +57,7 @@ function SavedListLoadingShell() {
       <div className="h-10 w-48 animate-pulse rounded-lg bg-ca-surface-container/60" />
       <div className="h-40 animate-pulse rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container/40" />
       <div className="h-40 animate-pulse rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container/40" />
-      <p className="sr-only">저장한 빌드를 불러오는 중입니다…</p>
+      <p className="sr-only">저장한 결과를 불러오는 중입니다…</p>
     </div>
   );
 }

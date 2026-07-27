@@ -21,7 +21,7 @@ export default function MyPage() {
           마이페이지
         </h1>
         <p className="max-w-xl break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:text-base">
-          취향 스냅샷, 저장한 빌드, 계정 설정을 관리합니다.
+          취향 요약, 저장한 결과, 계정 설정을 관리합니다.
         </p>
       </header>
       <RequireAuth loadingFallback={<MyPageAuthLoadingShell />}>

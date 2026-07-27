@@ -150,11 +150,11 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
 
   return (
     <MyPageSectionCard
-      title="저장한 빌드"
+      title="저장한 결과"
       description={
         items.length
-          ? "목록에서 빌드를 고르면 상세와 다시 보기·삭제 행동을 확인할 수 있습니다."
-          : "결과 화면에서 빌드를 저장하면 이 목록에 쌓입니다."
+          ? "목록에서 결과를 고르면 상세와 다시 보기·삭제 행동을 확인할 수 있습니다."
+          : "결과 화면에서 저장하면 이 목록에 쌓입니다."
       }
     >
       {showSearch ? (
@@ -162,7 +162,7 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="제목·스위치 등으로 검색"
-          aria-label="저장한 빌드 검색"
+          aria-label="저장한 결과 검색"
         />
       ) : null}
 
@@ -187,7 +187,7 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
               mobileDetailOpen && "hidden lg:flex",
             )}
             role="listbox"
-            aria-label="저장한 빌드 목록"
+            aria-label="저장한 결과 목록"
           >
             <div className="mypage-pane-scroll min-h-0 flex-1 space-y-2 overscroll-contain pr-0.5">
               {filtered.map((item) => {
@@ -267,13 +267,13 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
                 title={
                   canRestore
                     ? undefined
-                    : "같은 브라우저에서 저장한 빌드만 결과 화면으로 다시 열 수 있습니다."
+                    : "같은 브라우저에서 저장한 결과만 결과 화면으로 다시 열 수 있습니다."
                 }
                 onClick={() => {
                   const submission = restoreSubmissionFor(selected);
                   if (!submission) {
                     setRestoreError(
-                      "이 저장본에서는 추천 결과를 다시 열 수 없습니다. 같은 브라우저에서 저장한 빌드만 복원할 수 있어요. 대신 설문을 다시 하거나 구성 상세를 확인해 주세요.",
+                      "이 항목에서는 추천 결과를 다시 열 수 없습니다. 같은 브라우저에서 저장한 결과만 복원할 수 있어요. 대신 설문을 다시 하거나 구성 상세를 확인해 주세요.",
                     );
                     return;
                   }
@@ -298,8 +298,8 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
             </div>
             {!canRestore ? (
               <p className="mt-2 break-keep text-xs leading-relaxed text-ca-on-surface-variant">
-                결과 다시 보기는 이 브라우저에 스냅샷이 있을 때만 가능합니다. 구성 확인·다시 설문은 계속 사용할 수
-                있어요.
+                결과 다시 보기는 이 브라우저에 다시 열 데이터가 있을 때만 가능합니다. 구성 확인·다시 설문은 계속
+                사용할 수 있어요.
               </p>
             ) : null}
 
@@ -358,7 +358,7 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
                 </Button>
               </>
             ) : (
-              <p>조건에 맞는 저장 빌드가 없습니다.</p>
+              <p>조건에 맞는 저장한 결과가 없습니다.</p>
             )
           ) : (
             <>
@@ -401,7 +401,7 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
             className="w-full max-w-md rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest p-5 shadow-lg"
           >
             <p id="mypage-delete-title" className="font-headline text-base font-semibold text-ca-on-surface">
-              저장한 빌드를 삭제할까요?
+              저장한 결과를 삭제할까요?
             </p>
             <p className="mt-2 break-keep text-sm leading-relaxed text-ca-on-surface-variant">
               &quot;{shortSavedTitle(pendingDelete)}&quot; 항목을 삭제하면 되돌릴 수 없습니다.

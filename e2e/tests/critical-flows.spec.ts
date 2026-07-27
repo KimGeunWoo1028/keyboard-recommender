@@ -37,7 +37,7 @@ test.describe("Critical product flows", () => {
     await page.getByTestId("e2e-save-build").click();
     await expect(
       page.getByText(
-        /마이페이지에 저장했습니다|이미 마이페이지에 저장된 조합입니다|이 브라우저에 저장했습니다|이미 이 브라우저에 저장된 조합입니다|북마크 목록에 저장되었습니다|브라우저에 로컬 저장되었습니다|이 브라우저\(게스트\)에만 저장되었습니다|게스트 세션에 로컬 저장되었습니다/,
+        /계정에 저장했습니다|이미 계정에 저장된 결과입니다|이 브라우저에 저장했습니다|이미 이 브라우저에 저장된 결과입니다|북마크 목록에 저장되었습니다|브라우저에 로컬 저장되었습니다|이 브라우저\(게스트\)에만 저장되었습니다|게스트 세션에 로컬 저장되었습니다/,
       ),
     ).toBeVisible({ timeout: 30_000 });
     await expect(page.getByTestId("e2e-save-build")).toHaveText("저장됨", {
@@ -60,14 +60,14 @@ test.describe("Critical product flows", () => {
     await expect(page.getByTestId("e2e-mypage-hub")).toBeVisible({ timeout: 30_000 });
     await expect(page.getByRole("heading", { name: "마이페이지" })).toBeVisible();
     await expect(page.getByRole("button", { name: "개요" })).toBeVisible();
-    await expect(page.getByRole("button", { name: "저장한 빌드" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "저장한 결과" })).toBeVisible();
     await expect(page.getByRole("button", { name: "계정" })).toBeVisible();
     await expect(page.getByRole("button", { name: "비교 기록" })).toHaveCount(0);
     await expect(page.getByRole("button", { name: "활동" })).toHaveCount(0);
 
-    await page.getByRole("button", { name: "저장한 빌드" }).click();
+    await page.getByRole("button", { name: "저장한 결과" }).click();
     await expect(page).toHaveURL(/section=saved/);
-    await expect(page.getByRole("heading", { name: "저장한 빌드" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "저장한 결과" })).toBeVisible();
 
     await page.getByRole("button", { name: "계정" }).click();
     await expect(page).toHaveURL(/section=account/);
@@ -78,6 +78,6 @@ test.describe("Critical product flows", () => {
     await page.goto("/mypage?section=activity");
     await expect(page.getByTestId("e2e-mypage-hub")).toBeVisible({ timeout: 30_000 });
     await expect(page).toHaveURL(/section=saved/);
-    await expect(page.getByRole("heading", { name: "저장한 빌드" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "저장한 결과" })).toBeVisible();
   });
 });

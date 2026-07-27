@@ -50,7 +50,7 @@ export function ResultsTrustLayer({
         <details className="group rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container-lowest">
           <summary className="cursor-pointer list-none px-3 py-2.5 text-sm font-medium text-ca-on-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))] focus-visible:ring-offset-2 [&::-webkit-details-marker]:hidden sm:px-4">
             <span className="flex items-center justify-between gap-2">
-              <span>취향 스냅샷</span>
+              <span>취향 요약</span>
               <span className="text-xs font-normal text-ca-on-surface-variant group-open:hidden">펼치기</span>
               <span className="hidden text-xs font-normal text-ca-on-surface-variant group-open:inline">접기</span>
             </span>

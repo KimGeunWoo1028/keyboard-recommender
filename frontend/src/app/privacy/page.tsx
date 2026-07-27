@@ -47,7 +47,7 @@ export default function PrivacyPage() {
         <LegalSection title="2. 수집하는 정보">
           <ul className="list-disc space-y-1 pl-5">
             <li>계정: 이메일, 비밀번호(암호화 저장), 표시 이름</li>
-            <li>서비스 이용: 설문 응답·추천 결과 스냅샷, 저장한 빌드(북마크), 계정 설정</li>
+            <li>서비스 이용: 설문 응답·추천 결과, 저장한 결과, 계정 설정</li>
             <li>기기 로컬: 비로그인 이용 시 브라우저 저장소(예: localStorage)에 임시 결과·게스트 저장</li>
             <li>기술 로그: 보안·장애 대응을 위한 일반적인 접속·오류 로그(가능한 범위에서 최소화)</li>
           </ul>
@@ -56,7 +56,7 @@ export default function PrivacyPage() {
         <LegalSection title="3. 이용 목적">
           <ul className="list-disc space-y-1 pl-5">
             <li>회원가입·로그인·본인 확인(이메일 인증)</li>
-            <li>추천 결과 제공 및 저장한 빌드 관리</li>
+            <li>추천 결과 제공 및 저장한 결과 관리</li>
             <li>서비스 안정성·보안·오류 대응</li>
             <li>법령상 의무 이행</li>
           </ul>
@@ -80,7 +80,7 @@ export default function PrivacyPage() {
 
         <LegalSection title="6. 이용자 권리">
           <p>
-            계정 정보 확인·수정, 저장 빌드 관리, 회원 탈퇴는 마이페이지에서 진행할 수 있습니다.
+            계정 정보 확인·수정, 저장한 결과 관리, 회원 탈퇴는 마이페이지에서 진행할 수 있습니다.
             개인정보 관련 문의는{" "}
             <Link href="/contact" className="underline underline-offset-2 hover:text-ca-on-surface">
               문의

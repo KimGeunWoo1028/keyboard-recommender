@@ -111,7 +111,7 @@ Implemented in `components/ui/button.tsx` (`variant`):
 
 | Role | Variant | When |
 |------|---------|------|
-| **Primary** | `primary` (default) | One main action per moment (e.g. results「이 조합 저장」, survey start) |
+| **Primary** | `primary` (default) | One main action per moment (e.g. results「이 결과 저장」, survey start) |
 | **Secondary** | `outline` | Parallel but quieter (e.g. Swagkey link, header「로그인」, selected tab surface) |
 | **Tertiary** | `ghost` / `link` | Low emphasis navigation |
 | **Destructive** | `destructive` | Delete / account deletion — confirm required; never purple fill |

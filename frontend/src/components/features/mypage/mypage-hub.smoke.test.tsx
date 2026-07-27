@@ -93,7 +93,7 @@ describe("MyPageHub smoke", () => {
     render(<MyPageHub />);
 
     expect(screen.getByTestId("e2e-mypage-data-loading")).toBeInTheDocument();
-    expect(screen.queryByText("아직 저장한 빌드가 없습니다")).not.toBeInTheDocument();
+    expect(screen.queryByText("아직 저장한 결과가 없습니다")).not.toBeInTheDocument();
     expect(screen.queryByText("아직 추천 기록이 없습니다.")).not.toBeInTheDocument();
 
     resolveSaved([]);
@@ -101,7 +101,7 @@ describe("MyPageHub smoke", () => {
       expect(screen.getByText("허브유저")).toBeInTheDocument();
     });
     expect(screen.getByText("0")).toBeInTheDocument();
-    expect(screen.getByText(/아직 저장한 빌드가 없습니다/)).toBeInTheDocument();
+    expect(screen.getByText(/아직 저장한 결과가 없습니다/)).toBeInTheDocument();
   });
 
   it("shows saved count after successful load with items", async () => {
@@ -123,7 +123,7 @@ describe("MyPageHub smoke", () => {
       expect(screen.getByText("허브유저")).toBeInTheDocument();
       expect(screen.getByText("1")).toBeInTheDocument();
     });
-    expect(screen.queryByText(/아직 저장한 빌드가 없습니다/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/아직 저장한 결과가 없습니다/)).not.toBeInTheDocument();
     expect(listSavedRecommendationBookmarks).toHaveBeenCalled();
     expect(fetchAccountSecuritySummary).toHaveBeenCalled();
   });
@@ -133,9 +133,9 @@ describe("MyPageHub smoke", () => {
     render(<MyPageHub />);
     await waitFor(() => expect(screen.getByText("허브유저")).toBeInTheDocument());
 
-    await user.click(screen.getByRole("button", { name: "저장한 빌드" }));
+    await user.click(screen.getByRole("button", { name: "저장한 결과" }));
     await waitFor(() => {
-      expect(screen.getByRole("heading", { name: "저장한 빌드" })).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: "저장한 결과" })).toBeInTheDocument();
     });
     expect(replace).toHaveBeenCalledWith("/mypage?section=saved", { scroll: false });
 
@@ -151,7 +151,7 @@ describe("MyPageHub smoke", () => {
     render(<MyPageHub />);
 
     await waitFor(() => {
-      expect(screen.getByRole("heading", { name: "저장한 빌드" })).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: "저장한 결과" })).toBeInTheDocument();
     });
     expect(replace).toHaveBeenCalledWith("/mypage?section=saved", { scroll: false });
   });
@@ -174,9 +174,9 @@ describe("MyPageHub smoke", () => {
     render(<MyPageHub />);
 
     await waitFor(() => expect(screen.getByText("허브유저")).toBeInTheDocument());
-    await user.click(screen.getByRole("button", { name: "저장한 빌드" }));
+    await user.click(screen.getByRole("button", { name: "저장한 결과" }));
     await waitFor(() => {
-      expect(screen.getByRole("listbox", { name: "저장한 빌드 목록" })).toBeInTheDocument();
+      expect(screen.getByRole("listbox", { name: "저장한 결과 목록" })).toBeInTheDocument();
     });
     expect(screen.queryByText("저장한 결과를 불러오지 못했어요.")).not.toBeInTheDocument();
   });
@@ -191,7 +191,7 @@ describe("MyPageHub smoke", () => {
     });
     expect(screen.getByRole("button", { name: "다시 불러오기" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "계정 전환" })).toHaveAttribute("href", "/auth?force=1");
-    expect(screen.queryByText(/아직 저장한 빌드가 없습니다/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/아직 저장한 결과가 없습니다/)).not.toBeInTheDocument();
   });
 
   it("clears prior user data when account switches", async () => {

@@ -209,20 +209,20 @@ test.describe("Save reliability", () => {
     console.log("assert:save-response");
 
     await expect(saveButton).toHaveText("저장됨", { timeout: 30_000 });
-    await expect(page.getByText(/마이페이지에 저장했습니다|이미 마이페이지에 저장된 조합입니다/)).toBeVisible({
+    await expect(page.getByText(/계정에 저장했습니다|이미 계정에 저장된 결과입니다/)).toBeVisible({
       timeout: 30_000,
     });
     console.log("assert:save-ui-complete");
 
-    await page.getByRole("link", { name: "저장한 빌드로 이동" }).click();
+    await page.getByRole("link", { name: "저장한 결과 보기" }).click();
     await expect(page).toHaveURL(/\/mypage\?section=saved/, { timeout: 30_000 });
     // Hub may land on a recoverable load error; retry then assert the saved list.
     const retryLoad = page.getByRole("button", { name: "다시 시도" });
     if (await retryLoad.isVisible().catch(() => false)) {
       await retryLoad.click();
     }
-    await page.getByRole("button", { name: "저장한 빌드" }).click();
-    await expect(page.getByRole("listbox", { name: "저장한 빌드 목록" })).toBeVisible({ timeout: 30_000 });
+    await page.getByRole("button", { name: "저장한 결과" }).click();
+    await expect(page.getByRole("listbox", { name: "저장한 결과 목록" })).toBeVisible({ timeout: 30_000 });
     console.log("assert:mypage-visible");
 
     const firstItem = page.locator('[role="option"]').first();
@@ -239,7 +239,7 @@ test.describe("Save reliability", () => {
     console.log("assert:time-visible");
 
     await page.reload();
-    await expect(page.getByRole("listbox", { name: "저장한 빌드 목록" })).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByRole("listbox", { name: "저장한 결과 목록" })).toBeVisible({ timeout: 30_000 });
     await expect(firstItem).toBeVisible();
     await expect(savedAt).toHaveText(savedAtText);
     console.log("assert:reload-visible");
@@ -249,8 +249,8 @@ test.describe("Save reliability", () => {
     await expect(page).toHaveURL(/\/mypage\?section=saved/, { timeout: 30_000 });
     // Full navigation after cookie login can race the first extras fetch; ensure
     // the saved section is selected and data is present before asserting.
-    await page.getByRole("button", { name: "저장한 빌드" }).click();
-    const savedList = page.getByRole("listbox", { name: "저장한 빌드 목록" });
+    await page.getByRole("button", { name: "저장한 결과" }).click();
+    const savedList = page.getByRole("listbox", { name: "저장한 결과 목록" });
     if (!(await savedList.isVisible().catch(() => false))) {
       await Promise.all([
         page.waitForResponse(
@@ -262,7 +262,7 @@ test.describe("Save reliability", () => {
         ).catch(() => null),
         page.reload(),
       ]);
-      await page.getByRole("button", { name: "저장한 빌드" }).click();
+      await page.getByRole("button", { name: "저장한 결과" }).click();
     }
     await expect(savedList).toBeVisible({ timeout: 30_000 });
     await expect(firstItem).toBeVisible();
@@ -310,7 +310,7 @@ test.describe("Save reliability", () => {
     await saveButton.click();
     await retryResponsePromise;
     await expect(saveButton).toHaveText("저장됨", { timeout: 30_000 });
-    await expect(page.getByText(/마이페이지에 저장했습니다|이미 마이페이지에 저장된 조합입니다/)).toBeVisible({
+    await expect(page.getByText(/계정에 저장했습니다|이미 계정에 저장된 결과입니다/)).toBeVisible({
       timeout: 30_000,
     });
   });

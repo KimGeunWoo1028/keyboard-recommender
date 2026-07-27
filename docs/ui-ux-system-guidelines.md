@@ -32,11 +32,11 @@ Implemented in `frontend/src/components/ui/button.tsx`.
 
 | State | Label pattern |
 |-------|----------------|
-| Idle (account) | `이 조합 저장` |
+| Idle (account) | `이 결과 저장` |
 | Idle (guest) | `이 브라우저에 저장` |
 | Busy | `저장 중…` / auth `로그인 확인 중…` |
-| Success | `마이페이지에 저장됨` / `이 브라우저에 저장됨` |
-| Error | Keep prior idle label; show recovery message + retry |
+| Success | `저장됨` (+ message: `계정에 저장했습니다` / `이 브라우저에 저장했습니다`) |
+| Error | `다시 저장`; show recovery message + retry |
 
 ---
 
@@ -78,16 +78,18 @@ User-facing glossary. Code identifiers (`build_id`, `SavedRecommendation`) stay 
 
 | Concept | Official term | Avoid in new copy |
 |---------|---------------|-------------------|
-| Product recommendation unit | **추천 조합** | 추천 빌드 (new UI) |
+| Product recommendation unit | **추천 결과** (구성 설명 시 **조합**) | 추천 빌드 / 저장한 빌드 (new UI) |
 | Results page / chrome | **추천 결과** | — |
-| Account bookmark list / nav | **저장한 빌드** | Keep for hub tab & list title (entrenched) |
-| Account save CTA | **이 조합 저장** | 이 빌드 저장 |
+| Account bookmark list / nav | **저장한 결과** | 저장한 빌드 |
+| Account save CTA | **이 결과 저장** | 이 조합 저장 / 이 빌드 저장 |
 | Guest / local save CTA | **이 브라우저에 저장** | 로컬에 저장 |
-| Local success | **이 브라우저에 저장됨** | 이 기기에 저장됨 |
-| Recent local snapshot | **최근 추천 결과** | 최근 결과 (ambiguous) |
+| Account save success | **계정에 저장했습니다** | 마이페이지에 저장했습니다 |
+| Local success | **이 브라우저에 저장했습니다** | 이 기기에 저장됨 |
+| Past recommendations | **추천 기록** | 저장 기록 (ambiguous) |
+| Recent local result | **최근 추천 결과** | 최근 결과 (ambiguous) |
 | Survey entry | **추천 설문** / **설문** | 테스트 (unless A/B tooling) |
 | Browse SKUs | **카탈로그** / **부품 둘러보기** | 제품 탐색 as primary nav label |
-| Preference summary | **취향** / 취향 요약 | Inventing “취향 프로필” as a product feature name |
+| Preference summary | **취향 요약** | 취향 스냅샷 (user-facing) |
 
 Legal / privacy pages may keep longer phrasing; align new UI with this table first.
 
@@ -129,7 +131,7 @@ Loading copy should preview value (“곧 추천 조합이 준비됩니다”) w
 | Mypage saved search miss | 검색 지우기 |
 | Catalog search miss | 검색 지우기 + hint keywords |
 | Catalog filter miss | 필터 초기화 |
-| Results missing submission | 설문 / 카탈로그 / 저장한 빌드 |
+| Results missing submission | 설문 / 카탈로그 / 저장한 결과 |
 | Image missing | Neutral category + name (no broken-image icon, no fake product photo) |
 
 ---

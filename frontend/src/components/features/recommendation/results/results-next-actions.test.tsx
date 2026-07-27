@@ -65,14 +65,14 @@ describe("ResultsNextActions", () => {
         authReady
         saveState="saved"
         saveScope="account"
-        saveMessage="마이페이지에 저장했습니다."
+        saveMessage="계정에 저장했습니다."
         onSaveBuild={vi.fn()}
       />,
     );
 
     expect(screen.getByTestId("e2e-save-build")).toHaveTextContent("저장됨");
     expect(screen.getByTestId("e2e-save-build")).toBeDisabled();
-    expect(screen.getByText("마이페이지에 저장했습니다.")).toBeInTheDocument();
+    expect(screen.getByText("계정에 저장했습니다.")).toBeInTheDocument();
   });
 
   it("keeps retry enabled on save error", () => {

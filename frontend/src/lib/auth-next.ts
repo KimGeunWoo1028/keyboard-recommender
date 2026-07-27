@@ -30,13 +30,13 @@ export function authLoginContextCopy(ctx: AuthEntryContext): { title: string; bo
       return {
         title: "로그인",
         body: "추천 결과를 계정에 저장하려면 로그인하세요. 로그인 후 현재 결과로 돌아옵니다.",
-        benefits: ["다른 기기에서도 저장한 빌드 확인", "최근 추천 결과 이어보기"],
+        benefits: ["다른 기기에서도 저장한 결과 확인", "최근 추천 결과 이어보기"],
       };
     case "mypage":
       return {
         title: "로그인",
-        body: "계정으로 로그인하고 저장한 빌드를 이어가세요.",
-        benefits: ["저장한 추천 조합 관리", "최근 추천 결과 다시 열기"],
+        body: "계정으로 로그인하고 저장한 결과를 이어가세요.",
+        benefits: ["저장한 결과 관리", "최근 추천 결과 다시 열기"],
       };
     case "recommend":
       return {

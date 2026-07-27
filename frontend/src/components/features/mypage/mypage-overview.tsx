@@ -131,7 +131,7 @@ export function MyPageOverview({ user, savedItems }: Props) {
         </div>
 
         <div className="flex flex-1 flex-col p-5 sm:p-6">
-          <h3 className="font-headline text-base font-semibold text-ca-on-surface">취향 스냅샷</h3>
+          <h3 className="font-headline text-base font-semibold text-ca-on-surface">취향 요약</h3>
           <p className="mt-1 break-keep text-sm leading-relaxed text-ca-on-surface-variant">
             {TRAIT_MINI_PROFILE_MICROCOPY}
           </p>
@@ -151,7 +151,7 @@ export function MyPageOverview({ user, savedItems }: Props) {
             </div>
           ) : (
             <div className="mt-4 rounded-lg border border-dashed border-ca-outline-variant/50 p-4 text-sm text-ca-on-surface-variant">
-              설문으로 취향을 만들면 여기에 6축 스냅샷이 표시됩니다.
+              설문으로 취향을 만들면 여기에 6축 요약이 표시됩니다.
               <Link
                 href="/recommend"
                 prefetch={false}
@@ -165,11 +165,11 @@ export function MyPageOverview({ user, savedItems }: Props) {
       </article>
 
       <div className="flex h-full min-h-[22rem] flex-col rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest p-5 sm:min-h-[24rem] sm:p-6">
-        <h3 className="font-headline text-base font-semibold text-ca-on-surface">저장한 빌드</h3>
+        <h3 className="font-headline text-base font-semibold text-ca-on-surface">저장한 결과</h3>
         <p className="mt-3 font-headline text-3xl font-semibold tabular-nums tracking-tight text-ca-on-surface">
           {savedItems.length}
         </p>
-        <p className="mt-1 text-sm text-ca-on-surface-variant">저장된 추천 조합</p>
+        <p className="mt-1 text-sm text-ca-on-surface-variant">저장된 추천 결과</p>
 
         <div className="mt-5 flex-1 border-t border-ca-outline-variant/30 pt-5">
           {latestSaved ? (
@@ -216,7 +216,7 @@ export function MyPageOverview({ user, savedItems }: Props) {
           ) : (
             <div className="space-y-2">
               <p className="text-sm text-ca-on-surface-variant">
-                아직 저장한 빌드가 없습니다. 결과 상단에서 저장하면 여기에 모입니다.
+                아직 저장한 결과가 없습니다. 결과에서 「이 결과 저장」을 누르면 여기에 모입니다.
               </p>
               <Link
                 href="/recommend"
@@ -233,7 +233,7 @@ export function MyPageOverview({ user, savedItems }: Props) {
           href="/mypage?section=saved"
           className="mt-5 self-start text-sm font-medium text-ca-primary hover:underline"
         >
-          저장 목록 보기 →
+          저장한 결과 보기 →
         </Link>
         <Link
           href="/results"
@@ -243,7 +243,7 @@ export function MyPageOverview({ user, savedItems }: Props) {
           최근 추천 결과 보기 →
         </Link>
         <p className="mt-3 break-keep text-xs leading-relaxed text-ca-on-surface-variant">
-          별도 북마크·히스토리 페이지는 없습니다. 저장한 빌드와 최근 추천 결과가 재방문 기록입니다.
+          별도 북마크·히스토리 페이지는 없습니다. 저장한 결과와 최근 추천 결과가 재방문 기록입니다.
         </p>
       </div>
     </div>

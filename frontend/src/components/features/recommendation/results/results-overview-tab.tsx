@@ -266,14 +266,14 @@ export function ResultsOverviewTab({
           </details>
           <p className="mt-3 break-keep text-sm text-ca-on-surface-variant">
             {isAuthenticated
-              ? "계정 저장은 「이 결과 저장」으로 할 수 있어요. 마이페이지에서 다시 확인할 수 있습니다."
-              : "「이 브라우저에 저장」은 이 브라우저에만 남습니다. 다른 기기에서도 보려면 로그인 후 저장하세요."}
+              ? "계정에 저장하려면 「이 결과 저장」을 누르세요. 저장한 결과는 마이페이지에서 다시 확인할 수 있습니다."
+              : "「이 브라우저에 저장」은 이 브라우저에만 남습니다. 다른 기기에서도 보려면 로그인 후 계정에 저장하세요."}
           </p>
           <Link
             href="/mypage?section=saved"
             className="mt-2 inline-block text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline"
           >
-            마이페이지에서 저장한 빌드 보기
+            저장한 결과 보기
           </Link>
         </div>
       </Card>

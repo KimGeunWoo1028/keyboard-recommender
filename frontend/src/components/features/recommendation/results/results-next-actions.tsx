@@ -70,7 +70,7 @@ export function ResultsNextActions({
     >
       <p className="font-headline text-sm font-semibold text-ca-on-surface">다음에 할 일</p>
       <p className="mt-1 break-keep text-sm text-ca-on-surface-variant">
-        먼저 이 조합을 저장해 두고, 필요하면 스웨그키에서 대표 부품 가격·재고를 확인해 보세요.
+        먼저 이 결과를 저장해 두고, 필요하면 스웨그키에서 대표 부품 가격·재고를 확인해 보세요.
       </p>
       <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
         <Button
@@ -136,7 +136,7 @@ export function ResultsNextActions({
               href="/mypage?section=saved"
               className="inline-block font-medium text-ca-primary underline-offset-4 hover:underline"
             >
-              {saveScope === "account" ? "마이페이지에서 보기" : "저장한 빌드로 이동"}
+              저장한 결과 보기
             </Link>
           ) : null}
         </div>

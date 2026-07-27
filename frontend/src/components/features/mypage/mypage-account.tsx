@@ -34,7 +34,7 @@ type Props = {
 
 const DELETE_CONFIRM_WORD = "탈퇴";
 const DELETE_WARNING =
-  "탈퇴하면 계정·프로필·저장한 빌드 접근 권한이 즉시 사라집니다. 탈퇴 후에는 같은 이메일로 다시 가입할 수 있습니다.";
+  "탈퇴하면 계정·프로필·저장한 결과 접근 권한이 즉시 사라집니다. 탈퇴 후에는 같은 이메일로 다시 가입할 수 있습니다.";
 
 function validateDisplayName(value: string): string | null {
   const v = value.trim();

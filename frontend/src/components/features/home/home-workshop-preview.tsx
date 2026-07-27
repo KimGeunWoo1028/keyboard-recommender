@@ -51,7 +51,7 @@ function EmptyLoggedInPreview({ recommendHref }: { recommendHref: string }) {
         아직 추천 기록이 없어요
       </p>
       <p className="mt-2 break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:text-base">
-        설문으로 첫 조합을 받아 보세요. 저장한 빌드는 마이페이지에서 관리합니다.
+        설문으로 첫 추천 결과를 받아 보세요. 저장한 결과는 마이페이지에서 관리합니다.
       </p>
       <Link
         href={recommendHref}
