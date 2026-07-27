@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { type FormEvent, useEffect, useState } from "react";
+import { type FormEvent, useEffect, useRef, useState } from "react";
 
 import { useAuthHeader } from "@/components/layout/auth-controls";
 import { Button } from "@/components/ui/button";
@@ -19,7 +19,7 @@ import {
 /** Legacy key stored `{ email, password }`; we only persist `{ email }` now. */
 const REMEMBER_SIGNIN_KEY = "kr_saved_signin_credentials_v1";
 
-function friendlyAuthErrorMessage(mode: "login" | "signup", err: unknown): string {
+export function friendlyAuthErrorMessage(mode: "login" | "signup", err: unknown): string {
   if (!(err instanceof ApiError)) {
     return "네트워크 연결을 확인하고 다시 시도해 주세요.";
   }
@@ -28,12 +28,12 @@ function friendlyAuthErrorMessage(mode: "login" | "signup", err: unknown): strin
     if (err.status === 409 || raw.includes("already exists")) {
       return "이미 가입된 이메일입니다.";
     }
-      if (raw.includes("email verification")) {
-        return "이메일 인증을 먼저 완료해 주세요.";
-      }
-      if (raw.includes("verification code")) {
-        return "인증번호를 다시 확인해 주세요.";
-      }
+    if (raw.includes("email verification")) {
+      return "이메일 인증을 먼저 완료해 주세요.";
+    }
+    if (raw.includes("verification code")) {
+      return "인증번호를 다시 확인해 주세요.";
+    }
     if (err.status === 422) {
       if (raw.includes("password")) return "비밀번호는 8~20자, 영문/숫자/특수문자를 모두 포함해야 합니다.";
       if (raw.includes("email")) return "이메일 형식을 확인해 주세요.";
@@ -65,13 +65,23 @@ export function AuthPageClient() {
   const router = useRouter();
   const { setUser } = useAuthHeader();
   const [mode, setMode] = useState<"login" | "signup">("login");
+  const modeRef = useRef(mode);
+  modeRef.current = mode;
+  /** Bumps on tab switch so abandoned auth responses do not paint the wrong tab. */
+  const authRequestGen = useRef(0);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
-  const [error, setError] = useState<string | null>(null);
-  const [busy, setBusy] = useState(false);
-  const [info, setInfo] = useState<string | null>(null);
+
+  const [loginError, setLoginError] = useState<string | null>(null);
+  const [signupError, setSignupError] = useState<string | null>(null);
+  const [loginBusy, setLoginBusy] = useState(false);
+  const [signupBusy, setSignupBusy] = useState(false);
+  /** Signup success notice shown on the login tab only. */
+  const [loginNotice, setLoginNotice] = useState<string | null>(null);
+
   const [displayNameCheckMessage, setDisplayNameCheckMessage] = useState<string | null>(null);
   const [checkingDisplayName, setCheckingDisplayName] = useState(false);
   const [displayNameVerified, setDisplayNameVerified] = useState(false);
@@ -86,6 +96,9 @@ export function AuthPageClient() {
   const [sendingEmailCode, setSendingEmailCode] = useState(false);
   const [verifyingEmailCode, setVerifyingEmailCode] = useState(false);
   const [authNextPath, setAuthNextPath] = useState<string | null>(null);
+
+  const formBusy = mode === "login" ? loginBusy : signupBusy;
+  const activeError = mode === "login" ? loginError : signupError;
 
   useEffect(() => {
     const { force, next } = readAuthSearchParams();
@@ -156,31 +169,71 @@ export function AuthPageClient() {
   const hasRequiredCharTypes = /[A-Za-z]/.test(password) && /\d/.test(password) && /[^A-Za-z0-9]/.test(password);
   const hasValidPasswordLength = password.length >= 8 && password.length <= 20;
 
+  function switchToLogin() {
+    authRequestGen.current += 1;
+    setMode("login");
+    setSignupError(null);
+    setSignupBusy(false);
+    // Keep loginNotice (e.g. after successful signup).
+  }
+
+  function switchToSignup() {
+    authRequestGen.current += 1;
+    setMode("signup");
+    setLoginError(null);
+    setLoginNotice(null);
+    setLoginBusy(false);
+    // Existing policy: clear credentials when entering signup from login.
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+    setRememberEmail(false);
+    setEmailCode("");
+    setEmailCodeSent(false);
+    setEmailVerified(false);
+    setEmailVerificationToken(null);
+    setEmailVerificationMessage(null);
+  }
+
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
-    setBusy(true);
-    setError(null);
-    setInfo(null);
+    const submitMode = mode;
+    const requestId = ++authRequestGen.current;
+
+    if (submitMode === "login") {
+      setLoginBusy(true);
+      setLoginError(null);
+      setLoginNotice(null);
+    } else {
+      setSignupBusy(true);
+      setSignupError(null);
+    }
+
+    const stillCurrent = () =>
+      requestId === authRequestGen.current && modeRef.current === submitMode;
+
     try {
-      if (mode === "signup") {
+      if (submitMode === "signup") {
         if (!displayNameValidation.valid) {
-          setError(displayNameValidation.message);
+          if (stillCurrent()) setSignupError(displayNameValidation.message);
           return;
         }
         if (!displayNameVerified) {
-          setError("닉네임 중복 확인을 먼저 완료해 주세요.");
+          if (stillCurrent()) setSignupError("닉네임 중복 확인을 먼저 완료해 주세요.");
           return;
         }
         if (!emailVerified || !emailVerificationToken) {
-          setError("이메일 인증을 먼저 완료해 주세요.");
+          if (stillCurrent()) setSignupError("이메일 인증을 먼저 완료해 주세요.");
           return;
         }
         if (!passwordMatches) {
-          setError("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+          if (stillCurrent()) setSignupError("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
           return;
         }
         if (!isPasswordPolicyValid(password)) {
-          setError("비밀번호는 8~20자, 영문/숫자/특수문자를 모두 포함해야 합니다.");
+          if (stillCurrent()) {
+            setSignupError("비밀번호는 8~20자, 영문/숫자/특수문자를 모두 포함해야 합니다.");
+          }
           return;
         }
         await signup({
@@ -189,7 +242,9 @@ export function AuthPageClient() {
           password,
           display_name: displayName || undefined,
         });
-        setInfo("계정이 생성되었습니다. 로그인해 주세요.");
+        if (requestId !== authRequestGen.current) return;
+        setSignupError(null);
+        setLoginNotice("계정이 생성되었습니다. 로그인해 주세요.");
         setMode("login");
         setDisplayNameCheckMessage(null);
         setEmailCode("");
@@ -198,24 +253,29 @@ export function AuthPageClient() {
         setEmailVerificationToken(null);
         setEmailVerificationMessage(null);
         return;
-      } else {
-        const loggedIn = await login({ email, password });
-        if (rememberEmail) {
-          window.localStorage.setItem(REMEMBER_SIGNIN_KEY, JSON.stringify({ email }));
-        } else {
-          window.localStorage.removeItem(REMEMBER_SIGNIN_KEY);
-        }
-        // Keep the login response in header state. A stale in-flight /me must not
-        // clear it (AuthHeaderProvider generation guard); soft nav keeps that state.
-        setUser(loggedIn);
-        const { next } = readAuthSearchParams();
-        router.replace(safeAuthNextPath(next));
-        return;
       }
+
+      const loggedIn = await login({ email, password });
+      if (requestId !== authRequestGen.current) return;
+      if (modeRef.current !== "login") return;
+      if (rememberEmail) {
+        window.localStorage.setItem(REMEMBER_SIGNIN_KEY, JSON.stringify({ email }));
+      } else {
+        window.localStorage.removeItem(REMEMBER_SIGNIN_KEY);
+      }
+      // Keep the login response in header state. A stale in-flight /me must not
+      // clear it (AuthHeaderProvider generation guard); soft nav keeps that state.
+      setUser(loggedIn);
+      const { next } = readAuthSearchParams();
+      router.replace(safeAuthNextPath(next));
     } catch (err) {
-      setError(friendlyAuthErrorMessage(mode, err));
+      if (!stillCurrent()) return;
+      const message = friendlyAuthErrorMessage(submitMode, err);
+      if (submitMode === "login") setLoginError(message);
+      else setSignupError(message);
     } finally {
-      setBusy(false);
+      if (submitMode === "login") setLoginBusy(false);
+      else setSignupBusy(false);
     }
   }
 
@@ -349,38 +409,27 @@ export function AuthPageClient() {
           <div className="flex gap-2" role="tablist" aria-label="로그인 또는 회원가입">
             <Button
               variant={mode === "login" ? "primary" : "outline"}
-              onClick={() => setMode("login")}
+              onClick={switchToLogin}
               className={mode === "login" ? tabActiveClass : tabIdleClass}
-              disabled={busy || sendingEmailCode || verifyingEmailCode || checkingDisplayName}
               role="tab"
               aria-selected={mode === "login"}
+              data-testid="e2e-auth-tab-login"
             >
               로그인
             </Button>
             <Button
               variant={mode === "signup" ? "primary" : "outline"}
-              onClick={() => {
-                setMode("signup");
-                setEmail("");
-                setPassword("");
-                setConfirmPassword("");
-                setRememberEmail(false);
-                setEmailCode("");
-                setEmailCodeSent(false);
-                setEmailVerified(false);
-                setEmailVerificationToken(null);
-                setEmailVerificationMessage(null);
-              }}
+              onClick={switchToSignup}
               className={mode === "signup" ? tabActiveClass : tabIdleClass}
-              disabled={busy || sendingEmailCode || verifyingEmailCode || checkingDisplayName}
               role="tab"
               aria-selected={mode === "signup"}
+              data-testid="e2e-auth-tab-signup"
             >
               회원가입
             </Button>
           </div>
 
-          <form className="space-y-4" onSubmit={onSubmit} aria-busy={busy || undefined}>
+          <form className="space-y-4" onSubmit={onSubmit} aria-busy={formBusy || undefined}>
             {mode === "signup" ? (
               <div className="space-y-2">
                 <Label htmlFor="displayName" className="ca-label">
@@ -397,7 +446,7 @@ export function AuthPageClient() {
                       setDisplayNameVerified(false);
                     }}
                     required={mode === "signup"}
-                    disabled={busy || checkingDisplayName}
+                    disabled={formBusy || checkingDisplayName}
                   />
                   <Button
                     type="button"
@@ -405,7 +454,7 @@ export function AuthPageClient() {
                     className="min-w-[5.5rem] shrink-0"
                     onClick={() => void onCheckDisplayName()}
                     loading={checkingDisplayName}
-                    disabled={busy}
+                    disabled={formBusy}
                   >
                     중복 확인
                   </Button>
@@ -441,7 +490,7 @@ export function AuthPageClient() {
                   }
                 }}
                 required
-                disabled={busy || (mode === "signup" && !canFillSignupEmail)}
+                disabled={formBusy || (mode === "signup" && !canFillSignupEmail)}
               />
             </div>
 
@@ -454,7 +503,7 @@ export function AuthPageClient() {
                     className="w-full"
                     onClick={() => void onSendEmailCode()}
                     loading={sendingEmailCode}
-                    disabled={!canFillSignupEmail || busy || verifyingEmailCode}
+                    disabled={!canFillSignupEmail || formBusy || verifyingEmailCode}
                   >
                     인증번호 발송
                   </Button>
@@ -467,7 +516,7 @@ export function AuthPageClient() {
                       placeholder="인증번호 6자리"
                       value={emailCode}
                       onChange={(e) => setEmailCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
-                      disabled={busy || !emailCodeSent || emailVerified || verifyingEmailCode}
+                      disabled={formBusy || !emailCodeSent || emailVerified || verifyingEmailCode}
                     />
                     <Button
                       type="button"
@@ -475,7 +524,7 @@ export function AuthPageClient() {
                       className="min-w-[5.5rem] shrink-0"
                       onClick={() => void onVerifyEmailCode()}
                       loading={verifyingEmailCode}
-                      disabled={!emailCodeSent || emailVerified || busy || sendingEmailCode}
+                      disabled={!emailCodeSent || emailVerified || formBusy || sendingEmailCode}
                     >
                       {emailVerified ? "인증 완료" : "인증 확인"}
                     </Button>
@@ -506,7 +555,7 @@ export function AuthPageClient() {
                   required
                   minLength={8}
                   maxLength={20}
-                  disabled={busy || (mode === "signup" && !canFillSignupCredentials)}
+                  disabled={formBusy || (mode === "signup" && !canFillSignupCredentials)}
                   className="ca-input pr-10"
                 />
                 <Button
@@ -516,7 +565,7 @@ export function AuthPageClient() {
                   className="absolute right-1 top-1/2 h-8 w-8 -translate-y-1/2 text-ca-on-surface-variant hover:text-ca-on-surface"
                   onClick={() => setShowPassword((v) => !v)}
                   aria-label={showPassword ? "비밀번호 숨기기" : "비밀번호 보기"}
-                  disabled={busy}
+                  disabled={formBusy}
                 >
                   {showPassword ? (
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4">
@@ -567,7 +616,7 @@ export function AuthPageClient() {
                     required
                     minLength={8}
                     maxLength={20}
-                    disabled={busy || (mode === "signup" && !canFillSignupCredentials)}
+                    disabled={formBusy || (mode === "signup" && !canFillSignupCredentials)}
                     className="ca-input pr-10"
                   />
                   <Button
@@ -577,7 +626,7 @@ export function AuthPageClient() {
                     className="absolute right-1 top-1/2 h-8 w-8 -translate-y-1/2 text-ca-on-surface-variant hover:text-ca-on-surface"
                     onClick={() => setShowConfirmPassword((v) => !v)}
                     aria-label={showConfirmPassword ? "비밀번호 확인 숨기기" : "비밀번호 확인 보기"}
-                    disabled={busy}
+                    disabled={formBusy}
                   >
                     {showConfirmPassword ? (
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4">
@@ -610,7 +659,7 @@ export function AuthPageClient() {
                     type="checkbox"
                     checked={rememberEmail}
                     onChange={(e) => setRememberEmail(e.target.checked)}
-                    disabled={busy}
+                    disabled={formBusy}
                     className="h-4 w-4 rounded border-ca-outline-variant bg-ca-surface-container"
                   />
                   이메일 기억하기
@@ -619,16 +668,24 @@ export function AuthPageClient() {
                   href="/auth/forgot-password"
                   prefetch={false}
                   className="text-sm font-medium text-ca-primary underline-offset-2 hover:underline"
-                  aria-disabled={busy || undefined}
-                  tabIndex={busy ? -1 : undefined}
+                  aria-disabled={formBusy || undefined}
+                  tabIndex={formBusy ? -1 : undefined}
                 >
                   비밀번호 찾기
                 </Link>
               </div>
             ) : null}
 
-            {error ? <p className="break-keep text-sm text-destructive">{error}</p> : null}
-            {info ? <p className="break-keep text-sm text-ca-viz-emerald">{info}</p> : null}
+            {activeError ? (
+              <p className="break-keep text-sm text-destructive" role="alert" data-testid="e2e-auth-error">
+                {activeError}
+              </p>
+            ) : null}
+            {mode === "login" && loginNotice ? (
+              <p className="break-keep text-sm text-ca-viz-emerald" data-testid="e2e-auth-login-notice">
+                {loginNotice}
+              </p>
+            ) : null}
 
             {mode === "signup" ? (
               <p className="break-keep text-center text-xs leading-relaxed text-ca-on-surface-variant">
@@ -644,7 +701,7 @@ export function AuthPageClient() {
               </p>
             ) : null}
 
-            <Button type="submit" className="w-full" loading={busy} disabled={!canProceedSignup}>
+            <Button type="submit" className="w-full" loading={formBusy} disabled={!canProceedSignup} data-testid="e2e-auth-submit">
               {mode === "login" ? "로그인" : "계정 만들기"}
             </Button>
           </form>
@@ -653,4 +710,3 @@ export function AuthPageClient() {
     </div>
   );
 }
-
