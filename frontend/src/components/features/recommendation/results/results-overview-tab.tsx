@@ -257,7 +257,7 @@ export function ResultsOverviewTab({
           </details>
           <p className="mt-3 break-keep text-sm text-ca-on-surface-variant">
             {isAuthenticated
-              ? "계정 저장은 상단 「이 조합 저장」으로 할 수 있어요. 마이페이지에서 다시 확인할 수 있습니다."
+              ? "계정 저장은 상단 「이 결과 저장」으로 할 수 있어요. 마이페이지에서 다시 확인할 수 있습니다."
               : "상단 「이 브라우저에 저장」은 이 브라우저에만 남습니다. 다른 기기에서도 보려면 로그인 후 저장하세요."}
           </p>
           <Link

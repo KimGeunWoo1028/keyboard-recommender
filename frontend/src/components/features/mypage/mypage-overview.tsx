@@ -216,7 +216,7 @@ export function MyPageOverview({ user, savedItems }: Props) {
           ) : (
             <div className="space-y-2">
               <p className="text-sm text-ca-on-surface-variant">
-                아직 저장한 빌드가 없습니다. 결과에서 「이 조합 저장」을 누르면 여기에 모입니다.
+                아직 저장한 빌드가 없습니다. 결과 상단에서 저장하면 여기에 모입니다.
               </p>
               <Link
                 href="/recommend"
