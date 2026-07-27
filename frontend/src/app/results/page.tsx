@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { ResultsView } from "@/components/features/recommendation/results-view";
+import { ManusPageHeader } from "@/components/layout/manus-page-header";
 import { PageShell } from "@/components/layout/page-shell";
 import { privatePageMetadata } from "@/lib/seo/page-metadata";
 
@@ -14,16 +15,15 @@ export const metadata: Metadata = privatePageMetadata({
 
 export default function ResultsPage() {
   return (
-    <PageShell className="max-w-ca space-y-8 px-ca-margin-mobile pb-12 sm:px-ca-margin sm:space-y-10 sm:pb-16">
-      <div className="max-w-2xl space-y-2">
-        <h1 className="font-headline text-2xl font-semibold tracking-tight text-ca-on-surface sm:text-3xl">
-          맞춤 추천 결과
-        </h1>
-        <p className="break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:text-base">
-          추천 조합을 확인하고, 마음에 들면 저장해 두세요. 계정 로그인 시 마이페이지에서 다시 볼 수 있어요.
-        </p>
-      </div>
-      <ResultsView />
-    </PageShell>
+    <div className="bg-ca-surface-container-low">
+      <PageShell className="max-w-ca space-y-8 px-ca-margin-mobile pb-12 sm:px-ca-margin sm:space-y-10 sm:pb-16">
+        <ManusPageHeader
+          eyebrow="Results"
+          title="맞춤 추천 결과"
+          description="추천 조합을 확인하고, 마음에 들면 저장해 두세요. 계정 로그인 시 마이페이지에서 다시 볼 수 있어요."
+        />
+        <ResultsView />
+      </PageShell>
+    </div>
   );
 }

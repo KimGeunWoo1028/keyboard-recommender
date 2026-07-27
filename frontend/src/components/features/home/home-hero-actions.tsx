@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 import { useAuthHeader } from "@/components/layout/auth-controls";
 import { buttonClassName } from "@/components/ui/button";
@@ -10,33 +11,37 @@ export function HomeHeroActions() {
   const { user, authChecked } = useAuthHeader();
 
   return (
-    <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-4 sm:gap-y-3">
-      <div className="flex w-full flex-col gap-1.5 sm:w-auto">
+    <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
         <Link
           href="/recommend"
-          className={cn(buttonClassName({ size: "default" }), "w-full justify-center sm:w-auto")}
+          className={cn(
+            buttonClassName({ size: "lg" }),
+            "w-full justify-center font-bold shadow-lg shadow-primary/25 sm:w-auto",
+          )}
           aria-busy={!authChecked}
         >
           추천 설문 시작
+          <ArrowRight className="h-5 w-5" aria-hidden />
         </Link>
-        {!authChecked ? (
-          <div className="min-h-[2.75rem] sm:min-h-0" aria-hidden />
-        ) : !user ? (
-          <p className="break-keep text-sm text-ca-on-surface-variant">
-            로그인 없이 설문과 추천 결과를 볼 수 있어요. 계정에 저장하려면 나중에 로그인하세요.
-          </p>
-        ) : null}
+        <Link
+          href="/catalog"
+          prefetch={false}
+          className={cn(
+            buttonClassName({ variant: "outline", size: "lg" }),
+            "w-full justify-center font-semibold sm:w-auto",
+          )}
+        >
+          카탈로그 둘러보기
+        </Link>
       </div>
-      <Link
-        href="/catalog"
-        prefetch={false}
-        className={cn(
-          buttonClassName({ variant: "outline", size: "default" }),
-          "w-full justify-center sm:w-auto",
-        )}
-      >
-        카탈로그 둘러보기
-      </Link>
+      {!authChecked ? (
+        <div className="min-h-[1.25rem]" aria-hidden />
+      ) : !user ? (
+        <p className="break-keep text-sm text-ca-on-surface-variant">
+          로그인 없이 설문과 추천 결과를 볼 수 있어요. 계정에 저장하려면 나중에 로그인하세요.
+        </p>
+      ) : null}
     </div>
   );
 }

@@ -8,15 +8,14 @@ type Props = {
 };
 
 /**
- * Wraps the app so `next-themes` can toggle `class="dark"` on `<html>`.
- * `enableSystem` stays off so SSR and the pre-hydration script agree on the default
- * dark launch theme without reading `prefers-color-scheme` (React #418 / html class).
+ * Precision Editorial default: light (Manus demo-final).
+ * `enableSystem` off so SSR and pre-hydration agree without prefers-color-scheme.
  */
 export function ThemeProvider({ children }: Props) {
   return (
     <NextThemesProvider
       attribute="class"
-      defaultTheme="dark"
+      defaultTheme="light"
       storageKey="kr-theme"
       enableSystem={false}
       disableTransitionOnChange

@@ -13,7 +13,7 @@ export function HomeWorkshopPreviewShell({
   return (
     <div
       className={cn(
-        "rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest p-5 sm:p-6",
+        "rounded-2xl border border-border bg-[#F8F9FA] p-6 sm:p-8 dark:bg-ca-surface-container",
         className,
       )}
     >
@@ -29,8 +29,8 @@ export function HomeWorkshopGuestPreview() {
   return (
     <HomeWorkshopPreviewShell>
       <div className="flex flex-wrap items-center gap-2">
-        <span className="rounded border border-ca-outline-variant/50 px-1.5 py-0.5 text-xs font-medium text-ca-on-surface-variant">
-          {example.badge}
+        <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary">
+          예시 결과
         </span>
         <p
           data-testid="home-result-preview"

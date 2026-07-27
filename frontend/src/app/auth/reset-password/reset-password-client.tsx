@@ -4,8 +4,9 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { type FormEvent, useMemo, useRef, useState } from "react";
 
+import { ManusPageHeader } from "@/components/layout/manus-page-header";
+import { ManusSurfaceCard } from "@/components/layout/manus-surface-card";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { confirmPasswordReset } from "@/lib/api/auth";
@@ -79,20 +80,24 @@ export function ResetPasswordClient() {
   }
 
   return (
-    <div className="mx-auto max-w-md px-ca-margin-mobile py-10 sm:px-ca-margin">
-      <Card className="ca-glass-panel border-ca-outline-variant/40">
-        <CardHeader className="border-b-0">
-          <p className="font-label text-ca-label-sm font-medium text-ca-secondary">AUTH</p>
-          <CardTitle className="font-headline text-ca-on-surface">비밀번호 재설정</CardTitle>
-          <CardDescription className="text-ca-on-surface-variant">새 비밀번호를 입력해 주세요.</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
+    <div className="mx-auto flex min-h-[calc(100dvh-8rem)] w-full max-w-md flex-col justify-center px-ca-margin-mobile py-10 sm:px-ca-margin sm:py-16">
+      <ManusSurfaceCard className="animate-fade-up" padding="none">
+        <div className="space-y-6 border-b border-border px-6 py-7 sm:px-8">
+          <ManusPageHeader
+            eyebrow="Auth"
+            title="비밀번호 재설정"
+            description="새 비밀번호를 입력해 주세요."
+          />
+        </div>
+        <div className="space-y-4 px-6 py-6 sm:px-8 sm:py-7">
           {done ? (
-            <div className="space-y-3">
-              <p className="text-sm text-ca-viz-emerald">비밀번호가 성공적으로 변경되었습니다.</p>
+            <div className="space-y-4">
+              <p className="break-keep rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2.5 text-sm text-emerald-800 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-100">
+                비밀번호가 성공적으로 변경되었습니다.
+              </p>
               <Button
                 type="button"
-                className="w-full rounded-full"
+                className="h-11 w-full font-semibold"
                 onClick={() => {
                   router.push("/auth?force=1");
                   router.refresh();
@@ -102,9 +107,12 @@ export function ResetPasswordClient() {
               </Button>
             </div>
           ) : (
-            <form className="space-y-3" onSubmit={onSubmit}>
-              <div className="space-y-1">
-                <Label htmlFor="newPassword" className="ca-label">
+            <form className="space-y-4" onSubmit={onSubmit}>
+              <div className="space-y-1.5">
+                <Label
+                  htmlFor="newPassword"
+                  className="text-xs font-semibold uppercase tracking-wider text-ca-on-surface-variant"
+                >
                   새 비밀번호
                 </Label>
                 <div className="relative">
@@ -121,14 +129,14 @@ export function ResetPasswordClient() {
                     minLength={8}
                     maxLength={20}
                     disabled={busy}
-                    className="ca-input pr-10"
+                    className="ca-input h-11 border-border pr-10 focus-visible:border-primary"
                     {...passwordField.inputProps}
                   />
                   <Button
                     type="button"
                     variant="ghost"
                     size="icon"
-                    className="absolute right-1 top-1/2 h-8 w-8 -translate-y-1/2 text-ca-on-surface-variant hover:text-ca-on-surface"
+                    className="absolute right-1 top-1/2 h-8 w-8 -translate-y-1/2 text-ca-on-surface-variant hover:text-primary"
                     onClick={() => setShowPassword((v) => !v)}
                     aria-label={showPassword ? "비밀번호 숨기기" : "비밀번호 보기"}
                     disabled={busy}
@@ -150,8 +158,11 @@ export function ResetPasswordClient() {
                 </div>
                 <FieldValidationError id={passwordField.errorId} message={passwordField.error} />
               </div>
-              <div className="space-y-1">
-                <Label htmlFor="confirmPassword" className="ca-label">
+              <div className="space-y-1.5">
+                <Label
+                  htmlFor="confirmPassword"
+                  className="text-xs font-semibold uppercase tracking-wider text-ca-on-surface-variant"
+                >
                   새 비밀번호 확인
                 </Label>
                 <div className="relative">
@@ -168,14 +179,14 @@ export function ResetPasswordClient() {
                     minLength={8}
                     maxLength={20}
                     disabled={busy}
-                    className="ca-input pr-10"
+                    className="ca-input h-11 border-border pr-10 focus-visible:border-primary"
                     {...confirmPasswordField.inputProps}
                   />
                   <Button
                     type="button"
                     variant="ghost"
                     size="icon"
-                    className="absolute right-1 top-1/2 h-8 w-8 -translate-y-1/2 text-ca-on-surface-variant hover:text-ca-on-surface"
+                    className="absolute right-1 top-1/2 h-8 w-8 -translate-y-1/2 text-ca-on-surface-variant hover:text-primary"
                     onClick={() => setShowConfirmPassword((v) => !v)}
                     aria-label={showConfirmPassword ? "비밀번호 확인 숨기기" : "비밀번호 확인 보기"}
                     disabled={busy}
@@ -198,11 +209,11 @@ export function ResetPasswordClient() {
                 <FieldValidationError id={confirmPasswordField.errorId} message={confirmPasswordField.error} />
               </div>
               <p className="text-xs text-ca-on-surface">
-                <span className={policyValid ? "text-ca-viz-emerald" : "text-destructive"}>{policyValid ? "✓" : "✗"}</span>{" "}
+                <span className={policyValid ? "text-emerald-600" : "text-destructive"}>{policyValid ? "✓" : "✗"}</span>{" "}
                 8~20자, 영문/숫자/특수기호 포함
               </p>
               <p className="text-xs text-ca-on-surface">
-                <span className={passwordMatches ? "text-ca-viz-emerald" : "text-destructive"}>
+                <span className={passwordMatches ? "text-emerald-600" : "text-destructive"}>
                   {passwordMatches ? "✓" : "✗"}
                 </span>{" "}
                 {passwordMatches ? "비밀번호가 일치합니다." : "비밀번호가 일치하지 않습니다."}
@@ -212,19 +223,19 @@ export function ResetPasswordClient() {
                   {error}
                 </p>
               ) : null}
-              <Button type="submit" className="w-full rounded-full" loading={busy}>
+              <Button type="submit" className="h-11 w-full font-semibold" loading={busy}>
                 비밀번호 변경
               </Button>
             </form>
           )}
           <Link
             href="/auth?force=1"
-            className="font-label text-ca-label-sm font-medium text-ca-primary underline-offset-2 hover:underline"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-primary underline-offset-2 hover:underline"
           >
             로그인 화면으로 돌아가기
           </Link>
-        </CardContent>
-      </Card>
+        </div>
+      </ManusSurfaceCard>
     </div>
   );
 }

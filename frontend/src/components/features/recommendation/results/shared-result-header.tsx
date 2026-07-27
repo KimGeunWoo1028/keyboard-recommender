@@ -74,10 +74,10 @@ export function SharedResultHeader({
 
   return (
     <div className="space-y-4 sm:space-y-5">
-      <article className="overflow-hidden rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest">
+      <article className="overflow-hidden rounded-2xl border border-border bg-white shadow-sm dark:bg-ca-surface-container">
         <div className="space-y-2 px-4 py-5 sm:px-6 sm:py-6">
-          <p className="text-sm text-ca-on-surface-variant">추천 결과</p>
-          <h2 className="flex flex-wrap items-center gap-2 font-headline text-xl font-semibold tracking-tight text-ca-on-surface sm:text-2xl">
+          <p className="section-label">Results</p>
+          <h2 className="flex flex-wrap items-center gap-2 font-headline text-xl font-extrabold tracking-tight text-ca-on-surface sm:text-2xl">
             <span>{preferenceAlignedTitle}</span>
             <HelpHint text="제목은 이번 설문에서 고른 사운드·키감 성향을 그대로 보여 줍니다. 아래 취향 태그와 같아야 해요." />
           </h2>
@@ -87,10 +87,7 @@ export function SharedResultHeader({
           {tags.length > 0 ? (
             <ul className="mt-3 flex flex-wrap gap-1.5" aria-label="취향 태그">
               {tags.map((tag) => (
-                <li
-                  key={tag}
-                  className="rounded-md border border-ca-outline-variant/40 px-2 py-0.5 text-xs text-ca-on-surface-variant sm:text-sm"
-                >
+                <li key={tag} className="ca-keycap-badge">
                   {tag}
                 </li>
               ))}
@@ -115,7 +112,7 @@ export function ResultsPreferenceSummary({
 
   return (
     <div data-testid="e2e-preference-summary">
-      <details className="group rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container-lowest sm:hidden">
+      <details className="group rounded-lg border border-border bg-white dark:bg-ca-surface-container sm:hidden">
         <summary className="cursor-pointer list-none px-3 py-2.5 [&::-webkit-details-marker]:hidden">
           <div className="flex items-center justify-between gap-2">
             <span className="text-sm font-medium text-ca-on-surface">내 취향 요약</span>

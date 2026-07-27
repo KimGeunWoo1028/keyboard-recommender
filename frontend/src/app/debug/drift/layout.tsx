@@ -4,22 +4,26 @@ export const metadata: Metadata = {
   title: "Drift",
 };
 
+const DRIFT_LINKS = [
+  { href: "/debug/drift", label: "Overview" },
+  { href: "/debug/drift/confidence", label: "Confidence" },
+  { href: "/debug/drift/diversity", label: "Diversity" },
+  { href: "/debug/drift/families", label: "Families" },
+] as const;
+
 export default function DriftLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="space-y-4">
-      <nav className="flex flex-wrap gap-2 text-xs">
-        <a className="rounded border border-border px-2 py-1 hover:bg-muted" href="/debug/drift">
-          Overview
-        </a>
-        <a className="rounded border border-border px-2 py-1 hover:bg-muted" href="/debug/drift/confidence">
-          Confidence
-        </a>
-        <a className="rounded border border-border px-2 py-1 hover:bg-muted" href="/debug/drift/diversity">
-          Diversity
-        </a>
-        <a className="rounded border border-border px-2 py-1 hover:bg-muted" href="/debug/drift/families">
-          Families
-        </a>
+      <nav className="flex flex-wrap gap-2 border-b border-border pb-3" aria-label="Drift sections">
+        {DRIFT_LINKS.map((link) => (
+          <a
+            key={link.href}
+            className="inline-flex h-8 items-center rounded-lg border border-border bg-ca-surface-container-low px-2.5 text-xs font-semibold text-ca-on-surface-variant transition-colors hover:border-primary/40 hover:text-primary"
+            href={link.href}
+          >
+            {link.label}
+          </a>
+        ))}
       </nav>
       {children}
     </div>

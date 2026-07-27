@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Hanken_Grotesk, Inter } from "next/font/google";
+import { Hanken_Grotesk, Inter, Noto_Sans_KR } from "next/font/google";
 
 import "./globals.css";
 
@@ -11,7 +11,7 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 
 const hankenGrotesk = Hanken_Grotesk({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["500", "600", "700", "800"],
   variable: "--font-headline",
   display: "swap",
 });
@@ -20,6 +20,13 @@ const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   variable: "--font-body",
+  display: "swap",
+});
+
+const notoSansKR = Noto_Sans_KR({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-korean",
   display: "swap",
 });
 
@@ -77,7 +84,7 @@ export default function RootLayout({
       lang="ko"
       // next-themes may adjust class/color-scheme on <html> before hydration.
       suppressHydrationWarning
-      className={`dark ${hankenGrotesk.variable} ${inter.variable}`}
+      className={`${hankenGrotesk.variable} ${inter.variable} ${notoSansKR.variable}`}
     >
       <body className="min-h-screen font-body antialiased">
         <ThemeProvider>

@@ -31,15 +31,15 @@ function RecommendationCompareCard({
   return (
     <Card
       className={cn(
-        "flex h-full flex-col rounded-xl border bg-ca-surface-container-lowest shadow-none",
-        topPick ? "border-ca-on-surface/40" : "border-ca-outline-variant/40",
+        "flex h-full flex-col rounded-2xl border-2 bg-white shadow-sm dark:bg-ca-surface-container",
+        topPick ? "border-primary/40" : "border-border",
       )}
     >
       <CardHeader className="space-y-3 border-b-0 pb-2">
         <div className="flex flex-wrap items-start justify-between gap-2">
           <div className="space-y-1">
             <p className="text-sm font-medium text-ca-on-surface-variant">{categoryLabel}</p>
-            <CardTitle className="font-headline text-base font-semibold leading-snug text-ca-on-surface sm:text-lg">
+            <CardTitle className="font-headline text-base font-bold leading-snug text-ca-on-surface sm:text-lg">
               {item.name}
             </CardTitle>
           </div>
@@ -47,7 +47,7 @@ function RecommendationCompareCard({
             <Badge
               className={
                 topPick
-                  ? "shrink-0 border-ca-on-surface/30 bg-transparent font-medium text-ca-on-surface"
+                  ? "shrink-0 border-primary/30 bg-ca-primary-container/10 font-medium text-primary"
                   : "shrink-0 bg-transparent font-normal"
               }
             >
@@ -62,16 +62,16 @@ function RecommendationCompareCard({
         <CardDescription className="text-sm leading-relaxed text-ca-on-surface-variant">{item.description}</CardDescription>
       </CardHeader>
       <CardContent className="mt-auto flex flex-1 flex-col gap-4 pt-0">
-        <div className="rounded-lg border border-ca-outline-variant/35 bg-ca-surface-container-lowest px-3 py-2.5">
+        <div className="rounded-xl border border-border bg-ca-surface-container-low px-3 py-2.5">
           <p className="text-sm font-medium text-ca-on-surface">추천 이유</p>
           <p className="mt-1.5 text-sm leading-relaxed text-ca-on-surface-variant">{explanation}</p>
         </div>
         <div className="grid gap-3 sm:grid-cols-2">
-          <div className="rounded-lg border border-ca-outline-variant/35 px-3 py-2.5">
+          <div className="rounded-xl border border-border px-3 py-2.5">
             <p className="text-sm font-medium text-ca-on-surface">사운드 성향</p>
             <p className="mt-1.5 text-sm leading-relaxed text-ca-on-surface-variant">{soundSummary}</p>
           </div>
-          <div className="rounded-lg border border-ca-outline-variant/35 px-3 py-2.5">
+          <div className="rounded-xl border border-border px-3 py-2.5">
             <p className="text-sm font-medium text-ca-on-surface">타건감</p>
             <p className="mt-1.5 text-sm leading-relaxed text-ca-on-surface-variant">{typingSummary}</p>
           </div>

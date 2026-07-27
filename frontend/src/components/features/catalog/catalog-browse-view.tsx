@@ -167,7 +167,7 @@ function CatalogPartCard({
         }
       }}
       className={cn(
-        "flex h-full min-h-[16.5rem] cursor-pointer flex-col overflow-hidden rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest shadow-none transition hover:border-ca-on-surface/35",
+        "flex h-full min-h-[16.5rem] cursor-pointer flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition hover:border-primary/40 hover:shadow-md dark:bg-ca-surface-container",
         selected && "border-ca-on-surface/50 bg-ca-surface-container-low",
       )}
     >

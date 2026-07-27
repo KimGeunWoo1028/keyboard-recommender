@@ -47,7 +47,7 @@ export function ResultsTrustLayer({
         />
       ) : null}
       {hasMiniProfile ? (
-        <details className="group rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container-lowest">
+        <details className="group rounded-lg border border-border bg-white dark:bg-ca-surface-container">
           <summary className="cursor-pointer list-none px-3 py-2.5 text-sm font-medium text-ca-on-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))] focus-visible:ring-offset-2 [&::-webkit-details-marker]:hidden sm:px-4">
             <span className="flex items-center justify-between gap-2">
               <span>취향 요약</span>

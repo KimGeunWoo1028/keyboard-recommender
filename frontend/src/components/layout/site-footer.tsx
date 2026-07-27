@@ -22,44 +22,80 @@ export function SiteFooter() {
     pathname.startsWith("/auth/");
 
   return (
-    <footer className="mt-auto border-t border-ca-outline-variant/30 bg-ca-surface-container-lowest/80">
-      <div className="mx-auto flex w-full max-w-ca flex-col items-center justify-between gap-4 px-ca-margin-mobile py-8 md:flex-row md:px-ca-margin">
-        <div className="flex flex-col items-center gap-1 md:items-start">
-          <Link
-            href="/"
-            prefetch={deferNavPrefetch ? false : undefined}
-            className="font-headline text-sm font-bold text-ca-on-surface"
-          >
-            Keyboard Recommender
-          </Link>
-          <p className="font-label text-ca-label-sm font-medium text-ca-on-surface-variant">
-            © {year} Keyboard Recommender
-          </p>
+    <footer className="mt-auto bg-[rgb(15_15_25)] text-white dark:bg-ca-surface-container-lowest">
+      <div className="mx-auto w-full max-w-ca px-ca-margin-mobile py-12 md:px-ca-margin">
+        <div className="mb-10 grid grid-cols-1 gap-8 md:grid-cols-3">
+          <div>
+            <div className="mb-3 flex items-center gap-2">
+              <span className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-primary text-xs font-bold text-primary-foreground">
+                K
+              </span>
+              <span className="text-sm font-bold">Keyboard Recommender</span>
+            </div>
+            <p className="max-w-xs text-sm leading-relaxed text-white/60">
+              취향에 맞는 키보드 부품 조합을 1분 설문으로 찾아드립니다.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="mb-4 text-xs font-bold uppercase tracking-widest text-white/40">서비스</h2>
+            <ul className="space-y-2">
+              <li>
+                <Link
+                  href="/recommend"
+                  prefetch={deferNavPrefetch ? false : undefined}
+                  className="text-sm text-white/70 transition-colors hover:text-white"
+                >
+                  추천 설문
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/catalog"
+                  prefetch={deferNavPrefetch ? false : undefined}
+                  className="text-sm text-white/70 transition-colors hover:text-white"
+                >
+                  부품 카탈로그
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/mypage"
+                  prefetch={deferNavPrefetch ? false : undefined}
+                  className="text-sm text-white/70 transition-colors hover:text-white"
+                >
+                  마이페이지
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="mb-4 text-xs font-bold uppercase tracking-widest text-white/40">정보</h2>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/privacy" prefetch={false} className="text-sm text-white/70 transition-colors hover:text-white">
+                  개인정보처리방침
+                </Link>
+              </li>
+              <li>
+                <Link href="/terms" prefetch={false} className="text-sm text-white/70 transition-colors hover:text-white">
+                  이용약관
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" prefetch={false} className="text-sm text-white/70 transition-colors hover:text-white">
+                  문의
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
 
-        <nav
-          className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 font-label text-ca-label-sm font-medium text-ca-on-surface-variant"
-          aria-label="푸터"
-        >
-          <Link href="/catalog" prefetch={deferNavPrefetch ? false : undefined} className="transition-colors hover:text-ca-on-surface">
-            카탈로그
-          </Link>
-          <Link href="/recommend" prefetch={deferNavPrefetch ? false : undefined} className="transition-colors hover:text-ca-on-surface">
-            설문
-          </Link>
-          <Link href="/mypage" prefetch={deferNavPrefetch ? false : undefined} className="transition-colors hover:text-ca-on-surface">
-            마이페이지
-          </Link>
-          <Link href="/privacy" prefetch={false} className="transition-colors hover:text-ca-on-surface">
-            개인정보처리방침
-          </Link>
-          <Link href="/terms" prefetch={false} className="transition-colors hover:text-ca-on-surface">
-            이용약관
-          </Link>
-          <Link href="/contact" prefetch={false} className="transition-colors hover:text-ca-on-surface">
-            문의
-          </Link>
-        </nav>
+        <div className="flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 sm:flex-row">
+          <p className="text-xs text-white/40">© {year} Keyboard Recommender. All rights reserved.</p>
+          <p className="text-xs text-white/40">취향에 맞는 키보드 조합을 찾아드립니다</p>
+        </div>
       </div>
     </footer>
   );

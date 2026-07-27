@@ -400,11 +400,11 @@ export function AuthPageClient() {
   const tabActiveClass = "h-10 flex-1 rounded-lg";
 
   return (
-    <div className="mx-auto w-full max-w-md px-ca-margin-mobile py-10 sm:px-ca-margin sm:py-12">
-      <section className="overflow-hidden rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest">
-        <header className="space-y-2 border-b border-ca-outline-variant/30 px-5 py-5 sm:px-6 sm:py-6">
-          <p className="font-headline text-sm font-semibold tracking-tight text-ca-on-surface">Keyboard Recommender</p>
-          <h1 className="font-headline text-2xl font-semibold tracking-tight text-ca-on-surface">
+    <div className="mx-auto w-full max-w-md px-ca-margin-mobile py-10 sm:px-ca-margin sm:py-16">
+      <section className="overflow-hidden rounded-2xl border border-border bg-white shadow-lg shadow-indigo-100/60 dark:bg-ca-surface-container dark:shadow-none">
+        <header className="space-y-2 border-b border-border px-5 py-6 sm:px-6 sm:py-7">
+          <p className="section-label">Keyboard Recommender</p>
+          <h1 className="font-headline text-2xl font-extrabold tracking-tight text-ca-on-surface">
             {mode === "login" ? loginCopy.title : "회원가입"}
           </h1>
           <p className="break-keep text-sm leading-relaxed text-ca-on-surface-variant">

@@ -18,8 +18,8 @@ export default function NotFound() {
   return (
     <PageShell className="flex min-h-[min(70vh,36rem)] max-w-ca flex-col justify-center overflow-x-hidden px-ca-margin-mobile py-14 sm:px-ca-margin sm:py-16">
       <div className="max-w-xl" data-testid="e2e-not-found">
-        <p className="font-label text-ca-label-sm font-medium text-ca-secondary">404</p>
-        <h1 className="mt-2 font-headline text-2xl font-semibold tracking-tight text-ca-on-surface sm:text-3xl">
+        <p className="section-label">404</p>
+        <h1 className="mt-4 font-headline text-3xl font-black tracking-tight text-ca-on-surface sm:text-4xl">
           페이지를 찾을 수 없어요
         </h1>
         <p className="mt-3 break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:text-base">

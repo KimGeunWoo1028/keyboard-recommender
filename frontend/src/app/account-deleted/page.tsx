@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { ManusPageHeader } from "@/components/layout/manus-page-header";
+import { ManusSurfaceCard } from "@/components/layout/manus-surface-card";
 import { buttonClassName } from "@/components/ui/button";
 import { privatePageMetadata } from "@/lib/seo/page-metadata";
 
@@ -16,19 +18,18 @@ export default function AccountDeletedPage() {
       className="mx-auto flex min-h-[60vh] max-w-lg flex-col justify-center px-ca-margin-mobile py-14 sm:px-ca-margin"
       data-testid="e2e-account-deleted"
     >
-      <p className="font-label text-ca-label-sm font-medium text-ca-secondary">ACCOUNT</p>
-      <h1 className="mt-2 font-headline text-2xl font-semibold tracking-tight text-ca-on-surface sm:text-3xl">
-        회원탈퇴가 완료되었습니다
-      </h1>
-      <p className="mt-3 text-sm leading-relaxed text-ca-on-surface-variant sm:text-base">
-        이용해 주셔서 감사합니다. 계정·프로필·저장한 결과 접근 권한이 삭제되었습니다. 같은 이메일로 다시
-        가입하실 수 있습니다.
-      </p>
-      <div className="mt-8">
-        <Link href="/" className={buttonClassName({ className: "rounded-full" })}>
-          홈으로
-        </Link>
-      </div>
+      <ManusSurfaceCard className="animate-fade-up space-y-6" padding="lg">
+        <ManusPageHeader
+          eyebrow="Account"
+          title="회원탈퇴가 완료되었습니다"
+          description="이용해 주셔서 감사합니다. 계정·프로필·저장한 결과 접근 권한이 삭제되었습니다. 같은 이메일로 다시 가입하실 수 있습니다."
+        />
+        <div>
+          <Link href="/" className={buttonClassName({ className: "h-11 font-semibold" })}>
+            홈으로
+          </Link>
+        </div>
+      </ManusSurfaceCard>
     </main>
   );
 }

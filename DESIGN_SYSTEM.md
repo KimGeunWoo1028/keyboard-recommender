@@ -1,8 +1,8 @@
 # DESIGN_SYSTEM.md
 
 > Keyboard Recommender — implementation-aligned design system  
-> Parent: [`DESIGN.md`](./DESIGN.md) (launch purple-dark canonical)  
-> Status: **canonical for launch (2026-07-22)** — documents what the app ships  
+> Parent: [`DESIGN.md`](./DESIGN.md) (Precision Editorial)  
+> Status: **canonical (2026-07-27)** — documents what the app ships  
 > Code sources: `frontend/src/app/globals.css`, `frontend/src/components/ui/*`
 
 ---
@@ -23,40 +23,38 @@ Do not invent token names here that do not exist in code. Prefer documenting cur
 
 | Item | Live behavior |
 |------|----------------|
-| Default theme | `dark` (`ThemeProvider` `defaultTheme="dark"`) |
-| Light tokens | Present under `:root` (supported, not the launch default) |
-| Dark tokens | `.dark` — production default look |
+| Default theme | `light` (`ThemeProvider` `defaultTheme="light"`) |
+| Light tokens | `:root` — Precision Editorial (launch default) |
+| Dark tokens | `.dark` — deep indigo surfaces + amber accent |
 
-RGB channels are stored **without** `rgb()` wrappers, e.g. `--ca-primary: 208 188 255` → `rgb(var(--ca-primary))`.
+RGB channels are stored **without** `rgb()` wrappers, e.g. `--ca-primary: 55 48 163` → `rgb(var(--ca-primary))`.
 
 ---
 
-## Color tokens (dark / launch default)
+## Color tokens (light / default)
 
-Values from `.dark` in `globals.css` (space-separated RGB):
+Values from `:root` in `globals.css` (space-separated RGB):
 
 | Token | Value | Typical use |
 |-------|-------|-------------|
-| `--background` / `--ca-background` | `13 13 21` / `21 18 27` | Page background |
-| `--foreground` / `--ca-on-surface` | `231 224 237` | Primary text |
-| `--ca-on-surface-variant` / `--muted-foreground` | `203 195 215` | Secondary text |
-| `--card` / `--ca-surface-container` | `33 30 39` | Cards / panels |
-| `--ca-surface-container-lowest` | `15 13 21` | Elevated low panels |
-| `--ca-surface-container-high` | `44 40 50` | Higher surface steps |
-| `--primary` / `--ca-primary` | `208 188 255` | Primary fill / accent |
-| `--primary-foreground` / `--ca-on-primary` | `60 0 145` | Text on primary |
-| `--ca-primary-container` | `160 120 255` | Stronger purple container |
-| `--secondary` / `--ca-secondary` | `137 206 255` | Secondary accent (cyan) |
-| `--border` / `--ca-outline-variant` | `73 68 84` | Borders / dividers |
-| `--ca-error` | `255 180 171` | Error text/surfaces |
+| `--background` / `--ca-background` | `248 248 252` | Page background |
+| `--foreground` / `--ca-on-surface` | `15 15 25` | Primary text |
+| `--ca-on-surface-variant` / `--muted-foreground` | `75 75 100` / `80 80 100` | Secondary text |
+| `--card` / `--ca-surface-container` | `255 255 255` / `235 235 250` | Cards / panels |
+| `--primary` / `--ca-primary` | `55 48 163` | Primary fill / accent (indigo) |
+| `--primary-foreground` / `--ca-on-primary` | `255 255 255` | Text on primary |
+| `--ca-primary-container` | `79 70 229` | Stronger indigo container |
+| `--secondary` / `--ca-secondary` | `245 158 11` | Amber accent |
+| `--border` / `--ca-outline-variant` | `220 220 235` / `200 200 225` | Borders / dividers |
+| `--ca-error` | `220 38 38` | Error text/surfaces |
 | `--ca-viz-emerald` | `16 185 129` | Viz success accent |
-| `--ca-viz-gold` | `245 158 11` | Viz warning accent |
-| `--focus-ring` | `137 206 255` | Keyboard focus outline (dark) |
+| `--ca-viz-gold` | `245 158 11` | Viz / amber accent |
+| `--focus-ring` | `55 48 163` | Keyboard focus outline (light) |
 | `--focus-ring-offset` | `3px` | Focus offset |
 
-Light (`:root`) keeps a violet primary (`--primary: 124 58 237`, `--focus-ring: 99 14 212`) for theme toggle — not the default launch surface.
+Dark (`.dark`) uses deep navy surfaces (`13 13 28`) with softer indigo primary (`165 180 252`) and amber secondary — see `globals.css`.
 
-Utility classes commonly used: `bg-ca-surface*`, `text-ca-on-surface`, `border-ca-outline-variant`, `bg-primary`, `text-ca-primary`.
+Utility classes commonly used: `bg-ca-surface*`, `text-ca-on-surface`, `border-ca-outline-variant`, `bg-primary`, `text-ca-primary`, `ca-keycap-badge`, `ca-fade-in-up`.
 
 ---
 
@@ -68,20 +66,19 @@ Utility classes commonly used: `bg-ca-surface*`, `text-ca-on-surface`, `border-c
 |------|---------|------------------------|
 | Headline / titles | `--font-headline` | Hanken Grotesk |
 | Body | `--font-body` | Inter |
+| Korean body | `--font-korean` | Noto Sans KR |
 | Mono | `--font-mono` | system UI mono stack |
 
-Classes: `font-headline`, `font-body`.
+Classes: `font-headline`, `font-body`. Body stack falls back through `--font-korean`.
 
 ### Usage patterns (not a rigid type ramp)
 
 | Pattern | Typical classes |
 |---------|-----------------|
-| Page title | `font-headline text-2xl sm:text-3xl font-semibold tracking-tight` |
+| Page title | `font-headline text-4xl sm:text-5xl font-extrabold tracking-tight` |
 | Section / card title | `font-headline text-base font-semibold` |
 | Body | `text-sm` / `text-base` + `text-ca-on-surface-variant` for secondary |
-| Caption / helper | `text-xs` / `text-sm` muted |
-
-Do not require a separate unused token ladder (`type.display`, etc.) unless implemented in CSS.
+| Caption / helper | `text-xs` / `text-sm` muted; keycap badges via `ca-keycap-badge` |
 
 ---
 
@@ -98,25 +95,25 @@ Do not require a separate unused token ladder (`type.display`, etc.) unless impl
 
 | Token / class | Value / note |
 |---------------|--------------|
-| `--radius` | `1rem` (cards often `rounded-xl`) |
+| `--radius` | `0.75rem` (cards often `rounded-xl`) |
 | `--radius-btn` | `0.5rem` |
 | Buttons | `rounded-lg` in `button.tsx` |
-| `--ca-elevated-shadow` | Soft dark shadow; `--ca-btn-glow` / `--ca-focus-glow` are `none` |
+| `--ca-elevated-shadow` | Soft editorial shadow; `--ca-btn-glow` on primary hover |
 
 ---
 
 ## Button hierarchy
 
-Implemented in `components/ui/button.tsx` (`variant`):
+Implemented in `components/ui/button.tsx` (`variant`) — **token-based** (`bg-primary`, not hardcoded RGB):
 
 | Role | Variant | When |
 |------|---------|------|
-| **Primary** | `primary` (default) | One main action per moment (e.g. results「이 결과 저장」, survey start) |
-| **Secondary** | `outline` | Parallel but quieter (e.g. Swagkey link, header「로그인」, selected tab surface) |
+| **Primary** | `primary` (default) | One main action per moment |
+| **Secondary** | `outline` | Parallel but quieter |
 | **Tertiary** | `ghost` / `link` | Low emphasis navigation |
-| **Destructive** | `destructive` | Delete / account deletion — confirm required; never purple fill |
+| **Destructive** | `destructive` | Delete / account deletion — confirm required; never primary fill |
 
-Pass policy: avoid two competing filled primaries in the same viewport. Results save lives once in `ResultsNextActions` (Pass 3). Full glossary + status rules: [`docs/ui-ux-system-guidelines.md`](./docs/ui-ux-system-guidelines.md).
+Pass policy: avoid two competing filled primaries in the same viewport. Full glossary + status rules: [`docs/ui-ux-system-guidelines.md`](./docs/ui-ux-system-guidelines.md).
 
 ---
 
@@ -176,7 +173,7 @@ Catalog: keep a **single** search UI on `/catalog` (body search; header search h
 
 - Catalog / result thumbnails: `CatalogPartThumbnail` with consistent media framing (`uniformCardMedia` where used).
 - Layout diagrams: SVG under `public/layout-diagrams/` — **do not change geometry** unless Owner explicitly requests (project lock).
-- Prefer real product imagery over abstract purple gradients as the main visual idea.
+- Prefer real product imagery over abstract gradients as the main visual idea.
 - Fallbacks: keep alt text and empty states honest when image URLs fail.
 
 ---
@@ -194,16 +191,10 @@ Catalog: keep a **single** search UI on `/catalog` (body search; header search h
 
 ---
 
-## Desk Craft note
-
-Older revisions of this file described a material “Desk Craft” system (anti-purple defaults, paper craft light). That content is **not** launch canonical. See `DESIGN.md` § Desk Craft and `.design-ref/` for history. Applying Desk Craft requires a separate redesign Phase — do not treat those rules as blocking the live purple-dark UI.
-
----
-
 ## Change history
 
 | Date | Change |
 |------|--------|
+| 2026-07-27 | Precision Editorial (Manus): light default, indigo+amber tokens, Noto Sans KR, dark tokens repaired, button stays token-based. |
 | 2026-07-26 | Pass 6: `destructive` button variant; save glossary; date/time + guidelines pointer. |
-| 2026-07-22 | L01: rewritten against live tokens/components; purple-dark default documented; Desk Craft demoted; focus, button hierarchy, and results IA from Pass 1–3 recorded. |
-| (earlier) | Desk Craft aspirational spec drafted (status noted as not yet applied to pages). |
+| 2026-07-22 | L01: rewritten against prior purple-dark live tokens (now superseded). |

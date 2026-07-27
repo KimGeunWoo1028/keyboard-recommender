@@ -34,7 +34,7 @@ export function ResultsConfidenceStory({
   return (
     <div
       data-testid="e2e-confidence-story"
-      className="rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest px-4 py-4 sm:px-5"
+      className="rounded-xl border border-border bg-white dark:bg-ca-surface-container px-4 py-4 sm:px-5"
     >
       <p className="text-xs font-medium uppercase tracking-wide text-ca-on-surface-variant">취향 반영도</p>
       <p className="mt-1 break-keep text-sm leading-relaxed text-ca-on-surface sm:text-base">{story.support}</p>

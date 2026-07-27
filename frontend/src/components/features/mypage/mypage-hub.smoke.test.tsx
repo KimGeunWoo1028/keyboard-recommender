@@ -133,13 +133,13 @@ describe("MyPageHub smoke", () => {
     render(<MyPageHub />);
     await waitFor(() => expect(screen.getByText("허브유저")).toBeInTheDocument());
 
-    await user.click(screen.getByRole("button", { name: "저장한 결과" }));
+    await user.click(screen.getByRole("tab", { name: "저장한 결과" }));
     await waitFor(() => {
       expect(screen.getByRole("heading", { name: "저장한 결과" })).toBeInTheDocument();
     });
     expect(replace).toHaveBeenCalledWith("/mypage?section=saved", { scroll: false });
 
-    await user.click(screen.getByRole("button", { name: "계정" }));
+    await user.click(screen.getByRole("tab", { name: "계정" }));
     expect(screen.getByRole("heading", { name: "프로필" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "보안" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "회원탈퇴" })).toBeInTheDocument();
@@ -174,7 +174,7 @@ describe("MyPageHub smoke", () => {
     render(<MyPageHub />);
 
     await waitFor(() => expect(screen.getByText("허브유저")).toBeInTheDocument());
-    await user.click(screen.getByRole("button", { name: "저장한 결과" }));
+    await user.click(screen.getByRole("tab", { name: "저장한 결과" }));
     await waitFor(() => {
       expect(screen.getByRole("listbox", { name: "저장한 결과 목록" })).toBeInTheDocument();
     });

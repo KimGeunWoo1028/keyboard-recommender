@@ -21,7 +21,7 @@ export function MetricGuideCard({ embedded = false }: { embedded?: boolean }) {
   }
 
   return (
-    <details className="group rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest">
+    <details className="group rounded-xl border border-border bg-white dark:bg-ca-surface-container">
       <summary className="cursor-pointer list-none px-4 py-3 text-sm font-medium text-ca-on-surface [&::-webkit-details-marker]:hidden sm:px-5">
         <span className="flex items-center justify-between gap-2">
           <span>지표 해석 가이드</span>

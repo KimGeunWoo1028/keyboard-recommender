@@ -118,24 +118,30 @@ export function ResultsView() {
 
   if (!submission || !build) {
     return (
-      <div className="rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest p-6 sm:p-8">
-        <p className="max-w-xl text-sm leading-relaxed text-ca-on-surface-variant sm:text-base">
-          아직 이 브라우저에 설문 결과가 없습니다. 결과 화면은 기기(브라우저) 단위로 잠시 보관되며, 다른
-          기기·브라우저에서는 비어 보일 수 있어요. 계정에 저장한 결과만 마이페이지에서 기기와 관계없이
-          확인할 수 있습니다.
+      <div className="animate-fade-up rounded-2xl border border-border bg-white p-6 shadow-sm dark:bg-ca-surface-container sm:p-8">
+        <p className="section-label mb-3">Empty</p>
+        <h2 className="font-headline text-xl font-extrabold tracking-tight text-ca-on-surface">
+          아직 설문 결과가 없어요
+        </h2>
+        <p className="mt-2 max-w-xl break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:text-base">
+          결과 화면은 기기(브라우저) 단위로 잠시 보관되며, 다른 기기·브라우저에서는 비어 보일 수 있어요.
+          계정에 저장한 결과만 마이페이지에서 기기와 관계없이 확인할 수 있습니다.
         </p>
         <div className="mt-5 flex flex-col items-start gap-3">
-          <Link href="/recommend" className={buttonClassName()}>
+          <Link href="/recommend" className={buttonClassName({ className: "h-11 font-semibold" })}>
             설문 시작하기
           </Link>
           <div className="flex flex-col gap-2 text-sm sm:flex-row sm:flex-wrap sm:gap-x-5">
             <Link
               href="/mypage?section=saved"
-              className="font-medium text-ca-on-surface underline-offset-4 hover:underline"
+              className="font-medium text-primary underline-offset-4 hover:underline"
             >
               저장한 결과 보기
             </Link>
-            <Link href={catalogHref({ from: "results" })} className="font-medium text-ca-on-surface underline-offset-4 hover:underline">
+            <Link
+              href={catalogHref({ from: "results" })}
+              className="font-medium text-primary underline-offset-4 hover:underline"
+            >
               부품 카탈로그 둘러보기
             </Link>
           </div>

@@ -65,7 +65,7 @@ export function ResultsNextActions({
 
   return (
     <div
-      className="rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest px-4 py-4 sm:px-5"
+      className="rounded-xl border border-border bg-white dark:bg-ca-surface-container px-4 py-4 sm:px-5"
       data-testid="e2e-results-next-actions"
     >
       <p className="font-headline text-sm font-semibold text-ca-on-surface">다음에 할 일</p>
