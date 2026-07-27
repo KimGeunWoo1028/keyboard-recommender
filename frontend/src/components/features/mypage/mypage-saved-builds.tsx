@@ -16,11 +16,15 @@ import { MyPageSectionCard } from "@/components/features/mypage/mypage-section-c
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import type { SavedRecommendationItem } from "@/lib/api/saved-recommendations";
+import { emitExplorationEvent } from "@/lib/api/saved-recommendations";
 import {
   loadResultSnapshot,
   makeResultSnapshotId,
+  saveResultSnapshot,
+  submissionFromSavedMetadata,
 } from "@/lib/saved-result-snapshots";
 import { formatAbsoluteDate, formatAbsoluteDateTime, toEpochMs } from "@/lib/date-time";
+import { getOrCreateClientSessionId } from "@/lib/client-session-id";
 import { loadLastKnownGoodSubmission, saveSurveySubmission } from "@/lib/survey-storage";
 import { cn } from "@/lib/utils";
 
@@ -56,6 +60,7 @@ function snapshotIdFor(item: SavedRecommendationItem): string {
 }
 
 function canRestoreResults(item: SavedRecommendationItem): boolean {
+  if (submissionFromSavedMetadata(item.metadata)) return true;
   if (loadResultSnapshot(snapshotIdFor(item))) return true;
   const lastGood = loadLastKnownGoodSubmission();
   if (!lastGood?.build) return false;
@@ -63,6 +68,8 @@ function canRestoreResults(item: SavedRecommendationItem): boolean {
 }
 
 function restoreSubmissionFor(item: SavedRecommendationItem) {
+  const fromServer = submissionFromSavedMetadata(item.metadata);
+  if (fromServer) return fromServer;
   const fromSnapshot = loadResultSnapshot(snapshotIdFor(item));
   if (fromSnapshot) return fromSnapshot;
   const lastGood = loadLastKnownGoodSubmission();
@@ -267,17 +274,31 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
                 title={
                   canRestore
                     ? undefined
-                    : "같은 브라우저에서 저장한 결과만 결과 화면으로 다시 열 수 있습니다."
+                    : "이 저장본에는 다시 열 결과 데이터가 없습니다. 결과 화면에서 다시 저장하면 복원할 수 있습니다."
                 }
                 onClick={() => {
                   const submission = restoreSubmissionFor(selected);
                   if (!submission) {
                     setRestoreError(
-                      "이 항목에서는 추천 결과를 다시 열 수 없습니다. 같은 브라우저에서 저장한 결과만 복원할 수 있어요. 대신 설문을 다시 하거나 구성 상세를 확인해 주세요.",
+                      "이 항목에는 다시 열 결과 데이터가 없습니다. 결과 화면에서 한 번 더 저장하면 다른 기기에서도 다시 볼 수 있어요. 구성 확인·다시 설문은 계속 사용할 수 있습니다.",
                     );
                     return;
                   }
+                  saveResultSnapshot(snapshotIdFor(selected), submission);
                   saveSurveySubmission(submission);
+                  void emitExplorationEvent({
+                    event_type: "interaction.revisit",
+                    request_id: selected.request_id,
+                    session_id: getOrCreateClientSessionId(),
+                    scenario_id: "mypage_restore_v1",
+                    metadata: {
+                      buildId: selected.build_id,
+                      source: submissionFromSavedMetadata(selected.metadata)
+                        ? "server_snapshot"
+                        : "local_snapshot",
+                      resultSnapshotId: snapshotIdFor(selected),
+                    },
+                  }).catch(() => undefined);
                   router.push("/results");
                 }}
               >
@@ -298,8 +319,8 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
             </div>
             {!canRestore ? (
               <p className="mt-2 break-keep text-xs leading-relaxed text-ca-on-surface-variant">
-                결과 다시 보기는 이 브라우저에 다시 열 데이터가 있을 때만 가능합니다. 구성 확인·다시 설문은 계속
-                사용할 수 있어요.
+                다시 보기에 필요한 결과 데이터가 이 저장본에 없습니다. 결과 화면에서 다시 저장하면 복원할 수
+                있어요. 구성 확인·다시 설문은 계속 사용할 수 있습니다.
               </p>
             ) : null}
 

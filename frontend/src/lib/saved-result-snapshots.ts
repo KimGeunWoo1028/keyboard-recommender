@@ -29,6 +29,22 @@ export function makeResultSnapshotId(requestId: string, buildId: string): string
   return `${requestId}:${buildId}`;
 }
 
+/** Validate a SurveySubmission-shaped value (local or server metadata). */
+export function asSurveySubmission(value: unknown): SurveySubmission | null {
+  if (!value || typeof value !== "object") return null;
+  const sub = value as SurveySubmission;
+  if (sub.version !== 2 || !sub.answers || !sub.traits) return null;
+  return sub;
+}
+
+/** Read restorable submission embedded in saved-bookmark metadata (server or guest). */
+export function submissionFromSavedMetadata(
+  metadata: Record<string, unknown> | undefined | null,
+): SurveySubmission | null {
+  if (!metadata || typeof metadata !== "object") return null;
+  return asSurveySubmission(metadata.resultSnapshot);
+}
+
 export function saveResultSnapshot(id: string, submission: SurveySubmission): void {
   if (typeof window === "undefined") return;
   const map = readAll();
@@ -47,9 +63,7 @@ export function saveResultSnapshot(id: string, submission: SurveySubmission): vo
 export function loadResultSnapshot(id: string): SurveySubmission | null {
   const entry = readAll()[id];
   if (!entry?.submission) return null;
-  const sub = entry.submission;
-  if (sub.version !== 2 || !sub.answers || !sub.traits) return null;
-  return sub;
+  return asSurveySubmission(entry.submission);
 }
 
 export function removeResultSnapshot(id: string): void {

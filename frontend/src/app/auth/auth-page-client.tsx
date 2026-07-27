@@ -56,10 +56,16 @@ function isRetryableDisplayNameCheckError(err: unknown): boolean {
 }
 
 /** Read auth query params without ``useSearchParams`` (avoids Suspense SSR fallback). */
-function readAuthSearchParams(): { force: boolean; next: string | null } {
-  if (typeof window === "undefined") return { force: false, next: null };
+function readAuthSearchParams(): {
+  force: boolean;
+  next: string | null;
+  mode: "login" | "signup" | null;
+} {
+  if (typeof window === "undefined") return { force: false, next: null, mode: null };
   const params = new URLSearchParams(window.location.search);
-  return { force: params.get("force") === "1", next: params.get("next") };
+  const rawMode = params.get("mode");
+  const mode = rawMode === "signup" || rawMode === "login" ? rawMode : null;
+  return { force: params.get("force") === "1", next: params.get("next"), mode };
 }
 
 export function AuthPageClient() {
@@ -109,8 +115,9 @@ export function AuthPageClient() {
   const activeError = mode === "login" ? loginError : signupError;
 
   useEffect(() => {
-    const { force, next } = readAuthSearchParams();
+    const { force, next, mode: queryMode } = readAuthSearchParams();
     setAuthNextPath(next);
+    if (queryMode) setMode(queryMode);
     if (force) return;
     let cancelled = false;
     void fetchCurrentUser().then((user) => {

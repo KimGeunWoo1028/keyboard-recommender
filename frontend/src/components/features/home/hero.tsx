@@ -21,7 +21,7 @@ export function HomeHero() {
         <div className="animate-fade-up">
           <p className="section-label mb-6">Keyboard Recommender</p>
           <h1 className="font-headline text-4xl font-black tracking-tight text-ca-on-surface sm:text-5xl sm:leading-[1.08] lg:text-6xl lg:leading-[1.05]">
-            취향에 맞는
+            취향에 맞는{" "}
             <br />
             <span className="text-primary">키보드 조합</span>
           </h1>

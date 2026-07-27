@@ -11,6 +11,14 @@ export function normalizeSeoPath(path: string): string {
   return withSlash.replace(/\/+$/, "") || "/";
 }
 
+/** Shared default OG image (exists at `public/og/default.png`; resolved via root metadataBase). */
+export const DEFAULT_OG_IMAGE = {
+  url: "/og/default.png",
+  width: 1200,
+  height: 630,
+  alt: "Keyboard Recommender",
+} as const;
+
 type PublicPageMetadataInput = {
   path: string;
   /** Segment title (uses root `%s · Keyboard Recommender` template) or absolute title object. */
@@ -39,9 +47,17 @@ export function publicPageMetadata({
       title: ogTitle,
       description,
       url: canonical,
+      images: [DEFAULT_OG_IMAGE],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: ogTitle,
+      description,
+      images: [DEFAULT_OG_IMAGE.url],
     },
   };
 }
+
 
 type PrivatePageMetadataInput = {
   path: string;
