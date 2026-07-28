@@ -24,6 +24,7 @@ function saved(partial: Partial<SavedRecommendationItem> = {}): SavedRecommendat
       foam: "Poron",
       layout: "65%",
       case: "Alu",
+      keycap: "PBT keycap",
     },
     metadata: {},
     ...partial,
@@ -37,14 +38,17 @@ describe("MyPageSavedBuilds smoke", () => {
     expect(screen.getByRole("button", { name: "추천 설문 시작" })).toBeInTheDocument();
   });
 
-  it("renders master–detail with restore and delete actions", async () => {
+  it("renders Manus-style cards with restore and delete actions", async () => {
     const user = userEvent.setup();
     const onRemove = vi.fn().mockResolvedValue(undefined);
     render(
       <MyPageSavedBuilds
         items={[
           saved({
-            metadata: { preferenceTags: ["조용한 편", "차분한 소리"] },
+            metadata: {
+              preferenceTags: ["조용한 편", "차분한 소리"],
+              overallConfidence: 0.92,
+            },
           }),
         ]}
         removingKeys={new Set()}
@@ -52,22 +56,19 @@ describe("MyPageSavedBuilds smoke", () => {
       />,
     );
 
-    expect(screen.getByRole("listbox", { name: "저장한 결과 목록" })).toBeInTheDocument();
-    expect(screen.getAllByText(/조용한 편/).length).toBeGreaterThanOrEqual(1);
-    expect(screen.getByText(/스위치 Oil King/)).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "추천 결과 다시 보기" })).toBeInTheDocument();
-    expect(screen.getByText("스위치")).toBeInTheDocument();
-    expect(screen.getAllByText("Oil King").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByRole("list", { name: "저장한 결과 목록" })).toBeInTheDocument();
+    expect(screen.getByText("일치도 92%")).toBeInTheDocument();
+    expect(screen.getByText(/조용한 편/)).toBeInTheDocument();
+    expect(screen.getByText(/· Oil King · FR4 · PBT keycap/)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "결과 보기" })).toBeInTheDocument();
 
-    await user.click(screen.getByRole("option"));
     await user.click(screen.getByRole("button", { name: "삭제" }));
     expect(screen.getByText("저장한 결과를 삭제할까요?")).toBeInTheDocument();
     await user.click(screen.getByRole("button", { name: "삭제하기" }));
     expect(onRemove).toHaveBeenCalledTimes(1);
   });
 
-  it("enables restore when server metadata includes resultSnapshot", async () => {
-    const user = userEvent.setup();
+  it("enables restore when server metadata includes resultSnapshot", () => {
     const submission = {
       version: 2 as const,
       answers: {
@@ -79,6 +80,7 @@ describe("MyPageSavedBuilds smoke", () => {
       },
       traits: emptyTraits(),
       completedAtIso: "2026-07-28T00:00:00.000Z",
+      overallConfidence: 0.88,
       build: {
         id: "build-1",
         title: "Quiet build",
@@ -98,7 +100,7 @@ describe("MyPageSavedBuilds smoke", () => {
         onRemove={vi.fn()}
       />,
     );
-    await user.click(screen.getByRole("option"));
-    expect(screen.getByRole("button", { name: "추천 결과 다시 보기" })).toBeEnabled();
+    expect(screen.getByRole("button", { name: "결과 보기" })).toBeEnabled();
+    expect(screen.getByText("일치도 88%")).toBeInTheDocument();
   });
 });
