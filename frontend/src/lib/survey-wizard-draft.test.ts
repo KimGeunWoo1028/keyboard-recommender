@@ -1,7 +1,9 @@
-import { describe, expect, it, beforeEach } from "vitest";
+import { describe, expect, it, beforeEach, vi } from "vitest";
 
 import {
   clearSurveyWizardDraft,
+  installSurveyNavPopListener,
+  isBrowserBackNavigation,
   loadSurveyWizardDraft,
   saveSurveyWizardDraft,
 } from "@/lib/survey-wizard-draft";
@@ -9,6 +11,9 @@ import {
 describe("survey-wizard-draft", () => {
   beforeEach(() => {
     clearSurveyWizardDraft();
+    sessionStorage.removeItem("kr_survey_nav_pop_v1");
+    vi.restoreAllMocks();
+    delete (window as Window & { __krSurveyNavPopInstalled?: boolean }).__krSurveyNavPopInstalled;
   });
 
   it("round-trips a mid-wizard draft", () => {
@@ -28,6 +33,19 @@ describe("survey-wizard-draft", () => {
     expect(loaded?.seededStepIds).toEqual(["sound_profile", "volume"]);
   });
 
+  it("round-trips completedForResults", () => {
+    saveSurveyWizardDraft({
+      phase: "questions",
+      stepIndex: 4,
+      answers: {},
+      selectedStyle: null,
+      seededStepIds: [],
+      nlPreferenceText: "",
+      completedForResults: true,
+    });
+    expect(loadSurveyWizardDraft()?.completedForResults).toBe(true);
+  });
+
   it("clears draft", () => {
     saveSurveyWizardDraft({
       phase: "questions",
@@ -39,5 +57,23 @@ describe("survey-wizard-draft", () => {
     });
     clearSurveyWizardDraft();
     expect(loadSurveyWizardDraft()).toBeNull();
+  });
+
+  it("detects browser back via popstate flag", () => {
+    installSurveyNavPopListener();
+    window.dispatchEvent(new PopStateEvent("popstate"));
+    expect(isBrowserBackNavigation()).toBe(true);
+    // Consumed — second read is false unless Timing says back_forward.
+    vi.spyOn(window.performance, "getEntriesByType").mockReturnValue([
+      { type: "navigate" } as PerformanceNavigationTiming,
+    ]);
+    expect(isBrowserBackNavigation()).toBe(false);
+  });
+
+  it("falls back to Navigation Timing back_forward", () => {
+    vi.spyOn(window.performance, "getEntriesByType").mockReturnValue([
+      { type: "back_forward" } as PerformanceNavigationTiming,
+    ]);
+    expect(isBrowserBackNavigation()).toBe(true);
   });
 });
