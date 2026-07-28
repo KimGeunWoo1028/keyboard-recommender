@@ -7,6 +7,7 @@ import {
   clearSurveyWizardDraft,
   saveSurveyWizardDraft,
 } from "@/lib/survey-wizard-draft";
+import type { SurveyStepId } from "@/types/survey";
 
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: vi.fn() }),
@@ -23,7 +24,7 @@ const completedDraft = {
     weight_preference: "light" as const,
   },
   selectedStyle: "creamy_quiet" as const,
-  seededStepIds: ["sound_profile", "volume"] as const,
+  seededStepIds: ["sound_profile", "volume"] as SurveyStepId[],
   nlPreferenceText: "",
   completedForResults: true,
 };
