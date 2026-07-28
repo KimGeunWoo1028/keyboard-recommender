@@ -102,7 +102,8 @@ const config: Config = {
       },
       maxWidth: {
         content: "42rem",
-        ca: "90rem",
+        /** Manus `.container` lg max-width — keeps side breathing room on laptop widths */
+        ca: "80rem",
       },
       spacing: {
         "ca-gutter": "1.5rem",
