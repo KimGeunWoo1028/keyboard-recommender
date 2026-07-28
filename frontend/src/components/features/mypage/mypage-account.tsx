@@ -41,11 +41,8 @@ const DELETE_WARNING =
 function validateDisplayName(value: string): string | null {
   const v = value.trim();
   if (!v) return "닉네임을 입력해 주세요.";
-  const hasHangul = /[가-힣]/.test(v);
-  const hasLatin = /[A-Za-z]/.test(v);
-  if (hasHangul && !hasLatin && v.length < 2) return "한국어 닉네임은 2자 이상이어야 합니다.";
-  if (hasLatin && !hasHangul && v.length < 3) return "영어 닉네임은 3자 이상이어야 합니다.";
-  if (v.length < 3 && (hasHangul || hasLatin)) return "닉네임은 3자 이상이어야 합니다.";
+  if (v.length < 2) return "닉네임은 2자 이상이어야 합니다.";
+  if (!/^[가-힣A-Za-z]/.test(v)) return "닉네임은 한글 또는 영문으로 시작해야 합니다.";
   return null;
 }
 

@@ -72,8 +72,7 @@ def _as_utc(dt: datetime) -> datetime:
 
 
 _PASSWORD_ALLOWED = re.compile(r"^[\x21-\x7E]{8,20}$")
-_HAS_HANGUL = re.compile(r"[가-힣]")
-_HAS_LATIN = re.compile(r"[A-Za-z]")
+_DISPLAY_NAME_STARTS_OK = re.compile(r"^[가-힣A-Za-z]")
 
 
 def _allow_debug_email_code(settings: SettingsDep) -> bool:
@@ -120,26 +119,15 @@ def _assert_display_name_policy(display_name: str) -> None:
     normalized = _normalize_display_name(display_name)
     if not normalized:
         raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail="Display name is required.")
-    has_hangul = bool(_HAS_HANGUL.search(normalized))
-    has_latin = bool(_HAS_LATIN.search(normalized))
-    if has_hangul and not has_latin:
-        if len(normalized) < 2:
-            raise HTTPException(
-                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-                detail="Korean display names must be at least 2 characters.",
-            )
-        return
-    if has_latin and not has_hangul:
-        if len(normalized) < 3:
-            raise HTTPException(
-                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-                detail="English display names must be at least 3 characters.",
-            )
-        return
-    if len(normalized) < 3:
+    if len(normalized) < 2:
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail="Display name must be at least 3 characters.",
+            detail="Display name must be at least 2 characters.",
+        )
+    if not _DISPLAY_NAME_STARTS_OK.match(normalized):
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="Display name must start with a Korean or English letter.",
         )
 
 
