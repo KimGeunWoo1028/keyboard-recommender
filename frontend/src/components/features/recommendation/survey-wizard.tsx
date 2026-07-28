@@ -6,6 +6,11 @@ import { useEffect, useRef, useState } from "react";
 import { SurveyOnboardingStyleIcon } from "@/components/features/recommendation/survey-option-icon";
 import { SurveyQuestion } from "@/components/features/recommendation/survey-question";
 import { SurveySegmentedProgress } from "@/components/features/recommendation/survey-segmented-progress";
+import {
+  SurveyPageBody,
+  SurveyPageHeader,
+  SurveyWizardShell,
+} from "@/components/features/recommendation/survey-page-shell";
 import { Button } from "@/components/ui/button";
 import { ApiError, getPublicApiBase } from "@/lib/api/client";
 import {
@@ -472,52 +477,42 @@ export function SurveyWizard() {
 
   if (submitting) {
     return (
-      <div
-        className="mx-auto flex h-full w-full max-w-2xl flex-col justify-center"
-        data-testid="e2e-survey-wizard"
-        aria-live="polite"
-      >
-        <div className="text-center">
-          <h2 className="font-headline text-xl font-semibold tracking-tight text-ca-on-surface sm:text-2xl">
-            추천 조합을 준비하는 중
-          </h2>
-          <p className="mt-2 break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:text-base">
-            취향을 조합해 가장 잘 맞는 구성을 찾고 있어요. 잠시 후 추천 이유와 실제 제품을 확인할 수
-            있습니다.
+      <SurveyWizardShell live="polite">
+        <SurveyPageHeader />
+        <SurveyPageBody className="max-w-2xl flex-1 justify-center">
+          <div className="text-center">
+            <h2 className="font-headline text-xl font-semibold tracking-tight text-ca-on-surface sm:text-2xl">
+              추천 조합을 준비하는 중
+            </h2>
+            <p className="mt-2 break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:text-base">
+              취향을 조합해 가장 잘 맞는 구성을 찾고 있어요. 잠시 후 추천 이유와 실제 제품을 확인할 수
+              있습니다.
+            </p>
+          </div>
+          <p className="mt-8 text-center text-sm text-ca-on-surface">{loadingMessage}</p>
+          <div
+            className="mx-auto mt-6 h-1 w-full max-w-xs overflow-hidden rounded bg-ca-outline-variant/35"
+            role="progressbar"
+            aria-label="추천 준비 중"
+            aria-busy="true"
+            aria-valuetext="진행 중"
+          >
+            <div className="h-full w-2/3 motion-safe:animate-pulse bg-ca-on-surface/40" />
+          </div>
+          <p className="mx-auto mt-8 max-w-sm break-keep text-center text-xs leading-relaxed text-ca-on-surface-variant sm:text-sm">
+            네트워크가 느려도 잠시만 기다려 주세요. 실패하면 다시 시도할 수 있어요
+            {lastKnownGoodAvailable ? " · 이전에 성공한 결과도 열 수 있습니다" : ""}.
           </p>
-        </div>
-        <p className="mt-8 text-center text-sm text-ca-on-surface">{loadingMessage}</p>
-        <div
-          className="mx-auto mt-6 h-1 w-full max-w-xs overflow-hidden rounded bg-ca-outline-variant/35"
-          role="progressbar"
-          aria-label="추천 준비 중"
-          aria-busy="true"
-          aria-valuetext="진행 중"
-        >
-          <div className="h-full w-2/3 motion-safe:animate-pulse bg-ca-on-surface/40" />
-        </div>
-        <p className="mx-auto mt-8 max-w-sm break-keep text-center text-xs leading-relaxed text-ca-on-surface-variant sm:text-sm">
-          네트워크가 느려도 잠시만 기다려 주세요. 실패하면 다시 시도할 수 있어요
-          {lastKnownGoodAvailable ? " · 이전에 성공한 결과도 열 수 있습니다" : ""}.
-        </p>
-      </div>
+        </SurveyPageBody>
+      </SurveyWizardShell>
     );
   }
 
   if (phase === "entry") {
     return (
-      <div className="mx-auto flex h-full w-full max-w-ca flex-col" data-testid="e2e-survey-wizard">
-        <div className="-mx-ca-margin-mobile border-b border-[rgb(220_220_238)] bg-[#F8F9FA] px-ca-margin-mobile py-8 dark:border-border dark:bg-ca-surface-container-low sm:-mx-ca-margin sm:px-ca-margin sm:py-10">
-          <p className="section-label mb-3">Survey</p>
-          <h1 className="font-headline text-3xl font-black tracking-tight text-ca-on-surface sm:text-4xl">
-            취향에 맞는 키보드 찾기
-          </h1>
-          <p className="mt-2 max-w-2xl break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:text-base">
-            가까운 성향을 고르면 몇 가지 답을 미리 채워 더 빠르게 시작할 수 있어요.
-          </p>
-        </div>
-
-        <div className="flex min-h-0 flex-1 flex-col gap-8 py-8 sm:py-10">
+      <SurveyWizardShell>
+        <SurveyPageHeader description="가까운 성향을 고르면 몇 가지 답을 미리 채워 더 빠르게 시작할 수 있어요." />
+        <SurveyPageBody className="min-h-0 flex-1 gap-8">
           <div className="flex items-center gap-3">
             <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
               1
@@ -618,16 +613,15 @@ export function SurveyWizard() {
               <NavArrowForward className="h-4 w-4" />
             </Button>
           </div>
-        </div>
-      </div>
+        </SurveyPageBody>
+      </SurveyWizardShell>
     );
   }
 
   return (
-    <div
-      className="mx-auto flex h-full min-h-0 w-full max-w-ca flex-col gap-3 sm:gap-4"
-      data-testid="e2e-survey-wizard"
-    >
+    <SurveyWizardShell>
+      <SurveyPageHeader description="각 문항은 한 번만 고르면 됩니다." />
+      <SurveyPageBody className="min-h-0 flex-1 gap-3 sm:gap-4">
       <SurveySegmentedProgress
         currentStep={stepIndex + 1}
         totalSteps={totalSteps}
@@ -813,6 +807,7 @@ export function SurveyWizard() {
           ) : null}
         </div>
       </div>
-    </div>
+      </SurveyPageBody>
+    </SurveyWizardShell>
   );
 }
