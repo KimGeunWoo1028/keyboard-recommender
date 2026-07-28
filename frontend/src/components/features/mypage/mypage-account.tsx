@@ -1,5 +1,6 @@
 "use client";
 
+import { Check, LogOut, Pencil, Trash2 } from "lucide-react";
 import { useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -95,7 +96,7 @@ function PasswordVisibilityToggle({
 export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [openNicknamePanel, setOpenNicknamePanel] = useState(false);
+  const [editNickname, setEditNickname] = useState(false);
   const [openPasswordPanel, setOpenPasswordPanel] = useState(false);
   const [displayName, setDisplayName] = useState(user.display_name ?? "");
   const [displayNameMessage, setDisplayNameMessage] = useState<string | null>(null);
@@ -140,22 +141,21 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
   const hasCustomAvatar = Boolean(user.avatar_url?.trim());
 
   return (
-    <div className="space-y-4">
-      <MyPageSectionCard title="프로필" description="프로필 사진과 표시 이름을 확인·수정합니다.">
-        <div className="flex items-center gap-4">
-          <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full border border-ca-outline-variant/50 bg-ca-surface-container/60">
+    <div className="max-w-lg space-y-6">
+      <MyPageSectionCard title="프로필" className="rounded-xl">
+        <div className="flex items-center gap-3 border-b border-ca-outline-variant/30 pb-4">
+          <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full border border-ca-outline-variant/50 bg-ca-surface-container/60">
             {/* eslint-disable-next-line @next/next/no-img-element -- remote API avatar + local default */}
             <img
               src={avatarSrc}
               alt=""
-              width={96}
-              height={96}
+              width={64}
+              height={64}
               className="h-full w-full object-cover"
               decoding="async"
             />
           </div>
           <div className="min-w-0 flex-1 space-y-2">
-            <p className="font-label text-ca-label-sm font-medium text-ca-secondary">프로필 사진</p>
             <div className="flex flex-wrap gap-2">
               <Button
                 type="button"
@@ -217,84 +217,42 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
               }}
             />
             {avatarMessage ? <p className="text-xs text-ca-on-surface-variant">{avatarMessage}</p> : null}
-            <p className="text-xs text-ca-on-surface-variant">JPEG, PNG, WebP · 최대 5MB</p>
           </div>
         </div>
 
-        <div className="space-y-3 border-t border-ca-outline-variant/30 pt-4">
-          <div>
-            <p className="font-label text-ca-label-sm font-medium text-ca-secondary">이메일</p>
-            <p className="mt-1 truncate text-sm text-ca-on-surface">{user.email}</p>
-          </div>
-          <div>
-            <p className="font-label text-ca-label-sm font-medium text-ca-secondary">닉네임</p>
-            <p className="mt-1 text-sm text-ca-on-surface">{user.display_name?.trim() || "-"}</p>
-          </div>
-        </div>
-
-        <Button
-          variant={openNicknamePanel ? "primary" : "outline"}
-          className="mt-2 w-full justify-between"
-          onClick={() => setOpenNicknamePanel((prev) => !prev)}
-        >
-          닉네임 변경
-          <span>{openNicknamePanel ? "▲" : "▼"}</span>
-        </Button>
-        {openNicknamePanel ? (
-          <div className="space-y-2 rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container/30 p-3">
-            <div className="space-y-1.5">
-              <Label htmlFor="mypage-nickname">닉네임</Label>
+        <div className="space-y-4">
+          <div className="space-y-1.5">
+            <Label htmlFor="mypage-nickname-display" className="text-xs font-semibold uppercase tracking-wider text-ca-on-surface-variant">
+              닉네임
+            </Label>
+            <div className="flex gap-2">
               <Input
-                id="mypage-nickname"
-                value={displayName}
+                id="mypage-nickname-display"
+                value={editNickname ? displayName : user.display_name?.trim() || ""}
+                disabled={!editNickname}
                 onChange={(e) => {
                   setDisplayName(e.target.value);
                   setDisplayNameAvailable(false);
                   setDisplayNameMessage(null);
                 }}
                 placeholder="표시할 닉네임"
+                className="disabled:bg-[rgb(248_248_252)] dark:disabled:bg-ca-surface-container-low"
               />
-            </div>
-            <div className="flex flex-wrap gap-2">
               <Button
+                type="button"
                 variant="outline"
-                className="h-10 whitespace-nowrap px-4"
-                onClick={() => {
-                  const err = validateDisplayName(displayName);
-                  if (err) {
-                    setDisplayNameMessage(err);
-                    setDisplayNameAvailable(false);
-                    return;
-                  }
-                  void checkDisplayNameAvailability(displayName.trim())
-                    .then((res) => {
-                      if (
-                        res.available ||
-                        displayName.trim().toLowerCase() === (user.display_name ?? "").trim().toLowerCase()
-                      ) {
-                        setDisplayNameAvailable(true);
-                        setDisplayNameMessage("사용 가능한 닉네임입니다.");
-                      } else {
-                        setDisplayNameAvailable(false);
-                        setDisplayNameMessage("이미 사용중입니다.");
-                      }
-                    })
-                    .catch((e) => {
-                      setDisplayNameAvailable(false);
-                      if (isRetryableDisplayNameCheckError(e)) {
-                        setDisplayNameMessage("지금은 중복 확인이 어렵습니다. 잠시 후 다시 시도해 주세요.");
-                        return;
-                      }
-                      setDisplayNameMessage(e instanceof Error ? e.message : "중복 확인에 실패했습니다.");
-                    });
-                }}
-              >
-                중복 확인
-              </Button>
-              <Button
-                className="h-10 whitespace-nowrap px-4"
+                size="sm"
+                className="shrink-0"
+                aria-label={editNickname ? "닉네임 저장" : "닉네임 수정"}
                 disabled={updatingName}
                 onClick={() => {
+                  if (!editNickname) {
+                    setDisplayName(user.display_name ?? "");
+                    setDisplayNameAvailable(false);
+                    setDisplayNameMessage(null);
+                    setEditNickname(true);
+                    return;
+                  }
                   const err = validateDisplayName(displayName);
                   if (err) {
                     setDisplayNameMessage(err);
@@ -313,6 +271,7 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
                       onUserChanged(updated);
                       setDisplayNameMessage("닉네임이 변경되었습니다.");
                       setDisplayNameAvailable(false);
+                      setEditNickname(false);
                     })
                     .catch((e) => {
                       if (e instanceof ApiError && e.status === 409) {
@@ -324,34 +283,111 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
                     .finally(() => setUpdatingName(false));
                 }}
               >
-                {updatingName ? "저장 중..." : "저장"}
+                {editNickname ? <Check className="h-4 w-4" aria-hidden /> : <Pencil className="h-4 w-4" aria-hidden />}
               </Button>
             </div>
+            {editNickname ? (
+              <div className="flex flex-wrap gap-2 pt-1">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    const err = validateDisplayName(displayName);
+                    if (err) {
+                      setDisplayNameMessage(err);
+                      setDisplayNameAvailable(false);
+                      return;
+                    }
+                    void checkDisplayNameAvailability(displayName.trim())
+                      .then((res) => {
+                        if (
+                          res.available ||
+                          displayName.trim().toLowerCase() === (user.display_name ?? "").trim().toLowerCase()
+                        ) {
+                          setDisplayNameAvailable(true);
+                          setDisplayNameMessage("사용 가능한 닉네임입니다.");
+                        } else {
+                          setDisplayNameAvailable(false);
+                          setDisplayNameMessage("이미 사용중입니다.");
+                        }
+                      })
+                      .catch((e) => {
+                        setDisplayNameAvailable(false);
+                        if (isRetryableDisplayNameCheckError(e)) {
+                          setDisplayNameMessage("지금은 중복 확인이 어렵습니다. 잠시 후 다시 시도해 주세요.");
+                          return;
+                        }
+                        setDisplayNameMessage(e instanceof Error ? e.message : "중복 확인에 실패했습니다.");
+                      });
+                  }}
+                >
+                  중복 확인
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => {
+                    setEditNickname(false);
+                    setDisplayName(user.display_name ?? "");
+                    setDisplayNameAvailable(false);
+                    setDisplayNameMessage(null);
+                  }}
+                >
+                  취소
+                </Button>
+              </div>
+            ) : null}
             {displayNameMessage ? <p className="text-xs text-ca-on-surface-variant">{displayNameMessage}</p> : null}
           </div>
-        ) : null}
+
+          <div className="space-y-1.5">
+            <Label htmlFor="mypage-email" className="text-xs font-semibold uppercase tracking-wider text-ca-on-surface-variant">
+              이메일
+            </Label>
+            <Input
+              id="mypage-email"
+              value={user.email}
+              disabled
+              className="bg-[rgb(248_248_252)] text-ca-on-surface-variant dark:bg-ca-surface-container-low"
+            />
+          </div>
+        </div>
       </MyPageSectionCard>
 
-      <MyPageSectionCard title="보안" description="비밀번호를 바꾸고, 로그인 세션을 종료할 수 있어요.">
+      <MyPageSectionCard title="보안" className="rounded-xl">
         {securitySummary?.last_login_at ? (
-          <p className="text-sm text-ca-on-surface-variant">
+          <p className="text-xs text-ca-on-surface-variant">
             최근 로그인 · {formatAbsoluteDateTime(securitySummary.last_login_at, { includeSeconds: true })}
           </p>
         ) : null}
 
-        <Button
-          variant={openPasswordPanel ? "primary" : "outline"}
-          className="w-full justify-between"
-          onClick={() => {
-            setOpenPasswordPanel((prev) => !prev);
-            setPasswordMessage(null);
-          }}
-        >
-          비밀번호 변경
-          <span>{openPasswordPanel ? "▲" : "▼"}</span>
-        </Button>
-        {openPasswordPanel ? (
+        {!openPasswordPanel ? (
+          <Button
+            variant="outline"
+            className="border-border text-primary hover:border-primary"
+            onClick={() => {
+              setOpenPasswordPanel(true);
+              setPasswordMessage(null);
+            }}
+          >
+            비밀번호 변경 이메일 보내기
+          </Button>
+        ) : (
           <div className="space-y-2 rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container/30 p-3">
+            <div className="flex items-center justify-between gap-2">
+              <p className="text-sm font-medium text-ca-on-surface">비밀번호 변경</p>
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={() => {
+                  setOpenPasswordPanel(false);
+                  setPasswordMessage(null);
+                }}
+              >
+                닫기
+              </Button>
+            </div>
             <p className="text-xs text-ca-on-surface-variant">
               가입 이메일(<span className="font-medium text-ca-on-surface">{user.email}</span>)로 인증번호를
               받은 뒤, 비밀번호를 변경할 수 있습니다.
@@ -390,56 +426,56 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
               <div className="flex min-w-0 flex-1 flex-col gap-1.5">
                 <Label htmlFor="mypage-password-code">비밀번호 변경 인증번호</Label>
                 <div className="flex min-w-0 items-center gap-2">
-                <Input
-                  id="mypage-password-code"
-                  type="text"
-                  inputMode="numeric"
-                  maxLength={6}
-                  value={passwordCode}
-                  onChange={(e) => {
-                    setPasswordCode(e.target.value.replace(/\D/g, "").slice(0, 6));
-                    if (passwordVerified) {
-                      setPasswordVerified(false);
-                      setPasswordVerificationToken(null);
-                    }
-                  }}
-                  placeholder="6자리 숫자"
-                  className="min-w-0 flex-1"
-                  disabled={!passwordCodeSent || passwordVerified}
-                  autoComplete="one-time-code"
-                />
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  className="min-w-[5.5rem] shrink-0"
-                  loading={verifyingPasswordCode}
-                  disabled={!passwordCodeSent || passwordVerified || securityActionBusy !== "none"}
-                  onClick={() => {
-                    setPasswordMessage(null);
-                    if (!/^\d{6}$/.test(passwordCode)) {
-                      setPasswordMessage("인증번호 6자리를 입력해 주세요.");
-                      return;
-                    }
-                    setVerifyingPasswordCode(true);
-                    void verifyPasswordChangeCode(passwordCode)
-                      .then((res) => {
-                        setPasswordVerified(true);
-                        setPasswordVerificationToken(res.verification_token);
-                        setPasswordMessage("이메일 인증이 완료되었습니다. 새 비밀번호를 입력해 주세요.");
-                      })
-                      .catch((e) => {
-                        if (e instanceof ApiError && e.status === 400) {
-                          setPasswordMessage("인증번호가 올바르지 않거나 만료되었습니다.");
-                        } else {
-                          setPasswordMessage(e instanceof Error ? e.message : "인증 확인에 실패했습니다.");
-                        }
-                      })
-                      .finally(() => setVerifyingPasswordCode(false));
-                  }}
-                >
-                  {passwordVerified ? "인증 완료" : "인증 확인"}
-                </Button>
+                  <Input
+                    id="mypage-password-code"
+                    type="text"
+                    inputMode="numeric"
+                    maxLength={6}
+                    value={passwordCode}
+                    onChange={(e) => {
+                      setPasswordCode(e.target.value.replace(/\D/g, "").slice(0, 6));
+                      if (passwordVerified) {
+                        setPasswordVerified(false);
+                        setPasswordVerificationToken(null);
+                      }
+                    }}
+                    placeholder="6자리 숫자"
+                    className="min-w-0 flex-1"
+                    disabled={!passwordCodeSent || passwordVerified}
+                    autoComplete="one-time-code"
+                  />
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="min-w-[5.5rem] shrink-0"
+                    loading={verifyingPasswordCode}
+                    disabled={!passwordCodeSent || passwordVerified || securityActionBusy !== "none"}
+                    onClick={() => {
+                      setPasswordMessage(null);
+                      if (!/^\d{6}$/.test(passwordCode)) {
+                        setPasswordMessage("인증번호 6자리를 입력해 주세요.");
+                        return;
+                      }
+                      setVerifyingPasswordCode(true);
+                      void verifyPasswordChangeCode(passwordCode)
+                        .then((res) => {
+                          setPasswordVerified(true);
+                          setPasswordVerificationToken(res.verification_token);
+                          setPasswordMessage("이메일 인증이 완료되었습니다. 새 비밀번호를 입력해 주세요.");
+                        })
+                        .catch((e) => {
+                          if (e instanceof ApiError && e.status === 400) {
+                            setPasswordMessage("인증번호가 올바르지 않거나 만료되었습니다.");
+                          } else {
+                            setPasswordMessage(e instanceof Error ? e.message : "인증 확인에 실패했습니다.");
+                          }
+                        })
+                        .finally(() => setVerifyingPasswordCode(false));
+                    }}
+                  >
+                    {passwordVerified ? "인증 완료" : "인증 확인"}
+                  </Button>
                 </div>
               </div>
             </div>
@@ -539,6 +575,7 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
                     setPasswordCodeSent(false);
                     setPasswordVerified(false);
                     setPasswordVerificationToken(null);
+                    setOpenPasswordPanel(false);
                   })
                   .catch((e) => {
                     if (e instanceof ApiError && e.status === 401) {
@@ -558,11 +595,14 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
             </Button>
             {passwordMessage ? <p className="text-xs text-ca-on-surface-variant">{passwordMessage}</p> : null}
           </div>
-        ) : null}
+        )}
+      </MyPageSectionCard>
 
-        <div className="flex flex-wrap gap-2 border-t border-ca-outline-variant/30 pt-4">
+      <MyPageSectionCard title="계정 관리" className="rounded-xl">
+        <div className="flex flex-col gap-3">
           <Button
             variant="outline"
+            className="justify-start gap-2 border-border text-ca-on-surface-variant hover:border-primary hover:text-primary"
             disabled={securityActionBusy !== "none"}
             onClick={() => {
               setSecurityActionBusy("logout");
@@ -572,10 +612,12 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
               });
             }}
           >
-            {securityActionBusy === "logout" ? "로그아웃 중..." : "현재 세션 로그아웃"}
+            <LogOut className="h-4 w-4" aria-hidden />
+            {securityActionBusy === "logout" ? "로그아웃 중..." : "로그아웃"}
           </Button>
           <Button
             variant="ghost"
+            className="justify-start text-ca-on-surface-variant hover:text-primary"
             disabled={securityActionBusy !== "none"}
             onClick={() => {
               setSecurityActionBusy("logout_all");
@@ -587,27 +629,23 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
           >
             {securityActionBusy === "logout_all" ? "처리 중..." : "전체 세션 로그아웃"}
           </Button>
+          <Button
+            variant="ghost"
+            className="justify-start gap-2 text-destructive hover:bg-destructive/10 hover:text-destructive"
+            disabled={securityActionBusy !== "none" || deletingAccount}
+            onClick={() => {
+              setOpenDeletePanel((prev) => !prev);
+              setDeleteMessage(null);
+            }}
+          >
+            <Trash2 className="h-4 w-4" aria-hidden />
+            계정 삭제
+          </Button>
         </div>
-      </MyPageSectionCard>
 
-      <MyPageSectionCard
-        title="회원탈퇴"
-        description="계정을 영구적으로 삭제합니다. 이 작업은 되돌릴 수 없습니다."
-      >
-        <p className="text-sm text-ca-on-surface-variant">{DELETE_WARNING}</p>
-        <Button
-          variant={openDeletePanel ? "destructive" : "outline"}
-          className="w-full justify-between"
-          onClick={() => {
-            setOpenDeletePanel((prev) => !prev);
-            setDeleteMessage(null);
-          }}
-        >
-          탈퇴하기
-          <span>{openDeletePanel ? "▲" : "▼"}</span>
-        </Button>
         {openDeletePanel ? (
-          <div className="space-y-2 rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container/30 p-3">
+          <div className="mt-4 space-y-2 rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container/30 p-3">
+            <p className="text-sm text-ca-on-surface-variant">{DELETE_WARNING}</p>
             <p className="text-xs text-ca-on-surface-variant">
               가입 이메일(<span className="font-medium text-ca-on-surface">{user.email}</span>)로 인증번호를
               받은 뒤, 비밀번호와 함께 탈퇴를 완료합니다.
@@ -646,56 +684,56 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
               <div className="flex min-w-0 flex-1 flex-col gap-1.5">
                 <Label htmlFor="mypage-delete-code">탈퇴 인증번호</Label>
                 <div className="flex min-w-0 items-center gap-2">
-                <Input
-                  id="mypage-delete-code"
-                  type="text"
-                  inputMode="numeric"
-                  maxLength={6}
-                  value={deleteCode}
-                  onChange={(e) => {
-                    setDeleteCode(e.target.value.replace(/\D/g, "").slice(0, 6));
-                    if (deleteVerified) {
-                      setDeleteVerified(false);
-                      setDeleteVerificationToken(null);
-                    }
-                  }}
-                  placeholder="6자리 숫자"
-                  className="min-w-0 flex-1"
-                  disabled={!deleteCodeSent || deleteVerified}
-                  autoComplete="one-time-code"
-                />
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  className="min-w-[5.5rem] shrink-0"
-                  loading={verifyingDeleteCode}
-                  disabled={!deleteCodeSent || deleteVerified || securityActionBusy !== "none"}
-                  onClick={() => {
-                    setDeleteMessage(null);
-                    if (!/^\d{6}$/.test(deleteCode)) {
-                      setDeleteMessage("인증번호 6자리를 입력해 주세요.");
-                      return;
-                    }
-                    setVerifyingDeleteCode(true);
-                    void verifyAccountDeletionCode(deleteCode)
-                      .then((res) => {
-                        setDeleteVerified(true);
-                        setDeleteVerificationToken(res.verification_token);
-                        setDeleteMessage("이메일 인증이 완료되었습니다. 비밀번호를 입력해 탈퇴를 완료하세요.");
-                      })
-                      .catch((e) => {
-                        if (e instanceof ApiError && e.status === 400) {
-                          setDeleteMessage("인증번호가 올바르지 않거나 만료되었습니다.");
-                        } else {
-                          setDeleteMessage(e instanceof Error ? e.message : "인증 확인에 실패했습니다.");
-                        }
-                      })
-                      .finally(() => setVerifyingDeleteCode(false));
-                  }}
-                >
-                  {deleteVerified ? "인증 완료" : "인증 확인"}
-                </Button>
+                  <Input
+                    id="mypage-delete-code"
+                    type="text"
+                    inputMode="numeric"
+                    maxLength={6}
+                    value={deleteCode}
+                    onChange={(e) => {
+                      setDeleteCode(e.target.value.replace(/\D/g, "").slice(0, 6));
+                      if (deleteVerified) {
+                        setDeleteVerified(false);
+                        setDeleteVerificationToken(null);
+                      }
+                    }}
+                    placeholder="6자리 숫자"
+                    className="min-w-0 flex-1"
+                    disabled={!deleteCodeSent || deleteVerified}
+                    autoComplete="one-time-code"
+                  />
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="min-w-[5.5rem] shrink-0"
+                    loading={verifyingDeleteCode}
+                    disabled={!deleteCodeSent || deleteVerified || securityActionBusy !== "none"}
+                    onClick={() => {
+                      setDeleteMessage(null);
+                      if (!/^\d{6}$/.test(deleteCode)) {
+                        setDeleteMessage("인증번호 6자리를 입력해 주세요.");
+                        return;
+                      }
+                      setVerifyingDeleteCode(true);
+                      void verifyAccountDeletionCode(deleteCode)
+                        .then((res) => {
+                          setDeleteVerified(true);
+                          setDeleteVerificationToken(res.verification_token);
+                          setDeleteMessage("이메일 인증이 완료되었습니다. 비밀번호를 입력해 탈퇴를 완료하세요.");
+                        })
+                        .catch((e) => {
+                          if (e instanceof ApiError && e.status === 400) {
+                            setDeleteMessage("인증번호가 올바르지 않거나 만료되었습니다.");
+                          } else {
+                            setDeleteMessage(e instanceof Error ? e.message : "인증 확인에 실패했습니다.");
+                          }
+                        })
+                        .finally(() => setVerifyingDeleteCode(false));
+                    }}
+                  >
+                    {deleteVerified ? "인증 완료" : "인증 확인"}
+                  </Button>
                 </div>
               </div>
             </div>
@@ -757,7 +795,6 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
                   verification_token: deleteVerificationToken,
                 })
                   .then(() => {
-                    // Hard navigation: avoid RequireAuth racing emitAuthChanged → /auth?next=…
                     window.location.assign("/account-deleted");
                   })
                   .catch((e) => {

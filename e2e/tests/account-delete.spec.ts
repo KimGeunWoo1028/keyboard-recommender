@@ -56,9 +56,9 @@ test.describe("회원탈퇴 account delete", () => {
     await page.locator('form button[type="submit"]').click();
     await expect(page).toHaveURL((u) => new URL(u).pathname === "/mypage", { timeout: 60_000 });
     await expect(page.getByTestId("e2e-mypage-hub")).toBeVisible({ timeout: 30_000 });
-    await expect(page.getByRole("heading", { name: "회원탈퇴" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "계정 관리" })).toBeVisible();
 
-    await page.getByRole("button", { name: "탈퇴하기" }).click();
+    await page.getByRole("button", { name: "계정 삭제" }).click();
 
     const sendPromise = page.waitForResponse(
       (r) => r.url().includes("/api/v1/auth/account/deletion-code/send") && r.request().method() === "POST",
