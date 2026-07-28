@@ -31,6 +31,7 @@ FUNNEL_EVENT_TYPES: tuple[str, ...] = (
     "interaction.bookmark",
     "interaction.results_tab_click",
     "interaction.click",
+    "interaction.outbound_click",
     "interaction.revisit",
     "interaction.repeated_view",
 )
@@ -52,6 +53,7 @@ class FunnelAnalyticsReport:
     avg_time_to_first_result_ms: float | None = None
     evidence_tab_clicks: int = 0
     overview_tab_clicks: int = 0
+    north_star_reopen_count: int = 0
     excluded_from_success: list[str] = field(default_factory=lambda: list(EXCLUDED_SUCCESS_METRICS))
     phase_b_unlock_ready: bool = False
     phase_b_unlock_blockers: list[str] = field(default_factory=list)
@@ -89,6 +91,7 @@ class FunnelAnalyticsReport:
         )
         rows.append({"metric": "evidence_tab_clicks", "value": str(self.evidence_tab_clicks)})
         rows.append({"metric": "overview_tab_clicks", "value": str(self.overview_tab_clicks)})
+        rows.append({"metric": "north_star_reopen_count", "value": str(self.north_star_reopen_count)})
         for excluded in self.excluded_from_success:
             rows.append({"metric": "excluded_success_metric", "value": excluded})
         return rows
@@ -125,6 +128,7 @@ def aggregate_funnel_rows(
     ttf_ms: list[float] = []
     evidence_tabs = 0
     overview_tabs = 0
+    north_star_reopens = 0
     filtered: list[dict[str, Any]] = []
 
     for row in rows:
@@ -138,6 +142,7 @@ def aggregate_funnel_rows(
 
         payload = row.get("payload") if isinstance(row.get("payload"), Mapping) else row
         meta = _payload_meta(payload if isinstance(payload, Mapping) else None)
+        scenario = str(row.get("scenario_id") or meta.get("scenario_id") or "")
 
         if et == "kpi.time_to_first_result":
             v = meta.get("duration_ms")
@@ -149,6 +154,8 @@ def aggregate_funnel_rows(
                 evidence_tabs += 1
             elif tab == "overview":
                 overview_tabs += 1
+        if et == "interaction.revisit" and scenario == "mypage_restore_v1":
+            north_star_reopens += 1
 
     # Phase B unlock uses Observe subset only (same criteria / no conflict).
     observe_report = aggregate_observe_rows(
@@ -164,8 +171,13 @@ def aggregate_funnel_rows(
     home = counts["home.viewed"]
     tab_clicks = counts["interaction.results_tab_click"]
     revisits = counts["interaction.revisit"] + counts["interaction.repeated_view"]
+    outbound = counts["interaction.outbound_click"]
 
     rates: dict[str, float | None] = {
+        # Funnel 3 stages (KPI-01): survey start → result → save
+        "funnel_stage1_onboarding_viewed_to_completed": _safe_rate(completed, viewed),
+        "funnel_stage2_completed_to_bookmark": _safe_rate(bookmarks, completed),
+        "funnel_stage3_bookmark_to_north_star_reopen": _safe_rate(north_star_reopens, bookmarks),
         "onboarding_completion": _safe_rate(completed, viewed),
         # Primary Phase C success: save after survey complete (same denom as debug KPI).
         "bookmark_given_onboarding_completed": _safe_rate(bookmarks, completed),
@@ -173,6 +185,7 @@ def aggregate_funnel_rows(
         "bookmark_given_home_viewed": _safe_rate(bookmarks, home),
         "evidence_tab_given_tab_clicks": _safe_rate(evidence_tabs, tab_clicks),
         "revisit_given_onboarding_completed": _safe_rate(revisits, completed),
+        "outbound_click_given_onboarding_completed": _safe_rate(outbound, completed),
     }
 
     avg_ttf = (sum(ttf_ms) / len(ttf_ms)) if ttf_ms else None
@@ -185,6 +198,7 @@ def aggregate_funnel_rows(
         avg_time_to_first_result_ms=avg_ttf,
         evidence_tab_clicks=evidence_tabs,
         overview_tab_clicks=overview_tabs,
+        north_star_reopen_count=north_star_reopens,
         phase_b_unlock_ready=observe_report.unlock_ready,
         phase_b_unlock_blockers=list(observe_report.unlock_blockers),
         product_ui_locked=True,

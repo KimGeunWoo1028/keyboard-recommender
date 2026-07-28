@@ -1,3 +1,6 @@
+"use client";
+
+import { emitOutboundShopClickBestEffort } from "@/lib/api/onboarding-events";
 import { swagkeyProductLinkLabel } from "@/lib/layout-catalog-links";
 import { normalizeSwagkeyProductUrl } from "@/lib/swagkey-source-links";
 import { cn } from "@/lib/utils";
@@ -8,12 +11,14 @@ export function SwagkeyProductLink({
   domain,
   itemId,
   label,
+  surface = "results",
 }: {
   href?: string;
   className?: string;
   domain?: string;
   itemId?: string;
   label?: string;
+  surface?: "results" | "catalog";
 }) {
   const url = normalizeSwagkeyProductUrl(href);
   if (!url) return null;
@@ -28,6 +33,14 @@ export function SwagkeyProductLink({
         "text-sm font-medium text-ca-on-surface underline-offset-4 transition-colors hover:underline",
         className,
       )}
+      onClick={() => {
+        void emitOutboundShopClickBestEffort({
+          surface,
+          domain,
+          itemId,
+          href: url,
+        });
+      }}
     >
       {text}
       <span className="sr-only"> (새 탭)</span>

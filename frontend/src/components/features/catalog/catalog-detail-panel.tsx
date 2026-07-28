@@ -8,6 +8,7 @@ import { CatalogPartThumbnail } from "@/components/features/catalog/catalog-part
 import { LayoutDiagram, LayoutDiagramPanel, resolveLayoutDiagramId } from "@/components/features/catalog/layout-diagram";
 import { layoutArchetypeMetadata } from "@/components/features/catalog/layout-diagram/layout-archetype-metadata";
 import type { CatalogFamily, CatalogPartDetail } from "@/lib/api/catalog";
+import { emitOutboundShopClickBestEffort } from "@/lib/api/onboarding-events";
 import { catalogHref } from "@/lib/catalog-links";
 import { layoutSizeFilterLabel, resolveLayoutSizeFromMetadata } from "@/lib/layout-size";
 import { isReferenceOnlyLayoutArchetype, swagkeyProductLinkLabel } from "@/lib/layout-catalog-links";
@@ -110,6 +111,14 @@ function SwagkeyLink({ href, family, itemId }: { href?: string; family?: Catalog
       target="_blank"
       rel="noopener noreferrer"
       className="inline-flex h-9 items-center rounded-btn border border-ca-outline-variant/50 bg-ca-surface-container px-3 font-label text-ca-label-sm font-medium text-ca-on-surface underline-offset-4 hover:border-ca-on-surface/40 hover:underline"
+      onClick={() => {
+        void emitOutboundShopClickBestEffort({
+          surface: "catalog",
+          domain: family,
+          itemId,
+          href: url,
+        });
+      }}
     >
       {swagkeyProductLinkLabel(family, itemId)}
     </a>

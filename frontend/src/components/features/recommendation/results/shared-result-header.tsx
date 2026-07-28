@@ -4,6 +4,7 @@ import type { RecommendedBuild } from "@/types/recommendation";
 import type { SurveySubmission } from "@/types/survey";
 
 import { HelpHint } from "./help-hint";
+import { deriveConfidenceStory } from "./results-confidence-story-content";
 
 const soundLabelMap: Record<SurveySubmission["answers"]["sound_profile"], string> = {
   thocky: "묵직한 저음",
@@ -67,13 +68,14 @@ export function SharedResultHeader({
   const { answers } = submission;
   const preferenceRows = preferenceRowsFromAnswers(answers);
   const tags = preferenceTagsFromAnswers(answers);
+  const story = deriveConfidenceStory(submission, submission.recommendations ?? []);
 
   const preferenceAlignedTitle = `${soundLabelMap[answers.sound_profile]} · ${switchFeelLabelMap[answers.switch_feel]}`;
   const preferenceAlignedSubtitle =
     "설문에서 고른 소리·키감 성향에 맞춰 스위치부터 키캡까지 골랐어요.";
 
   return (
-    <div className="space-y-4 sm:space-y-5">
+    <div className="space-y-4 sm:space-y-5" data-testid="e2e-result-trust-summary">
       <article className="overflow-hidden rounded-2xl border border-border bg-white shadow-sm dark:bg-ca-surface-container">
         <div className="space-y-2 px-4 py-5 sm:px-6 sm:py-6">
           <p className="section-label">Results</p>
@@ -93,6 +95,18 @@ export function SharedResultHeader({
               ))}
             </ul>
           ) : null}
+          {/* RES-02: conclusion + tags + one short why in first viewport */}
+          {story?.support ? (
+            <p
+              className="mt-3 max-w-3xl break-keep text-sm font-medium leading-relaxed text-ca-on-surface"
+              data-testid="e2e-trust-short-why"
+            >
+              {story.support}
+            </p>
+          ) : null}
+          <p className="mt-2 break-keep text-xs leading-relaxed text-ca-on-surface-variant">
+            점수는 구매 만족이나 품질 보증이 아니라, 설문 취향과의 맞춤 정도를 안내합니다.
+          </p>
         </div>
       </article>
 

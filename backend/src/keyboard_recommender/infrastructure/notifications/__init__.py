@@ -1,5 +1,6 @@
 from keyboard_recommender.infrastructure.notifications.email import (
     send_account_deleted_email,
+    send_contact_inquiry_email,
     send_password_reset_link_email,
     send_password_reset_notice_email,
     send_verification_code_email,
@@ -10,4 +11,5 @@ __all__ = [
     "send_password_reset_notice_email",
     "send_password_reset_link_email",
     "send_account_deleted_email",
+    "send_contact_inquiry_email",
 ]

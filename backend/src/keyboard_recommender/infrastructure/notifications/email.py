@@ -419,3 +419,42 @@ def send_account_deleted_email(settings: Settings, *, to_email: str) -> str:
         logger.exception("account_deleted_email_failed email=%s", to_email)
         logger.info("account_deleted_fallback_log email=%s", to_email)
         return "log"
+
+
+def send_contact_inquiry_email(
+    settings: Settings,
+    *,
+    to_email: str,
+    name: str,
+    reply_email: str,
+    message: str,
+) -> str:
+    """Deliver a contact-form inquiry to the ops inbox (best-effort)."""
+    text = (
+        f"이름: {name}\n"
+        f"회신 이메일: {reply_email}\n\n"
+        f"{message}\n"
+    )
+    html = _render_email_html(
+        settings,
+        eyebrow="Contact",
+        title="새 문의가 도착했습니다",
+        intro=f"{name} ({reply_email}) 님의 문의입니다.",
+        body_lines=[line for line in message.splitlines() if line.strip()][:40] or [message[:500]],
+        cta_label=None,
+        cta_url=None,
+        notice="이 메일은 Keyboard Recommender 문의 폼에서 자동 발송되었습니다.",
+    )
+    try:
+        return _deliver_email(
+            settings,
+            to_email=to_email,
+            subject=f"[Keyboard Recommender] 문의 — {name}",
+            text_body=text,
+            html_body=html,
+            fallback_log_key="contact_inquiry_fallback_log",
+        )
+    except Exception:
+        logger.exception("contact_inquiry_email_failed to=%s reply=%s", to_email, reply_email)
+        logger.info("contact_inquiry_fallback_log reply=%s", reply_email)
+        return "log"

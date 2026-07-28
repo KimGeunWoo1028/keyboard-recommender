@@ -16,8 +16,8 @@ export type ResultsConfidenceStoryProps = {
 };
 
 /**
- * Phase 5: collapsed one-line fit summary + accessible accordion for bullets.
- * Detail content stays in the DOM (hidden when collapsed) — not removed.
+ * Phase 5 / RES-02: short why is in SharedResultHeader (first viewport).
+ * This block is the collapsed 「자세히」 detail — no raw 0.xx scores.
  */
 export function ResultsConfidenceStory({
   submission,
@@ -36,18 +36,18 @@ export function ResultsConfidenceStory({
       data-testid="e2e-confidence-story"
       className="rounded-xl border border-border bg-white dark:bg-ca-surface-container px-4 py-4 sm:px-5"
     >
-      <p className="text-xs font-medium uppercase tracking-wide text-ca-on-surface-variant">취향 반영도</p>
-      <p className="mt-1 break-keep text-sm leading-relaxed text-ca-on-surface sm:text-base">{story.support}</p>
-
-      <button
-        type="button"
-        className="mt-3 text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-        aria-expanded={detailsOpen}
-        aria-controls={panelId}
-        onClick={() => setDetailsOpen((open) => !open)}
-      >
-        {detailsOpen ? "추천 기준 접기" : "추천 기준 자세히 보기"}
-      </button>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <p className="text-xs font-medium uppercase tracking-wide text-ca-on-surface-variant">취향 반영도</p>
+        <button
+          type="button"
+          className="text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          aria-expanded={detailsOpen}
+          aria-controls={panelId}
+          onClick={() => setDetailsOpen((open) => !open)}
+        >
+          {detailsOpen ? "추천 기준 접기" : "추천 기준 자세히 보기"}
+        </button>
+      </div>
 
       <div
         id={panelId}
@@ -58,7 +58,8 @@ export function ResultsConfidenceStory({
       >
         <p className="font-headline text-base font-semibold text-ca-on-surface">{story.headline}</p>
         <p className="mt-1.5 text-xs leading-relaxed text-ca-on-surface-variant">
-          측정값이 아니라, 설문 응답이 얼마나 일관됐는지를 바탕으로 한 안내입니다.
+          측정값이 아니라, 설문 응답이 얼마나 일관됐는지를 바탕으로 한 안내입니다. 원시 점수(0.xx)는
+          표시하지 않습니다.
         </p>
         <ul className="mt-3 space-y-2">
           {story.bullets.map((bullet) => (
