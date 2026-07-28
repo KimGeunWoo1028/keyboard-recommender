@@ -7,6 +7,7 @@ import { useEffect, useMemo, useState } from "react";
 import { SignupStepEmail } from "@/components/auth/signup/signup-step-email";
 import { SignupStepNickname } from "@/components/auth/signup/signup-step-nickname";
 import { SignupStepPassword } from "@/components/auth/signup/signup-step-password";
+import { SignupStepVerify } from "@/components/auth/signup/signup-step-verify";
 import { signup } from "@/lib/api/auth";
 import { friendlyAuthErrorMessage } from "@/lib/auth-form-helpers";
 import { safeAuthNextPath } from "@/lib/auth-next";
@@ -24,15 +25,25 @@ import {
 } from "@/lib/signup-draft";
 
 const STEP_META: Record<SignupStep, { index: number; title: string; body: string }> = {
-  email: { index: 1, title: "이메일 인증", body: "가입할 이메일을 인증해 주세요." },
-  password: { index: 2, title: "비밀번호 설정", body: "로그인에 사용할 비밀번호를 만듭니다." },
-  nickname: { index: 3, title: "닉네임 설정", body: "다른 사람과 겹치지 않는 닉네임을 정해 주세요." },
+  email: { index: 1, title: "이메일 입력", body: "가입에 사용할 이메일을 입력해 주세요." },
+  verify: { index: 2, title: "인증번호 확인", body: "이메일로 받은 6자리 인증번호를 입력합니다." },
+  password: { index: 3, title: "비밀번호 설정", body: "로그인에 사용할 비밀번호를 만듭니다." },
+  nickname: { index: 4, title: "닉네임 설정", body: "다른 사람과 겹치지 않는 닉네임을 정해 주세요." },
 };
+
+const STEP_COUNT = 4;
 
 function readSignupSearch(): { step: SignupStep; next: string | null } {
   if (typeof window === "undefined") return { step: "email", next: null };
   const params = new URLSearchParams(window.location.search);
   return { step: parseSignupStep(params.get("step")), next: params.get("next") };
+}
+
+function previousStep(step: SignupStep): SignupStep | "login" {
+  if (step === "email") return "login";
+  if (step === "verify") return "email";
+  if (step === "password") return "verify";
+  return "password";
 }
 
 export function SignupWizardClient() {
@@ -63,7 +74,6 @@ export function SignupWizardClient() {
       router.replace(signupWizardHref(resolved, next));
     }
     setReady(true);
-    // password intentionally omitted: only gate nickname on mount/refresh
     // eslint-disable-next-line react-hooks/exhaustive-deps -- mount sync from URL + draft
   }, [router]);
 
@@ -82,8 +92,8 @@ export function SignupWizardClient() {
   }, [nextPath]);
 
   async function onCreateAccount(displayName: string) {
-    if (!draft || !password) {
-      goToStep(draft ? "password" : "email");
+    if (!draft?.emailVerificationToken || !password) {
+      goToStep(draft?.email ? (draft.emailVerificationToken ? "password" : "verify") : "email");
       return;
     }
     setSignupBusy(true);
@@ -115,12 +125,12 @@ export function SignupWizardClient() {
 
   return (
     <div className="flex min-h-[calc(100dvh-4.5rem)] items-center justify-center bg-[rgb(248_248_252)] px-4 py-10 dark:bg-ca-surface-container-low sm:py-16">
-      <section className="w-full max-w-md overflow-hidden rounded-sm border-2 border-[rgb(220_220_238)] bg-white shadow-sm shadow-primary/5 dark:border-border dark:bg-ca-surface-container dark:shadow-none">
+      <section className="w-full max-w-md overflow-hidden rounded-md border-2 border-[rgb(220_220_238)] bg-white shadow-sm shadow-primary/5 dark:border-border dark:bg-ca-surface-container dark:shadow-none">
         <div className="space-y-5 p-8">
           <header className="space-y-3">
             <p className="text-xs font-semibold uppercase tracking-widest text-primary">Keyboard Recommender</p>
-            <div className="flex gap-1.5" aria-label={`회원가입 ${meta.index} / 3 단계`}>
-              {([1, 2, 3] as const).map((n) => (
+            <div className="flex gap-1.5" aria-label={`회원가입 ${meta.index} / ${STEP_COUNT} 단계`}>
+              {Array.from({ length: STEP_COUNT }, (_, i) => i + 1).map((n) => (
                 <div
                   key={n}
                   className={cn(
@@ -139,10 +149,41 @@ export function SignupWizardClient() {
           {step === "email" ? (
             <SignupStepEmail
               initialEmail={draft?.email ?? ""}
+              onCodeSent={(payload) => {
+                const nextDraft: SignupDraft = {
+                  email: payload.email,
+                  codeSentAt: payload.codeSentAt,
+                };
+                writeSignupDraft(nextDraft);
+                setDraft(nextDraft);
+                setPassword(null);
+                goToStep("verify");
+              }}
+            />
+          ) : null}
+
+          {step === "verify" && draft?.email ? (
+            <SignupStepVerify
+              email={draft.email}
+              codeSentAt={draft.codeSentAt}
+              onCodeResent={(codeSentAt) => {
+                const nextDraft: SignupDraft = {
+                  email: draft.email,
+                  codeSentAt,
+                };
+                writeSignupDraft(nextDraft);
+                setDraft(nextDraft);
+              }}
+              onChangeEmail={() => {
+                writeSignupDraft({ email: draft.email });
+                setDraft({ email: draft.email });
+                goToStep("email");
+              }}
               onVerified={(payload) => {
-                const nextDraft = {
+                const nextDraft: SignupDraft = {
                   email: payload.email,
                   emailVerificationToken: payload.emailVerificationToken,
+                  codeSentAt: draft.codeSentAt,
                 };
                 writeSignupDraft(nextDraft);
                 setDraft(nextDraft);
@@ -174,12 +215,12 @@ export function SignupWizardClient() {
               type="button"
               className="font-medium text-ca-on-surface-variant underline-offset-2 hover:text-ca-on-surface hover:underline"
               onClick={() => {
-                if (step === "email") {
+                const prev = previousStep(step);
+                if (prev === "login") {
                   router.push(loginHref);
                   return;
                 }
-                if (step === "password") goToStep("email");
-                else goToStep("password");
+                goToStep(prev);
               }}
             >
               {step === "email" ? "로그인으로" : "이전"}

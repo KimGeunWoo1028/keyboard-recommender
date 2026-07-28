@@ -1,14 +1,19 @@
 export const SIGNUP_DRAFT_KEY = "kr_signup_draft_v1";
 
-export type SignupStep = "email" | "password" | "nickname";
+export type SignupStep = "email" | "verify" | "password" | "nickname";
 
+/** Pending email after send; token appears only after OTP verify. */
 export type SignupDraft = {
   email: string;
-  emailVerificationToken: string;
+  emailVerificationToken?: string;
+  /** Epoch ms when the last code was sent — drives resend cooldown UI. */
+  codeSentAt?: number;
 };
 
+export const SIGNUP_RESEND_COOLDOWN_SEC = 120;
+
 export function parseSignupStep(raw: string | null | undefined): SignupStep {
-  if (raw === "password" || raw === "nickname" || raw === "email") return raw;
+  if (raw === "verify" || raw === "password" || raw === "nickname" || raw === "email") return raw;
   return "email";
 }
 
@@ -22,8 +27,12 @@ export function resolveSignupStep(opts: {
   hasPassword: boolean;
 }): SignupStep {
   const { urlStep, draft, hasPassword } = opts;
-  if (urlStep === "password" && !draft) return "email";
-  if (urlStep === "nickname" && !draft) return "email";
+  const hasEmail = Boolean(draft?.email);
+  const hasToken = Boolean(draft?.emailVerificationToken);
+
+  if (urlStep === "verify" && !hasEmail) return "email";
+  if (urlStep === "password" && !hasToken) return hasEmail ? "verify" : "email";
+  if (urlStep === "nickname" && !hasToken) return hasEmail ? "verify" : "email";
   if (urlStep === "nickname" && !hasPassword) return "password";
   return urlStep;
 }
@@ -35,10 +44,18 @@ export function readSignupDraft(): SignupDraft | null {
     if (!raw) return null;
     const parsed = JSON.parse(raw) as Partial<SignupDraft>;
     const email = typeof parsed.email === "string" ? parsed.email.trim() : "";
+    if (!email) return null;
     const token =
       typeof parsed.emailVerificationToken === "string" ? parsed.emailVerificationToken.trim() : "";
-    if (!email || !token) return null;
-    return { email, emailVerificationToken: token };
+    const codeSentAt =
+      typeof parsed.codeSentAt === "number" && Number.isFinite(parsed.codeSentAt)
+        ? parsed.codeSentAt
+        : undefined;
+    return {
+      email,
+      ...(token ? { emailVerificationToken: token } : {}),
+      ...(codeSentAt != null ? { codeSentAt } : {}),
+    };
   } catch {
     return null;
   }
@@ -46,13 +63,16 @@ export function readSignupDraft(): SignupDraft | null {
 
 export function writeSignupDraft(draft: SignupDraft): void {
   if (typeof window === "undefined") return;
-  window.sessionStorage.setItem(
-    SIGNUP_DRAFT_KEY,
-    JSON.stringify({
-      email: draft.email.trim(),
-      emailVerificationToken: draft.emailVerificationToken.trim(),
-    }),
-  );
+  const payload: SignupDraft = {
+    email: draft.email.trim(),
+  };
+  if (draft.emailVerificationToken?.trim()) {
+    payload.emailVerificationToken = draft.emailVerificationToken.trim();
+  }
+  if (typeof draft.codeSentAt === "number") {
+    payload.codeSentAt = draft.codeSentAt;
+  }
+  window.sessionStorage.setItem(SIGNUP_DRAFT_KEY, JSON.stringify(payload));
 }
 
 export function clearSignupDraft(): void {
@@ -74,4 +94,16 @@ export function loginAfterSignupHref(next?: string | null): string {
   params.set("signup", "1");
   if (next && next.startsWith("/")) params.set("next", next);
   return `/auth?${params.toString()}`;
+}
+
+export function resendCooldownRemaining(codeSentAt: number | undefined, now = Date.now()): number {
+  if (codeSentAt == null) return 0;
+  const elapsed = Math.floor((now - codeSentAt) / 1000);
+  return Math.max(0, SIGNUP_RESEND_COOLDOWN_SEC - elapsed);
+}
+
+export function formatCooldownMmSs(totalSec: number): string {
+  const m = Math.floor(totalSec / 60);
+  const s = totalSec % 60;
+  return `${m}:${s.toString().padStart(2, "0")}`;
 }

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { type FormEvent, useEffect, useRef, useState } from "react";
 
+import { PasswordVisibilityToggle } from "@/components/auth/password-visibility-toggle";
 import { useAuthHeader } from "@/components/layout/auth-controls";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -134,7 +135,7 @@ export function AuthPageClient() {
 
   return (
     <div className="flex min-h-[calc(100dvh-4.5rem)] items-center justify-center bg-[rgb(248_248_252)] px-4 py-10 dark:bg-ca-surface-container-low sm:py-16">
-      <section className="w-full max-w-md overflow-hidden rounded-sm border-2 border-[rgb(220_220_238)] bg-white shadow-sm shadow-primary/5 dark:border-border dark:bg-ca-surface-container dark:shadow-none">
+      <section className="w-full max-w-md overflow-hidden rounded-md border-2 border-[rgb(220_220_238)] bg-white shadow-sm shadow-primary/5 dark:border-border dark:bg-ca-surface-container dark:shadow-none">
         <div className="space-y-5 p-8">
           <header className="space-y-2">
             <p className="text-xs font-semibold uppercase tracking-widest text-primary">Keyboard Recommender</p>
@@ -193,29 +194,11 @@ export function AuthPageClient() {
                   className="ca-input pr-10"
                   {...passwordField.inputProps}
                 />
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="icon"
-                  className="absolute right-1 top-1/2 h-8 w-8 -translate-y-1/2 text-ca-on-surface-variant hover:text-ca-on-surface"
-                  onClick={() => setShowPassword((v) => !v)}
-                  aria-label={showPassword ? "비밀번호 숨기기" : "비밀번호 보기"}
+                <PasswordVisibilityToggle
+                  visible={showPassword}
+                  onToggle={() => setShowPassword((v) => !v)}
                   disabled={loginBusy}
-                >
-                  {showPassword ? (
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4">
-                      <path d="M3 3l18 18" />
-                      <path d="M10.58 10.58a2 2 0 0 0 2.84 2.84" />
-                      <path d="M9.88 5.09A9.77 9.77 0 0 1 12 4c5 0 9.27 3.11 11 8a11.8 11.8 0 0 1-3.17 4.59" />
-                      <path d="M6.61 6.61A11.8 11.8 0 0 0 1 12c1.04 2.94 3.1 5.2 5.74 6.46" />
-                    </svg>
-                  ) : (
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4">
-                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z" />
-                      <circle cx="12" cy="12" r="3" />
-                    </svg>
-                  )}
-                </Button>
+                />
               </div>
               <FieldValidationError id={passwordField.errorId} message={passwordField.error} />
             </div>

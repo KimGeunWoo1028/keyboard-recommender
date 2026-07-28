@@ -2,6 +2,7 @@
 
 import { useRef, useState, type FormEvent } from "react";
 
+import { PasswordVisibilityToggle } from "@/components/auth/password-visibility-toggle";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -77,17 +78,11 @@ export function SignupStepPassword({ onContinue, busy = false }: Props) {
             className="ca-input pr-10"
             {...passwordField.inputProps}
           />
-          <Button
-            type="button"
-            variant="ghost"
-            size="icon"
-            className="absolute right-1 top-1/2 h-8 w-8 -translate-y-1/2 text-ca-on-surface-variant hover:text-ca-on-surface"
-            onClick={() => setShowPassword((v) => !v)}
-            aria-label={showPassword ? "비밀번호 숨기기" : "비밀번호 보기"}
+          <PasswordVisibilityToggle
+            visible={showPassword}
+            onToggle={() => setShowPassword((v) => !v)}
             disabled={busy}
-          >
-            {showPassword ? "숨김" : "보기"}
-          </Button>
+          />
         </div>
         <FieldValidationError id={passwordField.errorId} message={passwordField.error} />
         <div className="space-y-1 pt-1 text-sm text-ca-on-surface-variant">
@@ -128,17 +123,13 @@ export function SignupStepPassword({ onContinue, busy = false }: Props) {
             className="ca-input pr-10"
             {...confirmPasswordField.inputProps}
           />
-          <Button
-            type="button"
-            variant="ghost"
-            size="icon"
-            className="absolute right-1 top-1/2 h-8 w-8 -translate-y-1/2 text-ca-on-surface-variant hover:text-ca-on-surface"
-            onClick={() => setShowConfirmPassword((v) => !v)}
-            aria-label={showConfirmPassword ? "비밀번호 확인 숨기기" : "비밀번호 확인 보기"}
+          <PasswordVisibilityToggle
+            visible={showConfirmPassword}
+            onToggle={() => setShowConfirmPassword((v) => !v)}
             disabled={busy}
-          >
-            {showConfirmPassword ? "숨김" : "보기"}
-          </Button>
+            hideLabel="비밀번호 확인 숨기기"
+            showLabel="비밀번호 확인 보기"
+          />
         </div>
         <FieldValidationError id={confirmPasswordField.errorId} message={confirmPasswordField.error} />
         <p className="text-sm text-ca-on-surface-variant">
