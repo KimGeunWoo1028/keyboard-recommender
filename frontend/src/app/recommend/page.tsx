@@ -11,9 +11,11 @@ export const metadata: Metadata = publicPageMetadata({
 
 export default function RecommendPage() {
   return (
-    <div className="flex min-h-[calc(100dvh-4.25rem)] w-full flex-col overflow-y-auto bg-white dark:bg-ca-surface sm:h-[calc(100dvh-4.25rem)] sm:max-h-[calc(100dvh-4.25rem)] sm:overflow-hidden">
-      <div className="mx-auto flex min-h-0 w-full max-w-ca flex-1 flex-col px-ca-margin-mobile sm:px-ca-margin">
-        <SurveyWizard />
+    <div className="flex min-h-[calc(100dvh-4.25rem)] w-full flex-col overflow-y-auto bg-ca-surface-container-low dark:bg-ca-surface-container sm:h-[calc(100dvh-4.25rem)] sm:max-h-[calc(100dvh-4.25rem)] sm:overflow-hidden">
+      <div className="mx-auto flex min-h-0 w-full max-w-ca flex-1 flex-col px-ca-margin-mobile py-6 sm:px-ca-margin sm:py-8">
+        <div className="flex min-h-0 flex-1 flex-col bg-white dark:bg-ca-surface">
+          <SurveyWizard />
+        </div>
       </div>
     </div>
   );
