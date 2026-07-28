@@ -169,7 +169,7 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
                           일치도 {matchPercent}%
                         </span>
                       ) : null}
-                      <span className="text-xs text-ca-on-surface-variant">
+                      <span className="text-xs text-ca-on-surface-variant" data-testid="e2e-saved-card-date">
                         {formatAbsoluteDate(item.saved_at)}
                       </span>
                     </div>
