@@ -125,3 +125,39 @@ export function fixedAxisBarGlyph(filledSegments: number, empty = "□", filled 
   const n = Math.max(0, Math.min(BAR_SEGMENTS, filledSegments));
   return filled.repeat(n) + empty.repeat(BAR_SEGMENTS - n);
 }
+
+function summaryPhrase(value: number, low: string, mid: string, high: string): string {
+  if (value < 0.35) return low;
+  if (value > 0.65) return high;
+  return mid;
+}
+
+function fixedAxisSummaryPhrase(id: FixedDisplayAxisId, value: number): string {
+  switch (id) {
+    case "noise":
+      return summaryPhrase(value, "조용함 선호", "보통 소음", "또렷한 소리 선호");
+    case "tactility":
+      return summaryPhrase(value, "매끈한 입력", "중간 구분감", "뚜렷한 구분감");
+    case "bounce":
+      return summaryPhrase(value, "차분한 반발", "중간 반발", "경쾌한 반발");
+    case "heft":
+      return summaryPhrase(value, "가벼운 타건", "중간 무게감", "묵직한 타건");
+    case "flexibility":
+      return summaryPhrase(value, "단단한 느낌", "중간 탄성", "탄성 있는 느낌");
+    case "clarity":
+      return summaryPhrase(value, "부드러운 소리", "중간 선명도", "선명한 소리");
+    default:
+      return "중간";
+  }
+}
+
+/** Human-readable one-liner per fixed axis for mypage overview rows. */
+export function fixedAxisSummaryRows(
+  userTraitScores: Record<string, number> | undefined,
+): { id: FixedDisplayAxisId; label: string; value: string }[] {
+  return fixedAxisBars(userTraitScores).map((bar) => ({
+    id: bar.id,
+    label: bar.label,
+    value: fixedAxisSummaryPhrase(bar.id, bar.value),
+  }));
+}

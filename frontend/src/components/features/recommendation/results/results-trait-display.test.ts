@@ -4,6 +4,7 @@ import {
   FIXED_DISPLAY_AXES,
   fixedAxisBars,
   fixedAxisBarGlyph,
+  fixedAxisSummaryRows,
   normalizeTraitScore,
   TRAIT_MINI_PROFILE_MICROCOPY,
 } from "./results-trait-display";
@@ -59,5 +60,12 @@ describe("results-trait-display", () => {
     expect(fixedAxisBarGlyph(3)).toBe("■■■□□");
     expect(fixedAxisBarGlyph(0)).toBe("□□□□□");
     expect(fixedAxisBarGlyph(5)).toBe("■■■■■");
+  });
+
+  it("maps fixed axes to readable summary phrases", () => {
+    const rows = fixedAxisSummaryRows(stableMutedUser);
+    expect(rows).toHaveLength(6);
+    expect(rows[0]?.label).toBe("소음");
+    expect(rows[0]?.value).toMatch(/조용|보통|또렷/);
   });
 });
