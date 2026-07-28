@@ -35,7 +35,11 @@ function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function postAuth(path: string, body: Record<string, unknown>): Promise<AuthUser> {
+async function postAuth(
+  path: string,
+  body: Record<string, unknown>,
+  opts?: { emitSession?: boolean },
+): Promise<AuthUser> {
   const base = getPublicApiBase();
   if (!base) throw new ApiError(0, "서비스 연결을 확인한 뒤 다시 시도해 주세요.");
   const res = await fetch(`${base}${path}`, {
@@ -46,7 +50,11 @@ async function postAuth(path: string, body: Record<string, unknown>): Promise<Au
   });
   if (!res.ok) throw new ApiError(res.status, await readErrorMessage(res));
   const json = (await res.json()) as AuthEnvelope;
-  emitAuthChanged({ user: json.user });
+  // Signup creates an account but does not set a session cookie — do not mark the
+  // client as logged in (header would look signed-in while /auth still asks to log in).
+  if (opts?.emitSession !== false) {
+    emitAuthChanged({ user: json.user });
+  }
   return json.user;
 }
 
@@ -56,7 +64,7 @@ export async function signup(input: {
   password: string;
   display_name?: string;
 }): Promise<AuthUser> {
-  return postAuth("/api/v1/auth/signup", input);
+  return postAuth("/api/v1/auth/signup", input, { emitSession: false });
 }
 
 export async function login(input: { email: string; password: string }): Promise<AuthUser> {
