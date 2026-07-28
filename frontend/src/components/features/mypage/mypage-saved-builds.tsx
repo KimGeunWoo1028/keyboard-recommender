@@ -195,15 +195,12 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
                     ) : null}
                   </div>
 
-                  <div className="flex shrink-0 items-center gap-3 sm:flex-col sm:items-end sm:gap-2">
-                    <button
+                  <div className="flex shrink-0 flex-col gap-2 sm:items-end">
+                    <Button
                       type="button"
-                      className={cn(
-                        "text-sm font-semibold underline-offset-4",
-                        canRestore
-                          ? "text-primary hover:underline"
-                          : "cursor-not-allowed text-ca-on-surface-variant/50",
-                      )}
+                      variant="outline"
+                      size="sm"
+                      className="border-border font-semibold text-primary hover:border-primary hover:bg-primary/5"
                       disabled={!canRestore}
                       title={
                         canRestore
@@ -222,7 +219,7 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
                       }}
                     >
                       결과 보기
-                    </button>
+                    </Button>
                     <Button
                       type="button"
                       variant="ghost"
