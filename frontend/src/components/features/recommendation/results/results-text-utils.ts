@@ -170,7 +170,7 @@ const DOMAIN_AXIS_PRIORITY: Record<string, string[]> = {
 
 type ParsedAlignment = { axisLabel: string; contribution: number; line: string };
 
-function parseEvidenceAlignments(whyTraits: string[] | undefined): ParsedAlignment[] {
+export function parseEvidenceAlignments(whyTraits: string[] | undefined): ParsedAlignment[] {
   return (whyTraits ?? [])
     .map((line) => {
       const m = line.trim().match(EVIDENCE_ALIGNMENT_TRAIT);
@@ -196,7 +196,7 @@ function normalizeEvidenceDomain(domain?: string): string {
   return d;
 }
 
-function pickDomainAlignmentAxis(alignments: ParsedAlignment[], domain?: string): string | null {
+export function pickDomainAlignmentAxis(alignments: ParsedAlignment[], domain?: string): string | null {
   if (alignments.length === 0) return null;
   const priorities = DOMAIN_AXIS_PRIORITY[normalizeEvidenceDomain(domain)] ?? [];
   let best: ParsedAlignment | null = null;
@@ -279,6 +279,30 @@ function combineEvidenceWhyLine(axisLabel: string | null, feelHook: string): str
   if (axis) return `${axis} 취향이 잘 맞아요`;
   if (hook) return /[.!?]$/.test(hook) ? hook : `${hook}.`;
   return "";
+}
+
+/** Evidence pick — part-specific feel hook only (no shared preference axis prefix). */
+export function formatEvidencePartWhyLine(
+  summary: string | undefined,
+  whyTraits: string[] | undefined,
+  _itemName?: string,
+  domain?: string,
+): string {
+  const alignments = parseEvidenceAlignments(whyTraits);
+  const axisLabel = pickDomainAlignmentAxis(alignments, domain);
+  const feelHook = buildEvidenceFeelHook(domain, axisLabel, whyTraits);
+  const hook = feelHook.replace(/\s+/g, " ").replace(/\.+$/u, "").trim();
+  if (hook) return /[.!?]$/.test(hook) ? hook : `${hook}.`;
+
+  const trimmed = (summary ?? "").trim();
+  if (!trimmed) return "";
+
+  const withoutTail = trimmed
+    .replace(/\s*그리고\s+.+상위 추천되었습니다\.?$/, "")
+    .replace(/\s*성향 정합이 높아 상위 추천되었습니다\.?$/, "")
+    .trim();
+
+  return withoutTail.length > 0 ? withoutTail : trimmed;
 }
 
 /** Evidence pick — preference axis + short feel hook (spec lines stay in «제품 특징»). */

@@ -1,6 +1,8 @@
 import type { RecommendedBuild } from "@/types/recommendation";
 import type { SurveySubmission } from "@/types/survey";
 
+import type { SharedEvidenceReasons } from "./results-evidence-shared-reasons-content";
+
 export type ApiPick = NonNullable<SurveySubmission["recommendations"]>[number];
 
 export type ResultsEvidenceTabProps = {
@@ -16,4 +18,5 @@ export type ResultsEvidencePickCardProps = {
   build: RecommendedBuild;
   apiPicks: ApiPick[];
   enrichedSourceUrls: Record<string, string>;
+  sharedReasons: SharedEvidenceReasons;
 };
