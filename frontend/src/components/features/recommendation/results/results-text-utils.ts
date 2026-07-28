@@ -225,20 +225,82 @@ function pickEvidenceSpecLines(whyTraits: string[] | undefined, excludeLines: Se
     .filter((line) => line.length > 0 && !isEvidenceEngineAuditLine(line) && !excludeLines.has(line));
 }
 
-function buildEvidenceFeelHook(
-  domain: string | undefined,
-  axisLabel: string | null,
-  whyTraits: string[] | undefined,
-): string {
-  const specText = pickEvidenceSpecLines(whyTraits, new Set()).join(" ");
-  const d = normalizeEvidenceDomain(domain);
-  const axis = (axisLabel ?? "").trim();
-
-  if (d === "switch") {
+function buildDomainSpecFeelHook(domain: string, specText: string): string | null {
+  if (domain === "switch") {
     if (/택타일|갈축|구분감/.test(specText)) return "중간에 구분감이 느껴지는 스위치예요";
     if (/리니어|매끈/i.test(specText)) return "처음부터 끝까지 매끈하게 눌리는 스위치예요";
     if (/저소음|무소음|silent/i.test(specText)) return "저소음 환경에 무난한 스위치예요";
     if (/클릭|청축/.test(specText)) return "또렷한 클릭감이 있는 스위치예요";
+  }
+  if (domain === "plate") {
+    if (/FR4/i.test(specText)) return "FR4로 타건 강성과 소리 톤을 잡아줘요";
+    if (/PC|폴리/i.test(specText)) return "유연한 PC 플레이트로 바닥감을 살려줘요";
+    if (/알루|ALU|alumin/i.test(specText)) return "단단한 알루미늄 플레이트로 타건을 또렷하게 해줘요";
+  }
+  if (domain === "foam") {
+    if (/흡음|EPDM|PORON|IXPE|폼/i.test(specText)) return "울림과 공명을 줄여 소리를 다듬어 줘요";
+    if (/하부|케이스|case/i.test(specText)) return "케이스 공명을 줄여 저음을 안정화해요";
+  }
+  if (domain === "layout") {
+    if (/풀사이즈|Full-size|104|108/i.test(specText)) return "숫자 키패드를 포함한 풀사이즈 배열이에요";
+    if (/75%/.test(specText)) return "F열을 유지하면서도 컴팩트한 75% 배열이에요";
+    if (/65%/.test(specText)) return "화살표를 유지한 컴팩트 65% 배열이에요";
+    if (/60%/.test(specText)) return "최소 구성의 60% 배열이에요";
+    if (/TKL|tenkeyless/i.test(specText)) return "텐키리스로 마우스 공간을 확보해요";
+  }
+  if (domain === "case") {
+    if (/알루|ALU|alumin/i.test(specText)) return "알루미늄 하우징으로 무게감과 울림을 잡아줘요";
+    if (/가스켓|gasket/i.test(specText)) return "가스켓 구조로 타건감과 소음 밸런스에 유리해요";
+    if (/PC|폴리/i.test(specText)) return "가벼운 PC 하우징으로 부담을 줄여줘요";
+  }
+  if (domain === "keycap") {
+    if (/PBT/i.test(specText)) return "PBT 재질로 마모와 소음 변화가 적어요";
+    if (/ABS/i.test(specText)) return "ABS 재질로 가벼운 타건감을 살려줘요";
+    if (/염료|염료승화|더블샷/i.test(specText)) return "각인이 오래 유지되는 키캡이에요";
+  }
+  return null;
+}
+
+function domainDefaultFeelHook(domain: string): string {
+  const domainDefault: Record<string, string> = {
+    switch: "타건과 소리 균형이 이 조합에 맞아요",
+    plate: "타건의 단단함과 소리 톤을 잡아주는 플레이트예요",
+    foam: "울림을 줄이거나 다듬어 줘요",
+    layout: "키 배열과 사용 동선이 맞아요",
+    case: "케이스 울림·무게감이 조합에 맞아요",
+    keycap: "키캡 소재·프로필이 소리 성향에 맞아요",
+  };
+  return domainDefault[domain] ?? "이 부품이 추천 조합에 잘 맞아요";
+}
+
+function buildEvidenceFeelHook(
+  domain: string | undefined,
+  axisLabel: string | null,
+  whyTraits: string[] | undefined,
+  options?: { preferDomainSpecific?: boolean },
+): string {
+  const specText = pickEvidenceSpecLines(whyTraits, new Set()).join(" ");
+  const d = normalizeEvidenceDomain(domain);
+  const axis = (axisLabel ?? "").trim();
+  const preferDomainSpecific = options?.preferDomainSpecific === true;
+
+  // Part-specific copy: domain/spec only — never reuse shared preference-axis phrases.
+  if (preferDomainSpecific) {
+    const domainSpecHook = buildDomainSpecFeelHook(d, specText);
+    if (domainSpecHook) return domainSpecHook;
+
+    const firstSpec = pickEvidenceSpecLines(whyTraits, new Set())[0];
+    if (firstSpec) {
+      const shortened = firstSpec.replace(/입니다\.?$/u, "").trim();
+      if (shortened) return `${shortened} 특성이 이 조합에 맞아요`;
+    }
+    return domainDefaultFeelHook(d);
+  }
+
+  // Legacy combined why line: keep switch-type inference, then axis hooks.
+  if (d === "switch") {
+    const switchHook = buildDomainSpecFeelHook("switch", specText);
+    if (switchHook) return switchHook;
   }
 
   const axisHooks: [string, string][] = [
@@ -260,15 +322,7 @@ function buildEvidenceFeelHook(
     if (axis.includes(match)) return hook;
   }
 
-  const domainDefault: Record<string, string> = {
-    switch: "타건과 소리 균형이 이 조합에 맞아요",
-    plate: "타건의 단단함과 소리 톤을 잡아주는 플레이트예요",
-    foam: "울림을 줄이거나 다듬어 줘요",
-    layout: "키 배열과 사용 동선이 맞아요",
-    case: "케이스 울림·무게감이 조합에 맞아요",
-    keycap: "키캡 소재·프로필이 소리 성향에 맞아요",
-  };
-  return domainDefault[d] ?? "이 부품이 추천 조합에 잘 맞아요";
+  return domainDefaultFeelHook(d);
 }
 
 function combineEvidenceWhyLine(axisLabel: string | null, feelHook: string): string {
@@ -281,7 +335,7 @@ function combineEvidenceWhyLine(axisLabel: string | null, feelHook: string): str
   return "";
 }
 
-/** Evidence pick — part-specific feel hook only (no shared preference axis prefix). */
+/** Evidence pick — part-specific feel hook only (no shared preference axis phrase). */
 export function formatEvidencePartWhyLine(
   summary: string | undefined,
   whyTraits: string[] | undefined,
@@ -290,7 +344,9 @@ export function formatEvidencePartWhyLine(
 ): string {
   const alignments = parseEvidenceAlignments(whyTraits);
   const axisLabel = pickDomainAlignmentAxis(alignments, domain);
-  const feelHook = buildEvidenceFeelHook(domain, axisLabel, whyTraits);
+  const feelHook = buildEvidenceFeelHook(domain, axisLabel, whyTraits, {
+    preferDomainSpecific: true,
+  });
   const hook = feelHook.replace(/\s+/g, " ").replace(/\.+$/u, "").trim();
   if (hook) return /[.!?]$/.test(hook) ? hook : `${hook}.`;
 

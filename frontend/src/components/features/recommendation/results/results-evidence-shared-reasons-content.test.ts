@@ -69,14 +69,22 @@ describe("formatEvidenceCardWhyLine", () => {
       pick("layout", [ALIGNMENT_TRAIT]),
     ]);
 
-    const card = formatEvidenceCardWhyLine(
+    const switchCard = formatEvidenceCardWhyLine(
       pick("switch", [ALIGNMENT_TRAIT, "저소음 무소음 스위치입니다."]),
       shared,
     );
+    const plateCard = formatEvidenceCardWhyLine(
+      pick("plate", [ALIGNMENT_TRAIT, "FR4 소재 플레이트입니다."]),
+      shared,
+    );
+    const foamCard = formatEvidenceCardWhyLine(pick("foam", [ALIGNMENT_TRAIT]), shared);
 
-    expect(card.label).toBe("부품별 근거");
-    expect(card.line).toBe("저소음 환경에 무난한 스위치예요.");
-    expect(card.line).not.toContain("차분한 소리 취향");
+    expect(switchCard.label).toBe("부품별 근거");
+    expect(switchCard.line).toBe("저소음 환경에 무난한 스위치예요.");
+    expect(plateCard.line).toBe("FR4로 타건 강성과 소리 톤을 잡아줘요.");
+    expect(foamCard.line).toBe("울림을 줄이거나 다듬어 줘요.");
+    expect(switchCard.line).not.toEqual(plateCard.line);
+    expect(switchCard.line).not.toContain("차분한 소리");
   });
 
   it("keeps legacy why label when shared block is absent", () => {
