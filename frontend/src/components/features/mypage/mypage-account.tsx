@@ -341,15 +341,8 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
           </div>
 
           <div className="space-y-1.5">
-            <Label htmlFor="mypage-email" className="text-xs font-semibold uppercase tracking-wider text-ca-on-surface-variant">
-              이메일
-            </Label>
-            <Input
-              id="mypage-email"
-              value={user.email}
-              disabled
-              className="bg-[rgb(248_248_252)] text-ca-on-surface-variant dark:bg-ca-surface-container-low"
-            />
+            <p className="text-xs font-semibold uppercase tracking-wider text-ca-on-surface-variant">이메일</p>
+            <p className="truncate text-sm text-ca-on-surface">{user.email}</p>
           </div>
         </div>
       </MyPageSectionCard>
@@ -364,7 +357,7 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
         {!openPasswordPanel ? (
           <Button
             variant="outline"
-            className="border-border text-primary hover:border-primary"
+            className="border-border font-semibold text-primary hover:border-primary"
             onClick={() => {
               setOpenPasswordPanel(true);
               setPasswordMessage(null);
@@ -631,7 +624,7 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
           </Button>
           <Button
             variant="ghost"
-            className="justify-start gap-2 text-destructive hover:bg-destructive/10 hover:text-destructive"
+            className="justify-start gap-2 font-semibold text-destructive hover:bg-destructive/10 hover:text-destructive"
             disabled={securityActionBusy !== "none" || deletingAccount}
             onClick={() => {
               setOpenDeletePanel((prev) => !prev);
