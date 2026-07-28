@@ -8,7 +8,7 @@
  */
 import { expect, test } from "@playwright/test";
 
-import { gotoDeterministicResults, stabilizeForScreenshot } from "./helpers/results-flow";
+import { expectEvidencePickExplanations, gotoDeterministicResults, stabilizeForScreenshot } from "./helpers/results-flow";
 
 const VIEWPORT = { width: 375, height: 812 } as const;
 
@@ -56,11 +56,10 @@ test.describe("Results visual regression — 375px", () => {
   test("375px Evidence tab region", async ({ page }) => {
     await gotoDeterministicResults(page);
     await page.getByRole("tab", { name: "근거" }).click();
-    await expect(page.getByTestId("e2e-pick-explanations")).toBeVisible();
+    await expectEvidencePickExplanations(page);
     await stabilizeForScreenshot(page);
 
     const evidence = page.getByTestId("e2e-pick-explanations");
-    await expect(evidence.getByText("왜 추천했나요").first()).toBeVisible();
 
     await expect(evidence).toHaveScreenshot("results-375-evidence-tab.png", shotOpts);
   });

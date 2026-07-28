@@ -1,5 +1,7 @@
 "use client";
 
+import { useId, useState } from "react";
+
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
@@ -8,6 +10,7 @@ import {
   pickDisplayName,
   pickRowSourceUrl,
 } from "./results-build-utils";
+import { formatEvidenceCardWhyLine } from "./results-evidence-shared-reasons-content";
 import { formatEvidenceRankingWhy } from "./results-evidence-ranking-why-content";
 import { EvidencePickSectionSlot } from "./results-evidence-pick-section-slot";
 import { ResultsEvidencePickSection, EVIDENCE_PICK_SPEC_BODY_MIN_H } from "./results-evidence-pick-section";
@@ -17,7 +20,6 @@ import {
   alternativeTagline,
   formatEvidenceDetailLines,
   formatEvidenceTradeoff,
-  formatEvidenceWhyLine,
 } from "./results-text-utils";
 
 function isRankingWhyEnabled(): boolean {
@@ -30,10 +32,15 @@ export function ResultsEvidencePickCard({
   build,
   apiPicks,
   enrichedSourceUrls,
+  sharedReasons,
 }: ResultsEvidencePickCardProps) {
-  const whyLine = formatEvidenceWhyLine(row.summary, row.whyTraits, pickDisplayName(row), row.domain);
+  const altPanelId = useId();
+  const [alternativesOpen, setAlternativesOpen] = useState(false);
+
+  const { label: whyLabel, line: whyLine } = formatEvidenceCardWhyLine(row, sharedReasons);
   const tradeoffLine = formatEvidenceTradeoff(row.tradeOffs);
-  const productSpecLines = formatEvidenceDetailLines(row.whyTraits, whyLine);
+  const showTradeoff = tradeoffLine !== null && tradeoffLine !== sharedReasons.tradeoffLine;
+  const productSpecLines = formatEvidenceDetailLines(row.whyTraits, whyLine ?? undefined);
   const alternatives = (row.alternatives ?? []).slice(0, 2);
   const runnerUpScore = alternatives[0]?.score;
   const rankingWhy = isRankingWhyEnabled()
@@ -70,7 +77,7 @@ export function ResultsEvidencePickCard({
 
       <EvidencePickSectionSlot>
         {whyLine ? (
-          <ResultsEvidencePickSection label="왜 추천했나요">
+          <ResultsEvidencePickSection label={whyLabel}>
             <p className="text-sm font-medium leading-relaxed text-foreground">{whyLine}</p>
           </ResultsEvidencePickSection>
         ) : null}
@@ -89,7 +96,7 @@ export function ResultsEvidencePickCard({
       </EvidencePickSectionSlot>
 
       <EvidencePickSectionSlot>
-        {tradeoffLine ? (
+        {showTradeoff ? (
           <ResultsEvidencePickSection label="주의할 점" variant="warning" testId="e2e-pick-tradeoff">
             <p className="text-sm leading-relaxed text-amber-950/90 dark:text-amber-50/90">{tradeoffLine}</p>
           </ResultsEvidencePickSection>
@@ -115,33 +122,51 @@ export function ResultsEvidencePickCard({
 
       <EvidencePickSectionSlot>
         {alternatives.length > 0 ? (
-          <ResultsEvidencePickSection label="대안 후보" variant="muted">
-            <ul className="space-y-2">
-              {alternatives.map((alt, altIdx) => (
-                <li
-                  key={`${row.itemId}-alt-${alt.itemId}`}
-                  className="rounded-md border border-ca-outline-variant/40 bg-ca-surface-container/40 p-2"
-                >
-                  <p className="font-label text-ca-label-sm font-semibold text-ca-secondary">
-                    {alternativeTagline(altIdx)}
-                  </p>
-                  <p className="mt-0.5 text-xs font-semibold text-ca-on-surface">{pickDisplayName(alt)}</p>
-                  <p className="mt-1 text-xs text-ca-on-surface-variant">
-                    <SwagkeyProductLink
-                      href={pickRowSourceUrl(
-                        { domain: row.domain, itemId: alt.itemId, sourceUrl: alt.sourceUrl },
-                        build,
-                        apiPicks,
-                        enrichedSourceUrls,
-                      )}
-                      domain={row.domain}
-                      itemId={alt.itemId}
-                    />
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </ResultsEvidencePickSection>
+          <div className="space-y-2">
+            <button
+              type="button"
+              className="text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              aria-expanded={alternativesOpen}
+              aria-controls={altPanelId}
+              data-testid="e2e-pick-alternatives-toggle"
+              onClick={() => setAlternativesOpen((open) => !open)}
+            >
+              {alternativesOpen
+                ? "대안 후보 접기"
+                : `대안 후보 ${alternatives.length}개 보기`}
+            </button>
+            <div id={altPanelId} role="region" aria-label="대안 후보" hidden={!alternativesOpen}>
+              {alternativesOpen ? (
+                <ResultsEvidencePickSection label="대안 후보" variant="muted">
+                  <ul className="space-y-2">
+                    {alternatives.map((alt, altIdx) => (
+                      <li
+                        key={`${row.itemId}-alt-${alt.itemId}`}
+                        className="rounded-md border border-ca-outline-variant/40 bg-ca-surface-container/40 p-2"
+                      >
+                        <p className="font-label text-ca-label-sm font-semibold text-ca-secondary">
+                          {alternativeTagline(altIdx)}
+                        </p>
+                        <p className="mt-0.5 text-xs font-semibold text-ca-on-surface">{pickDisplayName(alt)}</p>
+                        <p className="mt-1 text-xs text-ca-on-surface-variant">
+                          <SwagkeyProductLink
+                            href={pickRowSourceUrl(
+                              { domain: row.domain, itemId: alt.itemId, sourceUrl: alt.sourceUrl },
+                              build,
+                              apiPicks,
+                              enrichedSourceUrls,
+                            )}
+                            domain={row.domain}
+                            itemId={alt.itemId}
+                          />
+                        </p>
+                      </li>
+                    ))}
+                  </ul>
+                </ResultsEvidencePickSection>
+              ) : null}
+            </div>
+          </div>
         ) : null}
       </EvidencePickSectionSlot>
     </Card>

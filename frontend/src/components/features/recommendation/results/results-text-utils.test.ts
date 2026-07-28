@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import {
   formatEvidenceDetailLines,
+  formatEvidencePartWhyLine,
   formatEvidenceTradeoff,
   formatEvidenceWhyLine,
   isEvidenceEngineAuditLine,
@@ -41,6 +42,16 @@ describe("overviewAlternativeDescription", () => {
         "단일 축보다 전체 균형 점수가 높아 추천되었습니다.",
       ),
     ).toBe("");
+  });
+
+  it("formatEvidencePartWhyLine returns feel hook without preference axis prefix", () => {
+    const whyTraits = [
+      "저소음 무소음 스위치입니다.",
+      "차분한 소리 선호(+8.0)와 후보 특성(+10.0)이 같은 방향이라 정합 기여가 큽니다(+84.0).",
+    ];
+    expect(
+      formatEvidencePartWhyLine("ignored", whyTraits, "Switch", "switch"),
+    ).toBe("저소음 환경에 무난한 스위치예요.");
   });
 
   it("formatEvidenceWhyLine uses short feel hook and keeps specs for product features", () => {

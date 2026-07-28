@@ -1,10 +1,14 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import type { RecommendedBuild } from "@/types/recommendation";
 
 import { ResultsEvidencePickCard } from "./results-evidence-pick-card";
+import { deriveSharedEvidenceReasons } from "./results-evidence-shared-reasons-content";
 import { RANKING_WHY_FIXTURES } from "./results-ranking-thresholds";
+
+const NO_SHARED = deriveSharedEvidenceReasons([]);
 
 const ALIGNMENT_TRAITS = [
   "차분한 소리 선호(+8.0)와 후보 특성(+10.0)이 같은 방향이라 정합 기여가 큽니다(+84.0).",
@@ -59,6 +63,7 @@ describe("ResultsEvidencePickCard", () => {
         build={minimalBuild()}
         apiPicks={[]}
         enrichedSourceUrls={{}}
+        sharedReasons={NO_SHARED}
       />,
     );
 
@@ -92,6 +97,7 @@ describe("ResultsEvidencePickCard", () => {
         build={minimalBuild()}
         apiPicks={[]}
         enrichedSourceUrls={{}}
+        sharedReasons={NO_SHARED}
       />,
     );
 
@@ -119,6 +125,7 @@ describe("ResultsEvidencePickCard", () => {
         build={minimalBuild()}
         apiPicks={[]}
         enrichedSourceUrls={{}}
+        sharedReasons={NO_SHARED}
       />,
     );
 
@@ -148,6 +155,7 @@ describe("ResultsEvidencePickCard", () => {
         build={minimalBuild()}
         apiPicks={[]}
         enrichedSourceUrls={{}}
+        sharedReasons={NO_SHARED}
       />,
     );
 
@@ -171,6 +179,7 @@ describe("ResultsEvidencePickCard", () => {
         build={minimalBuild()}
         apiPicks={[]}
         enrichedSourceUrls={{}}
+        sharedReasons={NO_SHARED}
       />,
     );
 
@@ -195,6 +204,7 @@ describe("ResultsEvidencePickCard", () => {
         build={minimalBuild()}
         apiPicks={[]}
         enrichedSourceUrls={{}}
+        sharedReasons={NO_SHARED}
       />,
     );
 
@@ -221,6 +231,7 @@ describe("ResultsEvidencePickCard", () => {
         build={minimalBuild()}
         apiPicks={[]}
         enrichedSourceUrls={{}}
+        sharedReasons={NO_SHARED}
       />,
     );
 
@@ -247,9 +258,75 @@ describe("ResultsEvidencePickCard", () => {
         build={minimalBuild()}
         apiPicks={[]}
         enrichedSourceUrls={{}}
+        sharedReasons={NO_SHARED}
       />,
     );
 
     expect(screen.queryByTestId("e2e-pick-ranking-why")).not.toBeInTheDocument();
+  });
+
+  it("collapses alternatives until toggle is clicked", async () => {
+    const user = userEvent.setup();
+    render(
+      <ResultsEvidencePickCard
+        row={{
+          domain: "switch",
+          itemId: "sw-1",
+          itemName: "Switch A",
+          score: 0.8,
+          explanation: "",
+          summary: "Main",
+          alternatives: [
+            { itemId: "sw-2", itemName: "Switch B", score: 0.7, summary: "Alt" },
+            { itemId: "sw-3", itemName: "Switch C", score: 0.65, summary: "Alt 2" },
+          ],
+        }}
+        index={0}
+        build={minimalBuild()}
+        apiPicks={[]}
+        enrichedSourceUrls={{}}
+        sharedReasons={NO_SHARED}
+      />,
+    );
+
+    expect(screen.getByTestId("e2e-pick-alternatives-toggle")).toHaveTextContent("대안 후보 2개 보기");
+    expect(screen.queryByText("Switch B")).not.toBeInTheDocument();
+
+    await user.click(screen.getByTestId("e2e-pick-alternatives-toggle"));
+
+    expect(screen.getByText("Switch B")).toBeInTheDocument();
+    expect(screen.getByTestId("e2e-pick-alternatives-toggle")).toHaveTextContent("대안 후보 접기");
+  });
+
+  it("hides per-card tradeoff when it matches shared tradeoff", () => {
+    const tradeOffs = [
+      "구분감 있는 키감 축은 트레이드오프가 있습니다. 이 축의 가중 일치도가 상대적으로 낮아(-7.0), 핵심 선호 축 대비 체감이 덜 맞을 수 있습니다.",
+    ];
+    const shared = deriveSharedEvidenceReasons([
+      { domain: "switch", itemId: "sw-1", score: 0.8, explanation: "", tradeOffs },
+      { domain: "plate", itemId: "pl-1", score: 0.7, explanation: "", tradeOffs },
+      { domain: "foam", itemId: "fm-1", score: 0.6, explanation: "", tradeOffs },
+    ]);
+
+    render(
+      <ResultsEvidencePickCard
+        row={{
+          domain: "switch",
+          itemId: "sw-1",
+          itemName: "Switch A",
+          score: 0.8,
+          explanation: "",
+          summary: "Main",
+          tradeOffs,
+        }}
+        index={0}
+        build={minimalBuild()}
+        apiPicks={[]}
+        enrichedSourceUrls={{}}
+        sharedReasons={shared}
+      />,
+    );
+
+    expect(screen.queryByTestId("e2e-pick-tradeoff")).not.toBeInTheDocument();
   });
 });
