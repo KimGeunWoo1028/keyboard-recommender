@@ -104,7 +104,6 @@ describe("RecommendationResultView", () => {
     expect(screen.queryByTestId("e2e-quality-status")).not.toBeInTheDocument();
     expect(screen.getByText("차분한 소리 · 매끈한 키감")).toBeInTheDocument();
     expect(screen.queryByText("Test combination")).not.toBeInTheDocument();
-    expect(screen.getByText(/설문에서 고른 소리·키감 성향/)).toBeInTheDocument();
     expect(screen.getByText(/점수는 구매 만족이나 품질 보증이 아니라/)).toBeInTheDocument();
 
     const ranked = screen.getByTestId("e2e-server-ranked");

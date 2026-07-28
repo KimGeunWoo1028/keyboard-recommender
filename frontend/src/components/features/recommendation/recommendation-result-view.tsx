@@ -25,7 +25,6 @@ import { useAuthHeader } from "@/components/layout/auth-controls";
 import { makeResultSnapshotId, saveResultSnapshot } from "@/lib/saved-result-snapshots";
 import { recommendKeyboardStack } from "@/recommendation-engine/recommend";
 import { buildPreferenceVectorFromSubmission } from "@/nl-preference/merge-submission";
-import { soundProfileSummary, typingFeelSummary } from "@/lib/recommendation-summaries";
 import { topTraitHighlights } from "@/lib/trait-display";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -34,16 +33,19 @@ import type { SurveySubmission } from "@/types/survey";
 
 import { HelpHint } from "./results/help-hint";
 import { MetricGuideCard } from "./results/metric-guide-card";
-import { CategorySection, RecommendationCompareCard } from "./results/results-lite-compare";
+import { ResultsCompareTab } from "./results/results-compare-tab";
 import { catalogPickMetadata } from "./results/results-build-utils";
 import { DISPLAY_K } from "./results/results-constants";
+import { ResultsHeaderActions } from "./results/results-header-actions";
 import { ResultsNextActions } from "./results/results-next-actions";
+import { ResultsOverviewCtaBand } from "./results/results-overview-cta-band";
 import { ResultsOverviewTab } from "./results/results-overview-tab";
+import { ResultsPageShell } from "./results/results-page-shell";
 import { ResultsTrustLayer } from "./results/results-trust-layer";
-import { BackendResultTabBar, LiteResultTabBar } from "./results/results-tab-shell";
-import type { BackendResultTabId, LiteResultTabId } from "./results/results-types";
+import type { ResultTabId } from "./results/results-types";
 import { deriveConfidenceStory } from "./results/results-confidence-story-content";
-import { SharedResultHeader, ResultsPreferenceSummary, preferenceTagsFromAnswers } from "./results/shared-result-header";
+import { ResultsEvidenceMatchSection } from "./results/results-evidence-match-section";
+import { ResultsPreferenceSummary, preferenceTagsFromAnswers } from "./results/shared-result-header";
 
 const ResultsEvidenceTab = dynamic(
   () =>
@@ -75,8 +77,6 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
   const SAVE_FEEDBACK_MIN_MS = 350;
   const { answers, traits } = submission;
   const { sourceUrls } = build;
-  const soundSummary = soundProfileSummary(answers);
-  const typingSummary = typingFeelSummary(answers);
   const traitBadges = topTraitHighlights(traits, 6);
 
   const apiPicks = useMemo(
@@ -112,8 +112,7 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
   const isAuthenticated = authChecked && !!authUser;
   const sessionId = useMemo(() => getOrCreateClientSessionId(), []);
   const saveInFlightRef = useRef(false);
-  const [activeBackendTab, setActiveBackendTab] = useState<BackendResultTabId>("overview");
-  const [activeLiteTab, setActiveLiteTab] = useState<LiteResultTabId>("overview");
+  const [activeTab, setActiveTab] = useState<ResultTabId>("overview");
 
   const applySavedState = useCallback((scope: "account" | "local", message = "") => {
     setSaveScope(scope);
@@ -555,13 +554,13 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
     }
   }
 
-  const handleBackendTabChange = useCallback(
-    (tab: BackendResultTabId) => {
+  const handleTabChange = useCallback(
+    (tab: ResultTabId) => {
       void emitResultsUxEventBestEffort("interaction.results_tab_click", {
         tab,
         buildId: build.id,
       }).catch(() => undefined);
-      setActiveBackendTab(tab);
+      setActiveTab(tab);
     },
     [build.id],
   );
@@ -582,64 +581,81 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
     shareTaste.title = soundFeelTitle;
 
     return (
-      <div className="space-y-6 overflow-x-hidden sm:space-y-8">
-        <SharedResultHeader submission={submission} build={build} />
-
-        {/* RES-01: save CTA immediately after summary (m390 fold), before parts grid */}
-        <ResultsNextActions
-          build={build}
-          apiPicks={enrichedApiPicks}
-          enrichedSourceUrls={enrichedSourceUrls}
-          isAuthenticated={isAuthenticated}
-          authReady={authChecked}
-          saveState={saveState}
-          saveScope={saveScope}
-          saveMessage={saveMessage}
-          onSaveBuild={() => void handleSaveBuild()}
-          shareTaste={shareTaste}
-        />
-
-        <ResultsOverviewTab
-          submission={submission}
-          build={build}
-          apiPicks={enrichedApiPicks}
-          enrichedSourceUrls={enrichedSourceUrls}
-          enrichedLayoutSizes={enrichedLayoutSizes}
-          applyingRefine={applyingRefine}
-          refineError={refineError}
-          onApplyRefinement={(stepId, answerId, label) => void handleApplyRefinement(stepId, answerId, label)}
-          isAuthenticated={isAuthenticated}
-          sections="parts"
-        />
-
-        <ResultsTrustLayer
-          submission={submission}
-          build={build}
-          apiPicks={enrichedApiPicks}
-          applyingRefine={applyingRefine}
-          onApplyRefinement={(stepId, answerId, label) => void handleApplyRefinement(stepId, answerId, label)}
-        />
-
-        <ResultsPreferenceSummary answers={submission.answers} />
-
-        <BackendResultTabBar activeTab={activeBackendTab} onTabChange={handleBackendTabChange} />
-
-        {activeBackendTab === "overview" ? (
-          <ResultsOverviewTab
+      <ResultsPageShell
+        submission={submission}
+        build={build}
+        activeTab={activeTab}
+        onTabChange={handleTabChange}
+        headerActions={
+          <ResultsHeaderActions
             submission={submission}
             build={build}
-            apiPicks={enrichedApiPicks}
-            enrichedSourceUrls={enrichedSourceUrls}
-            enrichedLayoutSizes={enrichedLayoutSizes}
-            applyingRefine={applyingRefine}
-            refineError={refineError}
-            onApplyRefinement={(stepId, answerId, label) => void handleApplyRefinement(stepId, answerId, label)}
             isAuthenticated={isAuthenticated}
-            sections="secondary"
+            authReady={authChecked}
+            saveState={saveState}
+            onSaveBuild={() => void handleSaveBuild()}
+            shareTaste={shareTaste}
           />
+        }
+      >
+        {activeTab === "overview" ? (
+          <div className="space-y-6 sm:space-y-8">
+            <ResultsOverviewTab
+              submission={submission}
+              build={build}
+              apiPicks={enrichedApiPicks}
+              enrichedSourceUrls={enrichedSourceUrls}
+              enrichedLayoutSizes={enrichedLayoutSizes}
+              applyingRefine={applyingRefine}
+              refineError={refineError}
+              onApplyRefinement={(stepId, answerId, label) => void handleApplyRefinement(stepId, answerId, label)}
+              isAuthenticated={isAuthenticated}
+              sections="parts"
+            />
+            <ResultsTrustLayer
+              submission={submission}
+              build={build}
+              apiPicks={enrichedApiPicks}
+              applyingRefine={applyingRefine}
+              onApplyRefinement={(stepId, answerId, label) => void handleApplyRefinement(stepId, answerId, label)}
+            />
+            <ResultsPreferenceSummary answers={submission.answers} />
+            <ResultsNextActions
+              build={build}
+              apiPicks={enrichedApiPicks}
+              enrichedSourceUrls={enrichedSourceUrls}
+              isAuthenticated={isAuthenticated}
+              authReady={authChecked}
+              saveState={saveState}
+              saveScope={saveScope}
+              saveMessage={saveMessage}
+              onSaveBuild={() => void handleSaveBuild()}
+              shareTaste={shareTaste}
+              showSave={false}
+              showShare={false}
+            />
+            <ResultsOverviewCtaBand
+              isAuthenticated={isAuthenticated}
+              authReady={authChecked}
+              saveState={saveState}
+              onSaveBuild={() => void handleSaveBuild()}
+            />
+            <ResultsOverviewTab
+              submission={submission}
+              build={build}
+              apiPicks={enrichedApiPicks}
+              enrichedSourceUrls={enrichedSourceUrls}
+              enrichedLayoutSizes={enrichedLayoutSizes}
+              applyingRefine={applyingRefine}
+              refineError={refineError}
+              onApplyRefinement={(stepId, answerId, label) => void handleApplyRefinement(stepId, answerId, label)}
+              isAuthenticated={isAuthenticated}
+              sections="secondary"
+            />
+          </div>
         ) : null}
 
-        {activeBackendTab === "evidence" ? (
+        {activeTab === "evidence" ? (
           <ResultsEvidenceTab
             submission={submission}
             build={build}
@@ -647,7 +663,11 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
             enrichedSourceUrls={enrichedSourceUrls}
           />
         ) : null}
-      </div>
+
+        {activeTab === "compare" ? (
+          <ResultsCompareTab submission={submission} build={build} apiPicks={enrichedApiPicks} />
+        ) : null}
+      </ResultsPageShell>
     );
   }
 
@@ -655,135 +675,106 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
   const engine = recommendKeyboardStack(userVector, undefined, { topKLists: DISPLAY_K });
 
   const switches = engine.ranked.switches.slice(0, DISPLAY_K);
-  const plates = engine.ranked.plates.slice(0, DISPLAY_K);
-  const foams = engine.ranked.foams.slice(0, DISPLAY_K);
-  const layouts = engine.ranked.layouts.slice(0, 3);
+
+  const liteShareTaste = {
+    v: 1 as const,
+    title: preferenceTagsFromAnswers(submission.answers).slice(0, 2).join(" · ") || "취향 카드",
+    tags: preferenceTagsFromAnswers(submission.answers),
+  };
 
   return (
-    <div className="space-y-8">
-      <SharedResultHeader submission={submission} build={build} />
+    <ResultsPageShell
+      submission={submission}
+      build={build}
+      activeTab={activeTab}
+      onTabChange={handleTabChange}
+      headerActions={
+        <ResultsHeaderActions
+          submission={submission}
+          build={build}
+          isAuthenticated={isAuthenticated}
+          authReady={authChecked}
+          saveState={saveState}
+          onSaveBuild={() => void handleSaveBuild()}
+          shareTaste={liteShareTaste}
+        />
+      }
+    >
+      {activeTab === "overview" ? (
+        <div className="space-y-8">
+          {submission.apiUnreachableFallback ? (
+            <Card className="border-amber-500/40 bg-amber-500/10 shadow-none">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-base text-amber-950 dark:text-amber-100">연결이 불안정해요</CardTitle>
+                <CardDescription className="text-amber-900/90 dark:text-amber-100/90">
+                  네트워크 문제로 기본 추천 모드로 결과를 생성했습니다. 잠시 후 다시 시도해 주세요.
+                </CardDescription>
+              </CardHeader>
+            </Card>
+          ) : null}
 
-      <ResultsNextActions
-        build={build}
-        apiPicks={[]}
-        enrichedSourceUrls={{}}
-        isAuthenticated={isAuthenticated}
-        authReady={authChecked}
-        saveState={saveState}
-        saveScope={saveScope}
-        saveMessage={saveMessage}
-        onSaveBuild={() => void handleSaveBuild()}
-        shareTaste={{
-          v: 1,
-          title: preferenceTagsFromAnswers(submission.answers).slice(0, 2).join(" · ") || "취향 카드",
-          tags: preferenceTagsFromAnswers(submission.answers),
-        }}
-      />
+          {submission.nlPreferenceText?.trim() ? (
+            <Card className="rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest shadow-none">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-base font-semibold">자유 입력 취향</CardTitle>
+                <CardDescription>
+                  입력한 문장을 바탕으로 취향을 분석해 추천에 함께 반영했습니다.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="rounded-lg border border-ca-outline-variant/35 p-3 text-sm text-ca-on-surface-variant">
+                  {submission.nlPreferenceText.trim()}
+                </p>
+              </CardContent>
+            </Card>
+          ) : null}
 
-      <ResultsPreferenceSummary answers={submission.answers} />
-
-      <LiteResultTabBar activeTab={activeLiteTab} onTabChange={setActiveLiteTab} />
-
-      {activeLiteTab === "overview" && submission.apiUnreachableFallback ? (
-        <Card className="border-amber-500/40 bg-amber-500/10 shadow-none">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-base text-amber-950 dark:text-amber-100">연결이 불안정해요</CardTitle>
-            <CardDescription className="text-amber-900/90 dark:text-amber-100/90">
-              네트워크 문제로 기본 추천 모드로 결과를 생성했습니다. 잠시 후 다시 시도해 주세요.
-            </CardDescription>
-          </CardHeader>
-        </Card>
-      ) : null}
-
-      {activeLiteTab === "overview" && submission.nlPreferenceText?.trim() ? (
-        <Card className="rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest shadow-none">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-base font-semibold">자유 입력 취향</CardTitle>
-            <CardDescription>
-              입력한 문장을 바탕으로 취향을 분석해 추천에 함께 반영했습니다.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p className="rounded-lg border border-ca-outline-variant/35 p-3 text-sm text-ca-on-surface-variant">
-              {submission.nlPreferenceText.trim()}
+          <div className="space-y-2">
+            <p className="inline-flex items-center gap-1.5 text-sm font-medium text-ca-on-surface">
+              설문 기반 핵심 성향
+              <HelpHint text="설문 답변에서 특히 강하게 드러난 취향 축을 요약한 배지입니다. 점수가 클수록 해당 성향이 더 뚜렷합니다." />
             </p>
-          </CardContent>
-        </Card>
-      ) : null}
-
-      {activeLiteTab === "overview" ? (
-        <div className="space-y-2">
-          <p className="inline-flex items-center gap-1.5 text-sm font-medium text-ca-on-surface">
-            설문 기반 핵심 성향
-            <HelpHint text="설문 답변에서 특히 강하게 드러난 취향 축을 요약한 배지입니다. 점수가 클수록 해당 성향이 더 뚜렷합니다." />
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {traitBadges.map((t) => (
-              <Badge key={t.key} className="border-ca-outline-variant/50 bg-transparent font-normal">
-                {t.label} (+{t.score})
-              </Badge>
-            ))}
+            <div className="flex flex-wrap gap-2">
+              {traitBadges.map((t) => (
+                <Badge key={t.key} className="border-ca-outline-variant/50 bg-transparent font-normal">
+                  {t.label} (+{t.score})
+                </Badge>
+              ))}
+            </div>
           </div>
+
+          <MetricGuideCard />
+
+          <ResultsNextActions
+            build={build}
+            apiPicks={[]}
+            enrichedSourceUrls={{}}
+            isAuthenticated={isAuthenticated}
+            authReady={authChecked}
+            saveState={saveState}
+            saveScope={saveScope}
+            saveMessage={saveMessage}
+            onSaveBuild={() => void handleSaveBuild()}
+            shareTaste={liteShareTaste}
+            showSave={false}
+            showShare={false}
+          />
+          <ResultsOverviewCtaBand
+            isAuthenticated={isAuthenticated}
+            authReady={authChecked}
+            saveState={saveState}
+            onSaveBuild={() => void handleSaveBuild()}
+          />
         </div>
       ) : null}
 
-      {activeLiteTab === "overview" ? <MetricGuideCard /> : null}
-
-      {activeLiteTab === "evidence" ? (
-        <>
-          <CategorySection
-            title="스위치 추천"
-            description="샘플 카탈로그 기준 상위 스위치입니다. 점수와 추천 근거를 비교해 보세요."
-            categoryLabel="스위치"
-            rows={switches}
-            userVector={userVector}
-            soundSummary={soundSummary}
-            typingSummary={typingSummary}
-          />
-
-          <CategorySection
-            title="플레이트 추천"
-            description="플레이트는 보드의 단단함·휘는 느낌·소리 성향에 영향을 줍니다. 취향에 맞는 상위 후보를 보여드려요."
-            categoryLabel="플레이트"
-            rows={plates}
-            userVector={userVector}
-            soundSummary={soundSummary}
-            typingSummary={typingSummary}
-          />
-
-          <CategorySection
-            title="폼 추천"
-            description="폼 구성은 감쇠감과 사운드 활성을 바꿉니다. 부드러운 세팅과 또렷한 세팅을 비교해 보세요."
-            categoryLabel="폼"
-            rows={foams}
-            userVector={userVector}
-            soundSummary={soundSummary}
-            typingSummary={typingSummary}
-          />
-
-          <section className="space-y-4">
-            <div className="max-w-3xl space-y-1">
-              <h2 className="text-lg font-semibold tracking-tight sm:text-xl">레이아웃 추천</h2>
-              <p className="text-sm text-muted-foreground">
-                키보드 크기와 배열은 사용성/공진감에 영향을 줍니다. 사용자 성향에 맞는 상위 레이아웃입니다.
-              </p>
-            </div>
-            <div className="grid gap-4 md:grid-cols-3">
-              {layouts.map((row, i) => (
-                <RecommendationCompareCard
-                  key={row.item.id}
-                  rank={i + 1}
-                  categoryLabel="레이아웃"
-                  scored={row}
-                  userVector={userVector}
-                  soundSummary={soundSummary}
-                  typingSummary={typingSummary}
-                />
-              ))}
-            </div>
-          </section>
-        </>
+      {activeTab === "evidence" ? (
+        <ResultsEvidenceMatchSection submission={submission} />
       ) : null}
-    </div>
+
+      {activeTab === "compare" ? (
+        <ResultsCompareTab submission={submission} build={build} liteSwitches={switches} />
+      ) : null}
+    </ResultsPageShell>
   );
 }

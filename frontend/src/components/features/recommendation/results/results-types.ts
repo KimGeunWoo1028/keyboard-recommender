@@ -1,13 +1,17 @@
-export type BackendResultTabId = "overview" | "evidence";
-export type LiteResultTabId = "overview" | "evidence";
+export type ResultTabId = "overview" | "evidence" | "compare";
 
-/** Overview CTA: 저장만. 부품별 스웨그키 링크는 6축·대안·카탈로그에서 제공. */
-export const BACKEND_RESULT_TABS: { id: BackendResultTabId; label: string }[] = [
-  { id: "overview", label: "추천 요약" },
-  { id: "evidence", label: "추천 근거" },
+/** @deprecated Use ResultTabId */
+export type BackendResultTabId = ResultTabId;
+/** @deprecated Use ResultTabId */
+export type LiteResultTabId = ResultTabId;
+
+export const RESULT_TABS: { id: ResultTabId; label: string }[] = [
+  { id: "overview", label: "개요" },
+  { id: "evidence", label: "근거" },
+  { id: "compare", label: "비교" },
 ];
 
-export const LITE_RESULT_TABS: { id: LiteResultTabId; label: string }[] = [
-  { id: "overview", label: "추천 요약" },
-  { id: "evidence", label: "추천 근거" },
-];
+/** @deprecated Use RESULT_TABS */
+export const BACKEND_RESULT_TABS = RESULT_TABS;
+/** @deprecated Use RESULT_TABS */
+export const LITE_RESULT_TABS = RESULT_TABS;

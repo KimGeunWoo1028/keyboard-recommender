@@ -318,6 +318,133 @@ export function formatEvidenceTradeoff(tradeOffs: string[] | undefined): string 
 /** @deprecated Use formatEvidenceTradeoff */
 export const formatEvidenceTradeoffLine = formatEvidenceTradeoff;
 
+const DATASHEET_DOMAIN_SPEC: Record<string, string> = {
+  switch: "SWITCH",
+  plate: "PLATE",
+  foam: "FOAM",
+  layout: "LAYOUT",
+  case: "CASE",
+  keycap: "KEYCAP",
+};
+
+const DATASHEET_BRAND_SLUGS = [
+  "gateron",
+  "cherry",
+  "ttc",
+  "hmx",
+  "kailh",
+  "akko",
+  "domikey",
+  "keychron",
+  "epomaker",
+  "wekt",
+  "owlab",
+  "qwertykeys",
+  "monokei",
+  "tx",
+  "durock",
+] as const;
+
+/** Uppercase spec ribbon for overview datasheet cards (domain + material/type hints). */
+export function overviewDatasheetSpecLine(
+  domain: string,
+  whyTraits?: string[],
+  summary?: string,
+): string {
+  const d = normalizeEvidenceDomain(domain);
+  const domainLabel = DATASHEET_DOMAIN_SPEC[d] ?? d.toUpperCase();
+  const specLines = formatEvidenceDetailLines(whyTraits);
+  const combined = `${specLines.join(" ")} ${(summary ?? "").trim()}`;
+  const subtypes: string[] = [];
+
+  if (d === "switch") {
+    if (/저소음|무소음|silent/i.test(combined)) subtypes.push("SILENT");
+    if (/리니어|linear/i.test(combined)) subtypes.push("LINEAR");
+    else if (/택타일|tactile|갈축/i.test(combined)) subtypes.push("TACTILE");
+    else if (/클릭|clicky|청축/i.test(combined)) subtypes.push("CLICKY");
+  } else if (d === "plate") {
+    if (/FR4/i.test(combined)) subtypes.push("FR4");
+    else if (/PC|폴리/i.test(combined)) subtypes.push("PC");
+    else if (/알루|ALU|alumin/i.test(combined)) subtypes.push("ALU");
+    else if (/brass|황동/i.test(combined)) subtypes.push("BRASS");
+  } else if (d === "foam") {
+    if (/케이스|case/i.test(combined)) subtypes.push("CASE");
+    else if (/플레이트|plate/i.test(combined)) subtypes.push("PLATE");
+  } else if (d === "keycap") {
+    if (/PBT/i.test(combined)) subtypes.push("PBT");
+    else if (/ABS/i.test(combined)) subtypes.push("ABS");
+  } else if (d === "layout") {
+    if (/75%/.test(combined)) subtypes.push("75%");
+    else if (/TKL|tenkeyless/i.test(combined)) subtypes.push("TKL");
+    else if (/60%/.test(combined)) subtypes.push("60%");
+    else if (/65%/.test(combined)) subtypes.push("65%");
+  } else if (d === "case") {
+    if (/PC|폴리/i.test(combined)) subtypes.push("PC");
+    else if (/알루|ALU|alumin/i.test(combined)) subtypes.push("ALU");
+  }
+
+  if (subtypes.length === 0) return domainLabel;
+  return `${domainLabel} / ${subtypes.join(" · ")}`;
+}
+
+/** Brand ribbon from product name or catalog id (no fake placeholders). */
+export function overviewDatasheetBrand(itemName?: string, itemId?: string): string {
+  const name = (itemName ?? "").trim();
+  if (name) {
+    const first = name.split(/\s+/)[0]?.trim() ?? "";
+    if (first && /^[A-Za-z0-9][A-Za-z0-9+.&-]*$/u.test(first) && first.length <= 24) {
+      return first.toUpperCase();
+    }
+  }
+
+  const id = (itemId ?? "").trim().toLowerCase();
+  for (const slug of DATASHEET_BRAND_SLUGS) {
+    if (id.includes(slug)) {
+      return slug.toUpperCase();
+    }
+  }
+
+  return "";
+}
+
+function shortenSpecToTraitPill(line: string): string {
+  const text = line.trim();
+  if (!text) return "";
+  if (/FR4/i.test(text)) return "FR4";
+  if (/PBT/i.test(text)) return "PBT";
+  if (/ABS/i.test(text)) return "ABS";
+  if (/저소음|무소음/.test(text)) return "저소음";
+  if (/윤활/.test(text)) return "윤활";
+  const spring = text.match(/\((\d+g)\)/);
+  if (spring?.[1]) return spring[1];
+  const trimmed = text.replace(/입니다\.?$/, "").trim();
+  if (trimmed.length <= 10) return trimmed;
+  return trimmed.slice(0, 10);
+}
+
+/** Lavender trait pills for overview datasheet cards (≤3). */
+export function overviewDatasheetTraitPills(
+  whyTraits?: string[],
+  _domain?: string,
+  whyLine?: string,
+): string[] {
+  const pills: string[] = [];
+  const alignments = parseEvidenceAlignments(whyTraits);
+
+  for (const row of alignments) {
+    if (pills.length >= 2) break;
+    if (!pills.includes(row.axisLabel)) pills.push(row.axisLabel);
+  }
+
+  for (const line of formatEvidenceDetailLines(whyTraits, whyLine)) {
+    if (pills.length >= 3) break;
+    const short = shortenSpecToTraitPill(line);
+    if (short && !pills.includes(short)) pills.push(short);
+  }
+
+  return pills.slice(0, 3);
+}
+
 export function truncateForMobile(text: string, maxLength: number): string {
   if (text.length <= maxLength) return text;
   return `${text.slice(0, maxLength).trimEnd()}...`;

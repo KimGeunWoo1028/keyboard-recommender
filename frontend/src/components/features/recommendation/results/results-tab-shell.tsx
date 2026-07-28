@@ -1,13 +1,16 @@
 "use client";
 
+import { BarChart3, Info, Layers } from "lucide-react";
+
 import { cn } from "@/lib/utils";
 
-import {
-  BACKEND_RESULT_TABS,
-  LITE_RESULT_TABS,
-  type BackendResultTabId,
-  type LiteResultTabId,
-} from "./results-types";
+import { RESULT_TABS, type ResultTabId } from "./results-types";
+
+const TAB_ICONS: Record<ResultTabId, typeof Layers> = {
+  overview: Layers,
+  evidence: Info,
+  compare: BarChart3,
+};
 
 function tabClass(active: boolean): string {
   return cn(
@@ -18,12 +21,12 @@ function tabClass(active: boolean): string {
   );
 }
 
-export function BackendResultTabBar({
+export function ResultTabBar({
   activeTab,
   onTabChange,
 }: {
-  activeTab: BackendResultTabId;
-  onTabChange: (tab: BackendResultTabId) => void;
+  activeTab: ResultTabId;
+  onTabChange: (tab: ResultTabId) => void;
 }) {
   return (
     <div className="relative border-b border-border sm:static">
@@ -33,46 +36,28 @@ export function BackendResultTabBar({
         role="tablist"
         aria-label="결과 보기"
       >
-        {BACKEND_RESULT_TABS.map((tab) => (
-          <button
-            key={tab.id}
-            type="button"
-            role="tab"
-            aria-selected={activeTab === tab.id}
-            className={tabClass(activeTab === tab.id)}
-            onClick={() => onTabChange(tab.id)}
-          >
-            {tab.label}
-          </button>
-        ))}
+        {RESULT_TABS.map((tab) => {
+          const Icon = TAB_ICONS[tab.id];
+          return (
+            <button
+              key={tab.id}
+              type="button"
+              role="tab"
+              aria-selected={activeTab === tab.id}
+              className={tabClass(activeTab === tab.id)}
+              onClick={() => onTabChange(tab.id)}
+            >
+              <Icon className="h-4 w-4" aria-hidden />
+              {tab.label}
+            </button>
+          );
+        })}
       </div>
     </div>
   );
 }
 
-export function LiteResultTabBar({
-  activeTab,
-  onTabChange,
-}: {
-  activeTab: LiteResultTabId;
-  onTabChange: (tab: LiteResultTabId) => void;
-}) {
-  return (
-    <div className="border-b border-border" role="tablist" aria-label="결과 보기">
-      <div className="flex flex-wrap gap-1">
-        {LITE_RESULT_TABS.map((tab) => (
-          <button
-            key={tab.id}
-            type="button"
-            role="tab"
-            aria-selected={activeTab === tab.id}
-            className={tabClass(activeTab === tab.id)}
-            onClick={() => onTabChange(tab.id)}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
+/** @deprecated Use ResultTabBar */
+export const BackendResultTabBar = ResultTabBar;
+/** @deprecated Use ResultTabBar */
+export const LiteResultTabBar = ResultTabBar;

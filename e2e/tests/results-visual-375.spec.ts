@@ -58,7 +58,7 @@ test.describe("Results visual regression — 375px", () => {
 
   test("375px Evidence tab region", async ({ page }) => {
     await gotoDeterministicResults(page);
-    await page.getByRole("tab", { name: "추천 근거" }).click();
+    await page.getByRole("tab", { name: "근거" }).click();
     await expect(page.getByTestId("e2e-pick-explanations")).toBeVisible();
     await stabilizeForScreenshot(page);
 

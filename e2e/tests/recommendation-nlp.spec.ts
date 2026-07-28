@@ -18,7 +18,7 @@ test.describe("NLP preference path", () => {
     await page.getByTestId("e2e-submit-survey").click();
     await expect(page).toHaveURL(/\/results$/);
 
-    await page.getByRole("tab", { name: "추천 근거" }).click();
+    await page.getByRole("tab", { name: "근거" }).click();
     await expect(page.getByText("자유 입력 취향")).toBeVisible();
     await expect(page.getByText(/서버에서 분석되어/)).toBeVisible();
     await expect(page.getByText("thocky linear quiet")).toBeVisible();

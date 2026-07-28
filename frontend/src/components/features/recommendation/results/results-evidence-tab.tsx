@@ -2,6 +2,7 @@
 
 import { HelpHint } from "./help-hint";
 import { ResultsEvidenceContextSection } from "./results-evidence-context-section";
+import { ResultsEvidenceMatchSection } from "./results-evidence-match-section";
 import { ResultsEvidencePickCard } from "./results-evidence-pick-card";
 import type { ResultsEvidenceTabProps } from "./results-evidence-types";
 
@@ -17,7 +18,9 @@ export function ResultsEvidenceTab({
     <>
       <ResultsEvidenceContextSection submission={submission} />
 
-      <section className="space-y-4 [content-visibility:auto]" data-testid="e2e-pick-explanations">
+      <ResultsEvidenceMatchSection submission={submission} apiPicks={apiPicks} />
+
+      <section className="mt-8 space-y-4 [content-visibility:auto]" data-testid="e2e-pick-explanations">
         <div className="max-w-3xl space-y-1">
           <h2 className="inline-flex items-center gap-2 font-headline text-lg font-semibold tracking-tight text-ca-on-surface sm:text-xl">
             <span>후보별 추천 근거</span>
