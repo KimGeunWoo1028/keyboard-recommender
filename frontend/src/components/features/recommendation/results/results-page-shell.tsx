@@ -91,9 +91,7 @@ export function ResultsPageShell({
 
       <div className="bg-white dark:bg-ca-surface">
         <div className="mx-auto max-w-ca px-ca-margin-mobile pt-6 sm:px-ca-margin sm:pt-8">
-          <div className="border-b border-border pb-4">
-            <ResultTabBar activeTab={activeTab} onTabChange={onTabChange} />
-          </div>
+          <ResultTabBar activeTab={activeTab} onTabChange={onTabChange} />
         </div>
         <div className="mx-auto max-w-ca px-ca-margin-mobile py-8 sm:px-ca-margin sm:py-10">{children}</div>
       </div>
