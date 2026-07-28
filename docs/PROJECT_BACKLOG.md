@@ -127,7 +127,7 @@ S0 퀵윈 ──► E1 결과 소유 ──► E2 설문 연속 ──► E3 결
 | **Estimated** | 2d |
 | **Dependencies** | RET-01 권장(계정 경로가 살아 있어야 약속이 정직해짐). 카피만은 RET-01과 병렬 가능 |
 | **Acceptance Criteria** | ① 게스트: “이 브라우저에 임시 저장 / 계정에 보관하려면 로그인” 문구가 저장 CTA·성공 상태에 일치 ② 게스트 성공 후 MyPage를 “방금 저장분 열기”처럼 오해시키는 CTA 제거 또는 로그인 목적 명시 ③ 계정 저장: “마이페이지에서 다시 열 수 있음” + RET-01 동작과 정합 |
-| **Status** | Todo |
+| **Status** | Done |
 
 ---
 
@@ -144,7 +144,7 @@ S0 퀵윈 ──► E1 결과 소유 ──► E2 설문 연속 ──► E3 결
 | **Estimated** | 1d |
 | **Dependencies** | RET-01 |
 | **Acceptance Criteria** | ① 로그인 저장 성공 시 role=status 또는 동등 안내 ② 「마이페이지에서 다시 보기」 링크가 RET-01으로 연결 ③ 중복 저장 CTA 혼란 최소화(RES-01과 정합) |
-| **Status** | Todo |
+| **Status** | Done |
 
 ---
 
@@ -193,7 +193,7 @@ S0 퀵윈 ──► E1 결과 소유 ──► E2 설문 연속 ──► E3 결
 | **Estimated** | 2d |
 | **Dependencies** | 없음 |
 | **Acceptance Criteria** | ① 중간 단계 refresh 후 동일 단계·선택 복원 ② “처음부터” 명시 CTA는 초기화 가능 ③ 결과 제출 성공 후 정책에 맞게 클리어 |
-| **Status** | Todo |
+| **Status** | Done |
 
 ---
 
@@ -210,7 +210,7 @@ S0 퀵윈 ──► E1 결과 소유 ──► E2 설문 연속 ──► E3 결
 | **Estimated** | 2d |
 | **Dependencies** | SUR-01 권장 |
 | **Acceptance Criteria** | ① 결과에서 back → 설문 시작 화면이 아닌 직전 단계(또는 합의된 복귀점) ② 성향 선택만 리셋되는 회귀 없음 ③ 문서화한 복귀 규칙이 QA 시나리오와 일치 |
-| **Status** | Todo |
+| **Status** | Done |
 
 ---
 
@@ -258,7 +258,7 @@ S0 퀵윈 ──► E1 결과 소유 ──► E2 설문 연속 ──► E3 결
 | **Estimated** | 2d |
 | **Dependencies** | RET-02 카피와 정합 |
 | **Acceptance Criteria** | ① m390: 요약 카드 아래(또는 sticky)에 저장 CTA 가시 ② 하단 중복은 1회로 축소 또는 역할 분리 ③ RET-02/03 문구와 충돌 없음 |
-| **Status** | Todo |
+| **Status** | Done |
 
 ---
 
@@ -781,10 +781,13 @@ S0 퀵윈 ──► E1 결과 소유 ──► E2 설문 연속 ──► E3 결
 
 **완료 조건**
 
-- [ ] 설문 중 refresh 복원
-- [ ] 결과 back ≠ 설문 시작 리셋
-- [ ] m390 요약 직후 저장 CTA 가시
-- [ ] 게스트/계정 저장 카피·플로우 분리 QA pass
+- [x] 설문 중 refresh 복원
+- [x] 결과 back ≠ 설문 시작 리셋
+- [x] m390 요약 직후 저장 CTA 가시
+- [x] 게스트/계정 저장 카피·플로우 분리 QA pass
+
+**Sprint2 완료일:** 2026-07-28 · 보고서: `docs/Sprint2_COMPLETION_REPORT.md`  
+**여유 Task:** SUR-03 / RES-03 — Skip (Sprint 필수 완료 조건 외; Sprint 3+ 후보)
 
 ---
 

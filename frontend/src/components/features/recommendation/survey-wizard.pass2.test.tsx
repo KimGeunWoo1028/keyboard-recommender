@@ -1,14 +1,18 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { SurveyWizard } from "@/components/features/recommendation/survey-wizard";
+import { clearSurveyWizardDraft } from "@/lib/survey-wizard-draft";
 
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: vi.fn() }),
 }));
 
 describe("SurveyWizard Pass 2 (action hierarchy · NL · loading copy)", () => {
+  beforeEach(() => {
+    clearSurveyWizardDraft();
+  });
   it("hides secondary reset actions until details is opened", async () => {
     const user = userEvent.setup();
     render(<SurveyWizard />);

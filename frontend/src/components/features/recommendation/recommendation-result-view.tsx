@@ -570,6 +570,19 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
       <div className="space-y-6 overflow-x-hidden sm:space-y-8">
         <SharedResultHeader submission={submission} build={build} />
 
+        {/* RES-01: save CTA immediately after summary (m390 fold), before parts grid */}
+        <ResultsNextActions
+          build={build}
+          apiPicks={enrichedApiPicks}
+          enrichedSourceUrls={enrichedSourceUrls}
+          isAuthenticated={isAuthenticated}
+          authReady={authChecked}
+          saveState={saveState}
+          saveScope={saveScope}
+          saveMessage={saveMessage}
+          onSaveBuild={() => void handleSaveBuild()}
+        />
+
         <ResultsOverviewTab
           submission={submission}
           build={build}
@@ -581,18 +594,6 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
           onApplyRefinement={(stepId, answerId, label) => void handleApplyRefinement(stepId, answerId, label)}
           isAuthenticated={isAuthenticated}
           sections="parts"
-        />
-
-        <ResultsNextActions
-          build={build}
-          apiPicks={enrichedApiPicks}
-          enrichedSourceUrls={enrichedSourceUrls}
-          isAuthenticated={isAuthenticated}
-          authReady={authChecked}
-          saveState={saveState}
-          saveScope={saveScope}
-          saveMessage={saveMessage}
-          onSaveBuild={() => void handleSaveBuild()}
         />
 
         <ResultsTrustLayer

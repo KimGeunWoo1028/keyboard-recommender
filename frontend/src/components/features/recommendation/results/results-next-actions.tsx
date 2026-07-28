@@ -115,28 +115,44 @@ export function ResultsNextActions({
       {showIdleHint ? (
         <p className="mt-3 break-keep text-sm text-ca-on-surface-variant">
           {isAuthenticated
-            ? "계정에 저장되어 다른 기기에서도 확인할 수 있어요."
-            : "이 기기의 브라우저에 저장돼요. 로그인하면 계정에 저장할 수 있어요."}
+            ? "계정에 저장하면 마이페이지에서 다시 열 수 있어요."
+            : "이 브라우저에 임시 저장돼요. 계정에 보관하려면 로그인하세요."}
         </p>
       ) : null}
 
-      {saveMessage || saveState === "error" ? (
+      {saveMessage || saveState === "error" || saveState === "saved" ? (
         <div
           className="mt-3 space-y-1 text-sm text-ca-on-surface-variant"
           role={saveState === "error" ? "alert" : "status"}
           aria-live={saveState === "error" ? "assertive" : "polite"}
+          data-testid="e2e-save-feedback"
         >
           <p>
             {saveState === "error"
               ? saveMessage?.trim() || "저장하지 못했어요"
-              : saveMessage}
+              : saveMessage?.trim() ||
+                (saveState === "saved"
+                  ? isAuthenticated
+                    ? "계정에 저장했어요. 마이페이지에서 다시 열 수 있어요."
+                    : "이 브라우저에 임시 저장했어요."
+                  : "")}
           </p>
-          {saveState === "saved" ? (
+          {saveState === "saved" && isAuthenticated ? (
             <Link
               href="/mypage?section=saved"
               className="inline-block font-medium text-ca-primary underline-offset-4 hover:underline"
+              data-testid="e2e-save-mypage-link"
             >
-              저장한 결과 보기
+              마이페이지에서 다시 보기
+            </Link>
+          ) : null}
+          {saveState === "saved" && !isAuthenticated ? (
+            <Link
+              href="/auth?mode=login"
+              className="inline-block font-medium text-ca-primary underline-offset-4 hover:underline"
+              data-testid="e2e-save-login-link"
+            >
+              계정에 보관하려면 로그인
             </Link>
           ) : null}
         </div>

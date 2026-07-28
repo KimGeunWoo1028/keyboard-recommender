@@ -1,13 +1,17 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { SurveyWizard } from "@/components/features/recommendation/survey-wizard";
+import { clearSurveyWizardDraft } from "@/lib/survey-wizard-draft";
 
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: vi.fn() }),
 }));
 
 describe("SurveyWizard entry (Phase 1 — no quick recommendation)", () => {
+  beforeEach(() => {
+    clearSurveyWizardDraft();
+  });
   it("shows style presets without quick-recommend UI", () => {
     render(<SurveyWizard />);
 

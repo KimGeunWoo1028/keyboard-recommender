@@ -20,6 +20,11 @@ import { SURVEY_STEPS } from "@/lib/survey-definition";
 import { computeTraitsFromAnswers, isCompleteSurveyAnswers } from "@/lib/survey-logic";
 import { firstUnansweredStepIndex, selectedOptionLabel } from "@/lib/survey-step-navigation";
 import { loadLastKnownGoodSubmission, loadSurveySubmission, saveSurveySubmission } from "@/lib/survey-storage";
+import {
+  clearSurveyWizardDraft,
+  loadSurveyWizardDraft,
+  saveSurveyWizardDraft,
+} from "@/lib/survey-wizard-draft";
 import { cn } from "@/lib/utils";
 import type { SurveyAnswers, SurveyStepId } from "@/types/survey";
 
@@ -98,6 +103,7 @@ export function SurveyWizard() {
   const [showResetActions, setShowResetActions] = useState(false);
   const viewedRef = useRef(false);
   const completedRef = useRef(false);
+  const draftHydratedRef = useRef(false);
   const phaseRef = useRef(phase);
   const stepIndexRef = useRef(stepIndex);
   const onboardingViewedAtRef = useRef<number | null>(null);
@@ -137,12 +143,24 @@ export function SurveyWizard() {
       viewedRef.current = true;
       onboardingViewedAtRef.current = globalThis.performance?.now?.() ?? Date.now();
       void emitOnboardingEventBestEffort("onboarding.viewed");
-      const prev = loadSurveySubmission();
-      if (prev?.answers) {
-        setAnswers(prev.answers);
-        setHasPreviousSession(true);
+      const draft = loadSurveyWizardDraft();
+      if (draft?.phase === "questions") {
+        // SUR-01/SUR-02: restore mid-wizard (incl. browser back from /results).
+        setPhase("questions");
+        setStepIndex(Math.min(draft.stepIndex, Math.max(0, SURVEY_STEPS.length - 1)));
+        setAnswers(draft.answers);
+        setSelectedStyle(draft.selectedStyle);
+        setSeededStepIds(new Set(draft.seededStepIds));
+        setNlPreferenceText(draft.nlPreferenceText ?? "");
+      } else {
+        const prev = loadSurveySubmission();
+        if (prev?.answers) {
+          setAnswers(prev.answers);
+          setHasPreviousSession(true);
+        }
       }
       setLastKnownGoodAvailable(!!loadLastKnownGoodSubmission());
+      draftHydratedRef.current = true;
     }
     return () => {
       if (!completedRef.current) {
@@ -153,6 +171,18 @@ export function SurveyWizard() {
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (!draftHydratedRef.current) return;
+    saveSurveyWizardDraft({
+      phase,
+      stepIndex,
+      answers,
+      selectedStyle,
+      seededStepIds: Array.from(seededStepIds),
+      nlPreferenceText,
+    });
+  }, [phase, stepIndex, answers, selectedStyle, seededStepIds, nlPreferenceText]);
 
   function setAnswer<S extends SurveyStepId>(stepId: S, value: SurveyAnswers[S]) {
     setAnswers((prev) => ({ ...prev, [stepId]: value }));
@@ -287,6 +317,8 @@ export function SurveyWizard() {
         });
       }
       completedRef.current = true;
+      // SUR-02: keep mid-wizard draft so browser back from /results restores
+      // the last question step (not entry). Cleared only via reset / 「처음부터」.
       void emitOnboardingEventBestEffort("onboarding.completed", {
         style: selectedStyle,
         answeredSteps: Object.keys(submitAnswers).length,
@@ -335,6 +367,7 @@ export function SurveyWizard() {
     setNlPreferenceText("");
     setSubmitError(null);
     setShowResetActions(false);
+    clearSurveyWizardDraft();
   }
 
   function startFullSurvey() {
