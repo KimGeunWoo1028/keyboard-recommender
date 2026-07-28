@@ -11,14 +11,14 @@ export function HomeHero() {
   const example = HOME_RESULT_PREVIEW_EXAMPLE;
 
   return (
-    <section className="relative flex min-h-[min(92vh,56rem)] items-center">
-      {/* Clip decorative wash only — keep card shadows fully visible like Manus */}
+    <section className="relative flex min-h-[min(92vh,56rem)] w-full items-center">
+      {/* Full-bleed wash — must sit outside max-w-ca so edges are not clipped */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
         <div className="absolute right-0 top-0 h-full w-1/2 bg-gradient-to-l from-[#EEF2FF] to-transparent dark:from-primary/10" />
         <div className="absolute right-1/4 top-1/2 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-primary/5 blur-3xl" />
       </div>
 
-      <div className="relative grid w-full grid-cols-1 items-center gap-12 py-16 lg:grid-cols-2 lg:gap-12">
+      <div className="relative mx-auto grid w-full max-w-ca grid-cols-1 items-center gap-12 px-ca-margin-mobile py-16 sm:px-ca-margin lg:grid-cols-2 lg:gap-12">
         <div className="animate-fade-up">
           <p className="section-label mb-6">Keyboard Recommender</p>
           <h1 className="font-headline text-5xl font-black leading-[1.05] tracking-tight text-ca-on-surface sm:text-6xl lg:text-7xl">
