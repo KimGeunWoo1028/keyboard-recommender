@@ -96,4 +96,12 @@ describe("AuthPageClient error isolation", () => {
     });
     expect(screen.queryByTestId("e2e-auth-error")).not.toBeInTheDocument();
   });
+
+  it("opens signup tab when ?mode=signup is present", async () => {
+    window.history.pushState({}, "", "/auth?mode=signup");
+    render(<AuthPageClient />);
+    await waitFor(() => {
+      expect(screen.getByRole("tab", { name: "회원가입" })).toHaveAttribute("aria-selected", "true");
+    });
+  });
 });

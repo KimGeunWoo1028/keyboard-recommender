@@ -395,6 +395,66 @@ def test_duplicate_save_returns_existing_item_and_single_list_row(sqlite_eval_se
         app.dependency_overrides.clear()
 
 
+def test_duplicate_save_merges_result_snapshot_when_missing(sqlite_eval_session: Session) -> None:
+    app = create_app()
+    owner = SimpleNamespace(id=uuid.uuid4())
+
+    def _settings() -> Settings:
+        return Settings(
+            database_url="postgresql+psycopg://keyboard:keyboard@localhost:5432/keyboard_recommender",
+            enable_evaluation_persistence=True,
+        )
+
+    def _db() -> Generator[Session, None, None]:
+        yield sqlite_eval_session
+
+    app.dependency_overrides[get_settings_dep] = _settings
+    app.dependency_overrides[get_db_for_evaluation] = _db
+    app.dependency_overrides[get_current_user_optional] = lambda: owner
+    try:
+        client = TestClient(app)
+        first = client.post(
+            "/api/v1/recommendations/saved",
+            json={
+                "request_id": "req-snap-1",
+                "build_id": "build-snap",
+                "title": "Snap build",
+                "summary": "No snapshot yet",
+                "components": {"switches": "A"},
+                "metadata": {"origin": "legacy"},
+            },
+        )
+        assert first.status_code == 200
+        assert "resultSnapshot" not in (first.json()["item"].get("metadata") or {})
+
+        snap = {
+            "version": 2,
+            "answers": {"sound_profile": "muted"},
+            "traits": {"soundMuted": 1},
+            "completedAtIso": "2026-07-28T00:00:00.000Z",
+            "build": {"id": "build-snap", "title": "Snap build"},
+        }
+        duplicate = client.post(
+            "/api/v1/recommendations/saved",
+            json={
+                "request_id": "req-snap-2",
+                "build_id": "build-snap",
+                "title": "Snap build",
+                "summary": "With snapshot",
+                "components": {"switches": "A"},
+                "metadata": {"resultSnapshot": snap},
+            },
+        )
+        assert duplicate.status_code == 200
+        assert duplicate.json()["reason"] == "already_saved"
+        assert duplicate.json()["item"]["metadata"]["resultSnapshot"]["version"] == 2
+
+        listed = client.get("/api/v1/recommendations/saved")
+        assert listed.json()["items"][0]["metadata"]["resultSnapshot"]["version"] == 2
+    finally:
+        app.dependency_overrides.clear()
+
+
 def test_list_saved_recommendations_finds_owner_past_recent_noise(
     sqlite_eval_session: Session,
 ) -> None:

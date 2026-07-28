@@ -196,6 +196,27 @@ def post_save_recommendation(
             continue
         existing_item = _saved_item_from_eval_row(row)
         if existing_item is not None:
+            incoming_snap = body.metadata.get("resultSnapshot") if isinstance(body.metadata, dict) else None
+            existing_meta = (
+                row.payload.get("metadata")
+                if isinstance(row.payload, dict) and isinstance(row.payload.get("metadata"), dict)
+                else {}
+            )
+            if incoming_snap is not None and "resultSnapshot" not in existing_meta:
+                payload = row.payload if isinstance(row.payload, dict) else {}
+                merged_meta = {
+                    **(payload.get("metadata") if isinstance(payload.get("metadata"), dict) else {}),
+                    **dict(body.metadata),
+                    "buildId": body.build_id,
+                    "title": body.title,
+                    "summary": body.summary,
+                    "components": dict(body.components),
+                }
+                row.payload = {**payload, "metadata": merged_meta}
+                db_session.commit()
+                refreshed = _saved_item_from_eval_row(row)
+                if refreshed is not None:
+                    return SaveRecommendationResponse(saved=True, reason="already_saved", item=refreshed)
             return SaveRecommendationResponse(saved=True, reason="already_saved", item=existing_item)
     payload = {
         "event_type": "interaction.bookmark",

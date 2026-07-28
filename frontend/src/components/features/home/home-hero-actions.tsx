@@ -15,6 +15,7 @@ export function HomeHeroActions() {
       <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
         <Link
           href="/recommend"
+          data-testid="e2e-home-start-survey"
           className={cn(
             buttonClassName({ size: "lg" }),
             "w-full justify-center font-bold shadow-lg shadow-primary/25 sm:w-auto",

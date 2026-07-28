@@ -23,6 +23,14 @@ describe("page metadata helpers", () => {
     });
     expect(meta.alternates).toEqual({ canonical: "/catalog" });
     expect(meta.openGraph?.url).toBe("/catalog");
+    expect(meta.openGraph?.images).toEqual([
+      {
+        url: "/og/default.png",
+        width: 1200,
+        height: 630,
+        alt: "Keyboard Recommender",
+      },
+    ]);
     expect(meta.robots).toBeUndefined();
   });
 

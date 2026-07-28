@@ -130,7 +130,7 @@ export function SiteHeader() {
               "hidden font-semibold lg:inline-flex",
             )}
           >
-            설문 시작
+            추천 설문 시작
           </Link>
           <button
             type="button"

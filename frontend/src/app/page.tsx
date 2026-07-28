@@ -63,7 +63,7 @@ export default function HomePage() {
               href="/recommend"
               className={cn(buttonClassName({ size: "default" }), "mt-8 inline-flex font-bold")}
             >
-              지금 설문 시작하기
+              추천 설문 시작
               <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
           </div>
@@ -114,7 +114,7 @@ export default function HomePage() {
               "mt-8 bg-white font-bold text-primary hover:bg-indigo-50 hover:opacity-100",
             )}
           >
-            지금 설문 시작하기
+            추천 설문 시작
             <ArrowRight className="h-5 w-5" aria-hidden />
           </Link>
         </div>

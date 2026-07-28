@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 
 import type { SavedRecommendationItem } from "@/lib/api/saved-recommendations";
+import { emptyTraits } from "@/types/traits";
 
 import { MyPageSavedBuilds } from "./mypage-saved-builds";
 
@@ -63,5 +64,41 @@ describe("MyPageSavedBuilds smoke", () => {
     expect(screen.getByText("저장한 결과를 삭제할까요?")).toBeInTheDocument();
     await user.click(screen.getByRole("button", { name: "삭제하기" }));
     expect(onRemove).toHaveBeenCalledTimes(1);
+  });
+
+  it("enables restore when server metadata includes resultSnapshot", async () => {
+    const user = userEvent.setup();
+    const submission = {
+      version: 2 as const,
+      answers: {
+        sound_profile: "muted" as const,
+        typing_pressure: "medium" as const,
+        switch_feel: "linear" as const,
+        bottom_out: "soft" as const,
+        volume: "quiet" as const,
+      },
+      traits: emptyTraits(),
+      completedAtIso: "2026-07-28T00:00:00.000Z",
+      build: {
+        id: "build-1",
+        title: "Quiet build",
+        tagline: "soft",
+        switches: "Oil King — lubed",
+        plate: "FR4",
+        foam: "Poron",
+        layout: "65%",
+        highlights: [],
+      },
+      source: "api" as const,
+    };
+    render(
+      <MyPageSavedBuilds
+        items={[saved({ metadata: { resultSnapshot: submission } })]}
+        removingKeys={new Set()}
+        onRemove={vi.fn()}
+      />,
+    );
+    await user.click(screen.getByRole("option"));
+    expect(screen.getByRole("button", { name: "추천 결과 다시 보기" })).toBeEnabled();
   });
 });
