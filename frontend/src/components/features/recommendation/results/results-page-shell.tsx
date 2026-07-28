@@ -1,10 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import type { ReactNode } from "react";
 
-import { buttonClassName } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import type { RecommendedBuild } from "@/types/recommendation";
 import type { SurveySubmission } from "@/types/survey";
 
@@ -94,20 +91,8 @@ export function ResultsPageShell({
 
       <div className="bg-white dark:bg-ca-surface">
         <div className="mx-auto max-w-ca px-ca-margin-mobile pt-6 sm:px-ca-margin sm:pt-8">
-          <div className="space-y-3 border-b border-border pb-4">
+          <div className="border-b border-border pb-4">
             <ResultTabBar activeTab={activeTab} onTabChange={onTabChange} />
-            <div className="hidden sm:flex sm:justify-end">
-              <Link
-                href="/recommend"
-                className={cn(
-                  buttonClassName({ variant: "outline", size: "default" }),
-                  "min-h-10 border-ca-outline-variant/60 text-ca-on-surface",
-                )}
-                data-testid="e2e-results-retake-link"
-              >
-                다시 추천받기
-              </Link>
-            </div>
           </div>
         </div>
         <div className="mx-auto max-w-ca px-ca-margin-mobile py-8 sm:px-ca-margin sm:py-10">{children}</div>
