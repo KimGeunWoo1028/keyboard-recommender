@@ -210,25 +210,45 @@ export function SignupWizardClient() {
             />
           ) : null}
 
-          <div className="flex items-center justify-between gap-3 text-sm">
-            <button
-              type="button"
-              className="font-medium text-ca-on-surface-variant underline-offset-2 hover:text-ca-on-surface hover:underline"
-              onClick={() => {
-                const prev = previousStep(step);
-                if (prev === "login") {
-                  router.push(loginHref);
-                  return;
-                }
-                goToStep(prev);
-              }}
-            >
-              {step === "email" ? "로그인으로" : "이전"}
-            </button>
-            <Link href={loginHref} prefetch={false} className="font-medium text-primary underline-offset-2 hover:underline">
-              이미 계정이 있나요?
-            </Link>
-          </div>
+          {step === "email" ? (
+            <p className="text-center text-sm text-ca-on-surface-variant">
+              이미 계정이 있나요?{" "}
+              <Link
+                href={loginHref}
+                prefetch={false}
+                className="font-semibold text-primary underline-offset-2 hover:underline"
+              >
+                로그인
+              </Link>
+            </p>
+          ) : (
+            <div className="flex items-center justify-between gap-3 text-sm">
+              <button
+                type="button"
+                className="font-medium text-ca-on-surface-variant underline-offset-2 hover:text-ca-on-surface hover:underline"
+                onClick={() => {
+                  const prev = previousStep(step);
+                  if (prev === "login") {
+                    router.push(loginHref);
+                    return;
+                  }
+                  goToStep(prev);
+                }}
+              >
+                이전
+              </button>
+              <p className="text-right text-ca-on-surface-variant">
+                이미 계정이 있나요?{" "}
+                <Link
+                  href={loginHref}
+                  prefetch={false}
+                  className="font-semibold text-primary underline-offset-2 hover:underline"
+                >
+                  로그인
+                </Link>
+              </p>
+            </div>
+          )}
         </div>
       </section>
     </div>

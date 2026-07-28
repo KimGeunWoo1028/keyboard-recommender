@@ -105,6 +105,9 @@ export function SignupStepNickname({ onSubmitSignup, busy = false, formError = n
           </Button>
         </div>
         <FieldValidationError id={displayNameField.errorId} message={displayNameField.error} />
+        <p className="break-keep text-xs text-ca-on-surface-variant">
+          2자 이상, 한글 또는 영문으로 시작해야 합니다.
+        </p>
         {checkMessage ? (
           <p className="text-sm text-ca-on-surface-variant">
             {checkMessage}
