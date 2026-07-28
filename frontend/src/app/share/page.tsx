@@ -9,12 +9,12 @@ import { decodeShareTaste } from "@/lib/share-taste";
 import { publicPageMetadata } from "@/lib/seo/page-metadata";
 
 type Props = {
-  searchParams?: Promise<{ t?: string }> | { t?: string };
+  searchParams: Promise<{ t?: string }>;
 };
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
-  const sp = searchParams instanceof Promise ? await searchParams : searchParams;
-  const taste = sp?.t ? decodeShareTaste(sp.t) : null;
+  const sp = await searchParams;
+  const taste = sp.t ? decodeShareTaste(sp.t) : null;
   const title = taste?.title ? `취향 카드 · ${taste.title}` : "취향 카드";
   return publicPageMetadata({
     path: "/share",
@@ -24,8 +24,8 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
 }
 
 export default async function SharePage({ searchParams }: Props) {
-  const sp = searchParams instanceof Promise ? await searchParams : searchParams;
-  const taste = sp?.t ? decodeShareTaste(sp.t) : null;
+  const sp = await searchParams;
+  const taste = sp.t ? decodeShareTaste(sp.t) : null;
 
   return (
     <PageShell className="max-w-3xl space-y-8 px-ca-margin-mobile pb-16 pt-8 sm:px-ca-margin sm:pb-20">
