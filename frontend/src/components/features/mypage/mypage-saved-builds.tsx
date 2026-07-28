@@ -195,12 +195,12 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
                     ) : null}
                   </div>
 
-                  <div className="flex shrink-0 flex-col gap-2 sm:items-end">
+                  <div className="grid shrink-0 gap-2">
                     <Button
                       type="button"
                       variant="outline"
                       size="sm"
-                      className="border-border font-semibold text-primary hover:border-primary hover:bg-primary/5"
+                      className="justify-center border-border font-semibold text-primary hover:border-primary hover:bg-primary/5"
                       disabled={!canRestore}
                       title={
                         canRestore
@@ -224,7 +224,7 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
                       type="button"
                       variant="ghost"
                       size="sm"
-                      className="gap-1.5 text-destructive hover:bg-destructive/10 hover:text-destructive"
+                      className="justify-center gap-1.5 text-destructive hover:bg-destructive/10 hover:text-destructive"
                       disabled={isRemoving}
                       onClick={() => setPendingDelete(item)}
                     >

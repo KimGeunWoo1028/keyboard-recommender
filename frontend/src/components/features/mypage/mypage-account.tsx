@@ -73,7 +73,8 @@ function PasswordVisibilityToggle({
       type="button"
       variant="ghost"
       size="icon"
-      className="absolute right-1 top-1/2 h-8 w-8 -translate-y-1/2 text-ca-on-surface-variant hover:text-ca-on-surface"
+      className="absolute right-1 top-1/2 h-8 w-8 -translate-y-1/2 text-ca-on-surface-variant hover:bg-transparent hover:text-ca-on-surface"
+      aria-label={visible ? "비밀번호 숨기기" : "비밀번호 보기"}
       onClick={onToggle}
     >
       {visible ? (
@@ -90,6 +91,48 @@ function PasswordVisibilityToggle({
         </svg>
       )}
     </Button>
+  );
+}
+
+/** Label + password input with eye toggle anchored to the input only (not the label). */
+function PasswordField({
+  id,
+  label,
+  value,
+  onChange,
+  visible,
+  onToggleVisible,
+  placeholder,
+  disabled,
+  autoComplete,
+}: {
+  id: string;
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  visible: boolean;
+  onToggleVisible: () => void;
+  placeholder?: string;
+  disabled?: boolean;
+  autoComplete?: string;
+}) {
+  return (
+    <div className="space-y-1.5">
+      <Label htmlFor={id}>{label}</Label>
+      <div className="relative">
+        <Input
+          id={id}
+          type={visible ? "text" : "password"}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder={placeholder}
+          className="pr-10"
+          disabled={disabled}
+          autoComplete={autoComplete}
+        />
+        <PasswordVisibilityToggle visible={visible} onToggle={onToggleVisible} />
+      </div>
+    </div>
   );
 }
 
@@ -233,7 +276,7 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
             <Label htmlFor="mypage-nickname-display" className="text-xs font-semibold uppercase tracking-wider text-ca-on-surface-variant">
               닉네임
             </Label>
-            <div className="flex gap-2">
+            <div className="flex items-center gap-2">
               <Input
                 id="mypage-nickname-display"
                 value={editNickname ? displayName : user.display_name?.trim() || ""}
@@ -249,8 +292,8 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
               <Button
                 type="button"
                 variant="outline"
-                size="sm"
-                className="shrink-0"
+                size="icon"
+                className="h-10 w-10 shrink-0"
                 aria-label={editNickname ? "닉네임 저장" : "닉네임 수정"}
                 disabled={updatingName}
                 onClick={() => {
@@ -374,7 +417,7 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
             비밀번호 변경 이메일 보내기
           </Button>
         ) : (
-          <div className="space-y-2 rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container/30 p-3">
+          <div className="space-y-3 rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container/30 p-3">
             <div className="flex items-center justify-between gap-2">
               <p className="text-sm font-medium text-ca-on-surface">비밀번호 변경</p>
               <Button
@@ -393,141 +436,124 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
               가입 이메일(<span className="font-medium text-ca-on-surface">{user.email}</span>)로 인증번호를
               받은 뒤, 비밀번호를 변경할 수 있습니다.
             </p>
-            <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                className="w-full shrink-0 sm:w-auto"
-                loading={sendingPasswordCode}
-                disabled={passwordVerified || securityActionBusy !== "none"}
-                onClick={() => {
-                  setPasswordMessage(null);
-                  setPasswordVerified(false);
-                  setPasswordVerificationToken(null);
-                  setPasswordCode("");
-                  setSendingPasswordCode(true);
-                  void sendPasswordChangeCode()
-                    .then((res) => {
-                      setPasswordCodeSent(true);
-                      if (res.delivery === "smtp" || res.delivery === "resend") {
-                        setPasswordMessage("인증번호를 이메일로 보냈습니다.");
-                      } else {
-                        setPasswordMessage("인증번호 요청이 접수되었습니다. 메일 도착까지 잠시 기다려 주세요.");
-                      }
-                    })
-                    .catch((e) => {
-                      setPasswordMessage(e instanceof Error ? e.message : "인증번호 발송에 실패했습니다.");
-                    })
-                    .finally(() => setSendingPasswordCode(false));
-                }}
-              >
-                {passwordCodeSent ? "인증번호 재발송" : "인증번호 발송"}
-              </Button>
-              <div className="flex min-w-0 flex-1 flex-col gap-1.5">
-                <Label htmlFor="mypage-password-code">비밀번호 변경 인증번호</Label>
-                <div className="flex min-w-0 items-center gap-2">
-                  <Input
-                    id="mypage-password-code"
-                    type="text"
-                    inputMode="numeric"
-                    maxLength={6}
-                    value={passwordCode}
-                    onChange={(e) => {
-                      setPasswordCode(e.target.value.replace(/\D/g, "").slice(0, 6));
-                      if (passwordVerified) {
-                        setPasswordVerified(false);
-                        setPasswordVerificationToken(null);
-                      }
-                    }}
-                    placeholder="6자리 숫자"
-                    className="min-w-0 flex-1"
-                    disabled={!passwordCodeSent || passwordVerified}
-                    autoComplete="one-time-code"
-                  />
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    className="min-w-[5.5rem] shrink-0"
-                    loading={verifyingPasswordCode}
-                    disabled={!passwordCodeSent || passwordVerified || securityActionBusy !== "none"}
-                    onClick={() => {
-                      setPasswordMessage(null);
-                      if (!/^\d{6}$/.test(passwordCode)) {
-                        setPasswordMessage("인증번호 6자리를 입력해 주세요.");
-                        return;
-                      }
-                      setVerifyingPasswordCode(true);
-                      void verifyPasswordChangeCode(passwordCode)
-                        .then((res) => {
-                          setPasswordVerified(true);
-                          setPasswordVerificationToken(res.verification_token);
-                          setPasswordMessage("이메일 인증이 완료되었습니다. 새 비밀번호를 입력해 주세요.");
-                        })
-                        .catch((e) => {
-                          if (e instanceof ApiError && e.status === 400) {
-                            setPasswordMessage("인증번호가 올바르지 않거나 만료되었습니다.");
-                          } else {
-                            setPasswordMessage(e instanceof Error ? e.message : "인증 확인에 실패했습니다.");
-                          }
-                        })
-                        .finally(() => setVerifyingPasswordCode(false));
-                    }}
-                  >
-                    {passwordVerified ? "인증 완료" : "인증 확인"}
-                  </Button>
-                </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="mypage-password-code">비밀번호 변경 인증번호</Label>
+              <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-center">
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  className="h-10 w-full shrink-0 sm:w-auto"
+                  loading={sendingPasswordCode}
+                  disabled={passwordVerified || securityActionBusy !== "none"}
+                  onClick={() => {
+                    setPasswordMessage(null);
+                    setPasswordVerified(false);
+                    setPasswordVerificationToken(null);
+                    setPasswordCode("");
+                    setSendingPasswordCode(true);
+                    void sendPasswordChangeCode()
+                      .then((res) => {
+                        setPasswordCodeSent(true);
+                        if (res.delivery === "smtp" || res.delivery === "resend") {
+                          setPasswordMessage("인증번호를 이메일로 보냈습니다.");
+                        } else {
+                          setPasswordMessage("인증번호 요청이 접수되었습니다. 메일 도착까지 잠시 기다려 주세요.");
+                        }
+                      })
+                      .catch((e) => {
+                        setPasswordMessage(e instanceof Error ? e.message : "인증번호 발송에 실패했습니다.");
+                      })
+                      .finally(() => setSendingPasswordCode(false));
+                  }}
+                >
+                  {passwordCodeSent ? "인증번호 재발송" : "인증번호 발송"}
+                </Button>
+                <Input
+                  id="mypage-password-code"
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={6}
+                  value={passwordCode}
+                  onChange={(e) => {
+                    setPasswordCode(e.target.value.replace(/\D/g, "").slice(0, 6));
+                    if (passwordVerified) {
+                      setPasswordVerified(false);
+                      setPasswordVerificationToken(null);
+                    }
+                  }}
+                  placeholder="6자리 숫자"
+                  className="min-w-0 flex-1"
+                  disabled={!passwordCodeSent || passwordVerified}
+                  autoComplete="one-time-code"
+                />
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  className="h-10 min-w-[5.5rem] shrink-0"
+                  loading={verifyingPasswordCode}
+                  disabled={!passwordCodeSent || passwordVerified || securityActionBusy !== "none"}
+                  onClick={() => {
+                    setPasswordMessage(null);
+                    if (!/^\d{6}$/.test(passwordCode)) {
+                      setPasswordMessage("인증번호 6자리를 입력해 주세요.");
+                      return;
+                    }
+                    setVerifyingPasswordCode(true);
+                    void verifyPasswordChangeCode(passwordCode)
+                      .then((res) => {
+                        setPasswordVerified(true);
+                        setPasswordVerificationToken(res.verification_token);
+                        setPasswordMessage("이메일 인증이 완료되었습니다. 새 비밀번호를 입력해 주세요.");
+                      })
+                      .catch((e) => {
+                        if (e instanceof ApiError && e.status === 400) {
+                          setPasswordMessage("인증번호가 올바르지 않거나 만료되었습니다.");
+                        } else {
+                          setPasswordMessage(e instanceof Error ? e.message : "인증 확인에 실패했습니다.");
+                        }
+                      })
+                      .finally(() => setVerifyingPasswordCode(false));
+                  }}
+                >
+                  {passwordVerified ? "인증 완료" : "인증 확인"}
+                </Button>
               </div>
             </div>
-            <div className="relative space-y-1.5">
-              <Label htmlFor="mypage-current-password">현재 비밀번호</Label>
-              <Input
-                id="mypage-current-password"
-                type={showCurrentPassword ? "text" : "password"}
-                value={currentPassword}
-                onChange={(e) => setCurrentPassword(e.target.value)}
-                placeholder="현재 비밀번호"
-                className="pr-10"
-                disabled={!passwordVerified}
-                autoComplete="current-password"
-              />
-              <PasswordVisibilityToggle
-                visible={showCurrentPassword}
-                onToggle={() => setShowCurrentPassword((v) => !v)}
-              />
-            </div>
-            <div className="relative space-y-1.5">
-              <Label htmlFor="mypage-new-password">새 비밀번호</Label>
-              <Input
-                id="mypage-new-password"
-                type={showNewPassword ? "text" : "password"}
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-                placeholder="새 비밀번호"
-                className="pr-10"
-                disabled={!passwordVerified}
-                autoComplete="new-password"
-              />
-              <PasswordVisibilityToggle visible={showNewPassword} onToggle={() => setShowNewPassword((v) => !v)} />
-            </div>
-            <div className="relative space-y-1.5">
-              <Label htmlFor="mypage-confirm-password">새 비밀번호 확인</Label>
-              <Input
-                id="mypage-confirm-password"
-                type={showConfirmPassword ? "text" : "password"}
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="새 비밀번호 다시 입력"
-                className="pr-10"
-                disabled={!passwordVerified}
-                autoComplete="new-password"
-              />
-              <PasswordVisibilityToggle
-                visible={showConfirmPassword}
-                onToggle={() => setShowConfirmPassword((v) => !v)}
-              />
-            </div>
+            <PasswordField
+              id="mypage-current-password"
+              label="현재 비밀번호"
+              value={currentPassword}
+              onChange={setCurrentPassword}
+              visible={showCurrentPassword}
+              onToggleVisible={() => setShowCurrentPassword((v) => !v)}
+              placeholder="현재 비밀번호"
+              disabled={!passwordVerified}
+              autoComplete="current-password"
+            />
+            <PasswordField
+              id="mypage-new-password"
+              label="새 비밀번호"
+              value={newPassword}
+              onChange={setNewPassword}
+              visible={showNewPassword}
+              onToggleVisible={() => setShowNewPassword((v) => !v)}
+              placeholder="새 비밀번호"
+              disabled={!passwordVerified}
+              autoComplete="new-password"
+            />
+            <PasswordField
+              id="mypage-confirm-password"
+              label="새 비밀번호 확인"
+              value={confirmPassword}
+              onChange={setConfirmPassword}
+              visible={showConfirmPassword}
+              onToggleVisible={() => setShowConfirmPassword((v) => !v)}
+              placeholder="새 비밀번호 다시 입력"
+              disabled={!passwordVerified}
+              autoComplete="new-password"
+            />
             <div className="space-y-1 text-xs">
               <p className="text-ca-on-surface-variant">
                 <span className={isPasswordPolicyValid(newPassword) ? "text-green-500" : "text-red-500"}>
@@ -649,116 +675,108 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
         </div>
 
         {openDeletePanel ? (
-          <div className="mt-4 space-y-2 rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container/30 p-3">
+          <div className="mt-4 space-y-3 rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container/30 p-3">
             <p className="text-sm text-ca-on-surface-variant">{DELETE_WARNING}</p>
             <p className="text-xs text-ca-on-surface-variant">
               가입 이메일(<span className="font-medium text-ca-on-surface">{user.email}</span>)로 인증번호를
               받은 뒤, 비밀번호와 함께 탈퇴를 완료합니다.
             </p>
-            <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                className="w-full shrink-0 sm:w-auto"
-                loading={sendingDeleteCode}
-                disabled={deleteVerified || securityActionBusy !== "none"}
-                onClick={() => {
-                  setDeleteMessage(null);
-                  setDeleteVerified(false);
-                  setDeleteVerificationToken(null);
-                  setDeleteCode("");
-                  setSendingDeleteCode(true);
-                  void sendAccountDeletionCode()
-                    .then((res) => {
-                      setDeleteCodeSent(true);
-                      if (res.delivery === "smtp" || res.delivery === "resend") {
-                        setDeleteMessage("인증번호를 이메일로 보냈습니다.");
-                      } else {
-                        setDeleteMessage("인증번호 요청이 접수되었습니다. 메일 도착까지 잠시 기다려 주세요.");
-                      }
-                    })
-                    .catch((e) => {
-                      setDeleteMessage(e instanceof Error ? e.message : "인증번호 발송에 실패했습니다.");
-                    })
-                    .finally(() => setSendingDeleteCode(false));
-                }}
-              >
-                {deleteCodeSent ? "인증번호 재발송" : "인증번호 발송"}
-              </Button>
-              <div className="flex min-w-0 flex-1 flex-col gap-1.5">
-                <Label htmlFor="mypage-delete-code">탈퇴 인증번호</Label>
-                <div className="flex min-w-0 items-center gap-2">
-                  <Input
-                    id="mypage-delete-code"
-                    type="text"
-                    inputMode="numeric"
-                    maxLength={6}
-                    value={deleteCode}
-                    onChange={(e) => {
-                      setDeleteCode(e.target.value.replace(/\D/g, "").slice(0, 6));
-                      if (deleteVerified) {
-                        setDeleteVerified(false);
-                        setDeleteVerificationToken(null);
-                      }
-                    }}
-                    placeholder="6자리 숫자"
-                    className="min-w-0 flex-1"
-                    disabled={!deleteCodeSent || deleteVerified}
-                    autoComplete="one-time-code"
-                  />
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    className="min-w-[5.5rem] shrink-0"
-                    loading={verifyingDeleteCode}
-                    disabled={!deleteCodeSent || deleteVerified || securityActionBusy !== "none"}
-                    onClick={() => {
-                      setDeleteMessage(null);
-                      if (!/^\d{6}$/.test(deleteCode)) {
-                        setDeleteMessage("인증번호 6자리를 입력해 주세요.");
-                        return;
-                      }
-                      setVerifyingDeleteCode(true);
-                      void verifyAccountDeletionCode(deleteCode)
-                        .then((res) => {
-                          setDeleteVerified(true);
-                          setDeleteVerificationToken(res.verification_token);
-                          setDeleteMessage("이메일 인증이 완료되었습니다. 비밀번호를 입력해 탈퇴를 완료하세요.");
-                        })
-                        .catch((e) => {
-                          if (e instanceof ApiError && e.status === 400) {
-                            setDeleteMessage("인증번호가 올바르지 않거나 만료되었습니다.");
-                          } else {
-                            setDeleteMessage(e instanceof Error ? e.message : "인증 확인에 실패했습니다.");
-                          }
-                        })
-                        .finally(() => setVerifyingDeleteCode(false));
-                    }}
-                  >
-                    {deleteVerified ? "인증 완료" : "인증 확인"}
-                  </Button>
-                </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="mypage-delete-code">탈퇴 인증번호</Label>
+              <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-center">
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  className="h-10 w-full shrink-0 sm:w-auto"
+                  loading={sendingDeleteCode}
+                  disabled={deleteVerified || securityActionBusy !== "none"}
+                  onClick={() => {
+                    setDeleteMessage(null);
+                    setDeleteVerified(false);
+                    setDeleteVerificationToken(null);
+                    setDeleteCode("");
+                    setSendingDeleteCode(true);
+                    void sendAccountDeletionCode()
+                      .then((res) => {
+                        setDeleteCodeSent(true);
+                        if (res.delivery === "smtp" || res.delivery === "resend") {
+                          setDeleteMessage("인증번호를 이메일로 보냈습니다.");
+                        } else {
+                          setDeleteMessage("인증번호 요청이 접수되었습니다. 메일 도착까지 잠시 기다려 주세요.");
+                        }
+                      })
+                      .catch((e) => {
+                        setDeleteMessage(e instanceof Error ? e.message : "인증번호 발송에 실패했습니다.");
+                      })
+                      .finally(() => setSendingDeleteCode(false));
+                  }}
+                >
+                  {deleteCodeSent ? "인증번호 재발송" : "인증번호 발송"}
+                </Button>
+                <Input
+                  id="mypage-delete-code"
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={6}
+                  value={deleteCode}
+                  onChange={(e) => {
+                    setDeleteCode(e.target.value.replace(/\D/g, "").slice(0, 6));
+                    if (deleteVerified) {
+                      setDeleteVerified(false);
+                      setDeleteVerificationToken(null);
+                    }
+                  }}
+                  placeholder="6자리 숫자"
+                  className="min-w-0 flex-1"
+                  disabled={!deleteCodeSent || deleteVerified}
+                  autoComplete="one-time-code"
+                />
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  className="h-10 min-w-[5.5rem] shrink-0"
+                  loading={verifyingDeleteCode}
+                  disabled={!deleteCodeSent || deleteVerified || securityActionBusy !== "none"}
+                  onClick={() => {
+                    setDeleteMessage(null);
+                    if (!/^\d{6}$/.test(deleteCode)) {
+                      setDeleteMessage("인증번호 6자리를 입력해 주세요.");
+                      return;
+                    }
+                    setVerifyingDeleteCode(true);
+                    void verifyAccountDeletionCode(deleteCode)
+                      .then((res) => {
+                        setDeleteVerified(true);
+                        setDeleteVerificationToken(res.verification_token);
+                        setDeleteMessage("이메일 인증이 완료되었습니다. 비밀번호를 입력해 탈퇴를 완료하세요.");
+                      })
+                      .catch((e) => {
+                        if (e instanceof ApiError && e.status === 400) {
+                          setDeleteMessage("인증번호가 올바르지 않거나 만료되었습니다.");
+                        } else {
+                          setDeleteMessage(e instanceof Error ? e.message : "인증 확인에 실패했습니다.");
+                        }
+                      })
+                      .finally(() => setVerifyingDeleteCode(false));
+                  }}
+                >
+                  {deleteVerified ? "인증 완료" : "인증 확인"}
+                </Button>
               </div>
             </div>
-            <div className="relative space-y-1.5">
-              <Label htmlFor="mypage-delete-password">현재 비밀번호</Label>
-              <Input
-                id="mypage-delete-password"
-                type={showDeletePassword ? "text" : "password"}
-                value={deletePassword}
-                onChange={(e) => setDeletePassword(e.target.value)}
-                placeholder="현재 비밀번호"
-                className="pr-10"
-                autoComplete="current-password"
-                disabled={!deleteVerified}
-              />
-              <PasswordVisibilityToggle
-                visible={showDeletePassword}
-                onToggle={() => setShowDeletePassword((v) => !v)}
-              />
-            </div>
+            <PasswordField
+              id="mypage-delete-password"
+              label="현재 비밀번호"
+              value={deletePassword}
+              onChange={setDeletePassword}
+              visible={showDeletePassword}
+              onToggleVisible={() => setShowDeletePassword((v) => !v)}
+              placeholder="현재 비밀번호"
+              autoComplete="current-password"
+              disabled={!deleteVerified}
+            />
             <div className="space-y-1.5">
               <Label htmlFor="mypage-delete-confirm">탈퇴 확인 문구</Label>
               <Input
