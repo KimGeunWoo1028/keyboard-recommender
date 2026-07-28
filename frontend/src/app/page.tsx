@@ -26,7 +26,7 @@ export const metadata: Metadata = publicPageMetadata({
 export default function HomePage() {
   return (
     <>
-      <PageShell className="max-w-ca px-ca-margin-mobile pb-0 sm:px-ca-margin">
+      <PageShell className="max-w-ca overflow-visible px-ca-margin-mobile pb-0 sm:px-ca-margin">
         <HomeLandingObserve />
         <HomeHero />
       </PageShell>
