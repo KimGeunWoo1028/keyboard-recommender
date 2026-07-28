@@ -69,7 +69,9 @@ test.describe("Critical product flows", () => {
 
     await page.getByRole("tab", { name: "저장한 결과" }).click();
     await expect(page).toHaveURL(/section=saved/);
-    await expect(page.getByRole("heading", { name: "저장한 결과" })).toBeVisible();
+    await expect(
+      page.getByRole("list", { name: "저장한 결과 목록" }).or(page.getByText(/아직 저장한 추천이 없어요/)),
+    ).toBeVisible();
 
     await page.getByRole("tab", { name: "계정 설정" }).click();
     await expect(page).toHaveURL(/section=account/);
@@ -80,6 +82,8 @@ test.describe("Critical product flows", () => {
     await page.goto("/mypage?section=activity");
     await expect(page.getByTestId("e2e-mypage-hub")).toBeVisible({ timeout: 30_000 });
     await expect(page).toHaveURL(/section=saved/);
-    await expect(page.getByRole("heading", { name: "저장한 결과" })).toBeVisible();
+    await expect(
+      page.getByRole("list", { name: "저장한 결과 목록" }).or(page.getByText(/아직 저장한 추천이 없어요/)),
+    ).toBeVisible();
   });
 });
