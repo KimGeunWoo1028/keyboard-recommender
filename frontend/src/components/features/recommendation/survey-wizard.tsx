@@ -681,18 +681,25 @@ export function SurveyWizard() {
       ) : null}
 
       <div className="mt-auto shrink-0 space-y-2 border-t border-border pb-1 pt-3">
-        <div className="flex items-center justify-between gap-2 sm:gap-3">
-          <Button
-            type="button"
-            variant="ghost"
-            size="default"
-            onClick={goBack}
-            disabled={stepIndex === 0 || submitting}
-            className="gap-1.5 px-2 text-ca-on-surface-variant hover:text-primary sm:px-3"
-          >
-            <NavArrowBack className="h-4 w-4" />
-            이전
-          </Button>
+        <div
+          className={cn(
+            "flex items-center gap-2 sm:gap-3",
+            stepIndex > 0 ? "justify-between" : "justify-end",
+          )}
+        >
+          {stepIndex > 0 ? (
+            <Button
+              type="button"
+              variant="ghost"
+              size="default"
+              onClick={goBack}
+              disabled={submitting}
+              className="gap-1.5 px-2 text-ca-on-surface-variant hover:text-primary sm:px-3"
+            >
+              <NavArrowBack className="h-4 w-4" />
+              이전
+            </Button>
+          ) : null}
 
           {!isLastStep ? (
             <Button
@@ -725,21 +732,29 @@ export function SurveyWizard() {
           )}
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-1.5">
           <button
             type="button"
-            className="text-sm text-ca-on-surface-variant underline-offset-2 hover:text-ca-on-surface hover:underline"
+            className="inline-flex items-center gap-1 text-sm text-ca-on-surface-variant underline-offset-2 hover:text-ca-on-surface hover:underline"
             aria-expanded={showResetActions}
             onClick={() => setShowResetActions((open) => !open)}
           >
-            설정 다시 고르기
+            다시 고르기
+            <span
+              aria-hidden
+              className={cn(
+                "inline-block text-[0.65rem] leading-none transition-transform",
+                showResetActions && "rotate-180",
+              )}
+            >
+              ▾
+            </span>
           </button>
           {showResetActions ? (
-            <div className="flex flex-wrap gap-2">
-              <Button
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 pl-0.5">
+              <button
                 type="button"
-                variant="ghost"
-                size="sm"
+                className="text-sm text-ca-on-surface-variant underline-offset-2 hover:text-ca-on-surface hover:underline disabled:opacity-50"
                 onClick={() => {
                   setShowResetActions(false);
                   setPhase("entry");
@@ -747,10 +762,15 @@ export function SurveyWizard() {
                 disabled={submitting}
               >
                 스타일 선택으로
-              </Button>
-              <Button type="button" variant="ghost" size="sm" onClick={confirmReset} disabled={submitting}>
+              </button>
+              <button
+                type="button"
+                className="text-sm text-ca-on-surface-variant underline-offset-2 hover:text-ca-on-surface hover:underline disabled:opacity-50"
+                onClick={confirmReset}
+                disabled={submitting}
+              >
                 처음부터 다시
-              </Button>
+              </button>
             </div>
           ) : null}
         </div>
