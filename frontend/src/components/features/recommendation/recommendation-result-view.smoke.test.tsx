@@ -89,16 +89,16 @@ function minimalSubmission(): SurveySubmission {
 }
 
 describe("RecommendationResultView", () => {
-  it("renders minimal overview: parts grid, CTA band, footer links", () => {
+  it("renders minimal overview: parts grid, contextual CTA band, retake in shell", () => {
     const sub = minimalSubmission();
     const build = minimalBuild();
     render(<RecommendationResultView submission={sub} build={build} />);
 
     expect(screen.getByTestId("e2e-server-ranked")).toBeInTheDocument();
     expect(screen.getByTestId("e2e-overview-cta-band")).toBeInTheDocument();
-    expect(screen.getByTestId("e2e-overview-footer")).toBeInTheDocument();
     expect(screen.getByTestId("e2e-save-login-link")).toBeInTheDocument();
     expect(screen.getByTestId("e2e-results-retake-link")).toBeInTheDocument();
+    expect(screen.queryByTestId("e2e-overview-footer")).not.toBeInTheDocument();
     expect(screen.queryByTestId("e2e-trust-layer")).not.toBeInTheDocument();
     expect(screen.queryByTestId("e2e-confidence-story")).not.toBeInTheDocument();
     expect(screen.queryByTestId("e2e-results-next-actions")).not.toBeInTheDocument();

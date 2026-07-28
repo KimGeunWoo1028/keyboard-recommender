@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import type { ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
@@ -87,8 +88,15 @@ export function ResultsPageShell({
             {headerActions ? <div className="shrink-0">{headerActions}</div> : null}
           </div>
 
-          <div className="mt-6">
+          <div className="mt-6 space-y-3">
             <ResultTabBar activeTab={activeTab} onTabChange={onTabChange} />
+            <Link
+              href="/recommend"
+              className="inline-flex text-sm font-medium text-ca-on-surface-variant underline-offset-4 hover:text-ca-on-surface hover:underline"
+              data-testid="e2e-results-retake-link"
+            >
+              설문 다시 하기
+            </Link>
           </div>
         </div>
       </div>

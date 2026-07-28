@@ -7,10 +7,12 @@ import { catalogHref } from "@/lib/catalog-links";
 import { Button, buttonClassName } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+export type OverviewCtaSaveState = "idle" | "saving" | "saved" | "error";
+
 /** Manus overview band — short save label (header keeps full saveButtonLabel). */
 export function overviewCtaSaveLabel(params: {
   authReady: boolean;
-  saveState: "idle" | "saving" | "saved" | "error";
+  saveState: OverviewCtaSaveState;
 }): string {
   const { authReady, saveState } = params;
   if (!authReady) return "로그인 확인 중…";
@@ -20,22 +22,76 @@ export function overviewCtaSaveLabel(params: {
   return "저장하기";
 }
 
+export function overviewCtaBandCopy(params: {
+  isAuthenticated: boolean;
+  saveState: OverviewCtaSaveState;
+  saveMessage?: string;
+}): { title: string; subtitle: string } {
+  const { isAuthenticated, saveState, saveMessage = "" } = params;
+
+  if (saveState === "error") {
+    return {
+      title: "저장하지 못했어요",
+      subtitle: saveMessage.trim() || "네트워크 연결을 확인한 뒤 다시 시도해 주세요.",
+    };
+  }
+
+  if (saveState === "saved") {
+    if (isAuthenticated) {
+      return {
+        title: "저장했어요",
+        subtitle:
+          saveMessage.trim() || "마이페이지에서 언제든 이 조합을 다시 열 수 있어요.",
+      };
+    }
+    return {
+      title: "이 브라우저에 저장했어요",
+      subtitle: saveMessage.trim() || "계정에 보관하려면 로그인하세요.",
+    };
+  }
+
+  if (!isAuthenticated) {
+    return {
+      title: "이 조합이 마음에 드시나요?",
+      subtitle: "로그인하면 계정에 보관돼요. 카탈로그에서 실제 제품을 찾아보세요.",
+    };
+  }
+
+  return {
+    title: "이 조합이 마음에 드시나요?",
+    subtitle: "저장해두고 카탈로그에서 실제 제품을 찾아보세요.",
+  };
+}
+
+const outlineOnIndigo = cn(
+  buttonClassName({ variant: "outline", size: "default" }),
+  "min-h-11 justify-center border-white/40 bg-transparent text-white hover:bg-white/10 hover:text-white",
+);
+
+const primaryOnIndigo = "min-h-11 bg-white font-semibold text-primary hover:bg-white/90";
+
 export type ResultsOverviewCtaBandProps = {
   isAuthenticated: boolean;
   authReady?: boolean;
-  saveState: "idle" | "saving" | "saved" | "error";
+  saveState: OverviewCtaSaveState;
+  saveMessage?: string;
   onSaveBuild: () => void;
   className?: string;
 };
 
 export function ResultsOverviewCtaBand({
-  isAuthenticated: _isAuthenticated,
+  isAuthenticated,
   authReady = true,
   saveState,
+  saveMessage = "",
   onSaveBuild,
   className,
 }: ResultsOverviewCtaBandProps) {
-  void _isAuthenticated;
+  const { title, subtitle } = overviewCtaBandCopy({ isAuthenticated, saveState, saveMessage });
+  const showSaveAction = isAuthenticated && saveState !== "saved";
+  const showGuestLogin = !isAuthenticated;
+  const showMypage = isAuthenticated && saveState === "saved";
+  const showErrorFeedback = saveState === "error";
 
   return (
     <section
@@ -45,29 +101,59 @@ export function ResultsOverviewCtaBand({
       )}
       data-testid="e2e-overview-cta-band"
     >
-      <div className="min-w-0">
-        <h2 className="font-headline text-lg font-bold">이 조합이 마음에 드시나요?</h2>
-        <p className="mt-1 text-sm text-white/70">저장해두고 카탈로그에서 실제 제품을 찾아보세요.</p>
-      </div>
-      <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
-        <Button
-          type="button"
-          data-testid="e2e-overview-cta-save"
-          className="min-h-11 bg-white font-semibold text-primary hover:bg-white/90"
-          disabled={!authReady || saveState === "saving" || saveState === "saved"}
-          loading={saveState === "saving"}
-          aria-busy={saveState === "saving" || undefined}
-          onClick={() => void onSaveBuild()}
+      <div className="min-w-0 space-y-1">
+        <h2 className="font-headline text-lg font-bold">{title}</h2>
+        <p
+          className="text-sm text-white/70"
+          data-testid={showErrorFeedback ? "e2e-save-feedback" : undefined}
+          role={showErrorFeedback ? "alert" : undefined}
+          aria-live={showErrorFeedback ? "assertive" : undefined}
         >
-          {overviewCtaSaveLabel({ authReady, saveState })}
-        </Button>
+          {subtitle}
+        </p>
+      </div>
+
+      <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
+        {showMypage ? (
+          <Link
+            href="/mypage?section=saved"
+            data-testid="e2e-save-mypage-link"
+            className={cn(buttonClassName({ variant: "default", size: "default" }), primaryOnIndigo)}
+          >
+            마이페이지에서 보기
+          </Link>
+        ) : null}
+
+        {showSaveAction ? (
+          <Button
+            type="button"
+            data-testid="e2e-overview-cta-save"
+            className={primaryOnIndigo}
+            disabled={!authReady || saveState === "saving"}
+            loading={saveState === "saving"}
+            aria-busy={saveState === "saving" || undefined}
+            onClick={() => void onSaveBuild()}
+          >
+            {overviewCtaSaveLabel({ authReady, saveState })}
+          </Button>
+        ) : null}
+
+        {showGuestLogin ? (
+          <Link
+            href="/auth?mode=login"
+            data-testid="e2e-save-login-link"
+            className={cn(
+              showSaveAction || showMypage ? outlineOnIndigo : cn(buttonClassName({ variant: "default", size: "default" }), primaryOnIndigo),
+            )}
+          >
+            로그인
+          </Link>
+        ) : null}
+
         <Link
           href={catalogHref({ from: "results" })}
           data-testid="e2e-overview-cta-catalog"
-          className={cn(
-            buttonClassName({ variant: "outline", size: "default" }),
-            "min-h-11 justify-center border-white/40 bg-transparent text-white hover:bg-white/10 hover:text-white",
-          )}
+          className={outlineOnIndigo}
         >
           카탈로그 보기
           <ChevronRight className="ml-1 h-4 w-4" aria-hidden />

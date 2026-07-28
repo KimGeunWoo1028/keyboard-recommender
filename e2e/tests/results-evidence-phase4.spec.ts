@@ -9,7 +9,7 @@ test.describe("Results Evidence IA — Phase 4", () => {
     await expect(page.getByRole("tab", { name: "개요" })).toHaveAttribute("aria-selected", "true");
     await expect(page.getByTestId("e2e-server-ranked")).toBeVisible();
     await expect(page.getByTestId("e2e-overview-cta-band")).toBeVisible();
-    await expect(page.getByTestId("e2e-overview-footer")).toBeVisible();
+    await expect(page.getByTestId("e2e-save-login-link")).toBeVisible();
     await expect(page.getByTestId("e2e-results-retake-link")).toBeVisible();
     await expect(page.getByTestId("e2e-result-trust-summary")).toBeVisible();
     await expect(page.getByTestId("e2e-trust-short-why")).toBeVisible();
@@ -18,6 +18,7 @@ test.describe("Results Evidence IA — Phase 4", () => {
     await expect(page.getByTestId("e2e-trust-layer")).toHaveCount(0);
     await expect(page.getByTestId("e2e-confidence-story")).toHaveCount(0);
     await expect(page.getByTestId("e2e-results-next-actions")).toHaveCount(0);
+    await expect(page.getByTestId("e2e-overview-footer")).toHaveCount(0);
   });
 
   test("evidence tab pick persuasion and honest ranking why", async ({ page }) => {
