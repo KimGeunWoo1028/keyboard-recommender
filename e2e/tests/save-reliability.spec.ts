@@ -296,7 +296,7 @@ test.describe("Save reliability", () => {
     });
 
     await saveButton.click();
-    const errorAlert = page.getByTestId("e2e-results-next-actions").getByRole("alert");
+    const errorAlert = page.getByTestId("e2e-save-feedback");
     await expect(errorAlert).toBeVisible({ timeout: 30_000 });
     await expect(errorAlert).toContainText("네트워크 연결을 확인한 뒤 다시 시도해 주세요");
     await expect(errorAlert).not.toContainText(/Failed to fetch/i);
