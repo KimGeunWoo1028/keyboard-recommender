@@ -56,7 +56,9 @@ export function ResultsCompareBuildCard({ row }: ResultsCompareBuildCardProps) {
               part.changed ? "bg-primary/5 text-ca-on-surface" : "text-ca-on-surface-variant",
             )}
           >
-            <span className="w-16 shrink-0 text-xs font-medium text-ca-on-surface-variant">{part.label}</span>
+            <span className="w-20 shrink-0 whitespace-nowrap text-xs font-medium text-ca-on-surface-variant">
+              {part.label}
+            </span>
             <span className={cn("min-w-0 truncate font-medium", part.changed && "text-primary")}>
               {part.name}
               {part.changed ? <span className="ml-1 text-[10px] font-bold uppercase tracking-wide">변경</span> : null}
