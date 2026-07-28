@@ -48,7 +48,7 @@ describe("SurveyWizard draft restore (SUR-01 / SUR-02)", () => {
     unmount();
     render(<SurveyWizard />);
     expect(screen.getByRole("heading", { name: "타건 압력" })).toBeInTheDocument();
-    expect(screen.queryByText("취향에 맞는 키보드 찾기")).not.toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1, name: "취향에 맞는 키보드 찾기" })).toBeInTheDocument();
   });
 
   it("restores last step on browser back after results (completed draft)", () => {
