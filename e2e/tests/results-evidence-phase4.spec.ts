@@ -50,7 +50,7 @@ test.describe("Results Evidence IA — Phase 4", () => {
     await page.getByRole("tab", { name: "비교" }).click();
     await expect(page.getByTestId("e2e-results-compare-tab")).toBeVisible();
     await expect(page.getByTestId("e2e-compare-current-build")).toBeVisible();
-    await expect(page.getByText("현재 추천")).toBeVisible();
+    await expect(page.getByTestId("e2e-compare-current-build").getByText("현재 추천")).toBeVisible();
     await expect(page.getByText("취향 일치도").first()).toBeVisible();
     await expect(page.getByText("소음").first()).toBeVisible();
     await expect(page.getByText("타건감").first()).toBeVisible();
