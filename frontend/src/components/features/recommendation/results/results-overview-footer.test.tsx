@@ -18,6 +18,20 @@ describe("ResultsOverviewFooter", () => {
     expect(screen.getByTestId("e2e-results-retake-link")).toBeInTheDocument();
   });
 
+  it("shows mypage link after authenticated save", () => {
+    render(
+      <ResultsOverviewFooter
+        isAuthenticated
+        saveState="saved"
+        saveMessage="계정에 저장했습니다."
+      />,
+    );
+
+    expect(screen.getByText("계정에 저장했습니다.")).toBeInTheDocument();
+    expect(screen.getByTestId("e2e-save-mypage-link")).toHaveTextContent("마이페이지에서 다시 보기");
+    expect(screen.queryByTestId("e2e-save-login-link")).not.toBeInTheDocument();
+  });
+
   it("surfaces save error feedback", () => {
     render(
       <ResultsOverviewFooter

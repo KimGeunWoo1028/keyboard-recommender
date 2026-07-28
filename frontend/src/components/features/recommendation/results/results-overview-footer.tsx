@@ -19,7 +19,7 @@ export function ResultsOverviewFooter({
     <div className="space-y-3" data-testid="e2e-overview-footer">
       {showSaveFeedback ? (
         <div
-          className="text-sm text-ca-on-surface-variant"
+          className="space-y-1 text-sm text-ca-on-surface-variant"
           role={saveState === "error" ? "alert" : "status"}
           aria-live={saveState === "error" ? "assertive" : "polite"}
           data-testid="e2e-save-feedback"
@@ -34,6 +34,15 @@ export function ResultsOverviewFooter({
                     : "이 브라우저에 임시 저장했어요."
                   : "")}
           </p>
+          {saveState === "saved" && isAuthenticated ? (
+            <Link
+              href="/mypage?section=saved"
+              className="inline-block font-medium text-ca-primary underline-offset-4 hover:underline"
+              data-testid="e2e-save-mypage-link"
+            >
+              마이페이지에서 다시 보기
+            </Link>
+          ) : null}
         </div>
       ) : null}
 
