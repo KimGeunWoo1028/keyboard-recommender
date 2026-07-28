@@ -11,16 +11,18 @@ export function HomeSwitchGuide() {
   return (
     <section className="py-20 sm:py-24" aria-labelledby="home-switch-guide-heading">
       <div className="mx-auto grid max-w-ca grid-cols-1 items-center gap-12 px-ca-margin-mobile sm:px-ca-margin lg:grid-cols-2 lg:gap-16">
-        <div className="order-2 overflow-hidden rounded-2xl border border-border shadow-xl lg:order-1">
-          {/* Image slot — replace with <Image src="/brand/switches-hero.png" ...> when ready */}
-          <div
-            className="flex aspect-[5/4] w-full items-center justify-center bg-gradient-to-br from-[#F8F9FA] via-white to-[#EEF2FF] dark:from-ca-surface-container dark:via-ca-surface dark:to-primary/10"
-            role="img"
-            aria-label="스위치 가이드 이미지 자리"
-          >
-            <span className="text-xs font-semibold uppercase tracking-widest text-ca-on-surface-variant/60">
-              Switch image
-            </span>
+        <div className="order-2 rounded-2xl border border-border bg-white shadow-xl dark:bg-ca-surface-container lg:order-1">
+          <div className="overflow-hidden rounded-2xl">
+            {/* Image slot — replace with <Image src="/brand/switches-hero.png" ...> when ready */}
+            <div
+              className="flex aspect-[5/4] w-full items-center justify-center bg-gradient-to-br from-[#F8F9FA] via-white to-[#EEF2FF] dark:from-ca-surface-container dark:via-ca-surface dark:to-primary/10"
+              role="img"
+              aria-label="스위치 가이드 이미지 자리"
+            >
+              <span className="text-xs font-semibold uppercase tracking-widest text-ca-on-surface-variant/60">
+                Switch image
+              </span>
+            </div>
           </div>
         </div>
         <div className="order-1 lg:order-2">
