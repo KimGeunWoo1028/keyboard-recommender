@@ -29,7 +29,7 @@ export default function HomePage() {
       {/* Hero owns full-bleed gradient; content column is max-w-ca inside HomeHero */}
       <HomeHero />
 
-      <section className="bg-[#F8F9FA] py-20 dark:bg-ca-surface-container-low sm:py-24" aria-labelledby="home-process-heading">
+      <section className="bg-[#F8F9FA] py-20 dark:bg-[rgb(22_22_35)] sm:py-24" aria-labelledby="home-process-heading">
         <div className="mx-auto max-w-ca px-ca-margin-mobile sm:px-ca-margin">
           <div className="mb-12 sm:mb-14">
             <p className="section-label mb-4">How It Works</p>
@@ -72,7 +72,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#F8F9FA] py-20 dark:bg-ca-surface-container-low sm:py-24" aria-labelledby="home-parts-heading">
+      <section className="bg-[#F8F9FA] py-20 dark:bg-[rgb(22_22_35)] sm:py-24" aria-labelledby="home-parts-heading">
         <div className="mx-auto max-w-ca px-ca-margin-mobile sm:px-ca-margin">
           <div className="mb-12 flex flex-col justify-between gap-4 sm:mb-14 sm:flex-row sm:items-end">
             <div>
@@ -102,17 +102,17 @@ export default function HomePage() {
 
       <section className="bg-primary py-16 sm:py-20">
         <div className="mx-auto max-w-ca px-ca-margin-mobile text-center sm:px-ca-margin">
-          <h2 className="font-headline text-3xl font-black tracking-tight text-white sm:text-4xl">
+          <h2 className="font-headline text-3xl font-black tracking-tight text-primary-foreground sm:text-4xl">
             당신의 타건 취향,
             <br />
             1분이면 찾아드립니다
           </h2>
-          <p className="mt-4 text-lg text-indigo-200">무료 · 로그인 불필요 · 스위치부터 키캡까지 한 번에</p>
+          <p className="mt-4 text-lg text-primary-foreground/75">무료 · 로그인 불필요 · 스위치부터 키캡까지 한 번에</p>
           <Link
             href="/recommend"
             className={cn(
               buttonClassName({ size: "lg" }),
-              "mt-8 bg-white font-bold text-primary hover:bg-indigo-50 hover:opacity-100",
+              "mt-8 bg-white font-bold text-primary hover:bg-white/90 hover:opacity-100 dark:bg-white dark:text-[rgb(55_48_163)]",
             )}
           >
             지금 설문 시작하기
