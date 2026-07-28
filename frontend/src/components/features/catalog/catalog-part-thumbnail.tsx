@@ -71,6 +71,12 @@ export function CatalogPartThumbnail({
   const useUnoptimized = shouldSkipCatalogImageOptimization(trimmed);
   const Icon = FAMILY_ICONS[family];
   const isLayoutBlueprint = visualVariant === "layout-blueprint" || (family === "layout" && showBlueprint);
+  const mediaAspect =
+    uniformCardMedia || !isLayoutBlueprint
+      ? "4 / 3"
+      : isFullSizeBlueprint
+        ? "2 / 1"
+        : "5 / 3";
   const mediaClassName = uniformCardMedia
     ? "aspect-[4/3]"
     : isLayoutBlueprint
@@ -78,6 +84,10 @@ export function CatalogPartThumbnail({
         ? "aspect-[2/1] min-h-[9.5rem]"
         : "aspect-[5/3] min-h-[9.5rem]"
       : "aspect-[4/3]";
+  // Intrinsic box for CLS (CAT-01): CSS aspect + matching width/height on next/image.
+  const imageWidth = 1200;
+  const imageHeight = Math.round(imageWidth / (uniformCardMedia || !isLayoutBlueprint ? 4 / 3 : isFullSizeBlueprint ? 2 : 5 / 3));
+
   const traitMetadata =
     metadata && Object.keys(metadata).length > 0
       ? metadata
@@ -93,6 +103,8 @@ export function CatalogPartThumbnail({
           isLayoutBlueprint ? "bg-ca-surface-container/50" : "bg-ca-surface",
           mediaClassName,
         )}
+        style={{ aspectRatio: mediaAspect }}
+        data-testid="e2e-catalog-media-slot"
       >
         {showBlueprint ? (
           <div className="absolute inset-0 p-2 sm:p-3">
@@ -107,19 +119,20 @@ export function CatalogPartThumbnail({
           <Image
             src={trimmed}
             alt={alt}
-            fill
+            width={imageWidth}
+            height={imageHeight}
             sizes={sizes}
             /* Next `priority` preloads but does not set fetchPriority; Lighthouse needs high on the preload. */
             priority={priority}
             fetchPriority={priority ? "high" : undefined}
             unoptimized={useUnoptimized}
-            className="object-cover"
+            className="absolute inset-0 h-full w-full object-cover"
             onError={() => setFailed(true)}
           />
         ) : null}
         {!showBlueprint && !showImage ? (
           <div
-            className="flex h-full w-full flex-col items-center justify-center gap-1.5 bg-ca-surface-container/40 px-4 text-center text-ca-on-surface-variant"
+            className="absolute inset-0 flex h-full w-full flex-col items-center justify-center gap-1.5 bg-ca-surface-container/40 px-4 text-center text-ca-on-surface-variant"
             role="img"
             aria-label={alt ? `${FAMILY_FALLBACK_LABELS[family]} · ${alt}` : FAMILY_FALLBACK_LABELS[family]}
           >

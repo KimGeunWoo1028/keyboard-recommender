@@ -361,6 +361,7 @@ export async function removeRecommendationActivity(input: {
 export async function emitExplorationEvent(input: {
   event_type:
     | "interaction.click"
+    | "interaction.outbound_click"
     | "interaction.comparison"
     | "interaction.bookmark"
     | "interaction.feedback"

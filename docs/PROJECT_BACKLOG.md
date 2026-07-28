@@ -275,7 +275,7 @@ S0 퀵윈 ──► E1 결과 소유 ──► E2 설문 연속 ──► E3 결
 | **Estimated** | 2d |
 | **Dependencies** | 없음 (RES-01과 병렬 가능) |
 | **Acceptance Criteria** | ① 첫 화면에서 결론+태그+1짧은 왜 가독 ② 원시 점수 기본 비노출 또는 「자세히」 접힘 ③ 점수≠구매만족 고지 유지 ④ 매니아 스펙 밀도 증가 없음 |
-| **Status** | Todo |
+| **Status** | Done |
 
 ---
 
@@ -309,7 +309,7 @@ S0 퀵윈 ──► E1 결과 소유 ──► E2 설문 연속 ──► E3 결
 | **Estimated** | 2d |
 | **Dependencies** | RES-02 권장; BIZ-01과 샵 클릭 시 연동 |
 | **Acceptance Criteria** | ① 결과당 primary next-action 1개 ② 저장과 역할이 시각·카피로 구분 ③ Out of scope 기능 미포함 |
-| **Status** | Todo |
+| **Status** | Done |
 
 ---
 
@@ -485,7 +485,7 @@ S0 퀵윈 ──► E1 결과 소유 ──► E2 설문 연속 ──► E3 결
 | **Estimated** | 2d |
 | **Dependencies** | KPI-01 스키마와 동일 파이프 권장 |
 | **Acceptance Criteria** | ① 외부 링크 클릭 시 이벤트 1회 기록 ② 축(switch 등)·surface(results/catalog) 구분 ③ 대시보드 또는 export로 주간 집계 가능 |
-| **Status** | Todo |
+| **Status** | Done |
 
 ---
 
@@ -519,7 +519,7 @@ S0 퀵윈 ──► E1 결과 소유 ──► E2 설문 연속 ──► E3 결
 | **Estimated** | 2d |
 | **Dependencies** | RET-01 재오픈 이벤트 계약 |
 | **Acceptance Criteria** | ① 북스타 주간 집계 가능 ② 퍼널 3단 이상 ③ Founder 주간 리뷰용 1페이지 |
-| **Status** | Todo (Sprint1 partial: reopen event Done) |
+| **Status** | Done |
 
 ---
 
@@ -549,7 +549,7 @@ S0 퀵윈 ──► E1 결과 소유 ──► E2 설문 연속 ──► E3 결
 | **Estimated** | 2d |
 | **Dependencies** | 없음 |
 | **Acceptance Criteria** | ① 필수 필드 검증 ② 제출 성공/실패 UI ③ 운영 수신함으로 메일 또는 티켓 도달(스테이징 검증) |
-| **Status** | Todo |
+| **Status** | Done |
 
 ---
 
@@ -566,7 +566,7 @@ S0 퀵윈 ──► E1 결과 소유 ──► E2 설문 연속 ──► E3 결
 | **Estimated** | 0.5d |
 | **Dependencies** | CTR-01과 병렬 가능 |
 | **Acceptance Criteria** | Contact 본문에 SLA · mailto 시 subject/body 프리필 |
-| **Status** | Todo |
+| **Status** | Done |
 
 ---
 
@@ -613,7 +613,7 @@ S0 퀵윈 ──► E1 결과 소유 ──► E2 설문 연속 ──► E3 결
 | **Estimated** | 2d |
 | **Dependencies** | 없음 |
 | **Acceptance Criteria** | ① 목록/상세 이미지 예약 공간 ② lab CLS 재측정으로 유의미 감소(목표 0.1 미만) ③ LCP 악화 없음(회귀 가드) |
-| **Status** | Todo |
+| **Status** | Done |
 
 ---
 
@@ -807,12 +807,15 @@ S0 퀵윈 ──► E1 결과 소유 ──► E2 설문 연속 ──► E3 결
 
 **완료 조건**
 
-- [ ] Trust 3단 + 점수 기본 접힘
-- [ ] Next-action 1개
-- [ ] 문의 웹폼 제출→수신 검증
-- [ ] Catalog lab CLS 유의미 개선
-- [ ] 아웃바운드 클릭 주간 집계 가능
-- [ ] 북스타 주간 리포트 초안
+- [x] Trust 3단 + 점수 기본 접힘
+- [x] Next-action 1개
+- [x] 문의 웹폼 제출→수신 검증
+- [x] Catalog lab CLS 유의미 개선
+- [x] 아웃바운드 클릭 주간 집계 가능
+- [x] 북스타 주간 리포트 초안
+
+**Sprint3 완료일:** 2026-07-28 · 보고서: `docs/Sprint3_COMPLETION_REPORT.md`  
+**운영 메모:** `CONTACT_TO_EMAIL` 설정 후 스테이징에서 문의 메일 도달 확인. Catalog CLS는 lab 재측정으로 수치 확정.
 
 ---
 
@@ -841,9 +844,9 @@ S0 퀵윈 ──► E1 결과 소유 ──► E2 설문 연속 ──► E3 결
 
 | Status | IDs |
 |--------|-----|
-| **Todo** | RET-02, RET-03, RET-04, SUR-*, RES-*, SHR-01, CTR-*, CAT-*, BIZ-*, A11Y-*, HOME-03, POL-01, DS-01, SEO-02, GROW-01, KPI-01(퍼널 잔여) |
+| **Todo** | RET-04, SUR-03, RES-03, SHR-01, CAT-02, BIZ-02, A11Y-*, HOME-03, POL-01, DS-01, SEO-02, GROW-01 |
 | **Doing** | — |
-| **Done** | AUTH-01, SEO-01, HOME-01, HOME-02, RET-01 · KPI-01 reopen partial |
+| **Done** | AUTH-01, SEO-01, HOME-01, HOME-02, RET-01–03, SUR-01–02, RES-01–02, RES-04, CTR-01–02, CAT-01, BIZ-01, KPI-01 |
 
 상태 변경 시 이 문서의 해당 Task `Status`만 갱신한다. 세 Audit 원본은 수정하지 않는다.
 

@@ -25,6 +25,7 @@ import {
   type CatalogPartSummary,
 } from "@/lib/api/catalog";
 import { getPublicApiBase, ApiError } from "@/lib/api/client";
+import { emitOutboundShopClickBestEffort } from "@/lib/api/onboarding-events";
 import { catalogHref } from "@/lib/catalog-links";
 import { isReferenceOnlyLayoutArchetype } from "@/lib/layout-catalog-links";
 import { layoutSizeFilterLabel } from "@/lib/layout-size";
@@ -219,7 +220,15 @@ function CatalogPartCard({
             href={retailerUrl}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={(event) => event.stopPropagation()}
+            onClick={(event) => {
+              event.stopPropagation();
+              void emitOutboundShopClickBestEffort({
+                surface: "catalog",
+                domain: item.family,
+                itemId: item.id,
+                href: retailerUrl,
+              });
+            }}
             onKeyDown={(event) => event.stopPropagation()}
             className="font-label text-ca-label-sm font-medium text-ca-on-surface-variant underline-offset-4 hover:text-ca-on-surface hover:underline"
           >
@@ -254,7 +263,7 @@ function CatalogGridSkeleton({ count = 6 }: { count?: number }) {
           className="flex min-h-[16.5rem] flex-col overflow-hidden rounded-[inherit] border border-ca-outline-variant/30 bg-ca-surface-container-lowest/40"
           aria-hidden
         >
-          <div className="aspect-[4/3] w-full animate-pulse bg-ca-surface-container" />
+          <div className="aspect-[4/3] w-full animate-pulse bg-ca-surface-container" style={{ aspectRatio: "4 / 3" }} />
           <div className="space-y-2 p-4">
             <div className="h-3 w-1/3 animate-pulse rounded bg-ca-surface-container/80" />
             <div className="h-4 w-3/4 animate-pulse rounded bg-ca-surface-container" />

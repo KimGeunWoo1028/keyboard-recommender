@@ -4,6 +4,7 @@ from keyboard_recommender.api.v1 import (
     auth,
     cases,
     catalog_full,
+    contact,
     foam,
     keycaps,
     layouts,
@@ -17,6 +18,7 @@ from keyboard_recommender.api.v1.debug import router as debug_router
 router = APIRouter()
 router.include_router(debug_router)
 router.include_router(auth.router)
+router.include_router(contact.router)
 router.include_router(recommendations.router)
 router.include_router(terminology.router)
 router.include_router(switches.router)

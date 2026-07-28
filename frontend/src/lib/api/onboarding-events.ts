@@ -110,3 +110,29 @@ export async function emitHomeViewedEventBestEffort(metadata?: Record<string, un
   });
 }
 
+/** BIZ-01: results/catalog → external shop click (best-effort). */
+export async function emitOutboundShopClickBestEffort(metadata: {
+  surface: "results" | "catalog";
+  domain?: string;
+  itemId?: string;
+  buildId?: string;
+  href?: string;
+}): Promise<void> {
+  const { emitExplorationEvent } = await import("@/lib/api/saved-recommendations");
+  const { getOrCreateClientSessionId } = await import("@/lib/client-session-id");
+  try {
+    await emitExplorationEvent({
+      event_type: "interaction.outbound_click",
+      request_id: `outbound-${Date.now()}`,
+      session_id: getOrCreateClientSessionId(),
+      scenario_id: "outbound_shop_v1",
+      metadata: {
+        kind: "outbound_shop",
+        ...metadata,
+      },
+    });
+  } catch {
+    // best-effort
+  }
+}
+

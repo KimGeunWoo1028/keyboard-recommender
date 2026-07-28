@@ -14,6 +14,7 @@ UnifiedEventType = Literal[
     "recommendation.request",
     "kpi.time_to_first_result",
     "interaction.click",
+    "interaction.outbound_click",
     "interaction.bookmark",
     "interaction.comparison",
     "interaction.feedback",

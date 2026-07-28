@@ -101,6 +101,8 @@ class Settings(BaseSettings):
     smtp_use_tls: bool = True
     resend_api_key: str | None = None
     resend_from_email: str | None = None
+    contact_to_email: str | None = None
+    """Ops inbox for in-app contact form (CTR-01). Falls back to NEXT_PUBLIC twin via env."""
     auth_password_reset_ttl_minutes: int = 30
     public_frontend_base_url: str = "http://localhost:3000"
 

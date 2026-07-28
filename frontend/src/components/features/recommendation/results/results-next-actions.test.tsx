@@ -33,7 +33,7 @@ describe("saveButtonLabel", () => {
 });
 
 describe("ResultsNextActions", () => {
-  it("renders save as primary before shop secondary", () => {
+  it("renders save separate from single shop next-action (RES-04)", () => {
     render(
       <ResultsNextActions
         build={build}
@@ -49,10 +49,14 @@ describe("ResultsNextActions", () => {
     const save = screen.getByTestId("e2e-save-build");
     const shop = screen.getByTestId("e2e-results-shop-link");
     expect(save).toHaveTextContent("이 브라우저에 저장");
+    expect(screen.getByText("결과 보관")).toBeInTheDocument();
+    expect(screen.getByTestId("e2e-results-next-action")).toBeInTheDocument();
+    expect(shop).toHaveTextContent("이 조합 샵에서 보기");
     expect(shop).toHaveAttribute("rel", "noopener noreferrer");
     expect(shop).toHaveAttribute("target", "_blank");
     expect(shop.compareDocumentPosition(save) & Node.DOCUMENT_POSITION_PRECEDING).toBeTruthy();
     expect(screen.getByText(/이 브라우저에 임시 저장돼요/)).toBeInTheDocument();
+    expect(screen.getByTestId("e2e-results-retake-link")).toHaveTextContent("설문 다시 하기");
   });
 
   it("shows account hint and saved label when authenticated", () => {

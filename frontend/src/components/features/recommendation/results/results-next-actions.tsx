@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 
+import { emitOutboundShopClickBestEffort } from "@/lib/api/onboarding-events";
 import { swagkeyProductLinkLabel } from "@/lib/layout-catalog-links";
 import { cn } from "@/lib/utils";
 import { Button, buttonClassName } from "@/components/ui/button";
@@ -44,8 +45,8 @@ export function saveButtonLabel(params: {
 }
 
 /**
- * Sole primary save CTA on results — save first, shop secondary (outline).
- * Non-sticky so mobile scroll is not competed by a pinned bar.
+ * RES-04: Save (retention) + exactly one next-action (shop view MVP).
+ * Retake survey is a text link — not a competing CTA.
  */
 export function ResultsNextActions({
   build,
@@ -60,7 +61,8 @@ export function ResultsNextActions({
 }: ResultsNextActionsProps) {
   const switchPick = apiPicks.find((row) => row.domain.toLowerCase() === "switch");
   const switchUrl = buildPartSourceUrl(build, "switch", apiPicks, enrichedSourceUrls);
-  const shopLabel = swagkeyProductLinkLabel("switch", switchPick?.itemId);
+  const shopLabel = "이 조합 샵에서 보기";
+  const shopTitle = swagkeyProductLinkLabel("switch", switchPick?.itemId);
   const showIdleHint = authReady && (saveState === "idle" || saveState === "error");
 
   return (
@@ -68,11 +70,11 @@ export function ResultsNextActions({
       className="rounded-xl border border-border bg-white dark:bg-ca-surface-container px-4 py-4 sm:px-5"
       data-testid="e2e-results-next-actions"
     >
-      <p className="font-headline text-sm font-semibold text-ca-on-surface">다음에 할 일</p>
+      <p className="font-headline text-sm font-semibold text-ca-on-surface">결과 보관</p>
       <p className="mt-1 break-keep text-sm text-ca-on-surface-variant">
-        먼저 이 결과를 저장해 두고, 필요하면 스웨그키에서 대표 부품 가격·재고를 확인해 보세요.
+        나중에 다시 보려면 먼저 저장해 두세요.
       </p>
-      <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
+      <div className="mt-3">
         <Button
           data-testid="e2e-save-build"
           variant="primary"
@@ -85,31 +87,6 @@ export function ResultsNextActions({
         >
           {saveButtonLabel({ authReady, isAuthenticated, saveState })}
         </Button>
-        {switchUrl ? (
-          <a
-            href={switchUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            title="새 탭에서 스웨그키 매장이 열립니다"
-            data-testid="e2e-results-shop-link"
-            className={cn(
-              buttonClassName({ variant: "outline", size: "default" }),
-              "min-h-11 w-full justify-center border-ca-outline-variant/50 sm:w-auto",
-            )}
-          >
-            {shopLabel}
-            <span className="text-ca-on-surface-variant"> (새 탭)</span>
-          </a>
-        ) : null}
-        <Link
-          href="/recommend"
-          className={cn(
-            buttonClassName({ variant: "ghost", size: "default" }),
-            "min-h-11 w-full justify-center sm:w-auto",
-          )}
-        >
-          설문 다시 하기
-        </Link>
       </div>
 
       {showIdleHint ? (
@@ -157,6 +134,48 @@ export function ResultsNextActions({
           ) : null}
         </div>
       ) : null}
+
+      {switchUrl ? (
+        <div className="mt-5 border-t border-ca-outline-variant/35 pt-4" data-testid="e2e-results-next-action">
+          <p className="font-headline text-sm font-semibold text-ca-on-surface">다음에 할 일</p>
+          <p className="mt-1 break-keep text-sm text-ca-on-surface-variant">
+            대표 부품을 스웨그키에서 가격·재고를 확인해 보세요.
+          </p>
+          <a
+            href={switchUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={`${shopTitle} — 새 탭에서 스웨그키 매장이 열립니다`}
+            data-testid="e2e-results-shop-link"
+            className={cn(
+              buttonClassName({ variant: "outline", size: "default" }),
+              "mt-3 min-h-11 w-full justify-center border-ca-outline-variant/50 sm:w-auto",
+            )}
+            onClick={() => {
+              void emitOutboundShopClickBestEffort({
+                surface: "results",
+                domain: "switch",
+                itemId: switchPick?.itemId,
+                buildId: build.id,
+                href: switchUrl,
+              });
+            }}
+          >
+            {shopLabel}
+            <span className="text-ca-on-surface-variant"> (새 탭)</span>
+          </a>
+        </div>
+      ) : null}
+
+      <p className="mt-4">
+        <Link
+          href="/recommend"
+          className="text-sm text-ca-on-surface-variant underline-offset-4 hover:underline"
+          data-testid="e2e-results-retake-link"
+        >
+          설문 다시 하기
+        </Link>
+      </p>
     </div>
   );
 }
