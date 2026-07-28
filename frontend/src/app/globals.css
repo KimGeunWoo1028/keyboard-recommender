@@ -28,9 +28,9 @@
     --muted-foreground: 90 90 120;
     --border: 220 220 235;
     --ring: 55 48 163;
-    /* Manus Precision Editorial — sharper, near-rect corners */
+    /* Manus Precision Editorial — cards sharp; buttons use md (0.375rem) via --radius-btn */
     --radius: 0.125rem;
-    --radius-btn: 0.125rem;
+    --radius-btn: 0.375rem;
 
     --ca-surface: 255 255 255;
     --ca-surface-dim: 238 238 248;
@@ -153,7 +153,7 @@
     --ca-focus-glow: 0 0 0 3px rgb(129 140 248 / 0.35);
     --focus-ring: 165 180 252;
     --focus-ring-offset: 3px;
-    --radius-btn: 0.125rem;
+    --radius-btn: 0.375rem;
 
     color-scheme: dark;
   }

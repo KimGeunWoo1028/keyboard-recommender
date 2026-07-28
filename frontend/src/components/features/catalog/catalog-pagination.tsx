@@ -36,7 +36,7 @@ export function buildPaginationItems(current: number, total: number): Array<numb
 }
 
 const pageBtnClass =
-  "inline-flex h-10 min-w-10 items-center justify-center rounded-lg px-2 font-body text-sm font-medium tabular-nums transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))]";
+  "inline-flex h-10 min-w-10 items-center justify-center rounded-md px-2 font-body text-sm font-medium tabular-nums transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))]";
 
 export function CatalogPagination({ page, totalPages, loading = false, onPageChange }: CatalogPaginationProps) {
   const items = useMemo(() => buildPaginationItems(page, totalPages), [page, totalPages]);

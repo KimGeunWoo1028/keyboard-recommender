@@ -38,9 +38,6 @@ type Props = {
 const DELETE_CONFIRM_WORD = "탈퇴";
 const DELETE_WARNING =
   "탈퇴하면 계정·프로필·저장한 결과 접근 권한이 즉시 사라집니다. 탈퇴 후에는 같은 이메일로 다시 가입할 수 있습니다.";
-/** Softer corners on account settings actions — cards use rounded-xl, global Button defaults to rounded-sm. */
-const accountActionClass = "rounded-lg";
-
 function validateDisplayName(value: string): string | null {
   const v = value.trim();
   if (!v) return "닉네임을 입력해 주세요.";
@@ -253,7 +250,7 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
                 type="button"
                 variant="outline"
                 size="sm"
-                className={cn("shrink-0", accountActionClass)}
+                className="shrink-0"
                 aria-label={editNickname ? "닉네임 저장" : "닉네임 수정"}
                 disabled={updatingName}
                 onClick={() => {
@@ -302,7 +299,6 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
                 <Button
                   variant="outline"
                   size="sm"
-                  className={accountActionClass}
                   onClick={() => {
                     const err = validateDisplayName(displayName);
                     if (err) {
@@ -369,7 +365,7 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
         {!openPasswordPanel ? (
           <Button
             variant="outline"
-            className={cn("border-border font-semibold text-primary hover:border-primary", accountActionClass)}
+            className="border-border font-semibold text-primary hover:border-primary"
             onClick={() => {
               setOpenPasswordPanel(true);
               setPasswordMessage(null);
@@ -609,7 +605,6 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
             variant="outline"
             className={cn(
               "justify-start gap-2 border-border text-ca-on-surface-variant hover:border-primary hover:text-primary",
-              accountActionClass,
             )}
             disabled={securityActionBusy !== "none"}
             onClick={() => {
@@ -625,7 +620,7 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
           </Button>
           <Button
             variant="ghost"
-            className={cn("justify-start text-ca-on-surface-variant hover:text-primary", accountActionClass)}
+            className="justify-start text-ca-on-surface-variant hover:text-primary"
             disabled={securityActionBusy !== "none"}
             onClick={() => {
               setSecurityActionBusy("logout_all");
@@ -641,7 +636,6 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
             variant="ghost"
             className={cn(
               "justify-start gap-2 font-semibold text-destructive hover:bg-destructive/10 hover:text-destructive",
-              accountActionClass,
             )}
             disabled={securityActionBusy !== "none" || deletingAccount}
             onClick={() => {
