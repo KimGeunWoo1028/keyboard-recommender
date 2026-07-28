@@ -51,16 +51,9 @@ export function HomeHero() {
               className="h-auto w-full object-cover"
               priority
             />
-            <div className="absolute bottom-4 left-4 right-4 rounded-xl border border-border bg-white/90 p-4 shadow-lg backdrop-blur-md dark:bg-ca-surface-container/90">
-              <p className="mb-1 text-xs font-bold uppercase tracking-widest text-primary">추천 결과 예시</p>
-              <p className="mb-2 text-sm font-semibold text-ca-on-surface">{example.title}</p>
-              <div className="flex flex-wrap gap-2">
-                {example.parts.map((part) => (
-                  <span key={part.family} className="ca-keycap-badge">
-                    {part.name}
-                  </span>
-                ))}
-              </div>
+            <div className="absolute bottom-4 left-4 right-4 rounded-xl border border-border bg-white/90 px-4 py-3 shadow-lg backdrop-blur-md dark:bg-ca-surface-container/90">
+              <p className="mb-0.5 text-[10px] font-bold uppercase tracking-widest text-primary">예시</p>
+              <p className="text-sm font-semibold text-ca-on-surface">{example.title}</p>
             </div>
           </div>
           <div className="absolute -left-4 top-1/3 hidden rounded-xl border border-border bg-white p-3 shadow-lg dark:bg-ca-surface-container lg:block">
