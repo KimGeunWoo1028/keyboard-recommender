@@ -544,39 +544,41 @@ export function SurveyWizard() {
             })}
           </div>
 
-          <div className="mt-auto flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div className="mt-auto flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              {hasPreviousSession ? (
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="default"
+                  className="h-11 border-border font-semibold"
+                  onClick={() => {
+                    setStepIndex(firstUnansweredStepIndex(answers));
+                    setPhase("questions");
+                  }}
+                >
+                  이어서 설정하기
+                </Button>
+              ) : null}
+              <button
+                type="button"
+                onClick={startFullSurvey}
+                className="text-left text-sm font-medium text-ca-on-surface-variant hover:text-ca-on-surface"
+              >
+                성향 없이 전체 설문으로 시작
+              </button>
+            </div>
             <Button
               type="button"
               size="lg"
-              className="h-11 px-8 font-bold"
+              className="h-11 shrink-0 px-8 font-bold sm:order-none"
               disabled={!selectedStyle}
               onClick={confirmSelectedStyle}
               data-testid="e2e-survey-start-with-style"
             >
-              결과 보기
+              이 성향으로 시작
               <NavArrowForward className="h-4 w-4" />
             </Button>
-            {hasPreviousSession ? (
-              <Button
-                type="button"
-                variant="outline"
-                size="default"
-                className="h-11 border-border font-semibold"
-                onClick={() => {
-                  setStepIndex(firstUnansweredStepIndex(answers));
-                  setPhase("questions");
-                }}
-              >
-                이어서 설정하기
-              </Button>
-            ) : null}
-            <button
-              type="button"
-              onClick={startFullSurvey}
-              className="text-sm font-medium text-ca-on-surface-variant hover:text-ca-on-surface"
-            >
-              성향 없이 전체 설문으로 시작
-            </button>
           </div>
         </div>
       </div>
