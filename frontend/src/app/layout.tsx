@@ -44,12 +44,12 @@ export const metadata: Metadata = {
   // Page-level `alternates.canonical` only — do not pin every route to `/`.
   icons: {
     icon: [
-      { url: "/favicon.ico" },
-      { url: "/icons/favicon-v3.png?v=3", type: "image/png", sizes: "512x512" },
-      { url: "/icons/apple-touch-icon-v3.png?v=3", type: "image/png", sizes: "180x180" },
+      { url: "/icons/favicon-v3.png?v=7", type: "image/png", sizes: "512x512" },
+      { url: "/icons/favicon-v3.png?v=7", type: "image/png", sizes: "32x32" },
+      { url: "/favicon.ico?v=7" },
     ],
-    apple: [{ url: "/icons/apple-touch-icon-v3.png?v=3", sizes: "180x180", type: "image/png" }],
-    shortcut: ["/favicon.ico"],
+    apple: [{ url: "/icons/apple-touch-icon-v3.png?v=7", sizes: "180x180", type: "image/png" }],
+    shortcut: ["/icons/favicon-v3.png?v=7"],
   },
   openGraph: {
     type: "website",

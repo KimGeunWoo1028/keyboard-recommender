@@ -91,8 +91,16 @@ export function SiteHeader() {
             aria-label="Keyboard Recommender 홈"
             className="inline-flex min-w-0 shrink items-center gap-2.5 rounded-lg font-headline text-[15px] font-bold leading-none tracking-tight text-ca-on-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))]"
           >
-            <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground shadow-sm">
-              K
+            <span className="relative inline-flex h-8 w-8 shrink-0 overflow-hidden rounded-lg shadow-sm">
+              {/* eslint-disable-next-line @next/next/no-img-element -- static brand mark */}
+              <img
+                src="/icons/favicon-v3.png?v=7"
+                alt=""
+                width={32}
+                height={32}
+                className="h-full w-full object-cover"
+                decoding="async"
+              />
             </span>
             <span className="truncate">Keyboard Recommender</span>
           </Link>

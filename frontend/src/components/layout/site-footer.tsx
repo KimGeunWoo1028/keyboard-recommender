@@ -27,8 +27,16 @@ export function SiteFooter() {
         <div className="mb-10 grid grid-cols-1 gap-8 md:grid-cols-3">
           <div>
             <div className="mb-3 flex items-center gap-2">
-              <span className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-primary text-xs font-bold text-primary-foreground">
-                K
+              <span className="relative inline-flex h-7 w-7 overflow-hidden rounded-md">
+                {/* eslint-disable-next-line @next/next/no-img-element -- static brand mark */}
+                <img
+                  src="/icons/favicon-v3.png?v=7"
+                  alt=""
+                  width={28}
+                  height={28}
+                  className="h-full w-full object-cover"
+                  decoding="async"
+                />
               </span>
               <span className="text-sm font-bold">Keyboard Recommender</span>
             </div>
