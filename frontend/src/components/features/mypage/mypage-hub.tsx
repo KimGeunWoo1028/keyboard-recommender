@@ -323,7 +323,7 @@ export function MyPageHub() {
         </div>
       ) : null}
 
-      <div className="mx-auto flex w-full max-w-4xl flex-1 flex-col space-y-6 px-ca-margin-mobile py-8 pb-16 sm:px-ca-margin sm:pb-20 min-h-[min(45vh,24rem)]">
+      <div className="mx-auto flex w-full max-w-4xl flex-1 flex-col space-y-6 px-ca-margin-mobile py-8 pb-20 sm:px-ca-margin sm:pb-24 min-h-[min(55vh,32rem)]">
         {savedLoadState === "error" ? (
           <div
             className="rounded-xl border-2 border-[rgb(220_220_238)] bg-white p-5 shadow-sm dark:border-border dark:bg-ca-surface-container sm:p-6"
@@ -360,7 +360,9 @@ export function MyPageHub() {
           </div>
         ) : null}
 
-        {savedLoadState !== "error" ? section : null}
+        {savedLoadState !== "error" ? (
+          <div className="flex min-h-0 flex-1 flex-col">{section}</div>
+        ) : null}
       </div>
     </div>
   );

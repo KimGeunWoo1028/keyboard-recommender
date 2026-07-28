@@ -114,8 +114,15 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
     if (!showSearch && query) setQuery("");
   }, [query, showSearch]);
 
+  const isTrulyEmpty = items.length === 0;
+
   return (
-    <div className="space-y-4">
+    <div
+      className={cn(
+        "w-full",
+        isTrulyEmpty ? "flex flex-1 flex-col justify-center" : "space-y-4",
+      )}
+    >
       {showSearch ? (
         <Input
           value={query}
