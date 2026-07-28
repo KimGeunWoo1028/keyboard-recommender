@@ -169,7 +169,7 @@ function CatalogPartCard({
         }
       }}
       className={cn(
-        "flex h-full min-h-[16.5rem] cursor-pointer flex-col overflow-hidden rounded-sm border-2 border-[rgb(220_220_238)] border-l-4 border-l-primary bg-white shadow-sm transition hover:border-primary/40 hover:shadow-md dark:border-border dark:bg-ca-surface-container",
+        "flex h-full min-h-[12.5rem] cursor-pointer flex-col overflow-hidden rounded-sm border-2 border-[rgb(220_220_238)] border-l-[3px] border-l-primary bg-white shadow-sm transition hover:border-primary/40 hover:shadow-md dark:border-border dark:bg-ca-surface-container",
         selected && "border-primary/50 bg-ca-surface-container-low",
       )}
     >
@@ -181,16 +181,16 @@ function CatalogPartCard({
         visualVariant={isReferenceLayout ? "layout-blueprint" : "default"}
         uniformCardMedia
         priority={priority}
-        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 378px"
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
       />
-      <CardHeader className="flex flex-1 flex-col space-y-1.5 border-b-0 pb-2 pt-3">
-        <p className="font-label text-[0.7rem] font-medium tracking-wide text-ca-on-surface-variant">
+      <CardHeader className="flex flex-1 flex-col space-y-1 border-b-0 px-3 pb-1.5 pt-2 sm:px-3.5">
+        <p className="font-label text-[0.65rem] font-medium tracking-wide text-ca-on-surface-variant">
           {FAMILY_LABELS[item.family]}
         </p>
-        <CardTitle className="line-clamp-2 min-h-[2.5rem] font-headline text-base font-semibold leading-snug text-ca-on-surface">
+        <CardTitle className="line-clamp-2 min-h-[2.125rem] font-headline text-sm font-semibold leading-snug text-ca-on-surface">
           {item.name}
         </CardTitle>
-        <div className="min-h-[1.5rem]">
+        <div className="min-h-[1.25rem]">
           {item.family === "layout" && isReferenceLayout ? (
             <LayoutTraitChips
               metadata={layoutArchetypeMetadata(item.id)}
@@ -213,7 +213,7 @@ function CatalogPartCard({
           ) : null}
         </div>
       </CardHeader>
-      <CardContent className="mt-auto flex min-h-[2.75rem] flex-wrap items-center justify-between gap-2 border-t border-ca-outline-variant/25 pt-3 text-xs text-ca-on-surface-variant">
+      <CardContent className="mt-auto flex min-h-[2.25rem] flex-wrap items-center justify-between gap-1.5 border-t border-ca-outline-variant/25 px-3 pb-2.5 pt-2 text-[0.6875rem] leading-snug text-ca-on-surface-variant sm:px-3.5">
         {isReferenceOnlyLayout ? (
           <span>판매 제품 없음</span>
         ) : retailerUrl ? (
@@ -255,20 +255,20 @@ function CatalogPartCard({
   );
 }
 
-function CatalogGridSkeleton({ count = 6 }: { count?: number }) {
+function CatalogGridSkeleton({ count = 8 }: { count?: number }) {
   return (
     <>
       {Array.from({ length: count }, (_, i) => (
         <div
           key={`catalog-skel-${i}`}
-          className="flex min-h-[16.5rem] flex-col overflow-hidden rounded-[inherit] border border-ca-outline-variant/30 bg-ca-surface-container-lowest/40"
+          className="flex min-h-[12.5rem] flex-col overflow-hidden rounded-[inherit] border border-ca-outline-variant/30 bg-ca-surface-container-lowest/40"
           aria-hidden
         >
           <div className="aspect-[4/3] w-full animate-pulse bg-ca-surface-container" style={{ aspectRatio: "4 / 3" }} />
-          <div className="space-y-2 p-4">
-            <div className="h-3 w-1/3 animate-pulse rounded bg-ca-surface-container/80" />
-            <div className="h-4 w-3/4 animate-pulse rounded bg-ca-surface-container" />
-            <div className="h-3 w-1/2 animate-pulse rounded bg-ca-surface-container/80" />
+          <div className="space-y-1.5 p-3">
+            <div className="h-2.5 w-1/3 animate-pulse rounded bg-ca-surface-container/80" />
+            <div className="h-3.5 w-3/4 animate-pulse rounded bg-ca-surface-container" />
+            <div className="h-2.5 w-1/2 animate-pulse rounded bg-ca-surface-container/80" />
           </div>
         </div>
       ))}
@@ -808,10 +808,10 @@ export function CatalogBrowseView({
       ) : null}
 
       <section
-        className="grid min-h-[32rem] items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3"
+        className="grid min-h-[28rem] items-stretch gap-3 sm:grid-cols-2 lg:grid-cols-4"
         aria-busy={loading}
       >
-        {loading && items.length === 0 ? <CatalogGridSkeleton count={6} /> : null}
+        {loading && items.length === 0 ? <CatalogGridSkeleton count={8} /> : null}
         {items.map((item, index) => (
           <CatalogPartCard
             key={item.id}
