@@ -9,7 +9,6 @@ import { HomeProcessSteps } from "@/components/features/home/home-process-steps"
 import { HomeSwitchGuide } from "@/components/features/home/home-switch-guide";
 import { HomeWorkshopPreviewGate } from "@/components/features/home/home-workshop-preview-gate";
 import { buttonClassName } from "@/components/ui/button";
-import { PageShell } from "@/components/layout/page-shell";
 import { publicPageMetadata } from "@/lib/seo/page-metadata";
 import { cn } from "@/lib/utils";
 
@@ -26,10 +25,9 @@ export const metadata: Metadata = publicPageMetadata({
 export default function HomePage() {
   return (
     <>
-      <PageShell className="max-w-ca overflow-visible px-ca-margin-mobile pb-0 sm:px-ca-margin">
-        <HomeLandingObserve />
-        <HomeHero />
-      </PageShell>
+      <HomeLandingObserve />
+      {/* Hero owns full-bleed gradient; content column is max-w-ca inside HomeHero */}
+      <HomeHero />
 
       <section className="bg-[#F8F9FA] py-20 dark:bg-ca-surface-container-low sm:py-24" aria-labelledby="home-process-heading">
         <div className="mx-auto max-w-ca px-ca-margin-mobile sm:px-ca-margin">
