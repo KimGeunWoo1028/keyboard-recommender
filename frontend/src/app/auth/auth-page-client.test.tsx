@@ -5,12 +5,12 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { ApiError } from "@/lib/api/client";
 
 const loginMock = vi.fn();
-const signupMock = vi.fn();
 const fetchCurrentUserMock = vi.fn();
 const setUserMock = vi.fn();
+const replaceMock = vi.fn();
 
 vi.mock("next/navigation", () => ({
-  useRouter: () => ({ replace: vi.fn(), push: vi.fn(), refresh: vi.fn() }),
+  useRouter: () => ({ replace: replaceMock, push: vi.fn(), refresh: vi.fn() }),
 }));
 
 vi.mock("@/components/layout/auth-controls", () => ({
@@ -19,11 +19,7 @@ vi.mock("@/components/layout/auth-controls", () => ({
 
 vi.mock("@/lib/api/auth", () => ({
   login: (...args: unknown[]) => loginMock(...args),
-  signup: (...args: unknown[]) => signupMock(...args),
   fetchCurrentUser: (...args: unknown[]) => fetchCurrentUserMock(...args),
-  checkDisplayNameAvailability: vi.fn(),
-  sendSignupEmailCode: vi.fn(),
-  verifySignupEmailCode: vi.fn(),
 }));
 
 import { AuthPageClient, friendlyAuthErrorMessage } from "./auth-page-client";
@@ -42,16 +38,25 @@ describe("friendlyAuthErrorMessage", () => {
   });
 });
 
-describe("AuthPageClient error isolation", () => {
+describe("AuthPageClient login-only", () => {
   beforeEach(() => {
     loginMock.mockReset();
-    signupMock.mockReset();
     fetchCurrentUserMock.mockReset();
     setUserMock.mockReset();
+    replaceMock.mockReset();
     fetchCurrentUserMock.mockResolvedValue(null);
+    window.history.pushState({}, "", "/auth");
   });
 
-  it("clears login error when switching to signup", async () => {
+  it("shows login form and link to signup wizard", async () => {
+    render(<AuthPageClient />);
+    expect(screen.getByTestId("e2e-auth-submit")).toHaveTextContent("로그인");
+    const signup = screen.getByTestId("e2e-auth-tab-signup");
+    expect(signup).toHaveAttribute("href", expect.stringContaining("/auth/signup"));
+    expect(signup).toHaveAttribute("href", expect.stringContaining("step=email"));
+  });
+
+  it("shows login error on failed login", async () => {
     const user = userEvent.setup();
     loginMock.mockRejectedValue(new ApiError(401, "Invalid email or password"));
 
@@ -64,44 +69,21 @@ describe("AuthPageClient error isolation", () => {
     expect(await screen.findByTestId("e2e-auth-error")).toHaveTextContent(
       "이메일 또는 비밀번호가 올바르지 않습니다.",
     );
-
-    await user.click(screen.getByTestId("e2e-auth-tab-signup"));
-    expect(screen.queryByTestId("e2e-auth-error")).not.toBeInTheDocument();
-    expect(screen.queryByText("이메일 또는 비밀번호가 올바르지 않습니다.")).not.toBeInTheDocument();
   });
 
-  it("does not paint a late login failure onto the signup tab", async () => {
-    const user = userEvent.setup();
-    let rejectLogin!: (err: unknown) => void;
-    loginMock.mockImplementation(
-      () =>
-        new Promise((_resolve, reject) => {
-          rejectLogin = reject;
-        }),
+  it("redirects ?mode=signup to signup wizard", async () => {
+    window.history.pushState({}, "", "/auth?mode=signup&next=/results");
+    render(<AuthPageClient />);
+    await waitFor(() => {
+      expect(replaceMock).toHaveBeenCalledWith("/auth/signup?step=email&next=%2Fresults");
+    });
+  });
+
+  it("shows signup success notice when ?signup=1", async () => {
+    window.history.pushState({}, "", "/auth?signup=1");
+    render(<AuthPageClient />);
+    expect(await screen.findByTestId("e2e-auth-login-notice")).toHaveTextContent(
+      "계정이 생성되었습니다. 로그인해 주세요.",
     );
-
-    render(<AuthPageClient />);
-
-    await user.type(screen.getByLabelText("이메일"), "a@b.com");
-    await user.type(screen.getByLabelText("비밀번호"), "Password1!");
-    await user.click(screen.getByTestId("e2e-auth-submit"));
-
-    await user.click(screen.getByTestId("e2e-auth-tab-signup"));
-    expect(screen.getByRole("tab", { name: "회원가입" })).toHaveAttribute("aria-selected", "true");
-
-    rejectLogin(new ApiError(401, "Invalid email or password"));
-
-    await waitFor(() => {
-      expect(screen.queryByText("이메일 또는 비밀번호가 올바르지 않습니다.")).not.toBeInTheDocument();
-    });
-    expect(screen.queryByTestId("e2e-auth-error")).not.toBeInTheDocument();
-  });
-
-  it("opens signup tab when ?mode=signup is present", async () => {
-    window.history.pushState({}, "", "/auth?mode=signup");
-    render(<AuthPageClient />);
-    await waitFor(() => {
-      expect(screen.getByRole("tab", { name: "회원가입" })).toHaveAttribute("aria-selected", "true");
-    });
   });
 });
