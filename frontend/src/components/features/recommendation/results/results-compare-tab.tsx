@@ -38,12 +38,12 @@ export function ResultsCompareTab({
   const rows =
     apiPicks.length > 0
       ? buildApiCompareRows(submission, build, apiPicks)
-      : buildLiteCompareRows(submission, liteSwitches);
+      : buildLiteCompareRows(submission, build, liteSwitches);
 
   return (
     <div className="space-y-6" data-testid="e2e-results-compare-tab">
       <p className="text-sm text-ca-on-surface-variant">
-        다른 조합과 비교해 현재 추천의 위치를 확인하세요.
+        현재 추천 조합과, 부품 일부를 바꾼 대안 조합을 비교해 보세요.
       </p>
       <div className="space-y-3">
         {rows.map((row) => (

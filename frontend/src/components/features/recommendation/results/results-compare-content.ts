@@ -3,6 +3,13 @@ import type { RecommendedBuild } from "@/types/recommendation";
 import type { CatalogItem, ScoredComponent } from "@/recommendation-engine/models";
 import type { TraitMetadata } from "@/recommendation-engine/traits";
 
+import {
+  BUILD_DOMAIN_KEYS,
+  BUILD_DOMAIN_LABELS,
+  type BuildDomainKey,
+  buildComponentDisplayText,
+  splitBuildComponentText,
+} from "./results-build-utils";
 import { DISPLAY_K } from "./results-constants";
 import { alternativeTagline } from "./results-text-utils";
 
@@ -12,12 +19,21 @@ export type CompareAxisBars = {
   bottomOut: number;
 };
 
+export type CompareBuildPart = {
+  domain: BuildDomainKey;
+  label: string;
+  name: string;
+  changed: boolean;
+};
+
 export type CompareBuildRow = {
   id: string;
   name: string;
   matchPercent: number | null;
   isCurrent: boolean;
   bars: CompareAxisBars;
+  parts: CompareBuildPart[];
+  diffSummary: string | null;
 };
 
 export const COMPARE_AXIS_LABELS = {
@@ -134,98 +150,203 @@ export function traitMetadataToCompareBars(meta: TraitMetadata): CompareAxisBars
   };
 }
 
-function collectSwitchAlternatives(apiPicks: ApiPick[], limit: number): ApiAlternative[] {
-  const switchPick = apiPicks.find((pick) => pick.domain.toLowerCase() === "switch");
-  return (switchPick?.alternatives ?? []).slice(0, limit);
+function normalizeDomain(domain: string): BuildDomainKey | null {
+  const d = domain.toLowerCase();
+  if (d === "switch" || d === "switches") return "switch";
+  if (d === "plate" || d === "plates") return "plate";
+  if (d === "foam" || d === "foams") return "foam";
+  if (d === "layout" || d === "layouts") return "layout";
+  if (d === "case" || d === "cases") return "case";
+  if (d === "keycap" || d === "keycaps") return "keycap";
+  return null;
 }
 
-function collectOtherAlternatives(apiPicks: ApiPick[], limit: number, excludeIds: Set<string>): ApiAlternative[] {
-  const rows: ApiAlternative[] = [];
+export function resolveCompareBuildParts(
+  build: RecommendedBuild,
+  apiPicks: Array<{ domain: string; itemId: string; itemName?: string }> = [],
+): CompareBuildPart[] {
+  return BUILD_DOMAIN_KEYS.map((domain) => {
+    const parsed = splitBuildComponentText(buildComponentDisplayText(build, domain, apiPicks));
+    return {
+      domain,
+      label: BUILD_DOMAIN_LABELS[domain],
+      name: parsed.name,
+      changed: false,
+    };
+  });
+}
+
+function withSwappedPart(
+  baseParts: CompareBuildPart[],
+  domain: BuildDomainKey,
+  nextName: string,
+): CompareBuildPart[] {
+  return baseParts.map((part) =>
+    part.domain === domain
+      ? { ...part, name: nextName.trim() || part.name, changed: true }
+      : { ...part, changed: false },
+  );
+}
+
+function shortPartName(name: string): string {
+  const trimmed = name.trim();
+  if (!trimmed || trimmed === "—") return "";
+  return trimmed.split(/\s+/).slice(0, 3).join(" ");
+}
+
+export function currentCompareBuildName(
+  answers: SurveySubmission["answers"],
+  parts: CompareBuildPart[],
+): string {
+  const headline = compareBuildHeadline(answers);
+  const caseName = shortPartName(parts.find((part) => part.domain === "case")?.name ?? "");
+  if (caseName) return `${caseName} · ${headline}`;
+  return `${headline} 조합`;
+}
+
+function blendBarsForVariant(
+  current: CompareAxisBars,
+  variantHint: CompareAxisBars,
+  domain: BuildDomainKey,
+): CompareAxisBars {
+  if (domain === "switch") {
+    return {
+      noise: variantHint.noise,
+      tactile: variantHint.tactile,
+      bottomOut: variantHint.bottomOut !== 3 ? variantHint.bottomOut : current.bottomOut,
+    };
+  }
+  if (domain === "foam" || domain === "case" || domain === "plate") {
+    return {
+      noise: variantHint.noise !== 3 ? variantHint.noise : current.noise,
+      tactile: current.tactile,
+      bottomOut: variantHint.bottomOut !== 3 ? variantHint.bottomOut : current.bottomOut,
+    };
+  }
+  return current;
+}
+
+export function buildCompareDiffSummary(
+  domain: BuildDomainKey,
+  currentBars: CompareAxisBars,
+  nextBars: CompareAxisBars,
+): string {
+  const label = BUILD_DOMAIN_LABELS[domain];
+  const deltas: string[] = [];
+  if (nextBars.noise < currentBars.noise) deltas.push("소음이 더 낮아질 수 있어요");
+  else if (nextBars.noise > currentBars.noise) deltas.push("소음이 더 커질 수 있어요");
+  if (nextBars.tactile > currentBars.tactile) deltas.push("구분감이 더 살아날 수 있어요");
+  else if (nextBars.tactile < currentBars.tactile) deltas.push("타건이 더 매끈해질 수 있어요");
+  if (nextBars.bottomOut > currentBars.bottomOut) deltas.push("바닥감이 더 단단해질 수 있어요");
+  else if (nextBars.bottomOut < currentBars.bottomOut) deltas.push("바닥감이 더 부드러워질 수 있어요");
+
+  if (deltas.length === 0) return `${label}만 바꾼 조합이에요.`;
+  return `${label}만 바꾼 조합이에요. ${deltas[0]}`;
+}
+
+type DomainAlt = {
+  domain: BuildDomainKey;
+  alt: ApiAlternative;
+  pickScore?: number;
+};
+
+function collectDomainAlternatives(apiPicks: ApiPick[], limit: number): DomainAlt[] {
+  const rows: DomainAlt[] = [];
+  const switchPick = apiPicks.find((pick) => normalizeDomain(pick.domain) === "switch");
+  for (const alt of switchPick?.alternatives ?? []) {
+    rows.push({ domain: "switch", alt, pickScore: switchPick?.score });
+    if (rows.length >= limit) return rows;
+  }
+
   for (const pick of apiPicks) {
+    const domain = normalizeDomain(pick.domain);
+    if (!domain || domain === "switch") continue;
     for (const alt of pick.alternatives ?? []) {
-      const key = `${pick.domain}:${alt.itemId}`;
-      if (excludeIds.has(key)) continue;
-      rows.push(alt);
+      rows.push({ domain, alt, pickScore: pick.score });
       if (rows.length >= limit) return rows;
     }
   }
   return rows;
 }
 
-/** API results — current build + up to two switch/other alternatives. */
+/** API results — current full build + up to two part-swap variants. */
 export function buildApiCompareRows(
   submission: SurveySubmission,
-  _build: RecommendedBuild,
+  build: RecommendedBuild,
   apiPicks: ApiPick[],
 ): CompareBuildRow[] {
   const currentMatch = resolveMatchPercent(submission);
+  const currentBars = surveyAnswersToCompareBars(submission.answers);
+  const baseParts = resolveCompareBuildParts(build, apiPicks);
+
   const rows: CompareBuildRow[] = [
     {
       id: "current",
-      name: compareBuildHeadline(submission.answers),
+      name: currentCompareBuildName(submission.answers, baseParts),
       matchPercent: currentMatch,
       isCurrent: true,
-      bars: surveyAnswersToCompareBars(submission.answers),
+      bars: currentBars,
+      parts: baseParts,
+      diffSummary: null,
     },
   ];
 
-  const switchPick = apiPicks.find((pick) => pick.domain.toLowerCase() === "switch");
-  const switchAlts = collectSwitchAlternatives(apiPicks, 2);
-  const used = new Set<string>();
+  const variants = collectDomainAlternatives(apiPicks, 2);
+  for (const [idx, variant] of variants.entries()) {
+    const altName = (variant.alt.itemName ?? "").trim() || alternativeTagline(idx);
+    const parts = withSwappedPart(baseParts, variant.domain, altName);
+    const text = `${variant.alt.summary} ${variant.alt.description ?? ""} ${altName}`;
+    const hintBars = inferCompareBarsFromText(text);
+    const bars = blendBarsForVariant(currentBars, hintBars, variant.domain);
 
-  for (const [idx, alt] of switchAlts.entries()) {
-    used.add(`switch:${alt.itemId}`);
-    const text = `${alt.summary} ${alt.description ?? ""} ${alt.itemName ?? ""}`;
     rows.push({
-      id: `alt-switch-${alt.itemId}`,
-      name: alt.itemName?.trim() || alternativeTagline(idx),
-      matchPercent: scaledAlternativeMatch(currentMatch, switchPick?.score, alt.score),
+      id: `alt-${variant.domain}-${variant.alt.itemId}`,
+      name: `대안 조합 · ${alternativeTagline(idx)}`,
+      matchPercent: scaledAlternativeMatch(currentMatch, variant.pickScore, variant.alt.score),
       isCurrent: false,
-      bars: inferCompareBarsFromText(text),
+      bars,
+      parts,
+      diffSummary: buildCompareDiffSummary(variant.domain, currentBars, bars),
     });
-  }
-
-  if (rows.length < 3) {
-    const extras = collectOtherAlternatives(apiPicks, 3 - rows.length, used);
-    for (const [idx, alt] of extras.entries()) {
-      const text = `${alt.summary} ${alt.description ?? ""} ${alt.itemName ?? ""}`;
-      rows.push({
-        id: `alt-extra-${alt.itemId}-${idx}`,
-        name: alt.itemName?.trim() || alternativeTagline(idx + switchAlts.length),
-        matchPercent: Math.max(1, Math.min(99, Math.round(alt.score * 100))),
-        isCurrent: false,
-        bars: inferCompareBarsFromText(text),
-      });
-    }
   }
 
   return rows.slice(0, 3);
 }
 
-/** Lite/local engine — headline + top switch candidates as variants. */
+/** Lite/local engine — headline build + top switch candidates as switch-swap variants. */
 export function buildLiteCompareRows(
   submission: SurveySubmission,
+  build: RecommendedBuild,
   switches: ScoredComponent<CatalogItem>[],
 ): CompareBuildRow[] {
   const currentMatch = resolveMatchPercent(submission);
+  const currentBars = surveyAnswersToCompareBars(submission.answers);
+  const baseParts = resolveCompareBuildParts(build, []);
+
   const rows: CompareBuildRow[] = [
     {
       id: "current",
-      name: compareBuildHeadline(submission.answers),
+      name: currentCompareBuildName(submission.answers, baseParts),
       matchPercent: currentMatch,
       isCurrent: true,
-      bars: surveyAnswersToCompareBars(submission.answers),
+      bars: currentBars,
+      parts: baseParts,
+      diffSummary: null,
     },
   ];
 
   const topPickScore = switches[0]?.score;
   for (const [idx, row] of switches.slice(1, DISPLAY_K).entries()) {
+    const parts = withSwappedPart(baseParts, "switch", row.item.name);
+    const bars = blendBarsForVariant(currentBars, traitMetadataToCompareBars(row.item.traitMetadata), "switch");
     rows.push({
       id: `lite-switch-${row.item.id}`,
-      name: row.item.name,
+      name: `대안 조합 · ${alternativeTagline(idx)}`,
       matchPercent: scaledAlternativeMatch(currentMatch, topPickScore, row.score),
       isCurrent: false,
-      bars: traitMetadataToCompareBars(row.item.traitMetadata),
+      bars,
+      parts,
+      diffSummary: buildCompareDiffSummary("switch", currentBars, bars),
     });
   }
 

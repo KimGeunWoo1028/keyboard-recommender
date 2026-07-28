@@ -28,6 +28,9 @@ export function ResultsCompareBuildCard({ row }: ResultsCompareBuildCardProps) {
             </span>
           ) : null}
           <h3 className="font-headline text-base font-extrabold leading-snug text-ca-on-surface">{row.name}</h3>
+          {row.diffSummary ? (
+            <p className="mt-1 break-keep text-sm text-ca-on-surface-variant">{row.diffSummary}</p>
+          ) : null}
         </div>
         {row.matchPercent !== null ? (
           <div className="shrink-0 text-right">
@@ -43,6 +46,24 @@ export function ResultsCompareBuildCard({ row }: ResultsCompareBuildCardProps) {
           </div>
         ) : null}
       </div>
+
+      <ul className="mb-4 grid gap-1.5 sm:grid-cols-2" data-testid="e2e-compare-build-parts">
+        {row.parts.map((part) => (
+          <li
+            key={`${row.id}-${part.domain}`}
+            className={cn(
+              "flex items-baseline gap-2 rounded-md px-2 py-1 text-sm",
+              part.changed ? "bg-primary/5 text-ca-on-surface" : "text-ca-on-surface-variant",
+            )}
+          >
+            <span className="w-16 shrink-0 text-xs font-medium text-ca-on-surface-variant">{part.label}</span>
+            <span className={cn("min-w-0 truncate font-medium", part.changed && "text-primary")}>
+              {part.name}
+              {part.changed ? <span className="ml-1 text-[10px] font-bold uppercase tracking-wide">변경</span> : null}
+            </span>
+          </li>
+        ))}
+      </ul>
 
       <div className="grid grid-cols-3 gap-4">
         <div>
