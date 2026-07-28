@@ -11,7 +11,7 @@ test.describe("Survey → API → results (deterministic)", () => {
 
     await expect(page).toHaveURL(/\/results$/);
     await expect(page.getByRole("heading", { name: /차분한 소리 · 매끈한 키감/ })).toBeVisible();
-    await expect(page.getByTestId("e2e-result-trust-summary").getByText("추천 결과")).toBeVisible();
+    await expect(page.getByTestId("e2e-result-trust-summary").getByText("Results")).toBeVisible();
 
     await expect(page.getByTestId("e2e-server-ranked")).toBeVisible();
 
