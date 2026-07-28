@@ -25,27 +25,21 @@ import { useAuthHeader } from "@/components/layout/auth-controls";
 import { makeResultSnapshotId, saveResultSnapshot } from "@/lib/saved-result-snapshots";
 import { recommendKeyboardStack } from "@/recommendation-engine/recommend";
 import { buildPreferenceVectorFromSubmission } from "@/nl-preference/merge-submission";
-import { topTraitHighlights } from "@/lib/trait-display";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import type { RecommendedBuild } from "@/types/recommendation";
 import type { SurveySubmission } from "@/types/survey";
-
-import { HelpHint } from "./results/help-hint";
-import { MetricGuideCard } from "./results/metric-guide-card";
 import { ResultsCompareTab } from "./results/results-compare-tab";
 import { catalogPickMetadata } from "./results/results-build-utils";
 import { DISPLAY_K } from "./results/results-constants";
 import { ResultsHeaderActions } from "./results/results-header-actions";
-import { ResultsNextActions } from "./results/results-next-actions";
 import { ResultsOverviewCtaBand } from "./results/results-overview-cta-band";
+import { ResultsOverviewFooter } from "./results/results-overview-footer";
 import { ResultsOverviewTab } from "./results/results-overview-tab";
 import { ResultsPageShell } from "./results/results-page-shell";
-import { ResultsTrustLayer } from "./results/results-trust-layer";
 import type { ResultTabId } from "./results/results-types";
 import { deriveConfidenceStory } from "./results/results-confidence-story-content";
 import { ResultsEvidenceMatchSection } from "./results/results-evidence-match-section";
-import { ResultsPreferenceSummary, preferenceTagsFromAnswers } from "./results/shared-result-header";
+import { preferenceTagsFromAnswers } from "./results/shared-result-header";
 
 const ResultsEvidenceTab = dynamic(
   () =>
@@ -73,11 +67,10 @@ type Props = {
   refineError?: string | null;
 };
 
-export function RecommendationResultView({ submission, build, onApplyRefinement, refineError }: Props) {
+export function RecommendationResultView({ submission, build }: Props) {
   const SAVE_FEEDBACK_MIN_MS = 350;
-  const { answers, traits } = submission;
+  const { answers } = submission;
   const { sourceUrls } = build;
-  const traitBadges = topTraitHighlights(traits, 6);
 
   const apiPicks = useMemo(
     () => submission.recommendations ?? submission.matchExplanations ?? [],
@@ -105,7 +98,6 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
   const [saveState, setSaveState] = useState<"idle" | "saving" | "saved" | "error">("idle");
   const [saveMessage, setSaveMessage] = useState("");
   const [saveScope, setSaveScope] = useState<"account" | "local" | null>(null);
-  const [applyingRefine, setApplyingRefine] = useState(false);
   const [saveCollection, setSaveCollection] = useState("일반");
   // Reuse AuthHeaderProvider session (single GET /auth/me) — avoid a second fetch.
   const { user: authUser, authChecked } = useAuthHeader();
@@ -540,20 +532,6 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
     }
   }
 
-  async function handleApplyRefinement(stepId: string, answerId: string, label?: string): Promise<void> {
-    if (!onApplyRefinement) return;
-    setApplyingRefine(true);
-    try {
-      await onApplyRefinement({ [stepId]: answerId } as Partial<SurveySubmission["answers"]>, {
-        label,
-        stepId,
-        answerId,
-      });
-    } finally {
-      setApplyingRefine(false);
-    }
-  }
-
   const handleTabChange = useCallback(
     (tab: ResultTabId) => {
       void emitResultsUxEventBestEffort("interaction.results_tab_click", {
@@ -601,38 +579,10 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
         {activeTab === "overview" ? (
           <div className="space-y-6 sm:space-y-8">
             <ResultsOverviewTab
-              submission={submission}
               build={build}
               apiPicks={enrichedApiPicks}
               enrichedSourceUrls={enrichedSourceUrls}
               enrichedLayoutSizes={enrichedLayoutSizes}
-              applyingRefine={applyingRefine}
-              refineError={refineError}
-              onApplyRefinement={(stepId, answerId, label) => void handleApplyRefinement(stepId, answerId, label)}
-              isAuthenticated={isAuthenticated}
-              sections="parts"
-            />
-            <ResultsTrustLayer
-              submission={submission}
-              build={build}
-              apiPicks={enrichedApiPicks}
-              applyingRefine={applyingRefine}
-              onApplyRefinement={(stepId, answerId, label) => void handleApplyRefinement(stepId, answerId, label)}
-            />
-            <ResultsPreferenceSummary answers={submission.answers} />
-            <ResultsNextActions
-              build={build}
-              apiPicks={enrichedApiPicks}
-              enrichedSourceUrls={enrichedSourceUrls}
-              isAuthenticated={isAuthenticated}
-              authReady={authChecked}
-              saveState={saveState}
-              saveScope={saveScope}
-              saveMessage={saveMessage}
-              onSaveBuild={() => void handleSaveBuild()}
-              shareTaste={shareTaste}
-              showSave={false}
-              showShare={false}
             />
             <ResultsOverviewCtaBand
               isAuthenticated={isAuthenticated}
@@ -640,17 +590,10 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
               saveState={saveState}
               onSaveBuild={() => void handleSaveBuild()}
             />
-            <ResultsOverviewTab
-              submission={submission}
-              build={build}
-              apiPicks={enrichedApiPicks}
-              enrichedSourceUrls={enrichedSourceUrls}
-              enrichedLayoutSizes={enrichedLayoutSizes}
-              applyingRefine={applyingRefine}
-              refineError={refineError}
-              onApplyRefinement={(stepId, answerId, label) => void handleApplyRefinement(stepId, answerId, label)}
+            <ResultsOverviewFooter
               isAuthenticated={isAuthenticated}
-              sections="secondary"
+              saveState={saveState}
+              saveMessage={saveMessage}
             />
           </div>
         ) : null}
@@ -701,7 +644,7 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
       }
     >
       {activeTab === "overview" ? (
-        <div className="space-y-8">
+        <div className="space-y-6 sm:space-y-8">
           {submission.apiUnreachableFallback ? (
             <Card className="border-amber-500/40 bg-amber-500/10 shadow-none">
               <CardHeader className="pb-2">
@@ -713,57 +656,16 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
             </Card>
           ) : null}
 
-          {submission.nlPreferenceText?.trim() ? (
-            <Card className="rounded-xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest shadow-none">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-base font-semibold">자유 입력 취향</CardTitle>
-                <CardDescription>
-                  입력한 문장을 바탕으로 취향을 분석해 추천에 함께 반영했습니다.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="rounded-lg border border-ca-outline-variant/35 p-3 text-sm text-ca-on-surface-variant">
-                  {submission.nlPreferenceText.trim()}
-                </p>
-              </CardContent>
-            </Card>
-          ) : null}
-
-          <div className="space-y-2">
-            <p className="inline-flex items-center gap-1.5 text-sm font-medium text-ca-on-surface">
-              설문 기반 핵심 성향
-              <HelpHint text="설문 답변에서 특히 강하게 드러난 취향 축을 요약한 배지입니다. 점수가 클수록 해당 성향이 더 뚜렷합니다." />
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {traitBadges.map((t) => (
-                <Badge key={t.key} className="border-ca-outline-variant/50 bg-transparent font-normal">
-                  {t.label} (+{t.score})
-                </Badge>
-              ))}
-            </div>
-          </div>
-
-          <MetricGuideCard />
-
-          <ResultsNextActions
-            build={build}
-            apiPicks={[]}
-            enrichedSourceUrls={{}}
-            isAuthenticated={isAuthenticated}
-            authReady={authChecked}
-            saveState={saveState}
-            saveScope={saveScope}
-            saveMessage={saveMessage}
-            onSaveBuild={() => void handleSaveBuild()}
-            shareTaste={liteShareTaste}
-            showSave={false}
-            showShare={false}
-          />
           <ResultsOverviewCtaBand
             isAuthenticated={isAuthenticated}
             authReady={authChecked}
             saveState={saveState}
             onSaveBuild={() => void handleSaveBuild()}
+          />
+          <ResultsOverviewFooter
+            isAuthenticated={isAuthenticated}
+            saveState={saveState}
+            saveMessage={saveMessage}
           />
         </div>
       ) : null}

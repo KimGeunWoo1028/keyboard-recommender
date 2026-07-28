@@ -1,7 +1,7 @@
 /**
  * Phase D — 375px visual regression for `/results` (optional weekly / path-filtered).
  *
- * Scenarios (3): First View · Trust Layer · Evidence tab.
+ * Scenarios (3): First View · Header trust · Evidence tab.
  * Do not: Compare Drawer · Home Dashboard · «빠른 추천».
  *
  * Update baselines: `npx playwright test --project=visual-375 --update-snapshots`
@@ -24,12 +24,13 @@ test.describe("Results visual regression — 375px", () => {
     await page.setViewportSize(VIEWPORT);
   });
 
-  test("375px First View: hero + trust + ranked", async ({ page }) => {
+  test("375px First View: hero + parts + CTA band", async ({ page }) => {
     await gotoDeterministicResults(page);
     await stabilizeForScreenshot(page);
 
-    await expect(page.getByTestId("e2e-trust-layer")).toBeVisible();
+    await expect(page.getByTestId("e2e-result-trust-summary")).toBeVisible();
     await expect(page.getByTestId("e2e-server-ranked")).toBeVisible();
+    await expect(page.getByTestId("e2e-overview-cta-band")).toBeVisible();
     await expect(page.getByTestId("e2e-results-tab-bar")).toBeVisible();
     // Compare must stay gone (Do not).
     await expect(page.getByTestId("e2e-open-compare")).toHaveCount(0);
@@ -41,17 +42,13 @@ test.describe("Results visual regression — 375px", () => {
     });
   });
 
-  test("375px Trust Layer region", async ({ page }) => {
+  test("375px Header trust summary region", async ({ page }) => {
     await gotoDeterministicResults(page);
     await stabilizeForScreenshot(page);
 
-    const trust = page.getByTestId("e2e-trust-layer");
-    const traitMiniProfile = page.getByTestId("e2e-trait-mini-profile");
+    const trust = page.getByTestId("e2e-result-trust-summary");
     await expect(trust).toBeVisible();
-    await expect(page.getByTestId("e2e-confidence-story")).toBeVisible();
-    if ((await traitMiniProfile.count()) > 0) {
-      await expect(traitMiniProfile).toBeVisible();
-    }
+    await expect(page.getByTestId("e2e-trust-short-why")).toBeVisible();
 
     await expect(trust).toHaveScreenshot("results-375-trust-layer.png", shotOpts);
   });

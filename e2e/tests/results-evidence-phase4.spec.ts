@@ -3,24 +3,21 @@ import { expect, test } from "@playwright/test";
 import { gotoDeterministicResults } from "./helpers/results-flow";
 
 test.describe("Results Evidence IA — Phase 4", () => {
-  test("trust layer visible on overview tab without duplicate quality card", async ({ page }) => {
+  test("overview tab shows minimal body: parts grid, CTA band, footer links", async ({ page }) => {
     await gotoDeterministicResults(page);
 
     await expect(page.getByRole("tab", { name: "개요" })).toHaveAttribute("aria-selected", "true");
-    await expect(page.getByTestId("e2e-trust-layer")).toBeVisible();
-    await expect(page.getByTestId("e2e-confidence-story")).toBeVisible();
+    await expect(page.getByTestId("e2e-server-ranked")).toBeVisible();
+    await expect(page.getByTestId("e2e-overview-cta-band")).toBeVisible();
+    await expect(page.getByTestId("e2e-overview-footer")).toBeVisible();
+    await expect(page.getByTestId("e2e-results-retake-link")).toBeVisible();
+    await expect(page.getByTestId("e2e-result-trust-summary")).toBeVisible();
+    await expect(page.getByTestId("e2e-trust-short-why")).toBeVisible();
     await expect(page.getByTestId("e2e-results-tab-bar")).toBeVisible();
     await expect(page.getByTestId("e2e-quality-status")).toHaveCount(0);
-
-    const trustLayer = page.getByTestId("e2e-trust-layer");
-    const traitMiniProfile = page.getByTestId("e2e-trait-mini-profile");
-    await expect(trustLayer).not.toContainText("추천 엔진 v2");
-    await expect(trustLayer).not.toContainText("주요 성향 축:");
-    if ((await traitMiniProfile.count()) > 0) {
-      // Mini-profile lives inside a collapsed <details>; expand before visibility check.
-      await trustLayer.getByText("취향 요약").click();
-      await expect(traitMiniProfile).toBeVisible();
-    }
+    await expect(page.getByTestId("e2e-trust-layer")).toHaveCount(0);
+    await expect(page.getByTestId("e2e-confidence-story")).toHaveCount(0);
+    await expect(page.getByTestId("e2e-results-next-actions")).toHaveCount(0);
   });
 
   test("evidence tab pick persuasion and honest ranking why", async ({ page }) => {
@@ -58,7 +55,7 @@ test.describe("Results Evidence IA — Phase 4", () => {
     await expect(page.getByText("가격대")).toHaveCount(0);
   });
 
-  test("mobile 375px: tab bar and overview trust layer remain visible", async ({ page }) => {
+  test("mobile 375px: tab bar and overview minimal body remain visible", async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await gotoDeterministicResults(page);
 
@@ -66,6 +63,7 @@ test.describe("Results Evidence IA — Phase 4", () => {
     await expect(page.getByRole("tab", { name: "개요" })).toBeVisible();
     await expect(page.getByRole("tab", { name: "근거" })).toBeVisible();
     await expect(page.getByRole("tab", { name: "비교" })).toBeVisible();
-    await expect(page.getByTestId("e2e-trust-layer")).toBeVisible();
+    await expect(page.getByTestId("e2e-server-ranked")).toBeVisible();
+    await expect(page.getByTestId("e2e-overview-cta-band")).toBeVisible();
   });
 });
