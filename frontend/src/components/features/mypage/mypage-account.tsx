@@ -27,6 +27,7 @@ import {
 import { ApiError } from "@/lib/api/client";
 import { formatAbsoluteDateTime } from "@/lib/date-time";
 import { resolveAvatarSrc } from "@/lib/avatar";
+import { cn } from "@/lib/utils";
 
 type Props = {
   user: AuthUser;
@@ -37,6 +38,8 @@ type Props = {
 const DELETE_CONFIRM_WORD = "탈퇴";
 const DELETE_WARNING =
   "탈퇴하면 계정·프로필·저장한 결과 접근 권한이 즉시 사라집니다. 탈퇴 후에는 같은 이메일로 다시 가입할 수 있습니다.";
+/** Softer corners on account settings actions — cards use rounded-xl, global Button defaults to rounded-sm. */
+const accountActionClass = "rounded-lg";
 
 function validateDisplayName(value: string): string | null {
   const v = value.trim();
@@ -143,34 +146,41 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
   return (
     <div className="max-w-lg space-y-6">
       <MyPageSectionCard title="프로필" className="rounded-xl">
-        <div className="flex items-center gap-3 border-b border-ca-outline-variant/30 pb-4">
-          <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full border border-ca-outline-variant/50 bg-ca-surface-container/60">
+        <div className="flex items-center gap-4 border-b border-ca-outline-variant/30 pb-4">
+          <button
+            type="button"
+            className="group relative h-16 w-16 shrink-0 overflow-hidden rounded-full border border-ca-outline-variant/50 bg-ca-surface-container/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+            disabled={updatingAvatar}
+            aria-label="프로필 사진 변경"
+            onClick={() => fileInputRef.current?.click()}
+          >
             {/* eslint-disable-next-line @next/next/no-img-element -- remote API avatar + local default */}
             <img
               src={avatarSrc}
               alt=""
               width={64}
               height={64}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover transition-opacity group-hover:opacity-80"
               decoding="async"
             />
-          </div>
-          <div className="min-w-0 flex-1 space-y-2">
-            <div className="flex flex-wrap gap-2">
-              <Button
+            <span className="pointer-events-none absolute inset-0 flex items-center justify-center bg-ca-base/0 text-[10px] font-semibold text-white opacity-0 transition-opacity group-hover:bg-ca-base/35 group-hover:opacity-100">
+              변경
+            </span>
+          </button>
+          <div className="min-w-0 flex-1 space-y-1">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+              <button
                 type="button"
-                variant="outline"
-                size="sm"
+                className="text-sm font-medium text-primary hover:underline disabled:opacity-50"
                 disabled={updatingAvatar}
                 onClick={() => fileInputRef.current?.click()}
               >
-                {updatingAvatar ? "업로드 중..." : "사진 올리기"}
-              </Button>
+                {updatingAvatar ? "업로드 중..." : "사진 변경"}
+              </button>
               {hasCustomAvatar ? (
-                <Button
+                <button
                   type="button"
-                  variant="ghost"
-                  size="sm"
+                  className="text-sm text-ca-on-surface-variant hover:text-ca-on-surface hover:underline disabled:opacity-50"
                   disabled={updatingAvatar}
                   onClick={() => {
                     setAvatarMessage(null);
@@ -187,9 +197,10 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
                   }}
                 >
                   기본으로
-                </Button>
+                </button>
               ) : null}
             </div>
+            <p className="text-xs text-ca-on-surface-variant">JPEG, PNG, WebP · 최대 5MB</p>
             <input
               ref={fileInputRef}
               type="file"
@@ -242,7 +253,7 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
                 type="button"
                 variant="outline"
                 size="sm"
-                className="shrink-0"
+                className={cn("shrink-0", accountActionClass)}
                 aria-label={editNickname ? "닉네임 저장" : "닉네임 수정"}
                 disabled={updatingName}
                 onClick={() => {
@@ -291,6 +302,7 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
                 <Button
                   variant="outline"
                   size="sm"
+                  className={accountActionClass}
                   onClick={() => {
                     const err = validateDisplayName(displayName);
                     if (err) {
@@ -357,7 +369,7 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
         {!openPasswordPanel ? (
           <Button
             variant="outline"
-            className="border-border font-semibold text-primary hover:border-primary"
+            className={cn("border-border font-semibold text-primary hover:border-primary", accountActionClass)}
             onClick={() => {
               setOpenPasswordPanel(true);
               setPasswordMessage(null);
@@ -595,7 +607,10 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
         <div className="flex flex-col gap-3">
           <Button
             variant="outline"
-            className="justify-start gap-2 border-border text-ca-on-surface-variant hover:border-primary hover:text-primary"
+            className={cn(
+              "justify-start gap-2 border-border text-ca-on-surface-variant hover:border-primary hover:text-primary",
+              accountActionClass,
+            )}
             disabled={securityActionBusy !== "none"}
             onClick={() => {
               setSecurityActionBusy("logout");
@@ -610,7 +625,7 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
           </Button>
           <Button
             variant="ghost"
-            className="justify-start text-ca-on-surface-variant hover:text-primary"
+            className={cn("justify-start text-ca-on-surface-variant hover:text-primary", accountActionClass)}
             disabled={securityActionBusy !== "none"}
             onClick={() => {
               setSecurityActionBusy("logout_all");
@@ -624,7 +639,10 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
           </Button>
           <Button
             variant="ghost"
-            className="justify-start gap-2 font-semibold text-destructive hover:bg-destructive/10 hover:text-destructive"
+            className={cn(
+              "justify-start gap-2 font-semibold text-destructive hover:bg-destructive/10 hover:text-destructive",
+              accountActionClass,
+            )}
             disabled={securityActionBusy !== "none" || deletingAccount}
             onClick={() => {
               setOpenDeletePanel((prev) => !prev);

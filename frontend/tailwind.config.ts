@@ -32,6 +32,10 @@ const config: Config = {
         },
         border: withAlpha("--border"),
         ring: withAlpha("--ring"),
+        destructive: {
+          DEFAULT: withAlpha("--ca-error"),
+          foreground: withAlpha("--ca-on-error"),
+        },
 
         /* Cyber-Artisan — use via bg-ca-primary, text-ca-on-surface, etc. */
         ca: {
