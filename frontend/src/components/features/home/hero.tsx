@@ -41,7 +41,7 @@ export function HomeHero() {
           <HomeHeroActions />
         </div>
 
-        <div className="animate-fade-up animate-fade-up-delay-2 relative lg:pr-1">
+        <div className="animate-fade-up animate-fade-up-delay-2 relative lg:pl-4">
           <div className="relative rounded-2xl border border-border bg-white shadow-2xl shadow-indigo-200/50 dark:bg-ca-surface-container dark:shadow-primary/10">
             <div className="relative overflow-hidden rounded-2xl">
               {/* Image slot — replace with <Image src=...> when asset is ready */}
@@ -67,7 +67,7 @@ export function HomeHero() {
               </div>
             </div>
           </div>
-          <div className="absolute -left-4 top-1/3 z-10 hidden rounded-xl border border-border bg-white p-3 shadow-lg dark:bg-ca-surface-container lg:block">
+          <div className="absolute -left-2 top-1/3 z-10 hidden rounded-xl border border-border bg-white p-3 shadow-lg dark:bg-ca-surface-container lg:block">
             <p className="text-xs font-medium text-ca-on-surface-variant">부품 카테고리</p>
             <p className="text-2xl font-black text-primary">6</p>
           </div>
