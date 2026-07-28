@@ -3,6 +3,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
+import { buttonClassName } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { RecommendedBuild } from "@/types/recommendation";
 import type { SurveySubmission } from "@/types/survey";
@@ -50,7 +51,7 @@ export function ResultsPageShell({
 
   return (
     <>
-      <div className="border-b border-border bg-white dark:bg-ca-surface-container">
+      <div className="border-b border-border bg-ca-surface-container-low dark:bg-ca-surface-container">
         <div className="mx-auto max-w-ca px-ca-margin-mobile py-8 sm:px-ca-margin sm:py-10">
           <div
             className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between"
@@ -90,18 +91,25 @@ export function ResultsPageShell({
 
           <div className="mt-6 space-y-3">
             <ResultTabBar activeTab={activeTab} onTabChange={onTabChange} />
-            <Link
-              href="/recommend"
-              className="inline-flex text-sm font-medium text-ca-on-surface-variant underline-offset-4 hover:text-ca-on-surface hover:underline"
-              data-testid="e2e-results-retake-link"
-            >
-              설문 다시 하기
-            </Link>
+            <div className="hidden sm:flex sm:justify-end">
+              <Link
+                href="/recommend"
+                className={cn(
+                  buttonClassName({ variant: "outline", size: "default" }),
+                  "min-h-10 border-ca-outline-variant/60 text-ca-on-surface",
+                )}
+                data-testid="e2e-results-retake-link"
+              >
+                다시 추천받기
+              </Link>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className={cn("mx-auto max-w-ca px-ca-margin-mobile py-8 sm:px-ca-margin sm:py-10")}>{children}</div>
+      <div className="bg-white dark:bg-ca-surface">
+        <div className={cn("mx-auto max-w-ca px-ca-margin-mobile py-8 sm:px-ca-margin sm:py-10")}>{children}</div>
+      </div>
     </>
   );
 }
