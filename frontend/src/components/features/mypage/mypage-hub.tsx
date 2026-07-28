@@ -268,7 +268,7 @@ export function MyPageHub() {
   const joined = user ? formatJoinedKo(user.created_at) : null;
 
   return (
-    <div data-testid="e2e-mypage-hub">
+    <div data-testid="e2e-mypage-hub" className="flex flex-1 flex-col">
       {user ? (
         <div className="border-b border-[rgb(220_220_238)] bg-white dark:border-border dark:bg-ca-surface">
           <div className="mx-auto max-w-4xl px-ca-margin-mobile py-8 sm:px-ca-margin">
@@ -323,7 +323,7 @@ export function MyPageHub() {
         </div>
       ) : null}
 
-      <div className="mx-auto max-w-4xl space-y-6 px-ca-margin-mobile py-8 sm:px-ca-margin">
+      <div className="mx-auto flex w-full max-w-4xl flex-1 flex-col space-y-6 px-ca-margin-mobile py-8 pb-16 sm:px-ca-margin sm:pb-20 min-h-[min(45vh,24rem)]">
         {savedLoadState === "error" ? (
           <div
             className="rounded-xl border-2 border-[rgb(220_220_238)] bg-white p-5 shadow-sm dark:border-border dark:bg-ca-surface-container sm:p-6"
