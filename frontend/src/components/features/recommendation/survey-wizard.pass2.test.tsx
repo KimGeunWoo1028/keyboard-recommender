@@ -18,6 +18,7 @@ describe("SurveyWizard Pass 2 (action hierarchy · NL · loading copy)", () => {
     render(<SurveyWizard />);
 
     await user.click(screen.getByRole("button", { name: /부드럽고 조용한 성향/ }));
+    await user.click(screen.getByTestId("e2e-survey-start-with-style"));
 
     expect(screen.getByRole("button", { name: "다음" })).toBeInTheDocument();
     expect(screen.queryByRole("button", { name: "스타일 선택으로" })).not.toBeInTheDocument();
@@ -33,6 +34,7 @@ describe("SurveyWizard Pass 2 (action hierarchy · NL · loading copy)", () => {
     render(<SurveyWizard />);
 
     await user.click(screen.getByRole("button", { name: /부드럽고 조용한 성향/ }));
+    await user.click(screen.getByTestId("e2e-survey-start-with-style"));
     expect(screen.queryByTestId("e2e-nl-preference")).not.toBeInTheDocument();
 
     await user.click(screen.getByRole("radio", { name: /가볍게 누름/ }));

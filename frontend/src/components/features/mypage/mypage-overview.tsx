@@ -90,11 +90,11 @@ export function MyPageOverview({ user, savedItems }: Props) {
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-2">
-        <div className="rounded-xl border-2 border-[rgb(220_220_238)] bg-white p-5 dark:border-border dark:bg-ca-surface-container">
+        <div className="rounded-sm border-2 border-[rgb(220_220_238)] bg-white p-5 dark:border-border dark:bg-ca-surface-container">
           <p className="mb-2 text-xs font-bold uppercase tracking-widest text-[rgb(130_130_150)]">저장한 조합</p>
           <p className="font-headline text-3xl font-extrabold tabular-nums text-primary">{savedItems.length}</p>
         </div>
-        <div className="rounded-xl border-2 border-[rgb(220_220_238)] bg-white p-5 dark:border-border dark:bg-ca-surface-container">
+        <div className="rounded-sm border-2 border-[rgb(220_220_238)] bg-white p-5 dark:border-border dark:bg-ca-surface-container">
           <p className="mb-2 text-xs font-bold uppercase tracking-widest text-[rgb(130_130_150)]">마지막 추천</p>
           <p className="font-headline text-lg font-extrabold leading-snug text-primary sm:text-xl">
             {relative ?? (hasRecommendationHint ? "기록 있음" : "없음")}
@@ -102,7 +102,7 @@ export function MyPageOverview({ user, savedItems }: Props) {
         </div>
       </div>
 
-      <div className="overflow-hidden rounded-xl border-2 border-[rgb(220_220_238)] bg-white dark:border-border dark:bg-ca-surface-container">
+      <div className="overflow-hidden rounded-sm border-2 border-[rgb(220_220_238)] bg-white dark:border-border dark:bg-ca-surface-container">
         <div className="flex items-center justify-between border-b border-[rgb(220_220_238)] bg-[rgb(248_248_252)] px-5 py-3 dark:border-border dark:bg-ca-surface-container-low">
           <div className="flex min-w-0 items-center gap-3">
             <div
@@ -167,7 +167,7 @@ export function MyPageOverview({ user, savedItems }: Props) {
               전체 보기 <ChevronRight className="h-3 w-3" aria-hidden />
             </Link>
           </div>
-          <div className="rounded-xl border-2 border-[rgb(220_220_238)] bg-white p-5 transition-colors hover:border-primary/40 dark:border-border dark:bg-ca-surface-container">
+          <div className="rounded-sm border-2 border-[rgb(220_220_238)] bg-white p-5 transition-colors hover:border-primary/40 dark:border-border dark:bg-ca-surface-container">
             <h3 className="font-headline font-extrabold text-ca-on-surface">
               {titleLine1}
               {titleLine2 ? ` ${titleLine2}` : null}
@@ -195,7 +195,7 @@ export function MyPageOverview({ user, savedItems }: Props) {
           </div>
         </div>
       ) : (
-        <div className="rounded-xl border-2 border-dashed border-[rgb(220_220_238)] bg-white p-8 text-center dark:border-border dark:bg-ca-surface-container">
+        <div className="rounded-sm border-2 border-dashed border-[rgb(220_220_238)] bg-white p-8 text-center dark:border-border dark:bg-ca-surface-container">
           <p className="text-sm font-medium text-ca-on-surface-variant">
             {hasRecommendationHint
               ? relative

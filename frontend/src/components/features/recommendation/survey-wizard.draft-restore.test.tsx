@@ -18,6 +18,7 @@ describe("SurveyWizard draft restore (SUR-01 / SUR-02)", () => {
     const user = userEvent.setup();
     const { unmount } = render(<SurveyWizard />);
     await user.click(screen.getByRole("button", { name: /부드럽고 조용한 성향/ }));
+    await user.click(screen.getByTestId("e2e-survey-start-with-style"));
     expect(screen.getByRole("heading", { name: "타건 압력" })).toBeInTheDocument();
     unmount();
     // Simulate /results → browser back: remount with draft intact (submit must not clear).

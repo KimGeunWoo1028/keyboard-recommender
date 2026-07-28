@@ -54,7 +54,7 @@ export function SurveyQuestion<T extends SurveyStepId>({ step, value, onChange, 
               aria-checked={selected}
               onClick={() => onChange(opt.id)}
               className={cn(
-                "group relative flex w-full min-w-0 flex-col items-start justify-start gap-2 rounded-xl border-2 bg-white p-4 text-left transition-colors dark:bg-ca-surface-container sm:p-4",
+                "group relative flex w-full min-w-0 flex-col items-start justify-start gap-2 rounded-sm border-2 bg-white p-4 text-left transition-colors dark:bg-ca-surface-container sm:p-4",
                 flexRow && "sm:flex-1",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                 selected

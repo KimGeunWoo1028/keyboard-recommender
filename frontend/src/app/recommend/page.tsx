@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
 import { SurveyWizard } from "@/components/features/recommendation/survey-wizard";
-import { PageShell } from "@/components/layout/page-shell";
 import { publicPageMetadata } from "@/lib/seo/page-metadata";
 
 export const metadata: Metadata = publicPageMetadata({
@@ -12,10 +11,10 @@ export const metadata: Metadata = publicPageMetadata({
 
 export default function RecommendPage() {
   return (
-    <PageShell className="flex min-h-[calc(100dvh-4.25rem)] w-full max-w-ca flex-col overflow-y-auto overflow-x-hidden !bg-[rgb(248_248_252)] !px-ca-margin-mobile !py-4 dark:!bg-ca-surface-container-low sm:h-[calc(100dvh-4.25rem)] sm:max-h-[calc(100dvh-4.25rem)] sm:overflow-hidden sm:!px-ca-margin sm:!py-6">
-      <div className="flex min-h-0 flex-1 flex-col">
+    <div className="flex min-h-[calc(100dvh-4.25rem)] w-full flex-col overflow-y-auto bg-white dark:bg-ca-surface sm:h-[calc(100dvh-4.25rem)] sm:max-h-[calc(100dvh-4.25rem)] sm:overflow-hidden">
+      <div className="mx-auto flex min-h-0 w-full max-w-ca flex-1 flex-col px-ca-margin-mobile sm:px-ca-margin">
         <SurveyWizard />
       </div>
-    </PageShell>
+    </div>
   );
 }
