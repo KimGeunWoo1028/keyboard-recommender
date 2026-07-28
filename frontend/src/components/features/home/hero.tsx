@@ -2,14 +2,11 @@ import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 
 import { HomeHeroActions } from "@/components/features/home/home-hero-actions";
-import { HOME_RESULT_PREVIEW_EXAMPLE } from "@/components/features/home/home-result-preview-example";
 
 /**
- * Home first viewport — Manus-style two-column hero.
+ * Home first viewport — cutout keyboard on page wash (no card frame).
  */
 export function HomeHero() {
-  const example = HOME_RESULT_PREVIEW_EXAMPLE;
-
   return (
     <section className="relative flex min-h-[min(92vh,56rem)] w-full items-center">
       {/* Full-bleed wash — must sit outside max-w-ca so edges are not clipped */}
@@ -18,7 +15,7 @@ export function HomeHero() {
         <div className="absolute right-1/4 top-1/2 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-primary/5 blur-3xl" />
       </div>
 
-      <div className="relative mx-auto grid w-full max-w-ca grid-cols-1 items-center gap-12 px-ca-margin-mobile py-16 sm:px-ca-margin lg:grid-cols-2 lg:gap-12">
+      <div className="relative mx-auto grid w-full max-w-ca grid-cols-1 items-center gap-10 px-ca-margin-mobile py-16 sm:px-ca-margin lg:grid-cols-2 lg:gap-8">
         <div className="animate-fade-up">
           <p className="section-label mb-6">Keyboard Recommender</p>
           <h1 className="font-headline text-5xl font-black leading-[1.05] tracking-tight text-ca-on-surface sm:text-6xl lg:text-7xl">
@@ -41,35 +38,16 @@ export function HomeHero() {
           <HomeHeroActions />
         </div>
 
-        <div className="animate-fade-up animate-fade-up-delay-2 relative lg:pl-4">
-          <div className="relative rounded-2xl border border-border bg-white shadow-2xl shadow-indigo-200/50 dark:bg-ca-surface-container dark:shadow-primary/10">
-            <div className="relative overflow-hidden rounded-2xl">
-              <div className="relative aspect-[5/4] w-full">
-                <Image
-                  src="/brand/hero-keyboard.png"
-                  alt="프리미엄 기계식 키보드"
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 40vw"
-                  className="object-cover"
-                />
-              </div>
-              <div className="absolute bottom-4 left-4 right-4 rounded-xl border border-border bg-white/90 p-4 shadow-lg backdrop-blur-md dark:bg-ca-surface-container/90">
-                <p className="mb-1 text-xs font-bold uppercase tracking-widest text-primary">추천 결과 예시</p>
-                <p className="mb-2 text-sm font-semibold text-ca-on-surface">{example.title}</p>
-                <div className="flex flex-wrap gap-2">
-                  {example.parts.map((part) => (
-                    <span key={part.family} className="ca-keycap-badge">
-                      {part.name}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="absolute -left-2 top-1/3 z-10 hidden rounded-xl border border-border bg-white p-3 shadow-lg dark:bg-ca-surface-container lg:block">
-            <p className="text-xs font-medium text-ca-on-surface-variant">부품 카테고리</p>
-            <p className="text-2xl font-black text-primary">6</p>
+        <div className="animate-fade-up animate-fade-up-delay-2 relative flex justify-center lg:justify-end">
+          <div className="relative aspect-[3/2] w-full max-w-xl lg:max-w-none">
+            <Image
+              src="/brand/hero-keyboard-cutout.png"
+              alt="프리미엄 기계식 키보드"
+              fill
+              priority
+              sizes="(max-width: 1024px) 90vw, 44vw"
+              className="object-contain object-center drop-shadow-[0_24px_48px_rgba(15,15,25,0.18)] dark:drop-shadow-[0_24px_48px_rgba(0,0,0,0.45)]"
+            />
           </div>
         </div>
       </div>

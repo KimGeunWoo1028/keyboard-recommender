@@ -7,23 +7,21 @@ const SWITCH_TYPES = [
 ] as const;
 
 /**
- * Manus Switch Guide layout — switch product photo + type list.
+ * Switch guide — cutout product photo on page wash (no card frame).
  */
 export function HomeSwitchGuide() {
   return (
     <section className="py-20 sm:py-24" aria-labelledby="home-switch-guide-heading">
       <div className="mx-auto grid max-w-ca grid-cols-1 items-center gap-12 px-ca-margin-mobile sm:px-ca-margin lg:grid-cols-2 lg:gap-16">
-        <div className="order-2 rounded-2xl border border-border bg-white shadow-xl dark:bg-ca-surface-container lg:order-1">
-          <div className="overflow-hidden rounded-2xl">
-            <div className="relative aspect-[5/4] w-full">
-              <Image
-                src="/brand/switches-hero.png"
-                alt="기계식 키보드 스위치"
-                fill
-                sizes="(max-width: 1024px) 100vw, 40vw"
-                className="object-cover"
-              />
-            </div>
+        <div className="order-2 flex justify-center lg:order-1 lg:justify-start">
+          <div className="relative aspect-[3/2] w-full max-w-lg">
+            <Image
+              src="/brand/hero-switches-cutout.png"
+              alt="기계식 키보드 스위치"
+              fill
+              sizes="(max-width: 1024px) 90vw, 40vw"
+              className="object-contain object-center drop-shadow-[0_20px_40px_rgba(15,15,25,0.16)] dark:drop-shadow-[0_20px_40px_rgba(0,0,0,0.4)]"
+            />
           </div>
         </div>
         <div className="order-1 lg:order-2">
