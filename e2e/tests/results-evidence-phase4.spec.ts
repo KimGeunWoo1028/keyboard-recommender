@@ -3,9 +3,10 @@ import { expect, test } from "@playwright/test";
 import { gotoDeterministicResults } from "./helpers/results-flow";
 
 test.describe("Results Evidence IA — Phase 4", () => {
-  test("trust layer visible above tabs without duplicate quality card", async ({ page }) => {
+  test("trust layer visible on overview tab without duplicate quality card", async ({ page }) => {
     await gotoDeterministicResults(page);
 
+    await expect(page.getByRole("tab", { name: "개요" })).toHaveAttribute("aria-selected", "true");
     await expect(page.getByTestId("e2e-trust-layer")).toBeVisible();
     await expect(page.getByTestId("e2e-confidence-story")).toBeVisible();
     await expect(page.getByTestId("e2e-results-tab-bar")).toBeVisible();
@@ -25,7 +26,10 @@ test.describe("Results Evidence IA — Phase 4", () => {
   test("evidence tab pick persuasion and honest ranking why", async ({ page }) => {
     await gotoDeterministicResults(page);
 
-    await page.getByRole("tab", { name: "추천 근거" }).click();
+    await page.getByRole("tab", { name: "근거" }).click();
+    await expect(page.getByTestId("e2e-evidence-matching-table")).toBeVisible();
+    await expect(page.getByTestId("e2e-evidence-confidence-callout")).toBeVisible();
+    await expect(page.getByText("취향 매칭 분석")).toBeVisible();
     await expect(page.getByTestId("e2e-pick-explanations")).toBeVisible();
     await expect(page.getByRole("heading", { name: "후보별 추천 근거" })).toBeVisible();
 
@@ -40,13 +44,28 @@ test.describe("Results Evidence IA — Phase 4", () => {
     await expect(evidence.getByText("순위 점수")).toHaveCount(0);
   });
 
-  test("mobile 375px: tab bar and trust layer remain visible", async ({ page }) => {
+  test("compare tab shows Manus-style build cards with current highlight", async ({ page }) => {
+    await gotoDeterministicResults(page);
+
+    await page.getByRole("tab", { name: "비교" }).click();
+    await expect(page.getByTestId("e2e-results-compare-tab")).toBeVisible();
+    await expect(page.getByTestId("e2e-compare-current-build")).toBeVisible();
+    await expect(page.getByTestId("e2e-compare-current-build").getByText("현재 추천")).toBeVisible();
+    await expect(page.getByText("취향 일치도").first()).toBeVisible();
+    await expect(page.getByText("소음").first()).toBeVisible();
+    await expect(page.getByText("타건감").first()).toBeVisible();
+    await expect(page.getByText("바닥감").first()).toBeVisible();
+    await expect(page.getByText("가격대")).toHaveCount(0);
+  });
+
+  test("mobile 375px: tab bar and overview trust layer remain visible", async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await gotoDeterministicResults(page);
 
     await expect(page.getByTestId("e2e-results-tab-bar")).toBeVisible();
-    await expect(page.getByRole("tab", { name: "추천 요약" })).toBeVisible();
-    await expect(page.getByRole("tab", { name: "추천 근거" })).toBeVisible();
+    await expect(page.getByRole("tab", { name: "개요" })).toBeVisible();
+    await expect(page.getByRole("tab", { name: "근거" })).toBeVisible();
+    await expect(page.getByRole("tab", { name: "비교" })).toBeVisible();
     await expect(page.getByTestId("e2e-trust-layer")).toBeVisible();
   });
 });

@@ -8,6 +8,9 @@ import {
   isGenericBuildPartDescription,
   overviewAlternativeDescription,
   overviewBuildPartDescription,
+  overviewDatasheetBrand,
+  overviewDatasheetSpecLine,
+  overviewDatasheetTraitPills,
 } from "./results-text-utils";
 
 describe("overviewAlternativeDescription", () => {
@@ -122,6 +125,40 @@ describe("overviewAlternativeDescription", () => {
         "Qwertykeys QK65 MK3 보강판",
       ),
     ).toBe("FR4 소재 플레이트입니다.");
+  });
+});
+
+describe("overviewDatasheet helpers", () => {
+  const STABLE_SWITCH_TRAITS = [
+    "중간 무게의 스프링(44g) 설정입니다.",
+    "팩토리 윤활이 적용되어 마찰감을 줄인 세팅입니다.",
+    "차분한 소리 선호(+8.0)와 후보 특성(+10.0)이 같은 방향이라 정합 기여가 큽니다(+84.0).",
+    "매끈한 타건감 선호(+5.0)와 후보 특성(+9.2)이 같은 방향이라 정합 기여가 큽니다(+55.2).",
+  ];
+
+  it("overviewDatasheetSpecLine combines domain and switch subtype", () => {
+    expect(overviewDatasheetSpecLine("switch", STABLE_SWITCH_TRAITS)).toBe("SWITCH");
+    expect(
+      overviewDatasheetSpecLine("switch", ["저소음 리니어 스위치입니다.", ...STABLE_SWITCH_TRAITS]),
+    ).toBe("SWITCH / SILENT · LINEAR");
+    expect(
+      overviewDatasheetSpecLine("plate", ["FR4 소재 플레이트입니다."], "FR4 plate"),
+    ).toBe("PLATE / FR4");
+  });
+
+  it("overviewDatasheetBrand extracts Latin brand token or slug", () => {
+    expect(overviewDatasheetBrand("Qwertykeys QK65 MK3 보강판")).toBe("QWERTYKEYS");
+    expect(overviewDatasheetBrand(undefined, "switch-gateron-yellow")).toBe("GATERON");
+    expect(overviewDatasheetBrand("일반 제품명")).toBe("");
+  });
+
+  it("overviewDatasheetTraitPills prefers alignment axes then spec tags", () => {
+    const why = formatEvidenceWhyLine("ignored", STABLE_SWITCH_TRAITS, "Switch", "switch");
+    expect(overviewDatasheetTraitPills(STABLE_SWITCH_TRAITS, "switch", why)).toEqual([
+      "차분한 소리",
+      "매끈한 타건감",
+      "44g",
+    ]);
   });
 });
 

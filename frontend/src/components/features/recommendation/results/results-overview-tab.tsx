@@ -1,50 +1,33 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState, type SyntheticEvent } from "react";
+import { useEffect, useState, type SyntheticEvent } from "react";
 
 import { catalogHref } from "@/lib/catalog-links";
 import { isReferenceOnlyLayoutArchetype } from "@/lib/layout-catalog-links";
-import { layoutSizeShortLabel } from "@/lib/layout-size";
 import { pickSourceUrlKey } from "@/lib/swagkey-source-links";
 import { layoutArchetypeMetadata } from "@/components/features/catalog/layout-diagram/layout-archetype-metadata";
-import { CatalogPartThumbnail } from "@/components/features/catalog/catalog-part-thumbnail";
-import { Badge } from "@/components/ui/badge";
 import { buttonClassName } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import type { CatalogFamily } from "@/lib/api/catalog";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import type { RecommendedBuild } from "@/types/recommendation";
 import type { SurveySubmission } from "@/types/survey";
 import { PurchaseTrustBlock } from "@/components/features/trust/purchase-trust-block";
 
-import { HelpHint } from "./help-hint";
-import { DISPLAY_K } from "./results-constants";
+import { ResultsOverviewDatasheetCard } from "./results-overview-datasheet-card";
 import {
   BUILD_DOMAIN_KEYS,
   BUILD_DOMAIN_LABELS,
   buildComponentDisplayText,
   buildPartSourceUrl,
-  domainDisplayLabel,
-  formatScoreBand,
-  pickRowSourceUrl,
   splitBuildComponentText,
 } from "./results-build-utils";
-import { SwagkeyProductLink } from "./swagkey-product-link";
 import {
-  alternativeTagline,
-  overviewAlternativeDescription,
+  formatEvidenceWhyLine,
   overviewBuildPartDescription,
+  overviewDatasheetBrand,
+  overviewDatasheetSpecLine,
+  overviewDatasheetTraitPills,
 } from "./results-text-utils";
-
-type ApiAlternative = {
-  itemId: string;
-  itemName?: string;
-  score: number;
-  description?: string;
-  summary: string;
-  tradeOff?: string;
-  sourceUrl?: string;
-};
 
 type ApiPick = {
   domain: string;
@@ -54,43 +37,8 @@ type ApiPick = {
   imageUrl?: string;
   score?: number;
   summary?: string;
-  alternatives?: ApiAlternative[];
+  whyTraits?: string[];
 };
-
-type OverviewAlternative = ApiAlternative & {
-  domain: string;
-  tagline: string;
-};
-
-function collectOverviewAlternatives(apiPicks: ApiPick[], limit: number): OverviewAlternative[] {
-  const seen = new Set<string>();
-  const rows: OverviewAlternative[] = [];
-
-  const pushFromPick = (pick: ApiPick) => {
-    for (const [altIdx, alt] of (pick.alternatives ?? []).entries()) {
-      const key = `${pick.domain}:${alt.itemId}`;
-      if (seen.has(key)) continue;
-      seen.add(key);
-      rows.push({
-        ...alt,
-        domain: pick.domain,
-        tagline: alternativeTagline(altIdx),
-      });
-      if (rows.length >= limit) return;
-    }
-  };
-
-  const switchPick = apiPicks.find((pick) => pick.domain.toLowerCase() === "switch");
-  if (switchPick) pushFromPick(switchPick);
-  if (rows.length >= limit) return rows;
-
-  for (const pick of apiPicks) {
-    pushFromPick(pick);
-    if (rows.length >= limit) break;
-  }
-
-  return rows;
-}
 
 function resolvePickLayoutSize(
   domain: string,
@@ -118,8 +66,7 @@ export type ResultsOverviewTabProps = {
   onApplyRefinement: (stepId: string, answerId: string, label: string) => void;
   isAuthenticated: boolean;
   /**
-   * Phase 5: `parts` = product cards (above CTA); `secondary` = alternatives/explore
-   * (below trust); `all` = legacy single block.
+   * `parts` = product cards; `secondary` = explore blocks; `all` = legacy single block.
    */
   sections?: "parts" | "secondary" | "all";
 };
@@ -135,39 +82,21 @@ export function ResultsOverviewTab({
 }: ResultsOverviewTabProps) {
   const showParts = sections === "parts" || sections === "all";
   const showSecondary = sections === "secondary" || sections === "all";
-  const overviewAlternatives = useMemo(
-    () => collectOverviewAlternatives(apiPicks, DISPLAY_K),
-    [apiPicks],
-  );
   /** Desktop: keep secondary blocks open; mobile: collapsed by default (P18). */
-  const [altsOpen, setAltsOpen] = useState(false);
   const [exploreOpen, setExploreOpen] = useState(false);
   useEffect(() => {
     if (typeof window.matchMedia !== "function") {
-      setAltsOpen(true);
       setExploreOpen(true);
       return;
     }
     const mq = window.matchMedia("(min-width: 640px)");
     const sync = () => {
-      const desktop = mq.matches;
-      setAltsOpen(desktop);
-      setExploreOpen(desktop);
+      setExploreOpen(mq.matches);
     };
     sync();
     mq.addEventListener("change", sync);
     return () => mq.removeEventListener("change", sync);
   }, []);
-
-  function onAltsToggle(event: SyntheticEvent<HTMLDetailsElement>) {
-    const el = event.currentTarget;
-    if (typeof window.matchMedia === "function" && window.matchMedia("(min-width: 640px)").matches) {
-      el.open = true;
-      setAltsOpen(true);
-      return;
-    }
-    setAltsOpen(el.open);
-  }
 
   function onExploreToggle(event: SyntheticEvent<HTMLDetailsElement>) {
     const el = event.currentTarget;
@@ -182,17 +111,11 @@ export function ResultsOverviewTab({
   return (
     <>
       {showParts ? (
-      <Card className="overflow-hidden rounded-sm border-2 border-[rgb(220_220_238)] bg-white shadow-sm dark:border-border dark:bg-ca-surface-container" data-testid="e2e-server-ranked">
-        <CardHeader className="border-b border-border pb-3 sm:pb-4">
-          <CardTitle className="flex items-center gap-2 font-headline text-base font-bold text-ca-on-surface">
-            <span>추천 조합 구성</span>
-            <HelpHint text="이번 결과에서 선택된 핵심 구성품(스위치, 플레이트, 폼, 레이아웃, 케이스/키트, 키캡) 요약입니다." />
-          </CardTitle>
-          <CardDescription className="text-ca-on-surface-variant">
-            스위치부터 키캡까지 여섯 축 · 상세는 카드에서 확인하세요.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="grid grid-cols-1 gap-3 pt-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="space-y-4" data-testid="e2e-server-ranked">
+        <p className="text-sm text-ca-on-surface-variant">
+          취향 분석을 바탕으로 선정한 6가지 부품 조합입니다.
+        </p>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {BUILD_DOMAIN_KEYS.map((key) => {
             const parsed = splitBuildComponentText(buildComponentDisplayText(build, key, apiPicks));
             const sourceUrl = buildPartSourceUrl(build, key, apiPicks, enrichedSourceUrls);
@@ -202,60 +125,37 @@ export function ResultsOverviewTab({
               pick?.summary,
               parsed.name,
             );
+            const whyLine = formatEvidenceWhyLine(pick?.summary, pick?.whyTraits, parsed.name, key);
             const layoutSize =
               key === "layout" || key === "case"
                 ? pick?.itemId
                   ? resolvePickLayoutSize(key, pick.itemId, enrichedLayoutSizes)
                   : null
                 : null;
+            const layoutCatalogHref =
+              key === "layout" && layoutSize && !isReferenceOnlyLayoutArchetype(pick?.itemId)
+                ? catalogHref({ family: "case", layoutSize, from: "results" })
+                : null;
+
             return (
-              <div
+              <ResultsOverviewDatasheetCard
                 key={key}
-                className="card-lift flex h-full flex-col overflow-hidden rounded-xl border-2 border-border bg-white transition-colors hover:border-primary/40 dark:bg-ca-surface-container"
-              >
-                <CatalogPartThumbnail
-                  family={key as CatalogFamily}
-                  imageUrl={pick?.imageUrl}
-                  partId={pick?.itemId}
-                  alt={parsed.name}
-                  className="rounded-none"
-                  uniformCardMedia
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                />
-                <div className="flex flex-1 flex-col px-3 py-3">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <p className="text-sm font-medium text-ca-on-surface-variant">{BUILD_DOMAIN_LABELS[key]}</p>
-                    {layoutSize ? (
-                      <Badge className="border-ca-outline-variant/50 bg-transparent font-normal text-ca-on-surface-variant">
-                        {layoutSizeShortLabel(layoutSize)}
-                      </Badge>
-                    ) : null}
-                  </div>
-                  <p className="mt-1 font-headline text-base font-semibold text-ca-on-surface">{parsed.name}</p>
-                  {blurb ? (
-                    <p className="mt-1 line-clamp-2 break-keep text-sm leading-relaxed text-ca-on-surface-variant">
-                      {blurb}
-                    </p>
-                  ) : null}
-                  <p className="mt-auto pt-2">
-                    <SwagkeyProductLink href={sourceUrl} domain={key} itemId={pick?.itemId} />
-                  </p>
-                  {key === "layout" && layoutSize && !isReferenceOnlyLayoutArchetype(pick?.itemId) ? (
-                    <p className="mt-2">
-                      <Link
-                        href={catalogHref({ family: "case", layoutSize, from: "results" })}
-                        className="text-sm font-medium text-ca-on-surface underline-offset-4 hover:underline"
-                      >
-                        {layoutSizeShortLabel(layoutSize)} 케이스/키트 보기
-                      </Link>
-                    </p>
-                  ) : null}
-                </div>
-              </div>
+                category={BUILD_DOMAIN_LABELS[key]}
+                specLine={overviewDatasheetSpecLine(key, pick?.whyTraits, pick?.summary)}
+                brand={overviewDatasheetBrand(parsed.name, pick?.itemId)}
+                name={parsed.name}
+                description={blurb}
+                traits={overviewDatasheetTraitPills(pick?.whyTraits, key, whyLine)}
+                sourceUrl={sourceUrl}
+                domain={key}
+                itemId={pick?.itemId}
+                layoutSize={layoutSize}
+                layoutCatalogHref={layoutCatalogHref}
+              />
             );
           })}
-        </CardContent>
-        <div className="border-t border-border px-4 py-3 sm:px-6">
+        </div>
+        <div className="rounded-xl border border-border bg-white px-4 py-3 dark:bg-ca-surface-container sm:px-5">
           <details className="group">
             <summary className="cursor-pointer list-none text-sm font-medium text-ca-on-surface marker:content-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))] focus-visible:ring-offset-2 [&::-webkit-details-marker]:hidden">
               <span className="underline-offset-2 group-open:underline">구매·재고 안내</span>
@@ -285,103 +185,30 @@ export function ResultsOverviewTab({
             </Link>
           )}
         </div>
-      </Card>
+      </div>
       ) : null}
 
-      {showSecondary && overviewAlternatives.length > 0 ? (
-        <>
-          <div className="mt-6 flex flex-col gap-2 rounded-xl border border-border bg-white dark:bg-ca-surface-container px-4 py-4 sm:px-5">
-            <p className="font-headline text-sm font-semibold text-ca-on-surface">다른 선택지도 보고 싶나요?</p>
-            <p className="break-keep text-sm text-ca-on-surface-variant">
-              전용 비교 화면 없이, 추천과 비슷한 부품·카탈로그·설문으로 이어갈 수 있어요.
-            </p>
-            <div className="mt-1 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
-              <a
-                href="#compare-alternatives"
-                className={buttonClassName({ variant: "outline", size: "default" })}
-                onClick={() => setAltsOpen(true)}
-              >
-                비슷한 부품 비교
-              </a>
-              <Link
-                href={catalogHref({ family: "switch", from: "results" })}
-                className={buttonClassName({ variant: "outline", size: "default" })}
-              >
-                카탈로그에서 더 보기
-              </Link>
-              <Link
-                href="/recommend"
-                className={buttonClassName({ variant: "ghost", size: "default" })}
-              >
-                설문 다시 하기
-              </Link>
-            </div>
+      {showSecondary ? (
+        <div className="mt-6 flex flex-col gap-2 rounded-xl border border-border bg-white dark:bg-ca-surface-container px-4 py-4 sm:px-5">
+          <p className="font-headline text-sm font-semibold text-ca-on-surface">다른 선택지도 보고 싶나요?</p>
+          <p className="break-keep text-sm text-ca-on-surface-variant">
+            비교 탭에서 비슷한 부품을 확인하거나, 카탈로그·설문으로 이어갈 수 있어요.
+          </p>
+          <div className="mt-1 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+            <Link
+              href={catalogHref({ family: "switch", from: "results" })}
+              className={buttonClassName({ variant: "outline", size: "default" })}
+            >
+              카탈로그에서 더 보기
+            </Link>
+            <Link
+              href="/recommend"
+              className={buttonClassName({ variant: "ghost", size: "default" })}
+            >
+              설문 다시 하기
+            </Link>
           </div>
-        <details
-          id="compare-alternatives"
-          className="group mt-4 scroll-mt-24 [content-visibility:auto]"
-          open={altsOpen}
-          onToggle={onAltsToggle}
-        >
-          <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden sm:pointer-events-none sm:cursor-default">
-            <div className="space-y-1">
-              <div className="flex items-center justify-between gap-2">
-                <h3 className="font-headline text-base font-semibold text-ca-on-surface">비슷한 부품 비교</h3>
-                <span className="text-xs text-ca-on-surface-variant sm:hidden group-open:hidden">펼치기</span>
-                <span className="hidden text-xs text-ca-on-surface-variant group-open:inline sm:hidden">접기</span>
-              </div>
-              <p className="text-sm text-ca-on-surface-variant">
-                지금 추천과 비슷한 대안입니다. 성향 차이를 본 뒤, 추천 근거 탭에서 자세히 볼 수 있어요.
-              </p>
-            </div>
-          </summary>
-          <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-            {overviewAlternatives.map((alt) => {
-              const blurb = overviewAlternativeDescription(alt.description, alt.summary, alt.itemName);
-              return (
-              <Card
-                key={`${alt.domain}-${alt.itemId}`}
-                className="flex h-full flex-col rounded-xl border border-border bg-white dark:bg-ca-surface-container shadow-none"
-              >
-                <CardHeader className="flex-1 space-y-2 border-b-0 pb-2">
-                  <div className="flex items-start justify-between gap-2">
-                    <Badge className="shrink-0 border-ca-outline-variant/50 bg-transparent font-normal">
-                      {domainDisplayLabel(alt.domain)}
-                    </Badge>
-                    <span className="text-xs font-medium text-ca-on-surface-variant">
-                      {formatScoreBand(alt.score)}
-                    </span>
-                  </div>
-                  <div className="space-y-1.5">
-                    <p className="text-sm text-ca-on-surface-variant">{alt.tagline}</p>
-                    <CardTitle className="font-headline text-base font-semibold leading-snug text-ca-on-surface">
-                      {alt.itemName ?? alt.itemId}
-                    </CardTitle>
-                    {blurb ? (
-                      <p className="line-clamp-2 break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:line-clamp-none">
-                        {blurb}
-                      </p>
-                    ) : null}
-                  </div>
-                </CardHeader>
-                <CardContent className="mt-auto border-t border-border pt-3">
-                  <SwagkeyProductLink
-                    href={pickRowSourceUrl(
-                      { domain: alt.domain, itemId: alt.itemId, sourceUrl: alt.sourceUrl },
-                      build,
-                      apiPicks,
-                      enrichedSourceUrls,
-                    )}
-                    domain={alt.domain}
-                    itemId={alt.itemId}
-                  />
-                </CardContent>
-              </Card>
-            );
-            })}
-          </div>
-        </details>
-        </>
+        </div>
       ) : null}
 
       {showSecondary && submission.degradedReason ? (
