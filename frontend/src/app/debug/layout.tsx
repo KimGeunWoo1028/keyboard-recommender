@@ -41,7 +41,7 @@ export default function DebugLayout({ children }: { children: React.ReactNode })
             </a>
           ))}
         </nav>
-        <div className="rounded-xl border-2 border-[rgb(220_220_238)] bg-white p-4 shadow-sm dark:border-border dark:bg-ca-surface-container sm:p-6">
+        <div className="rounded-sm border-2 border-[rgb(220_220_238)] bg-white p-4 shadow-sm dark:border-border dark:bg-ca-surface-container sm:p-6">
           {children}
         </div>
       </div>

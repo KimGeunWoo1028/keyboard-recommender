@@ -51,9 +51,19 @@ function NavArrowForward({ className }: { className?: string }) {
   );
 }
 
+function CheckCircleIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M22 4L12 14.01l-3-3" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 type OnboardingStyle = {
   id: "creamy_quiet" | "crisp_expressive" | "balanced";
   label: string;
+  spec: string;
   blurb: string;
   audience: string;
   tags: readonly string[];
@@ -64,6 +74,7 @@ const ONBOARDING_STYLES: readonly OnboardingStyle[] = [
   {
     id: "creamy_quiet",
     label: "부드럽고 조용한 성향",
+    spec: "QUIET / SMOOTH",
     blurb: "소음이 적고 편안한 타건을 선호할 때",
     audience: "장시간 타이핑·사무실에 잘 맞아요.",
     tags: ["조용함", "부드러움"],
@@ -72,6 +83,7 @@ const ONBOARDING_STYLES: readonly OnboardingStyle[] = [
   {
     id: "crisp_expressive",
     label: "또렷하고 경쾌한 성향",
+    spec: "CRISP / TACTILE",
     blurb: "또렷한 고음과 단단한 피드백을 원할 때",
     audience: "타건 피드백을 분명하게 느끼고 싶을 때 좋아요.",
     tags: ["또렷함", "경쾌함"],
@@ -80,6 +92,7 @@ const ONBOARDING_STYLES: readonly OnboardingStyle[] = [
   {
     id: "balanced",
     label: "균형형 타건감",
+    spec: "BALANCED / NEUTRAL",
     blurb: "아직 취향을 탐색 중이라면",
     audience: "한쪽으로 치우치지 않은 무난한 시작점이에요.",
     tags: ["균형", "탐색"],
@@ -413,6 +426,12 @@ export function SurveyWizard() {
     });
   }
 
+  function confirmSelectedStyle() {
+    const style = ONBOARDING_STYLES.find((s) => s.id === selectedStyle);
+    if (!style) return;
+    chooseStyle(style);
+  }
+
   if (submitting) {
     return (
       <div
@@ -449,97 +468,116 @@ export function SurveyWizard() {
 
   if (phase === "entry") {
     return (
-      <div
-        className="mx-auto flex h-full w-full max-w-ca flex-col gap-6 sm:gap-8"
-        data-testid="e2e-survey-wizard"
-      >
-        <div className="shrink-0 animate-fade-up sm:max-w-xl">
+      <div className="mx-auto flex h-full w-full max-w-ca flex-col" data-testid="e2e-survey-wizard">
+        <div className="-mx-ca-margin-mobile border-b border-[rgb(220_220_238)] bg-[#F8F9FA] px-ca-margin-mobile py-8 dark:border-border dark:bg-ca-surface-container-low sm:-mx-ca-margin sm:px-ca-margin sm:py-10">
           <p className="section-label mb-3">Survey</p>
-          <h1 className="font-headline text-2xl font-extrabold tracking-tight text-ca-on-surface sm:text-4xl">
+          <h1 className="font-headline text-3xl font-black tracking-tight text-ca-on-surface sm:text-4xl">
             취향에 맞는 키보드 찾기
           </h1>
-          <p className="mt-3 break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:text-base">
-            가까운 성향을 고르면 몇 가지 답을 미리 채워 더 빠르게 시작할 수 있어요. 언제든 직접 바꿀 수
-            있습니다.
+          <p className="mt-2 max-w-2xl break-keep text-sm leading-relaxed text-ca-on-surface-variant sm:text-base">
+            가까운 성향을 고르면 몇 가지 답을 미리 채워 더 빠르게 시작할 수 있어요.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-5">
-          {ONBOARDING_STYLES.map((style, index) => {
-            const selected = selectedStyle === style.id;
-            return (
-              <button
-                key={style.id}
-                type="button"
-                onClick={() => chooseStyle(style)}
-                className={cn(
-                  "card-lift group flex flex-col items-start justify-start gap-3 rounded-xl border-2 border-l-4 bg-white p-5 text-left dark:bg-ca-surface-container sm:gap-3 sm:p-6",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-primary",
-                  selected
-                    ? "border-primary border-l-primary bg-primary/5"
-                    : "border-[rgb(220_220_238)] border-l-primary/40 hover:border-primary/50 dark:border-border",
-                  "animate-fade-up",
-                  index === 1 && "animate-fade-up-delay-1",
-                  index === 2 && "animate-fade-up-delay-2",
-                )}
-              >
-                <div
+        <div className="flex min-h-0 flex-1 flex-col gap-8 py-8 sm:py-10">
+          <div className="flex items-center gap-3">
+            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
+              1
+            </div>
+            <div className="h-px w-8 bg-border" aria-hidden />
+            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-muted text-xs font-bold text-muted-foreground">
+              2
+            </div>
+            <span className="ml-2 text-sm text-ca-on-surface-variant">성향 선택</span>
+          </div>
+
+          <h2 className="font-headline text-2xl font-bold text-ca-on-surface">나의 타건 성향은?</h2>
+
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+            {ONBOARDING_STYLES.map((style, index) => {
+              const selected = selectedStyle === style.id;
+              return (
+                <button
+                  key={style.id}
+                  type="button"
+                  onClick={() => setSelectedStyle(style.id)}
+                  aria-pressed={selected}
                   className={cn(
-                    "flex h-10 w-10 items-center justify-center rounded-xl",
-                    selected ? "bg-primary text-primary-foreground" : "bg-ca-surface-container-low text-primary",
+                    "card-lift group flex flex-col items-start justify-start gap-0 rounded-sm border-2 bg-white p-6 text-left dark:bg-ca-surface-container",
+                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-primary",
+                    selected
+                      ? "border-primary bg-primary/5"
+                      : "border-[rgb(220_220_238)] hover:border-primary/50 dark:border-border",
+                    "animate-fade-up",
+                    index === 1 && "animate-fade-up-delay-1",
+                    index === 2 && "animate-fade-up-delay-2",
                   )}
                 >
-                  <SurveyOnboardingStyleIcon styleId={style.id} className="h-5 w-5 shrink-0" />
-                </div>
-                <div className="w-full space-y-2">
-                  <div className="h-px bg-border" />
-                  <p className="font-headline text-base font-black leading-tight text-ca-on-surface sm:text-lg">
-                    {style.label}
+                  <div className="mb-4 flex w-full items-start justify-between">
+                    <div
+                      className={cn(
+                        "flex h-10 w-10 items-center justify-center rounded-sm",
+                        selected ? "bg-primary text-primary-foreground" : "bg-primary/10 text-primary",
+                      )}
+                    >
+                      <SurveyOnboardingStyleIcon styleId={style.id} className="h-5 w-5 shrink-0" />
+                    </div>
+                    {selected ? <CheckCircleIcon className="h-5 w-5 text-primary" /> : null}
+                  </div>
+                  <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.15em] text-ca-on-surface-variant">
+                    {style.spec}
                   </p>
-                  <p className="break-keep text-sm leading-snug text-ca-on-surface-variant sm:text-base">
-                    {style.blurb}
-                  </p>
-                  <p className="break-keep text-xs leading-snug text-ca-on-surface-variant sm:text-sm">
-                    {style.audience}
-                  </p>
-                  <ul className="flex flex-wrap gap-1.5" aria-label={`${style.label} 키워드`}>
+                  <div className="mb-3 h-px w-full bg-border" />
+                  <h3 className="font-headline text-lg font-black text-ca-on-surface">{style.label}</h3>
+                  <p className="mt-1 break-keep text-sm text-ca-on-surface-variant">{style.blurb}</p>
+                  <p className="mt-2 break-keep text-xs text-ca-on-surface-variant">{style.audience}</p>
+                  <ul className="mt-4 flex flex-wrap gap-1.5" aria-label={`${style.label} 키워드`}>
                     {style.tags.map((tag) => (
                       <li key={tag} className="ca-keycap-badge">
                         {tag}
                       </li>
                     ))}
                   </ul>
-                  <p className="text-xs font-medium text-ca-on-surface-variant sm:text-sm">
-                    일부 답변을 먼저 채워드려요
-                  </p>
-                </div>
-              </button>
-            );
-          })}
-        </div>
+                  <p className="mt-3 text-xs text-ca-on-surface-variant">일부 답변을 먼저 채워드려요</p>
+                </button>
+              );
+            })}
+          </div>
 
-        <div className="mt-auto flex shrink-0 flex-col items-stretch gap-3 sm:items-center">
-          {hasPreviousSession ? (
+          <div className="mt-auto flex flex-col gap-3 sm:flex-row sm:items-center">
             <Button
               type="button"
-              variant="outline"
-              size="default"
-              className="h-11 border-border font-semibold"
-              onClick={() => {
-                setStepIndex(firstUnansweredStepIndex(answers));
-                setPhase("questions");
-              }}
+              size="lg"
+              className="h-11 px-8 font-bold"
+              disabled={!selectedStyle}
+              onClick={confirmSelectedStyle}
+              data-testid="e2e-survey-start-with-style"
             >
-              이어서 설정하기
+              결과 보기
+              <NavArrowForward className="h-4 w-4" />
             </Button>
-          ) : null}
-          <button
-            type="button"
-            onClick={startFullSurvey}
-            className="text-sm text-ca-on-surface-variant underline-offset-2 hover:text-primary hover:underline"
-          >
-            성향 없이 전체 설문으로 시작
-          </button>
+            {hasPreviousSession ? (
+              <Button
+                type="button"
+                variant="outline"
+                size="default"
+                className="h-11 border-border font-semibold"
+                onClick={() => {
+                  setStepIndex(firstUnansweredStepIndex(answers));
+                  setPhase("questions");
+                }}
+              >
+                이어서 설정하기
+              </Button>
+            ) : null}
+            <button
+              type="button"
+              onClick={startFullSurvey}
+              className="text-sm font-medium text-ca-on-surface-variant hover:text-ca-on-surface"
+            >
+              성향 없이 전체 설문으로 시작
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -563,7 +601,7 @@ export function SurveyWizard() {
       {isPrefilledStep && prefilledLabel ? (
         <div
           data-testid="e2e-prefilled-step-banner"
-          className="flex shrink-0 flex-col justify-center rounded-xl border border-primary/20 bg-ca-primary-container/10 px-4 py-3 sm:py-3.5"
+          className="flex shrink-0 flex-col justify-center rounded-sm border border-primary/20 bg-ca-primary-container/10 px-4 py-3 sm:py-3.5"
         >
           <p className="text-xs font-semibold uppercase tracking-wider text-primary sm:text-sm">
             스타일에서 자동 반영됨
@@ -603,7 +641,7 @@ export function SurveyWizard() {
                 disabled={submitting}
                 placeholder="예: 조용하고 부드러운 타건감을 원해요"
                 className={cn(
-                  "min-h-[4.5rem] w-full resize-none rounded-lg border border-ca-outline-variant/50 bg-ca-surface-container-lowest px-3 py-2.5 text-sm text-ca-on-surface",
+                  "min-h-[4.5rem] w-full resize-none rounded-sm border border-ca-outline-variant/50 bg-ca-surface-container-lowest px-3 py-2.5 text-sm text-ca-on-surface",
                   "placeholder:text-ca-on-surface-variant/70",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-primary",
                   "disabled:cursor-not-allowed disabled:opacity-50",

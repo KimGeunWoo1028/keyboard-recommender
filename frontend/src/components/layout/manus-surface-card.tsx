@@ -19,7 +19,7 @@ export function ManusSurfaceCard({ children, className, padding = "lg" }: Props)
   return (
     <div
       className={cn(
-        "overflow-hidden rounded-xl border-2 border-[rgb(220_220_238)] bg-white shadow-sm dark:border-border dark:bg-ca-surface-container dark:shadow-none",
+        "overflow-hidden rounded-sm border-2 border-[rgb(220_220_238)] bg-white shadow-sm dark:border-border dark:bg-ca-surface-container dark:shadow-none",
         paddingClass[padding],
         className,
       )}

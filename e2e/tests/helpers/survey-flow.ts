@@ -23,6 +23,7 @@ async function ensureSurveyQuestionsPhase(page: Page) {
   }
 
   await wizard.getByRole("button", { name: /부드럽고 조용한 성향/ }).click();
+  await wizard.getByTestId("e2e-survey-start-with-style").click();
   await expect(wizard.getByRole("radio", { name: DETERMINISTIC_STEP_OPTION_PATTERNS[1] })).toBeVisible({
     timeout: 15_000,
   });

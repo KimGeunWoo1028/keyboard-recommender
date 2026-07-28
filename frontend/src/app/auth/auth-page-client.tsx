@@ -409,7 +409,7 @@ export function AuthPageClient() {
 
   return (
     <div className="flex min-h-[calc(100dvh-4.25rem)] items-center justify-center bg-[rgb(248_248_252)] px-4 py-10 dark:bg-ca-surface-container-low sm:py-16">
-      <section className="w-full max-w-md overflow-hidden rounded-xl border-2 border-[rgb(220_220_238)] bg-white shadow-sm shadow-primary/5 dark:border-border dark:bg-ca-surface-container dark:shadow-none">
+      <section className="w-full max-w-md overflow-hidden rounded-sm border-2 border-[rgb(220_220_238)] bg-white shadow-sm shadow-primary/5 dark:border-border dark:bg-ca-surface-container dark:shadow-none">
         <div className="flex border-b border-[rgb(220_220_238)] dark:border-border" role="tablist" aria-label="로그인 또는 회원가입">
           <Button
             variant="ghost"

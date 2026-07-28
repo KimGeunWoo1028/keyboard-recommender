@@ -18,6 +18,7 @@ describe("SurveyWizard preset skip (Phase 3)", () => {
     render(<SurveyWizard />);
 
     await user.click(screen.getByRole("button", { name: /부드럽고 조용한 성향/ }));
+    await user.click(screen.getByTestId("e2e-survey-start-with-style"));
 
     expect(screen.getByRole("heading", { name: "타건 압력" })).toBeInTheDocument();
     expect(screen.getByText(/2 \/ 5 문항/)).toBeInTheDocument();
@@ -29,6 +30,7 @@ describe("SurveyWizard preset skip (Phase 3)", () => {
     render(<SurveyWizard />);
 
     await user.click(screen.getByRole("button", { name: /부드럽고 조용한 성향/ }));
+    await user.click(screen.getByTestId("e2e-survey-start-with-style"));
     await user.click(screen.getByRole("radio", { name: /가볍게 누름/ }));
     await user.click(screen.getByRole("button", { name: "다음" }));
 

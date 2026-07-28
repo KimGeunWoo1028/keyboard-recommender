@@ -16,6 +16,7 @@ test.describe("Critical product flows", () => {
     const wizard = page.getByTestId("e2e-survey-wizard");
     await expect(wizard).toBeVisible({ timeout: 30_000 });
     await wizard.getByRole("button", { name: /부드럽고 조용한 성향/ }).click();
+    await wizard.getByTestId("e2e-survey-start-with-style").click();
 
     await expect(page.getByRole("heading", { name: "타건 압력" })).toBeVisible({ timeout: 15_000 });
     await expect(page.getByText(/2 \/ 5 문항/)).toBeVisible();

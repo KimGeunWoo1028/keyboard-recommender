@@ -182,7 +182,7 @@ export function ResultsOverviewTab({
   return (
     <>
       {showParts ? (
-      <Card className="overflow-hidden rounded-xl border-2 border-[rgb(220_220_238)] bg-white shadow-sm dark:border-border dark:bg-ca-surface-container" data-testid="e2e-server-ranked">
+      <Card className="overflow-hidden rounded-sm border-2 border-[rgb(220_220_238)] bg-white shadow-sm dark:border-border dark:bg-ca-surface-container" data-testid="e2e-server-ranked">
         <CardHeader className="border-b border-border pb-3 sm:pb-4">
           <CardTitle className="flex items-center gap-2 font-headline text-base font-bold text-ca-on-surface">
             <span>추천 조합 구성</span>
