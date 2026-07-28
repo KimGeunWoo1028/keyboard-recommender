@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -61,6 +61,12 @@ import {
   listSavedRecommendationBookmarks,
 } from "@/lib/api/saved-recommendations";
 
+function expectOverviewStat(label: string, value: string | RegExp) {
+  const card = screen.getByText(label).closest("div.rounded-xl");
+  expect(card).toBeTruthy();
+  expect(within(card!).getByText(value)).toBeInTheDocument();
+}
+
 describe("MyPageHub smoke", () => {
   beforeEach(() => {
     sectionParam = null;
@@ -100,7 +106,8 @@ describe("MyPageHub smoke", () => {
     await waitFor(() => {
       expect(screen.getAllByText("허브유저").length).toBeGreaterThan(0);
     });
-    expect(screen.getByText("0")).toBeInTheDocument();
+    expect(screen.getAllByText("0").length).toBeGreaterThanOrEqual(1);
+    expectOverviewStat("저장한 조합", "0");
     expect(screen.getByText(/아직 저장한 결과가 없습니다/)).toBeInTheDocument();
   });
 
@@ -121,7 +128,7 @@ describe("MyPageHub smoke", () => {
 
     await waitFor(() => {
       expect(screen.getAllByText("허브유저").length).toBeGreaterThan(0);
-      expect(screen.getByText("1")).toBeInTheDocument();
+      expectOverviewStat("저장한 조합", "1");
     });
     expect(screen.queryByText(/아직 저장한 결과가 없습니다/)).not.toBeInTheDocument();
     expect(listSavedRecommendationBookmarks).toHaveBeenCalled();
@@ -221,7 +228,7 @@ describe("MyPageHub smoke", () => {
 
     const { rerender } = render(<MyPageHub />);
     await waitFor(() => {
-      expect(screen.getByText("1")).toBeInTheDocument();
+      expectOverviewStat("저장한 조합", "1");
     });
 
     authHeaderState.user = {
@@ -236,7 +243,7 @@ describe("MyPageHub smoke", () => {
       expect(screen.getByText("두번째")).toBeInTheDocument();
     });
     expect(screen.queryByText("허브유저")).not.toBeInTheDocument();
-    expect(screen.getByText("1")).toBeInTheDocument();
+    expectOverviewStat("저장한 조합", "1");
   });
 
   it("shows login gate when shared auth user is missing", async () => {

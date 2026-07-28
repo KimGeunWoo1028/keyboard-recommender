@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
 import type { AuthUser } from "@/lib/api/auth";
@@ -27,20 +27,41 @@ function saved(partial: Partial<SavedRecommendationItem> = {}): SavedRecommendat
 }
 
 describe("MyPageOverview smoke", () => {
-  it("shows profile, empty saved hub, and continue CTAs", () => {
+  it("shows overview stats, empty saved hub, and continue CTAs", () => {
     render(<MyPageOverview user={user} savedItems={[]} />);
 
-    expect(screen.getByText("테스트유저")).toBeInTheDocument();
-    expect(screen.getByText("0")).toBeInTheDocument();
+    expect(screen.getByText("저장한 조합")).toBeInTheDocument();
+    expect(screen.getByText("완료한 설문")).toBeInTheDocument();
+    expect(screen.getByText("최고 일치도")).toBeInTheDocument();
+    expect(screen.getByText("—")).toBeInTheDocument();
     expect(screen.getByText(/아직 저장한 결과가 없습니다/)).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /설문 다시하기/ })).toHaveAttribute("href", "/recommend");
     expect(screen.getByRole("link", { name: "설문 시작하기" })).toHaveAttribute("href", "/recommend");
   });
 
   it("shows latest saved preview when bookmarks exist", () => {
-    render(<MyPageOverview user={user} savedItems={[saved()]} />);
+    render(
+      <MyPageOverview
+        user={user}
+        savedItems={[
+          saved({
+            metadata: {
+              overallConfidence: 0.92,
+              preferenceTags: ["차분한 소리"],
+            },
+          }),
+        ]}
+      />,
+    );
 
-    expect(screen.getByText("1")).toBeInTheDocument();
+    const savedCard = screen.getByText("저장한 조합").closest("div.rounded-xl");
+    expect(savedCard).toBeTruthy();
+    expect(within(savedCard!).getByText("1")).toBeInTheDocument();
+
+    const bestMatchCard = screen.getByText("최고 일치도").closest("div.rounded-xl");
+    expect(bestMatchCard).toBeTruthy();
+    expect(within(bestMatchCard!).getByText(/92%/)).toBeInTheDocument();
+
     expect(screen.getByText(/Quiet/)).toBeInTheDocument();
     expect(screen.getByText(/Soft/)).toBeInTheDocument();
     expect(screen.getByText(/Oil King/)).toBeInTheDocument();
