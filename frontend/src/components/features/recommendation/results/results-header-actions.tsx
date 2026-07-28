@@ -53,10 +53,10 @@ export function ResultsHeaderActions({
   }
 
   return (
-    <div className="flex flex-col items-stretch gap-3 sm:items-end">
+    <div className="flex flex-col items-stretch gap-2 sm:items-end">
       {matchPercent !== null ? (
         <div
-          className="inline-flex items-center gap-2 self-start rounded-xl bg-primary/10 px-4 py-2.5 sm:self-end"
+          className="inline-flex items-center gap-2 self-start rounded-lg bg-primary/10 px-3 py-1.5 sm:self-end"
           data-testid="e2e-preference-match-badge"
         >
           <span className="text-sm font-bold text-primary">취향 일치도 {matchPercent}%</span>
