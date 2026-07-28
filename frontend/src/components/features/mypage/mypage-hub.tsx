@@ -22,6 +22,7 @@ import {
   type SavedRecommendationItem,
 } from "@/lib/api/saved-recommendations";
 import { makeResultSnapshotId, removeResultSnapshot } from "@/lib/saved-result-snapshots";
+import { resolveAvatarSrc } from "@/lib/avatar";
 import { cn } from "@/lib/utils";
 
 type SectionId = "overview" | "saved" | "account";
@@ -264,7 +265,7 @@ export function MyPageHub() {
   }, [active, removingKeys, savedItems, savedLoadState, securitySummary, setUser, user]);
 
   const displayName = user?.display_name?.trim() || user?.email || "";
-  const initial = (displayName[0] ?? "K").toUpperCase();
+  const avatarSrc = resolveAvatarSrc(user?.avatar_url);
   const joined = user ? formatJoinedKo(user.created_at) : null;
 
   return (
@@ -273,11 +274,17 @@ export function MyPageHub() {
         <div className="border-b border-[rgb(220_220_238)] bg-white dark:border-border dark:bg-ca-surface">
           <div className="mx-auto max-w-4xl px-ca-margin-mobile py-8 sm:px-ca-margin">
             <div className="flex items-center gap-4">
-              <div
-                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary text-lg font-bold text-primary-foreground"
-                aria-hidden
-              >
-                {initial}
+              <div className="h-12 w-12 shrink-0 overflow-hidden rounded-full border border-ca-outline-variant/50 bg-ca-surface-container/60">
+                {/* eslint-disable-next-line @next/next/no-img-element -- remote API avatar + local default */}
+                <img
+                  src={avatarSrc}
+                  alt=""
+                  width={48}
+                  height={48}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <div className="min-w-0">
                 <p className="mb-0.5 text-xs font-semibold uppercase tracking-widest text-primary">마이페이지</p>

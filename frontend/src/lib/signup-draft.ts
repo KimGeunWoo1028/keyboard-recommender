@@ -10,7 +10,7 @@ export type SignupDraft = {
   codeSentAt?: number;
 };
 
-export const SIGNUP_RESEND_COOLDOWN_SEC = 120;
+export const SIGNUP_RESEND_COOLDOWN_SEC = 10;
 
 export function parseSignupStep(raw: string | null | undefined): SignupStep {
   if (raw === "verify" || raw === "password" || raw === "nickname" || raw === "email") return raw;
