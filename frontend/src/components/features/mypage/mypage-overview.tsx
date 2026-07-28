@@ -157,7 +157,7 @@ export function MyPageOverview({ user: _user, savedItems }: Props) {
               <Link
                 href="/recommend"
                 prefetch={false}
-                className={buttonClassName({ variant: "primary", size: "sm", className: "mt-3 rounded-lg" })}
+                className={buttonClassName({ variant: "primary", size: "sm", className: "mt-3" })}
               >
                 설문으로 취향 만들기
               </Link>
@@ -225,12 +225,12 @@ export function MyPageOverview({ user: _user, savedItems }: Props) {
               <Link
                 href="/results"
                 prefetch={false}
-                className={buttonClassName({ variant: "outline", size: "sm", className: "rounded-lg" })}
+                className={buttonClassName({ variant: "outline", size: "sm" })}
               >
                 최근 추천 결과 열기
               </Link>
             ) : null}
-            <Link href="/recommend" prefetch={false} className={buttonClassName({ size: "sm", className: "rounded-lg" })}>
+            <Link href="/recommend" prefetch={false} className={buttonClassName({ size: "sm" })}>
               설문 시작하기
             </Link>
           </div>
