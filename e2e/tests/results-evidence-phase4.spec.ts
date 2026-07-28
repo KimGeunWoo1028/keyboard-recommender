@@ -3,13 +3,18 @@ import { expect, test } from "@playwright/test";
 import { gotoDeterministicResults } from "./helpers/results-flow";
 
 test.describe("Results Evidence IA — Phase 4", () => {
-  test("overview tab shows minimal body: parts grid, CTA band, footer links", async ({ page }) => {
+  test("overview tab shows minimal body: parts grid, CTA band, and retake link", async ({ page }) => {
     await gotoDeterministicResults(page);
 
     await expect(page.getByRole("tab", { name: "개요" })).toHaveAttribute("aria-selected", "true");
     await expect(page.getByTestId("e2e-server-ranked")).toBeVisible();
     await expect(page.getByTestId("e2e-overview-cta-band")).toBeVisible();
-    await expect(page.getByTestId("e2e-overview-footer")).toBeVisible();
+    const ctaLogin = page.getByTestId("e2e-save-login-link");
+    const ctaSave = page.getByTestId("e2e-overview-cta-save");
+    const ctaMypage = page.getByTestId("e2e-save-mypage-link");
+    const ctaActionCount =
+      (await ctaLogin.count()) + (await ctaSave.count()) + (await ctaMypage.count());
+    expect(ctaActionCount).toBeGreaterThan(0);
     await expect(page.getByTestId("e2e-results-retake-link")).toBeVisible();
     await expect(page.getByTestId("e2e-result-trust-summary")).toBeVisible();
     await expect(page.getByTestId("e2e-trust-short-why")).toBeVisible();
@@ -18,6 +23,7 @@ test.describe("Results Evidence IA — Phase 4", () => {
     await expect(page.getByTestId("e2e-trust-layer")).toHaveCount(0);
     await expect(page.getByTestId("e2e-confidence-story")).toHaveCount(0);
     await expect(page.getByTestId("e2e-results-next-actions")).toHaveCount(0);
+    await expect(page.getByTestId("e2e-overview-footer")).toHaveCount(0);
   });
 
   test("evidence tab pick persuasion and honest ranking why", async ({ page }) => {

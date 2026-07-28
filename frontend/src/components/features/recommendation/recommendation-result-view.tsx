@@ -33,7 +33,6 @@ import { catalogPickMetadata } from "./results/results-build-utils";
 import { DISPLAY_K } from "./results/results-constants";
 import { ResultsHeaderActions } from "./results/results-header-actions";
 import { ResultsOverviewCtaBand } from "./results/results-overview-cta-band";
-import { ResultsOverviewFooter } from "./results/results-overview-footer";
 import { ResultsOverviewTab } from "./results/results-overview-tab";
 import { ResultsPageShell } from "./results/results-page-shell";
 import type { ResultTabId } from "./results/results-types";
@@ -588,12 +587,8 @@ export function RecommendationResultView({ submission, build }: Props) {
               isAuthenticated={isAuthenticated}
               authReady={authChecked}
               saveState={saveState}
-              onSaveBuild={() => void handleSaveBuild()}
-            />
-            <ResultsOverviewFooter
-              isAuthenticated={isAuthenticated}
-              saveState={saveState}
               saveMessage={saveMessage}
+              onSaveBuild={() => void handleSaveBuild()}
             />
           </div>
         ) : null}
@@ -660,12 +655,8 @@ export function RecommendationResultView({ submission, build }: Props) {
             isAuthenticated={isAuthenticated}
             authReady={authChecked}
             saveState={saveState}
-            onSaveBuild={() => void handleSaveBuild()}
-          />
-          <ResultsOverviewFooter
-            isAuthenticated={isAuthenticated}
-            saveState={saveState}
             saveMessage={saveMessage}
+            onSaveBuild={() => void handleSaveBuild()}
           />
         </div>
       ) : null}
