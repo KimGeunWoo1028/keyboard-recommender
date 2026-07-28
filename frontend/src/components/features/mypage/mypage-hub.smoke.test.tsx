@@ -176,7 +176,7 @@ describe("MyPageHub smoke", () => {
     await waitFor(() => expect(screen.getAllByText("허브유저").length).toBeGreaterThan(0));
     await user.click(screen.getByRole("tab", { name: "저장한 결과" }));
     await waitFor(() => {
-      expect(screen.getByRole("listbox", { name: "저장한 결과 목록" })).toBeInTheDocument();
+      expect(screen.getByRole("list", { name: "저장한 결과 목록" })).toBeInTheDocument();
     });
     expect(screen.queryByText("저장한 결과를 불러오지 못했어요.")).not.toBeInTheDocument();
   });

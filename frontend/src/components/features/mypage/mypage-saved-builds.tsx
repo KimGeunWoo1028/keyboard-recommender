@@ -1,16 +1,15 @@
 "use client";
 
+import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
-import { buildStackParts, savedItemKey } from "@/components/features/mypage/mypage-build-stack";
+import { savedItemKey } from "@/components/features/mypage/mypage-build-stack";
 import {
-  savedLayoutName,
-  savedOneLineSummary,
+  savedMatchPercent,
+  savedPartsOneLiner,
   savedPreferenceTags,
-  savedSwitchName,
   shortSavedTitle,
-  shortSavedTitleLines,
 } from "@/components/features/mypage/mypage-saved-identity";
 import { MyPageSectionCard } from "@/components/features/mypage/mypage-section-card";
 import { Button } from "@/components/ui/button";
@@ -23,7 +22,7 @@ import {
   saveResultSnapshot,
   submissionFromSavedMetadata,
 } from "@/lib/saved-result-snapshots";
-import { formatAbsoluteDate, formatAbsoluteDateTime, toEpochMs } from "@/lib/date-time";
+import { formatAbsoluteDate, toEpochMs } from "@/lib/date-time";
 import { getOrCreateClientSessionId } from "@/lib/client-session-id";
 import { loadLastKnownGoodSubmission, saveSurveySubmission } from "@/lib/survey-storage";
 import { cn } from "@/lib/utils";
@@ -36,15 +35,6 @@ type Props = {
 
 /** Show search only once the list is long enough to need it. */
 const SEARCH_VISIBLE_FROM = 16;
-
-function getUpdatedAt(item: SavedRecommendationItem): number {
-  const raw = item.metadata?.updatedAt;
-  if (typeof raw === "string") {
-    const parsed = toEpochMs(raw);
-    if (parsed > 0) return parsed;
-  }
-  return toEpochMs(item.saved_at);
-}
 
 function normalizeText(item: SavedRecommendationItem): string {
   return [item.title, item.summary, item.build_id, ...Object.values(item.components ?? {})]
@@ -77,31 +67,28 @@ function restoreSubmissionFor(item: SavedRecommendationItem) {
   return null;
 }
 
-function ListIdentityMeta({ item }: { item: SavedRecommendationItem }) {
-  const tags = savedPreferenceTags(item);
-  const switchName = savedSwitchName(item);
-  const layoutName = savedLayoutName(item);
-  return (
-    <div className="mt-1 space-y-0.5">
-      {tags.length ? (
-        <p className="truncate text-xs text-ca-on-surface-variant">{tags.join(" · ")}</p>
-      ) : null}
-      {switchName || layoutName ? (
-        <p className="truncate text-xs text-ca-on-surface-variant">
-          {[switchName ? `스위치 ${switchName}` : null, layoutName ? `배열 ${layoutName}` : null]
-            .filter(Boolean)
-            .join(" · ")}
-        </p>
-      ) : null}
-    </div>
-  );
+function restoreSavedResult(item: SavedRecommendationItem): boolean {
+  const submission = restoreSubmissionFor(item);
+  if (!submission) return false;
+  saveResultSnapshot(snapshotIdFor(item), submission);
+  saveSurveySubmission(submission);
+  void emitExplorationEvent({
+    event_type: "interaction.revisit",
+    request_id: item.request_id,
+    session_id: getOrCreateClientSessionId(),
+    scenario_id: "mypage_restore_v1",
+    metadata: {
+      buildId: item.build_id,
+      source: submissionFromSavedMetadata(item.metadata) ? "server_snapshot" : "local_snapshot",
+      resultSnapshotId: snapshotIdFor(item),
+    },
+  }).catch(() => undefined);
+  return true;
 }
 
 export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
   const router = useRouter();
   const [query, setQuery] = useState("");
-  const [selectedKey, setSelectedKey] = useState<string | null>(null);
-  const [mobileDetailOpen, setMobileDetailOpen] = useState(false);
   const [pendingDelete, setPendingDelete] = useState<SavedRecommendationItem | null>(null);
   const [restoreError, setRestoreError] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
@@ -110,9 +97,6 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
   useEffect(() => {
     setMounted(true);
     setHasLocalResult(Boolean(loadLastKnownGoodSubmission()?.build));
-    if (typeof window.matchMedia === "function" && window.matchMedia("(min-width: 1024px)").matches) {
-      setMobileDetailOpen(true);
-    }
   }, []);
 
   const showSearch = items.length >= SEARCH_VISIBLE_FROM;
@@ -131,36 +115,12 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
     if (!showSearch && query) setQuery("");
   }, [query, showSearch]);
 
-  useEffect(() => {
-    if (!filtered.length) {
-      setSelectedKey(null);
-      setMobileDetailOpen(false);
-      return;
-    }
-    if (!selectedKey || !filtered.some((item) => savedItemKey(item) === selectedKey)) {
-      setSelectedKey(savedItemKey(filtered[0]));
-    }
-  }, [filtered, selectedKey]);
-
-  const selected = useMemo(
-    () => filtered.find((item) => savedItemKey(item) === selectedKey) ?? null,
-    [filtered, selectedKey],
-  );
-
-  const stackParts = selected ? buildStackParts(selected) : [];
-  const selectedKeySafe = selected ? savedItemKey(selected) : null;
-  const isRemoving = selectedKeySafe ? removingKeys.has(selectedKeySafe) : false;
-  const canRestore = mounted && selected ? canRestoreResults(selected) : false;
-  const selectedTags = selected ? savedPreferenceTags(selected) : [];
-  const selectedSummary = selected ? savedOneLineSummary(selected) : null;
-  const selectedSwitch = selected ? savedSwitchName(selected) : null;
-
   return (
     <MyPageSectionCard
       title="저장한 결과"
       description={
         items.length
-          ? "목록에서 결과를 고르면 상세와 다시 보기·삭제 행동을 확인할 수 있습니다."
+          ? "저장한 추천 조합을 다시 열거나 정리할 수 있습니다."
           : "결과 화면에서 저장하면 이 목록에 쌓입니다."
       }
     >
@@ -186,188 +146,101 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
         </div>
       ) : null}
 
-      {filtered.length && selected ? (
-        <div className="grid items-stretch gap-4 lg:grid-cols-[minmax(14rem,18rem)_minmax(0,1fr)] lg:min-h-[28rem]">
-          <div
-            className={cn(
-              "flex max-h-[22rem] flex-col overflow-hidden rounded-xl border border-border bg-white/80 dark:bg-ca-surface-container/40 p-2 sm:p-2.5 lg:max-h-none lg:h-full",
-              mobileDetailOpen && "hidden lg:flex",
-            )}
-            role="listbox"
-            aria-label="저장한 결과 목록"
-          >
-            <div className="mypage-pane-scroll min-h-0 flex-1 space-y-2 overscroll-contain pr-0.5">
-              {filtered.map((item) => {
-                const key = savedItemKey(item);
-                const active = key === selectedKey;
-                const [line1, line2] = shortSavedTitleLines(item);
-                return (
-                  <button
-                    key={key}
-                    type="button"
-                    role="option"
-                    aria-selected={active}
-                    onClick={() => {
-                      setSelectedKey(key);
-                      setMobileDetailOpen(true);
-                      setRestoreError(null);
-                    }}
-                    className={cn(
-                      "flex min-h-[5.5rem] w-full flex-col justify-between rounded-lg border px-3 py-2.5 text-left transition-colors",
-                      active
-                        ? "border-ca-on-surface/40 bg-ca-surface-container/60"
-                        : "border-ca-outline-variant/40 bg-transparent hover:border-ca-outline-variant/70 hover:bg-ca-surface-container/40",
-                    )}
-                  >
-                    <div className="min-w-0">
-                      <p className="truncate font-headline text-sm font-semibold leading-snug text-ca-on-surface">{line1}</p>
-                      {line2 ? (
-                        <p className="truncate font-headline text-sm font-semibold leading-snug text-ca-on-surface">
-                          {line2}
-                        </p>
+      {filtered.length ? (
+        <ul className="space-y-3" aria-label="저장한 결과 목록">
+          {filtered.map((item) => {
+            const key = savedItemKey(item);
+            const tags = savedPreferenceTags(item);
+            const partsLine = savedPartsOneLiner(item);
+            const matchPercent = savedMatchPercent(item);
+            const canRestore = mounted && canRestoreResults(item);
+            const isRemoving = removingKeys.has(key);
+
+            return (
+              <li
+                key={key}
+                className="rounded-2xl border border-border bg-white p-5 shadow-sm dark:bg-ca-surface-container"
+              >
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                  <div className="min-w-0 flex-1 space-y-3">
+                    <div className="flex flex-wrap items-center gap-2">
+                      {matchPercent !== null ? (
+                        <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-bold text-primary">
+                          일치도 {matchPercent}%
+                        </span>
                       ) : null}
-                      <ListIdentityMeta item={item} />
+                      <span className="text-xs text-ca-on-surface-variant" data-testid="e2e-saved-card-date">
+                        {formatAbsoluteDate(item.saved_at)}
+                      </span>
                     </div>
-                    <p className="mt-1.5 text-xs text-ca-on-surface-variant">{formatAbsoluteDate(item.saved_at)} 저장</p>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
 
-          <div
-            className={cn(
-              "flex h-full min-h-[22rem] flex-col rounded-xl border border-border bg-white/80 dark:bg-ca-surface-container/40 p-4 sm:p-5 lg:min-h-0",
-              !mobileDetailOpen && "hidden lg:flex",
-            )}
-          >
-            <div className="mb-3 lg:hidden">
-              <Button type="button" variant="ghost" size="sm" onClick={() => setMobileDetailOpen(false)}>
-                ← 목록으로
-              </Button>
-            </div>
-            <div className="flex flex-wrap items-start justify-between gap-3 border-b border-ca-outline-variant/30 pb-4">
-              <div className="min-w-0 space-y-1.5">
-                <p className="font-headline text-lg font-semibold tracking-tight text-ca-on-surface">
-                  {shortSavedTitle(selected)}
-                </p>
-                {selectedTags.length ? (
-                  <p className="text-sm text-ca-on-surface-variant">{selectedTags.join(" · ")}</p>
-                ) : null}
-                {selectedSwitch ? (
-                  <p className="text-sm text-ca-on-surface-variant">대표 스위치 · {selectedSwitch}</p>
-                ) : null}
-                <p className="text-sm text-ca-on-surface-variant">
-                  저장: {formatAbsoluteDateTime(selected.saved_at)}
-                  {getUpdatedAt(selected) !== toEpochMs(selected.saved_at)
-                    ? ` · 수정: ${formatAbsoluteDateTime(getUpdatedAt(selected))}`
-                    : ""}
-                </p>
-              </div>
-            </div>
+                    <h3 className="font-headline text-lg font-bold tracking-tight text-ca-on-surface">
+                      {shortSavedTitle(item)}
+                    </h3>
 
-            <div className="mt-3 flex flex-wrap items-center gap-2">
-              <Button
-                variant="primary"
-                size="sm"
-                disabled={!canRestore}
-                title={
-                  canRestore
-                    ? undefined
-                    : "이 저장본에는 다시 열 결과 데이터가 없습니다. 결과 화면에서 다시 저장하면 복원할 수 있습니다."
-                }
-                onClick={() => {
-                  const submission = restoreSubmissionFor(selected);
-                  if (!submission) {
-                    setRestoreError(
-                      "이 항목에는 다시 열 결과 데이터가 없습니다. 결과 화면에서 한 번 더 저장하면 다른 기기에서도 다시 볼 수 있어요. 구성 확인·다시 설문은 계속 사용할 수 있습니다.",
-                    );
-                    return;
-                  }
-                  saveResultSnapshot(snapshotIdFor(selected), submission);
-                  saveSurveySubmission(submission);
-                  void emitExplorationEvent({
-                    event_type: "interaction.revisit",
-                    request_id: selected.request_id,
-                    session_id: getOrCreateClientSessionId(),
-                    scenario_id: "mypage_restore_v1",
-                    metadata: {
-                      buildId: selected.build_id,
-                      source: submissionFromSavedMetadata(selected.metadata)
-                        ? "server_snapshot"
-                        : "local_snapshot",
-                      resultSnapshotId: snapshotIdFor(selected),
-                    },
-                  }).catch(() => undefined);
-                  router.push("/results");
-                }}
-              >
-                추천 결과 다시 보기
-              </Button>
-              <Button type="button" variant="outline" size="sm" onClick={() => router.push("/recommend")}>
-                다시 설문
-              </Button>
-              <Button
-                type="button"
-                variant="destructive"
-                size="sm"
-                disabled={isRemoving}
-                onClick={() => setPendingDelete(selected)}
-              >
-                {isRemoving ? "삭제 중…" : "삭제"}
-              </Button>
-            </div>
-            {!canRestore ? (
-              <p className="mt-2 break-keep text-xs leading-relaxed text-ca-on-surface-variant">
-                다시 보기에 필요한 결과 데이터가 이 저장본에 없습니다. 결과 화면에서 다시 저장하면 복원할 수
-                있어요. 구성 확인·다시 설문은 계속 사용할 수 있습니다.
-              </p>
-            ) : null}
+                    {tags.length ? (
+                      <ul className="flex flex-wrap gap-1.5" aria-label="취향 태그">
+                        {tags.map((tag) => (
+                          <li
+                            key={`${key}-${tag}`}
+                            className="rounded-full border border-border bg-[#F8F9FA] px-2.5 py-0.5 text-xs font-medium text-ca-on-surface-variant dark:bg-ca-surface-container-low"
+                          >
+                            {tag}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
 
-            <div className="mypage-pane-scroll min-h-0 flex-1 overscroll-contain">
-              {stackParts.length ? (
-                <ul className="mt-4 grid grid-cols-1 sm:grid-cols-2">
-                  {stackParts.map((part, index) => {
-                    const isLeft = index % 2 === 0;
-                    const row = Math.floor(index / 2);
-                    const lastRow = Math.floor((stackParts.length - 1) / 2);
-                    const isLastOdd = stackParts.length % 2 === 1 && index === stackParts.length - 1;
-                    return (
-                      <li
-                        key={part.key}
-                        className={cn(
-                          "py-3",
-                          row < lastRow && "border-b border-ca-outline-variant/25",
-                          isLeft && !isLastOdd && "sm:border-r sm:border-ca-outline-variant/25 sm:pr-4",
-                          !isLeft && "sm:pl-4",
-                          isLastOdd && "sm:col-span-2",
-                        )}
-                      >
-                        <p className="text-sm font-medium text-ca-on-surface-variant">{part.label}</p>
-                        <p className="mt-0.5 text-sm font-medium text-ca-on-surface">{part.name}</p>
-                        {part.detail ? (
-                          <p className="mt-1 line-clamp-2 break-keep text-sm leading-relaxed text-ca-on-surface-variant">
-                            {part.detail}
-                          </p>
-                        ) : null}
-                      </li>
-                    );
-                  })}
-                </ul>
-              ) : (
-                <p className="mt-4 text-sm text-ca-on-surface-variant">
-                  {selectedSummary || "부품 구성 정보가 아직 없습니다."}
-                </p>
-              )}
+                    {partsLine ? (
+                      <p className="truncate text-sm text-ca-on-surface-variant">{partsLine}</p>
+                    ) : null}
+                  </div>
 
-              {selectedSummary && stackParts.length ? (
-                <p className="mt-4 border-t border-ca-outline-variant/25 pt-4 break-keep text-sm leading-relaxed text-ca-on-surface-variant">
-                  {selectedSummary}
-                </p>
-              ) : null}
-            </div>
-          </div>
-        </div>
+                  <div className="flex shrink-0 items-center gap-3 sm:flex-col sm:items-end sm:gap-2">
+                    <button
+                      type="button"
+                      className={cn(
+                        "text-sm font-semibold underline-offset-4",
+                        canRestore
+                          ? "text-primary hover:underline"
+                          : "cursor-not-allowed text-ca-on-surface-variant/50",
+                      )}
+                      disabled={!canRestore}
+                      title={
+                        canRestore
+                          ? undefined
+                          : "이 저장본에는 다시 열 결과 데이터가 없습니다. 결과 화면에서 다시 저장하면 복원할 수 있습니다."
+                      }
+                      onClick={() => {
+                        setRestoreError(null);
+                        if (!restoreSavedResult(item)) {
+                          setRestoreError(
+                            "이 항목에는 다시 열 결과 데이터가 없습니다. 결과 화면에서 한 번 더 저장하면 다른 기기에서도 다시 볼 수 있어요.",
+                          );
+                          return;
+                        }
+                        router.push("/results");
+                      }}
+                    >
+                      결과 보기
+                    </button>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      className="gap-1.5 text-destructive hover:bg-destructive/10 hover:text-destructive"
+                      disabled={isRemoving}
+                      onClick={() => setPendingDelete(item)}
+                    >
+                      <Trash2 className="h-4 w-4" aria-hidden />
+                      {isRemoving ? "삭제 중…" : "삭제"}
+                    </Button>
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
       ) : (
         <div className="space-y-3 rounded-lg border border-ca-outline-variant/50 p-5 text-sm text-ca-on-surface-variant">
           {items.length ? (
@@ -419,7 +292,7 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
             role="dialog"
             aria-modal="true"
             aria-labelledby="mypage-delete-title"
-            className="w-full max-w-md rounded-xl border border-border bg-white dark:bg-ca-surface-container p-5 shadow-lg"
+            className="w-full max-w-md rounded-xl border border-border bg-white p-5 shadow-lg dark:bg-ca-surface-container"
           >
             <p id="mypage-delete-title" className="font-headline text-base font-semibold text-ca-on-surface">
               저장한 결과를 삭제할까요?

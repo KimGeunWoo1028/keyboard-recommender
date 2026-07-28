@@ -62,3 +62,41 @@ export function savedOneLineSummary(item: SavedRecommendationItem): string | nul
   if (/Matched via trait|score|vector/i.test(summary)) return null;
   return summary;
 }
+
+/** Switch · plate · keycap blurb for Manus-style saved cards. */
+export function savedPartsOneLiner(item: SavedRecommendationItem): string | null {
+  const parts = buildStackParts(item);
+  const byKey = (keys: string[]) =>
+    parts.find((part) => keys.includes(part.key))?.name?.trim() || null;
+  const bits = [
+    byKey(["switches", "switch"]),
+    byKey(["plate"]),
+    byKey(["keycap"]),
+  ].filter((value): value is string => Boolean(value));
+  if (!bits.length) return null;
+  return `· ${bits.join(" · ")}`;
+}
+
+/** Prefer snapshot confidence stored on the bookmark metadata. */
+export function savedMatchPercent(item: SavedRecommendationItem): number | null {
+  const snap = item.metadata?.resultSnapshot;
+  if (snap && typeof snap === "object" && !Array.isArray(snap)) {
+    const overall = (snap as { overallConfidence?: unknown }).overallConfidence;
+    if (typeof overall === "number" && Number.isFinite(overall)) {
+      return Math.max(0, Math.min(100, Math.round(overall * 100)));
+    }
+    const band = (snap as { recommendationConfidence?: { overall?: unknown } }).recommendationConfidence
+      ?.overall;
+    if (typeof band === "number" && Number.isFinite(band)) {
+      return Math.max(0, Math.min(100, Math.round(band * 100)));
+    }
+  }
+
+  for (const key of ["overallConfidence", "matchPercent", "preferenceMatch"] as const) {
+    const raw = item.metadata?.[key];
+    if (typeof raw === "number" && Number.isFinite(raw)) {
+      return raw <= 1 ? Math.max(0, Math.min(100, Math.round(raw * 100))) : Math.max(0, Math.min(100, Math.round(raw)));
+    }
+  }
+  return null;
+}

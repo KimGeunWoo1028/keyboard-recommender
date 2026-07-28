@@ -222,12 +222,14 @@ test.describe("Save reliability", () => {
       await retryLoad.click();
     }
     await page.getByRole("tab", { name: "저장한 결과" }).click();
-    await expect(page.getByRole("listbox", { name: "저장한 결과 목록" })).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByRole("list", { name: "저장한 결과 목록" })).toBeVisible({ timeout: 30_000 });
     console.log("assert:mypage-visible");
 
-    const firstItem = page.locator('[role="option"]').first();
-    const savedAt = page.getByText(/^저장:/).first();
+    const savedList = page.getByRole("list", { name: "저장한 결과 목록" });
+    const firstItem = savedList.getByRole("listitem").first();
+    const savedAt = firstItem.getByTestId("e2e-saved-card-date");
     await expect(firstItem).toBeVisible();
+    await expect(firstItem.getByRole("button", { name: "결과 보기" })).toBeVisible();
     await expect(savedAt).toBeVisible();
 
     const latestSavedAtIso = await fetchLatestSavedAt(page);
@@ -235,11 +237,11 @@ test.describe("Save reliability", () => {
     expect(Date.parse(latestSavedAtIso!)).toBeLessThanOrEqual(Date.now() + 60_000);
 
     const savedAtText = (await savedAt.textContent())?.trim() ?? "";
-    expect(savedAtText).toMatch(/^저장:/);
+    expect(savedAtText.length).toBeGreaterThan(0);
     console.log("assert:time-visible");
 
     await page.reload();
-    await expect(page.getByRole("listbox", { name: "저장한 결과 목록" })).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByRole("list", { name: "저장한 결과 목록" })).toBeVisible({ timeout: 30_000 });
     await expect(firstItem).toBeVisible();
     await expect(savedAt).toHaveText(savedAtText);
     console.log("assert:reload-visible");
@@ -250,8 +252,8 @@ test.describe("Save reliability", () => {
     // Full navigation after cookie login can race the first extras fetch; ensure
     // the saved section is selected and data is present before asserting.
     await page.getByRole("tab", { name: "저장한 결과" }).click();
-    const savedList = page.getByRole("listbox", { name: "저장한 결과 목록" });
-    if (!(await savedList.isVisible().catch(() => false))) {
+    const savedListAfterRelogin = page.getByRole("list", { name: "저장한 결과 목록" });
+    if (!(await savedListAfterRelogin.isVisible().catch(() => false))) {
       await Promise.all([
         page.waitForResponse(
           (response) =>
@@ -264,9 +266,11 @@ test.describe("Save reliability", () => {
       ]);
       await page.getByRole("tab", { name: "저장한 결과" }).click();
     }
-    await expect(savedList).toBeVisible({ timeout: 30_000 });
-    await expect(firstItem).toBeVisible();
-    await expect(savedAt).toHaveText(savedAtText);
+    await expect(savedListAfterRelogin).toBeVisible({ timeout: 30_000 });
+    await expect(savedListAfterRelogin.getByRole("listitem").first()).toBeVisible();
+    await expect(savedListAfterRelogin.getByRole("listitem").first().getByTestId("e2e-saved-card-date")).toHaveText(
+      savedAtText,
+    );
     console.log("assert:relogin-visible");
   });
 
