@@ -13,7 +13,7 @@ export const metadata: Metadata = privatePageMetadata({
 
 export default function MyPage() {
   return (
-    <div className="bg-[rgb(248_248_252)] dark:bg-ca-surface-container-low">
+    <div className="flex min-h-full flex-1 flex-col bg-[rgb(248_248_252)] dark:bg-ca-surface-container-low">
       {/* SSR chrome lives in hub when authenticated — Manus full-bleed profile header. */}
       <RequireAuth loadingFallback={<MyPageAuthLoadingShell />}>
         <Suspense fallback={<MyPageAuthLoadingShell />}>
