@@ -83,7 +83,7 @@ export function SiteHeader() {
           : "border-b border-transparent bg-white/80 backdrop-blur-sm dark:bg-ca-surface/80",
       )}
     >
-      <div className="mx-auto flex h-16 w-full max-w-ca items-center justify-between gap-3 px-ca-margin-mobile md:gap-4 md:px-ca-margin">
+      <div className="mx-auto flex h-[4.5rem] w-full max-w-ca items-center justify-between gap-3 px-ca-margin-mobile md:gap-4 md:px-ca-margin">
         <div className="flex min-w-0 items-center gap-3 md:gap-8">
           <Link
             href="/"
@@ -106,7 +106,7 @@ export function SiteHeader() {
                   href={item.href}
                   prefetch={deferNavPrefetch ? false : undefined}
                   className={cn(
-                    "rounded-md px-4 py-2 font-body text-sm font-medium transition-colors",
+                    "rounded-md px-4 py-2.5 font-body text-sm font-medium transition-colors",
                     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))]",
                     active
                       ? "bg-primary/10 text-primary"
