@@ -98,7 +98,7 @@ describe("MyPageHub smoke", () => {
 
     resolveSaved([]);
     await waitFor(() => {
-      expect(screen.getByText("허브유저")).toBeInTheDocument();
+      expect(screen.getAllByText("허브유저").length).toBeGreaterThan(0);
     });
     expect(screen.getByText("0")).toBeInTheDocument();
     expect(screen.getByText(/아직 저장한 결과가 없습니다/)).toBeInTheDocument();
@@ -120,7 +120,7 @@ describe("MyPageHub smoke", () => {
     render(<MyPageHub />);
 
     await waitFor(() => {
-      expect(screen.getByText("허브유저")).toBeInTheDocument();
+      expect(screen.getAllByText("허브유저").length).toBeGreaterThan(0);
       expect(screen.getByText("1")).toBeInTheDocument();
     });
     expect(screen.queryByText(/아직 저장한 결과가 없습니다/)).not.toBeInTheDocument();
@@ -131,7 +131,7 @@ describe("MyPageHub smoke", () => {
   it("switches to saved and account sections", async () => {
     const user = userEvent.setup();
     render(<MyPageHub />);
-    await waitFor(() => expect(screen.getByText("허브유저")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getAllByText("허브유저").length).toBeGreaterThan(0));
 
     await user.click(screen.getByRole("tab", { name: "저장한 결과" }));
     await waitFor(() => {
@@ -139,7 +139,7 @@ describe("MyPageHub smoke", () => {
     });
     expect(replace).toHaveBeenCalledWith("/mypage?section=saved", { scroll: false });
 
-    await user.click(screen.getByRole("tab", { name: "계정" }));
+    await user.click(screen.getByRole("tab", { name: "계정 설정" }));
     expect(screen.getByRole("heading", { name: "프로필" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "보안" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "회원탈퇴" })).toBeInTheDocument();
@@ -173,7 +173,7 @@ describe("MyPageHub smoke", () => {
 
     render(<MyPageHub />);
 
-    await waitFor(() => expect(screen.getByText("허브유저")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getAllByText("허브유저").length).toBeGreaterThan(0));
     await user.click(screen.getByRole("tab", { name: "저장한 결과" }));
     await waitFor(() => {
       expect(screen.getByRole("listbox", { name: "저장한 결과 목록" })).toBeInTheDocument();

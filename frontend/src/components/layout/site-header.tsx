@@ -108,7 +108,7 @@ export function SiteHeader() {
                     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))]",
                     active
                       ? "bg-primary/10 text-primary"
-                      : "text-ca-on-surface-variant hover:bg-muted hover:text-ca-on-surface",
+                      : "text-muted-foreground hover:bg-muted hover:text-foreground",
                   )}
                 >
                   {item.label}
@@ -133,7 +133,7 @@ export function SiteHeader() {
               "hidden font-semibold lg:inline-flex",
             )}
           >
-            추천 설문 시작
+            설문 시작
           </Link>
           <button
             type="button"

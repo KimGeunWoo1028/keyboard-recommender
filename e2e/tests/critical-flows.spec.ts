@@ -59,18 +59,18 @@ test.describe("Critical product flows", () => {
   test("mypage hub loads overview/saved/account", async ({ page }) => {
     await page.goto("/mypage");
     await expect(page.getByTestId("e2e-mypage-hub")).toBeVisible({ timeout: 30_000 });
-    await expect(page.getByRole("heading", { name: "마이페이지" })).toBeVisible();
-    await expect(page.getByRole("tab", { name: "개요" })).toBeVisible();
+    await expect(page.getByRole("tab", { name: "취향 요약" })).toBeVisible();
     await expect(page.getByRole("tab", { name: "저장한 결과" })).toBeVisible();
-    await expect(page.getByRole("tab", { name: "계정" })).toBeVisible();
+    await expect(page.getByRole("tab", { name: "계정 설정" })).toBeVisible();
     await expect(page.getByRole("tab", { name: "비교 기록" })).toHaveCount(0);
     await expect(page.getByRole("tab", { name: "활동" })).toHaveCount(0);
+    await expect(page.getByRole("tab", { name: "개요" })).toHaveCount(0);
 
     await page.getByRole("tab", { name: "저장한 결과" }).click();
     await expect(page).toHaveURL(/section=saved/);
     await expect(page.getByRole("heading", { name: "저장한 결과" })).toBeVisible();
 
-    await page.getByRole("tab", { name: "계정" }).click();
+    await page.getByRole("tab", { name: "계정 설정" }).click();
     await expect(page).toHaveURL(/section=account/);
     await expect(page.getByRole("heading", { name: "프로필" })).toBeVisible();
   });

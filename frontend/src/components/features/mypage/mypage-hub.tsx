@@ -1,8 +1,9 @@
 "use client";
 
+import { Bookmark, LayoutGrid, Settings } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type ComponentType } from "react";
 
 import { MyPageDataLoadingShell } from "@/components/auth/mypage-auth-loading-shell";
 import { MyPageAccount } from "@/components/features/mypage/mypage-account";
@@ -21,15 +22,23 @@ import {
   type SavedRecommendationItem,
 } from "@/lib/api/saved-recommendations";
 import { makeResultSnapshotId, removeResultSnapshot } from "@/lib/saved-result-snapshots";
+import { cn } from "@/lib/utils";
 
 type SectionId = "overview" | "saved" | "account";
 type SavedLoadState = "idle" | "loading" | "success" | "error";
 
-const SECTIONS: { id: SectionId; label: string }[] = [
-  { id: "overview", label: "개요" },
-  { id: "saved", label: "저장한 결과" },
-  { id: "account", label: "계정" },
+const SECTIONS: { id: SectionId; label: string; icon: ComponentType<{ className?: string }> }[] = [
+  { id: "overview", label: "취향 요약", icon: LayoutGrid },
+  { id: "saved", label: "저장한 결과", icon: Bookmark },
+  { id: "account", label: "계정 설정", icon: Settings },
 ];
+
+function formatJoinedKo(iso: string | undefined): string | null {
+  if (!iso) return null;
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return null;
+  return `${d.getFullYear()}년 ${d.getMonth() + 1}월`;
+}
 
 const SECTION_IDS = new Set<SectionId>(SECTIONS.map((s) => s.id));
 
@@ -183,7 +192,7 @@ export function MyPageHub() {
   const section = useMemo(() => {
     if (!user) {
       return (
-        <div className="rounded-2xl border border-border bg-white p-5 shadow-sm dark:bg-ca-surface-container sm:p-6">
+        <div className="rounded-xl border-2 border-[rgb(220_220_238)] bg-white p-5 shadow-sm dark:border-border dark:bg-ca-surface-container sm:p-6">
           <h2 className="font-headline text-lg font-semibold text-ca-on-surface">로그인이 필요합니다.</h2>
           <p className="mt-1 break-keep text-sm leading-relaxed text-ca-on-surface-variant">
             세션이 만료된 경우 다시 로그인해 주세요.
@@ -254,66 +263,105 @@ export function MyPageHub() {
     return <MyPageAccount user={user} securitySummary={securitySummary} onUserChanged={setUser} />;
   }, [active, removingKeys, savedItems, savedLoadState, securitySummary, setUser, user]);
 
-  return (
-    <div className="space-y-6" data-testid="e2e-mypage-hub">
-      <div className="border-b border-border" role="tablist" aria-label="마이페이지 섹션">
-        <div className="flex flex-wrap gap-1">
-          {SECTIONS.map((tab) => (
-            <button
-              key={tab.id}
-              type="button"
-              role="tab"
-              aria-selected={tab.id === active}
-              className={
-                tab.id === active
-                  ? "inline-flex h-11 items-center border-b-2 border-primary px-4 text-sm font-semibold text-primary sm:px-5"
-                  : "inline-flex h-11 items-center border-b-2 border-transparent px-4 text-sm font-semibold text-ca-on-surface-variant transition-colors hover:text-primary sm:px-5"
-              }
-              onClick={() => selectSection(tab.id)}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
-      </div>
+  const displayName = user?.display_name?.trim() || user?.email || "";
+  const initial = (displayName[0] ?? "K").toUpperCase();
+  const joined = user ? formatJoinedKo(user.created_at) : null;
 
-      {savedLoadState === "error" ? (
-        <div
-          className="rounded-2xl border border-border bg-white p-5 shadow-sm dark:bg-ca-surface-container sm:p-6"
-          data-testid="e2e-mypage-load-error"
-        >
-          <h2 className="font-headline text-lg font-semibold text-ca-on-surface">{SAVED_LOAD_ERROR_TITLE}</h2>
-          <p className="mt-1 break-keep text-sm leading-relaxed text-ca-on-surface-variant">
-            {SAVED_LOAD_ERROR_HINT}
-          </p>
-          {loadError && loadError !== SAVED_LOAD_ERROR_HINT ? (
-            <p className="mt-2 break-keep text-xs text-ca-on-surface-variant">{loadError}</p>
-          ) : null}
-          <div className="mt-4 flex flex-wrap gap-2">
-            <Button variant="primary" onClick={retryLoad}>
-              다시 불러오기
-            </Button>
-            <Link href="/auth?force=1" className={buttonClassName({ variant: "outline" })}>
-              계정 전환
-            </Link>
+  return (
+    <div data-testid="e2e-mypage-hub">
+      {user ? (
+        <div className="border-b border-[rgb(220_220_238)] bg-white dark:border-border dark:bg-ca-surface">
+          <div className="mx-auto max-w-4xl px-ca-margin-mobile py-8 sm:px-ca-margin">
+            <div className="flex items-center gap-4">
+              <div
+                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary text-lg font-bold text-primary-foreground"
+                aria-hidden
+              >
+                {initial}
+              </div>
+              <div className="min-w-0">
+                <p className="mb-0.5 text-xs font-semibold uppercase tracking-widest text-primary">마이페이지</p>
+                <h1 className="truncate font-headline text-2xl font-extrabold tracking-tight text-ca-on-surface">
+                  {displayName}
+                </h1>
+                <p className="truncate text-sm text-ca-on-surface-variant">
+                  {user.email}
+                  {joined ? ` · ${joined} 가입` : null}
+                </p>
+              </div>
+            </div>
+
+            <div
+              className="-mb-px mt-6 flex gap-1 border-b border-[rgb(220_220_238)] dark:border-border"
+              role="tablist"
+              aria-label="마이페이지 섹션"
+            >
+              {SECTIONS.map((tab) => {
+                const Icon = tab.icon;
+                const selected = tab.id === active;
+                return (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={selected}
+                    className={cn(
+                      "inline-flex items-center gap-1.5 border-b-2 px-4 py-3 text-sm font-semibold transition-colors",
+                      selected
+                        ? "border-primary text-primary"
+                        : "border-transparent text-ca-on-surface-variant hover:text-primary",
+                    )}
+                    onClick={() => selectSection(tab.id)}
+                  >
+                    <Icon className="h-4 w-4" aria-hidden />
+                    {tab.label}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
       ) : null}
 
-      {savedLoadState !== "error" && actionError ? (
-        <div className="rounded-lg border border-ca-outline-variant/50 bg-ca-surface-container/40 px-4 py-3 text-sm text-ca-on-surface-variant">
-          {actionError}
-          <button
-            type="button"
-            className="ml-3 text-sm font-medium text-ca-primary hover:underline"
-            onClick={() => setActionError(null)}
+      <div className="mx-auto max-w-4xl space-y-6 px-ca-margin-mobile py-8 sm:px-ca-margin">
+        {savedLoadState === "error" ? (
+          <div
+            className="rounded-xl border-2 border-[rgb(220_220_238)] bg-white p-5 shadow-sm dark:border-border dark:bg-ca-surface-container sm:p-6"
+            data-testid="e2e-mypage-load-error"
           >
-            닫기
-          </button>
-        </div>
-      ) : null}
+            <h2 className="font-headline text-lg font-semibold text-ca-on-surface">{SAVED_LOAD_ERROR_TITLE}</h2>
+            <p className="mt-1 break-keep text-sm leading-relaxed text-ca-on-surface-variant">
+              {SAVED_LOAD_ERROR_HINT}
+            </p>
+            {loadError && loadError !== SAVED_LOAD_ERROR_HINT ? (
+              <p className="mt-2 break-keep text-xs text-ca-on-surface-variant">{loadError}</p>
+            ) : null}
+            <div className="mt-4 flex flex-wrap gap-2">
+              <Button variant="primary" onClick={retryLoad}>
+                다시 불러오기
+              </Button>
+              <Link href="/auth?force=1" className={buttonClassName({ variant: "outline" })}>
+                계정 전환
+              </Link>
+            </div>
+          </div>
+        ) : null}
 
-      {savedLoadState !== "error" ? section : null}
+        {savedLoadState !== "error" && actionError ? (
+          <div className="rounded-lg border border-ca-outline-variant/50 bg-ca-surface-container/40 px-4 py-3 text-sm text-ca-on-surface-variant">
+            {actionError}
+            <button
+              type="button"
+              className="ml-3 text-sm font-medium text-ca-primary hover:underline"
+              onClick={() => setActionError(null)}
+            >
+              닫기
+            </button>
+          </div>
+        ) : null}
+
+        {savedLoadState !== "error" ? section : null}
+      </div>
     </div>
   );
 }

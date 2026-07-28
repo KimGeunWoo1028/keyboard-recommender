@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { ManusPageHeader } from "@/components/layout/manus-page-header";
+import { ManusSecondaryShell } from "@/components/layout/manus-secondary-shell";
 import { ManusSurfaceCard } from "@/components/layout/manus-surface-card";
-import { PageShell } from "@/components/layout/page-shell";
 import { buttonClassName } from "@/components/ui/button";
 import { decodeShareTaste } from "@/lib/share-taste";
 import { publicPageMetadata } from "@/lib/seo/page-metadata";
@@ -28,7 +28,7 @@ export default async function SharePage({ searchParams }: Props) {
   const taste = sp.t ? decodeShareTaste(sp.t) : null;
 
   return (
-    <PageShell className="max-w-3xl space-y-8 px-ca-margin-mobile pb-16 pt-8 sm:px-ca-margin sm:pb-20">
+    <ManusSecondaryShell>
       <ManusPageHeader
         eyebrow="Share"
         title="취향 카드"
@@ -75,6 +75,6 @@ export default async function SharePage({ searchParams }: Props) {
         </div>
         </div>
       </ManusSurfaceCard>
-    </PageShell>
+    </ManusSecondaryShell>
   );
 }

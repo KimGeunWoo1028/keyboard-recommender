@@ -15,7 +15,7 @@ export const metadata: Metadata = privatePageMetadata({
 
 export default function ResultsPage() {
   return (
-    <div className="bg-ca-surface-container-low">
+    <div className="bg-[rgb(248_248_252)] dark:bg-ca-surface-container-low">
       <PageShell className="max-w-ca space-y-8 px-ca-margin-mobile pb-12 sm:px-ca-margin sm:space-y-10 sm:pb-16">
         <ManusPageHeader
           eyebrow="Results"

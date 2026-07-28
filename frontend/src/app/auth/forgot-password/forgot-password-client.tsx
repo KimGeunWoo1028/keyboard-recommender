@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { type FormEvent, useState } from "react";
 
-import { ManusPageHeader } from "@/components/layout/manus-page-header";
 import { ManusSurfaceCard } from "@/components/layout/manus-surface-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -48,64 +47,68 @@ export function ForgotPasswordClient() {
   }
 
   return (
-    <div className="mx-auto flex min-h-[calc(100dvh-8rem)] w-full max-w-md flex-col justify-center overflow-x-hidden px-ca-margin-mobile py-10 sm:px-ca-margin sm:py-16">
-      <ManusSurfaceCard className="animate-fade-up" padding="none">
-        <div className="space-y-6 border-b border-border px-6 py-7 sm:px-8">
-          <ManusPageHeader
-            eyebrow="Auth"
-            title="비밀번호 재설정"
-            description="가입한 이메일을 입력하면 비밀번호 재설정 링크를 보내드려요."
-          />
-        </div>
-        <div className="space-y-4 px-6 py-6 sm:px-8 sm:py-7">
-          <form className="space-y-4" onSubmit={onSubmit} aria-busy={busy || undefined}>
-            <div className="space-y-1.5">
-              <Label
-                htmlFor="forgot-password-email"
-                className="text-xs font-semibold uppercase tracking-wider text-ca-on-surface-variant"
+    <div className="flex min-h-[calc(100dvh-4.25rem)] items-center justify-center bg-[rgb(248_248_252)] px-4 py-10 dark:bg-ca-surface-container-low sm:py-16">
+      <div className="w-full max-w-md animate-fade-up">
+        <ManusSurfaceCard padding="none">
+          <div className="space-y-5 p-8">
+            <header className="space-y-2">
+              <p className="text-xs font-semibold uppercase tracking-widest text-primary">Keyboard Recommender</p>
+              <h1 className="font-headline text-2xl font-extrabold tracking-tight text-ca-on-surface">
+                비밀번호 재설정
+              </h1>
+              <p className="break-keep text-sm leading-relaxed text-ca-on-surface-variant">
+                가입한 이메일을 입력하면 비밀번호 재설정 링크를 보내드려요.
+              </p>
+            </header>
+
+            <form className="space-y-4" onSubmit={onSubmit} aria-busy={busy || undefined}>
+              <div className="space-y-1.5">
+                <Label htmlFor="forgot-password-email" className="ca-label">
+                  이메일
+                </Label>
+                <Input
+                  id="forgot-password-email"
+                  type="email"
+                  name="email"
+                  autoComplete="email"
+                  className="ca-input"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  disabled={busy}
+                  {...emailField.inputProps}
+                />
+                <FieldValidationError id={emailField.errorId} message={emailField.error} />
+              </div>
+              <Button type="submit" className="w-full" loading={busy} disabled={busy}>
+                재설정 링크 받기
+              </Button>
+            </form>
+
+            {submitted && message ? (
+              <p
+                className="break-keep rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2.5 text-sm text-emerald-800 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-100"
+                role="status"
+                data-testid="e2e-forgot-password-success"
               >
-                이메일
-              </Label>
-              <Input
-                id="forgot-password-email"
-                type="email"
-                name="email"
-                autoComplete="email"
-                className="ca-input h-11 border-border focus-visible:border-primary"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                disabled={busy}
-                {...emailField.inputProps}
-              />
-              <FieldValidationError id={emailField.errorId} message={emailField.error} />
-            </div>
-            <Button type="submit" className="h-11 w-full font-semibold" loading={busy} disabled={busy}>
-              재설정 링크 받기
-            </Button>
-          </form>
-          {submitted && message ? (
-            <p
-              className="break-keep rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2.5 text-sm text-emerald-800 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-100"
-              role="status"
-              data-testid="e2e-forgot-password-success"
+                {message}
+              </p>
+            ) : null}
+            {error ? (
+              <p className="break-keep text-sm text-destructive" role="alert" data-testid="e2e-forgot-password-error">
+                {error}
+              </p>
+            ) : null}
+
+            <Link
+              href="/auth?force=1"
+              className="inline-flex text-sm font-medium text-primary underline-offset-2 hover:underline"
             >
-              {message}
-            </p>
-          ) : null}
-          {error ? (
-            <p className="break-keep text-sm text-destructive" role="alert" data-testid="e2e-forgot-password-error">
-              {error}
-            </p>
-          ) : null}
-          <Link
-            href="/auth?force=1"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-primary underline-offset-2 hover:underline"
-          >
-            로그인으로 돌아가기
-          </Link>
-        </div>
-      </ManusSurfaceCard>
+              로그인으로 돌아가기
+            </Link>
+          </div>
+        </ManusSurfaceCard>
+      </div>
     </div>
   );
 }

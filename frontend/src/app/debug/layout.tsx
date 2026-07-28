@@ -19,26 +19,29 @@ const DEBUG_LINKS = [
 
 export default function DebugLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-[calc(100dvh-4.25rem)] bg-ca-surface-container-low">
-      <div className="mx-auto max-w-5xl space-y-6 px-4 py-8 sm:px-6">
+    <div className="min-h-[calc(100dvh-4.25rem)] bg-[rgb(248_248_252)] dark:bg-ca-surface-container-low">
+      <div className="mx-auto max-w-5xl space-y-6 px-ca-margin-mobile py-8 sm:px-ca-margin">
         <ManusPageHeader
           eyebrow="Internal"
           title="Debug console"
           description="운영·품질 점검용 내부 도구입니다. 공개 제품 UI가 아닙니다."
         />
         <DebugChrome />
-        <nav className="flex flex-wrap gap-2 border-b border-border pb-4" aria-label="Debug sections">
+        <nav
+          className="flex flex-wrap gap-1 border-b border-[rgb(220_220_238)] dark:border-border"
+          aria-label="Debug sections"
+        >
           {DEBUG_LINKS.map((link) => (
             <a
               key={link.href}
-              className="inline-flex h-9 items-center rounded-lg border border-border bg-white px-3 text-sm font-semibold text-ca-on-surface-variant transition-colors hover:border-primary/40 hover:text-primary dark:bg-ca-surface-container"
+              className="inline-flex h-11 items-center border-b-2 border-transparent px-4 text-sm font-semibold text-ca-on-surface-variant transition-colors hover:border-primary/40 hover:text-primary"
               href={link.href}
             >
               {link.label}
             </a>
           ))}
         </nav>
-        <div className="rounded-2xl border border-border bg-white p-4 shadow-sm dark:bg-ca-surface-container sm:p-6">
+        <div className="rounded-xl border-2 border-[rgb(220_220_238)] bg-white p-4 shadow-sm dark:border-border dark:bg-ca-surface-container sm:p-6">
           {children}
         </div>
       </div>

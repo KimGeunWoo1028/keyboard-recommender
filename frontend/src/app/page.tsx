@@ -6,6 +6,7 @@ import { FeatureGrid } from "@/components/features/home/feature-grid";
 import { HomeHero } from "@/components/features/home/hero";
 import { HomeLandingObserve } from "@/components/features/home/home-landing-observe";
 import { HomeProcessSteps } from "@/components/features/home/home-process-steps";
+import { HomeSwitchGuide } from "@/components/features/home/home-switch-guide";
 import { HomeWorkshopPreviewGate } from "@/components/features/home/home-workshop-preview-gate";
 import { buttonClassName } from "@/components/ui/button";
 import { PageShell } from "@/components/layout/page-shell";
@@ -99,6 +100,8 @@ export default function HomePage() {
         </div>
       </section>
 
+      <HomeSwitchGuide />
+
       <section className="bg-primary py-16 sm:py-20">
         <div className="mx-auto max-w-ca px-ca-margin-mobile text-center sm:px-ca-margin">
           <h2 className="font-headline text-3xl font-black tracking-tight text-white sm:text-4xl">
@@ -114,7 +117,7 @@ export default function HomePage() {
               "mt-8 bg-white font-bold text-primary hover:bg-indigo-50 hover:opacity-100",
             )}
           >
-            추천 설문 시작
+            지금 설문 시작하기
             <ArrowRight className="h-5 w-5" aria-hidden />
           </Link>
         </div>

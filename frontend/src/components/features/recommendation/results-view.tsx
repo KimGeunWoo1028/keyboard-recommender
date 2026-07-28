@@ -118,7 +118,7 @@ export function ResultsView() {
 
   if (!submission || !build) {
     return (
-      <div className="animate-fade-up rounded-2xl border border-border bg-white p-6 shadow-sm dark:bg-ca-surface-container sm:p-8">
+      <div className="animate-fade-up rounded-xl border-2 border-[rgb(220_220_238)] bg-white p-6 shadow-sm dark:border-border dark:bg-ca-surface-container sm:p-8">
         <p className="section-label mb-3">Empty</p>
         <h2 className="font-headline text-xl font-extrabold tracking-tight text-ca-on-surface">
           아직 설문 결과가 없어요

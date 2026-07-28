@@ -3,8 +3,8 @@ import Link from "next/link";
 
 import { ContactForm } from "@/components/features/contact/contact-form";
 import { ManusPageHeader } from "@/components/layout/manus-page-header";
+import { ManusSecondaryShell } from "@/components/layout/manus-secondary-shell";
 import { ManusSurfaceCard } from "@/components/layout/manus-surface-card";
-import { PageShell } from "@/components/layout/page-shell";
 import { buttonClassName } from "@/components/ui/button";
 import { publicPageMetadata } from "@/lib/seo/page-metadata";
 
@@ -44,7 +44,7 @@ export default function ContactPage() {
   const mailto = contactEmail ? buildMailto(contactEmail) : null;
 
   return (
-    <PageShell className="max-w-3xl space-y-8 px-ca-margin-mobile pb-16 pt-8 sm:px-ca-margin sm:pb-20">
+    <ManusSecondaryShell>
       <ManusPageHeader
         eyebrow="Support"
         title="문의"
@@ -62,7 +62,7 @@ export default function ContactPage() {
       {contactEmail && mailto ? (
         <ManusSurfaceCard className="animate-fade-up space-y-3" padding="lg">
           <div className="space-y-1">
-            <p className="text-xs font-semibold uppercase tracking-wider text-ca-on-surface-variant">이메일 (대안)</p>
+            <p className="ca-label">이메일 (대안)</p>
             <a
               href={mailto}
               className="break-all text-sm font-semibold text-primary underline-offset-4 hover:underline"
@@ -90,6 +90,6 @@ export default function ContactPage() {
           이용약관
         </Link>
       </p>
-    </PageShell>
+    </ManusSecondaryShell>
   );
 }
