@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 
-import { emitOutboundShopClickBestEffort } from "@/lib/api/onboarding-events";
+import { emitOutboundShopClickBestEffort, emitShareAttemptBestEffort } from "@/lib/api/onboarding-events";
 import { swagkeyProductLinkLabel } from "@/lib/layout-catalog-links";
+import { buildShareUrl, type ShareTastePayload } from "@/lib/share-taste";
 import { cn } from "@/lib/utils";
 import { Button, buttonClassName } from "@/components/ui/button";
 import type { RecommendedBuild } from "@/types/recommendation";
@@ -28,6 +30,8 @@ export type ResultsNextActionsProps = {
   saveScope?: "account" | "local" | null;
   saveMessage?: string;
   onSaveBuild: () => void;
+  /** Non-PII taste card for SHR-01 share link. */
+  shareTaste?: ShareTastePayload | null;
 };
 
 /** Exported for unit/e2e label contracts. */
@@ -58,12 +62,26 @@ export function ResultsNextActions({
   saveScope,
   saveMessage = "",
   onSaveBuild,
+  shareTaste = null,
 }: ResultsNextActionsProps) {
   const switchPick = apiPicks.find((row) => row.domain.toLowerCase() === "switch");
   const switchUrl = buildPartSourceUrl(build, "switch", apiPicks, enrichedSourceUrls);
   const shopLabel = "이 조합 샵에서 보기";
   const shopTitle = swagkeyProductLinkLabel("switch", switchPick?.itemId);
   const showIdleHint = authReady && (saveState === "idle" || saveState === "error");
+  const [shareStatus, setShareStatus] = useState<"idle" | "copied" | "error">("idle");
+
+  async function onCopyShareLink() {
+    if (!shareTaste) return;
+    void emitShareAttemptBestEffort({ buildId: build.id });
+    try {
+      const url = buildShareUrl(window.location.origin, shareTaste);
+      await navigator.clipboard.writeText(url);
+      setShareStatus("copied");
+    } catch {
+      setShareStatus("error");
+    }
+  }
 
   return (
     <div
@@ -167,10 +185,33 @@ export function ResultsNextActions({
         </div>
       ) : null}
 
+      {shareTaste ? (
+        <div className="mt-5 border-t border-ca-outline-variant/35 pt-4" data-testid="e2e-results-share">
+          <p className="font-headline text-sm font-semibold text-ca-on-surface">공유</p>
+          <p className="mt-1 break-keep text-sm text-ca-on-surface-variant">
+            취향 요약 링크를 복사해 공유할 수 있어요. 계정 정보는 포함되지 않습니다.
+          </p>
+          <Button
+            type="button"
+            variant="outline"
+            className="mt-3 min-h-11 w-full sm:w-auto"
+            data-testid="e2e-share-copy"
+            onClick={() => void onCopyShareLink()}
+          >
+            {shareStatus === "copied" ? "링크 복사됨" : "링크 복사"}
+          </Button>
+          {shareStatus === "error" ? (
+            <p className="mt-2 text-sm text-destructive" role="alert">
+              클립보드에 복사하지 못했어요. 잠시 후 다시 시도해 주세요.
+            </p>
+          ) : null}
+        </div>
+      ) : null}
+
       <p className="mt-4">
         <Link
           href="/recommend"
-          className="text-sm text-ca-on-surface-variant underline-offset-4 hover:underline"
+          className="inline-flex min-h-11 items-center text-sm text-ca-on-surface-variant underline-offset-4 hover:underline"
           data-testid="e2e-results-retake-link"
         >
           설문 다시 하기

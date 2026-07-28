@@ -542,13 +542,17 @@ export function AuthPageClient() {
                   >
                     인증번호 발송
                   </Button>
-                  <div className="flex min-w-0 items-center gap-2">
+                  <div className="flex min-w-0 flex-col gap-2">
+                    <Label htmlFor="emailCode" className="ca-label">
+                      이메일 인증번호
+                    </Label>
+                    <div className="flex min-w-0 items-center gap-2">
                     <Input
                       id="emailCode"
                       className="ca-input min-w-0 flex-1 text-center"
                       inputMode="numeric"
                       maxLength={6}
-                      placeholder="인증번호 6자리"
+                      placeholder="6자리 숫자"
                       value={emailCode}
                       onChange={(e) => setEmailCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
                       disabled={formBusy || !emailCodeSent || emailVerified || verifyingEmailCode}
@@ -563,6 +567,7 @@ export function AuthPageClient() {
                     >
                       {emailVerified ? "인증 완료" : "인증 확인"}
                     </Button>
+                    </div>
                   </div>
                 </div>
                 {emailVerificationMessage ? (

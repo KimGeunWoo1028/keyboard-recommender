@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { MyPageSectionCard } from "@/components/features/mypage/mypage-section-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   checkDisplayNameAvailability,
   changePassword,
@@ -241,15 +242,19 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
         </Button>
         {openNicknamePanel ? (
           <div className="space-y-2 rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container/30 p-3">
-            <Input
-              value={displayName}
-              onChange={(e) => {
-                setDisplayName(e.target.value);
-                setDisplayNameAvailable(false);
-                setDisplayNameMessage(null);
-              }}
-              placeholder="닉네임 입력란"
-            />
+            <div className="space-y-1.5">
+              <Label htmlFor="mypage-nickname">닉네임</Label>
+              <Input
+                id="mypage-nickname"
+                value={displayName}
+                onChange={(e) => {
+                  setDisplayName(e.target.value);
+                  setDisplayNameAvailable(false);
+                  setDisplayNameMessage(null);
+                }}
+                placeholder="표시할 닉네임"
+              />
+            </div>
             <div className="flex flex-wrap gap-2">
               <Button
                 variant="outline"
@@ -382,8 +387,11 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
               >
                 {passwordCodeSent ? "인증번호 재발송" : "인증번호 발송"}
               </Button>
-              <div className="flex min-w-0 flex-1 items-center gap-2">
+              <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+                <Label htmlFor="mypage-password-code">비밀번호 변경 인증번호</Label>
+                <div className="flex min-w-0 items-center gap-2">
                 <Input
+                  id="mypage-password-code"
                   type="text"
                   inputMode="numeric"
                   maxLength={6}
@@ -395,7 +403,7 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
                       setPasswordVerificationToken(null);
                     }
                   }}
-                  placeholder="인증번호 6자리"
+                  placeholder="6자리 숫자"
                   className="min-w-0 flex-1"
                   disabled={!passwordCodeSent || passwordVerified}
                   autoComplete="one-time-code"
@@ -432,10 +440,13 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
                 >
                   {passwordVerified ? "인증 완료" : "인증 확인"}
                 </Button>
+                </div>
               </div>
             </div>
-            <div className="relative">
+            <div className="relative space-y-1.5">
+              <Label htmlFor="mypage-current-password">현재 비밀번호</Label>
               <Input
+                id="mypage-current-password"
                 type={showCurrentPassword ? "text" : "password"}
                 value={currentPassword}
                 onChange={(e) => setCurrentPassword(e.target.value)}
@@ -449,8 +460,10 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
                 onToggle={() => setShowCurrentPassword((v) => !v)}
               />
             </div>
-            <div className="relative">
+            <div className="relative space-y-1.5">
+              <Label htmlFor="mypage-new-password">새 비밀번호</Label>
               <Input
+                id="mypage-new-password"
                 type={showNewPassword ? "text" : "password"}
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
@@ -461,12 +474,14 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
               />
               <PasswordVisibilityToggle visible={showNewPassword} onToggle={() => setShowNewPassword((v) => !v)} />
             </div>
-            <div className="relative">
+            <div className="relative space-y-1.5">
+              <Label htmlFor="mypage-confirm-password">새 비밀번호 확인</Label>
               <Input
+                id="mypage-confirm-password"
                 type={showConfirmPassword ? "text" : "password"}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="새 비밀번호 확인란"
+                placeholder="새 비밀번호 다시 입력"
                 className="pr-10"
                 disabled={!passwordVerified}
                 autoComplete="new-password"
@@ -628,8 +643,11 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
               >
                 {deleteCodeSent ? "인증번호 재발송" : "인증번호 발송"}
               </Button>
-              <div className="flex min-w-0 flex-1 items-center gap-2">
+              <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+                <Label htmlFor="mypage-delete-code">탈퇴 인증번호</Label>
+                <div className="flex min-w-0 items-center gap-2">
                 <Input
+                  id="mypage-delete-code"
                   type="text"
                   inputMode="numeric"
                   maxLength={6}
@@ -641,7 +659,7 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
                       setDeleteVerificationToken(null);
                     }
                   }}
-                  placeholder="인증번호 6자리"
+                  placeholder="6자리 숫자"
                   className="min-w-0 flex-1"
                   disabled={!deleteCodeSent || deleteVerified}
                   autoComplete="one-time-code"
@@ -678,10 +696,13 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
                 >
                   {deleteVerified ? "인증 완료" : "인증 확인"}
                 </Button>
+                </div>
               </div>
             </div>
-            <div className="relative">
+            <div className="relative space-y-1.5">
+              <Label htmlFor="mypage-delete-password">현재 비밀번호</Label>
               <Input
+                id="mypage-delete-password"
                 type={showDeletePassword ? "text" : "password"}
                 value={deletePassword}
                 onChange={(e) => setDeletePassword(e.target.value)}
@@ -695,14 +716,18 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
                 onToggle={() => setShowDeletePassword((v) => !v)}
               />
             </div>
-            <Input
-              type="text"
-              value={deleteConfirm}
-              onChange={(e) => setDeleteConfirm(e.target.value)}
-              placeholder={`확인을 위해 «${DELETE_CONFIRM_WORD}»를 입력하세요`}
-              autoComplete="off"
-              disabled={!deleteVerified}
-            />
+            <div className="space-y-1.5">
+              <Label htmlFor="mypage-delete-confirm">탈퇴 확인 문구</Label>
+              <Input
+                id="mypage-delete-confirm"
+                type="text"
+                value={deleteConfirm}
+                onChange={(e) => setDeleteConfirm(e.target.value)}
+                placeholder={`«${DELETE_CONFIRM_WORD}» 입력`}
+                autoComplete="off"
+                disabled={!deleteVerified}
+              />
+            </div>
             <p className="text-xs text-ca-on-surface-variant">
               <span className={deleteConfirm === DELETE_CONFIRM_WORD ? "text-green-500" : "text-red-500"}>
                 {deleteConfirm === DELETE_CONFIRM_WORD ? "✓" : "✗"}

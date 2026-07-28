@@ -390,7 +390,7 @@ S0 퀵윈 ──► E1 결과 소유 ──► E2 설문 연속 ──► E3 결
 | **Estimated** | 1d |
 | **Dependencies** | HOME-01과 병렬 가능 |
 | **Acceptance Criteria** | 1280×720에서 Primary CTA와 비로그인 안내가 뷰포트 내(또는 CTA 직상단) |
-| **Status** | Todo |
+| **Status** | Done |
 
 ---
 
@@ -437,7 +437,7 @@ S0 퀵윈 ──► E1 결과 소유 ──► E2 설문 연속 ──► E3 결
 | **Estimated** | 5d |
 | **Dependencies** | SEO-01, RES-02 권장 |
 | **Acceptance Criteria** | ① 결과에서 공유/복사 1액션 ② 붙여넣기 시 미리보기 또는 유효 랜딩 ③ 타 사용자 PII 노출 없음 ④ 공유 시도 이벤트(KPI-01) |
-| **Status** | Todo |
+| **Status** | Done |
 
 ---
 
@@ -630,7 +630,7 @@ S0 퀵윈 ──► E1 결과 소유 ──► E2 설문 연속 ──► E3 결
 | **Estimated** | 2d |
 | **Dependencies** | 없음 |
 | **Acceptance Criteria** | Catalog 상세·모바일 메뉴 각각 dialog 패턴 충족 |
-| **Status** | Todo |
+| **Status** | Done |
 
 ---
 
@@ -671,7 +671,7 @@ S0 퀵윈 ──► E1 결과 소유 ──► E2 설문 연속 ──► E3 결
 | **Estimated** | 1d |
 | **Dependencies** | 없음 |
 | **Acceptance Criteria** | 샘플 푸터/인라인 ≥24px 높이 |
-| **Status** | Todo |
+| **Status** | Done |
 
 ---
 
@@ -688,7 +688,7 @@ S0 퀵윈 ──► E1 결과 소유 ──► E2 설문 연속 ──► E3 결
 | **Estimated** | 1d |
 | **Dependencies** | 없음 |
 | **Acceptance Criteria** | 주요 입력에 가시 label |
-| **Status** | Todo |
+| **Status** | Done |
 
 ---
 
@@ -705,7 +705,7 @@ S0 퀵윈 ──► E1 결과 소유 ──► E2 설문 연속 ──► E3 결
 | **Estimated** | 0.5d |
 | **Dependencies** | SUR-03 권장 |
 | **Acceptance Criteria** | 진행 변경 시 valuemax/now 갱신 |
-| **Status** | Todo |
+| **Status** | Done |
 
 ---
 
@@ -832,9 +832,12 @@ S0 퀵윈 ──► E1 결과 소유 ──► E2 설문 연속 ──► E3 결
 
 **완료 조건**
 
-- [ ] 결과 공유 1액션 E2E
-- [ ] Modal/터치/라벨/progress 기준 충족
-- [ ] **Gate 리뷰:** D7 재오픈·저장률·아웃바운드 클릭 추세 점검 → Sprint 5에서 RET-04/CAT-02/SEO-02/BIZ-02 vs 투자 Watch 재평가
+- [x] 결과 공유 1액션 E2E
+- [x] Modal/터치/라벨/progress 기준 충족
+- [x] **Gate 리뷰:** D7 재오픈·저장률·아웃바운드 클릭 추세 점검 → Sprint 5에서 RET-04/CAT-02/SEO-02/BIZ-02 vs 투자 Watch 재평가
+
+**Sprint4 완료일:** 2026-07-28 · 보고서: `docs/Sprint4_COMPLETION_REPORT.md`  
+**Gate 메모:** 운영 수치는 `python scripts/report_funnel_analytics.py --window-days 7` + `docs/weekly-north-star-report.md`로 확인. 코드 게이트는 공유·a11y·fold 충족.
 
 **Sprint 4 이후 (백로그):** RET-04 · CAT-02 · SEO-02 · BIZ-02 · DS-01 · POL-01 · GROW-01
 
@@ -844,9 +847,9 @@ S0 퀵윈 ──► E1 결과 소유 ──► E2 설문 연속 ──► E3 결
 
 | Status | IDs |
 |--------|-----|
-| **Todo** | RET-04, SUR-03, RES-03, SHR-01, CAT-02, BIZ-02, A11Y-*, HOME-03, POL-01, DS-01, SEO-02, GROW-01 |
+| **Todo** | RET-04, SUR-03, RES-03, CAT-02, BIZ-02, POL-01, DS-01, SEO-02, GROW-01 |
 | **Doing** | — |
-| **Done** | AUTH-01, SEO-01, HOME-01, HOME-02, RET-01–03, SUR-01–02, RES-01–02, RES-04, CTR-01–02, CAT-01, BIZ-01, KPI-01 |
+| **Done** | AUTH-01, SEO-01, HOME-01–03, RET-01–03, SUR-01–02, RES-01–02, RES-04, CTR-01–02, CAT-01, BIZ-01, KPI-01, SHR-01, A11Y-01–04 |
 
 상태 변경 시 이 문서의 해당 Task `Status`만 갱신한다. 세 Audit 원본은 수정하지 않는다.
 

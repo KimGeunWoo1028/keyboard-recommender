@@ -17,19 +17,19 @@ export function HomeHero() {
         <div className="absolute right-1/4 top-1/2 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-primary/5 blur-3xl" />
       </div>
 
-      <div className="relative grid grid-cols-1 items-center gap-12 py-10 lg:grid-cols-2 lg:py-16">
+      <div className="relative grid grid-cols-1 items-center gap-8 py-8 lg:grid-cols-2 lg:gap-10 lg:py-10">
         <div className="animate-fade-up">
-          <p className="section-label mb-6">Keyboard Recommender</p>
-          <h1 className="font-headline text-4xl font-black tracking-tight text-ca-on-surface sm:text-5xl sm:leading-[1.08] lg:text-6xl lg:leading-[1.05]">
+          <p className="section-label mb-4">Keyboard Recommender</p>
+          <h1 className="font-headline text-4xl font-black tracking-tight text-ca-on-surface sm:text-5xl sm:leading-[1.08] lg:text-5xl lg:leading-[1.08]">
             취향에 맞는{" "}
             <br />
             <span className="text-primary">키보드 조합</span>
           </h1>
-          <p className="mt-6 max-w-md break-keep text-base leading-relaxed text-ca-on-surface-variant sm:text-lg">
+          <p className="mt-4 max-w-md break-keep text-base leading-relaxed text-ca-on-surface-variant sm:text-lg">
             취향을 몇 가지 고르면 스위치부터 키캡까지 한 번에 조합해 드려요.
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-2">
+          <div className="mt-5 flex flex-wrap gap-2">
             {["약 1분", "무료", "로그인 없이 시작"].map((tag) => (
               <span key={tag} className="ca-keycap-badge">
                 {tag}
@@ -37,7 +37,7 @@ export function HomeHero() {
             ))}
           </div>
 
-          <div className="mt-10">
+          <div className="mt-6">
             <HomeHeroActions />
           </div>
         </div>

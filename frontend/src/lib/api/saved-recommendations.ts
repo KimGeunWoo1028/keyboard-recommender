@@ -362,6 +362,7 @@ export async function emitExplorationEvent(input: {
   event_type:
     | "interaction.click"
     | "interaction.outbound_click"
+    | "interaction.share_attempt"
     | "interaction.comparison"
     | "interaction.bookmark"
     | "interaction.feedback"

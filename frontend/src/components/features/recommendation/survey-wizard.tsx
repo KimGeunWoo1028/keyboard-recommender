@@ -434,6 +434,8 @@ export function SurveyWizard() {
           className="mx-auto mt-6 h-1 w-full max-w-xs overflow-hidden rounded bg-ca-outline-variant/35"
           role="progressbar"
           aria-label="추천 준비 중"
+          aria-busy="true"
+          aria-valuetext="진행 중"
         >
           <div className="h-full w-2/3 motion-safe:animate-pulse bg-ca-on-surface/40" />
         </div>

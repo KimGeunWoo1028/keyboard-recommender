@@ -42,6 +42,7 @@ import { ResultsOverviewTab } from "./results/results-overview-tab";
 import { ResultsTrustLayer } from "./results/results-trust-layer";
 import { BackendResultTabBar, LiteResultTabBar } from "./results/results-tab-shell";
 import type { BackendResultTabId, LiteResultTabId } from "./results/results-types";
+import { deriveConfidenceStory } from "./results/results-confidence-story-content";
 import { SharedResultHeader, ResultsPreferenceSummary, preferenceTagsFromAnswers } from "./results/shared-result-header";
 
 const ResultsEvidenceTab = dynamic(
@@ -566,6 +567,20 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
   );
 
   if (useBackendScoring) {
+    const shareStory = deriveConfidenceStory(submission, enrichedApiPicks);
+    const shareTaste = {
+      v: 1 as const,
+      title: `${preferenceTagsFromAnswers(submission.answers)[1] ?? "취향"} · 추천 요약`,
+      tags: preferenceTagsFromAnswers(submission.answers),
+      why: shareStory?.support,
+    };
+    // Prefer title from header pattern (sound · feel) without importing maps again:
+    const soundFeelTitle = (() => {
+      const tags = preferenceTagsFromAnswers(submission.answers);
+      return tags.length >= 2 ? `${tags[1]} · ${tags[2] ?? tags[0]}` : tags[0] ?? "취향 카드";
+    })();
+    shareTaste.title = soundFeelTitle;
+
     return (
       <div className="space-y-6 overflow-x-hidden sm:space-y-8">
         <SharedResultHeader submission={submission} build={build} />
@@ -581,6 +596,7 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
           saveScope={saveScope}
           saveMessage={saveMessage}
           onSaveBuild={() => void handleSaveBuild()}
+          shareTaste={shareTaste}
         />
 
         <ResultsOverviewTab
@@ -657,6 +673,11 @@ export function RecommendationResultView({ submission, build, onApplyRefinement,
         saveScope={saveScope}
         saveMessage={saveMessage}
         onSaveBuild={() => void handleSaveBuild()}
+        shareTaste={{
+          v: 1,
+          title: preferenceTagsFromAnswers(submission.answers).slice(0, 2).join(" · ") || "취향 카드",
+          tags: preferenceTagsFromAnswers(submission.answers),
+        }}
       />
 
       <ResultsPreferenceSummary answers={submission.answers} />

@@ -15,6 +15,7 @@ UnifiedEventType = Literal[
     "kpi.time_to_first_result",
     "interaction.click",
     "interaction.outbound_click",
+    "interaction.share_attempt",
     "interaction.bookmark",
     "interaction.comparison",
     "interaction.feedback",
