@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 
 import { HomeHeroActions } from "@/components/features/home/home-hero-actions";
@@ -5,7 +6,6 @@ import { HOME_RESULT_PREVIEW_EXAMPLE } from "@/components/features/home/home-res
 
 /**
  * Home first viewport — Manus-style two-column hero.
- * Image slot is layout-only (no asset) until a dedicated hero photo is supplied.
  */
 export function HomeHero() {
   const example = HOME_RESULT_PREVIEW_EXAMPLE;
@@ -44,15 +44,15 @@ export function HomeHero() {
         <div className="animate-fade-up animate-fade-up-delay-2 relative lg:pl-4">
           <div className="relative rounded-2xl border border-border bg-white shadow-2xl shadow-indigo-200/50 dark:bg-ca-surface-container dark:shadow-primary/10">
             <div className="relative overflow-hidden rounded-2xl">
-              {/* Image slot — replace with <Image src=...> when asset is ready */}
-              <div
-                className="flex aspect-[5/4] w-full items-center justify-center bg-gradient-to-br from-[#EEF2FF] via-[#F8F9FA] to-[#E0E7FF] dark:from-primary/20 dark:via-ca-surface-container dark:to-primary/10"
-                role="img"
-                aria-label="히어로 키보드 이미지 자리"
-              >
-                <span className="text-xs font-semibold uppercase tracking-widest text-ca-on-surface-variant/60">
-                  Hero image
-                </span>
+              <div className="relative aspect-[5/4] w-full">
+                <Image
+                  src="/brand/hero-keyboard.png"
+                  alt="프리미엄 기계식 키보드"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  className="object-cover"
+                />
               </div>
               <div className="absolute bottom-4 left-4 right-4 rounded-xl border border-border bg-white/90 p-4 shadow-lg backdrop-blur-md dark:bg-ca-surface-container/90">
                 <p className="mb-1 text-xs font-bold uppercase tracking-widest text-primary">추천 결과 예시</p>
