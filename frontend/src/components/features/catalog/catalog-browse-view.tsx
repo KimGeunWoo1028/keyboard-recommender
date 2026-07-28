@@ -168,8 +168,8 @@ function CatalogPartCard({
         }
       }}
       className={cn(
-        "flex h-full min-h-[16.5rem] cursor-pointer flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition hover:border-primary/40 hover:shadow-md dark:bg-ca-surface-container",
-        selected && "border-ca-on-surface/50 bg-ca-surface-container-low",
+        "flex h-full min-h-[16.5rem] cursor-pointer flex-col overflow-hidden rounded-xl border-2 border-[rgb(220_220_238)] border-l-4 border-l-primary bg-white shadow-sm transition hover:border-primary/40 hover:shadow-md dark:border-border dark:bg-ca-surface-container",
+        selected && "border-primary/50 bg-ca-surface-container-low",
       )}
     >
       <CatalogPartThumbnail
@@ -668,17 +668,17 @@ export function CatalogBrowseView({
 
       <div className="space-y-2">
         <p className="font-label text-xs font-medium text-ca-on-surface-variant">부품군</p>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 border-b border-[rgb(220_220_238)] pb-0 dark:border-border">
           {CATALOG_TABS.map((tab) => (
             <Button
               key={tab.id}
               type="button"
-              variant={family === tab.id ? "primary" : "outline"}
+              variant="ghost"
               size="default"
               className={
                 family === tab.id
-                  ? "h-10 rounded-lg px-4 font-headline text-sm font-semibold sm:px-5"
-                  : "h-10 rounded-lg border-ca-outline-variant/60 px-4 font-headline text-sm font-semibold text-ca-on-surface-variant hover:border-ca-on-surface/30 hover:bg-ca-surface-container/50 sm:px-5"
+                  ? "h-11 rounded-none border-b-2 border-primary bg-transparent px-4 font-headline text-sm font-semibold text-primary shadow-none hover:bg-transparent hover:opacity-100 sm:px-5"
+                  : "h-11 rounded-none border-b-2 border-transparent bg-transparent px-4 font-headline text-sm font-semibold text-ca-on-surface-variant shadow-none hover:bg-transparent hover:text-primary sm:px-5"
               }
               onClick={() => {
                 replaceCatalogParams({

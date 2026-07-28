@@ -76,7 +76,7 @@ export function SharedResultHeader({
 
   return (
     <div className="space-y-4 sm:space-y-5" data-testid="e2e-result-trust-summary">
-      <article className="overflow-hidden rounded-2xl border border-border bg-white shadow-sm dark:bg-ca-surface-container">
+      <article className="overflow-hidden rounded-xl border-2 border-[rgb(220_220_238)] bg-white shadow-sm dark:border-border dark:bg-ca-surface-container">
         <div className="space-y-2 px-4 py-5 sm:px-6 sm:py-6">
           <p className="section-label">Results</p>
           <h2 className="flex flex-wrap items-center gap-2 font-headline text-xl font-extrabold tracking-tight text-ca-on-surface sm:text-2xl">

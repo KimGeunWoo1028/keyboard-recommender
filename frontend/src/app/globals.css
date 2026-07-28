@@ -28,7 +28,8 @@
     --muted-foreground: 90 90 120;
     --border: 220 220 235;
     --ring: 55 48 163;
-    --radius: 0.75rem;
+    /* Manus Precision Editorial — 0.5rem base radius */
+    --radius: 0.5rem;
     --radius-btn: 0.5rem;
 
     --ca-surface: 255 255 255;
@@ -405,8 +406,9 @@
     font-family: var(--font-headline), ui-sans-serif, system-ui, sans-serif;
     font-size: 0.75rem;
     font-weight: 600;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.08em;
     line-height: 1rem;
+    text-transform: uppercase;
     color: rgb(var(--ca-on-surface-variant));
   }
 

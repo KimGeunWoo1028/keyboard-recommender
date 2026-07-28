@@ -26,7 +26,7 @@ export function DebugChrome() {
   const base = getDebugApiBaseUrl();
 
   return (
-    <div className="space-y-4 rounded-2xl border border-amber-500/35 bg-amber-50/80 p-5 text-sm dark:bg-amber-500/10">
+    <div className="space-y-4 rounded-xl border-2 border-amber-500/35 bg-amber-50/80 p-5 text-sm dark:bg-amber-500/10">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div>
           <p className="section-label !text-amber-800 dark:!text-amber-200">Debug token</p>

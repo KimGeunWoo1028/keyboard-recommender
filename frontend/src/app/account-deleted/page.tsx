@@ -15,21 +15,23 @@ export const metadata: Metadata = privatePageMetadata({
 export default function AccountDeletedPage() {
   return (
     <main
-      className="mx-auto flex min-h-[60vh] max-w-lg flex-col justify-center px-ca-margin-mobile py-14 sm:px-ca-margin"
+      className="flex min-h-[calc(100dvh-4.25rem)] items-center justify-center bg-[rgb(248_248_252)] px-4 py-14 dark:bg-ca-surface-container-low"
       data-testid="e2e-account-deleted"
     >
-      <ManusSurfaceCard className="animate-fade-up space-y-6" padding="lg">
-        <ManusPageHeader
-          eyebrow="Account"
-          title="회원탈퇴가 완료되었습니다"
-          description="이용해 주셔서 감사합니다. 계정·프로필·저장한 결과 접근 권한이 삭제되었습니다. 같은 이메일로 다시 가입하실 수 있습니다."
-        />
-        <div>
-          <Link href="/" className={buttonClassName({ className: "h-11 font-semibold" })}>
-            홈으로
-          </Link>
-        </div>
-      </ManusSurfaceCard>
+      <div className="w-full max-w-lg animate-fade-up">
+        <ManusSurfaceCard className="space-y-6" padding="lg">
+          <ManusPageHeader
+            eyebrow="Account"
+            title="회원탈퇴가 완료되었습니다"
+            description="이용해 주셔서 감사합니다. 계정·프로필·저장한 결과 접근 권한이 삭제되었습니다. 같은 이메일로 다시 가입하실 수 있습니다."
+          />
+          <div>
+            <Link href="/" className={buttonClassName({ className: "h-11 font-semibold" })}>
+              홈으로
+            </Link>
+          </div>
+        </ManusSurfaceCard>
+      </div>
     </main>
   );
 }

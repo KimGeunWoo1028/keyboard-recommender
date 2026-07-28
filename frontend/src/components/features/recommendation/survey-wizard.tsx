@@ -473,11 +473,11 @@ export function SurveyWizard() {
                 type="button"
                 onClick={() => chooseStyle(style)}
                 className={cn(
-                  "card-lift group flex flex-col items-start justify-start gap-3 rounded-xl border-2 bg-white p-5 text-left dark:bg-ca-surface-container sm:gap-3 sm:p-6",
+                  "card-lift group flex flex-col items-start justify-start gap-3 rounded-xl border-2 border-l-4 bg-white p-5 text-left dark:bg-ca-surface-container sm:gap-3 sm:p-6",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-primary",
                   selected
-                    ? "border-primary bg-ca-primary-container/10"
-                    : "border-border hover:border-primary/50",
+                    ? "border-primary border-l-primary bg-primary/5"
+                    : "border-[rgb(220_220_238)] border-l-primary/40 hover:border-primary/50 dark:border-border",
                   "animate-fade-up",
                   index === 1 && "animate-fade-up-delay-1",
                   index === 2 && "animate-fade-up-delay-2",

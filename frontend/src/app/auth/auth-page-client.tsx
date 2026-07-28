@@ -403,62 +403,63 @@ export function AuthPageClient() {
   const loginCtx = authEntryContext(authNextPath);
   const loginCopy = authLoginContextCopy(loginCtx);
   const tabIdleClass =
-    "h-10 flex-1 rounded-lg border-ca-outline-variant/50 bg-transparent text-ca-on-surface-variant hover:border-ca-on-surface/30 hover:bg-ca-surface-container/50 hover:text-ca-on-surface";
-  const tabActiveClass = "h-10 flex-1 rounded-lg";
+    "flex-1 rounded-none border-0 bg-[rgb(248_248_252)] py-4 text-sm font-semibold text-[rgb(100_100_120)] shadow-none hover:bg-[rgb(248_248_252)] hover:text-primary dark:bg-ca-surface-container-low dark:text-ca-on-surface-variant";
+  const tabActiveClass =
+    "flex-1 rounded-none border-0 border-b-2 border-primary bg-white py-4 text-sm font-semibold text-primary shadow-none hover:bg-white hover:opacity-100 dark:bg-ca-surface";
 
   return (
-    <div className="mx-auto w-full max-w-md px-ca-margin-mobile py-10 sm:px-ca-margin sm:py-16">
-      <section className="overflow-hidden rounded-2xl border border-border bg-white shadow-lg shadow-indigo-100/60 dark:bg-ca-surface-container dark:shadow-none">
-        <header className="space-y-2 border-b border-border px-5 py-6 sm:px-6 sm:py-7">
-          <p className="section-label">Keyboard Recommender</p>
-          <h1 className="font-headline text-2xl font-extrabold tracking-tight text-ca-on-surface">
-            {mode === "login" ? loginCopy.title : "회원가입"}
-          </h1>
-          <p className="break-keep text-sm leading-relaxed text-ca-on-surface-variant">
-            {mode === "login"
-              ? loginCopy.body
-              : "닉네임과 이메일 인증 후 계정을 만듭니다."}
-          </p>
-          {mode === "login" && loginCopy.benefits?.length ? (
-            <ul className="mt-2 space-y-1 text-sm text-ca-on-surface-variant">
-              {loginCopy.benefits.map((line) => (
-                <li key={line} className="flex gap-2">
-                  <span aria-hidden>·</span>
-                  <span className="break-keep">{line}</span>
-                </li>
-              ))}
-            </ul>
-          ) : null}
-          {mode === "signup" ? (
-            <p className="break-keep text-sm leading-relaxed text-ca-on-surface-variant">
-              비밀번호는 8~20자, 영문·숫자·특수문자를 모두 포함해야 합니다.
-            </p>
-          ) : null}
-        </header>
+    <div className="flex min-h-[calc(100dvh-4.25rem)] items-center justify-center bg-[rgb(248_248_252)] px-4 py-10 dark:bg-ca-surface-container-low sm:py-16">
+      <section className="w-full max-w-md overflow-hidden rounded-xl border-2 border-[rgb(220_220_238)] bg-white shadow-sm shadow-primary/5 dark:border-border dark:bg-ca-surface-container dark:shadow-none">
+        <div className="flex border-b border-[rgb(220_220_238)] dark:border-border" role="tablist" aria-label="로그인 또는 회원가입">
+          <Button
+            variant="ghost"
+            onClick={switchToLogin}
+            className={mode === "login" ? tabActiveClass : tabIdleClass}
+            role="tab"
+            aria-selected={mode === "login"}
+            data-testid="e2e-auth-tab-login"
+          >
+            로그인
+          </Button>
+          <Button
+            variant="ghost"
+            onClick={switchToSignup}
+            className={mode === "signup" ? tabActiveClass : tabIdleClass}
+            role="tab"
+            aria-selected={mode === "signup"}
+            data-testid="e2e-auth-tab-signup"
+          >
+            회원가입
+          </Button>
+        </div>
 
-        <div className="space-y-5 p-5 sm:p-6">
-          <div className="flex gap-2" role="tablist" aria-label="로그인 또는 회원가입">
-            <Button
-              variant={mode === "login" ? "primary" : "outline"}
-              onClick={switchToLogin}
-              className={mode === "login" ? tabActiveClass : tabIdleClass}
-              role="tab"
-              aria-selected={mode === "login"}
-              data-testid="e2e-auth-tab-login"
-            >
-              로그인
-            </Button>
-            <Button
-              variant={mode === "signup" ? "primary" : "outline"}
-              onClick={switchToSignup}
-              className={mode === "signup" ? tabActiveClass : tabIdleClass}
-              role="tab"
-              aria-selected={mode === "signup"}
-              data-testid="e2e-auth-tab-signup"
-            >
-              회원가입
-            </Button>
-          </div>
+        <div className="space-y-5 p-8">
+          <header className="space-y-2">
+            <p className="text-xs font-semibold uppercase tracking-widest text-primary">Keyboard Recommender</p>
+            <h1 className="font-headline text-2xl font-extrabold tracking-tight text-ca-on-surface">
+              {mode === "login" ? loginCopy.title : "회원가입"}
+            </h1>
+            <p className="break-keep text-sm leading-relaxed text-ca-on-surface-variant">
+              {mode === "login"
+                ? loginCopy.body
+                : "닉네임과 이메일 인증 후 계정을 만듭니다."}
+            </p>
+            {mode === "login" && loginCopy.benefits?.length ? (
+              <ul className="mt-2 space-y-1 text-sm text-ca-on-surface-variant">
+                {loginCopy.benefits.map((line) => (
+                  <li key={line} className="flex gap-2">
+                    <span aria-hidden>·</span>
+                    <span className="break-keep">{line}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+            {mode === "signup" ? (
+              <p className="break-keep text-sm leading-relaxed text-ca-on-surface-variant">
+                비밀번호는 8~20자, 영문·숫자·특수문자를 모두 포함해야 합니다.
+              </p>
+            ) : null}
+          </header>
 
           <form className="space-y-4" onSubmit={onSubmit} aria-busy={formBusy || undefined}>
             {mode === "signup" ? (

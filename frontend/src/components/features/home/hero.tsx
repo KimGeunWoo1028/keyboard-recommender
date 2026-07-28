@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ChevronDown } from "lucide-react";
 
 import { HomeHeroActions } from "@/components/features/home/home-hero-actions";
 import { HOME_RESULT_PREVIEW_EXAMPLE } from "@/components/features/home/home-result-preview-example";
@@ -11,25 +12,25 @@ export function HomeHero() {
   const example = HOME_RESULT_PREVIEW_EXAMPLE;
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative flex min-h-[min(92vh,56rem)] items-center overflow-hidden">
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         <div className="absolute right-0 top-0 h-full w-1/2 bg-gradient-to-l from-[#EEF2FF] to-transparent dark:from-primary/10" />
         <div className="absolute right-1/4 top-1/2 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-primary/5 blur-3xl" />
       </div>
 
-      <div className="relative grid grid-cols-1 items-center gap-8 py-8 lg:grid-cols-2 lg:gap-10 lg:py-10">
+      <div className="relative grid w-full grid-cols-1 items-center gap-12 py-16 lg:grid-cols-2 lg:gap-12">
         <div className="animate-fade-up">
-          <p className="section-label mb-4">Keyboard Recommender</p>
-          <h1 className="font-headline text-4xl font-black tracking-tight text-ca-on-surface sm:text-5xl sm:leading-[1.08] lg:text-5xl lg:leading-[1.08]">
-            취향에 맞는{" "}
+          <p className="section-label mb-6">Keyboard Recommender</p>
+          <h1 className="font-headline text-5xl font-black leading-[1.05] tracking-tight text-ca-on-surface sm:text-6xl lg:text-7xl">
+            취향에 맞는
             <br />
             <span className="text-primary">키보드 조합</span>
           </h1>
-          <p className="mt-4 max-w-md break-keep text-base leading-relaxed text-ca-on-surface-variant sm:text-lg">
+          <p className="mt-6 max-w-md break-keep text-lg leading-relaxed text-ca-on-surface-variant">
             취향을 몇 가지 고르면 스위치부터 키캡까지 한 번에 조합해 드려요.
           </p>
 
-          <div className="mt-5 flex flex-wrap gap-2">
+          <div className="mb-10 mt-8 flex flex-wrap gap-2">
             {["약 1분", "무료", "로그인 없이 시작"].map((tag) => (
               <span key={tag} className="ca-keycap-badge">
                 {tag}
@@ -37,9 +38,7 @@ export function HomeHero() {
             ))}
           </div>
 
-          <div className="mt-6">
-            <HomeHeroActions />
-          </div>
+          <HomeHeroActions />
         </div>
 
         <div className="animate-fade-up animate-fade-up-delay-2 relative">
@@ -53,9 +52,7 @@ export function HomeHero() {
               priority
             />
             <div className="absolute bottom-4 left-4 right-4 rounded-xl border border-border bg-white/90 p-4 shadow-lg backdrop-blur-md dark:bg-ca-surface-container/90">
-              <p className="mb-1 text-xs font-bold uppercase tracking-widest text-primary">
-                추천 결과 예시
-              </p>
+              <p className="mb-1 text-xs font-bold uppercase tracking-widest text-primary">추천 결과 예시</p>
               <p className="mb-2 text-sm font-semibold text-ca-on-surface">{example.title}</p>
               <div className="flex flex-wrap gap-2">
                 {example.parts.map((part) => (
@@ -71,6 +68,13 @@ export function HomeHero() {
             <p className="text-2xl font-black text-primary">6</p>
           </div>
         </div>
+      </div>
+
+      <div
+        className="absolute bottom-8 left-1/2 flex -translate-x-1/2 animate-bounce flex-col items-center gap-1 text-ca-on-surface-variant"
+        aria-hidden
+      >
+        <ChevronDown className="h-5 w-5" />
       </div>
     </section>
   );

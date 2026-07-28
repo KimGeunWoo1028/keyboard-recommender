@@ -3,8 +3,8 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 
 import { ManusPageHeader } from "@/components/layout/manus-page-header";
+import { ManusSecondaryShell } from "@/components/layout/manus-secondary-shell";
 import { ManusSurfaceCard } from "@/components/layout/manus-surface-card";
-import { PageShell } from "@/components/layout/page-shell";
 import { publicPageMetadata } from "@/lib/seo/page-metadata";
 
 type LegalSectionProps = {
@@ -14,8 +14,10 @@ type LegalSectionProps = {
 
 function LegalSection({ title, children }: LegalSectionProps) {
   return (
-    <section className="space-y-2 border-b border-border pb-6 last:border-b-0 last:pb-0">
-      <h2 className="font-headline text-lg font-bold tracking-tight text-ca-on-surface">{title}</h2>
+    <section className="space-y-2 border-b border-[rgb(220_220_238)] pb-6 last:border-b-0 last:pb-0 dark:border-border">
+      <h2 className="text-xs font-bold uppercase tracking-widest text-[rgb(100_100_120)] dark:text-ca-on-surface-variant">
+        {title}
+      </h2>
       <div className="space-y-2 text-sm leading-relaxed text-ca-on-surface-variant">{children}</div>
     </section>
   );
@@ -29,7 +31,7 @@ export const metadata: Metadata = publicPageMetadata({
 
 export default function TermsPage() {
   return (
-    <PageShell className="max-w-3xl space-y-8 px-ca-margin-mobile pb-16 pt-8 sm:px-ca-margin sm:pb-20">
+    <ManusSecondaryShell>
       <ManusPageHeader
         eyebrow="Legal"
         title="이용약관"
@@ -118,6 +120,6 @@ export default function TermsPage() {
           문의
         </Link>
       </p>
-    </PageShell>
+    </ManusSecondaryShell>
   );
 }
