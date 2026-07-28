@@ -5,15 +5,25 @@ const SWITCH_TYPES = [
 ] as const;
 
 /**
- * Switch guide — text + taxonomy only.
- * Manus used a separate switches-hero asset; until that file is available we avoid
- * reusing the hero keyboard photo (duplicate on the same page).
+ * Manus Switch Guide layout — image column is a slot only until switches-hero is supplied.
  */
 export function HomeSwitchGuide() {
   return (
     <section className="py-20 sm:py-24" aria-labelledby="home-switch-guide-heading">
-      <div className="mx-auto max-w-ca px-ca-margin-mobile sm:px-ca-margin">
-        <div className="mx-auto max-w-2xl">
+      <div className="mx-auto grid max-w-ca grid-cols-1 items-center gap-12 px-ca-margin-mobile sm:px-ca-margin lg:grid-cols-2 lg:gap-16">
+        <div className="order-2 overflow-hidden rounded-2xl border border-border shadow-xl lg:order-1">
+          {/* Image slot — replace with <Image src="/brand/switches-hero.png" ...> when ready */}
+          <div
+            className="flex aspect-[5/4] w-full items-center justify-center bg-gradient-to-br from-[#F8F9FA] via-white to-[#EEF2FF] dark:from-ca-surface-container dark:via-ca-surface dark:to-primary/10"
+            role="img"
+            aria-label="스위치 가이드 이미지 자리"
+          >
+            <span className="text-xs font-semibold uppercase tracking-widest text-ca-on-surface-variant/60">
+              Switch image
+            </span>
+          </div>
+        </div>
+        <div className="order-1 lg:order-2">
           <p className="section-label mb-4">Switch Guide</p>
           <h2
             id="home-switch-guide-heading"
@@ -23,11 +33,11 @@ export function HomeSwitchGuide() {
             <br />
             결정합니다
           </h2>
-          <p className="mt-5 break-keep leading-relaxed text-ca-on-surface-variant">
+          <p className="mt-5 max-w-xl break-keep leading-relaxed text-ca-on-surface-variant">
             리니어, 택타일, 클리키 — 세 가지 유형 중 어느 것이 당신의 취향인지 설문을 통해 정확하게
             찾아드립니다.
           </p>
-          <div className="mt-8 space-y-3">
+          <div className="mt-6 space-y-3">
             {SWITCH_TYPES.map((sw) => (
               <div
                 key={sw.type}

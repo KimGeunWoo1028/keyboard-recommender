@@ -1,12 +1,11 @@
-import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 
 import { HomeHeroActions } from "@/components/features/home/home-hero-actions";
 import { HOME_RESULT_PREVIEW_EXAMPLE } from "@/components/features/home/home-result-preview-example";
 
 /**
- * Home first viewport — Manus Precision Editorial two-column hero.
- * Brand mark stays in header; preview overlays are labeled 예시 only.
+ * Home first viewport — Manus-style two-column hero.
+ * Image slot is layout-only (no asset) until a dedicated hero photo is supplied.
  */
 export function HomeHero() {
   const example = HOME_RESULT_PREVIEW_EXAMPLE;
@@ -43,17 +42,26 @@ export function HomeHero() {
 
         <div className="animate-fade-up animate-fade-up-delay-2 relative">
           <div className="relative overflow-hidden rounded-2xl border border-border shadow-2xl shadow-indigo-200/50 dark:shadow-primary/10">
-            <Image
-              src="/brand/hero-keyboard.png"
-              alt="기계식 키보드 예시 이미지"
-              width={900}
-              height={720}
-              className="h-auto w-full object-cover"
-              priority
-            />
-            <div className="absolute bottom-4 left-4 right-4 rounded-xl border border-border bg-white/90 px-4 py-3 shadow-lg backdrop-blur-md dark:bg-ca-surface-container/90">
-              <p className="mb-0.5 text-[10px] font-bold uppercase tracking-widest text-primary">예시</p>
-              <p className="text-sm font-semibold text-ca-on-surface">{example.title}</p>
+            {/* Image slot — replace with <Image src=...> when asset is ready */}
+            <div
+              className="flex aspect-[5/4] w-full items-center justify-center bg-gradient-to-br from-[#EEF2FF] via-[#F8F9FA] to-[#E0E7FF] dark:from-primary/20 dark:via-ca-surface-container dark:to-primary/10"
+              role="img"
+              aria-label="히어로 키보드 이미지 자리"
+            >
+              <span className="text-xs font-semibold uppercase tracking-widest text-ca-on-surface-variant/60">
+                Hero image
+              </span>
+            </div>
+            <div className="absolute bottom-4 left-4 right-4 rounded-xl border border-border bg-white/90 p-4 shadow-lg backdrop-blur-md dark:bg-ca-surface-container/90">
+              <p className="mb-1 text-xs font-bold uppercase tracking-widest text-primary">추천 결과 예시</p>
+              <p className="mb-2 text-sm font-semibold text-ca-on-surface">{example.title}</p>
+              <div className="flex flex-wrap gap-2">
+                {example.parts.map((part) => (
+                  <span key={part.family} className="ca-keycap-badge">
+                    {part.name}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
           <div className="absolute -left-4 top-1/3 hidden rounded-xl border border-border bg-white p-3 shadow-lg dark:bg-ca-surface-container lg:block">
