@@ -22,6 +22,7 @@ import { firstUnansweredStepIndex, selectedOptionLabel } from "@/lib/survey-step
 import { loadLastKnownGoodSubmission, loadSurveySubmission, saveSurveySubmission } from "@/lib/survey-storage";
 import {
   clearSurveyWizardDraft,
+  isBrowserBackNavigation,
   loadSurveyWizardDraft,
   saveSurveyWizardDraft,
 } from "@/lib/survey-wizard-draft";
@@ -157,14 +158,39 @@ export function SurveyWizard() {
       onboardingViewedAtRef.current = globalThis.performance?.now?.() ?? Date.now();
       void emitOnboardingEventBestEffort("onboarding.viewed");
       const draft = loadSurveyWizardDraft();
-      if (draft?.phase === "questions") {
-        // SUR-01/SUR-02: restore mid-wizard (incl. browser back from /results).
+      const startFreshAfterResults =
+        draft?.phase === "questions" &&
+        draft.completedForResults &&
+        !isBrowserBackNavigation();
+
+      if (startFreshAfterResults) {
+        // Nav/tab link from /results: new survey from entry (not last question).
+        clearSurveyWizardDraft();
+        const prev = loadSurveySubmission();
+        if (prev?.answers) {
+          setAnswers(prev.answers);
+          setHasPreviousSession(true);
+        }
+      } else if (draft?.phase === "questions") {
+        // SUR-01: mid-wizard refresh. SUR-02: browser back from /results.
         setPhase("questions");
         setStepIndex(Math.min(draft.stepIndex, Math.max(0, SURVEY_STEPS.length - 1)));
         setAnswers(draft.answers);
         setSelectedStyle(draft.selectedStyle);
         setSeededStepIds(new Set(draft.seededStepIds));
         setNlPreferenceText(draft.nlPreferenceText ?? "");
+        if (draft.completedForResults) {
+          // After back-restore, drop the flag so later tab visits keep mid-edit.
+          saveSurveyWizardDraft({
+            phase: "questions",
+            stepIndex: Math.min(draft.stepIndex, Math.max(0, SURVEY_STEPS.length - 1)),
+            answers: draft.answers,
+            selectedStyle: draft.selectedStyle,
+            seededStepIds: draft.seededStepIds,
+            nlPreferenceText: draft.nlPreferenceText ?? "",
+            completedForResults: false,
+          });
+        }
       } else {
         const prev = loadSurveySubmission();
         if (prev?.answers) {
@@ -187,6 +213,7 @@ export function SurveyWizard() {
 
   useEffect(() => {
     if (!draftHydratedRef.current) return;
+    const existing = loadSurveyWizardDraft();
     saveSurveyWizardDraft({
       phase,
       stepIndex,
@@ -194,6 +221,8 @@ export function SurveyWizard() {
       selectedStyle,
       seededStepIds: Array.from(seededStepIds),
       nlPreferenceText,
+      // Preserve submit flag until hydrate consumes it (back vs fresh nav).
+      completedForResults: existing?.completedForResults === true,
     });
   }, [phase, stepIndex, answers, selectedStyle, seededStepIds, nlPreferenceText]);
 
@@ -330,8 +359,17 @@ export function SurveyWizard() {
         });
       }
       completedRef.current = true;
-      // SUR-02: keep mid-wizard draft so browser back from /results restores
-      // the last question step (not entry). Cleared only via reset / 「처음부터」.
+      // SUR-02: keep draft for browser back; mark completed so nav/tab to
+      // /recommend starts at entry instead of the last question.
+      saveSurveyWizardDraft({
+        phase: "questions",
+        stepIndex,
+        answers: submitAnswers,
+        selectedStyle,
+        seededStepIds: Array.from(seededStepIds),
+        nlPreferenceText,
+        completedForResults: true,
+      });
       void emitOnboardingEventBestEffort("onboarding.completed", {
         style: selectedStyle,
         answeredSteps: Object.keys(submitAnswers).length,

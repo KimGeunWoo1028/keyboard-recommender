@@ -11,6 +11,7 @@ import { buttonClassName } from "@/components/ui/button";
 import { useDialogA11y } from "@/components/ui/use-dialog-a11y";
 import { isInternalDebugUiEnabled } from "@/lib/internal-debug-flags";
 import { hasUsableRecentRecommendationResult } from "@/lib/survey-storage";
+import { installSurveyNavPopListener } from "@/lib/survey-wizard-draft";
 import { cn } from "@/lib/utils";
 
 const primaryNav: { href: string; label: string }[] = [
@@ -39,6 +40,7 @@ export function SiteHeader() {
   const { panelRef: mobileNavRef, titleId: mobileNavTitleId } = useDialogA11y(mobileOpen, closeMobile);
 
   useEffect(() => {
+    installSurveyNavPopListener();
     const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });

@@ -2,13 +2,19 @@
  * Mid-wizard draft (sessionStorage). Separate from completed `kr_survey_v2`.
  *
  * Restore rules (SUR-01 / SUR-02):
- * - Persist while phase is entry|questions (incl. after successful submit).
- * - Remount/refresh/back → hydrate to saved phase + stepIndex (not survey start).
- * - Clear only on explicit reset / 「처음부터」 (not on submit — needed for back from /results).
+ * - Persist while phase is entry|questions.
+ * - Incomplete mid-wizard: remount/refresh → hydrate to saved phase + stepIndex.
+ * - After successful submit: keep draft with `completedForResults` so browser **back**
+ *   from /results restores the last question step (SUR-02).
+ * - Fresh navigation to /recommend (nav tab / link) after submit → start at entry
+ *   (clear completed draft). Detect back via `popstate` (App Router soft nav) with
+ *   Navigation Timing fallback for full document loads.
+ * - Clear on explicit reset / 「처음부터」.
  */
 import type { SurveyAnswers, SurveyStepId } from "@/types/survey";
 
 const DRAFT_KEY = "kr_survey_wizard_draft_v1";
+const NAV_POP_KEY = "kr_survey_nav_pop_v1";
 
 export type SurveyWizardDraft = {
   version: 1;
@@ -19,9 +25,13 @@ export type SurveyWizardDraft = {
   seededStepIds: SurveyStepId[];
   nlPreferenceText: string;
   updatedAtIso: string;
+  /** Set after successful submit; cleared after back-restore or fresh entry. */
+  completedForResults?: boolean;
 };
 
-export function saveSurveyWizardDraft(draft: Omit<SurveyWizardDraft, "version" | "updatedAtIso">): void {
+export function saveSurveyWizardDraft(
+  draft: Omit<SurveyWizardDraft, "version" | "updatedAtIso">,
+): void {
   if (typeof window === "undefined") return;
   const payload: SurveyWizardDraft = {
     version: 1,
@@ -58,4 +68,51 @@ export function clearSurveyWizardDraft(): void {
   } catch {
     // ignore
   }
+}
+
+/**
+ * Must run while chrome is mounted (e.g. site header) so popstate is recorded
+ * even when SurveyWizard is unmounted on /results.
+ */
+export function installSurveyNavPopListener(): void {
+  if (typeof window === "undefined") return;
+  const w = window as Window & { __krSurveyNavPopInstalled?: boolean };
+  if (w.__krSurveyNavPopInstalled) return;
+  w.__krSurveyNavPopInstalled = true;
+  window.addEventListener("popstate", () => {
+    try {
+      window.sessionStorage.setItem(NAV_POP_KEY, "1");
+    } catch {
+      // ignore
+    }
+  });
+}
+
+/**
+ * True when this mount follows a browser back/forward traversal.
+ * Consumes the popstate flag so a later remount does not reuse it.
+ */
+export function isBrowserBackNavigation(): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    if (window.sessionStorage.getItem(NAV_POP_KEY) === "1") {
+      window.sessionStorage.removeItem(NAV_POP_KEY);
+      return true;
+    }
+  } catch {
+    // ignore
+  }
+  try {
+    const entries = window.performance.getEntriesByType("navigation");
+    const nav = entries[0] as PerformanceNavigationTiming | undefined;
+    if (nav?.type === "back_forward") return true;
+    const legacy = (
+      window.performance as Performance & { navigation?: { type?: number } }
+    ).navigation;
+    // PerformanceNavigation.TYPE_BACK_FORWARD === 2
+    if (legacy?.type === 2) return true;
+  } catch {
+    // ignore
+  }
+  return false;
 }
