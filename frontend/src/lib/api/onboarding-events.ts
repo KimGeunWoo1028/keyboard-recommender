@@ -136,3 +136,23 @@ export async function emitOutboundShopClickBestEffort(metadata: {
   }
 }
 
+/** SHR-01: share / copy attempt (best-effort). */
+export async function emitShareAttemptBestEffort(metadata?: Record<string, unknown>): Promise<void> {
+  const { emitExplorationEvent } = await import("@/lib/api/saved-recommendations");
+  const { getOrCreateClientSessionId } = await import("@/lib/client-session-id");
+  try {
+    await emitExplorationEvent({
+      event_type: "interaction.share_attempt",
+      request_id: `share-${Date.now()}`,
+      session_id: getOrCreateClientSessionId(),
+      scenario_id: "share_taste_v1",
+      metadata: {
+        kind: "share_taste_copy",
+        ...(metadata ?? {}),
+      },
+    });
+  } catch {
+    // best-effort
+  }
+}
+

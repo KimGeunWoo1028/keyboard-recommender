@@ -2,12 +2,6 @@
 
 import Link from "next/link";
 
-import { Button } from "@/components/ui/button";
-import { CompatibleLayoutChips } from "@/components/features/catalog/compatible-layout-chips";
-import { CatalogPartThumbnail } from "@/components/features/catalog/catalog-part-thumbnail";
-import { LayoutDiagram, LayoutDiagramPanel, resolveLayoutDiagramId } from "@/components/features/catalog/layout-diagram";
-import { layoutArchetypeMetadata } from "@/components/features/catalog/layout-diagram/layout-archetype-metadata";
-import type { CatalogFamily, CatalogPartDetail } from "@/lib/api/catalog";
 import { emitOutboundShopClickBestEffort } from "@/lib/api/onboarding-events";
 import { catalogHref } from "@/lib/catalog-links";
 import { layoutSizeFilterLabel, resolveLayoutSizeFromMetadata } from "@/lib/layout-size";
@@ -15,6 +9,13 @@ import { isReferenceOnlyLayoutArchetype, swagkeyProductLinkLabel } from "@/lib/l
 import { traitAxisDisplayLabel } from "@/lib/keyboard-terminology";
 import { normalizeSwagkeyProductUrl } from "@/lib/swagkey-source-links";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { CompatibleLayoutChips } from "@/components/features/catalog/compatible-layout-chips";
+import { CatalogPartThumbnail } from "@/components/features/catalog/catalog-part-thumbnail";
+import { LayoutDiagram, LayoutDiagramPanel, resolveLayoutDiagramId } from "@/components/features/catalog/layout-diagram";
+import { layoutArchetypeMetadata } from "@/components/features/catalog/layout-diagram/layout-archetype-metadata";
+import { useDialogA11y } from "@/components/ui/use-dialog-a11y";
+import type { CatalogFamily, CatalogPartDetail } from "@/lib/api/catalog";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 type Props = {
@@ -126,6 +127,8 @@ function SwagkeyLink({ href, family, itemId }: { href?: string; family?: Catalog
 }
 
 export function CatalogDetailPanel({ open, loading, error, family, partDetail, onClose }: Props) {
+  const { panelRef, titleId } = useDialogA11y(open, onClose);
+
   if (!open) return null;
 
   const title = partDetail?.name;
@@ -163,13 +166,33 @@ export function CatalogDetailPanel({ open, loading, error, family, partDetail, o
     caseLayoutSize && partDetail ? resolveLayoutDiagramId(undefined, undefined, caseLayoutSize) : null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-ca-base/70 p-0 backdrop-blur-sm sm:items-center sm:p-4">
-      <Card className={cn("max-h-[90vh] w-full overflow-y-auto rounded-t-2xl border-border bg-white shadow-xl shadow-indigo-100/40 dark:bg-ca-surface-container dark:shadow-none sm:max-w-2xl sm:rounded-2xl")}>
+    <div
+      className="fixed inset-0 z-50 flex items-end justify-center bg-ca-base/70 p-0 backdrop-blur-sm sm:items-center sm:p-4"
+      onMouseDown={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <div
+        ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        tabIndex={-1}
+        className="max-h-[90vh] w-full outline-none sm:max-w-2xl"
+      >
+      <Card
+        className={cn(
+          "max-h-[90vh] w-full overflow-y-auto rounded-t-2xl border-border bg-white shadow-xl shadow-indigo-100/40 dark:bg-ca-surface-container dark:shadow-none sm:rounded-2xl",
+        )}
+      >
         <CardHeader className="sticky top-0 z-10 border-b border-border bg-white/95 backdrop-blur dark:bg-ca-surface-container/95">
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0 flex-1 space-y-1">
               <p className="section-label">Catalog</p>
-              <CardTitle className="font-headline text-lg font-extrabold leading-snug text-ca-on-surface">
+              <CardTitle
+                id={titleId}
+                className="font-headline text-lg font-extrabold leading-snug text-ca-on-surface"
+              >
                 {loading ? "불러오는 중…" : title || "상세 정보"}
               </CardTitle>
               {description && !isGenericCatalogCardDescription(description) ? (
@@ -281,6 +304,7 @@ export function CatalogDetailPanel({ open, loading, error, family, partDetail, o
           ) : null}
         </CardContent>
       </Card>
+      </div>
     </div>
   );
 }

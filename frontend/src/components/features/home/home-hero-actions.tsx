@@ -11,7 +11,7 @@ export function HomeHeroActions() {
   const { user, authChecked } = useAuthHeader();
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-2">
       <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
         <Link
           href="/recommend"
@@ -39,7 +39,7 @@ export function HomeHeroActions() {
       {!authChecked ? (
         <div className="min-h-[1.25rem]" aria-hidden />
       ) : !user ? (
-        <p className="break-keep text-sm text-ca-on-surface-variant">
+        <p className="break-keep text-sm text-ca-on-surface-variant" data-testid="e2e-home-guest-trust">
           로그인 없이 설문과 추천 결과를 볼 수 있어요. 계정에 저장하려면 나중에 로그인하세요.
         </p>
       ) : null}

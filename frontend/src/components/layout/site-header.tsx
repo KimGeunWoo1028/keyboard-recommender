@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { AuthNickname, AuthSessionAction } from "@/components/layout/auth-controls";
 import { HeaderCatalogSearch } from "@/components/layout/header-catalog-search";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { buttonClassName } from "@/components/ui/button";
+import { useDialogA11y } from "@/components/ui/use-dialog-a11y";
 import { isInternalDebugUiEnabled } from "@/lib/internal-debug-flags";
 import { hasUsableRecentRecommendationResult } from "@/lib/survey-storage";
 import { cn } from "@/lib/utils";
@@ -34,6 +35,8 @@ export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   // Hide until client mount + storage check to avoid SSR/hydration flicker (L04).
   const [showResultsNav, setShowResultsNav] = useState(false);
+  const closeMobile = useCallback(() => setMobileOpen(false), []);
+  const { panelRef: mobileNavRef, titleId: mobileNavTitleId } = useDialogA11y(mobileOpen, closeMobile);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -147,14 +150,22 @@ export function SiteHeader() {
 
       {mobileOpen ? (
         <div
+          ref={mobileNavRef}
           id="site-mobile-nav"
-          className="border-t border-ca-outline-variant/40 bg-ca-surface-container-low px-ca-margin-mobile py-3 lg:hidden"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={mobileNavTitleId}
+          tabIndex={-1}
+          className="border-t border-ca-outline-variant/40 bg-ca-surface-container-low px-ca-margin-mobile py-3 outline-none lg:hidden"
         >
+          <p id={mobileNavTitleId} className="sr-only">
+            모바일 메뉴
+          </p>
           <nav className="flex flex-col gap-1" aria-label="모바일">
             <Link
               href="/"
               prefetch={deferNavPrefetch ? false : undefined}
-              onClick={() => setMobileOpen(false)}
+              onClick={closeMobile}
               className={cn(
                 "rounded-btn px-3 py-2.5 font-body text-sm font-medium",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))]",
@@ -170,7 +181,7 @@ export function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 prefetch={deferNavPrefetch ? false : undefined}
-                onClick={() => setMobileOpen(false)}
+                onClick={closeMobile}
                 className={cn(
                   "rounded-btn px-3 py-2.5 font-body text-sm font-medium",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))]",

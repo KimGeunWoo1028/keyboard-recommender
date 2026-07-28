@@ -44,7 +44,7 @@ export function SiteFooter() {
                 <Link
                   href="/recommend"
                   prefetch={deferNavPrefetch ? false : undefined}
-                  className="text-sm text-white/70 transition-colors hover:text-white"
+                  className="inline-flex min-h-11 items-center text-sm text-white/70 transition-colors hover:text-white"
                 >
                   추천 설문
                 </Link>
@@ -53,7 +53,7 @@ export function SiteFooter() {
                 <Link
                   href="/catalog"
                   prefetch={deferNavPrefetch ? false : undefined}
-                  className="text-sm text-white/70 transition-colors hover:text-white"
+                  className="inline-flex min-h-11 items-center text-sm text-white/70 transition-colors hover:text-white"
                 >
                   부품 카탈로그
                 </Link>
@@ -62,7 +62,7 @@ export function SiteFooter() {
                 <Link
                   href="/mypage"
                   prefetch={deferNavPrefetch ? false : undefined}
-                  className="text-sm text-white/70 transition-colors hover:text-white"
+                  className="inline-flex min-h-11 items-center text-sm text-white/70 transition-colors hover:text-white"
                 >
                   마이페이지
                 </Link>
@@ -74,17 +74,17 @@ export function SiteFooter() {
             <h2 className="mb-4 text-xs font-bold uppercase tracking-widest text-white/40">정보</h2>
             <ul className="space-y-2">
               <li>
-                <Link href="/privacy" prefetch={false} className="text-sm text-white/70 transition-colors hover:text-white">
+                <Link href="/privacy" prefetch={false} className="inline-flex min-h-11 items-center text-sm text-white/70 transition-colors hover:text-white">
                   개인정보처리방침
                 </Link>
               </li>
               <li>
-                <Link href="/terms" prefetch={false} className="text-sm text-white/70 transition-colors hover:text-white">
+                <Link href="/terms" prefetch={false} className="inline-flex min-h-11 items-center text-sm text-white/70 transition-colors hover:text-white">
                   이용약관
                 </Link>
               </li>
               <li>
-                <Link href="/contact" prefetch={false} className="text-sm text-white/70 transition-colors hover:text-white">
+                <Link href="/contact" prefetch={false} className="inline-flex min-h-11 items-center text-sm text-white/70 transition-colors hover:text-white">
                   문의
                 </Link>
               </li>
