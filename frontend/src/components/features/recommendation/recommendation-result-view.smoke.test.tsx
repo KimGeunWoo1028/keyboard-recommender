@@ -89,7 +89,7 @@ function minimalSubmission(): SurveySubmission {
 }
 
 describe("RecommendationResultView", () => {
-  it("renders minimal overview: parts grid, contextual CTA band, retake in shell", () => {
+  it("renders minimal overview: parts grid, contextual CTA band, retake below CTA", () => {
     const sub = minimalSubmission();
     const build = minimalBuild();
     render(<RecommendationResultView submission={sub} build={build} />);
@@ -112,9 +112,11 @@ describe("RecommendationResultView", () => {
 
     const ranked = screen.getByTestId("e2e-server-ranked");
     const cta = screen.getByTestId("e2e-overview-cta-band");
+    const retake = screen.getByTestId("e2e-results-retake-link");
     const save = screen.getByTestId("e2e-save-build");
     expect(save.compareDocumentPosition(ranked) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(ranked.compareDocumentPosition(cta) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(cta.compareDocumentPosition(retake) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 
   it("shows one-line quality status when recommendation is not fully stable", () => {

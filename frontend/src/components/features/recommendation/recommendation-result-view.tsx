@@ -1,7 +1,6 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import {
@@ -26,9 +25,7 @@ import { useAuthHeader } from "@/components/layout/auth-controls";
 import { makeResultSnapshotId, saveResultSnapshot } from "@/lib/saved-result-snapshots";
 import { recommendKeyboardStack } from "@/recommendation-engine/recommend";
 import { buildPreferenceVectorFromSubmission } from "@/nl-preference/merge-submission";
-import { buttonClassName } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
 import type { RecommendedBuild } from "@/types/recommendation";
 import type { SurveySubmission } from "@/types/survey";
 import { ResultsCompareTab } from "./results/results-compare-tab";
@@ -38,6 +35,7 @@ import { ResultsHeaderActions } from "./results/results-header-actions";
 import { ResultsOverviewCtaBand } from "./results/results-overview-cta-band";
 import { ResultsOverviewTab } from "./results/results-overview-tab";
 import { ResultsPageShell } from "./results/results-page-shell";
+import { ResultsRetakeLink } from "./results/results-retake-link";
 import type { ResultTabId } from "./results/results-types";
 import { deriveConfidenceStory } from "./results/results-confidence-story-content";
 import { ResultsEvidenceMatchSection } from "./results/results-evidence-match-section";
@@ -593,16 +591,7 @@ export function RecommendationResultView({ submission, build }: Props) {
               saveMessage={saveMessage}
               onSaveBuild={() => void handleSaveBuild()}
             />
-            <Link
-              href="/recommend"
-              className={cn(
-                buttonClassName({ variant: "outline", size: "default" }),
-                "min-h-11 w-full border-ca-outline-variant/60 text-ca-on-surface sm:hidden",
-              )}
-              data-testid="e2e-results-retake-mobile"
-            >
-              다시 추천받기
-            </Link>
+            <ResultsRetakeLink />
           </div>
         ) : null}
 
@@ -671,16 +660,7 @@ export function RecommendationResultView({ submission, build }: Props) {
             saveMessage={saveMessage}
             onSaveBuild={() => void handleSaveBuild()}
           />
-          <Link
-            href="/recommend"
-            className={cn(
-              buttonClassName({ variant: "outline", size: "default" }),
-              "min-h-11 w-full border-ca-outline-variant/60 text-ca-on-surface sm:hidden",
-            )}
-            data-testid="e2e-results-retake-mobile"
-          >
-            다시 추천받기
-          </Link>
+          <ResultsRetakeLink />
         </div>
       ) : null}
 
