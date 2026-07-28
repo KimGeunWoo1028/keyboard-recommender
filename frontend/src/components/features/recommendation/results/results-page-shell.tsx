@@ -49,7 +49,7 @@ export function ResultsPageShell({
   return (
     <>
       {/* Match catalog/survey: gray band = page identity only; tabs live in white body. */}
-      <div className="border-b border-border bg-[#F8F9FA] dark:bg-ca-surface-container-low">
+      <div className="border-b border-border bg-[#F8F9FA] dark:bg-[rgb(22_22_35)]">
         <div className="mx-auto max-w-ca px-ca-margin-mobile py-10 sm:px-ca-margin sm:py-12">
           <div
             className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-6"

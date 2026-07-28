@@ -88,70 +88,70 @@
   }
 
   .dark {
-    /* Precision Editorial dark — deep indigo surfaces */
-    --background: 13 13 28;
-    --foreground: 240 240 255;
-    --card: 22 22 40;
-    --card-foreground: 240 240 255;
-    --primary: 129 140 248;
-    --primary-foreground: 15 15 35;
+    /* Precision Editorial dark — Manus inverted surfaces, brand indigo lifted for contrast */
+    --background: 13 13 22;
+    --foreground: 240 240 252;
+    --card: 18 18 30;
+    --card-foreground: 240 240 252;
+    --primary: 99 102 241;
+    --primary-foreground: 255 255 255;
     --secondary: 245 158 11;
     --secondary-foreground: 15 15 25;
-    --muted: 28 28 48;
-    --muted-foreground: 170 170 200;
-    --border: 50 50 78;
-    --ring: 129 140 248;
+    --muted: 26 26 46;
+    --muted-foreground: 148 148 180;
+    --border: 45 45 72;
+    --ring: 99 102 241;
 
-    --ca-surface: 13 13 28;
-    --ca-surface-dim: 10 10 22;
-    --ca-surface-bright: 28 28 48;
-    --ca-surface-container-lowest: 10 10 20;
-    --ca-surface-container-low: 18 18 34;
-    --ca-surface-container: 24 24 42;
-    --ca-surface-container-high: 32 32 52;
-    --ca-surface-container-highest: 40 40 62;
-    --ca-on-surface: 240 240 255;
-    --ca-on-surface-variant: 170 170 200;
-    --ca-inverse-surface: 240 240 255;
+    --ca-surface: 18 18 30;
+    --ca-surface-dim: 26 26 46;
+    --ca-surface-bright: 25 25 42;
+    --ca-surface-container-lowest: 13 13 22;
+    --ca-surface-container-low: 13 13 22;
+    --ca-surface-container: 25 25 42;
+    --ca-surface-container-high: 35 35 58;
+    --ca-surface-container-highest: 45 45 74;
+    --ca-on-surface: 240 240 252;
+    --ca-on-surface-variant: 148 148 180;
+    --ca-inverse-surface: 232 232 245;
     --ca-inverse-on-surface: 20 20 40;
-    --ca-outline: 140 140 175;
-    --ca-outline-variant: 55 55 85;
-    --ca-surface-tint: 129 140 248;
-    --ca-primary: 165 180 252;
-    --ca-on-primary: 15 15 35;
-    --ca-primary-container: 67 56 202;
-    --ca-on-primary-container: 238 235 255;
+    --ca-outline: 80 80 120;
+    --ca-outline-variant: 45 45 72;
+    --ca-surface-tint: 99 102 241;
+    --ca-primary: 99 102 241;
+    --ca-on-primary: 255 255 255;
+    --ca-primary-container: 55 48 163;
+    --ca-on-primary-container: 199 210 254;
     --ca-inverse-primary: 55 48 163;
-    --ca-secondary: 251 191 36;
+    --ca-secondary: 245 158 11;
     --ca-on-secondary: 15 15 25;
-    --ca-secondary-container: 120 70 0;
+    --ca-secondary-container: 80 50 0;
     --ca-on-secondary-container: 253 230 138;
-    --ca-tertiary: 52 211 153;
-    --ca-on-tertiary: 0 40 25;
-    --ca-tertiary-container: 5 120 85;
+    --ca-tertiary: 16 185 129;
+    --ca-on-tertiary: 255 255 255;
+    --ca-tertiary-container: 0 60 40;
     --ca-on-tertiary-container: 167 243 208;
-    --ca-error: 252 165 165;
-    --ca-on-error: 80 0 0;
-    --ca-error-container: 153 27 27;
-    --ca-on-error-container: 254 226 226;
-    --ca-background: 13 13 28;
-    --ca-on-background: 240 240 255;
-    --ca-surface-variant: 32 32 52;
-    --ca-viz-emerald: 52 211 153;
-    --ca-viz-gold: 251 191 36;
-    --ca-base: 240 240 255;
+    --ca-error: 248 113 113;
+    --ca-on-error: 255 255 255;
+    --ca-error-container: 60 15 15;
+    --ca-on-error-container: 252 165 165;
+    --ca-background: 13 13 22;
+    --ca-on-background: 240 240 252;
+    --ca-surface-variant: 26 26 46;
+    --ca-viz-emerald: 16 185 129;
+    --ca-viz-gold: 245 158 11;
+    --ca-base: 240 240 252;
 
-    --ca-ghost-border: 240 240 255;
-    --ca-ghost-border-opacity: 0.12;
-    --ca-glass-fill: 22 22 40;
-    --ca-glass-fill-opacity: 0.88;
-    --ca-input-fill: 24 24 42;
+    --ca-ghost-border: 240 240 252;
+    --ca-ghost-border-opacity: 0.15;
+    --ca-glass-fill: 18 18 30;
+    --ca-glass-fill-opacity: 0.85;
+    --ca-input-fill: 25 25 42;
     --ca-elevated-shadow:
-      0 1px 2px rgb(0 0 0 / 0.45),
-      0 8px 24px rgb(0 0 0 / 0.35);
-    --ca-btn-glow: 0 4px 24px rgb(99 102 241 / 0.35);
-    --ca-focus-glow: 0 0 0 3px rgb(129 140 248 / 0.35);
-    --focus-ring: 165 180 252;
+      0 1px 3px rgb(0 0 0 / 0.4),
+      0 8px 24px rgb(99 102 241 / 0.15);
+    --ca-btn-glow: 0 8px 24px rgb(99 102 241 / 0.4);
+    --ca-focus-glow: 0 0 0 3px rgb(99 102 241 / 0.35);
+    --focus-ring: 99 102 241;
     --focus-ring-offset: 3px;
     --radius-btn: 0.375rem;
 

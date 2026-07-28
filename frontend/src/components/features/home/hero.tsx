@@ -14,7 +14,7 @@ export function HomeHero() {
     <section className="relative flex min-h-[min(92vh,56rem)] w-full items-center">
       {/* Full-bleed wash — must sit outside max-w-ca so edges are not clipped */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-        <div className="absolute right-0 top-0 h-full w-1/2 bg-gradient-to-l from-[#EEF2FF] to-transparent dark:from-primary/10" />
+        <div className="absolute right-0 top-0 h-full w-1/2 bg-gradient-to-l from-[#EEF2FF] to-transparent dark:from-[#1A1836]" />
         <div className="absolute right-1/4 top-1/2 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-primary/5 blur-3xl" />
       </div>
 

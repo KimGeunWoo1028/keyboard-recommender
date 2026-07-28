@@ -13,7 +13,7 @@ export function HomeWorkshopPreviewShell({
   return (
     <div
       className={cn(
-        "rounded-2xl border border-border bg-[#F8F9FA] p-6 sm:p-8 dark:bg-ca-surface-container",
+        "rounded-2xl border border-border bg-[#F8F9FA] p-6 sm:p-8 dark:bg-[rgb(22_22_35)]",
         className,
       )}
     >

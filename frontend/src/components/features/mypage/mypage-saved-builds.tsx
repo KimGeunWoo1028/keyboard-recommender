@@ -182,7 +182,7 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
                         {tags.map((tag) => (
                           <li
                             key={`${key}-${tag}`}
-                            className="rounded-full border border-border bg-[#F8F9FA] px-2.5 py-0.5 text-xs font-medium text-ca-on-surface-variant dark:bg-ca-surface-container-low"
+                            className="rounded-full border border-border bg-[#F8F9FA] px-2.5 py-0.5 text-xs font-medium text-ca-on-surface-variant dark:bg-[rgb(22_22_35)]"
                           >
                             {tag}
                           </li>

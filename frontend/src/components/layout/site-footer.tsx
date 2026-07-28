@@ -22,7 +22,7 @@ export function SiteFooter() {
     pathname.startsWith("/auth/");
 
   return (
-    <footer className="mt-auto bg-[rgb(15_15_25)] text-white dark:bg-ca-surface-container-lowest">
+    <footer className="mt-auto bg-[rgb(15_15_25)] text-white dark:bg-[rgb(10_10_20)] dark:text-[rgb(240_240_252)]">
       <div className="mx-auto w-full max-w-ca px-ca-margin-mobile py-12 md:px-ca-margin">
         <div className="mb-10 grid grid-cols-1 gap-8 md:grid-cols-3">
           <div>

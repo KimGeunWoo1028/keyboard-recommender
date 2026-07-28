@@ -65,10 +65,11 @@ export function overviewCtaBandCopy(params: {
 
 const outlineOnIndigo = cn(
   buttonClassName({ variant: "outline", size: "default" }),
-  "min-h-11 justify-center border-white/40 bg-transparent text-white hover:bg-white/10 hover:text-white",
+  "min-h-11 justify-center border-primary-foreground/40 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground",
 );
 
-const primaryOnIndigo = "min-h-11 bg-white font-semibold text-primary hover:bg-white/90";
+const primaryOnIndigo =
+  "min-h-11 bg-white font-semibold text-primary hover:bg-white/90 dark:text-[rgb(55_48_163)]";
 
 export type ResultsOverviewCtaBandProps = {
   isAuthenticated: boolean;
@@ -96,7 +97,7 @@ export function ResultsOverviewCtaBand({
   return (
     <section
       className={cn(
-        "flex flex-col gap-4 rounded-2xl bg-primary p-6 text-white sm:flex-row sm:items-center sm:justify-between",
+        "flex flex-col gap-4 rounded-2xl bg-primary p-6 text-primary-foreground sm:flex-row sm:items-center sm:justify-between",
         className,
       )}
       data-testid="e2e-overview-cta-band"
@@ -104,7 +105,7 @@ export function ResultsOverviewCtaBand({
       <div className="min-w-0 space-y-1">
         <h2 className="font-headline text-lg font-bold">{title}</h2>
         <p
-          className="text-sm text-white/70"
+          className="text-sm text-primary-foreground/70"
           data-testid={showErrorFeedback ? "e2e-save-feedback" : undefined}
           role={showErrorFeedback ? "alert" : undefined}
           aria-live={showErrorFeedback ? "assertive" : undefined}
