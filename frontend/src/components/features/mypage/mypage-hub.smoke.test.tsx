@@ -135,7 +135,7 @@ describe("MyPageHub smoke", () => {
 
     await user.click(screen.getByRole("tab", { name: "저장한 결과" }));
     await waitFor(() => {
-      expect(screen.getByRole("heading", { name: "저장한 결과" })).toBeInTheDocument();
+      expect(screen.getByText(/아직 저장한 추천이 없어요/)).toBeInTheDocument();
     });
     expect(replace).toHaveBeenCalledWith("/mypage?section=saved", { scroll: false });
 
@@ -151,7 +151,7 @@ describe("MyPageHub smoke", () => {
     render(<MyPageHub />);
 
     await waitFor(() => {
-      expect(screen.getByRole("heading", { name: "저장한 결과" })).toBeInTheDocument();
+      expect(screen.getByText(/아직 저장한 추천이 없어요/)).toBeInTheDocument();
     });
     expect(replace).toHaveBeenCalledWith("/mypage?section=saved", { scroll: false });
   });

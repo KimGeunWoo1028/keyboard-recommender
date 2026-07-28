@@ -11,7 +11,6 @@ import {
   savedPreferenceTags,
   shortSavedTitle,
 } from "@/components/features/mypage/mypage-saved-identity";
-import { MyPageSectionCard } from "@/components/features/mypage/mypage-section-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import type { SavedRecommendationItem } from "@/lib/api/saved-recommendations";
@@ -116,14 +115,7 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
   }, [query, showSearch]);
 
   return (
-    <MyPageSectionCard
-      title="저장한 결과"
-      description={
-        items.length
-          ? "저장한 추천 조합을 다시 열거나 정리할 수 있습니다."
-          : "결과 화면에서 저장하면 이 목록에 쌓입니다."
-      }
-    >
+    <div className="space-y-4">
       {showSearch ? (
         <Input
           value={query}
@@ -242,7 +234,7 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
           })}
         </ul>
       ) : (
-        <div className="space-y-3 rounded-lg border border-ca-outline-variant/50 p-5 text-sm text-ca-on-surface-variant">
+        <div className="space-y-3 rounded-2xl border border-dashed border-border bg-white p-8 text-center text-sm text-ca-on-surface-variant dark:bg-ca-surface-container">
           {items.length ? (
             showSearch && activeQuery.trim() ? (
               <>
@@ -260,7 +252,7 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
               <p className="break-keep leading-relaxed">
                 설문 결과에서 마음에 드는 조합을 저장하면 여기서 다시 볼 수 있습니다.
               </p>
-              <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+              <div className="flex flex-col items-center justify-center gap-2 sm:flex-row sm:flex-wrap">
                 <Button type="button" variant="primary" size="sm" onClick={() => router.push("/recommend")}>
                   추천 설문 시작
                 </Button>
@@ -319,6 +311,6 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
           </div>
         </div>
       ) : null}
-    </MyPageSectionCard>
+    </div>
   );
 }
