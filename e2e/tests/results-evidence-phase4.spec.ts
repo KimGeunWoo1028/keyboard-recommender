@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-import { gotoDeterministicResults } from "./helpers/results-flow";
+import { gotoDeterministicResults, expectEvidencePickExplanations } from "./helpers/results-flow";
 
 test.describe("Results Evidence IA — Phase 4", () => {
   test("overview tab shows minimal body: parts grid, CTA band, and retake link", async ({ page }) => {
@@ -33,11 +33,9 @@ test.describe("Results Evidence IA — Phase 4", () => {
     await expect(page.getByTestId("e2e-evidence-matching-table")).toBeVisible();
     await expect(page.getByTestId("e2e-evidence-confidence-callout")).toBeVisible();
     await expect(page.getByText("취향 매칭 분석")).toBeVisible();
-    await expect(page.getByTestId("e2e-pick-explanations")).toBeVisible();
-    await expect(page.getByRole("heading", { name: "후보별 추천 근거" })).toBeVisible();
+    await expectEvidencePickExplanations(page);
 
     const evidence = page.getByTestId("e2e-pick-explanations");
-    await expect(evidence.getByText("왜 추천했나요").first()).toBeVisible();
     await expect(evidence.getByTestId("e2e-pick-ranking-why")).toHaveCount(0);
     await expect(page.getByText("세부 취향 프로필")).toHaveCount(0);
     await expect(evidence).not.toContainText("특별히 주의할");
