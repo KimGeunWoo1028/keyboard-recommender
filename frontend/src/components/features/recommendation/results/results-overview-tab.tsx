@@ -100,6 +100,7 @@ export function ResultsOverviewTab({
               sourceUrl={sourceUrl}
               domain={key}
               itemId={pick?.itemId}
+              imageUrl={pick?.imageUrl}
               layoutSize={layoutSize}
               layoutCatalogHref={layoutCatalogHref}
             />
