@@ -21,12 +21,23 @@ describe("SurveyWizard Pass 2 (action hierarchy · NL · loading copy)", () => {
     await user.click(screen.getByTestId("e2e-survey-start-with-style"));
 
     expect(screen.getByRole("button", { name: "다음" })).toBeInTheDocument();
+    // Style prefills early steps, so the user lands mid-survey and back is available.
+    expect(screen.getByRole("button", { name: "이전" })).toBeInTheDocument();
     expect(screen.queryByRole("button", { name: "스타일 선택으로" })).not.toBeInTheDocument();
     expect(screen.queryByRole("button", { name: "처음부터 다시" })).not.toBeInTheDocument();
 
-    await user.click(screen.getByRole("button", { name: "설정 다시 고르기" }));
+    await user.click(screen.getByRole("button", { name: /다시 고르기/ }));
     expect(screen.getByRole("button", { name: "스타일 선택으로" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "처음부터 다시" })).toBeInTheDocument();
+  });
+
+  it("hides back on the first question of a full survey", async () => {
+    const user = userEvent.setup();
+    render(<SurveyWizard />);
+
+    await user.click(screen.getByRole("button", { name: "성향 없이 전체 설문으로 시작" }));
+    expect(screen.getByRole("button", { name: "다음" })).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "이전" })).not.toBeInTheDocument();
   });
 
   it("shows optional NL preference only on the last step", async () => {
