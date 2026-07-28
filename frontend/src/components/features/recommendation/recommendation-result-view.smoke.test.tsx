@@ -107,7 +107,8 @@ describe("RecommendationResultView", () => {
     const ranked = screen.getByTestId("e2e-server-ranked");
     const trust = screen.getByTestId("e2e-trust-layer");
     const save = screen.getByTestId("e2e-save-build");
-    expect(ranked.compareDocumentPosition(save) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    // RES-01: save CTA immediately after header, before parts grid
+    expect(save.compareDocumentPosition(ranked) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(save.compareDocumentPosition(trust) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 

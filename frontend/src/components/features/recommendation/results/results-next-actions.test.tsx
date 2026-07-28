@@ -52,7 +52,7 @@ describe("ResultsNextActions", () => {
     expect(shop).toHaveAttribute("rel", "noopener noreferrer");
     expect(shop).toHaveAttribute("target", "_blank");
     expect(shop.compareDocumentPosition(save) & Node.DOCUMENT_POSITION_PRECEDING).toBeTruthy();
-    expect(screen.getByText(/이 기기의 브라우저에 저장돼요/)).toBeInTheDocument();
+    expect(screen.getByText(/이 브라우저에 임시 저장돼요/)).toBeInTheDocument();
   });
 
   it("shows account hint and saved label when authenticated", () => {
@@ -73,6 +73,35 @@ describe("ResultsNextActions", () => {
     expect(screen.getByTestId("e2e-save-build")).toHaveTextContent("저장됨");
     expect(screen.getByTestId("e2e-save-build")).toBeDisabled();
     expect(screen.getByText("계정에 저장했습니다.")).toBeInTheDocument();
+    expect(screen.getByTestId("e2e-save-feedback")).toHaveAttribute("role", "status");
+    const mypage = screen.getByTestId("e2e-save-mypage-link");
+    expect(mypage).toHaveTextContent("마이페이지에서 다시 보기");
+    expect(mypage).toHaveAttribute("href", "/mypage?section=saved");
+    expect(screen.queryByTestId("e2e-save-login-link")).not.toBeInTheDocument();
+  });
+
+  it("guest saved points to login, not MyPage as reopen (RET-02)", () => {
+    render(
+      <ResultsNextActions
+        build={build}
+        apiPicks={[]}
+        enrichedSourceUrls={{}}
+        isAuthenticated={false}
+        authReady
+        saveState="saved"
+        saveScope="local"
+        saveMessage=""
+        onSaveBuild={vi.fn()}
+      />,
+    );
+
+    expect(screen.getByTestId("e2e-save-feedback")).toHaveAttribute("role", "status");
+    expect(screen.getByText(/이 브라우저에 임시 저장했어요/)).toBeInTheDocument();
+    const login = screen.getByTestId("e2e-save-login-link");
+    expect(login).toHaveTextContent("계정에 보관하려면 로그인");
+    expect(login).toHaveAttribute("href", "/auth?mode=login");
+    expect(screen.queryByTestId("e2e-save-mypage-link")).not.toBeInTheDocument();
+    expect(screen.queryByText("저장한 결과 보기")).not.toBeInTheDocument();
   });
 
   it("keeps retry enabled on save error", () => {

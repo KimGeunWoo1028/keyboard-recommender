@@ -1,14 +1,18 @@
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { SurveyWizard } from "@/components/features/recommendation/survey-wizard";
+import { clearSurveyWizardDraft } from "@/lib/survey-wizard-draft";
 
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: vi.fn() }),
 }));
 
 describe("SurveyWizard preset skip (Phase 3)", () => {
+  beforeEach(() => {
+    clearSurveyWizardDraft();
+  });
   it("jumps to first unanswered step after style preset", async () => {
     const user = userEvent.setup();
     render(<SurveyWizard />);
