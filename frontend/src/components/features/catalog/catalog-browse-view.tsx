@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { ArrowRight, Search } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -619,80 +620,86 @@ export function CatalogBrowseView({
   };
 
   return (
-    <PageShell className="max-w-ca space-y-5 px-ca-margin-mobile sm:px-ca-margin">
-      <div ref={catalogTopRef} className="scroll-mt-24 space-y-3">
-        {fromResults ? (
-          <div className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-ca-outline-variant/40 bg-ca-surface-container/40 px-3 py-2 text-sm">
-            <p className="break-keep text-ca-on-surface-variant">
-              추천 결과에서 온 탐색 · 현재{" "}
-              <span className="font-medium text-ca-on-surface">{FAMILY_LABELS[family]}</span>
-            </p>
-            <Link
-              href="/results"
-              className="font-medium text-ca-primary underline-offset-4 hover:underline"
-            >
-              추천 결과로 돌아가기
-            </Link>
-          </div>
-        ) : null}
-
-        <div className="space-y-2">
-          <h1 className="font-headline text-2xl font-semibold tracking-tight text-ca-on-surface">
-            키보드 부품 둘러보기
+    <>
+      <div className="border-b border-border bg-[#F8F9FA] dark:bg-ca-surface-container-low">
+        <div className="mx-auto max-w-ca px-ca-margin-mobile py-10 sm:px-ca-margin sm:py-12">
+          {fromResults ? (
+            <div className="mb-6 flex flex-wrap items-center justify-between gap-2 rounded-sm border border-border bg-white px-3 py-2 text-sm dark:bg-ca-surface-container">
+              <p className="break-keep text-ca-on-surface-variant">
+                추천 결과에서 온 탐색 · 현재{" "}
+                <span className="font-medium text-ca-on-surface">{FAMILY_LABELS[family]}</span>
+              </p>
+              <Link
+                href="/results"
+                className="font-medium text-primary underline-offset-4 hover:underline"
+              >
+                추천 결과로 돌아가기
+              </Link>
+            </div>
+          ) : null}
+          <p className="section-label mb-3">Parts Catalog</p>
+          <h1 className="font-headline text-4xl font-black tracking-tight text-ca-on-surface">
+            부품 카탈로그
           </h1>
-          <p className="break-keep text-sm leading-relaxed text-ca-on-surface-variant">
-            제품과 부품을 직접 탐색할 수 있어요.
-            <br className="hidden sm:block" /> 취향에 맞는 조합이 필요하면 추천 설문을 이용하세요.
+          <p className="mt-2 break-keep text-ca-on-surface-variant">
+            소리와 타건에 영향을 주는 여섯 가지 부품을 살펴보세요.
           </p>
-          <div className="flex flex-wrap items-center gap-2 pt-0.5">
-            <Link href="/recommend" className={buttonClassName({ variant: "outline", size: "sm" })}>
-              추천 설문 시작
-            </Link>
-          </div>
-          <p className="break-keep text-xs leading-relaxed text-ca-on-surface-variant/90">
+          <p className="mt-2 break-keep text-xs leading-relaxed text-ca-on-surface-variant/90">
             가격·재고는 스웨그키 매장 기준이며 구매 전 최종 확인해 주세요.
           </p>
         </div>
-
-        <div className="sm:max-w-sm">
-          <Input
-            type="search"
-            className="ca-input"
-            placeholder="카탈로그에서 부품 검색…"
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-            aria-label="카탈로그에서 부품 검색"
-          />
-        </div>
       </div>
 
-      <div className="space-y-2">
-        <p className="font-label text-xs font-medium text-ca-on-surface-variant">부품군</p>
-        <div className="flex flex-wrap gap-2 border-b border-[rgb(220_220_238)] pb-0 dark:border-border">
-          {CATALOG_TABS.map((tab) => (
-            <Button
-              key={tab.id}
-              type="button"
-              variant="ghost"
-              size="default"
-              className={
-                family === tab.id
-                  ? "h-11 rounded-none border-b-2 border-primary bg-transparent px-4 font-headline text-sm font-semibold text-primary shadow-none hover:bg-transparent hover:opacity-100 sm:px-5"
-                  : "h-11 rounded-none border-b-2 border-transparent bg-transparent px-4 font-headline text-sm font-semibold text-ca-on-surface-variant shadow-none hover:bg-transparent hover:text-primary sm:px-5"
-              }
-              onClick={() => {
-                replaceCatalogParams({
-                  family: tab.id,
-                  subtype: tab.id === "layout" ? "pcb" : "",
-                  layoutSize: tab.id === "case" ? layoutSize : null,
-                  ...(tab.id !== family ? { q: null } : {}),
-                  page: 1,
-                });
-              }}
-            >
-              {tab.label}
-            </Button>
-          ))}
+      <PageShell className="max-w-ca space-y-8 px-ca-margin-mobile sm:px-ca-margin">
+      <div ref={catalogTopRef} className="scroll-mt-24 space-y-8">
+        <div className="relative max-w-md">
+          <Search
+            className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ca-on-surface-variant"
+            aria-hidden
+          />
+          <Input
+            type="search"
+            className="h-11 rounded-xl border-border bg-white pl-10 pr-4 text-sm shadow-none focus-visible:ring-primary/30 dark:bg-ca-surface-container"
+            placeholder="부품 이름, 브랜드 검색..."
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            aria-label="부품 이름, 브랜드 검색"
+          />
+        </div>
+
+        <div
+          className="flex flex-wrap gap-2"
+          role="tablist"
+          aria-label="부품군"
+        >
+          {CATALOG_TABS.map((tab) => {
+            const active = family === tab.id;
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                role="tab"
+                aria-selected={active}
+                className={cn(
+                  "rounded-full px-4 py-2 text-sm font-semibold transition-all",
+                  active
+                    ? "bg-primary text-primary-foreground shadow-md shadow-primary/20"
+                    : "border border-border bg-[#F8F9FA] text-ca-on-surface-variant hover:bg-muted hover:text-ca-on-surface dark:bg-ca-surface-container",
+                )}
+                onClick={() => {
+                  replaceCatalogParams({
+                    family: tab.id,
+                    subtype: tab.id === "layout" ? "pcb" : "",
+                    layoutSize: tab.id === "case" ? layoutSize : null,
+                    ...(tab.id !== family ? { q: null } : {}),
+                    page: 1,
+                  });
+                }}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -876,6 +883,24 @@ export function CatalogBrowseView({
           </div>
         </div>
       ) : null}
+
+      <div className="rounded-2xl border border-border bg-[#F8F9FA] p-8 text-center dark:bg-ca-surface-container">
+        <p className="font-headline text-lg font-bold text-ca-on-surface">어떤 조합이 나에게 맞을까요?</p>
+        <p className="mt-2 text-sm text-ca-on-surface-variant">
+          1분 설문으로 취향에 맞는 부품 조합을 추천받으세요.
+        </p>
+        <Link
+          href="/recommend"
+          className={cn(
+            buttonClassName({ size: "default" }),
+            "mt-5 inline-flex h-11 items-center gap-2 px-6 font-bold",
+          )}
+        >
+          추천 설문 시작
+          <ArrowRight className="h-4 w-4" aria-hidden />
+        </Link>
+      </div>
     </PageShell>
+    </>
   );
 }

@@ -100,7 +100,7 @@ export default async function CatalogPage({
   const { list, queryKey } = await loadInitialCatalogList(sp);
 
   return (
-    <div className="bg-[rgb(248_248_252)] dark:bg-ca-surface-container-low">
+    <div className="bg-white dark:bg-ca-surface-container-low">
       <Suspense
         fallback={
           <p className="p-6 text-sm text-ca-on-surface-variant" aria-live="polite">
