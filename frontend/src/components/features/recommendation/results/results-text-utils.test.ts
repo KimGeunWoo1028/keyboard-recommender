@@ -54,6 +54,21 @@ describe("overviewAlternativeDescription", () => {
     ).toBe("저소음 환경에 무난한 스위치예요.");
   });
 
+  it("formatEvidencePartWhyLine uses domain defaults instead of shared axis hooks", () => {
+    const sharedAxis = [
+      "차분한 소리 선호(+8.0)와 후보 특성(+10.0)이 같은 방향이라 정합 기여가 큽니다(+84.0).",
+    ];
+    expect(formatEvidencePartWhyLine("ignored", sharedAxis, "Plate", "plate")).toBe(
+      "타건의 단단함과 소리 톤을 잡아주는 플레이트예요.",
+    );
+    expect(formatEvidencePartWhyLine("ignored", sharedAxis, "Foam", "foam")).toBe(
+      "울림을 줄이거나 다듬어 줘요.",
+    );
+    expect(formatEvidencePartWhyLine("ignored", sharedAxis, "Layout", "layout")).toBe(
+      "키 배열과 사용 동선이 맞아요.",
+    );
+  });
+
   it("formatEvidenceWhyLine uses short feel hook and keeps specs for product features", () => {
     const whyTraits = [
       "중간 무게의 스프링(44g) 설정입니다.",
