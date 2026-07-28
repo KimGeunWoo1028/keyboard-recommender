@@ -118,7 +118,7 @@ export function ResultsOverviewCtaBand({
           <Link
             href="/mypage?section=saved"
             data-testid="e2e-save-mypage-link"
-            className={cn(buttonClassName({ variant: "default", size: "default" }), primaryOnIndigo)}
+            className={cn(buttonClassName({ variant: "primary", size: "default" }), primaryOnIndigo)}
           >
             마이페이지에서 보기
           </Link>
@@ -143,7 +143,7 @@ export function ResultsOverviewCtaBand({
             href="/auth?mode=login"
             data-testid="e2e-save-login-link"
             className={cn(
-              showSaveAction || showMypage ? outlineOnIndigo : cn(buttonClassName({ variant: "default", size: "default" }), primaryOnIndigo),
+              showSaveAction || showMypage ? outlineOnIndigo : cn(buttonClassName({ variant: "primary", size: "default" }), primaryOnIndigo),
             )}
           >
             로그인
