@@ -5,7 +5,6 @@ import { Canvas } from "@react-three/fiber";
 import {
   Bounds,
   Center,
-  ContactShadows,
   Environment,
   OrbitControls,
   useGLTF,
@@ -43,13 +42,6 @@ export function HomeHeroKeyboardCanvas({ onReady }: { onReady: () => void }) {
       <pointLight color="#805bff" intensity={18} position={[2.3, 0.35, 0]} />
 
       <KeyboardModel onReady={onReady} />
-      <ContactShadows
-        position={[0, -0.58, 0]}
-        opacity={0.3}
-        scale={8}
-        blur={2.5}
-        far={3}
-      />
       <Environment preset="studio" environmentIntensity={0.65} />
       <OrbitControls
         makeDefault
