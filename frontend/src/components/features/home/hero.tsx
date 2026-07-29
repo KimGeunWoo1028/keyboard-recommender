@@ -52,7 +52,7 @@ export function HomeHero() {
               aria-hidden
             />
 
-            <div className="relative aspect-[3/2] w-full">
+            <div className="relative aspect-[4/3] w-full">
               <Image
                 src="/brand/hero-keyboard-cutout.png"
                 alt="프리미엄 기계식 키보드"

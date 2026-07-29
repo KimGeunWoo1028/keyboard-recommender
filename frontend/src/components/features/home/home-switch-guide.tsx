@@ -26,14 +26,7 @@ export function HomeSwitchGuide() {
               aria-hidden
             />
 
-            {/* Bottom fade softens the hard crop edge */}
-            <div
-              className="relative aspect-[3/2] w-full"
-              style={{
-                maskImage: "linear-gradient(to bottom, #000 0%, #000 78%, transparent 100%)",
-                WebkitMaskImage: "linear-gradient(to bottom, #000 0%, #000 78%, transparent 100%)",
-              }}
-            >
+            <div className="relative aspect-[3/2] w-full">
               <Image
                 src="/brand/hero-switches-cutout.png"
                 alt="기계식 키보드 스위치"
