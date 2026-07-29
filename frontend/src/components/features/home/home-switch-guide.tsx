@@ -26,16 +26,24 @@ export function HomeSwitchGuide() {
 
           <div className="relative w-[118%] max-w-2xl -translate-x-1 sm:w-[112%] lg:-ml-8 lg:w-[128%] lg:translate-y-2">
             <div
-              className="pointer-events-none absolute bottom-[6%] left-1/2 h-[14%] w-[68%] -translate-x-1/2 rounded-[100%] bg-[rgb(15_15_25_/0.26)] blur-2xl dark:bg-black/55"
+              className="pointer-events-none absolute bottom-[2%] left-1/2 h-[18%] w-[62%] -translate-x-1/2 rounded-[100%] bg-[rgb(15_15_25_/0.18)] blur-3xl dark:bg-black/45"
               aria-hidden
             />
 
-            {/* Soft edge fade so the cutout blends into the page wash */}
+            {/* Fade all four edges (not just corners) into the page */}
             <div
               className="relative aspect-[3/2] w-full"
               style={{
-                maskImage: "radial-gradient(ellipse 88% 82% at 50% 44%, #000 45%, transparent 74%)",
-                WebkitMaskImage: "radial-gradient(ellipse 88% 82% at 50% 44%, #000 45%, transparent 74%)",
+                maskImage: [
+                  "linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%)",
+                  "linear-gradient(to bottom, transparent 0%, #000 12%, #000 68%, transparent 100%)",
+                ].join(", "),
+                WebkitMaskImage: [
+                  "linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%)",
+                  "linear-gradient(to bottom, transparent 0%, #000 12%, #000 68%, transparent 100%)",
+                ].join(", "),
+                maskComposite: "intersect",
+                WebkitMaskComposite: "source-in",
               }}
             >
               <Image
