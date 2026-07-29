@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
-import { Canvas } from "@react-three/fiber";
+import { useRef } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
 import {
   Bounds,
   Center,
@@ -14,10 +14,14 @@ const MODEL_PATH = "/brand/hero-keyboard.glb";
 
 function KeyboardModel({ onReady }: { onReady: () => void }) {
   const { scene } = useGLTF(MODEL_PATH);
+  const hasSignalled = useRef(false);
 
-  useEffect(() => {
+  // Signal after the first painted frame so the placeholder never uncovers an empty canvas.
+  useFrame(() => {
+    if (hasSignalled.current) return;
+    hasSignalled.current = true;
     onReady();
-  }, [onReady]);
+  });
 
   return (
     <Bounds fit clip observe margin={0.82}>

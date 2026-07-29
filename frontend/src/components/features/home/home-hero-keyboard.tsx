@@ -2,7 +2,6 @@
 
 import { useCallback, useState } from "react";
 import dynamic from "next/dynamic";
-import Image from "next/image";
 
 const HomeHeroKeyboardCanvas = dynamic(
   () =>
@@ -22,16 +21,15 @@ export function HomeHeroKeyboard() {
       role="img"
       aria-label="마우스로 돌려볼 수 있는 반투명 보라색 기계식 키보드 3D 모델"
     >
-      <Image
-        src="/brand/hero-keyboard-cutout.png"
-        alt=""
-        fill
-        priority
-        sizes="(max-width: 1024px) 100vw, 58vw"
-        className={`pointer-events-none object-contain object-center transition-opacity duration-500 ${
+      {/* Loading placeholder — neutral so it does not read as a different product */}
+      <div
+        className={`pointer-events-none absolute inset-0 flex items-center justify-center transition-opacity duration-500 ${
           isReady ? "opacity-0" : "opacity-100"
         }`}
-      />
+        aria-hidden
+      >
+        <div className="h-[42%] w-[76%] animate-pulse rounded-2xl bg-primary/10 blur-xl dark:bg-primary/15" />
+      </div>
 
       <div
         className={`absolute inset-0 transition-opacity duration-500 ${
