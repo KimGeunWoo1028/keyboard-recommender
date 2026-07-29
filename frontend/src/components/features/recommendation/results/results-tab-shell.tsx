@@ -16,8 +16,8 @@ function tabClass(active: boolean): string {
   return cn(
     "inline-flex h-11 shrink-0 snap-start items-center gap-1.5 border-b-2 px-4 text-sm font-semibold transition-colors sm:px-5",
     active
-      ? "border-primary text-primary"
-      : "border-transparent text-ca-on-surface-variant hover:text-primary",
+      ? "border-primary text-primary dark:border-[rgb(165_180_252)] dark:text-[rgb(165_180_252)]"
+      : "border-transparent text-ca-on-surface-variant hover:text-primary dark:hover:text-[rgb(165_180_252)]",
   );
 }
 

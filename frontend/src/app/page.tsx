@@ -100,14 +100,14 @@ export default function HomePage() {
 
       <HomeSwitchGuide />
 
-      <section className="bg-primary py-16 sm:py-20">
+      <section className="bg-primary py-16 dark:bg-[rgb(55_48_163)] sm:py-20">
         <div className="mx-auto max-w-ca px-ca-margin-mobile text-center sm:px-ca-margin">
           <h2 className="font-headline text-3xl font-black tracking-tight text-primary-foreground sm:text-4xl">
             당신의 타건 취향,
             <br />
             1분이면 찾아드립니다
           </h2>
-          <p className="mt-4 text-lg text-primary-foreground/75">무료 · 로그인 불필요 · 스위치부터 키캡까지 한 번에</p>
+          <p className="mt-4 text-lg text-primary-foreground/90">무료 · 로그인 불필요 · 스위치부터 키캡까지 한 번에</p>
           <Link
             href="/recommend"
             className={cn(

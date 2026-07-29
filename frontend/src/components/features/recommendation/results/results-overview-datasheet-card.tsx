@@ -79,10 +79,12 @@ export function ResultsOverviewDatasheetCard({
               </p>
             ) : null}
             {brand ? (
-              <p className="mt-0.5 truncate text-xs font-semibold text-primary">{brand}</p>
+              <p className="mt-0.5 truncate text-xs font-semibold text-primary dark:text-[rgb(165_180_252)]">
+                {brand}
+              </p>
             ) : null}
           </div>
-          <span className="shrink-0 rounded-full border border-[rgb(220_220_238)] bg-[rgb(248_248_252)] px-2 py-0.5 text-xs font-bold text-[rgb(80_80_100)] dark:border-border dark:bg-ca-surface-container-low">
+          <span className="shrink-0 rounded-full border border-[rgb(220_220_238)] bg-[rgb(248_248_252)] px-2 py-0.5 text-xs font-bold text-[rgb(80_80_100)] dark:border-border dark:bg-ca-surface-container-low dark:text-ca-on-surface-variant">
             {category}
           </span>
         </div>
@@ -104,7 +106,7 @@ export function ResultsOverviewDatasheetCard({
             {traits.map((trait) => (
               <span
                 key={trait}
-                className="rounded-full border border-primary/15 bg-[rgb(238_235_255)] px-2.5 py-0.5 text-[11px] font-semibold text-primary dark:bg-primary/10"
+                className="rounded-full border border-primary/15 bg-[rgb(238_235_255)] px-2.5 py-0.5 text-[11px] font-semibold text-primary dark:border-[rgb(165_180_252)]/25 dark:bg-primary/10 dark:text-[rgb(165_180_252)]"
               >
                 {trait}
               </span>

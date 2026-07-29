@@ -1,16 +1,27 @@
 "use client";
 
-import { useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import {
-  Bounds,
-  Center,
-  Environment,
-  OrbitControls,
-  useGLTF,
-} from "@react-three/drei";
+import { useEffect, useRef } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Bounds, Center, OrbitControls, useGLTF } from "@react-three/drei";
 
 const MODEL_PATH = "/brand/hero-keyboard.glb";
+
+function CanvasHealthMonitor({ onContextLost }: { onContextLost: () => void }) {
+  const gl = useThree((state) => state.gl);
+
+  useEffect(() => {
+    const canvas = gl.domElement;
+    const handleContextLost = (event: Event) => {
+      event.preventDefault();
+      onContextLost();
+    };
+
+    canvas.addEventListener("webglcontextlost", handleContextLost);
+    return () => canvas.removeEventListener("webglcontextlost", handleContextLost);
+  }, [gl, onContextLost]);
+
+  return null;
+}
 
 function KeyboardModel({ onReady }: { onReady: () => void }) {
   const { scene } = useGLTF(MODEL_PATH);
@@ -32,21 +43,26 @@ function KeyboardModel({ onReady }: { onReady: () => void }) {
   );
 }
 
-export function HomeHeroKeyboardCanvas({ onReady }: { onReady: () => void }) {
+type HomeHeroKeyboardCanvasProps = {
+  onReady: () => void;
+  onContextLost: () => void;
+};
+
+export function HomeHeroKeyboardCanvas({ onReady, onContextLost }: HomeHeroKeyboardCanvasProps) {
   return (
     <Canvas
       camera={{ fov: 28, position: [3.8, 2.7, 4.9] }}
       dpr={[1, 1.75]}
       gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
     >
-      <ambientLight intensity={1.15} />
-      <directionalLight color="#ffffff" intensity={2.4} position={[3, 5, 4]} />
-      <pointLight color="#9b6bff" intensity={18} position={[-2.3, 0.35, 0]} />
-      <pointLight color="#b794ff" intensity={16} position={[0, 0.35, 0]} />
-      <pointLight color="#805bff" intensity={18} position={[2.3, 0.35, 0]} />
+      <CanvasHealthMonitor onContextLost={onContextLost} />
+      <ambientLight intensity={0.65} />
+      <directionalLight color="#ffffff" intensity={1.4} position={[3, 5, 4]} />
+      <pointLight color="#9b6bff" intensity={6} position={[-2.3, 0.35, 0]} />
+      <pointLight color="#b794ff" intensity={5} position={[0, 0.35, 0]} />
+      <pointLight color="#805bff" intensity={6} position={[2.3, 0.35, 0]} />
 
       <KeyboardModel onReady={onReady} />
-      <Environment preset="studio" environmentIntensity={0.65} />
       <OrbitControls
         makeDefault
         enablePan={false}

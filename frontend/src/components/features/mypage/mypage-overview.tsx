@@ -189,7 +189,7 @@ export function MyPageOverview({ user: _user, savedItems }: Props) {
                     {latestTags.map((tag) => (
                       <span
                         key={tag}
-                        className="rounded-full border border-primary/15 bg-[rgb(238_235_255)] px-2.5 py-0.5 text-[11px] font-semibold text-primary dark:bg-primary/15"
+                        className="rounded-full border border-primary/15 bg-[rgb(238_235_255)] px-2.5 py-0.5 text-[11px] font-semibold text-primary dark:border-[rgb(165_180_252)]/25 dark:bg-primary/15 dark:text-[rgb(165_180_252)]"
                       >
                         {tag}
                       </span>

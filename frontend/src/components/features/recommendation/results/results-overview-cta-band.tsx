@@ -97,7 +97,7 @@ export function ResultsOverviewCtaBand({
   return (
     <section
       className={cn(
-        "flex flex-col gap-4 rounded-2xl bg-primary p-6 text-primary-foreground sm:flex-row sm:items-center sm:justify-between",
+        "flex flex-col gap-4 rounded-2xl bg-primary p-6 text-primary-foreground dark:bg-[rgb(55_48_163)] sm:flex-row sm:items-center sm:justify-between",
         className,
       )}
       data-testid="e2e-overview-cta-band"
@@ -105,7 +105,7 @@ export function ResultsOverviewCtaBand({
       <div className="min-w-0 space-y-1">
         <h2 className="font-headline text-lg font-bold">{title}</h2>
         <p
-          className="text-sm text-primary-foreground/70"
+          className="text-sm text-primary-foreground/90"
           data-testid={showErrorFeedback ? "e2e-save-feedback" : undefined}
           role={showErrorFeedback ? "alert" : undefined}
           aria-live={showErrorFeedback ? "assertive" : undefined}

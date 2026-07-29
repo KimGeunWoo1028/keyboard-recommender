@@ -59,7 +59,9 @@ export function ResultsHeaderActions({
           className="inline-flex items-center gap-2 self-start rounded-lg bg-primary/10 px-3 py-1.5 sm:self-end"
           data-testid="e2e-preference-match-badge"
         >
-          <span className="text-sm font-bold text-primary">취향 일치도 {matchPercent}%</span>
+          <span className="text-sm font-bold text-primary dark:text-[rgb(165_180_252)]">
+            취향 일치도 {matchPercent}%
+          </span>
         </div>
       ) : null}
       <div className="flex flex-wrap items-center gap-2">

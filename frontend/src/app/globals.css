@@ -584,6 +584,14 @@
     background: rgb(var(--ca-primary));
   }
 
+  .dark .section-label {
+    color: rgb(165 180 252);
+  }
+
+  .dark .section-label::before {
+    background: rgb(165 180 252);
+  }
+
   .ca-keycap-badge,
   .keycap-badge {
     display: inline-flex;
@@ -599,6 +607,12 @@
     letter-spacing: 0.02em;
     padding: 0.15rem 0.625rem;
     box-shadow: 0 2px 0 rgb(var(--ca-outline-variant) / 0.55);
+  }
+
+  .dark .ca-keycap-badge,
+  .dark .keycap-badge {
+    border-color: rgb(165 180 252 / 0.25);
+    color: rgb(165 180 252);
   }
 
   .card-lift {

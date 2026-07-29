@@ -46,7 +46,7 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <h2 className="mb-4 text-xs font-bold uppercase tracking-widest text-white/40">서비스</h2>
+            <h2 className="mb-4 text-xs font-bold uppercase tracking-widest text-white/60">서비스</h2>
             <ul className="space-y-2">
               <li>
                 <Link
@@ -79,7 +79,7 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <h2 className="mb-4 text-xs font-bold uppercase tracking-widest text-white/40">정보</h2>
+            <h2 className="mb-4 text-xs font-bold uppercase tracking-widest text-white/60">정보</h2>
             <ul className="space-y-2">
               <li>
                 <Link href="/privacy" prefetch={false} className="inline-flex min-h-11 items-center text-sm text-white/70 transition-colors hover:text-white">
@@ -101,8 +101,8 @@ export function SiteFooter() {
         </div>
 
         <div className="flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 sm:flex-row">
-          <p className="text-xs text-white/40">© {year} Keyboard Recommender. All rights reserved.</p>
-          <div className="text-center text-xs text-white/40 sm:text-right">
+          <p className="text-xs text-white/60">© {year} Keyboard Recommender. All rights reserved.</p>
+          <div className="text-center text-xs text-white/60 sm:text-right">
             <p>취향에 맞는 키보드 조합을 찾아드립니다</p>
             <p className="mt-1">
               3D model:{" "}
