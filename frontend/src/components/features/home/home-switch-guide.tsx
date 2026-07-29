@@ -35,12 +35,12 @@ export function HomeSwitchGuide() {
               className="relative aspect-[3/2] w-full"
               style={{
                 maskImage: [
-                  "linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%)",
-                  "linear-gradient(to bottom, transparent 0%, #000 12%, #000 68%, transparent 100%)",
+                  "linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%)",
+                  "linear-gradient(to bottom, transparent 0%, #000 7%, #000 80%, transparent 100%)",
                 ].join(", "),
                 WebkitMaskImage: [
-                  "linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%)",
-                  "linear-gradient(to bottom, transparent 0%, #000 12%, #000 68%, transparent 100%)",
+                  "linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%)",
+                  "linear-gradient(to bottom, transparent 0%, #000 7%, #000 80%, transparent 100%)",
                 ].join(", "),
                 maskComposite: "intersect",
                 WebkitMaskComposite: "source-in",
