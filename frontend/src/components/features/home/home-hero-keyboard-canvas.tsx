@@ -21,7 +21,7 @@ function KeyboardModel({ onReady }: { onReady: () => void }) {
   }, [onReady]);
 
   return (
-    <Bounds fit clip observe margin={1.08}>
+    <Bounds fit clip observe margin={0.82}>
       <Center>
         <primitive object={scene} rotation={[-0.16, -0.42, 0.04]} />
       </Center>
@@ -32,7 +32,7 @@ function KeyboardModel({ onReady }: { onReady: () => void }) {
 export function HomeHeroKeyboardCanvas({ onReady }: { onReady: () => void }) {
   return (
     <Canvas
-      camera={{ fov: 34, position: [4.5, 3.2, 5.8] }}
+      camera={{ fov: 28, position: [3.8, 2.7, 4.9] }}
       dpr={[1, 1.75]}
       gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
     >

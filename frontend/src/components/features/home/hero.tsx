@@ -45,24 +45,14 @@ export function HomeHero() {
             aria-hidden
           />
 
-          <div className="relative w-[120%] max-w-none translate-x-3 sm:w-[118%] lg:w-[142%] lg:translate-x-10 lg:translate-y-3">
+          <div className="relative w-[135%] max-w-none translate-x-4 sm:w-[130%] lg:w-[168%] lg:translate-x-14 lg:translate-y-2">
             {/* Foot shadow — grounds the cutout */}
             <div
-              className="pointer-events-none absolute bottom-[4%] left-1/2 h-[14%] w-[78%] -translate-x-1/2 rounded-[100%] bg-[rgb(15_15_25_/0.28)] blur-2xl dark:bg-black/60"
+              className="pointer-events-none absolute bottom-[2%] left-1/2 h-[12%] w-[72%] -translate-x-1/2 rounded-[100%] bg-[rgb(15_15_25_/0.28)] blur-2xl dark:bg-black/60"
               aria-hidden
             />
 
             <HomeHeroKeyboard />
-
-            {/* Thin callout — ties product to UI */}
-            <div className="absolute left-0 top-[38%] z-10 hidden sm:block lg:left-2">
-              <div className="rounded-lg border border-border/70 bg-white/90 px-3 py-2 shadow-sm backdrop-blur-sm dark:border-border dark:bg-ca-surface/90">
-                <p className="text-[10px] font-medium uppercase tracking-widest text-ca-on-surface-variant">
-                  부품 카테고리
-                </p>
-                <p className="font-headline text-xl font-black leading-none text-primary">6</p>
-              </div>
-            </div>
           </div>
         </div>
       </div>

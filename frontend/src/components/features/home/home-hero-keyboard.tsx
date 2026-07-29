@@ -18,7 +18,7 @@ export function HomeHeroKeyboard() {
 
   return (
     <div
-      className="group relative aspect-[4/3] w-full cursor-grab touch-pan-y active:cursor-grabbing"
+      className="group relative aspect-[5/4] w-full cursor-grab touch-pan-y active:cursor-grabbing"
       role="img"
       aria-label="마우스로 돌려볼 수 있는 반투명 보라색 기계식 키보드 3D 모델"
     >
