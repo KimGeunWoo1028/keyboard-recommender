@@ -7,24 +7,45 @@ const SWITCH_TYPES = [
 ] as const;
 
 /**
- * Switch guide — cutout product photo on page wash (no card frame).
+ * Switch guide — larger cutout with wash, foot shadow, and bottom fade.
  */
 export function HomeSwitchGuide() {
   return (
-    <section className="py-20 sm:py-24" aria-labelledby="home-switch-guide-heading">
-      <div className="mx-auto grid max-w-ca grid-cols-1 items-center gap-12 px-ca-margin-mobile sm:px-ca-margin lg:grid-cols-2 lg:gap-16">
-        <div className="order-2 flex justify-center lg:order-1 lg:justify-start">
-          <div className="relative aspect-[3/2] w-full max-w-lg">
-            <Image
-              src="/brand/hero-switches-cutout.png"
-              alt="기계식 키보드 스위치"
-              fill
-              sizes="(max-width: 1024px) 90vw, 40vw"
-              className="object-contain object-center drop-shadow-[0_20px_40px_rgba(15,15,25,0.16)] dark:drop-shadow-[0_20px_40px_rgba(0,0,0,0.4)]"
+    <section className="overflow-x-clip py-20 sm:py-24" aria-labelledby="home-switch-guide-heading">
+      <div className="mx-auto grid max-w-ca grid-cols-1 items-center gap-10 px-ca-margin-mobile sm:px-ca-margin lg:grid-cols-2 lg:gap-12 lg:items-stretch">
+        <div className="order-2 relative flex min-h-[20rem] items-center justify-center sm:min-h-[24rem] lg:order-1 lg:min-h-full lg:justify-start">
+          {/* Soft wash behind switches */}
+          <div
+            className="pointer-events-none absolute left-[40%] top-1/2 h-[75%] w-[90%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#EEEBFF]/70 blur-3xl dark:bg-[#1E1B41]/65"
+            aria-hidden
+          />
+
+          <div className="relative w-[108%] max-w-xl sm:w-[105%] lg:-ml-4 lg:w-[115%]">
+            <div
+              className="pointer-events-none absolute bottom-[8%] left-1/2 h-[10%] w-[58%] -translate-x-1/2 rounded-[100%] bg-[rgb(15_15_25_/0.2)] blur-2xl dark:bg-black/50"
+              aria-hidden
             />
+
+            {/* Bottom fade softens the hard crop edge */}
+            <div
+              className="relative aspect-[3/2] w-full"
+              style={{
+                maskImage: "linear-gradient(to bottom, #000 0%, #000 78%, transparent 100%)",
+                WebkitMaskImage: "linear-gradient(to bottom, #000 0%, #000 78%, transparent 100%)",
+              }}
+            >
+              <Image
+                src="/brand/hero-switches-cutout.png"
+                alt="기계식 키보드 스위치"
+                fill
+                sizes="(max-width: 1024px) 95vw, 48vw"
+                className="object-contain object-center"
+              />
+            </div>
           </div>
         </div>
-        <div className="order-1 lg:order-2">
+
+        <div className="order-1 flex flex-col justify-center lg:order-2">
           <p className="section-label mb-4">Switch Guide</p>
           <h2
             id="home-switch-guide-heading"
