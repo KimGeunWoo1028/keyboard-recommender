@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 
 import { HomeHeroActions } from "@/components/features/home/home-hero-actions";
+import { HomeHeroKeyboard } from "@/components/features/home/home-hero-keyboard";
 
 /**
  * Home first viewport — oversized cutout keyboard grounded with wash + foot shadow.
@@ -52,16 +52,7 @@ export function HomeHero() {
               aria-hidden
             />
 
-            <div className="relative aspect-[4/3] w-full">
-              <Image
-                src="/brand/hero-keyboard-cutout.png"
-                alt="프리미엄 기계식 키보드"
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 58vw"
-                className="object-contain object-center"
-              />
-            </div>
+            <HomeHeroKeyboard />
 
             {/* Thin callout — ties product to UI */}
             <div className="absolute left-0 top-[38%] z-10 hidden sm:block lg:left-2">

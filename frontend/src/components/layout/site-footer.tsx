@@ -102,7 +102,21 @@ export function SiteFooter() {
 
         <div className="flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 sm:flex-row">
           <p className="text-xs text-white/40">© {year} Keyboard Recommender. All rights reserved.</p>
-          <p className="text-xs text-white/40">취향에 맞는 키보드 조합을 찾아드립니다</p>
+          <div className="text-center text-xs text-white/40 sm:text-right">
+            <p>취향에 맞는 키보드 조합을 찾아드립니다</p>
+            <p className="mt-1">
+              3D model:{" "}
+              <a
+                href="https://skfb.ly/oMwJr"
+                target="_blank"
+                rel="noreferrer"
+                className="underline decoration-white/20 underline-offset-2 transition-colors hover:text-white/70"
+              >
+                White TKL Keyboard by UncleVeles
+              </a>{" "}
+              · CC BY
+            </p>
+          </div>
         </div>
       </div>
     </footer>
