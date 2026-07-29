@@ -13,25 +13,36 @@ export function HomeSwitchGuide() {
   return (
     <section className="overflow-x-clip py-20 sm:py-24" aria-labelledby="home-switch-guide-heading">
       <div className="mx-auto grid max-w-ca grid-cols-1 items-center gap-10 px-ca-margin-mobile sm:px-ca-margin lg:grid-cols-2 lg:gap-12 lg:items-stretch">
-        <div className="order-2 relative flex min-h-[20rem] items-center justify-center sm:min-h-[24rem] lg:order-1 lg:min-h-full lg:justify-start">
-          {/* Soft wash behind switches */}
+        <div className="order-2 relative flex min-h-[22rem] items-center justify-center sm:min-h-[26rem] lg:order-1 lg:min-h-full lg:justify-start">
+          {/* Soft wash behind switches — stronger blend into page */}
           <div
-            className="pointer-events-none absolute left-[40%] top-1/2 h-[75%] w-[90%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#EEEBFF]/70 blur-3xl dark:bg-[#1E1B41]/65"
+            className="pointer-events-none absolute left-[42%] top-[48%] h-[85%] w-[105%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#EEEBFF]/90 blur-3xl dark:bg-[#1E1B41]/80"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute left-[35%] top-[55%] h-[40%] w-[70%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/50 blur-2xl dark:bg-ca-surface/40"
             aria-hidden
           />
 
-          <div className="relative w-[108%] max-w-xl sm:w-[105%] lg:-ml-4 lg:w-[115%]">
+          <div className="relative w-[118%] max-w-2xl -translate-x-1 sm:w-[112%] lg:-ml-8 lg:w-[128%] lg:translate-y-2">
             <div
-              className="pointer-events-none absolute bottom-[8%] left-1/2 h-[10%] w-[58%] -translate-x-1/2 rounded-[100%] bg-[rgb(15_15_25_/0.2)] blur-2xl dark:bg-black/50"
+              className="pointer-events-none absolute bottom-[6%] left-1/2 h-[14%] w-[68%] -translate-x-1/2 rounded-[100%] bg-[rgb(15_15_25_/0.26)] blur-2xl dark:bg-black/55"
               aria-hidden
             />
 
-            <div className="relative aspect-[3/2] w-full">
+            {/* Soft edge fade so the cutout blends into the page wash */}
+            <div
+              className="relative aspect-[3/2] w-full"
+              style={{
+                maskImage: "radial-gradient(ellipse 88% 82% at 50% 44%, #000 45%, transparent 74%)",
+                WebkitMaskImage: "radial-gradient(ellipse 88% 82% at 50% 44%, #000 45%, transparent 74%)",
+              }}
+            >
               <Image
                 src="/brand/hero-switches-cutout.png"
                 alt="기계식 키보드 스위치"
                 fill
-                sizes="(max-width: 1024px) 95vw, 48vw"
+                sizes="(max-width: 1024px) 100vw, 52vw"
                 className="object-contain object-center"
               />
             </div>
