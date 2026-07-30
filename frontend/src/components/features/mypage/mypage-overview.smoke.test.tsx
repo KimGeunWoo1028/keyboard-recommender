@@ -55,12 +55,12 @@ describe("MyPageOverview smoke", () => {
     );
 
     const savedCard = screen.getByText("저장한 조합").closest("div.rounded-xl");
-    expect(savedCard).toBeTruthy();
-    expect(within(savedCard!).getByText("1")).toBeInTheDocument();
+    expect(savedCard).toBeInstanceOf(HTMLElement);
+    expect(within(savedCard as HTMLElement).getByText("1")).toBeInTheDocument();
 
     const bestMatchCard = screen.getByText("최고 일치도").closest("div.rounded-xl");
-    expect(bestMatchCard).toBeTruthy();
-    expect(within(bestMatchCard!).getByText(/92%/)).toBeInTheDocument();
+    expect(bestMatchCard).toBeInstanceOf(HTMLElement);
+    expect(within(bestMatchCard as HTMLElement).getByText(/92%/)).toBeInTheDocument();
 
     expect(screen.getByText(/Quiet/)).toBeInTheDocument();
     expect(screen.getByText(/Soft/)).toBeInTheDocument();

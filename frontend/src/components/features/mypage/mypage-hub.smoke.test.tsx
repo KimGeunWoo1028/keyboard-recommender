@@ -63,8 +63,8 @@ import {
 
 function expectOverviewStat(label: string, value: string | RegExp) {
   const card = screen.getByText(label).closest("div.rounded-xl");
-  expect(card).toBeTruthy();
-  expect(within(card!).getByText(value)).toBeInTheDocument();
+  expect(card).toBeInstanceOf(HTMLElement);
+  expect(within(card as HTMLElement).getByText(value)).toBeInTheDocument();
 }
 
 describe("MyPageHub smoke", () => {
