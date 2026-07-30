@@ -19,3 +19,10 @@ backend/data/swagkey_images/*
 .pytest_cache/
 .node_
 .cursor/
+
+# Scratch QA evidence and throwaway analysis dirs
+tmp/
+.tmp-*/
+
+# Local-only SQLite databases
+*.db

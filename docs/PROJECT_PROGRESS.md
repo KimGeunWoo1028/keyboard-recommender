@@ -1,27 +1,27 @@
 # Project Progress
 
 > **Updated:** 2026-07-30 (KST) · **branch:** `main`  
-> **Sources:** git · full-project-qa mode=ops · `docs/deployment-roadmap.md` · `docs/remaining-work-phases.md`  
+> **Sources:** git (`a8b2f61`) · full-project-qa mode=ops · `docs/deployment-roadmap.md` · `docs/remaining-work-phases.md`  
 > **관련:** `docs/small-group-test-checklist.md` · `docs/LIGHT_MODE_COLOR_INVENTORY.md`
 
 ## Now
 
-ops 포함 전체 QA **PASS**. `tsc` mypage smoke 타입 오류도 정리했고, Vercel 공개 URL
-하나를 피드백·소그룹 환경으로 유지한다. 남은 큰 축은
+ops 포함 전체 QA **PASS** 후 `a8b2f61`까지 `origin/main` 동기화됨. Vercel 공개 URL
+하나(`www.keyboard-recommender.com`)를 피드백·소그룹 환경으로 유지. 남은 큰 축은
 **공개 URL 운영 스모크 · 소그룹 테스트**.
 
 ## Done (최근)
 
-- Full Project QA mode=ops: backend/frontend/e2e/ops 전부 PASS (E2E 26 passed)
-- `tsc --noEmit` PASS — mypage smoke `closest()` → `HTMLElement` 캐스트 3건
-- Backend ruff · unit 386p/1s · quality 11p · fixture blocking 0 · Ops ⑮ OK · catalog 128p/1s
+- git-sync `a8b2f61` — mypage smoke `HTMLElement` 캐스트 · Progress · ops report artifacts
+- Full Project QA mode=ops PASS (E2E 26 · backend/frontend/ops green)
 - 홈 3D WebGL 흰 박스 수정 · 다크 대비 보강 (`2c7b852`)
 - `recommendation-survey` · `results-evidence-phase4` · 다크 육안 QA
+- Backend ruff · unit 386p/1s · quality · fixture blocking 0 · Ops ⑮ · catalog regression
 
 ## Next (1–3)
 
 1. **운영 스모크 →** `docs/small-group-test-checklist.md` (`www.keyboard-recommender.com`)
-2. Coverage WARN 후속 — switch 3.6% · keycap 7.5% (목표 ≤2%, 운영 유지)
+2. Coverage WARN 후속 — switch ~3.6% · keycap ~7.5% (목표 ≤2%, 운영 유지)
 3. 미사용 백업 에셋(`hero-*-prev.png` 등) 정리 여부 결정
 
 ## Roadmaps
