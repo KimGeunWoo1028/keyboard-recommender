@@ -26,3 +26,6 @@ tmp/
 
 # Local-only SQLite databases
 *.db
+
+# Machine-specific Compose overrides (e.g. host port conflicts)
+docker-compose.override.yml
