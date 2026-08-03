@@ -87,7 +87,7 @@ export function FeatureGrid() {
               <div className="mb-4 h-px bg-border" />
               <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-primary">{item.subtitle}</p>
               <p className="break-keep text-sm leading-relaxed text-ca-on-surface-variant">{item.description}</p>
-              <div className="mt-5 flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-primary opacity-0 transition-opacity group-hover:opacity-100">
+              <div className="mt-5 flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-primary opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
                 카탈로그 보기 <ArrowRight className="h-3 w-3" aria-hidden />
               </div>
             </Link>

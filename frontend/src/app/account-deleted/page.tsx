@@ -15,7 +15,7 @@ export const metadata: Metadata = privatePageMetadata({
 export default function AccountDeletedPage() {
   return (
     <main
-      className="flex min-h-[calc(100dvh-4.25rem)] items-center justify-center bg-[rgb(248_248_252)] px-4 py-14 dark:bg-ca-surface-container-low"
+      className="flex min-h-[calc(100dvh-4.5rem)] items-center justify-center bg-[rgb(248_248_252)] px-4 py-14 dark:bg-ca-surface-container-low"
       data-testid="e2e-account-deleted"
     >
       <div className="w-full max-w-lg animate-fade-up">

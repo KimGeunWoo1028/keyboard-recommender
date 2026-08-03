@@ -20,7 +20,7 @@ const DEBUG_LINKS = [
 
 export default function DebugLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-[calc(100dvh-4.25rem)] bg-[rgb(248_248_252)] dark:bg-ca-surface-container-low">
+    <div className="min-h-[calc(100dvh-4.5rem)] bg-[rgb(248_248_252)] dark:bg-ca-surface-container-low">
       <div className="mx-auto max-w-5xl space-y-6 px-ca-margin-mobile py-8 sm:px-ca-margin">
         <ManusPageHeader
           eyebrow="Internal"

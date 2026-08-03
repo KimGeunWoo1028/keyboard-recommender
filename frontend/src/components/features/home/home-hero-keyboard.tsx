@@ -100,7 +100,7 @@ export function HomeHeroKeyboard() {
 
       <span
         className={`pointer-events-none absolute bottom-3 left-1/2 z-10 -translate-x-1/2 rounded-full border border-border/70 bg-white/80 px-3 py-1 text-[11px] font-medium text-ca-on-surface-variant shadow-sm backdrop-blur-sm transition-opacity dark:bg-ca-surface/80 ${
-          isReady ? "opacity-0 group-hover:opacity-100" : "opacity-0"
+          isReady ? "opacity-100" : "opacity-0"
         }`}
       >
         드래그해서 돌려보세요

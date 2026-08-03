@@ -47,7 +47,7 @@ export function ForgotPasswordClient() {
   }
 
   return (
-    <div className="flex min-h-[calc(100dvh-4.25rem)] items-center justify-center bg-[rgb(248_248_252)] px-4 py-10 dark:bg-ca-surface-container-low sm:py-16">
+    <div className="flex min-h-[calc(100dvh-4.5rem)] items-center justify-center bg-[rgb(248_248_252)] px-4 py-10 dark:bg-ca-surface-container-low sm:py-16">
       <div className="w-full max-w-md animate-fade-up">
         <ManusSurfaceCard padding="none">
           <div className="space-y-5 p-8">

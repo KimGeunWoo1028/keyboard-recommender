@@ -11,7 +11,7 @@ export const metadata: Metadata = publicPageMetadata({
 
 export default function RecommendPage() {
   return (
-    <div className="flex min-h-[calc(100dvh-4.25rem)] w-full flex-col overflow-y-auto bg-white dark:bg-ca-surface-container-low sm:h-[calc(100dvh-4.25rem)] sm:max-h-[calc(100dvh-4.25rem)] sm:overflow-hidden">
+    <div className="flex min-h-[calc(100dvh-4.5rem)] w-full flex-col overflow-y-auto bg-white dark:bg-ca-surface-container-low sm:h-[calc(100dvh-4.5rem)] sm:max-h-[calc(100dvh-4.5rem)] sm:overflow-hidden">
       <SurveyWizard />
     </div>
   );

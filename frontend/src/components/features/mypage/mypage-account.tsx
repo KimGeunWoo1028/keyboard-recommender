@@ -197,10 +197,10 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
               alt=""
               width={64}
               height={64}
-              className="h-full w-full object-cover transition-opacity group-hover:opacity-80"
+              className="h-full w-full object-cover transition-opacity group-hover:opacity-80 group-focus-visible:opacity-80"
               decoding="async"
             />
-            <span className="pointer-events-none absolute inset-0 flex items-center justify-center bg-ca-base/0 text-[10px] font-semibold text-white opacity-0 transition-opacity group-hover:bg-ca-base/35 group-hover:opacity-100">
+            <span className="pointer-events-none absolute inset-0 flex items-center justify-center bg-ca-base/0 text-[10px] font-semibold text-white opacity-0 transition-opacity group-hover:bg-ca-base/35 group-hover:opacity-100 group-focus-visible:bg-ca-base/35 group-focus-visible:opacity-100">
               변경
             </span>
           </button>
