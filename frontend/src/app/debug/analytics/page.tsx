@@ -7,7 +7,23 @@ export const metadata: Metadata = {
   title: "Debug analytics",
 };
 
-async function fetchKpis() {
+type AnalyticsTopEvent = {
+  label?: string;
+  value?: string | number;
+};
+
+type AnalyticsKpis = {
+  window_hours?: number;
+  generated_at?: string;
+  recommendation_completion_rate?: number;
+  avg_time_to_first_result_ms?: number | null;
+  save_conversion_rate?: number;
+  evidence_tab_share?: number | null;
+  retry_frequency_rate?: number;
+  top_events?: AnalyticsTopEvent[];
+};
+
+async function fetchKpis(): Promise<AnalyticsKpis | null> {
   const base = getDebugApiBaseUrl();
   const token = getServerInternalDebugToken();
   if (!base) return null;
@@ -16,7 +32,7 @@ async function fetchKpis() {
     cache: "no-store",
   });
   if (!res.ok) return null;
-  return (await res.json()) as any;
+  return (await res.json()) as AnalyticsKpis;
 }
 
 export default async function DebugAnalyticsPage() {
@@ -37,7 +53,10 @@ export default async function DebugAnalyticsPage() {
       <div className="grid gap-3 sm:grid-cols-2">
         {[
           ["Completion rate", `${Math.round((kpis.recommendation_completion_rate ?? 0) * 100)}%`],
-          ["Avg time to first result", kpis.avg_time_to_first_result_ms ? `${Math.round(kpis.avg_time_to_first_result_ms)} ms` : "—"],
+          [
+            "Avg time to first result",
+            kpis.avg_time_to_first_result_ms ? `${Math.round(kpis.avg_time_to_first_result_ms)} ms` : "—",
+          ],
           ["Save conversion", `${Math.round((kpis.save_conversion_rate ?? 0) * 100)}%`],
           [
             "Evidence tab share",
@@ -56,10 +75,11 @@ export default async function DebugAnalyticsPage() {
       <p className="text-xs text-muted-foreground">
         Success KPIs exclude Compare / drawer_open (UI removed). Home Redirect/Dashboard stay locked until
         Phase B unlock.
-      </p>      <div className="rounded-lg border border-border bg-card p-4">
+      </p>
+      <div className="rounded-lg border border-border bg-card p-4">
         <p className="text-sm font-semibold">Top event types</p>
         <ul className="mt-2 space-y-1 text-xs text-muted-foreground">
-          {(kpis.top_events ?? []).map((it: any) => (
+          {(kpis.top_events ?? []).map((it) => (
             <li key={String(it.label)}>
               <span className="font-medium text-foreground">{String(it.label)}</span> · {String(it.value)}
             </li>
@@ -69,4 +89,3 @@ export default async function DebugAnalyticsPage() {
     </div>
   );
 }
-

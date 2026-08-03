@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 import { CollapsibleJson } from "@/components/internal-debug/collapsible-json";
@@ -46,7 +47,11 @@ export default function DebugEvaluationPage() {
       <div>
         <h1 className="text-xl font-bold tracking-tight">Evaluation summary</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Paste a replay bundle from <a className="underline" href="/debug/recommendations">Recommendations</a> or a raw{" "}
+          Paste a replay bundle from{" "}
+          <Link className="underline" href="/debug/recommendations">
+            Recommendations
+          </Link>{" "}
+          or a raw{" "}
           <code className="rounded bg-muted px-1">evaluation.snapshot.v1</code> JSON, then analyze (no engine re-run).
         </p>
       </div>

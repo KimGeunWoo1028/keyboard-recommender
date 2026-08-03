@@ -852,7 +852,7 @@ export function CatalogBrowseView({
           onClick={() => setMobileFiltersOpen(false)}
         >
           <div
-            className="max-h-[80vh] w-full overflow-y-auto rounded-t-2xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest p-4 shadow-lg"
+            className="max-h-[80vh] w-full overflow-y-auto rounded-t-2xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest p-4 pb-[max(1rem,env(safe-area-inset-bottom,0px))] shadow-lg"
             onClick={(event) => event.stopPropagation()}
           >
             <div className="mb-3 flex items-center justify-between gap-2">

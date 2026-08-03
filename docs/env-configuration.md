@@ -56,6 +56,7 @@ Next.js inlines **only** variables whose names start with **`NEXT_PUBLIC_`** int
 |----------|--------|--------|
 | `NEXT_PUBLIC_API_URL` | Browser | API origin (use `https://` in production). |
 | `NEXT_PUBLIC_INTERNAL_DEBUG` | Browser | Feature flag only; **no secrets**. |
+| `NEXT_PUBLIC_EVIDENCE_RANKING_WHY` | Browser | Optional; set to `0` to hide ranking-why copy on results evidence cards (default: shown). |
 | `INTERNAL_DEBUG_TOKEN` | **Server only** | Read in `src/lib/debug-api-server.ts` (`import "server-only"`). Never prefix with `NEXT_PUBLIC_`. |
 | `INTERNAL_API_PROXY_TARGET` | Server (Next) | Optional rewrite target for dev. |
 

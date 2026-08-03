@@ -147,7 +147,7 @@ export function SiteHeader() {
           </Link>
           <button
             type="button"
-            className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md text-ca-on-surface-variant transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))] lg:hidden"
+            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-md text-ca-on-surface-variant transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))] lg:hidden"
             aria-expanded={mobileOpen}
             aria-controls="site-mobile-nav"
             aria-label={mobileOpen ? "메뉴 닫기" : "메뉴 열기"}

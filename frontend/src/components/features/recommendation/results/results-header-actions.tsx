@@ -81,7 +81,7 @@ export function ResultsHeaderActions({
         <Button
           type="button"
           size="sm"
-          className="h-10 gap-1.5 px-4 font-bold"
+          className="h-10 min-w-[10.5rem] gap-1.5 px-4 font-bold"
           data-testid="e2e-save-build"
           disabled={!authReady || saveState === "saving" || saveState === "saved"}
           loading={saveState === "saving"}

@@ -118,6 +118,10 @@ const config: Config = {
         ca: "20px",
         "ca-elevated": "40px",
       },
+      zIndex: {
+        /** Portaled help tooltips — above skip-link (z-[100]) and chrome */
+        tooltip: "110",
+      },
     },
   },
   plugins: [],

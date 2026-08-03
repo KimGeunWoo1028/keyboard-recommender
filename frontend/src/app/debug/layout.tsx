@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import { DebugChrome } from "@/components/internal-debug/debug-chrome";
 import { ManusPageHeader } from "@/components/layout/manus-page-header";
@@ -32,13 +33,13 @@ export default function DebugLayout({ children }: { children: React.ReactNode })
           aria-label="Debug sections"
         >
           {DEBUG_LINKS.map((link) => (
-            <a
+            <Link
               key={link.href}
               className="inline-flex h-11 items-center border-b-2 border-transparent px-4 text-sm font-semibold text-ca-on-surface-variant transition-colors hover:border-primary/40 hover:text-primary"
               href={link.href}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
         <div className="rounded-sm border-2 border-[rgb(220_220_238)] bg-white p-4 shadow-sm dark:border-border dark:bg-ca-surface-container sm:p-6">

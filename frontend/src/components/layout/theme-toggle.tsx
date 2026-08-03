@@ -30,7 +30,7 @@ export function ThemeToggle() {
   useEffect(() => setMounted(true), []);
 
   const buttonClass = cn(
-    "inline-flex h-9 w-9 items-center justify-center rounded-btn text-ca-on-surface-variant",
+    "inline-flex h-11 w-11 items-center justify-center rounded-btn text-ca-on-surface-variant",
     "transition-colors hover:bg-ca-surface-variant/50 hover:text-ca-on-surface",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-primary",
   );

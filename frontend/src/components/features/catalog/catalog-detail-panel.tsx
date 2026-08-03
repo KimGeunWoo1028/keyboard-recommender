@@ -182,7 +182,7 @@ export function CatalogDetailPanel({ open, loading, error, family, partDetail, o
       >
       <Card
         className={cn(
-          "max-h-[90vh] w-full overflow-y-auto rounded-t-2xl border-border bg-white shadow-xl shadow-indigo-100/40 dark:bg-ca-surface-container dark:shadow-none sm:rounded-2xl",
+          "max-h-[90vh] w-full overflow-y-auto rounded-t-2xl border-border bg-white pb-[max(1rem,env(safe-area-inset-bottom,0px))] shadow-xl shadow-indigo-100/40 dark:bg-ca-surface-container dark:shadow-none sm:rounded-2xl sm:pb-0",
         )}
       >
         <CardHeader className="sticky top-0 z-10 border-b border-border bg-white/95 backdrop-blur dark:bg-ca-surface-container/95">

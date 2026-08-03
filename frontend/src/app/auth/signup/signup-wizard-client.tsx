@@ -129,7 +129,11 @@ export function SignupWizardClient() {
         <div className="space-y-5 p-8">
           <header className="space-y-3">
             <p className="text-xs font-semibold uppercase tracking-widest text-primary">Keyboard Recommender</p>
-            <div className="flex gap-1.5" aria-label={`회원가입 ${meta.index} / ${STEP_COUNT} 단계`}>
+            <div
+              className="flex gap-1.5"
+              role="group"
+              aria-label={`회원가입 ${meta.index} / ${STEP_COUNT} 단계`}
+            >
               {Array.from({ length: STEP_COUNT }, (_, i) => i + 1).map((n) => (
                 <div
                   key={n}

@@ -60,15 +60,20 @@ export function HelpHint({ text }: { text: string }) {
         onKeyDown={(event) => {
           if (event.key === "Escape") setOpen(false);
         }}
-        className="inline-flex h-4 w-4 items-center justify-center rounded-full border border-border/70 bg-background text-[10px] font-bold leading-none text-muted-foreground transition-colors hover:bg-muted"
+        className="inline-flex h-11 w-11 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))]"
       >
-        ?
+        <span
+          aria-hidden
+          className="inline-flex h-4 w-4 items-center justify-center rounded-full border border-border/70 bg-background text-[10px] font-bold leading-none"
+        >
+          ?
+        </span>
       </button>
       {mounted && open
         ? createPortal(
             <span
               role="tooltip"
-              className={`fixed z-[99999] w-72 max-w-[calc(100vw-1rem)] rounded-md border border-border bg-background px-3 py-2 text-xs font-normal leading-relaxed text-foreground shadow-2xl sm:w-80 ${
+              className={`fixed z-tooltip w-72 max-w-[calc(100vw-1rem)] rounded-md border border-border bg-background px-3 py-2 text-xs font-normal leading-relaxed text-foreground shadow-2xl sm:w-80 ${
                 coords.mobile ? "-translate-x-1/2" : "-translate-y-1/2"
               }`}
               style={{ left: `${coords.left}px`, top: `${coords.top}px` }}

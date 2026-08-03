@@ -1,9 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 
-import { ResultsAuthLoadingShell } from "@/components/auth/results-auth-loading-shell";
 import { RecommendationResultView } from "@/components/features/recommendation/recommendation-result-view";
 import { buttonClassName } from "@/components/ui/button";
 import { ApiError } from "@/lib/api/client";
@@ -18,26 +17,39 @@ import type { RecommendedBuild } from "@/types/recommendation";
 import type { SurveyAnswers } from "@/types/survey";
 import type { SurveySubmission } from "@/types/survey";
 
+type StoredResult = {
+  submission: SurveySubmission | null;
+  build: RecommendedBuild | null;
+};
+
+const EMPTY_RESULT: StoredResult = { submission: null, build: null };
+
+function readStoredResult(): StoredResult {
+  const loaded = loadSurveySubmission() ?? loadLastKnownGoodSubmission();
+  if (!loaded) return EMPTY_RESULT;
+  const nl = loaded.nlPreferenceText?.trim();
+  const build = nl
+    ? getRecommendedBuildForSubmission(loaded)
+    : loaded.build ?? getMockBuildFromTraits(loaded.traits, loaded.answers);
+  return { submission: loaded, build };
+}
+
+/** Same-tab updates go through setLive; cross-tab via `storage`. */
+function subscribeResultsStorage(onStoreChange: () => void) {
+  if (typeof window === "undefined") return () => undefined;
+  window.addEventListener("storage", onStoreChange);
+  return () => window.removeEventListener("storage", onStoreChange);
+}
+
 export function ResultsView() {
-  const [hydrated, setHydrated] = useState(false);
-  const [submission, setSubmission] = useState<SurveySubmission | null>(null);
-  const [build, setBuild] = useState<RecommendedBuild | null>(null);
+  const snapshot = useSyncExternalStore(subscribeResultsStorage, readStoredResult, () => EMPTY_RESULT);
+  const [live, setLive] = useState<StoredResult | null>(null);
+  const submission = live?.submission ?? snapshot.submission;
+  const build = live?.build ?? snapshot.build;
   const [refineError, setRefineError] = useState<string | null>(null);
 
   useEffect(() => {
-    const loaded = loadSurveySubmission() ?? loadLastKnownGoodSubmission();
-    setSubmission(loaded);
-    if (loaded) {
-      const nl = loaded.nlPreferenceText?.trim();
-      const build =
-        nl ? getRecommendedBuildForSubmission(loaded) : loaded.build ?? getMockBuildFromTraits(loaded.traits, loaded.answers);
-      setBuild(build);
-    }
-    setHydrated(true);
-  }, []);
-
-  useEffect(() => {
-    if (!hydrated || !submission || submission.source !== "api") return;
+    if (!submission || submission.source !== "api") return;
     const picks = submission.recommendations ?? submission.matchExplanations ?? [];
     const hasMissingItemNames =
       picks.length === 0 || picks.some((pick) => !((pick as { itemName?: string }).itemName ?? "").trim());
@@ -102,19 +114,14 @@ export function ResultsView() {
           ...(nl ? { nlPreferenceText: nl } : {}),
         };
         saveSurveySubmission(refreshed);
-        setSubmission(refreshed);
-        setBuild(res.build);
+        setLive({ submission: refreshed, build: res.build });
       })
       .catch(() => undefined);
 
     return () => {
       cancelled = true;
     };
-  }, [hydrated, submission]);
-
-  if (!hydrated) {
-    return <ResultsAuthLoadingShell />;
-  }
+  }, [submission]);
 
   if (!submission || !build) {
     return (
@@ -185,8 +192,7 @@ export function ResultsView() {
         ...(nl ? { nlPreferenceText: nl } : {}),
       };
       saveSurveySubmission(nextSubmission);
-      setSubmission(nextSubmission);
-      setBuild(res.build);
+      setLive({ submission: nextSubmission, build: res.build });
       setRefineError(null);
       void emitRefinementEventBestEffort({
         actionLabel: meta?.label ?? "quick_refine",
@@ -210,5 +216,12 @@ export function ResultsView() {
     }
   }
 
-  return <RecommendationResultView submission={submission} build={build} onApplyRefinement={applyRefinement} refineError={refineError} />;
+  return (
+    <RecommendationResultView
+      submission={submission}
+      build={build}
+      onApplyRefinement={applyRefinement}
+      refineError={refineError}
+    />
+  );
 }
