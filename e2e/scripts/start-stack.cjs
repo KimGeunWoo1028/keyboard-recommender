@@ -71,10 +71,14 @@ async function main() {
       env: {
         ...process.env,
         CORS_ORIGINS: "http://127.0.0.1:3000",
-        // Account save/mypage bookmarks are stored in eval_events — must be on for
-        // critical-flows + save-reliability. Override with ENABLE_EVALUATION_PERSISTENCE=false
-        // only when intentionally testing the disabled path.
-        ENABLE_EVALUATION_PERSISTENCE: process.env.ENABLE_EVALUATION_PERSISTENCE ?? "true",
+        // Account save/mypage bookmarks live in eval_events. Always on for this stack so a
+        // parent shell left over from unit QA (ENABLE_EVALUATION_PERSISTENCE=false) cannot
+        // silently break critical-flows / save-reliability. Opt out only with
+        // E2E_ALLOW_PERSISTENCE_OFF=1 when intentionally testing the disabled path.
+        ENABLE_EVALUATION_PERSISTENCE:
+          process.env.E2E_ALLOW_PERSISTENCE_OFF === "1"
+            ? (process.env.ENABLE_EVALUATION_PERSISTENCE ?? "false")
+            : "true",
         // Force local+debug so disposable signup returns debug_code even when the parent
         // shell / backend/.env is deploy-shaped (APP_ENV=production strips debug flags).
         DEBUG: "true",
