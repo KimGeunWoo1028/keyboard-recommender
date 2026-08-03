@@ -1,5 +1,5 @@
 Swagkey catalog regression (step ⑥) report
-generated: 2026-08-03T13:02:40.090801+00:00
+generated: 2026-08-03T15:21:22.763460+00:00
 seed: C:/Users/jeung/keyboard-recommender/backend/src/keyboard_recommender/catalog/swagkey_products.seed.json
 
 extracted: 329

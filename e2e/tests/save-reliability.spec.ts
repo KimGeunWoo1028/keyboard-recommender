@@ -1,5 +1,8 @@
 import { expect, test, type Page } from "@playwright/test";
 
+import { clearExistingSavedBuilds } from "./helpers/saved-builds";
+import { gotoDeterministicResults } from "./helpers/results-flow";
+
 const TEST_EMAIL = process.env.E2E_USER_EMAIL ?? "e2e-ci@keyboard.local";
 const TEST_PASSWORD = process.env.E2E_USER_PASSWORD ?? "E2e_test!9";
 const API_BASE = (process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000").replace(/\/$/, "");
@@ -71,50 +74,6 @@ async function logout(page: Page): Promise<void> {
   console.log("logout:done");
 }
 
-async function clearExistingSavedBuilds(page: Page): Promise<void> {
-  console.log("saved:clear:start");
-  const items = await page.evaluate(
-    async ({ base }) => {
-      const response = await fetch(`${base}/api/v1/recommendations/saved?limit=100`, {
-        credentials: "include",
-        headers: { Accept: "application/json" },
-      });
-      if (!response.ok) throw new Error(`list saved failed: ${response.status}`);
-      const json = (await response.json()) as {
-        items?: Array<{ request_id: string; build_id: string; saved_at?: string }>;
-      };
-      return Array.isArray(json.items) ? json.items : [];
-    },
-    { base: API_BASE },
-  );
-
-  for (const item of items) {
-    await page.evaluate(
-      async ({ base, payload }) => {
-        const response = await fetch(`${base}/api/v1/recommendations/saved/remove`, {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        });
-        if (!response.ok) throw new Error(`remove saved failed: ${response.status}`);
-      },
-      {
-        base: API_BASE,
-        payload: {
-          request_id: item.request_id,
-          build_id: item.build_id,
-          ...(item.saved_at ? { saved_at: item.saved_at } : {}),
-        },
-      },
-    );
-  }
-  console.log(`saved:clear:done:${items.length}`);
-}
-
 async function openDeterministicResults(page: Page): Promise<void> {
   const response = await page.request.post(`${API_BASE}/api/v1/recommendations/compute`, {
     headers: { Accept: "application/json", "Content-Type": "application/json" },
@@ -179,6 +138,23 @@ function isSavedPost(url: string, method: string): boolean {
 
 test.describe("Save reliability", () => {
   test.describe.configure({ mode: "serial" });
+
+  test("survey → results: overview CTA save without tab", async ({ page }) => {
+    test.setTimeout(120_000);
+    await login(page);
+    await clearExistingSavedBuilds(page);
+    await gotoDeterministicResults(page);
+
+    const saveButton = page.getByTestId("e2e-save-build");
+    await expect(saveButton).toHaveText("이 결과 저장", { timeout: 30_000 });
+    await saveButton.click();
+    await expect(
+      page.getByText(
+        /계정에 저장했습니다|이미 계정에 저장된 결과입니다|이 브라우저에 저장했습니다|이미 이 브라우저에 저장된 결과입니다|북마크 목록에 저장되었습니다|브라우저에 로컬 저장되었습니다|이 브라우저\(게스트\)에만 저장되었습니다|게스트 세션에 로컬 저장되었습니다/,
+      ),
+    ).toBeVisible({ timeout: 30_000 });
+    await expect(saveButton).toHaveText(/저장됨/, { timeout: 30_000 });
+  });
 
   test("login -> save -> mypage -> reload -> logout -> relogin keeps saved build", async ({ page }) => {
     test.setTimeout(120_000);
