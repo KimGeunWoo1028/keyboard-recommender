@@ -24,14 +24,34 @@ type StoredResult = {
 
 const EMPTY_RESULT: StoredResult = { submission: null, build: null };
 
-function readStoredResult(): StoredResult {
+/** Stable snapshot for useSyncExternalStore — new refs every call cause React #185. */
+let cachedStoredResult: StoredResult = EMPTY_RESULT;
+let cachedStoredResultKey = "";
+
+export function readStoredResult(): StoredResult {
   const loaded = loadSurveySubmission() ?? loadLastKnownGoodSubmission();
-  if (!loaded) return EMPTY_RESULT;
+  if (!loaded) {
+    cachedStoredResult = EMPTY_RESULT;
+    cachedStoredResultKey = "";
+    return EMPTY_RESULT;
+  }
   const nl = loaded.nlPreferenceText?.trim();
   const build = nl
     ? getRecommendedBuildForSubmission(loaded)
     : loaded.build ?? getMockBuildFromTraits(loaded.traits, loaded.answers);
-  return { submission: loaded, build };
+  const key = [
+    loaded.completedAtIso,
+    loaded.source ?? "",
+    loaded.apiUnreachableFallback ? "1" : "0",
+    build?.id ?? "",
+    String(loaded.recommendations?.length ?? 0),
+    String(loaded.matchExplanations?.length ?? 0),
+    nl ? "nl" : "",
+  ].join("|");
+  if (key === cachedStoredResultKey) return cachedStoredResult;
+  cachedStoredResultKey = key;
+  cachedStoredResult = { submission: loaded, build };
+  return cachedStoredResult;
 }
 
 /** Same-tab updates go through setLive; cross-tab via `storage`. */
@@ -50,6 +70,8 @@ export function ResultsView() {
 
   useEffect(() => {
     if (!submission || submission.source !== "api") return;
+    // Local offline fallback has no API picks to refresh — avoid useless retries.
+    if (submission.apiUnreachableFallback) return;
     const picks = submission.recommendations ?? submission.matchExplanations ?? [];
     const hasMissingItemNames =
       picks.length === 0 || picks.some((pick) => !((pick as { itemName?: string }).itemName ?? "").trim());
@@ -126,7 +148,7 @@ export function ResultsView() {
   if (!submission || !build) {
     return (
       <div className="animate-fade-up rounded-sm border-2 border-[rgb(220_220_238)] bg-white p-6 shadow-sm dark:border-border dark:bg-ca-surface-container sm:p-8">
-        <p className="section-label mb-3">Empty</p>
+        <p className="section-label mb-3">결과 없음</p>
         <h2 className="font-headline text-xl font-extrabold tracking-tight text-ca-on-surface">
           아직 설문 결과가 없어요
         </h2>
@@ -136,7 +158,7 @@ export function ResultsView() {
         </p>
         <div className="mt-5 flex flex-col items-start gap-3">
           <Link href="/recommend" className={buttonClassName({ className: "h-11 font-semibold" })}>
-            설문 시작하기
+            설문 시작
           </Link>
           <div className="flex flex-col gap-2 text-sm sm:flex-row sm:flex-wrap sm:gap-x-5">
             <Link
@@ -206,12 +228,10 @@ export function ResultsView() {
     } catch (err) {
       const message =
         err instanceof ApiError
-          ? err.status > 0
-            ? `추천 재조정 요청에 실패했습니다. (${err.status}): ${err.message}`
-            : err.message
-          : err instanceof Error
-            ? err.message
-            : "추천 재조정에 실패했습니다.";
+          ? err.status === 0
+            ? "추천 서버에 연결할 수 없습니다. 잠시 후 다시 시도해 주세요."
+            : "추천 재조정에 실패했습니다. 잠시 후 다시 시도해 주세요."
+          : "추천 재조정에 실패했습니다. 잠시 후 다시 시도해 주세요.";
       setRefineError(message);
     }
   }

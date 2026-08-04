@@ -48,7 +48,7 @@ export default function NotFound() {
                 className: "min-h-11 w-full justify-center sm:w-auto sm:min-w-[10.5rem]",
               })}
             >
-              추천 설문 시작
+              설문 시작
             </Link>
           </div>
 

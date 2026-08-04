@@ -385,13 +385,11 @@ export function SurveyWizard() {
       const message =
         err instanceof ApiError
           ? err.status === 422
-              ? `설문 입력값이 올바르지 않습니다: ${err.message}`
+            ? "설문 입력값이 올바르지 않습니다. 답변을 확인한 뒤 다시 시도해 주세요."
             : err.status > 0
-              ? `요청 처리에 실패했습니다 (${err.status}): ${err.message}`
-              : err.message
-          : err instanceof Error
-            ? err.message
-            : "요청 처리 중 문제가 발생했습니다.";
+              ? "요청을 처리하지 못했습니다. 잠시 후 다시 시도해 주세요."
+              : err.message || "요청을 처리하지 못했습니다. 잠시 후 다시 시도해 주세요."
+          : "요청을 처리하지 못했습니다. 잠시 후 다시 시도해 주세요.";
       setSubmitError(message);
     } finally {
       setSubmitting(false);

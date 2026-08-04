@@ -32,7 +32,7 @@ export default function HomePage() {
       <section className="bg-[#F8F9FA] py-20 dark:bg-[rgb(22_22_35)] sm:py-24" aria-labelledby="home-process-heading">
         <div className="mx-auto max-w-ca px-ca-margin-mobile sm:px-ca-margin">
           <div className="mb-12 sm:mb-14">
-            <p className="section-label mb-4">How It Works</p>
+            <p className="section-label mb-4">이용 방법</p>
             <h2
               id="home-process-heading"
               className="font-headline text-3xl font-black tracking-tight text-ca-on-surface sm:text-4xl"
@@ -47,7 +47,7 @@ export default function HomePage() {
       <section className="py-20 sm:py-24" aria-labelledby="home-preview-heading">
         <div className="mx-auto grid max-w-ca grid-cols-1 items-center gap-12 px-ca-margin-mobile sm:px-ca-margin lg:grid-cols-2 lg:gap-16">
           <div>
-            <p className="section-label mb-4">Result Preview</p>
+            <p className="section-label mb-4">결과 미리보기</p>
             <h2
               id="home-preview-heading"
               className="font-headline text-3xl font-black tracking-tight text-ca-on-surface sm:text-4xl"
@@ -58,11 +58,8 @@ export default function HomePage() {
               조합 · 취향 요약 · 저장까지 한 흐름으로 이어집니다. 소리·타건 취향을 고르면 스위치부터
               키캡까지 한 조합으로 이어 줍니다.
             </p>
-            <Link
-              href="/recommend"
-              className={cn(buttonClassName({ size: "default" }), "mt-8 inline-flex font-bold")}
-            >
-              추천 설문 시작
+            <Link href="/recommend" className={cn(buttonClassName({ size: "default" }), "mt-8 inline-flex font-bold")}>
+              설문 시작
               <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
           </div>
@@ -76,7 +73,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-ca px-ca-margin-mobile sm:px-ca-margin">
           <div className="mb-12 flex flex-col justify-between gap-4 sm:mb-14 sm:flex-row sm:items-end">
             <div>
-              <p className="section-label mb-4">Parts Catalog</p>
+              <p className="section-label mb-4">부품 카탈로그</p>
               <h2
                 id="home-parts-heading"
                 className="font-headline text-3xl font-black tracking-tight text-ca-on-surface sm:text-4xl"
@@ -115,7 +112,7 @@ export default function HomePage() {
               "mt-8 bg-white font-bold text-primary hover:bg-white/90 hover:opacity-100 dark:bg-white dark:text-[rgb(55_48_163)]",
             )}
           >
-            지금 설문 시작하기
+            설문 시작
             <ArrowRight className="h-5 w-5" aria-hidden />
           </Link>
         </div>

@@ -8,8 +8,13 @@ import {
 } from "./results-overview-cta-band";
 
 describe("overviewCtaSaveLabel", () => {
-  it("uses short Manus-style labels", () => {
-    expect(overviewCtaSaveLabel({ authReady: true, saveState: "idle" })).toBe("저장하기");
+  it("uses scope-aware save labels", () => {
+    expect(overviewCtaSaveLabel({ authReady: true, isAuthenticated: true, saveState: "idle" })).toBe(
+      "이 결과 저장",
+    );
+    expect(overviewCtaSaveLabel({ authReady: true, isAuthenticated: false, saveState: "idle" })).toBe(
+      "이 브라우저에 저장",
+    );
     expect(overviewCtaSaveLabel({ authReady: true, saveState: "saved" })).toBe("저장됨 ✓");
     expect(overviewCtaSaveLabel({ authReady: true, saveState: "saving" })).toBe("저장 중…");
   });
@@ -18,7 +23,7 @@ describe("overviewCtaSaveLabel", () => {
 describe("overviewCtaBandCopy", () => {
   it("switches copy for guest, saved, and error states", () => {
     expect(overviewCtaBandCopy({ isAuthenticated: false, saveState: "idle" }).subtitle).toMatch(
-      /로그인하면 계정에 보관/,
+      /이 브라우저에 저장/,
     );
     expect(overviewCtaBandCopy({ isAuthenticated: true, saveState: "saved" }).title).toBe("저장했어요");
     expect(
@@ -47,12 +52,12 @@ describe("ResultsOverviewCtaBand", () => {
 
     expect(screen.getByTestId("e2e-overview-cta-band")).toBeInTheDocument();
     expect(screen.getByText("이 조합이 마음에 드시나요?")).toBeInTheDocument();
-    expect(screen.getByTestId("e2e-overview-cta-save")).toHaveTextContent("저장하기");
+    expect(screen.getByTestId("e2e-overview-cta-save")).toHaveTextContent("이 결과 저장");
     expect(screen.getByTestId("e2e-overview-cta-catalog")).toHaveAttribute("href", "/catalog?from=results");
     expect(screen.queryByTestId("e2e-save-login-link")).not.toBeInTheDocument();
   });
 
-  it("renders guest band with login and catalog CTAs", () => {
+  it("renders guest band with browser save, login, and catalog CTAs", () => {
     render(
       <ResultsOverviewCtaBand
         isAuthenticated={false}
@@ -62,8 +67,8 @@ describe("ResultsOverviewCtaBand", () => {
       />,
     );
 
+    expect(screen.getByTestId("e2e-overview-cta-save")).toHaveTextContent("이 브라우저에 저장");
     expect(screen.getByTestId("e2e-save-login-link")).toHaveTextContent("로그인");
-    expect(screen.queryByTestId("e2e-overview-cta-save")).not.toBeInTheDocument();
   });
 
   it("renders saved authenticated band with mypage CTA", () => {
@@ -78,8 +83,7 @@ describe("ResultsOverviewCtaBand", () => {
     );
 
     expect(screen.getByText("저장했어요")).toBeInTheDocument();
-    expect(screen.getByText("계정에 저장했습니다.")).toBeInTheDocument();
-    expect(screen.getByTestId("e2e-save-mypage-link")).toHaveTextContent("마이페이지에서 보기");
+    expect(screen.getByTestId("e2e-save-mypage-link")).toHaveAttribute("href", "/mypage?section=saved");
     expect(screen.queryByTestId("e2e-overview-cta-save")).not.toBeInTheDocument();
   });
 
@@ -89,14 +93,14 @@ describe("ResultsOverviewCtaBand", () => {
         isAuthenticated
         authReady
         saveState="error"
-        saveMessage="네트워크 연결을 확인한 뒤 다시 시도해 주세요"
+        saveMessage="네트워크 연결을 확인한 뒤 다시 시도해 주세요."
         onSaveBuild={vi.fn()}
       />,
     );
 
     expect(screen.getByTestId("e2e-save-feedback")).toHaveRole("alert");
     expect(screen.getByTestId("e2e-save-feedback")).toHaveTextContent(
-      "네트워크 연결을 확인한 뒤 다시 시도해 주세요",
+      "네트워크 연결을 확인한 뒤 다시 시도해 주세요.",
     );
     expect(screen.getByTestId("e2e-overview-cta-save")).toHaveTextContent("다시 저장");
   });

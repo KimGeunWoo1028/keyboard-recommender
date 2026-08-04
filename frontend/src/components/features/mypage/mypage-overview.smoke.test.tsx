@@ -36,7 +36,7 @@ describe("MyPageOverview smoke", () => {
     expect(screen.getByText("—")).toBeInTheDocument();
     expect(screen.getByText(/아직 저장한 결과가 없습니다/)).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /설문 다시하기/ })).toHaveAttribute("href", "/recommend");
-    expect(screen.getByRole("link", { name: "설문 시작하기" })).toHaveAttribute("href", "/recommend");
+    expect(screen.getByRole("link", { name: "설문 시작" })).toHaveAttribute("href", "/recommend");
   });
 
   it("shows latest saved preview when bookmarks exist", () => {

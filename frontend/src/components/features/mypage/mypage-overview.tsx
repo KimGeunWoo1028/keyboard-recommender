@@ -218,7 +218,7 @@ export function MyPageOverview({ user: _user, savedItems }: Props) {
               ? relative
                 ? `이 브라우저에 ${relative} 설문 결과가 있습니다. 계정 저장 목록에는 아직 없습니다.`
                 : "이 브라우저에 설문 결과가 있습니다. 계정 저장 목록에는 아직 없습니다."
-              : "아직 저장한 결과가 없습니다. 결과에서 「이 결과 저장」을 누르면 여기에 모입니다."}
+              : "아직 저장한 결과가 없습니다. 결과 화면에서 저장하면 여기에 모입니다."}
           </p>
           <div className="mt-4 flex flex-wrap justify-center gap-3">
             {hasRecommendationHint ? (
@@ -231,7 +231,7 @@ export function MyPageOverview({ user: _user, savedItems }: Props) {
               </Link>
             ) : null}
             <Link href="/recommend" prefetch={false} className={buttonClassName({ size: "sm" })}>
-              설문 시작하기
+              설문 시작
             </Link>
           </div>
         </div>

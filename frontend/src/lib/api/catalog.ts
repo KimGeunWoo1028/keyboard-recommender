@@ -257,12 +257,14 @@ export async function fetchCatalogList(
   }
 
   let lastError: ApiError | null = null;
-  for (let attempt = 0; attempt < 3; attempt += 1) {
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 5000);
     try {
-      const res = await fetch(url, init);
+      const res = await fetch(url, { ...init, signal: ctrl.signal });
       if (!res.ok) {
         lastError = new ApiError(res.status, await readErrorMessage(res));
-        if (attempt < 2 && isRetryableCatalogStatus(lastError.status)) {
+        if (attempt < 1 && isRetryableCatalogStatus(lastError.status)) {
           await sleep(400 * (attempt + 1));
           continue;
         }
@@ -272,18 +274,20 @@ export async function fetchCatalogList(
     } catch (err) {
       if (err instanceof ApiError) {
         lastError = err;
-        if (attempt < 2 && isRetryableCatalogStatus(err.status)) {
+        if (attempt < 1 && isRetryableCatalogStatus(err.status)) {
           await sleep(400 * (attempt + 1));
           continue;
         }
         throw err;
       }
       lastError = new ApiError(0, "카탈로그 서버에 연결하지 못했습니다.");
-      if (attempt < 2) {
+      if (attempt < 1) {
         await sleep(400 * (attempt + 1));
         continue;
       }
       throw lastError;
+    } finally {
+      clearTimeout(timer);
     }
   }
   throw lastError ?? new ApiError(0, "카탈로그를 불러오지 못했습니다.");

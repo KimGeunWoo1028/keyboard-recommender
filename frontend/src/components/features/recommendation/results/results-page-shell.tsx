@@ -56,7 +56,7 @@ export function ResultsPageShell({
             data-testid="e2e-result-trust-summary"
           >
             <div className="min-w-0 space-y-2">
-              <p className="section-label mb-3">Results</p>
+              <p className="section-label mb-3">결과</p>
               <h1 className="font-headline text-3xl font-black tracking-tight text-ca-on-surface sm:text-4xl">
                 {headline}
               </h1>

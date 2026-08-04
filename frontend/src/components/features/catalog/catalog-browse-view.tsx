@@ -637,7 +637,7 @@ export function CatalogBrowseView({
               </Link>
             </div>
           ) : null}
-          <p className="section-label mb-3">Parts Catalog</p>
+          <p className="section-label mb-3">부품 카탈로그</p>
           <h1 className="font-headline text-4xl font-black tracking-tight text-ca-on-surface">
             부품 카탈로그
           </h1>
@@ -896,7 +896,7 @@ export function CatalogBrowseView({
             "mt-5 inline-flex h-11 items-center gap-2 px-6 font-bold",
           )}
         >
-          추천 설문 시작
+          설문 시작
           <ArrowRight className="h-4 w-4" aria-hidden />
         </Link>
       </div>

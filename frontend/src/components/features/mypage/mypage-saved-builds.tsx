@@ -252,13 +252,13 @@ export function MyPageSavedBuilds({ items, removingKeys, onRemove }: Props) {
             )
           ) : (
             <>
-              <p className="font-headline text-base font-semibold text-ca-on-surface">아직 저장한 추천이 없어요.</p>
+              <p className="font-headline text-base font-semibold text-ca-on-surface">아직 저장한 결과가 없어요.</p>
               <p className="break-keep leading-relaxed">
                 설문 결과에서 마음에 드는 조합을 저장하면 여기서 다시 볼 수 있습니다.
               </p>
               <div className="flex flex-col items-center justify-center gap-2 sm:flex-row sm:flex-wrap">
                 <Button type="button" variant="primary" size="sm" onClick={() => router.push("/recommend")}>
-                  추천 설문 시작
+                  설문 시작
                 </Button>
                 {mounted && hasLocalResult ? (
                   <Button

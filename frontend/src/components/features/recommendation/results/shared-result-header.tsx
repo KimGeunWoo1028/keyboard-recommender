@@ -78,7 +78,7 @@ export function SharedResultHeader({
     <div className="space-y-4 sm:space-y-5" data-testid="e2e-result-trust-summary">
       <article className="overflow-hidden rounded-sm border-2 border-[rgb(220_220_238)] bg-white shadow-sm dark:border-border dark:bg-ca-surface-container">
         <div className="space-y-2 px-4 py-5 sm:px-6 sm:py-6">
-          <p className="section-label">Results</p>
+          <p className="section-label">결과</p>
           <h2 className="flex flex-wrap items-center gap-2 font-headline text-xl font-extrabold tracking-tight text-ca-on-surface sm:text-2xl">
             <span>{preferenceAlignedTitle}</span>
             <HelpHint text="제목은 이번 설문에서 고른 사운드·키감 성향을 그대로 보여 줍니다. 아래 취향 태그와 같아야 해요." />

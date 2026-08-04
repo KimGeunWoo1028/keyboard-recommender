@@ -188,7 +188,7 @@ export function CatalogDetailPanel({ open, loading, error, family, partDetail, o
         <CardHeader className="sticky top-0 z-10 border-b border-border bg-white/95 backdrop-blur dark:bg-ca-surface-container/95">
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0 flex-1 space-y-1">
-              <p className="section-label">Catalog</p>
+              <p className="section-label">카탈로그</p>
               <CardTitle
                 id={titleId}
                 className="font-headline text-lg font-extrabold leading-snug text-ca-on-surface"

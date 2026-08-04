@@ -16,14 +16,14 @@ export default function GlobalError({
     <html lang="ko">
       <body style={{ margin: 0, fontFamily: "system-ui, sans-serif", background: "#faf8ff", color: "#131b2e" }}>
         <main style={{ maxWidth: 32 * 16, margin: "4rem auto", padding: "0 1.5rem" }}>
-          <p style={{ fontSize: 12, letterSpacing: "0.08em", textTransform: "uppercase", color: "#630ed4" }}>ERROR</p>
+          <p style={{ fontSize: 12, letterSpacing: "0.08em", color: "#630ed4" }}>오류</p>
           <h1 style={{ fontSize: 24, fontWeight: 600 }}>문제가 발생했습니다</h1>
           <p style={{ fontSize: 14, color: "#4a4455" }}>
-            {error.message || "알 수 없는 오류입니다. 페이지를 다시 불러와 주세요."}
+            화면을 불러오는 중 문제가 생겼어요. 다시 시도하거나 홈으로 돌아가 주세요.
           </p>
           {error.digest ? (
             <p style={{ fontFamily: "ui-monospace, monospace", fontSize: 12, color: "#7b7487" }}>
-              digest: {error.digest}
+              참조 코드: {error.digest}
             </p>
           ) : null}
           <button

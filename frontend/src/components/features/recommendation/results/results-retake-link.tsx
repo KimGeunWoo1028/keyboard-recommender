@@ -18,7 +18,7 @@ export function ResultsRetakeLink({ className }: { className?: string }) {
         )}
         data-testid="e2e-results-retake-link"
       >
-        다시 추천받기
+        설문 다시 하기
       </Link>
     </div>
   );

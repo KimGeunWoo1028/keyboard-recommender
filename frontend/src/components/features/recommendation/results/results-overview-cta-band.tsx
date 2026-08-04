@@ -12,14 +12,15 @@ export type OverviewCtaSaveState = "idle" | "saving" | "saved" | "error";
 /** Manus overview band — short save label (header keeps full saveButtonLabel). */
 export function overviewCtaSaveLabel(params: {
   authReady: boolean;
+  isAuthenticated?: boolean;
   saveState: OverviewCtaSaveState;
 }): string {
-  const { authReady, saveState } = params;
+  const { authReady, isAuthenticated = true, saveState } = params;
   if (!authReady) return "로그인 확인 중…";
   if (saveState === "saving") return "저장 중…";
   if (saveState === "saved") return "저장됨 ✓";
   if (saveState === "error") return "다시 저장";
-  return "저장하기";
+  return isAuthenticated ? "이 결과 저장" : "이 브라우저에 저장";
 }
 
 export function overviewCtaBandCopy(params: {
@@ -53,7 +54,7 @@ export function overviewCtaBandCopy(params: {
   if (!isAuthenticated) {
     return {
       title: "이 조합이 마음에 드시나요?",
-      subtitle: "로그인하면 계정에 보관돼요. 카탈로그에서 실제 제품을 찾아보세요.",
+      subtitle: "이 브라우저에 저장해 두고, 나중에 로그인하면 계정에도 보관할 수 있어요.",
     };
   }
 
@@ -89,7 +90,7 @@ export function ResultsOverviewCtaBand({
   className,
 }: ResultsOverviewCtaBandProps) {
   const { title, subtitle } = overviewCtaBandCopy({ isAuthenticated, saveState, saveMessage });
-  const showSaveAction = isAuthenticated && saveState !== "saved";
+  const showSaveAction = saveState !== "saved";
   const showGuestLogin = !isAuthenticated;
   const showMypage = isAuthenticated && saveState === "saved";
   const showErrorFeedback = saveState === "error";
@@ -135,7 +136,7 @@ export function ResultsOverviewCtaBand({
             aria-busy={saveState === "saving" || undefined}
             onClick={() => void onSaveBuild()}
           >
-            {overviewCtaSaveLabel({ authReady, saveState })}
+            {overviewCtaSaveLabel({ authReady, isAuthenticated, saveState })}
           </Button>
         ) : null}
 
@@ -143,9 +144,7 @@ export function ResultsOverviewCtaBand({
           <Link
             href="/auth?mode=login"
             data-testid="e2e-save-login-link"
-            className={cn(
-              showSaveAction || showMypage ? outlineOnIndigo : cn(buttonClassName({ variant: "primary", size: "default" }), primaryOnIndigo),
-            )}
+            className={outlineOnIndigo}
           >
             로그인
           </Link>

@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { checkDisplayNameAvailability } from "@/lib/api/auth";
 import { ApiError } from "@/lib/api/client";
 import { isRetryableDisplayNameCheckError, validateDisplayName } from "@/lib/auth-form-helpers";
+import { KO_VALIDATION } from "@/lib/form-validation-ko";
 import { FieldValidationError, useKoreanFieldValidation } from "@/lib/use-korean-field-validation";
 
 type Props = {
@@ -22,6 +23,7 @@ export function SignupStepNickname({ onSubmitSignup, busy = false, formError = n
   const [checkMessage, setCheckMessage] = useState<string | null>(null);
   const [checking, setChecking] = useState(false);
   const [verified, setVerified] = useState(false);
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [localError, setLocalError] = useState<string | null>(null);
   const displayNameField = useKoreanFieldValidation("displayName");
   const validation = validateDisplayName(displayName);
@@ -66,6 +68,10 @@ export function SignupStepNickname({ onSubmitSignup, busy = false, formError = n
     }
     if (!verified) {
       setLocalError("닉네임 중복 확인을 먼저 완료해 주세요.");
+      return;
+    }
+    if (!agreedToTerms) {
+      setLocalError(KO_VALIDATION.termsRequired);
       return;
     }
     await onSubmitSignup(displayName.trim());
@@ -116,17 +122,28 @@ export function SignupStepNickname({ onSubmitSignup, busy = false, formError = n
         ) : null}
       </div>
 
-      <p className="break-keep text-center text-xs leading-relaxed text-ca-on-surface-variant">
-        계정을 만들면{" "}
-        <Link href="/terms" prefetch={false} className="underline underline-offset-2 hover:text-ca-on-surface">
-          이용약관
-        </Link>
-        과{" "}
-        <Link href="/privacy" prefetch={false} className="underline underline-offset-2 hover:text-ca-on-surface">
-          개인정보처리방침
-        </Link>
-        에 동의하는 것으로 간주합니다.
-      </p>
+      <label className="flex items-start gap-2.5 break-keep text-xs leading-relaxed text-ca-on-surface-variant">
+        <input
+          type="checkbox"
+          className="mt-0.5 h-4 w-4 shrink-0 rounded border-border text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+          checked={agreedToTerms}
+          onChange={(e) => {
+            setAgreedToTerms(e.target.checked);
+            setLocalError(null);
+          }}
+          data-testid="e2e-signup-terms"
+        />
+        <span>
+          <Link href="/terms" prefetch={false} className="underline underline-offset-2 hover:text-ca-on-surface">
+            이용약관
+          </Link>
+          과{" "}
+          <Link href="/privacy" prefetch={false} className="underline underline-offset-2 hover:text-ca-on-surface">
+            개인정보처리방침
+          </Link>
+          에 동의합니다. (필수)
+        </span>
+      </label>
 
       {error ? (
         <p className="break-keep text-sm text-destructive" role="alert" data-testid="e2e-auth-error">
@@ -138,7 +155,7 @@ export function SignupStepNickname({ onSubmitSignup, busy = false, formError = n
         type="submit"
         className="w-full"
         loading={busy}
-        disabled={!verified || busy}
+        disabled={!verified || !agreedToTerms || busy}
         data-testid="e2e-auth-submit"
       >
         계정 만들기

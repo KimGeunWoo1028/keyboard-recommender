@@ -34,8 +34,8 @@ function saved(partial: Partial<SavedRecommendationItem> = {}): SavedRecommendat
 describe("MyPageSavedBuilds smoke", () => {
   it("shows empty state when no bookmarks", () => {
     render(<MyPageSavedBuilds items={[]} removingKeys={new Set()} onRemove={vi.fn()} />);
-    expect(screen.getByText(/아직 저장한 추천이 없어요/)).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "추천 설문 시작" })).toBeInTheDocument();
+    expect(screen.getByText(/아직 저장한 결과가 없어요/)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "설문 시작" })).toBeInTheDocument();
   });
 
   it("renders Manus-style cards with restore and delete actions", async () => {

@@ -57,6 +57,7 @@ export function SiteHeader() {
   );
   // L08: catalog page already has in-body search — hide header duplicate there.
   const isCatalogRoute = pathname === "/catalog" || pathname.startsWith("/catalog/");
+  const isRecommendRoute = pathname === "/recommend" || pathname.startsWith("/recommend/");
   /**
    * On primary surfaces first paint, skip speculative RSC/JS prefetch of other
    * tabs so Lighthouse unused-chunk noise stays down and LCP bandwidth is free.
@@ -135,16 +136,18 @@ export function SiteHeader() {
           </div>
           <AuthNickname />
           <AuthSessionAction />
-          <Link
-            href="/recommend"
-            prefetch={deferNavPrefetch ? false : undefined}
-            className={cn(
-              buttonClassName({ size: "sm" }),
-              "hidden font-semibold lg:inline-flex",
-            )}
-          >
-            설문 시작
-          </Link>
+          {!isRecommendRoute ? (
+            <Link
+              href="/recommend"
+              prefetch={deferNavPrefetch ? false : undefined}
+              className={cn(
+                buttonClassName({ size: "sm" }),
+                "hidden font-semibold lg:inline-flex",
+              )}
+            >
+              설문 시작
+            </Link>
+          ) : null}
           <button
             type="button"
             className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-md text-ca-on-surface-variant transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))] lg:hidden"

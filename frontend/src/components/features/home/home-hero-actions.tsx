@@ -22,7 +22,7 @@ export function HomeHeroActions() {
           )}
           aria-busy={!authChecked}
         >
-          추천 설문 시작
+          설문 시작
           <ArrowRight className="h-5 w-5" aria-hidden />
         </Link>
         <Link

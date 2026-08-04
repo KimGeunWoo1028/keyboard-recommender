@@ -64,7 +64,7 @@ export default async function SharePage({ searchParams }: Props) {
 
         <div className="flex flex-col gap-2 sm:flex-row">
           <Link href="/recommend" className={buttonClassName({ className: "h-11 font-semibold" })}>
-            추천 설문 시작
+            설문 시작
           </Link>
           <Link
             href="/catalog"
