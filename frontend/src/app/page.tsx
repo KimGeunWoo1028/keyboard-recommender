@@ -29,7 +29,7 @@ export default function HomePage() {
       {/* Hero owns full-bleed gradient; content column is max-w-ca inside HomeHero */}
       <HomeHero />
 
-      <section className="bg-[#F8F9FA] py-20 dark:bg-[rgb(22_22_35)] sm:py-24" aria-labelledby="home-process-heading">
+      <section className="bg-ca-surface-container-low py-20 sm:py-24" aria-labelledby="home-process-heading">
         <div className="mx-auto max-w-ca px-ca-margin-mobile sm:px-ca-margin">
           <div className="mb-12 sm:mb-14">
             <p className="section-label mb-4">이용 방법</p>
@@ -69,7 +69,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#F8F9FA] py-20 dark:bg-[rgb(22_22_35)] sm:py-24" aria-labelledby="home-parts-heading">
+      <section className="bg-ca-surface-container-low py-20 sm:py-24" aria-labelledby="home-parts-heading">
         <div className="mx-auto max-w-ca px-ca-margin-mobile sm:px-ca-margin">
           <div className="mb-12 flex flex-col justify-between gap-4 sm:mb-14 sm:flex-row sm:items-end">
             <div>

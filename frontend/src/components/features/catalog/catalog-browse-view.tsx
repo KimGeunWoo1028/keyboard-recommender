@@ -264,11 +264,11 @@ function CatalogGridSkeleton({ count = 8 }: { count?: number }) {
           className="flex min-h-[12.5rem] flex-col overflow-hidden rounded-[inherit] border border-ca-outline-variant/30 bg-ca-surface-container-lowest/40"
           aria-hidden
         >
-          <div className="aspect-[4/3] w-full animate-pulse bg-ca-surface-container" style={{ aspectRatio: "4 / 3" }} />
+          <div className="aspect-[4/3] w-full animate-pulse bg-ca-surface-container motion-reduce:animate-none" style={{ aspectRatio: "4 / 3" }} />
           <div className="space-y-1.5 p-3">
-            <div className="h-2.5 w-1/3 animate-pulse rounded bg-ca-surface-container/80" />
-            <div className="h-3.5 w-3/4 animate-pulse rounded bg-ca-surface-container" />
-            <div className="h-2.5 w-1/2 animate-pulse rounded bg-ca-surface-container/80" />
+            <div className="h-2.5 w-1/3 animate-pulse rounded bg-ca-surface-container/80 motion-reduce:animate-none" />
+            <div className="h-3.5 w-3/4 animate-pulse rounded bg-ca-surface-container motion-reduce:animate-none" />
+            <div className="h-2.5 w-1/2 animate-pulse rounded bg-ca-surface-container/80 motion-reduce:animate-none" />
           </div>
         </div>
       ))}
@@ -621,7 +621,7 @@ export function CatalogBrowseView({
 
   return (
     <>
-      <div className="border-b border-border bg-[#F8F9FA] dark:bg-[rgb(22_22_35)]">
+      <div className="border-b border-border bg-ca-surface-container-low">
         <div className="mx-auto max-w-ca px-ca-margin-mobile py-10 sm:px-ca-margin sm:py-12">
           {fromResults ? (
             <div className="mb-6 flex flex-wrap items-center justify-between gap-2 rounded-sm border border-border bg-white px-3 py-2 text-sm dark:bg-ca-surface-container">
@@ -684,7 +684,7 @@ export function CatalogBrowseView({
                   "rounded-full px-4 py-2 text-sm font-semibold transition-all",
                   active
                     ? "bg-primary text-primary-foreground shadow-md shadow-primary/20"
-                    : "border border-border bg-[#F8F9FA] text-ca-on-surface-variant hover:bg-muted hover:text-ca-on-surface dark:bg-[rgb(22_22_35)]",
+                    : "border border-border bg-ca-surface-container-low text-ca-on-surface-variant hover:bg-muted hover:text-ca-on-surface",
                 )}
                 onClick={() => {
                   replaceCatalogParams({
@@ -884,7 +884,7 @@ export function CatalogBrowseView({
         </div>
       ) : null}
 
-      <div className="rounded-2xl border border-border bg-[#F8F9FA] p-8 text-center dark:bg-[rgb(22_22_35)]">
+      <div className="rounded-2xl border border-border bg-ca-surface-container-low p-8 text-center">
         <p className="font-headline text-lg font-bold text-ca-on-surface">어떤 조합이 나에게 맞을까요?</p>
         <p className="mt-2 text-sm text-ca-on-surface-variant">
           1분 설문으로 취향에 맞는 부품 조합을 추천받으세요.

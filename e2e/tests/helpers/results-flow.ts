@@ -21,19 +21,40 @@ export async function expectEvidencePickExplanations(page: Page): Promise<void> 
   await expect(pickWhy.first()).toBeVisible();
 }
 
-/** Reduce flaky pixels from CSS transitions / caret / scrollbars. */
+/** Reduce flaky pixels from CSS transitions / caret / scrollbars / Web Animations. */
 export async function stabilizeForScreenshot(page: Page): Promise<void> {
+  await page.emulateMedia({ reducedMotion: "reduce" });
   await page.addStyleTag({
     content: `
       *, *::before, *::after {
         animation: none !important;
+        animation-duration: 0s !important;
         transition: none !important;
         caret-color: transparent !important;
       }
       html { scroll-behavior: auto !important; }
     `,
   });
-  await page.evaluate(() => {
+  await page.evaluate(async () => {
     window.scrollTo(0, 0);
+    if (document.fonts?.ready) {
+      try {
+        await Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 2000))]);
+      } catch {
+        /* ignore */
+      }
+    }
+    for (const anim of document.getAnimations?.() ?? []) {
+      try {
+        anim.finish();
+      } catch {
+        try {
+          anim.cancel();
+        } catch {
+          /* ignore */
+        }
+      }
+    }
   });
+  await page.waitForTimeout(50);
 }

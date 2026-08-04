@@ -1,10 +1,10 @@
-import type { ReactNode } from "react";
+﻿import type { ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 
 export function SurveyPageHeader({ description }: { description?: string }) {
   return (
-    <div className="border-b border-border bg-[#F8F9FA] dark:bg-[rgb(22_22_35)]">
+    <div className="border-b border-border bg-ca-surface-container-low">
       <div className="mx-auto max-w-ca px-ca-margin-mobile py-10 sm:px-ca-margin sm:py-12">
         <p className="section-label mb-3">설문</p>
         <h1 className="font-headline text-4xl font-black tracking-tight text-ca-on-surface">

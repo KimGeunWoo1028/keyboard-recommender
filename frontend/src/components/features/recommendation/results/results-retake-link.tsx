@@ -13,8 +13,8 @@ export function ResultsRetakeLink({ className }: { className?: string }) {
         href="/recommend"
         className={cn(
           buttonClassName({ variant: "outline", size: "default" }),
-          "min-h-10 w-full justify-center border-border bg-[#F8F9FA] font-medium text-ca-on-surface-variant",
-          "hover:bg-muted hover:text-ca-on-surface dark:bg-[rgb(22_22_35)] sm:w-auto",
+          "min-h-10 w-full justify-center border-border bg-ca-surface-container-low font-medium text-ca-on-surface-variant",
+          "hover:bg-muted hover:text-ca-on-surface sm:w-auto",
         )}
         data-testid="e2e-results-retake-link"
       >

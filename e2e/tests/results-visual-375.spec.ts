@@ -15,8 +15,8 @@ const VIEWPORT = { width: 375, height: 812 } as const;
 const shotOpts = {
   animations: "disabled" as const,
   caret: "hide" as const,
-  /** Font / antialias variance across machines. */
-  maxDiffPixelRatio: 0.04,
+  /** Font / antialias variance across machines (V-SNAP-02). */
+  maxDiffPixelRatio: 0.01,
 };
 
 test.describe("Results visual regression — 375px", () => {

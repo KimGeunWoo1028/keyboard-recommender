@@ -16,7 +16,7 @@ export function HomeSwitchGuide() {
         <div className="order-2 relative flex min-h-[22rem] items-center justify-center sm:min-h-[26rem] lg:order-1 lg:min-h-full lg:justify-start">
           {/* Soft wash behind switches — stronger blend into page */}
           <div
-            className="pointer-events-none absolute left-[42%] top-[48%] h-[85%] w-[105%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#EEEBFF]/90 blur-3xl dark:bg-[#1E1B41]/80"
+            className="pointer-events-none absolute left-[42%] top-[48%] h-[85%] w-[105%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/15 blur-3xl dark:bg-primary/25"
             aria-hidden
           />
           <div

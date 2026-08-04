@@ -20,8 +20,8 @@ module.exports = {
   reporter: [["list"]],
   expect: {
     toHaveScreenshot: {
-      // Phase D visual — tolerate minor AA / font raster differences.
-      maxDiffPixelRatio: 0.04,
+      // Antialias / font raster only — keep ≤0.01 (Visual QA V-P2 / V-SNAP-02).
+      maxDiffPixelRatio: 0.01,
       animations: "disabled",
       caret: "hide",
     },
@@ -49,7 +49,7 @@ module.exports = {
     { name: "setup", testMatch: /auth\.setup\.ts/ },
     {
       name: "chromium",
-      testIgnore: [/auth\.setup\.ts/, /results-visual-375\.spec\.ts/, /account-delete\.spec\.ts/],
+      testIgnore: [/auth\.setup\.ts/, /results-visual-375\.spec\.ts/, /account-delete\.spec\.ts/, /catalog-visual-smoke\.spec\.ts/],
       dependencies: ["setup"],
       use: {
         ...devices["Desktop Chrome"],
@@ -76,6 +76,15 @@ module.exports = {
         ...devices["Desktop Chrome"],
         storageState: authFile,
         viewport: { width: 375, height: 812 },
+      },
+    },
+    {
+      /** Catalog list fixture smoke — no auth / API required. */
+      name: "catalog-visual",
+      testMatch: /catalog-visual-smoke\.spec\.ts/,
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 1440, height: 900 },
       },
     },
   ],

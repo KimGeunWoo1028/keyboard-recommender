@@ -12,7 +12,7 @@ export function ResultsEvidenceSharedReasons({ shared }: ResultsEvidenceSharedRe
 
   return (
     <section
-      className="mt-8 space-y-3 rounded-2xl border border-border bg-[#F8F9FA] px-5 py-5 dark:bg-[rgb(22_22_35)] sm:px-6"
+      className="mt-8 space-y-3 rounded-2xl border border-border bg-ca-surface-container-low px-5 py-5 sm:px-6"
       data-testid="e2e-evidence-shared-reasons"
     >
       <div className="space-y-1">

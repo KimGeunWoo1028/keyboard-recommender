@@ -11,7 +11,7 @@ export function HomeHero() {
     <section className="relative flex min-h-[min(92vh,56rem)] w-full items-center overflow-x-clip">
       {/* Full-bleed wash — must sit outside max-w-ca so edges are not clipped */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-        <div className="absolute right-0 top-0 h-full w-1/2 bg-gradient-to-l from-[#EEF2FF] to-transparent dark:from-[#1A1836]" />
+        <div className="absolute right-0 top-0 h-full w-1/2 bg-gradient-to-l from-primary/10 to-transparent dark:from-primary/20" />
         <div className="absolute right-[8%] top-1/2 h-[640px] w-[640px] -translate-y-1/2 rounded-full bg-primary/[0.07] blur-3xl dark:bg-primary/15" />
       </div>
 
@@ -41,7 +41,7 @@ export function HomeHero() {
         <div className="animate-fade-up animate-fade-up-delay-2 relative flex min-h-[20rem] items-center justify-center sm:min-h-[24rem] lg:min-h-[32rem] lg:justify-end">
           {/* Local glow behind product */}
           <div
-            className="pointer-events-none absolute left-1/2 top-[42%] h-[78%] w-[95%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#EEEBFF]/85 blur-3xl dark:bg-[#1E1B41]/75"
+            className="pointer-events-none absolute left-1/2 top-[42%] h-[78%] w-[95%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/15 blur-3xl dark:bg-primary/25"
             aria-hidden
           />
 
