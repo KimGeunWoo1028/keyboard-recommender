@@ -14,7 +14,7 @@
       "https://www.swagkey.kr/132"
     ],
     "note": "상품명은 원문 유지, 설명/trait은 후속 매핑 단계에서 보강.",
-    "imageMergedAt": "2026-07-11T16:40:11.063883+00:00"
+    "imageMergedAt": "2026-08-05T10:01:58.992353+00:00"
   },
   "switches": {
     "linear": [
@@ -10531,7 +10531,9 @@
         "source": "inventory_v4"
       },
       "recommendationEligible": false,
-      "traitConfidence": "name_inferred"
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20251204/b1b7c4a6bd250.jpg",
+      "imageSource": "og:image"
     }
   ]
 }

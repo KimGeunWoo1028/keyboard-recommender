@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-07-11T16:39:31.283863+00:00",
+  "generatedAt": "2026-08-05T10:01:51.189644+00:00",
   "stats": {
     "total": 107,
     "resolved": 392,
@@ -6287,6 +6287,20 @@
       "inventoryId": "inv-0116",
       "productName": "HMX 아주르 리니어 스위치",
       "category": "Switches"
+    },
+    {
+      "swagkeyProductId": "1457",
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1457",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20251204/b1b7c4a6bd250.jpg",
+      "status": "ok",
+      "seedIds": [
+        "kc-108"
+      ],
+      "width": 1200,
+      "height": 627,
+      "cacheFile": "1457.html",
+      "matchMethod": "page_idx",
+      "imageSource": "og:image"
     }
   ],
   "failures": []

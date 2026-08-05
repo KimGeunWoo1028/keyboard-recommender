@@ -1,16 +1,16 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-07-11T16:40:11.063883+00:00",
+  "generatedAt": "2026-08-05T10:01:58.992353+00:00",
   "seedIn": "C:/Users/jeung/keyboard-recommender/backend/src/keyboard_recommender/catalog/swagkey_products.seed.json",
   "imagesIn": "C:/Users/jeung/keyboard-recommender/backend/data/swagkey_inventory/swagkey_product_images.json",
   "seedOut": "C:/Users/jeung/keyboard-recommender/backend/data/swagkey_inventory/swagkey_products.seed.with_images.json",
-  "seedTotal": 331,
-  "withImage": 318,
-  "withoutImage": 13,
-  "fillRatePct": 96.07,
+  "seedTotal": 330,
+  "withImage": 316,
+  "withoutImage": 14,
+  "fillRatePct": 95.76,
   "byMethod": {
-    "product_id": 318,
-    "missing": 13
+    "product_id": 316,
+    "missing": 14
   },
   "rows": [
     {
@@ -1994,6 +1994,16 @@
       "matchedProductId": "1800"
     },
     {
+      "seedId": "kc-108",
+      "family": "",
+      "name": "스웨그키 세라키 세라믹 V2 키캡 Pink",
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1457",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20251204/b1b7c4a6bd250.jpg",
+      "matchMethod": "product_id",
+      "matchScore": 1.0,
+      "matchedProductId": "1457"
+    },
+    {
       "seedId": "layout-001",
       "family": "layout",
       "name": "60% Standard",
@@ -2057,11 +2067,11 @@
       "seedId": "layout-007",
       "family": "layout",
       "name": "Split 60",
-      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1504",
-      "imageUrl": "https://cdn.imweb.me/thumbnail/20251215/40289badf505e.jpg",
-      "matchMethod": "product_id",
-      "matchScore": 1.0,
-      "matchedProductId": "1504"
+      "sourceUrl": "",
+      "imageUrl": "",
+      "matchMethod": "missing",
+      "matchScore": 0.0,
+      "matchedProductId": ""
     },
     {
       "seedId": "layout-idx-1001",
@@ -2686,7 +2696,7 @@
     {
       "seedId": "sw-linear-003",
       "family": "switch",
-      "name": "스웨그키 HMX Peach 반저소음 리니어 키보드 스위치",
+      "name": "스웨그키 HMX Peach 피치 반저소음 리니어 키보드 스위치",
       "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1765",
       "imageUrl": "https://cdn.imweb.me/thumbnail/20260408/652e8c8c5dfd5.jpg",
       "matchMethod": "product_id",
@@ -3264,16 +3274,6 @@
       "matchedProductId": "1444"
     },
     {
-      "seedId": "sw-tactile-002",
-      "family": "switch",
-      "name": "텍스트 Cherry MX2A 비윤활 갈축 키보드 스위치 - 450개 벌크",
-      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1443",
-      "imageUrl": "https://cdn.imweb.me/thumbnail/20251126/05a6606efa44d.jpg",
-      "matchMethod": "product_id",
-      "matchScore": 1.0,
-      "matchedProductId": "1443"
-    },
-    {
       "seedId": "sw-tactile-003",
       "family": "switch",
       "name": "Cherry MX2A 비윤활 갈축 키보드 스위치 - 450개 벌크",
@@ -3312,16 +3312,6 @@
       "matchMethod": "product_id",
       "matchScore": 1.0,
       "matchedProductId": "720"
-    },
-    {
-      "seedId": "sw-tactile-007",
-      "family": "switch",
-      "name": "TTC 피넛 라떼 저소음 택타일 스위치",
-      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1258",
-      "imageUrl": "https://cdn.imweb.me/thumbnail/20250926/70bfcffdf151a.png",
-      "matchMethod": "product_id",
-      "matchScore": 1.0,
-      "matchedProductId": "1258"
     }
   ],
   "manualReviewQueue": [
@@ -3418,12 +3408,12 @@
     }
   ],
   "summaryLines": [
-    "seed total: 331",
-    "with imageUrl: 318",
-    "without imageUrl: 13",
-    "fill rate: 96.07%",
+    "seed total: 330",
+    "with imageUrl: 316",
+    "without imageUrl: 14",
+    "fill rate: 95.76%",
     "target fill rate: 95.0%",
     "target met: True",
-    "by method: {'product_id': 318, 'missing': 13}"
+    "by method: {'product_id': 316, 'missing': 14}"
   ]
 }

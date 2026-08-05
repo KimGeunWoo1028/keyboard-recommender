@@ -2541,7 +2541,11 @@
       "productName": "스웨그키 세라키 세라믹 V2 키캡 Pink",
       "normalizedName": "스웨그키 세라키 세라믹 V2 키캡 Pink",
       "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1457",
-      "swagkeyProductId": "1457"
+      "swagkeyProductId": "1457",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20251204/b1b7c4a6bd250.jpg",
+      "imageSource": "og:image",
+      "imageWidth": 1200,
+      "imageHeight": 627
     },
     {
       "id": "inv-0196",

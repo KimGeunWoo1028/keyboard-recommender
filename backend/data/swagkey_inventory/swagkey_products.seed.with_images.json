@@ -14,7 +14,7 @@
       "https://www.swagkey.kr/132"
     ],
     "note": "상품명은 원문 유지, 설명/trait은 후속 매핑 단계에서 보강.",
-    "imageMergedAt": "2026-07-11T16:40:11.063883+00:00"
+    "imageMergedAt": "2026-08-05T10:01:58.992353+00:00"
   },
   "switches": {
     "linear": [
@@ -90,7 +90,7 @@
       },
       {
         "id": "sw-linear-003",
-        "name": "스웨그키 HMX Peach 반저소음 리니어 키보드 스위치",
+        "name": "스웨그키 HMX Peach 피치 반저소음 리니어 키보드 스위치",
         "category": "switch",
         "subtype": "linear",
         "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1765",
@@ -187,8 +187,12 @@
           "listed": true,
           "source": "inventory_v4"
         },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
+        "recommendationEligible": false,
+        "traitConfidence": "manual_curated",
+        "phase0Triage": {
+          "date": "2026-07-12",
+          "reason": "discontinued_not_in_inventory"
+        }
       },
       {
         "id": "sw-linear-007",
@@ -255,7 +259,8 @@
           "source": "inventory_v4"
         },
         "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
+        "traitConfidence": "manual_curated",
+        "inventoryId": "inv-0105"
       },
       {
         "id": "sw-linear-009",
@@ -533,7 +538,8 @@
           "source": "inventory_v4"
         },
         "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
+        "traitConfidence": "manual_curated",
+        "inventoryId": "inv-0093"
       },
       {
         "id": "sw-linear-018",
@@ -630,40 +636,6 @@
         "recommendationEligible": true,
         "traitConfidence": "manual_curated",
         "inventoryId": "inv-0109"
-      },
-      {
-        "id": "sw-tactile-002",
-        "name": "텍스트 Cherry MX2A 비윤활 갈축 키보드 스위치 - 450개 벌크",
-        "category": "switch",
-        "subtype": "tactile",
-        "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1443",
-        "metadata": {
-          "spring_weight_g": 53,
-          "bottom_out_force_g": 62,
-          "travel_distance_mm": 3.8,
-          "pretravel_mm": 2.0,
-          "long_pole": false,
-          "housing_material_top": "Nylon",
-          "housing_material_bottom": "Nylon",
-          "stem_material": "POM",
-          "factory_lubed": false,
-          "spring_type": "single_stage",
-          "sound_signature_tags": [
-            "click",
-            "linear",
-            "magnetic",
-            "silent",
-            "tactile"
-          ]
-        },
-        "imageUrl": "https://cdn.imweb.me/thumbnail/20251126/05a6606efa44d.jpg",
-        "imageSource": "og:image",
-        "browse": {
-          "listed": true,
-          "source": "inventory_v4"
-        },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
       },
       {
         "id": "sw-tactile-003",
@@ -804,40 +776,6 @@
         "recommendationEligible": true,
         "traitConfidence": "manual_curated",
         "inventoryId": "inv-0099"
-      },
-      {
-        "id": "sw-tactile-007",
-        "name": "TTC 피넛 라떼 저소음 택타일 스위치",
-        "category": "switch",
-        "subtype": "tactile",
-        "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1258",
-        "metadata": {
-          "spring_weight_g": 46,
-          "bottom_out_force_g": 60,
-          "travel_distance_mm": 3.8,
-          "pretravel_mm": 2.0,
-          "long_pole": false,
-          "housing_material_top": "Nylon",
-          "housing_material_bottom": "Nylon",
-          "stem_material": "POM",
-          "factory_lubed": true,
-          "spring_type": "single_stage",
-          "sound_signature_tags": [
-            "click",
-            "linear",
-            "magnetic",
-            "silent",
-            "tactile"
-          ]
-        },
-        "imageUrl": "https://cdn.imweb.me/thumbnail/20250926/70bfcffdf151a.png",
-        "imageSource": "og:image",
-        "browse": {
-          "listed": true,
-          "source": "inventory_v4"
-        },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
       }
     ],
     "click": [
@@ -907,8 +845,12 @@
           "listed": true,
           "source": "inventory_v4"
         },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
+        "recommendationEligible": false,
+        "traitConfidence": "manual_curated",
+        "phase0Triage": {
+          "date": "2026-07-12",
+          "reason": "duplicate_of_sw-linear-008"
+        }
       },
       {
         "id": "sw-silent-003",
@@ -974,8 +916,12 @@
           "listed": true,
           "source": "inventory_v4"
         },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
+        "recommendationEligible": false,
+        "traitConfidence": "manual_curated",
+        "phase0Triage": {
+          "date": "2026-07-12",
+          "reason": "discontinued_not_in_inventory"
+        }
       }
     ],
     "magnetic": [
@@ -1696,8 +1642,12 @@
           "listed": true,
           "source": "inventory_v4"
         },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
+        "recommendationEligible": false,
+        "traitConfidence": "manual_curated",
+        "phase0Triage": {
+          "date": "2026-07-12",
+          "reason": "discontinued_not_in_inventory"
+        }
       },
       {
         "id": "sw-other-004",
@@ -1763,8 +1713,12 @@
           "listed": true,
           "source": "inventory_v4"
         },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
+        "recommendationEligible": false,
+        "traitConfidence": "manual_curated",
+        "phase0Triage": {
+          "date": "2026-07-12",
+          "reason": "discontinued_not_in_inventory"
+        }
       },
       {
         "id": "sw-other-006",
@@ -1795,8 +1749,12 @@
           "listed": true,
           "source": "inventory_v4"
         },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
+        "recommendationEligible": false,
+        "traitConfidence": "manual_curated",
+        "phase0Triage": {
+          "date": "2026-07-12",
+          "reason": "discontinued_not_in_inventory"
+        }
       },
       {
         "id": "sw-other-007",
@@ -1862,8 +1820,12 @@
           "listed": true,
           "source": "inventory_v4"
         },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
+        "recommendationEligible": false,
+        "traitConfidence": "manual_curated",
+        "phase0Triage": {
+          "date": "2026-07-12",
+          "reason": "discontinued_not_in_inventory"
+        }
       },
       {
         "id": "sw-other-009",
@@ -1964,8 +1926,12 @@
           "listed": true,
           "source": "inventory_v4"
         },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
+        "recommendationEligible": false,
+        "traitConfidence": "manual_curated",
+        "phase0Triage": {
+          "date": "2026-07-12",
+          "reason": "discontinued_not_in_inventory"
+        }
       },
       {
         "id": "sw-other-013",
@@ -2101,8 +2067,12 @@
           "listed": true,
           "source": "inventory_v4"
         },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
+        "recommendationEligible": false,
+        "traitConfidence": "manual_curated",
+        "phase0Triage": {
+          "date": "2026-07-12",
+          "reason": "discontinued_not_in_inventory"
+        }
       },
       {
         "id": "sw-other-017",
@@ -2238,8 +2208,12 @@
           "listed": true,
           "source": "inventory_v4"
         },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
+        "recommendationEligible": false,
+        "traitConfidence": "manual_curated",
+        "phase0Triage": {
+          "date": "2026-07-12",
+          "reason": "discontinued_not_in_inventory"
+        }
       },
       {
         "id": "sw-other-021",
@@ -2270,8 +2244,12 @@
           "listed": true,
           "source": "inventory_v4"
         },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
+        "recommendationEligible": false,
+        "traitConfidence": "manual_curated",
+        "phase0Triage": {
+          "date": "2026-07-12",
+          "reason": "discontinued_not_in_inventory"
+        }
       }
     ]
   },
@@ -3137,8 +3115,12 @@
         "listed": true,
         "source": "inventory_v4"
       },
-      "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "recommendationEligible": false,
+      "traitConfidence": "manual_curated",
+      "phase0Triage": {
+        "date": "2026-07-12",
+        "reason": "discontinued_idx_recycled"
+      }
     },
     {
       "id": "foam-new-001-gdk-lab-dk1-tkl-여분-폼킷",
@@ -3521,9 +3503,7 @@
           "leaf_spring"
         ]
       },
-      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1504",
-      "imageUrl": "https://cdn.imweb.me/thumbnail/20251215/40289badf505e.jpg",
-      "imageSource": "og:image",
+      "sourceUrl": "",
       "browse": {
         "listed": true,
         "source": "inventory_v4"
@@ -3557,11 +3537,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20260624/f61cba751992c.png",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-new-002-mm-studio-class-100-전용-기판",
@@ -3589,11 +3573,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20260701/3c1264bccfb75.jpg",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-new-003-neo60-core-기판",
@@ -3621,11 +3609,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20251215/40289badf505e.jpg",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-new-004-neo65-cu-기판",
@@ -3653,11 +3645,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20251106/a78876b51f78c.png",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-new-005-neo65-core-plus-기판",
@@ -3685,11 +3681,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20251106/a78876b51f78c.png",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-new-006-neo75-기판",
@@ -3717,11 +3717,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20251015/d9e9ce80097f8.png",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-new-007-neo80-cu-기판",
@@ -3749,11 +3753,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20260624/f61cba751992c.png",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-new-008-neo98-기판",
@@ -3781,11 +3789,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20251015/d9e9ce80097f8.png",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-new-009-nono-studio-n65-기판",
@@ -3813,11 +3825,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20251106/a78876b51f78c.png",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-new-010-qk65-mk3-기판",
@@ -3845,11 +3861,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20251106/a78876b51f78c.png",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-new-011-shelby65-기판",
@@ -3877,11 +3897,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20251106/a78876b51f78c.png",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-new-012-스웨그키-eave65-전용-기판",
@@ -3909,11 +3933,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20251106/a78876b51f78c.png",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-new-013-스웨그키-sw-a87-레이아웃-8k-게이밍-기판",
@@ -3941,11 +3969,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20251015/d9e9ce80097f8.png",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-new-014-스웨그키-트랜지션-라이트-기판",
@@ -3973,11 +4005,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20251015/d9e9ce80097f8.png",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-new-015-트랜지션-라이트-전용-mx-8k-게이밍-기판",
@@ -4005,11 +4041,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20251015/d9e9ce80097f8.png",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-idx-1416",
@@ -10468,6 +10508,31 @@
       "recommendationEligible": false,
       "traitConfidence": "name_inferred",
       "imageUrl": "https://cdn.imweb.me/thumbnail/20260515/ab6af68de0e9f.png",
+      "imageSource": "og:image"
+    },
+    {
+      "id": "kc-108",
+      "name": "스웨그키 세라키 세라믹 V2 키캡 Pink",
+      "brand": "Cerakey",
+      "subtype": "base",
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1457",
+      "inventoryId": "inv-0195",
+      "metadata": {
+        "profile": "oem",
+        "material": "other",
+        "manufacturing": "other",
+        "kit_scope": "base",
+        "compatible_layout_sizes": [],
+        "colorway_mood": "neutral"
+      },
+      "inRecommendationPool": false,
+      "browse": {
+        "listed": true,
+        "source": "inventory_v4"
+      },
+      "recommendationEligible": false,
+      "traitConfidence": "name_inferred",
+      "imageUrl": "https://cdn.imweb.me/thumbnail/20251204/b1b7c4a6bd250.jpg",
       "imageSource": "og:image"
     }
   ]
