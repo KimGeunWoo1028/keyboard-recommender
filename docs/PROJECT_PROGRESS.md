@@ -1,42 +1,42 @@
 # Project Progress
 
 > **Updated:** 2026-08-05 (KST) · **branch:** `main`  
-> **Sources:** git (`d8bd49c`) · qa-suite 01–09 closeout · operator decision on deferred Visual/device gates  
+> **Sources:** git (`2ddbd5f`) · coverage DoD fix + Cerakey Pink · unused brand asset cleanup  
 > **관련:** `docs/small-group-test-checklist.md` · `docs/qa-suite/` · `docs/LIGHT_MODE_COLOR_INVENTORY.md`
 
 ## Now
 
-`docs/qa-suite` Master Suite(01–09) 심화 QA·필수 픽스·git-sync 완료 (`d8bd49c`).
-소그룹/공개 URL 피드백은 운영자 기준으로 완료. Visual CI 풀 baseline(V-F005)과
-상시 실기기 BLOCKED는 **미완이 아니라 정책 결정으로 종결**함.
+QA Master Suite·소그룹 피드백 완료. Catalog coverage WARN도 DoD(unique idx) 수정 +
+Cerakey Pink(이미지 포함) 반영으로 해소 (`c520bc6` · `2ddbd5f`).
+미사용 히어로 원본 PNG 2장 삭제. 출시 전 남은 건 수동 릴리스 게이트.
 
 ## Done (최근)
 
+- 미사용 brand 에셋 삭제: `hero-keyboard.png`, `switches-hero.png` (cutout/glb만 유지)
+- Catalog coverage DoD unique-idx + Pink seed/og:image (`c520bc6` · `2ddbd5f`)
 - Playwright QA harden + Gate 2 27/27 · mobile-chromium smoke (`d8bd49c`)
-- Design System contracts · Visual fixture/tokens · UX/Desktop/Mobile·A11y·Perf·Core
+- Design System · Visual · UX/Desktop/Mobile·A11y·Perf·Core
 - 소그룹/공개 URL 피드백 반영 완료 (운영자)
-- **V-F005 Accepted** — fixture/`visual-375` 동일-OS 게이트 유지; 풀 CI PNG 매트릭스 보류
-- **실기기·4G·VoiceOver** → 상시 BLOCKED 해제, **릴리스 게이트(수동)** 로 이전
+- **V-F005 Accepted** · 실기기/4G/VoiceOver → **릴리스 게이트(수동)**
 
 ## Next (1–3)
 
-1. Coverage WARN 후속 — switch/keycap 목표 ≤2% (catalog 1:1 운영 유지)
-2. 메이저 UI/출시 직전 — 아래 **릴리스 게이트(수동)** 1회 실행
-3. 미사용 백업 에셋(`hero-*-prev.png` 등) 정리 여부 결정
+1. 메이저 UI/출시 직전 — 아래 **릴리스 게이트(수동)** 1회 실행
+2. (선택) 3D 히어로 모바일 성능·로딩 체감 추가 튜닝 여부 결정
 
 ## Roadmaps
 
 | Track | Status | Note |
 |-------|--------|------|
 | Manus redesign | ✅ on main | 브랜드/다크/홈 후속도 main |
-| 홈 비주얼 | ✅ 3D 안정화 | WebGL 폴백 · 컷아웃 폴백 |
+| 홈 비주얼 | ✅ 3D 안정화 | WebGL 폴백 · 컷아웃 폴백 · 미사용 PNG 정리 |
 | 다크모드 팔레트 | ✅ | QA 스위트 대비 보강 포함 |
 | ui-ux launch Phase 1–11 | ✅ | 소그룹 피드백 반영 |
 | qa-suite Master (01–09) | ✅ | 심화 UI/UX · Finding 픽스 · sync |
 | launch-readiness | Pass 1–3 ✅ | 출시 전 수동 게이트만 남김 |
 | remaining-work A–F | ✅ / B 표본 대기 | Home revisit 🔒 |
 | deployment | 공개 URL=피드백 환경 | staging 분리 보류 |
-| catalog 1:1 | Phase 8 ✅ · 운영 유지 | coverage WARN 잔여 |
+| catalog 1:1 | Phase 8 ✅ · 운영 유지 | coverage DoD ✅ (unique idx) |
 | account-deletion | ✅ | |
 | Home revisit | 🔒 | Observe 표본 전 금지 |
 
@@ -62,5 +62,4 @@ baseline **단일 축**을 CI에 추가. full OS×테마 PNG 매트릭스는 비
 
 ## Open questions
 
-- 미사용 백업 에셋(`hero-*-prev.png`, `-dark`, `-white`) 정리 여부
 - 3D 히어로 모바일 성능·로딩 체감 추가 튜닝 필요 여부
