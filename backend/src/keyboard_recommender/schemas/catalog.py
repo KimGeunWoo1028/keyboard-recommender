@@ -15,6 +15,7 @@ class CatalogPartSummary(BaseModel):
     description: str = ""
     family: str
     subtype: str = ""
+    subtypes: list[str] = Field(default_factory=list)
     source_url: str = Field(default="", alias="sourceUrl")
     image_url: str = Field(default="", alias="imageUrl")
     popularity_weight: float = Field(default=1.0, alias="popularityWeight")

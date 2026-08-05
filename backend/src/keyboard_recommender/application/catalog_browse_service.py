@@ -119,6 +119,31 @@ def _part_subtype(part: KeyboardPart, seed_row: dict[str, Any]) -> str:
     return str(part.family)
 
 
+def _part_subtypes(part: KeyboardPart, seed_row: dict[str, Any]) -> list[str]:
+    """Browse subtype tags; supports multi-tab membership (e.g. Melodic tactile+click)."""
+    primary = _part_subtype(part, seed_row).strip().lower()
+    raw = seed_row.get("subtypes")
+    out: list[str] = []
+    if isinstance(raw, list):
+        for item in raw:
+            value = str(item or "").strip().lower()
+            if value and value != "other" and value not in out:
+                out.append(value)
+    if primary and primary != "other" and primary not in out:
+        out.insert(0, primary)
+    return out
+
+
+def _summary_matches_subtype(summary: CatalogPartSummary, subtype_filter: str) -> bool:
+    needle = subtype_filter.strip().lower()
+    if not needle:
+        return True
+    tags = [str(t).strip().lower() for t in (summary.subtypes or []) if str(t).strip()]
+    if tags:
+        return needle in tags
+    return str(summary.subtype or "").strip().lower() == needle
+
+
 def part_to_summary(part: KeyboardPart, *, seed_row: dict[str, Any] | None = None) -> CatalogPartSummary:
     row = seed_row or {}
     family = str(part.family)
@@ -132,6 +157,7 @@ def part_to_summary(part: KeyboardPart, *, seed_row: dict[str, Any] | None = Non
         description=part.description,
         family=part.family,  # type: ignore[arg-type]
         subtype=_part_subtype(part, row),
+        subtypes=_part_subtypes(part, row),
         source_url=_resolved_source_url(
             part.name,
             str(row.get("sourceUrl") or row.get("source_url") or "").strip(),
@@ -312,7 +338,7 @@ def list_catalog_parts(
         want_reference = subtype_filter == "reference"
         summaries = [s for s in summaries if bool(s.reference_layout) is want_reference]
     elif subtype_filter:
-        summaries = [s for s in summaries if str(s.subtype or "").strip().lower() == subtype_filter]
+        summaries = [s for s in summaries if _summary_matches_subtype(s, subtype_filter)]
     total = len(summaries)
     page = summaries[safe_offset : safe_offset + safe_limit]
     return CatalogListResponse(

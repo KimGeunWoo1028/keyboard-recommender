@@ -153,10 +153,14 @@ function CatalogPartCard({
   const caseCatalogHref =
     layoutSize.length > 0 ? catalogHref({ family: "case", layoutSize }) : null;
   const retailerUrl = normalizeSwagkeyProductUrl(item.sourceUrl);
-  const tagLabel =
-    item.subtype && item.family !== "layout" && item.subtype.trim().toLowerCase() !== "other"
-      ? subtypeLabel(item.family, item.subtype) ?? item.subtype
-      : null;
+  const tagLabels =
+    item.family === "layout"
+      ? []
+      : (item.subtypes?.length ? item.subtypes : item.subtype ? [item.subtype] : [])
+          .map((s) => s.trim())
+          .filter((s) => s && s.toLowerCase() !== "other")
+          .map((s) => subtypeLabel(item.family, s) ?? s)
+          .filter(Boolean);
 
   return (
     <Card
@@ -207,8 +211,14 @@ function CatalogPartCard({
               compact
               className="pt-0.5"
             />
-          ) : tagLabel ? (
-            <span className="ca-chip">{tagLabel}</span>
+          ) : tagLabels.length > 0 ? (
+            <div className="flex flex-wrap gap-1 pt-0.5">
+              {tagLabels.map((label) => (
+                <span key={label} className="ca-chip">
+                  {label}
+                </span>
+              ))}
+            </div>
           ) : isReferenceOnlyLayout ? (
             <span className="ca-chip">참조 배열</span>
           ) : null}

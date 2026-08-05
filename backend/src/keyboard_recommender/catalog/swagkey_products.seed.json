@@ -599,6 +599,192 @@
         "traitConfidence": "name_inferred",
         "imageUrl": "https://cdn.imweb.me/thumbnail/20230419/80403b59a24bb.png",
         "imageSource": "og:image"
+      },
+      {
+        "id": "sw-other-004",
+        "name": "QK01 키보드 스위치",
+        "category": "switch",
+        "subtype": "linear",
+        "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1676",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 58,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "linear"
+          ]
+        },
+        "imageUrl": "https://cdn.imweb.me/thumbnail/20260211/be9e9a8cfacbc.jpg",
+        "imageSource": "og:image",
+        "browse": {
+          "listed": true,
+          "source": "inventory_v4"
+        },
+        "recommendationEligible": true,
+        "traitConfidence": "manual_curated",
+        "inventoryId": "inv-0126"
+      },
+      {
+        "id": "sw-other-007",
+        "name": "체리 MX 흑축 삼신흑 키보드 스위치",
+        "category": "switch",
+        "subtype": "linear",
+        "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1659",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 58,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "linear"
+          ]
+        },
+        "imageUrl": "https://cdn.imweb.me/thumbnail/20260206/81d0c0c814aef.jpeg",
+        "imageSource": "og:image",
+        "browse": {
+          "listed": true,
+          "source": "inventory_v4"
+        },
+        "recommendationEligible": true,
+        "traitConfidence": "manual_curated",
+        "inventoryId": "inv-0135"
+      },
+      {
+        "id": "sw-other-009",
+        "name": "HMX Toast 키보드 스위치",
+        "category": "switch",
+        "subtype": "linear",
+        "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1569",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 58,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "POM",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "linear"
+          ]
+        },
+        "imageUrl": "https://cdn.imweb.me/thumbnail/20251224/00fb66705278a.jpg",
+        "imageSource": "og:image",
+        "browse": {
+          "listed": true,
+          "source": "inventory_v4"
+        },
+        "recommendationEligible": true,
+        "traitConfidence": "manual_curated",
+        "inventoryId": "inv-0097"
+      },
+      {
+        "id": "sw-other-013",
+        "name": "HMX T-Rex 키보드 스위치",
+        "category": "switch",
+        "subtype": "linear",
+        "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1494",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 58,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "POM",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "linear"
+          ]
+        },
+        "imageUrl": "https://cdn.imweb.me/thumbnail/20251211/4a91c6113c096.jpg",
+        "imageSource": "og:image",
+        "browse": {
+          "listed": true,
+          "source": "inventory_v4"
+        },
+        "recommendationEligible": true,
+        "traitConfidence": "manual_curated",
+        "inventoryId": "inv-0114"
+      },
+      {
+        "id": "sw-other-017",
+        "name": "Cherry MX2A 흑축 비윤활 스위치",
+        "category": "switch",
+        "subtype": "linear",
+        "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=680",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 58,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "linear"
+          ]
+        },
+        "imageUrl": "https://cdn.imweb.me/thumbnail/20250912/7e5ac5ae29ba3.png",
+        "imageSource": "og:image",
+        "browse": {
+          "listed": true,
+          "source": "inventory_v4"
+        },
+        "recommendationEligible": true,
+        "traitConfidence": "manual_curated",
+        "inventoryId": "inv-0088"
+      },
+      {
+        "id": "sw-other-019",
+        "name": "Cherry MX2A 스위치",
+        "category": "switch",
+        "subtype": "linear",
+        "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=851",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 58,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "linear"
+          ]
+        },
+        "imageUrl": "https://cdn.imweb.me/thumbnail/20250402/a8903535ac79d.jpg",
+        "imageSource": "og:image",
+        "browse": {
+          "listed": true,
+          "source": "inventory_v4"
+        },
+        "recommendationEligible": true,
+        "traitConfidence": "manual_curated",
+        "inventoryId": "inv-0111"
       }
     ],
     "tactile": [
@@ -776,6 +962,135 @@
         "recommendationEligible": true,
         "traitConfidence": "manual_curated",
         "inventoryId": "inv-0099"
+      },
+      {
+        "id": "sw-other-001",
+        "name": "스웨그키 Wingtree Golden Apple 키보드 스위치",
+        "category": "switch",
+        "subtype": "tactile",
+        "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1788",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 58,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "tactile"
+          ]
+        },
+        "imageUrl": "https://cdn.imweb.me/thumbnail/20260504/4ef7a6d42894a.jpg",
+        "imageSource": "og:image",
+        "browse": {
+          "listed": true,
+          "source": "inventory_v4"
+        },
+        "recommendationEligible": true,
+        "traitConfidence": "manual_curated",
+        "inventoryId": "inv-0091"
+      },
+      {
+        "id": "sw-other-014",
+        "name": "체리 MX2A Petal 키보드 스위치",
+        "category": "switch",
+        "subtype": "tactile",
+        "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1473",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 58,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "tactile"
+          ]
+        },
+        "imageUrl": "https://cdn.imweb.me/thumbnail/20251226/63b00663e21ea.jpg",
+        "imageSource": "og:image",
+        "browse": {
+          "listed": true,
+          "source": "inventory_v4"
+        },
+        "recommendationEligible": true,
+        "traitConfidence": "manual_curated",
+        "inventoryId": "inv-0121"
+      },
+      {
+        "id": "sw-other-015",
+        "name": "Peach Mellow 키보드 스위치",
+        "category": "switch",
+        "subtype": "tactile",
+        "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1437",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 58,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "tactile"
+          ]
+        },
+        "imageUrl": "https://cdn.imweb.me/thumbnail/20251119/af634b6e86357.jpg",
+        "imageSource": "og:image",
+        "browse": {
+          "listed": true,
+          "source": "inventory_v4"
+        },
+        "recommendationEligible": true,
+        "traitConfidence": "manual_curated",
+        "inventoryId": "inv-0129"
+      },
+      {
+        "id": "sw-other-018",
+        "name": "게이트론 Melodic 기계식 키보드 스위치.",
+        "category": "switch",
+        "subtype": "tactile",
+        "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=769",
+        "metadata": {
+          "spring_weight_g": 50,
+          "bottom_out_force_g": 58,
+          "travel_distance_mm": 3.8,
+          "pretravel_mm": 2.0,
+          "long_pole": false,
+          "housing_material_top": "Nylon",
+          "housing_material_bottom": "Nylon",
+          "stem_material": "POM",
+          "factory_lubed": false,
+          "spring_type": "single_stage",
+          "sound_signature_tags": [
+            "tactile",
+            "click"
+          ]
+        },
+        "imageUrl": "https://cdn.imweb.me/thumbnail/20250926/d5b7ccc85c567.png",
+        "imageSource": "og:image",
+        "browse": {
+          "listed": true,
+          "source": "inventory_v4"
+        },
+        "recommendationEligible": true,
+        "traitConfidence": "manual_curated",
+        "inventoryId": "inv-0123",
+        "subtypes": [
+          "tactile",
+          "click"
+        ]
       }
     ],
     "click": [
@@ -1579,41 +1894,6 @@
     ],
     "other": [
       {
-        "id": "sw-other-001",
-        "name": "스웨그키 Wingtree Golden Apple 키보드 스위치",
-        "category": "switch",
-        "subtype": "other",
-        "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1788",
-        "metadata": {
-          "spring_weight_g": 50,
-          "bottom_out_force_g": 58,
-          "travel_distance_mm": 3.8,
-          "pretravel_mm": 2.0,
-          "long_pole": false,
-          "housing_material_top": "Nylon",
-          "housing_material_bottom": "Nylon",
-          "stem_material": "POM",
-          "factory_lubed": false,
-          "spring_type": "single_stage",
-          "sound_signature_tags": [
-            "click",
-            "linear",
-            "magnetic",
-            "silent",
-            "tactile"
-          ]
-        },
-        "imageUrl": "https://cdn.imweb.me/thumbnail/20260504/4ef7a6d42894a.jpg",
-        "imageSource": "og:image",
-        "browse": {
-          "listed": true,
-          "source": "inventory_v4"
-        },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated",
-        "inventoryId": "inv-0091"
-      },
-      {
         "id": "sw-other-003",
         "name": "Tecsee x SW Flow Black 기계식 키보드 스위치",
         "category": "switch",
@@ -1648,41 +1928,6 @@
           "date": "2026-07-12",
           "reason": "discontinued_not_in_inventory"
         }
-      },
-      {
-        "id": "sw-other-004",
-        "name": "QK01 키보드 스위치",
-        "category": "switch",
-        "subtype": "other",
-        "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1676",
-        "metadata": {
-          "spring_weight_g": 50,
-          "bottom_out_force_g": 58,
-          "travel_distance_mm": 3.8,
-          "pretravel_mm": 2.0,
-          "long_pole": false,
-          "housing_material_top": "Nylon",
-          "housing_material_bottom": "Nylon",
-          "stem_material": "POM",
-          "factory_lubed": false,
-          "spring_type": "single_stage",
-          "sound_signature_tags": [
-            "click",
-            "linear",
-            "magnetic",
-            "silent",
-            "tactile"
-          ]
-        },
-        "imageUrl": "https://cdn.imweb.me/thumbnail/20260211/be9e9a8cfacbc.jpg",
-        "imageSource": "og:image",
-        "browse": {
-          "listed": true,
-          "source": "inventory_v4"
-        },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated",
-        "inventoryId": "inv-0126"
       },
       {
         "id": "sw-other-005",
@@ -1757,41 +2002,6 @@
         }
       },
       {
-        "id": "sw-other-007",
-        "name": "체리 MX 흑축 삼신흑 키보드 스위치",
-        "category": "switch",
-        "subtype": "other",
-        "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1659",
-        "metadata": {
-          "spring_weight_g": 50,
-          "bottom_out_force_g": 58,
-          "travel_distance_mm": 3.8,
-          "pretravel_mm": 2.0,
-          "long_pole": false,
-          "housing_material_top": "Nylon",
-          "housing_material_bottom": "Nylon",
-          "stem_material": "POM",
-          "factory_lubed": false,
-          "spring_type": "single_stage",
-          "sound_signature_tags": [
-            "click",
-            "linear",
-            "magnetic",
-            "silent",
-            "tactile"
-          ]
-        },
-        "imageUrl": "https://cdn.imweb.me/thumbnail/20260206/81d0c0c814aef.jpeg",
-        "imageSource": "og:image",
-        "browse": {
-          "listed": true,
-          "source": "inventory_v4"
-        },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated",
-        "inventoryId": "inv-0135"
-      },
-      {
         "id": "sw-other-008",
         "name": "체리 MX 3핀 키보드 스위치",
         "category": "switch",
@@ -1826,41 +2036,6 @@
           "date": "2026-07-12",
           "reason": "discontinued_not_in_inventory"
         }
-      },
-      {
-        "id": "sw-other-009",
-        "name": "HMX Toast 키보드 스위치",
-        "category": "switch",
-        "subtype": "other",
-        "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1569",
-        "metadata": {
-          "spring_weight_g": 50,
-          "bottom_out_force_g": 58,
-          "travel_distance_mm": 3.8,
-          "pretravel_mm": 2.0,
-          "long_pole": false,
-          "housing_material_top": "POM",
-          "housing_material_bottom": "Nylon",
-          "stem_material": "POM",
-          "factory_lubed": false,
-          "spring_type": "single_stage",
-          "sound_signature_tags": [
-            "click",
-            "linear",
-            "magnetic",
-            "silent",
-            "tactile"
-          ]
-        },
-        "imageUrl": "https://cdn.imweb.me/thumbnail/20251224/00fb66705278a.jpg",
-        "imageSource": "og:image",
-        "browse": {
-          "listed": true,
-          "source": "inventory_v4"
-        },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated",
-        "inventoryId": "inv-0097"
       },
       {
         "id": "sw-other-010",
@@ -1934,111 +2109,6 @@
         }
       },
       {
-        "id": "sw-other-013",
-        "name": "HMX T-Rex 키보드 스위치",
-        "category": "switch",
-        "subtype": "other",
-        "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1494",
-        "metadata": {
-          "spring_weight_g": 50,
-          "bottom_out_force_g": 58,
-          "travel_distance_mm": 3.8,
-          "pretravel_mm": 2.0,
-          "long_pole": false,
-          "housing_material_top": "POM",
-          "housing_material_bottom": "Nylon",
-          "stem_material": "POM",
-          "factory_lubed": false,
-          "spring_type": "single_stage",
-          "sound_signature_tags": [
-            "click",
-            "linear",
-            "magnetic",
-            "silent",
-            "tactile"
-          ]
-        },
-        "imageUrl": "https://cdn.imweb.me/thumbnail/20251211/4a91c6113c096.jpg",
-        "imageSource": "og:image",
-        "browse": {
-          "listed": true,
-          "source": "inventory_v4"
-        },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated",
-        "inventoryId": "inv-0114"
-      },
-      {
-        "id": "sw-other-014",
-        "name": "체리 MX2A Petal 키보드 스위치",
-        "category": "switch",
-        "subtype": "other",
-        "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1473",
-        "metadata": {
-          "spring_weight_g": 50,
-          "bottom_out_force_g": 58,
-          "travel_distance_mm": 3.8,
-          "pretravel_mm": 2.0,
-          "long_pole": false,
-          "housing_material_top": "Nylon",
-          "housing_material_bottom": "Nylon",
-          "stem_material": "POM",
-          "factory_lubed": false,
-          "spring_type": "single_stage",
-          "sound_signature_tags": [
-            "click",
-            "linear",
-            "magnetic",
-            "silent",
-            "tactile"
-          ]
-        },
-        "imageUrl": "https://cdn.imweb.me/thumbnail/20251226/63b00663e21ea.jpg",
-        "imageSource": "og:image",
-        "browse": {
-          "listed": true,
-          "source": "inventory_v4"
-        },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated",
-        "inventoryId": "inv-0121"
-      },
-      {
-        "id": "sw-other-015",
-        "name": "Peach Mellow 키보드 스위치",
-        "category": "switch",
-        "subtype": "other",
-        "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1437",
-        "metadata": {
-          "spring_weight_g": 50,
-          "bottom_out_force_g": 58,
-          "travel_distance_mm": 3.8,
-          "pretravel_mm": 2.0,
-          "long_pole": false,
-          "housing_material_top": "Nylon",
-          "housing_material_bottom": "Nylon",
-          "stem_material": "POM",
-          "factory_lubed": false,
-          "spring_type": "single_stage",
-          "sound_signature_tags": [
-            "click",
-            "linear",
-            "magnetic",
-            "silent",
-            "tactile"
-          ]
-        },
-        "imageUrl": "https://cdn.imweb.me/thumbnail/20251119/af634b6e86357.jpg",
-        "imageSource": "og:image",
-        "browse": {
-          "listed": true,
-          "source": "inventory_v4"
-        },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated",
-        "inventoryId": "inv-0129"
-      },
-      {
         "id": "sw-other-016",
         "name": "HMX 망고 푸딩 키보드 스위치",
         "category": "switch",
@@ -2073,111 +2143,6 @@
           "date": "2026-07-12",
           "reason": "discontinued_not_in_inventory"
         }
-      },
-      {
-        "id": "sw-other-017",
-        "name": "Cherry MX2A 흑축 비윤활 스위치",
-        "category": "switch",
-        "subtype": "other",
-        "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=680",
-        "metadata": {
-          "spring_weight_g": 50,
-          "bottom_out_force_g": 58,
-          "travel_distance_mm": 3.8,
-          "pretravel_mm": 2.0,
-          "long_pole": false,
-          "housing_material_top": "Nylon",
-          "housing_material_bottom": "Nylon",
-          "stem_material": "POM",
-          "factory_lubed": false,
-          "spring_type": "single_stage",
-          "sound_signature_tags": [
-            "click",
-            "linear",
-            "magnetic",
-            "silent",
-            "tactile"
-          ]
-        },
-        "imageUrl": "https://cdn.imweb.me/thumbnail/20250912/7e5ac5ae29ba3.png",
-        "imageSource": "og:image",
-        "browse": {
-          "listed": true,
-          "source": "inventory_v4"
-        },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated",
-        "inventoryId": "inv-0088"
-      },
-      {
-        "id": "sw-other-018",
-        "name": "게이트론 Melodic 기계식 키보드 스위치.",
-        "category": "switch",
-        "subtype": "other",
-        "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=769",
-        "metadata": {
-          "spring_weight_g": 50,
-          "bottom_out_force_g": 58,
-          "travel_distance_mm": 3.8,
-          "pretravel_mm": 2.0,
-          "long_pole": false,
-          "housing_material_top": "Nylon",
-          "housing_material_bottom": "Nylon",
-          "stem_material": "POM",
-          "factory_lubed": false,
-          "spring_type": "single_stage",
-          "sound_signature_tags": [
-            "click",
-            "linear",
-            "magnetic",
-            "silent",
-            "tactile"
-          ]
-        },
-        "imageUrl": "https://cdn.imweb.me/thumbnail/20250926/d5b7ccc85c567.png",
-        "imageSource": "og:image",
-        "browse": {
-          "listed": true,
-          "source": "inventory_v4"
-        },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated",
-        "inventoryId": "inv-0123"
-      },
-      {
-        "id": "sw-other-019",
-        "name": "Cherry MX2A 스위치",
-        "category": "switch",
-        "subtype": "other",
-        "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=851",
-        "metadata": {
-          "spring_weight_g": 50,
-          "bottom_out_force_g": 58,
-          "travel_distance_mm": 3.8,
-          "pretravel_mm": 2.0,
-          "long_pole": false,
-          "housing_material_top": "Nylon",
-          "housing_material_bottom": "Nylon",
-          "stem_material": "POM",
-          "factory_lubed": false,
-          "spring_type": "single_stage",
-          "sound_signature_tags": [
-            "click",
-            "linear",
-            "magnetic",
-            "silent",
-            "tactile"
-          ]
-        },
-        "imageUrl": "https://cdn.imweb.me/thumbnail/20250402/a8903535ac79d.jpg",
-        "imageSource": "og:image",
-        "browse": {
-          "listed": true,
-          "source": "inventory_v4"
-        },
-        "recommendationEligible": true,
-        "traitConfidence": "manual_curated",
-        "inventoryId": "inv-0111"
       },
       {
         "id": "sw-other-020",

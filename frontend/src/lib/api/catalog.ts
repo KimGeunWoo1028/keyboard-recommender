@@ -16,6 +16,8 @@ export type CatalogPartSummary = {
   description: string;
   family: CatalogFamily;
   subtype: string;
+  /** When present (e.g. Melodic), card chips + subtype filters use all tags. */
+  subtypes?: string[];
   sourceUrl: string;
   imageUrl: string;
   popularityWeight: number;
@@ -143,6 +145,9 @@ function parseSummary(raw: unknown): CatalogPartSummary | null {
     description: typeof raw.description === "string" ? raw.description : "",
     family,
     subtype: typeof raw.subtype === "string" ? raw.subtype : "",
+    subtypes: Array.isArray(raw.subtypes)
+      ? raw.subtypes.map(String).map((s) => s.trim()).filter(Boolean)
+      : undefined,
     sourceUrl: typeof raw.sourceUrl === "string" ? raw.sourceUrl : "",
     imageUrl: typeof raw.imageUrl === "string" ? raw.imageUrl : "",
     popularityWeight: typeof raw.popularityWeight === "number" ? raw.popularityWeight : 1,
