@@ -34,6 +34,12 @@ function parseLayoutBrowseSubtype(raw: string | undefined): "pcb" | "reference" 
   return raw === "reference" ? "reference" : "pcb";
 }
 
+/** UI chip → API: empty/full_base = server full/base default; missing keycap subtype defaults to all. */
+function keycapApiSubtype(subtype: string): string | undefined {
+  if (!subtype || subtype === "full_base") return undefined;
+  return subtype;
+}
+
 async function loadInitialCatalogList(sp: {
   family?: string;
   subtype?: string;
@@ -45,7 +51,8 @@ async function loadInitialCatalogList(sp: {
 }): Promise<{ list: CatalogListResponse | null; queryKey: string }> {
   const legacyKeycap = sp.mode === "full" && sp.category === "keycap";
   const family: CatalogFamily = legacyKeycap ? "keycap" : parseFamily(sp.family);
-  const subtype = sp.subtype ?? "";
+  const subtypeRaw = sp.subtype ?? "";
+  const subtype = family === "keycap" && !subtypeRaw ? "all" : subtypeRaw;
   const layoutBrowseSubtype = parseLayoutBrowseSubtype(subtype);
   const layoutSize = sp.layoutSize ?? "";
   const searchQuery = sp.q ?? "";
@@ -68,8 +75,8 @@ async function loadInitialCatalogList(sp: {
             ? subtype
             : family === "case" && subtype
               ? subtype
-              : family === "keycap" && subtype
-                ? subtype
+              : family === "keycap"
+                ? keycapApiSubtype(subtype)
                 : undefined,
       layoutSize: family === "case" && layoutSize.trim() ? layoutSize.trim() : undefined,
       q: searchQuery || undefined,

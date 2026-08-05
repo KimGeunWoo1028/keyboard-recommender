@@ -82,11 +82,11 @@ const SWITCH_SUBTYPES = [
 ];
 
 const KEYCAP_SUBTYPES = [
-  { id: "", label: "풀/베이스" },
+  { id: "all", label: "전체" },
+  { id: "full_base", label: "풀/베이스" },
   { id: "full", label: "풀세트" },
   { id: "base", label: "베이스" },
   { id: "addon", label: "애드온" },
-  { id: "all", label: "전체" },
 ];
 
 /** Layout browse tabs — no "전체"; default is PCB products. */
@@ -130,8 +130,15 @@ function subtypeLabel(family: CatalogFamily, subtype: string): string | null {
 
 function isSecondarySubtypeActive(family: CatalogFamily, subtype: string): boolean {
   if (family === "layout") return subtype === "reference";
-  if (family === "switch" || family === "case" || family === "keycap") return Boolean(subtype);
+  if (family === "keycap") return Boolean(subtype) && subtype !== "all";
+  if (family === "switch" || family === "case") return Boolean(subtype);
   return false;
+}
+
+/** Map UI keycap chip id → API subtype query (omit = server full/base default). */
+function keycapApiSubtype(subtype: string): string | undefined {
+  if (!subtype || subtype === "full_base") return undefined;
+  return subtype;
 }
 
 function CatalogPartCard({
@@ -339,7 +346,7 @@ function SecondarySubtypeFilters({
       <div className="flex flex-wrap gap-2">
         {KEYCAP_SUBTYPES.map((row) => (
           <Button
-            key={row.id || "all-keycap"}
+            key={row.id}
             type="button"
             variant={subtype === row.id ? "secondary" : "ghost"}
             size="sm"
@@ -386,8 +393,9 @@ export function CatalogBrowseView({
   const legacyKeycap =
     searchParams.get("mode") === "full" && searchParams.get("category") === "keycap";
   const family: CatalogFamily = legacyKeycap ? "keycap" : parseFamily(searchParams.get("family"));
-  const subtype = searchParams.get("subtype") ?? "";
-  const layoutBrowseSubtype = parseLayoutBrowseSubtype(subtype);
+  const subtypeRaw = searchParams.get("subtype") ?? "";
+  const subtype = family === "keycap" && !subtypeRaw ? "all" : subtypeRaw;
+  const layoutBrowseSubtype = parseLayoutBrowseSubtype(subtypeRaw);
   const layoutSize = searchParams.get("layoutSize") ?? "";
   const searchQuery = searchParams.get("q") ?? "";
   const page = parsePage(searchParams.get("page"));
@@ -489,7 +497,7 @@ export function CatalogBrowseView({
           label,
           clear: () =>
             replaceCatalogParams({
-              subtype: family === "layout" ? "pcb" : "",
+              subtype: family === "layout" ? "pcb" : family === "keycap" ? "all" : "",
               page: 1,
             }),
         });
@@ -517,6 +525,12 @@ export function CatalogBrowseView({
     if (family !== "layout") return;
     if (subtype === "pcb" || subtype === "reference") return;
     replaceCatalogParams({ subtype: "pcb", page });
+  }, [family, subtype, page, replaceCatalogParams]);
+
+  useEffect(() => {
+    if (family !== "keycap") return;
+    if (subtype) return;
+    replaceCatalogParams({ subtype: "all", page });
   }, [family, subtype, page, replaceCatalogParams]);
 
   const scrollCatalogToTop = useCallback(() => {
@@ -557,8 +571,8 @@ export function CatalogBrowseView({
               ? subtype
               : family === "case" && subtype
                 ? subtype
-                : family === "keycap" && subtype
-                  ? subtype
+                : family === "keycap"
+                  ? keycapApiSubtype(subtype)
                   : undefined,
         layoutSize: family === "case" && layoutSize.trim() ? layoutSize.trim() : undefined,
         q: searchQuery || undefined,
@@ -621,7 +635,7 @@ export function CatalogBrowseView({
 
   const clearAllSecondaryFilters = () => {
     replaceCatalogParams({
-      subtype: family === "layout" ? "pcb" : "",
+      subtype: family === "layout" ? "pcb" : family === "keycap" ? "all" : "",
       layoutSize: null,
       q: null,
       page: 1,
@@ -705,7 +719,7 @@ export function CatalogBrowseView({
                 onClick={() => {
                   replaceCatalogParams({
                     family: tab.id,
-                    subtype: tab.id === "layout" ? "pcb" : "",
+                    subtype: tab.id === "layout" ? "pcb" : tab.id === "keycap" ? "all" : "",
                     layoutSize: tab.id === "case" ? layoutSize : null,
                     ...(tab.id !== family ? { q: null } : {}),
                     page: 1,
