@@ -34,7 +34,7 @@
     },
     "keycap": {
       "recommend": 18,
-      "browse": 62,
+      "browse": 63,
       "ceiling": 22,
       "gatePassed": true
     }
@@ -46,7 +46,7 @@
     "  foam: recommend=8 browse=10 ceiling=12 ok=True",
     "  layout: recommend=7 browse=30 ceiling=7 ok=True",
     "  case: recommend=49 browse=126 ceiling=55 ok=True",
-    "  keycap: recommend=18 browse=62 ceiling=22 ok=True",
+    "  keycap: recommend=18 browse=63 ceiling=22 ok=True",
     "gate passed: True"
   ]
 }

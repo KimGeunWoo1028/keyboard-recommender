@@ -1,15 +1,19 @@
-Phase 1 coverage exceptions (2026-07-12)
+Phase 1 / coverage exceptions (updated 2026-08-05)
 =====================================
 
-Resolved in Phase 1:
-  - layout: gap -15 -> 0 (unlisted 15 mislinked layout-new-* rows; browse.listed policy enforced)
+Resolved:
+  - layout: gap -15 -> 0 (unlisted 15 mislinked layout-new-* rows; browse.listed policy)
+  - coverage DoD metric (schema 1.1): unique Swagkey idx − 404ex vs browse
+    (name-only CSV stubs + duplicate idx rows are informational, not DoD baseline)
+  - switch gap WARN: Neon (idx 384) + Kunzite (idx 1589) URL-enriched; both live 404 /
+    BROWSE_EXCLUDED → expected_browse matches browse (gap 0%)
 
-Remaining gaps (require live recrawl / idx enrichment):
-  - switch: +2 (3.6%) — inv-0093, inv-0105 missing swagkeyProductId/sourceUrl idx
-  - keycap: +5 (7.5%) — inv-0189, inv-0193, inv-0195 missing idx; +2 inventory rows without browse idx match
+Remaining informational (not threshold violations):
+  - keycap no_idx=2 — inv-0189 KKB Instant, inv-0193 Cerakey Blue Crazed
+    (live search: not found / discontinued; cannot merge without idx)
+  - keycap duplicate_idx_extra=2 — inv-0140≈inv-0180 (idx 1590), inv-0144≈inv-0169 (idx 1744)
 
-merge rejected (documented, no --apply fix):
-  - inv-0093 (switch), inv-0105 (switch)
-  - inv-0189, inv-0193, inv-0195 (keycap)
+Applied (2026-08-05 operator --apply-to-seed):
+  - inv-0195 Cerakey ceramic V2 Pink → idx 1457 (browse keycap 62→63; gap 0%)
 
 promote_to_recommendation_pool: promotedCount=0 (Phase 0 discontinued rows correctly excluded)

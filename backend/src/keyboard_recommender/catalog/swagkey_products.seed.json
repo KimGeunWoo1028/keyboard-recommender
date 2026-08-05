@@ -538,7 +538,8 @@
           "source": "inventory_v4"
         },
         "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
+        "traitConfidence": "manual_curated",
+        "inventoryId": "inv-0093"
       },
       {
         "id": "sw-linear-018",
@@ -10508,6 +10509,29 @@
       "traitConfidence": "name_inferred",
       "imageUrl": "https://cdn.imweb.me/thumbnail/20260515/ab6af68de0e9f.png",
       "imageSource": "og:image"
+    },
+    {
+      "id": "kc-108",
+      "name": "스웨그키 세라키 세라믹 V2 키캡 Pink",
+      "brand": "Cerakey",
+      "subtype": "base",
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1457",
+      "inventoryId": "inv-0195",
+      "metadata": {
+        "profile": "oem",
+        "material": "other",
+        "manufacturing": "other",
+        "kit_scope": "base",
+        "compatible_layout_sizes": [],
+        "colorway_mood": "neutral"
+      },
+      "inRecommendationPool": false,
+      "browse": {
+        "listed": true,
+        "source": "inventory_v4"
+      },
+      "recommendationEligible": false,
+      "traitConfidence": "name_inferred"
     }
   ]
 }

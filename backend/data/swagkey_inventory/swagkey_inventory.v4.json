@@ -5,9 +5,10 @@
     "rawCsv": "swagkey_products.csv",
     "sourceCsvPath": "C:/Users/jeung/keyboard-recommender/backend/data/swagkey_inventory/swagkey_products.csv",
     "cleanedAt": "2026-07-11T15:41:55.458328+00:00",
-    "urlEnrichedAt": "2026-07-11T15:42:36.376338+00:00",
+    "urlEnrichedAt": "2026-08-05T09:47:26.012260+00:00",
     "crawlMergedAt": "2026-07-11T15:42:36.376338+00:00",
-    "imageMergedAt": "2026-07-10T09:26:29.893685+00:00"
+    "imageMergedAt": "2026-07-10T09:26:29.893685+00:00",
+    "urlEnrichmentNote": "coverage gap: Neon/Kunzite from seed 404 idxs; Cerakey Pink from live search idx=1457"
   },
   "stats": {
     "inputRowCount": 322,
@@ -1236,7 +1237,9 @@
       "category": "Switches",
       "brand": "SWK",
       "productName": "SWK 네온 리니어 스위치",
-      "normalizedName": "SWK 네온 리니어 스위치"
+      "normalizedName": "SWK 네온 리니어 스위치",
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=384",
+      "swagkeyProductId": "384"
     },
     {
       "id": "inv-0094",
@@ -1386,7 +1389,9 @@
       "category": "Switches",
       "brand": "WEKT",
       "productName": "WEKT Kunzite 쿤자이트 저소음 리니어 스위치",
-      "normalizedName": "WEKT Kunzite 쿤자이트 저소음 리니어 스위치"
+      "normalizedName": "WEKT Kunzite 쿤자이트 저소음 리니어 스위치",
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1589",
+      "swagkeyProductId": "1589"
     },
     {
       "id": "inv-0106",
@@ -2534,7 +2539,9 @@
       "category": "Keycaps",
       "brand": "Cerakey",
       "productName": "스웨그키 세라키 세라믹 V2 키캡 Pink",
-      "normalizedName": "스웨그키 세라키 세라믹 V2 키캡 Pink"
+      "normalizedName": "스웨그키 세라키 세라믹 V2 키캡 Pink",
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1457",
+      "swagkeyProductId": "1457"
     },
     {
       "id": "inv-0196",

@@ -538,7 +538,8 @@
           "source": "inventory_v4"
         },
         "recommendationEligible": true,
-        "traitConfidence": "manual_curated"
+        "traitConfidence": "manual_curated",
+        "inventoryId": "inv-0093"
       },
       {
         "id": "sw-linear-018",
@@ -3536,11 +3537,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20260624/f61cba751992c.png",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-new-002-mm-studio-class-100-전용-기판",
@@ -3568,11 +3573,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20260701/3c1264bccfb75.jpg",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-new-003-neo60-core-기판",
@@ -3600,11 +3609,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20251215/40289badf505e.jpg",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-new-004-neo65-cu-기판",
@@ -3632,11 +3645,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20251106/a78876b51f78c.png",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-new-005-neo65-core-plus-기판",
@@ -3664,11 +3681,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20251106/a78876b51f78c.png",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-new-006-neo75-기판",
@@ -3696,11 +3717,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20251015/d9e9ce80097f8.png",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-new-007-neo80-cu-기판",
@@ -3728,11 +3753,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20260624/f61cba751992c.png",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-new-008-neo98-기판",
@@ -3760,11 +3789,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20251015/d9e9ce80097f8.png",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-new-009-nono-studio-n65-기판",
@@ -3792,11 +3825,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20251106/a78876b51f78c.png",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-new-010-qk65-mk3-기판",
@@ -3824,11 +3861,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20251106/a78876b51f78c.png",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-new-011-shelby65-기판",
@@ -3856,11 +3897,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20251106/a78876b51f78c.png",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-new-012-스웨그키-eave65-전용-기판",
@@ -3888,11 +3933,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20251106/a78876b51f78c.png",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-new-013-스웨그키-sw-a87-레이아웃-8k-게이밍-기판",
@@ -3920,11 +3969,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20251015/d9e9ce80097f8.png",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-new-014-스웨그키-트랜지션-라이트-기판",
@@ -3952,11 +4005,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20251015/d9e9ce80097f8.png",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-new-015-트랜지션-라이트-전용-mx-8k-게이밍-기판",
@@ -3984,11 +4041,15 @@
       "imageUrl": "https://cdn.imweb.me/thumbnail/20251015/d9e9ce80097f8.png",
       "imageSource": "og:image",
       "browse": {
-        "listed": true,
+        "listed": false,
         "source": "inventory_v4"
       },
       "recommendationEligible": true,
-      "traitConfidence": "manual_curated"
+      "traitConfidence": "manual_curated",
+      "phase1Triage": {
+        "date": "2026-07-12",
+        "reason": "mislinked_idx_not_in_inventory_candidates"
+      }
     },
     {
       "id": "layout-idx-1416",
@@ -10448,6 +10509,29 @@
       "traitConfidence": "name_inferred",
       "imageUrl": "https://cdn.imweb.me/thumbnail/20260515/ab6af68de0e9f.png",
       "imageSource": "og:image"
+    },
+    {
+      "id": "kc-108",
+      "name": "스웨그키 세라키 세라믹 V2 키캡 Pink",
+      "brand": "Cerakey",
+      "subtype": "base",
+      "sourceUrl": "https://www.swagkey.kr/shop_view/?idx=1457",
+      "inventoryId": "inv-0195",
+      "metadata": {
+        "profile": "oem",
+        "material": "other",
+        "manufacturing": "other",
+        "kit_scope": "base",
+        "compatible_layout_sizes": [],
+        "colorway_mood": "neutral"
+      },
+      "inRecommendationPool": false,
+      "browse": {
+        "listed": true,
+        "source": "inventory_v4"
+      },
+      "recommendationEligible": false,
+      "traitConfidence": "name_inferred"
     }
   ]
 }

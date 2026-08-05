@@ -1,5 +1,5 @@
 Swagkey inventory browse seed merge report
-generated: 2026-07-12T05:43:25.759708+00:00
+generated: 2026-08-05T09:50:34.303130+00:00
 dry_run: False
 
 counts (before -> after):
@@ -8,13 +8,10 @@ counts (before -> after):
   foam: 10 -> 10 (+0)
   layout: 45 -> 45 (+0)
   case: 126 -> 126 (+0)
-  keycap: 62 -> 62 (+0)
+  keycap: 62 -> 63 (+2)
 
-skipped existing (by idx): 295
+skipped existing (by idx): 297
 
-rejected (5):
-  - [switch] inv-0093: missing swagkey idx
-  - [switch] inv-0105: missing swagkey idx
+rejected (2):
   - [keycap] inv-0189: missing swagkey idx
   - [keycap] inv-0193: missing swagkey idx
-  - [keycap] inv-0195: missing swagkey idx

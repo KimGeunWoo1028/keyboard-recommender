@@ -17,8 +17,9 @@ from keyboard_recommender.catalog.catalog_browse_policy import (
     is_browse_listed_seed_row,
 )
 from keyboard_recommender.catalog.layout_diagrams import is_layout_archetype_part_id
+from keyboard_recommender.catalog.swagkey_crawler_v2 import extract_product_id_from_url
 
-COVERAGE_SCHEMA_VERSION = "1.0.0"
+COVERAGE_SCHEMA_VERSION = "1.1.0"
 COVERAGE_GAP_THRESHOLD_PCT = 2.0
 
 AuditFamily = Literal["switch", "plate", "foam", "layout", "case", "keycap"]
@@ -50,10 +51,23 @@ _INVENTORY_VERSION_RE = re.compile(r"swagkey_inventory\.v(\d+)\.json$")
 
 
 @dataclass(frozen=True, slots=True)
+class FamilyIdxCoverageStats:
+    """Unique collectable SKUs among classified inventory rows (idx-aware)."""
+
+    unique_idx_count: int
+    no_idx_count: int
+    duplicate_idx_extra: int
+    excluded_404_unique: int
+
+
+@dataclass(frozen=True, slots=True)
 class FamilyCoverage:
     family: AuditFamily
     csv_category_count: int | None
     inventory_classified_count: int
+    inventory_unique_idx_count: int
+    inventory_no_idx_count: int
+    inventory_duplicate_idx_extra: int
     seed_count: int
     seed_archetype_count: int | None
     seed_real_count: int | None
@@ -155,22 +169,53 @@ def _inventory_category_counts(items: list[dict[str, Any]]) -> dict[str, int]:
     return counts
 
 
-def _count_excluded_404(
+def _inventory_item_idx(item: dict[str, Any]) -> str:
+    explicit = str(item.get("swagkeyProductId") or "").strip()
+    if explicit.isdigit():
+        return explicit
+    return extract_product_id_from_url(str(item.get("sourceUrl") or "")) or ""
+
+
+def _is_excluded_collectable(item: dict[str, Any], idx: str) -> bool:
+    source_url = str(item.get("sourceUrl") or "").strip()
+    if source_url and is_browse_excluded_source_url(source_url):
+        return True
+    return bool(idx) and idx in BROWSE_EXCLUDED_SWAGKEY_IDX
+
+
+def _classified_idx_stats(
     items: list[dict[str, Any]],
     *,
     family: AuditFamily,
     classified_ids_by_family: dict[AuditFamily, set[str]],
-) -> int:
+) -> FamilyIdxCoverageStats:
+    """Count unique Swagkey idxs in the classified pool (dedupe + skip name-only stubs)."""
     allowed_ids = classified_ids_by_family.get(family, set())
-    excluded = 0
-    for row in items:
-        inv_id = str(row.get("id") or "").strip()
-        if allowed_ids and inv_id not in allowed_ids:
+    by_id = {str(row.get("id") or "").strip(): row for row in items if str(row.get("id") or "").strip()}
+    first_by_idx: dict[str, dict[str, Any]] = {}
+    no_idx = 0
+    with_idx_rows = 0
+    for inv_id in sorted(allowed_ids):
+        row = by_id.get(inv_id)
+        if row is None:
+            no_idx += 1
             continue
-        source_url = str(row.get("sourceUrl") or "")
-        if is_browse_excluded_source_url(source_url):
-            excluded += 1
-    return excluded
+        idx = _inventory_item_idx(row)
+        if not idx:
+            no_idx += 1
+            continue
+        with_idx_rows += 1
+        first_by_idx.setdefault(idx, row)
+    excluded = sum(
+        1 for idx, row in first_by_idx.items() if _is_excluded_collectable(row, idx)
+    )
+    unique = len(first_by_idx)
+    return FamilyIdxCoverageStats(
+        unique_idx_count=unique,
+        no_idx_count=no_idx,
+        duplicate_idx_extra=max(0, with_idx_rows - unique),
+        excluded_404_unique=excluded,
+    )
 
 
 def _classified_id_sets(candidates_path: Path) -> dict[AuditFamily, set[str]]:
@@ -285,18 +330,6 @@ def audit_catalog_1to1_coverage(
             browse_count = layout_browse_real
         else:
             browse_count = list_catalog_parts(family, limit=500).total  # type: ignore[arg-type]
-        excluded_404 = _count_excluded_404(
-            inventory_items,
-            family=family,
-            classified_ids_by_family=classified_ids,
-        )
-        if family == "keycap":
-            excluded_404 = sum(
-                1
-                for row in inventory_items
-                if str(row.get("category") or "").strip() == "Keycaps"
-                and is_browse_excluded_source_url(str(row.get("sourceUrl") or ""))
-            )
 
         inventory_count = classified[family]
         seed_count = int(seed[family])
@@ -304,18 +337,36 @@ def audit_catalog_1to1_coverage(
             seed_count = int(seed["layout_real"])
             seed_archetype = int(seed["layout_archetype"])
             seed_real = int(seed["layout_real"])
+            # Layout 1:1 uses classified real-PCB count (archetypes excluded upstream).
+            unique_idx_count = inventory_count
+            no_idx_count = 0
+            duplicate_idx_extra = 0
+            excluded_404 = 0
         else:
             seed_archetype = None
             seed_real = None
+            idx_stats = _classified_idx_stats(
+                inventory_items,
+                family=family,
+                classified_ids_by_family=classified_ids,
+            )
+            unique_idx_count = idx_stats.unique_idx_count
+            no_idx_count = idx_stats.no_idx_count
+            duplicate_idx_extra = idx_stats.duplicate_idx_extra
+            excluded_404 = idx_stats.excluded_404_unique
 
-        expected_browse = max(0, inventory_count - excluded_404)
-        gap_browse = inventory_count - browse_count
+        # DoD gap: unique collectable idxs (minus known 404) vs browse list.
+        expected_browse = max(0, unique_idx_count - excluded_404)
+        gap_browse = expected_browse - browse_count
         gap_seed = inventory_count - seed_count
 
         row = FamilyCoverage(
             family=family,
             csv_category_count=_csv_family_count(csv_categories, family),
             inventory_classified_count=inventory_count,
+            inventory_unique_idx_count=unique_idx_count,
+            inventory_no_idx_count=no_idx_count,
+            inventory_duplicate_idx_extra=duplicate_idx_extra,
             seed_count=seed_count,
             seed_archetype_count=seed_archetype,
             seed_real_count=seed_real,
@@ -324,7 +375,7 @@ def audit_catalog_1to1_coverage(
             expected_browse=expected_browse,
             gap_inventory_vs_browse=gap_browse,
             gap_inventory_vs_seed=gap_seed,
-            gap_pct_inventory_vs_browse=_gap_pct(gap_browse, inventory_count),
+            gap_pct_inventory_vs_browse=_gap_pct(gap_browse, max(expected_browse, unique_idx_count, 1)),
         )
         report.families[family] = asdict(row)
 
@@ -348,18 +399,21 @@ def _build_summary_lines(
         f"seed: {report.seed_path}",
         f"browse excluded idx ({len(BROWSE_EXCLUDED_SWAGKEY_IDX)}): {', '.join(sorted(BROWSE_EXCLUDED_SWAGKEY_IDX, key=int))}",
         "",
-        "family | inv | seed | browse | 404ex | gap(inv-browse) | gap%",
+        "family | inv | uniqIdx | noIdx | seed | browse | 404ex | gap(exp-browse) | gap%",
     ]
     for family in AUDIT_FAMILIES:
         row = report.families[family]
         lines.append(
-            f"{family:7} | {row['inventory_classified_count']:3} | {row['seed_count']:4} | "
-            f"{row['browse_count']:6} | {row['browse_excluded_404']:5} | "
+            f"{family:7} | {row['inventory_classified_count']:3} | "
+            f"{row['inventory_unique_idx_count']:7} | {row['inventory_no_idx_count']:5} | "
+            f"{row['seed_count']:4} | {row['browse_count']:6} | {row['browse_excluded_404']:5} | "
             f"{row['gap_inventory_vs_browse']:+4} | {row['gap_pct_inventory_vs_browse']:5.1f}%",
         )
     lines.extend(
         [
             "",
+            "gap = expected_browse - browse; expected_browse = unique_idx - 404ex "
+            "(name-only / duplicate idx rows are not DoD baseline)",
             f"layout archetype seed: {report.layout_archetype.get('seed_archetype_count')} "
             f"(browse {report.layout_archetype.get('browse_archetype_count')})",
             f"layout real PCB - classified: {report.layout_archetype.get('classified_real_pcb_count')} "
@@ -371,6 +425,15 @@ def _build_summary_lines(
             f"Keycaps={inv_categories.get('Keycaps', 0)}",
         ],
     )
+    unresolved = [
+        f"{family} no_idx={report.families[family]['inventory_no_idx_count']} "
+        f"dup_extra={report.families[family]['inventory_duplicate_idx_extra']}"
+        for family in AUDIT_FAMILIES
+        if report.families[family].get("inventory_no_idx_count")
+        or report.families[family].get("inventory_duplicate_idx_extra")
+    ]
+    if unresolved:
+        lines.append("unresolved inventory rows (informational): " + "; ".join(unresolved))
     keycap_gap = report.families["keycap"]["gap_inventory_vs_seed"]
     if keycap_gap:
         lines.append(f"keycap seed gap (documented baseline target): {keycap_gap} rows to merge in Phase 3")
@@ -383,15 +446,23 @@ def _family_gap_pct_for_threshold(
     *,
     layout_archetype: dict[str, Any],
 ) -> tuple[int, int, float]:
-    """Return (inventory baseline, gap, abs gap %) for threshold checks."""
-    inventory_count = int(row["inventory_classified_count"])
-    browse_count = int(row["browse_count"])
+    """Return (inventory baseline, gap, abs gap %) for threshold checks.
+
+    Baseline is unique collectable idxs (expected_browse includes 404 subtraction already
+    via gap = expected_browse - browse).
+    """
     if family == "layout":
-        inventory_count = int(layout_archetype.get("classified_real_pcb_count") or inventory_count)
-        browse_count = int(layout_archetype.get("browse_real_pcb_count") or browse_count)
-    gap = inventory_count - browse_count
-    baseline = max(inventory_count, 1)
-    return inventory_count, gap, abs(gap) / baseline * 100.0
+        inventory_count = int(layout_archetype.get("classified_real_pcb_count") or row["inventory_classified_count"])
+        browse_count = int(layout_archetype.get("browse_real_pcb_count") or row["browse_count"])
+        gap = inventory_count - browse_count
+        baseline = max(inventory_count, 1)
+        return inventory_count, gap, abs(gap) / baseline * 100.0
+
+    baseline = int(row.get("inventory_unique_idx_count") or row["inventory_classified_count"])
+    expected_browse = int(row.get("expected_browse") or baseline)
+    browse_count = int(row["browse_count"])
+    gap = expected_browse - browse_count
+    return baseline, gap, abs(gap) / max(baseline, 1) * 100.0
 
 
 def check_coverage_gap_thresholds(
@@ -434,7 +505,7 @@ def format_coverage_gap_violations(result: CoverageGapCheckResult) -> list[str]:
     for row in result.violations:
         lines.append(
             f"  - {row.family}: gap={row.gap:+d} ({row.gap_pct:.1f}%) "
-            f"inventory={row.inventory_count} browse={row.browse_count}",
+            f"unique_idx={row.inventory_count} browse={row.browse_count}",
         )
     return lines
 

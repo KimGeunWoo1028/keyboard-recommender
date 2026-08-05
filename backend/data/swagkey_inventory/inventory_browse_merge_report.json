@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-07-12T05:43:25.759708+00:00",
+  "generatedAt": "2026-08-05T09:50:34.303130+00:00",
   "dryRun": false,
   "beforeCounts": {
     "switch": 66,
@@ -16,7 +16,7 @@
     "foam": 10,
     "layout": 45,
     "case": 126,
-    "keycap": 62
+    "keycap": 63
   },
   "added": {
     "plate": 0,
@@ -24,14 +24,14 @@
     "layout": 0,
     "switch": 0,
     "case_kit": 0,
-    "keycap": 0
+    "keycap": 1
   },
   "updatedExisting": {
     "legacy_annotated": 0,
     "plate": 20,
     "foam": 9,
     "layout": 23,
-    "switch": 53,
+    "switch": 55,
     "case_kit": 126,
     "keycap": 64
   },
@@ -98,6 +98,7 @@
     "sw-linear-012",
     "sw-other-001",
     "sw-new-010-스웨그키-keygeek-b1-리니어-키보드-스위치",
+    "sw-linear-017",
     "sw-other-010",
     "sw-new-004-haimu-스노우-저소음-자석축-키보드-스위치",
     "sw-magnetic-002",
@@ -109,6 +110,7 @@
     "sw-new-015-스웨그키-wingtree-anon-리니어-키보드-스위치",
     "sw-linear-015",
     "sw-click-001",
+    "sw-linear-008",
     "sw-new-016-체리-mx2a-rgb-silver-은축-리니어-기계식-키보드-스위치",
     "sw-new-002-cherry-mx2a-northern-light-리니어-스위치",
     "sw-new-005-owlab-london-fog-v2-런던포그-키보드-스위치",
@@ -335,16 +337,6 @@
   "skippedArchetype": 0,
   "rejected": [
     {
-      "family": "switch",
-      "inventoryId": "inv-0093",
-      "reason": "missing swagkey idx"
-    },
-    {
-      "family": "switch",
-      "inventoryId": "inv-0105",
-      "reason": "missing swagkey idx"
-    },
-    {
       "family": "keycap",
       "inventoryId": "inv-0189",
       "reason": "missing swagkey idx"
@@ -352,11 +344,6 @@
     {
       "family": "keycap",
       "inventoryId": "inv-0193",
-      "reason": "missing swagkey idx"
-    },
-    {
-      "family": "keycap",
-      "inventoryId": "inv-0195",
       "reason": "missing swagkey idx"
     }
   ]

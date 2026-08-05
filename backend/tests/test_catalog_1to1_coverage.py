@@ -68,3 +68,24 @@ def test_coverage_gap_threshold_check_runs(inventory_paths: tuple[Path, Path, Pa
     result = check_coverage_gap_thresholds(report, threshold_pct=COVERAGE_GAP_THRESHOLD_PCT)
     assert result.threshold_pct == COVERAGE_GAP_THRESHOLD_PCT
     assert isinstance(result.violations, tuple)
+
+
+def test_coverage_uses_unique_idx_expected_browse(inventory_paths: tuple[Path, Path, Path]) -> None:
+    """DoD gap ignores name-only stubs and duplicate idx inventory rows."""
+    seed, _inventory_v3, candidates = inventory_paths
+    backend = Path(__file__).resolve().parents[1]
+    inventory_v4 = backend / "data" / "swagkey_inventory" / "swagkey_inventory.v4.json"
+    report = audit_catalog_1to1_coverage(
+        seed_path=seed,
+        inventory_path=inventory_v4,
+        candidates_path=candidates,
+    )
+    for family in ("switch", "keycap", "plate", "foam", "case"):
+        row = report.families[family]
+        assert "inventory_unique_idx_count" in row
+        assert row["expected_browse"] == max(
+            0, row["inventory_unique_idx_count"] - row["browse_excluded_404"]
+        )
+        assert row["gap_inventory_vs_browse"] == row["expected_browse"] - row["browse_count"]
+    result = check_coverage_gap_thresholds(report, threshold_pct=COVERAGE_GAP_THRESHOLD_PCT)
+    assert result.passed, result.violations
