@@ -6,6 +6,17 @@ function isHydrationIssue(message: string): boolean {
   return /hydration|#418|did not match|server rendered/i.test(message);
 }
 
+/** Wait for paint without hard timeout — double rAF after load. */
+async function settleClient(page: import("@playwright/test").Page) {
+  await expect(page.locator("body")).toBeVisible();
+  await page.evaluate(
+    () =>
+      new Promise<void>((resolve) => {
+        requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
+      }),
+  );
+}
+
 test.describe("Hydration safety smoke", () => {
   for (const route of HYDRATION_ROUTES) {
     test(`no React hydration pageerror on ${route}`, async ({ page }) => {
@@ -13,7 +24,7 @@ test.describe("Hydration safety smoke", () => {
       page.on("pageerror", (error) => pageErrors.push(error.message));
 
       await page.goto(route, { waitUntil: "domcontentloaded" });
-      await page.waitForTimeout(900);
+      await settleClient(page);
 
       expect(pageErrors.filter(isHydrationIssue)).toEqual([]);
     });
@@ -27,7 +38,7 @@ test.describe("Hydration safety smoke", () => {
 
     await darkPage.goto("/", { waitUntil: "domcontentloaded" });
     await darkPage.reload({ waitUntil: "domcontentloaded" });
-    await darkPage.waitForTimeout(900);
+    await settleClient(darkPage);
 
     expect(pageErrors.filter(isHydrationIssue)).toEqual([]);
     await context.close();

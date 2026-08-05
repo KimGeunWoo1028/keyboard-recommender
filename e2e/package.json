@@ -7,6 +7,8 @@
     "test:visual:update": "playwright test --project=visual-375 --update-snapshots",
     "test:catalog-visual": "playwright test --project=catalog-visual",
     "test:design-system": "playwright test --project=design-system",
+    "test:mobile": "playwright test --project=mobile-chromium",
+    "test:webkit": "playwright test --project=webkit-smoke",
     "test:account-delete": "playwright test --project=account-delete",
     "test:all": "playwright test",
     "install:browsers": "playwright install chromium"

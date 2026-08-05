@@ -1,5 +1,7 @@
 import { expect, test, type APIRequestContext } from "@playwright/test";
 
+import { loginViaApi } from "./helpers/api-auth";
+
 /**
  * Account deletion E2E — must NEVER use shared e2e-ci@keyboard.local.
  * Each run signs up a disposable user via API (requires DEBUG=true → debug_code).
@@ -50,10 +52,8 @@ test.describe("회원탈퇴 account delete", () => {
     test.setTimeout(120_000);
     const { email, password } = await signupDisposableUser(request);
 
-    await page.goto("/auth?force=1&next=/mypage?section=account");
-    await page.locator("#email").fill(email);
-    await page.locator("#password").fill(password);
-    await page.locator('form button[type="submit"]').click();
+    await loginViaApi(page, request, email, password);
+    await page.goto("/mypage?section=account");
     await expect(page).toHaveURL((u) => new URL(u).pathname === "/mypage", { timeout: 60_000 });
     await expect(page.getByTestId("e2e-mypage-hub")).toBeVisible({ timeout: 30_000 });
     await expect(page.getByRole("heading", { name: "계정 관리" })).toBeVisible();
@@ -69,12 +69,12 @@ test.describe("회원탈퇴 account delete", () => {
     const sendJson = (await sendRes.json()) as { debug_code?: string | null };
     expect(sendJson.debug_code, "debug_code missing — DEBUG=true required").toBeTruthy();
 
-    await page.locator("#mypage-delete-code").fill(sendJson.debug_code!);
+    await page.getByLabel("탈퇴 인증번호").fill(sendJson.debug_code!);
     await page.getByRole("button", { name: "인증 확인" }).click();
     await expect(page.getByText("이메일 인증이 완료되었습니다")).toBeVisible({ timeout: 15_000 });
 
-    await page.locator("#mypage-delete-password").fill(password);
-    await page.locator("#mypage-delete-confirm").fill("탈퇴");
+    await page.getByLabel("현재 비밀번호").fill(password);
+    await page.getByLabel("탈퇴 확인 문구").fill("탈퇴");
     await page.getByRole("button", { name: "계정 영구 삭제" }).click();
 
     await expect(page).toHaveURL((u) => new URL(u).pathname === "/account-deleted", { timeout: 30_000 });

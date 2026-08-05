@@ -97,15 +97,37 @@ async function main() {
 
   await waitForHealth("http://127.0.0.1:8000/health", 120_000);
 
+  // P-P9: default to production Next server. Opt into `next dev` with PW_USE_DEV_SERVER=1.
+  const useDevServer = process.env.PW_USE_DEV_SERVER === "1";
+  if (!useDevServer) {
+    console.log("Building frontend for production E2E (set PW_USE_DEV_SERVER=1 to skip)…");
+    const build = spawnSync("npm", ["run", "build"], {
+      cwd: frontendDir,
+      stdio: "inherit",
+      shell: process.platform === "win32",
+      env: {
+        ...process.env,
+        NEXT_PUBLIC_API_URL: "http://127.0.0.1:8000",
+      },
+    });
+    if (build.status !== 0 && build.status !== null) {
+      terminateChild(api);
+      process.exit(build.status);
+    }
+  }
+
   const fe = spawn(
     "npm",
-    ["run", "dev", "--", "--hostname", "127.0.0.1", "--port", "3000"],
+    useDevServer
+      ? ["run", "dev", "--", "--hostname", "127.0.0.1", "--port", "3000"]
+      : ["run", "start", "--", "--hostname", "127.0.0.1", "--port", "3000"],
     {
       cwd: frontendDir,
       stdio: "inherit",
       env: {
         ...process.env,
         NEXT_PUBLIC_API_URL: "http://127.0.0.1:8000",
+        PORT: "3000",
       },
       shell: process.platform === "win32",
     },

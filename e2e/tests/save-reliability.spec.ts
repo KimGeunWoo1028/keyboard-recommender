@@ -192,11 +192,9 @@ test.describe("Save reliability", () => {
 
     await page.getByTestId("e2e-save-mypage-link").click();
     await expect(page).toHaveURL(/\/mypage\?section=saved/, { timeout: 30_000 });
-    // Hub may land on a recoverable load error; retry then assert the saved list.
+    // Hub may land on a recoverable load error; recover then assert the saved list.
     const retryLoad = page.getByRole("button", { name: "다시 시도" });
-    if (await retryLoad.isVisible().catch(() => false)) {
-      await retryLoad.click();
-    }
+    await retryLoad.click({ timeout: 3_000 }).catch(() => undefined);
     await page.getByRole("tab", { name: "저장한 결과" }).click();
     await expect(page.getByRole("list", { name: "저장한 결과 목록" })).toBeVisible({ timeout: 30_000 });
     console.log("assert:mypage-visible");
@@ -225,24 +223,26 @@ test.describe("Save reliability", () => {
     await logout(page);
     await login(page, "/mypage?section=saved");
     await expect(page).toHaveURL(/\/mypage\?section=saved/, { timeout: 30_000 });
-    // Full navigation after cookie login can race the first extras fetch; ensure
-    // the saved section is selected and data is present before asserting.
     await page.getByRole("tab", { name: "저장한 결과" }).click();
     const savedListAfterRelogin = page.getByRole("list", { name: "저장한 결과 목록" });
-    if (!(await savedListAfterRelogin.isVisible().catch(() => false))) {
+    try {
+      await expect(savedListAfterRelogin).toBeVisible({ timeout: 10_000 });
+    } catch {
       await Promise.all([
-        page.waitForResponse(
-          (response) =>
-            response.url().includes("/api/v1/recommendations/saved") &&
-            response.request().method() === "GET" &&
-            response.ok(),
-          { timeout: 30_000 },
-        ).catch(() => null),
+        page
+          .waitForResponse(
+            (response) =>
+              response.url().includes("/api/v1/recommendations/saved") &&
+              response.request().method() === "GET" &&
+              response.ok(),
+            { timeout: 30_000 },
+          )
+          .catch(() => null),
         page.reload(),
       ]);
       await page.getByRole("tab", { name: "저장한 결과" }).click();
+      await expect(savedListAfterRelogin).toBeVisible({ timeout: 30_000 });
     }
-    await expect(savedListAfterRelogin).toBeVisible({ timeout: 30_000 });
     await expect(savedListAfterRelogin.getByRole("listitem").first()).toBeVisible();
     await expect(savedListAfterRelogin.getByRole("listitem").first().getByTestId("e2e-saved-card-date")).toHaveText(
       savedAtText,
@@ -330,10 +330,7 @@ test.describe("Save reliability", () => {
         // Extra clicks while saving — UI + in-flight guard must drop these.
         await saveButton.click({ force: true }).catch(() => undefined);
         await saveButton.click({ force: true }).catch(() => undefined);
-        const primary = page.getByTestId("e2e-save-build-primary");
-        if (await primary.count()) {
-          await primary.click({ force: true }).catch(() => undefined);
-        }
+        await page.getByTestId("e2e-save-build-primary").click({ force: true, timeout: 1_000 }).catch(() => undefined);
       })(),
     ]);
 

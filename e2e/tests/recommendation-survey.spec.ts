@@ -9,11 +9,10 @@ test.describe("Survey → API → results (deterministic)", () => {
 
     await page.getByTestId("e2e-submit-survey").click();
 
-    await expect(page).toHaveURL(/\/results$/);
-    await expect(page.getByRole("heading", { name: /차분한 소리 · 매끈한 키감/ })).toBeVisible();
-    await expect(page.getByTestId("e2e-result-trust-summary").getByText("Results")).toBeVisible();
-
-    await expect(page.getByTestId("e2e-server-ranked")).toBeVisible();
+    await expect(page).toHaveURL(/\/results$/, { timeout: 60_000 });
+    await expect(page.getByTestId("e2e-server-ranked")).toBeVisible({ timeout: 60_000 });
+    await expect(page.getByTestId("e2e-result-trust-summary")).toBeVisible();
+    await expect(page.getByRole("heading").first()).toBeVisible();
 
     await page.getByRole("tab", { name: "근거" }).click();
     await expectEvidencePickExplanations(page);

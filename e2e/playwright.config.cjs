@@ -15,8 +15,9 @@ module.exports = {
   testDir: path.join(__dirname, "tests"),
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 1 : 0,
   workers: process.env.CI ? 1 : undefined,
+  timeout: 90_000,
   reporter: [["list"]],
   expect: {
     toHaveScreenshot: {
@@ -49,7 +50,14 @@ module.exports = {
     { name: "setup", testMatch: /auth\.setup\.ts/ },
     {
       name: "chromium",
-      testIgnore: [/auth\.setup\.ts/, /results-visual-375\.spec\.ts/, /account-delete\.spec\.ts/, /catalog-visual-smoke\.spec\.ts/, /design-system-smoke\.spec\.ts/],
+      testIgnore: [
+        /auth\.setup\.ts/,
+        /results-visual-375\.spec\.ts/,
+        /account-delete\.spec\.ts/,
+        /catalog-visual-smoke\.spec\.ts/,
+        /design-system-smoke\.spec\.ts/,
+        /mobile-smoke\.spec\.ts/,
+      ],
       dependencies: ["setup"],
       use: {
         ...devices["Desktop Chrome"],
@@ -94,6 +102,26 @@ module.exports = {
       use: {
         ...devices["Desktop Chrome"],
         viewport: { width: 390, height: 844 },
+      },
+    },
+    {
+      /** Core G5 — narrow Chromium smoke. */
+      name: "mobile-chromium",
+      testMatch: /mobile-smoke\.spec\.ts/,
+      dependencies: ["setup"],
+      use: {
+        ...devices["Pixel 5"],
+        storageState: authFile,
+      },
+    },
+    {
+      /** Core G5 — WebKit smoke (install: npx playwright install webkit). */
+      name: "webkit-smoke",
+      testMatch: /mobile-smoke\.spec\.ts/,
+      dependencies: ["setup"],
+      use: {
+        ...devices["Desktop Safari"],
+        storageState: authFile,
       },
     },
   ],

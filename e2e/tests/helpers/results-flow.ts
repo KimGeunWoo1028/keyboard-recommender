@@ -6,14 +6,21 @@ import { completeDeterministicSurvey } from "./survey-flow";
 /** Deterministic survey → `/results` with ranked picks visible. */
 export async function gotoDeterministicResults(page: Page): Promise<void> {
   await completeDeterministicSurvey(page);
-  await page.getByTestId("e2e-submit-survey").click();
-  await expect(page).toHaveURL(/\/results$/, { timeout: 60_000 });
-  await expect(page.getByTestId("e2e-server-ranked")).toBeVisible();
+  const submit = page.getByTestId("e2e-submit-survey");
+  await expect(submit).toBeEnabled({ timeout: 15_000 });
+  await Promise.all([
+    page.waitForURL(/\/results$/, { timeout: 60_000 }),
+    submit.click(),
+  ]);
+  // Do not OR with getByRole('alert') — Next.js route announcer also uses role=alert.
+  await expect(page.getByTestId("e2e-server-ranked"), "expected ranked results after deterministic survey").toBeVisible({
+    timeout: 60_000,
+  });
 }
 
 /** Evidence tab: pick grid heading and per-card reason label (legacy or deduped IA). */
 export async function expectEvidencePickExplanations(page: Page): Promise<void> {
-  await expect(page.getByTestId("e2e-pick-explanations")).toBeVisible();
+  await expect(page.getByTestId("e2e-pick-explanations")).toBeVisible({ timeout: 30_000 });
   await expect(page.getByRole("heading", { name: /(후보별|부품별) 추천 근거/ })).toBeVisible();
 
   const evidence = page.getByTestId("e2e-pick-explanations");
@@ -55,6 +62,8 @@ export async function stabilizeForScreenshot(page: Page): Promise<void> {
         }
       }
     }
+    await new Promise<void>((resolve) => {
+      requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
+    });
   });
-  await page.waitForTimeout(50);
 }

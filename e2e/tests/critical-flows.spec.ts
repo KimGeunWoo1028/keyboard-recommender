@@ -16,7 +16,9 @@ test.describe("Critical product flows", () => {
     const wizard = page.getByTestId("e2e-survey-wizard");
     await expect(wizard).toBeVisible({ timeout: 30_000 });
     await wizard.getByRole("button", { name: /부드럽고 조용한 성향/ }).click();
-    await wizard.getByTestId("e2e-survey-start-with-style").click();
+    const start = wizard.getByTestId("e2e-survey-start-with-style");
+    await expect(start).toBeEnabled({ timeout: 10_000 });
+    await start.click();
 
     await expect(page.getByRole("heading", { name: "타건 압력" })).toBeVisible({ timeout: 15_000 });
     await expect(page.getByText(/2 \/ 5 문항/)).toBeVisible();
@@ -27,7 +29,7 @@ test.describe("Critical product flows", () => {
     await completeDeterministicSurvey(page);
     await page.getByTestId("e2e-submit-survey").click();
     await expect(page).toHaveURL(/\/results$/, { timeout: 60_000 });
-    await expect(page.getByTestId("e2e-server-ranked")).toBeVisible();
+    await expect(page.getByTestId("e2e-server-ranked")).toBeVisible({ timeout: 60_000 });
   });
 
   // Save click+toast is covered serially in save-reliability (shared e2e-ci + same
@@ -46,7 +48,7 @@ test.describe("Critical product flows", () => {
     await page.getByTestId("e2e-submit-survey").click();
     await expect(page).toHaveURL(/\/results$/, { timeout: 60_000 });
 
-    await expect(page.getByTestId("e2e-server-ranked")).toBeVisible();
+    await expect(page.getByTestId("e2e-server-ranked")).toBeVisible({ timeout: 60_000 });
     await expect(page.getByTestId("e2e-save-build")).toBeVisible();
   });
 
@@ -63,8 +65,8 @@ test.describe("Critical product flows", () => {
     await page.getByRole("tab", { name: "저장한 결과" }).click();
     await expect(page).toHaveURL(/section=saved/);
     await expect(
-      page.getByRole("list", { name: "저장한 결과 목록" }).or(page.getByText(/아직 저장한 추천이 없어요/)),
-    ).toBeVisible();
+      page.getByRole("list", { name: "저장한 결과 목록" }).or(page.getByText(/아직 저장한 결과/)),
+    ).toBeVisible({ timeout: 15_000 });
 
     await page.getByRole("tab", { name: "계정 설정" }).click();
     await expect(page).toHaveURL(/section=account/);
@@ -76,7 +78,7 @@ test.describe("Critical product flows", () => {
     await expect(page.getByTestId("e2e-mypage-hub")).toBeVisible({ timeout: 30_000 });
     await expect(page).toHaveURL(/section=saved/);
     await expect(
-      page.getByRole("list", { name: "저장한 결과 목록" }).or(page.getByText(/아직 저장한 추천이 없어요/)),
-    ).toBeVisible();
+      page.getByRole("list", { name: "저장한 결과 목록" }).or(page.getByText(/아직 저장한 결과/)),
+    ).toBeVisible({ timeout: 15_000 });
   });
 });

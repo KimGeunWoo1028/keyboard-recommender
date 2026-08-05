@@ -16,7 +16,7 @@ test.describe("NLP preference path", () => {
     await nlField.fill("thocky linear quiet");
 
     await page.getByTestId("e2e-submit-survey").click();
-    await expect(page).toHaveURL(/\/results$/);
+    await expect(page).toHaveURL(/\/results$/, { timeout: 60_000 });
 
     await page.getByRole("tab", { name: "근거" }).click();
     await expect(page.getByText("자유 입력 취향")).toBeVisible();
