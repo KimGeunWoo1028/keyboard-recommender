@@ -7,13 +7,13 @@ type EvidencePickSectionVariant = "default" | "muted" | "warning";
 const SHELL: Record<EvidencePickSectionVariant, string> = {
   default: "border-border bg-white dark:bg-ca-surface-container",
   muted: "border-border bg-white dark:bg-ca-surface-container",
-  warning: "border-amber-500/25 bg-amber-500/5",
+  warning: "border-warning/30 bg-warning-container/40 dark:bg-warning-container/50",
 };
 
 const LABEL: Record<EvidencePickSectionVariant, string> = {
   default: "text-ca-on-surface-variant",
   muted: "text-ca-on-surface-variant",
-  warning: "text-amber-900/80 dark:text-amber-100/90",
+  warning: "text-warning-on-container dark:text-warning-on-container",
 };
 
 /** Matches `formatEvidenceDetailLines` max of 3 × text-sm leading-relaxed lines. */

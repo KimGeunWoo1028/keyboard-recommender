@@ -167,7 +167,7 @@ export function CatalogDetailPanel({ open, loading, error, family, partDetail, o
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-ca-base/70 p-0 backdrop-blur-sm sm:items-center sm:p-4"
+      className="fixed inset-0 z-modal flex items-end justify-center bg-ca-base/70 p-0 backdrop-blur-sm sm:items-center sm:p-4"
       onMouseDown={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
@@ -182,10 +182,10 @@ export function CatalogDetailPanel({ open, loading, error, family, partDetail, o
       >
       <Card
         className={cn(
-          "max-h-[90vh] w-full overflow-y-auto rounded-t-2xl border-border bg-white pb-[max(1rem,env(safe-area-inset-bottom,0px))] shadow-xl shadow-indigo-100/40 dark:bg-ca-surface-container dark:shadow-none sm:rounded-2xl sm:pb-0",
+          "max-h-[90vh] w-full overflow-y-auto rounded-t-2xl border-border bg-card pb-[max(1rem,env(safe-area-inset-bottom,0px))] shadow-xl shadow-primary/10 dark:bg-ca-surface-container dark:shadow-none sm:rounded-2xl sm:pb-0",
         )}
       >
-        <CardHeader className="sticky top-0 z-10 border-b border-border bg-white/95 backdrop-blur dark:bg-ca-surface-container/95">
+        <CardHeader className="sticky top-0 z-10 border-b border-border bg-card/95 backdrop-blur dark:bg-ca-surface-container/95">
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0 flex-1 space-y-1">
               <p className="section-label">카탈로그</p>

@@ -4,6 +4,7 @@ import { useCallback, useState } from "react";
 
 import { CompatibilityTable, DiversityTable, FallbackPanel } from "@/components/internal-debug/audit-tables";
 import { CollapsibleJson } from "@/components/internal-debug/collapsible-json";
+import { Select } from "@/components/ui/select";
 import { internalDebugFetch } from "@/lib/debug-api";
 
 type Survey = {
@@ -82,8 +83,8 @@ export default function DebugRecommendationsPage() {
         ).map(([key, label]) => (
           <label key={key} className="flex flex-col gap-1 text-xs">
             <span className="text-muted-foreground">{label}</span>
-            <select
-              className="rounded-md border border-input bg-background px-2 py-1.5 text-sm"
+            <Select
+              className="h-9 rounded-md px-2 py-1.5 text-sm"
               value={survey[key]}
               onChange={(e) => setSurvey((s) => ({ ...s, [key]: e.target.value }))}
             >
@@ -124,7 +125,7 @@ export default function DebugRecommendationsPage() {
                   <option value="loud">loud</option>
                 </>
               ) : null}
-            </select>
+            </Select>
           </label>
         ))}
         <label className="sm:col-span-2 flex flex-col gap-1 text-xs">

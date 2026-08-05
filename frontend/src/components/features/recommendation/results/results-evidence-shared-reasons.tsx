@@ -36,7 +36,7 @@ export function ResultsEvidenceSharedReasons({ shared }: ResultsEvidenceSharedRe
 
       {shared.tradeoffLine ? (
         <ResultsEvidencePickSection label="공통 주의할 점" variant="warning">
-          <p className="text-sm leading-relaxed text-amber-950/90 dark:text-amber-50/90">
+          <p className="text-sm leading-relaxed text-warning-on-container">
             {shared.tradeoffLine}
           </p>
         </ResultsEvidencePickSection>

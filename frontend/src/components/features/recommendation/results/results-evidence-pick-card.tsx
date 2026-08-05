@@ -98,7 +98,7 @@ export function ResultsEvidencePickCard({
       <EvidencePickSectionSlot>
         {showTradeoff ? (
           <ResultsEvidencePickSection label="주의할 점" variant="warning" testId="e2e-pick-tradeoff">
-            <p className="text-sm leading-relaxed text-amber-950/90 dark:text-amber-50/90">{tradeoffLine}</p>
+            <p className="text-sm leading-relaxed text-warning-on-container">{tradeoffLine}</p>
           </ResultsEvidencePickSection>
         ) : null}
       </EvidencePickSectionSlot>

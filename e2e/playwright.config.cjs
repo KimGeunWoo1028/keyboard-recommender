@@ -49,7 +49,7 @@ module.exports = {
     { name: "setup", testMatch: /auth\.setup\.ts/ },
     {
       name: "chromium",
-      testIgnore: [/auth\.setup\.ts/, /results-visual-375\.spec\.ts/, /account-delete\.spec\.ts/, /catalog-visual-smoke\.spec\.ts/],
+      testIgnore: [/auth\.setup\.ts/, /results-visual-375\.spec\.ts/, /account-delete\.spec\.ts/, /catalog-visual-smoke\.spec\.ts/, /design-system-smoke\.spec\.ts/],
       dependencies: ["setup"],
       use: {
         ...devices["Desktop Chrome"],
@@ -85,6 +85,15 @@ module.exports = {
       use: {
         ...devices["Desktop Chrome"],
         viewport: { width: 1440, height: 900 },
+      },
+    },
+    {
+      /** Design System overlay/contract smoke (Storybook stand-in). */
+      name: "design-system",
+      testMatch: /design-system-smoke\.spec\.ts/,
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 390, height: 844 },
       },
     },
   ],

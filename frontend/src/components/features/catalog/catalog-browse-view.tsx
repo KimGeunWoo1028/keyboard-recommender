@@ -15,6 +15,7 @@ import { PageShell } from "@/components/layout/page-shell";
 import { Button, buttonClassName } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { useDialogA11y } from "@/components/ui/use-dialog-a11y";
 import {
   CATALOG_PAGE_SIZE,
   catalogListQueryKey,
@@ -169,7 +170,7 @@ function CatalogPartCard({
         }
       }}
       className={cn(
-        "flex h-full min-h-[12.5rem] cursor-pointer flex-col overflow-hidden rounded-sm border-2 border-[rgb(220_220_238)] border-l-[3px] border-l-primary bg-white shadow-sm transition hover:border-primary/40 hover:shadow-md dark:border-border dark:bg-ca-surface-container",
+        "flex h-full min-h-[12.5rem] cursor-pointer flex-col overflow-hidden rounded-sm border-2 border-border border-l-[3px] border-l-primary bg-card shadow-sm transition hover:border-primary/40 hover:shadow-md dark:bg-ca-surface-container",
         selected && "border-primary/50 bg-ca-surface-container-low",
       )}
     >
@@ -413,6 +414,11 @@ export function CatalogBrowseView({
   const [partDetail, setPartDetail] = useState<CatalogPartDetail | null>(null);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const catalogTopRef = useRef<HTMLDivElement>(null);
+  const closeMobileFilters = useCallback(() => setMobileFiltersOpen(false), []);
+  const { panelRef: mobileFiltersPanelRef, titleId: mobileFiltersTitleId } = useDialogA11y(
+    mobileFiltersOpen,
+    closeMobileFilters,
+  );
 
   const hasSecondaryFilters =
     family === "layout" || family === "switch" || family === "keycap" || family === "case";
@@ -845,21 +851,23 @@ export function CatalogBrowseView({
 
       {mobileFiltersOpen && hasSecondaryFilters ? (
         <div
-          className="fixed inset-0 z-50 flex items-end bg-ca-base/70 md:hidden"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="catalog-mobile-filters-title"
-          onClick={() => setMobileFiltersOpen(false)}
+          className="fixed inset-0 z-modal flex items-end bg-ca-base/70 md:hidden"
+          onClick={closeMobileFilters}
         >
           <div
-            className="max-h-[80vh] w-full overflow-y-auto rounded-t-2xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest p-4 pb-[max(1rem,env(safe-area-inset-bottom,0px))] shadow-lg"
+            ref={mobileFiltersPanelRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={mobileFiltersTitleId}
+            tabIndex={-1}
+            className="max-h-[80vh] w-full overflow-y-auto rounded-t-2xl border border-ca-outline-variant/40 bg-ca-surface-container-lowest p-4 pb-[max(1rem,env(safe-area-inset-bottom,0px))] shadow-lg outline-none"
             onClick={(event) => event.stopPropagation()}
           >
             <div className="mb-3 flex items-center justify-between gap-2">
-              <p id="catalog-mobile-filters-title" className="font-headline text-base font-semibold text-ca-on-surface">
+              <p id={mobileFiltersTitleId} className="font-headline text-base font-semibold text-ca-on-surface">
                 세부 필터
               </p>
-              <Button type="button" variant="ghost" size="sm" onClick={() => setMobileFiltersOpen(false)}>
+              <Button type="button" variant="ghost" size="sm" onClick={closeMobileFilters}>
                 닫기
               </Button>
             </div>

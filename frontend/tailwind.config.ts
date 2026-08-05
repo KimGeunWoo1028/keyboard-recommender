@@ -36,6 +36,19 @@ const config: Config = {
           DEFAULT: withAlpha("--ca-error"),
           foreground: withAlpha("--ca-on-error"),
         },
+        /** Semantic status aliases → ca tertiary/secondary (DS-F003) */
+        success: {
+          DEFAULT: withAlpha("--ca-tertiary"),
+          foreground: withAlpha("--ca-on-tertiary"),
+          container: withAlpha("--ca-tertiary-container"),
+          "on-container": withAlpha("--ca-on-tertiary-container"),
+        },
+        warning: {
+          DEFAULT: withAlpha("--ca-secondary"),
+          foreground: withAlpha("--ca-on-secondary"),
+          container: withAlpha("--ca-secondary-container"),
+          "on-container": withAlpha("--ca-on-secondary-container"),
+        },
 
         /* Cyber-Artisan — use via bg-ca-primary, text-ca-on-surface, etc. */
         ca: {
@@ -114,12 +127,24 @@ const config: Config = {
         "ca-glow": "none",
         "ca-elevated": "0 1px 2px rgb(0 0 0 / 0.45), 0 8px 24px rgb(0 0 0 / 0.35)",
       },
+      transitionDuration: {
+        "ca-fast": "150ms",
+        "ca-normal": "200ms",
+      },
+      transitionTimingFunction: {
+        ca: "cubic-bezier(0.23, 1, 0.32, 1)",
+      },
       backdropBlur: {
         ca: "20px",
         "ca-elevated": "40px",
       },
       zIndex: {
-        /** Portaled help tooltips — above skip-link (z-[100]) and chrome */
+        sticky: "20",
+        dropdown: "30",
+        modal: "50",
+        /** Skip link — above chrome, below tooltips */
+        "skip-link": "100",
+        /** Portaled help tooltips — above skip-link and chrome */
         tooltip: "110",
       },
     },

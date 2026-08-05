@@ -643,10 +643,10 @@ export function RecommendationResultView({ submission, build }: Props) {
       {activeTab === "overview" ? (
         <div className="space-y-6 sm:space-y-8">
           {submission.apiUnreachableFallback ? (
-            <Card className="border-amber-500/40 bg-amber-500/10 shadow-none">
+            <Card className="border-warning/40 bg-warning/10 shadow-none">
               <CardHeader className="pb-2">
-                <CardTitle className="text-base text-amber-950 dark:text-amber-100">연결이 불안정해요</CardTitle>
-                <CardDescription className="text-amber-900/90 dark:text-amber-100/90">
+                <CardTitle className="text-base text-warning-on-container">연결이 불안정해요</CardTitle>
+                <CardDescription className="text-warning-on-container/90">
                   네트워크 문제로 기본 추천 모드로 결과를 생성했습니다. 잠시 후 다시 시도해 주세요.
                 </CardDescription>
               </CardHeader>

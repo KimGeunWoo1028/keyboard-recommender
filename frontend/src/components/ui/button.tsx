@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 const variants = {
   primary:
-    "bg-primary text-primary-foreground shadow-sm shadow-primary/20 hover:bg-primary/90 active:scale-[0.97] transition-all duration-150",
+    "bg-primary text-primary-foreground shadow-sm shadow-primary/20 hover:bg-primary/90 active:scale-[0.97] transition-[color,background-color,box-shadow,transform,opacity] duration-ca-fast",
   secondary: "bg-muted text-foreground hover:bg-muted/80",
   outline: "border border-border bg-transparent shadow-xs hover:bg-muted text-foreground",
   ghost: "hover:bg-muted text-foreground",
@@ -26,7 +26,7 @@ type Variant = keyof typeof variants;
 type Size = keyof typeof sizes;
 
 const baseClass =
-  "relative inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50";
+  "relative inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-[color,background-color,border-color,box-shadow,transform,opacity] duration-ca-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--focus-ring))]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50";
 
 /** Use on `<Link>` when you need a styled anchor that looks like a button. */
 export function buttonClassName(options?: { variant?: Variant; size?: Size; className?: string }) {

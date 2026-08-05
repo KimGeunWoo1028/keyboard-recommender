@@ -553,13 +553,13 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
             />
             <div className="space-y-1 text-xs">
               <p className="text-ca-on-surface-variant">
-                <span className={isPasswordPolicyValid(newPassword) ? "text-green-500" : "text-red-500"}>
+                <span className={isPasswordPolicyValid(newPassword) ? "text-success" : "text-destructive"}>
                   {isPasswordPolicyValid(newPassword) ? "✓" : "✗"}
                 </span>{" "}
                 8~20자, 영문/숫자/특수문자 포함
               </p>
               <p className="text-ca-on-surface-variant">
-                <span className={passwordMatches ? "text-green-500" : "text-red-500"}>{passwordMatches ? "✓" : "✗"}</span>{" "}
+                <span className={passwordMatches ? "text-success" : "text-destructive"}>{passwordMatches ? "✓" : "✗"}</span>{" "}
                 비밀번호 확인 일치
               </p>
             </div>
@@ -787,7 +787,7 @@ export function MyPageAccount({ user, securitySummary, onUserChanged }: Props) {
               />
             </div>
             <p className="text-xs text-ca-on-surface-variant">
-              <span className={deleteConfirm === DELETE_CONFIRM_WORD ? "text-green-500" : "text-red-500"}>
+              <span className={deleteConfirm === DELETE_CONFIRM_WORD ? "text-success" : "text-destructive"}>
                 {deleteConfirm === DELETE_CONFIRM_WORD ? "✓" : "✗"}
               </span>{" "}
               «{DELETE_CONFIRM_WORD}» 입력 확인

@@ -1,0 +1,41 @@
+{
+  "$schema_comment": "DS-P11 / DS-F010 — raw-value and bypass exceptions. Each entry needs owner, reason, expiry (ISO date).",
+  "updated": "2026-08-05",
+  "exceptions": [
+    {
+      "id": "ex-global-error-inline",
+      "paths": ["src/app/global-error.tsx"],
+      "pattern": "inline style hex (no app CSS available)",
+      "owner": "frontend",
+      "reason": "Next.js global-error cannot rely on app layout CSS; hexes mirror :root Precision Editorial tokens.",
+      "expiry": "2027-02-05"
+    },
+    {
+      "id": "ex-hero-webgl-lights",
+      "paths": ["src/components/features/home/home-hero-keyboard-canvas.tsx"],
+      "pattern": "Three.js light color hex",
+      "owner": "frontend",
+      "reason": "WebGL lights are not CSS tokens; values are intentional brand accents for the 3D hero.",
+      "expiry": "2027-02-05"
+    },
+    {
+      "id": "ex-switch-guide-mask",
+      "paths": ["src/components/features/home/home-switch-guide.tsx"],
+      "pattern": "CSS mask linear-gradient #000",
+      "owner": "frontend",
+      "reason": "Mask alpha channel requires literal black; not a brand color.",
+      "expiry": "2027-08-05"
+    },
+    {
+      "id": "ex-layout-diagram-geometry",
+      "paths": [
+        "src/components/features/catalog/layout-diagram/**",
+        "public/layout-diagrams/**"
+      ],
+      "pattern": "diagram geometry / SVG fills",
+      "owner": "frontend",
+      "reason": "Freeze list — layout diagram geometry must not be changed without explicit operator request.",
+      "expiry": "2099-01-01"
+    }
+  ]
+}

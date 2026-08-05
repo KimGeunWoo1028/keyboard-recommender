@@ -87,7 +87,7 @@ export function ForgotPasswordClient() {
 
             {submitted && message ? (
               <p
-                className="break-keep rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2.5 text-sm text-emerald-800 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-100"
+                className="break-keep rounded-lg border border-success/30 bg-success-container px-3 py-2.5 text-sm text-success-on-container dark:border-success/40"
                 role="status"
                 data-testid="e2e-forgot-password-success"
               >

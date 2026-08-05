@@ -123,14 +123,14 @@ export function deriveQualityStatus(submission: QualityStatusSubmission): Qualit
 
 const toneClasses: Record<QualityStatusTone, string> = {
   neutral: "border-ca-outline-variant/50 bg-ca-surface-container/35 text-ca-on-surface",
-  caution: "border-amber-500/35 bg-amber-500/8 text-amber-950 dark:text-amber-50",
-  warning: "border-orange-500/35 bg-orange-500/8 text-orange-950 dark:text-orange-50",
+  caution: "border-warning/35 bg-warning/10 text-warning-on-container",
+  warning: "border-warning/50 bg-warning-container/80 text-warning-on-container",
 };
 
 const badgeClasses: Record<QualityStatusTone, string> = {
   neutral: "bg-ca-surface-container-highest/80 text-ca-on-surface",
-  caution: "bg-amber-500/15 text-amber-900 dark:text-amber-100",
-  warning: "bg-orange-500/15 text-orange-900 dark:text-orange-100",
+  caution: "bg-warning/15 text-warning-on-container",
+  warning: "bg-warning/20 text-warning-on-container",
 };
 
 export function ResultsQualityStatus({ submission }: { submission: QualityStatusSubmission }) {

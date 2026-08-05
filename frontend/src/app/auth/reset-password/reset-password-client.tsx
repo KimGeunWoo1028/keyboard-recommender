@@ -95,7 +95,7 @@ export function ResetPasswordClient() {
 
             {done ? (
               <div className="space-y-4">
-                <p className="break-keep rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2.5 text-sm text-emerald-800 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-100">
+                <p className="break-keep rounded-lg border border-success/30 bg-success-container px-3 py-2.5 text-sm text-success-on-container dark:border-success/40">
                   비밀번호가 성공적으로 변경되었습니다.
                 </p>
                 <Button
@@ -206,11 +206,11 @@ export function ResetPasswordClient() {
                   <FieldValidationError id={confirmPasswordField.errorId} message={confirmPasswordField.error} />
                 </div>
                 <p className="text-xs text-ca-on-surface">
-                  <span className={policyValid ? "text-emerald-600" : "text-destructive"}>{policyValid ? "✓" : "✗"}</span>{" "}
+                  <span className={policyValid ? "text-success" : "text-destructive"}>{policyValid ? "✓" : "✗"}</span>{" "}
                   8~20자, 영문/숫자/특수기호 포함
                 </p>
                 <p className="text-xs text-ca-on-surface">
-                  <span className={passwordMatches ? "text-emerald-600" : "text-destructive"}>
+                  <span className={passwordMatches ? "text-success" : "text-destructive"}>
                     {passwordMatches ? "✓" : "✗"}
                   </span>{" "}
                   {passwordMatches ? "비밀번호가 일치합니다." : "비밀번호가 일치하지 않습니다."}

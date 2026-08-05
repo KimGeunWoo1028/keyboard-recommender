@@ -133,7 +133,7 @@ export function ContactForm() {
         />
       </div>
       {state === "error" && error ? (
-        <p className="break-keep text-sm text-red-700 dark:text-red-300" role="alert">
+        <p className="break-keep text-sm text-destructive" role="alert">
           {error}
         </p>
       ) : null}
