@@ -58,7 +58,11 @@ export default function HomePage() {
               조합 · 취향 요약 · 저장까지 한 흐름으로 이어집니다. 소리·타건 취향을 고르면 스위치부터
               키캡까지 한 조합으로 이어 줍니다.
             </p>
-            <Link href="/recommend" className={cn(buttonClassName({ size: "default" }), "mt-8 inline-flex font-bold")}>
+            <Link
+              href="/recommend"
+              prefetch={false}
+              className={cn(buttonClassName({ size: "default" }), "mt-8 inline-flex font-bold")}
+            >
               설문 시작
               <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
@@ -107,6 +111,7 @@ export default function HomePage() {
           <p className="mt-4 text-lg text-primary-foreground/90">무료 · 로그인 불필요 · 스위치부터 키캡까지 한 번에</p>
           <Link
             href="/recommend"
+            prefetch={false}
             className={cn(
               buttonClassName({ size: "lg" }),
               "mt-8 bg-white font-bold text-primary hover:bg-white/90 hover:opacity-100 dark:bg-white dark:text-[rgb(55_48_163)]",

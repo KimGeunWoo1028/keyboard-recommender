@@ -74,5 +74,3 @@ export function HomeHeroKeyboardCanvas({ onReady, onContextLost }: HomeHeroKeybo
     </Canvas>
   );
 }
-
-useGLTF.preload(MODEL_PATH);
